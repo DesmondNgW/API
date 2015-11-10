@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+  <AppSettings>
+    <!--Key缓存版本号，修改使所有缓存失效-->
+    <add key="CacheKeyVersion" value="0.0.1" />
+    <!--路由缓存值版本号，修改使路由缓存失效-->
+    <add key="RouterCacheApp" value="0.0.1" />
+    <!--基金缓存值版本号，修改使基金缓存失效-->
+    <add key="FundCacheApp" value="0.0.1" />
+    <!--基金白名单缓存值版本号，修改使基金白名单缓存失效-->
+    <add key="WhiteListCacheApp" value="0.0.1" />
+    <!--用户缓存值版本号，修改使用户缓存失效-->
+    <add key="CustomerCacheApp" value="0.0.1" />
+  </AppSettings>
+</configuration>

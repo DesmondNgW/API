@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+	<AppSettings>
+		<!--Key缓存版本号，修改使所有缓存失效-->
+		<add key="CacheKeyVersion" value="0.0.1" />
+		<!--路由缓存值版本号，修改使路有缓存失效-->
+		<add key="RouterCacheApp" value="0.0.1" />
+	</AppSettings>
+	<!--自定义MongoDb配置节点-->
+	<mongodb>
+		<server name="XMongo">
+			<add host="127.0.0.1" port="27017" />
+			<socketPool MaxConnectionPoolSize="10" MinConnectionPoolSize="1" ConnectTimeout="10000" MaxConnectionLifeTime="300000"></socketPool>
+		</server>
+	</mongodb>
+	<!--自定义Couchbase配置节点-->
+	<couchbase>
+		<server name="XCouch" bucket="default">
+			<urls>
+				<add uri="http://172.16.87.109:8091/pools/default" />
+			</urls>
+			<socketPool minPoolSize="20" maxPoolSize="1000" connectionTimeout="00:00:02" deadTimeout="00:00:10" />
+		</server>
+	</couchbase>
+	<client>
+		<endpoint name="DateService.IDateService">
+			<address>http://222.73.55.27:8002/DateService/</address>
+		</endpoint>
+		<endpoint name="Services.IRouter" maxPoolSize="20">
+			<address>net.tcp://222.73.212.37:8733/Router/Route</address>
+		</endpoint>
+	</client>
+</configuration>

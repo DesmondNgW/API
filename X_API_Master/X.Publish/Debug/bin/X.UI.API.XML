@@ -1,0 +1,282 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>X.UI.API</name>
+    </assembly>
+    <members>
+        <member name="T:X.UI.API.Controllers.KmsController">
+            <summary>
+            秘钥管理
+            </summary>
+        </member>
+        <member name="M:X.UI.API.Controllers.KmsController.GetPublicKey(System.Int32)">
+            <summary>
+            获取指定长度的RSA公钥(一般1024)
+            </summary>
+            <param name="size">秘钥长度</param>
+            <returns>指定对象序列化</returns>
+        </member>
+        <member name="M:X.UI.API.Controllers.KmsController.GetToken">
+            <summary>
+            获取token
+            </summary>
+            <returns>指定对象序列化</returns>
+        </member>
+        <member name="T:X.UI.API.Controllers.WorkDayController">
+            <summary>
+            工作日
+            </summary>
+        </member>
+        <member name="M:X.UI.API.Controllers.WorkDayController.GetCurrentWorkDay">
+            <summary>
+            获取当前工作日
+            </summary>
+            <returns>指定对象序列化</returns>
+        </member>
+        <member name="M:X.UI.API.Controllers.WorkDayController.GetWorkday(System.DateTime)">
+            <summary>
+            获取指定日期的工作日
+            </summary>
+            <param name="dt">指定的日期</param>
+            <returns>指定对象序列化</returns>
+        </member>
+        <member name="M:X.UI.API.Controllers.WorkDayController.GetPointWorkday(System.DateTime,System.Int32)">
+            <summary>
+            获取指定日期向前（后）推算指定天数的工作日
+            </summary>
+            <param name="dt">指定日期</param>
+            <param name="day">指定天数</param>
+            <returns>指定对象序列化</returns>
+        </member>
+        <member name="T:X.UI.API.Controllers.FundController">
+            <summary>
+            基金对象
+            </summary>
+        </member>
+        <member name="M:X.UI.API.Controllers.FundController.GetFundCompanies">
+            <summary>
+            获取基金公司列表
+            </summary>
+            <returns>基金公司对象序列化</returns>
+        </member>
+        <member name="M:X.UI.API.Controllers.FundController.GetFunds">
+            <summary>
+            获取基金列表
+            </summary>
+            <returns>基金对象序列化</returns>
+        </member>
+        <member name="M:X.UI.API.Controllers.FundController.GetFund(System.String)">
+            <summary>
+            获取基金信息
+            </summary>
+            <param name="fundCode">基金代码</param>
+            <returns>基金对象序列化</returns>
+        </member>
+        <member name="M:X.UI.API.Controllers.FundController.GetFundNav(System.String)">
+            <summary>
+            获取净值
+            </summary>
+            <param name="fundCode">基金代码</param>
+            <returns>基金净值对象序列化</returns>
+        </member>
+        <member name="M:X.UI.API.Controllers.FundController.GetFundDay(System.String)">
+            <summary>
+            获取基金确认日和到账日
+            </summary>
+            <param name="fundCode">基金代码</param>
+            <returns>基金到期日和对账日序列化</returns>
+        </member>
+        <member name="T:X.UI.API.Controllers.LoginController">
+            <summary>
+            登录
+            </summary>
+        </member>
+        <member name="M:X.UI.API.Controllers.LoginController.Login(X.Interface.Dto.HttpRequest.LoginRequestDto)">
+            <summary>
+            登录
+            </summary>
+            <param name="loginDto">登陆请求Dto</param>
+            <returns>指定对象序列化</returns>
+        </member>
+        <member name="T:X.UI.API.Controllers.UserController">
+            <summary>
+            用户管理
+            </summary>
+        </member>
+        <member name="M:X.UI.API.Controllers.UserController.Logout(X.Interface.Dto.UserRequestDtoBase)">
+            <summary>
+            退出登录
+            </summary>
+            <param name="context">登陆用户请求Dto</param>
+            <returns>指定对象序列化</returns>
+        </member>
+        <member name="M:X.UI.API.Controllers.UserController.GetUserInfo(X.Interface.Dto.UserRequestDtoBase)">
+            <summary>
+            获取登录用户对象
+            </summary>
+            <param name="context">登陆用户请求Dto</param>
+            <returns>指定对象序列化</returns>
+        </member>
+        <member name="P:X.UI.API.Model.ApiRequestContext.UserAgent">
+            <summary>
+            UserAgent
+            </summary>     
+        </member>
+        <member name="P:X.UI.API.Model.ApiRequestContext.ClientIp">
+            <summary>
+            ClientIP
+            </summary>
+        </member>
+        <member name="P:X.UI.API.Model.ApiRequestContext.ServerIp">
+            <summary>
+            API-IP
+            </summary>
+        </member>
+        <member name="P:X.UI.API.Model.ApiRequestContext.Interface">
+            <summary>
+            Current接口
+            </summary>
+        </member>
+        <member name="P:X.UI.API.Model.ApiRequestContext.Now">
+            <summary>
+            时间戳
+            </summary>
+        </member>
+        <member name="P:X.UI.API.Model.ApiRequestContext.ActionArgument">
+            <summary>
+            ActionArgument 参数
+            </summary>
+        </member>
+        <member name="P:X.UI.API.Model.ApiRequestContext.Cid">
+            <summary>
+            处理当前请求的线程id
+            </summary>
+        </member>
+        <member name="P:X.UI.API.Model.ApiRequestContext.UserInfo">
+            <summary>
+            用户信息
+            </summary>
+        </member>
+        <member name="M:X.UI.API.Util.ControllerHelper.GetHttpContextWrapper(System.Web.Http.Controllers.HttpActionContext)">
+            <summary>
+            获取HttpContextWrapper对象
+            </summary>
+            <param name="actionContext"></param>
+            <returns></returns>
+        </member>
+        <member name="M:X.UI.API.Util.ControllerHelper.GetUid(System.Web.Http.Controllers.HttpActionContext)">
+            <summary>
+            获取Uid参数
+            </summary>
+            <param name="actionContext"></param>
+            <returns></returns>
+        </member>
+        <member name="M:X.UI.API.Util.ControllerHelper.GetApiRequestContext(System.Web.Http.Controllers.HttpActionContext)">
+            <summary>
+            检查参数、获取Api请求上下文
+            </summary>
+            <param name="actionContext"></param>
+            <returns></returns>
+        </member>
+        <member name="M:X.UI.API.Util.ControllerHelper.ClearPageCache(System.String)">
+            <summary>
+            清除缓存
+            </summary>
+            <param name="guid"></param>
+        </member>
+        <member name="M:X.UI.API.Util.ControllerHelper.CacheInit(System.Boolean)">
+            <summary>
+            初始化缓存
+            </summary>
+            <param name="noCache"></param>
+        </member>
+        <member name="M:X.UI.API.Util.ControllerHelper.ApiCallMonitor(X.UI.API.Model.ApiRequestContext)">
+            <summary>
+            监控Api调用记录
+            </summary>
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="M:X.UI.API.Util.ControllerHelper.OnActionExecuted(System.Web.Http.Filters.HttpActionExecutedContext)">
+            <summary>
+            Action执行完毕 附加响应头部
+            </summary>
+            <param name="actionExecutedContext"></param>
+        </member>
+        <member name="M:X.UI.API.Util.ControllerHelper.CallSuccess``1(X.Interface.Dto.ApiResult{``0})">
+            <summary>
+            CallSuccess
+            </summary>
+            <typeparam name="TResult"></typeparam>
+            <param name="iresult"></param>
+            <returns></returns>
+        </member>
+        <member name="M:X.UI.API.Util.ApiExceptionAttribute.OnException(System.Web.Http.Filters.HttpActionExecutedContext)">
+            <summary>
+            引发异常事件
+            </summary>
+            <param name="actionExecutedContext">操作的上下文</param>
+        </member>
+        <member name="T:X.UI.API.Util.UserAttribute">
+            <summary>
+            需要用户登录的Action特性
+            </summary>
+        </member>
+        <member name="M:X.UI.API.Util.UserAttribute.OnActionExecuted(System.Web.Http.Filters.HttpActionExecutedContext)">
+            <summary>
+            在调用操作方法之后发生
+            </summary>
+            <param name="actionExecutedContext">操作执行的上下文</param>
+        </member>
+        <member name="M:X.UI.API.Util.UserAttribute.OnActionExecuting(System.Web.Http.Controllers.HttpActionContext)">
+             <summary>
+            在调用操作方法之前发生
+             </summary>
+             <param name="actionContext">操作上下文</param>
+        </member>
+        <member name="T:X.UI.API.Util.UserBaseController">
+            <summary>
+            需要用户登录的Controller基类
+            </summary>
+        </member>
+        <member name="M:X.UI.API.Util.UserBaseController.UserIdentity(System.Web.Http.Controllers.HttpActionContext)">
+            <summary>
+            用户身份验证（登录状态、记录用户相关状态、监控Api调用）
+            </summary>
+            <param name="actionContext"></param>
+        </member>
+        <member name="T:X.UI.API.Util.OutputCacheAttribute">
+            <summary>
+            需要OutputCache的Action加此特性
+            </summary>
+        </member>
+        <member name="M:X.UI.API.Util.OutputCacheAttribute.OnActionExecuted(System.Web.Http.Filters.HttpActionExecutedContext)">
+            <summary>
+            在调用操作方法之后发生
+            </summary>
+            <param name="actionExecutedContext">操作执行的上下文</param>
+        </member>
+        <member name="T:X.UI.API.Util.VisitorAttribute">
+            <summary>
+            游客可访问的Action特性
+            </summary>
+        </member>
+        <member name="M:X.UI.API.Util.VisitorAttribute.OnActionExecuted(System.Web.Http.Filters.HttpActionExecutedContext)">
+            <summary>
+            在调用操作方法之后发生
+            </summary>
+            <param name="actionExecutedContext">操作执行的上下文</param>
+        </member>
+        <member name="M:X.UI.API.Util.VisitorAttribute.OnActionExecuting(System.Web.Http.Controllers.HttpActionContext)">
+             <summary>
+            在调用操作方法之前发生
+             </summary>
+             <param name="actionContext">操作上下文</param>
+        </member>
+        <member name="T:X.UI.API.Util.VisitorBaseController">
+            <summary>
+            无需登录的Controller基类
+            </summary>
+        </member>
+    </members>
+</doc>

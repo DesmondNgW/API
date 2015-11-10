@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+  <!--自定义MongoDb配置节点-->
+  <mongodb>
+    <server name="XMongo">
+      <add host="127.0.0.1" port="27017" />
+      <socketPool MaxConnectionPoolSize="10" minConnectionPoolSize="1" connectTimeout="00:00:30" maxConnectionLifeTime="00:30:00" />
+    </server>
+  </mongodb>
+  <!--自定义Couchbase配置节点-->
+  <couchbase>
+    <server name="XCouch" bucket="default" password="">
+      <urls>
+        <add uri="http://172.16.87.109:8091/pools/default" />
+      </urls>
+      <socketPool minPoolSize="20" maxPoolSize="1000" connectionTimeout="00:00:02" deadTimeout="00:00:10" />
+    </server>
+  </couchbase>
+  <!--自定义Redis配置节点-->
+  <redis>
+    <server name="XRedis">
+      <read>
+        <add uri="127.0.0.1:6379" />
+      </read>
+      <write>
+        <add uri="127.0.0.1:6379" />
+      </write>
+      <socketPool maxReadPoolSize="5" maxWritePoolSize="5" autoStart="true"></socketPool>
+    </server>
+  </redis>
+  <!--自定义WCF客户端配置节点-->
+  <client>
+    <endpoint name="Services.IDateService">
+      <address>http://222.73.55.27:8002/DateService/</address>
+    </endpoint>
+    <endpoint name="Services.IRouter" maxPoolSize="20">
+      <address>net.tcp://222.73.212.40:8733/Router/Route</address>
+    </endpoint>
+    <endpoint name="Services.IRouterManage" maxPoolSize="20">
+      <address>net.tcp://222.73.212.40:8733/Router/RealServerManagement</address>
+    </endpoint>
+    <endpoint name="Services.IFundManager" maxPoolSize="20">
+      <address>net.tcp://172.16.86.56:8818/Tcp/FundManager</address>
+    </endpoint>
+    <endpoint name="Services.ICustomerManager" maxPoolSize="20">
+      <address>net.tcp://172.16.86.56:8818/Tcp/CustomerManager</address>
+    </endpoint>
+    <endpoint name="Services.IShareManager" maxPoolSize="20">
+      <address>net.tcp://172.16.86.56:8818/Tcp/ShareManager</address>
+    </endpoint>
+    <endpoint name="Services.IBankManager" maxPoolSize="20">
+      <address>net.tcp://172.16.86.56:8818/Tcp/BankManager</address>
+    </endpoint>
+    <endpoint name="Services.ICustSecurityManager" maxPoolSize="20">
+      <address>net.tcp://172.16.86.56:8818/Tcp/CustSecurityManager</address>
+    </endpoint>
+    <endpoint name="Services.IBusinAppManager" maxPoolSize="20">
+      <address>net.tcp://172.16.86.56:8818/Tcp/BusinAppManager</address>
+    </endpoint>
+    <endpoint name="Services.IBusinCfmManager" maxPoolSize="20">
+      <address>net.tcp://172.16.86.56:8818/Tcp/BusinCfmManager</address>
+    </endpoint>
+    <endpoint name="Services.ICashBagSearchManager" maxPoolSize="20">
+      <address>net.tcp://172.16.86.56:8818/Tcp/CashBagSearchManager</address>
+    </endpoint>
+    <endpoint name="Services.ICashBagTradeManager" maxPoolSize="20">
+      <address>net.tcp://172.16.86.56:8818/Tcp/CashBagTradeManager</address>
+    </endpoint>
+    <endpoint name="Services.IFundTransferBusiness" maxPoolSize="20">
+      <address>net.tcp://172.16.86.56:8818/Tcp/FundTransferBusiness</address>
+    </endpoint>
+    <endpoint name="Services.IPayChannelManager" maxPoolSize="20">
+      <address>net.tcp://172.16.86.56:8818/Tcp/PayChannelManager</address>
+    </endpoint>
+    <endpoint name="Services.ISalesApplicabilityManager" maxPoolSize="20">
+      <address>net.tcp://172.16.86.56:8818/Tcp/SalesApplicabilityManager</address>
+    </endpoint>
+    <endpoint name="Services.ICashBagPaymentManager" maxPoolSize="20">
+      <address>net.tcp://172.16.86.56:8818/Tcp/CashBagPaymentManager</address>
+    </endpoint>
+    <endpoint name="Services.IShareTransferManager" maxPoolSize="20">
+      <address>net.tcp://172.16.86.56:8818/Tcp/ShareTransferManager</address>
+    </endpoint>
+    <endpoint name="Services.IComplaintManager" maxPoolSize="20">
+      <address>net.tcp://172.16.86.56:8818/Tcp/ComplaintManager</address>
+    </endpoint>
+    <endpoint name="Services.IAngieOneService" maxPoolSize="20">
+      <address>http://172.16.86.57:8001/AngieOneServices/</address>
+    </endpoint>
+  </client>
+</configuration>

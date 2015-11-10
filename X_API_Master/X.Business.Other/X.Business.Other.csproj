@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{15CD3E7A-9465-4C52-82EB-0E5BBB2E4220}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>X.Business.Other</RootNamespace>
+    <AssemblyName>X.Business.Other</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Em.Entities">
+      <HintPath>..\X.Ref\Em.Entities.dll</HintPath>
+    </Reference>
+    <Reference Include="Em.FundTrade.Route.Entities">
+      <HintPath>..\X.Ref\Em.FundTrade.Route.Entities.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\X.Business.Core\X.Business.Core.csproj">
+      <Project>{4e052d22-2583-4f0c-92bf-a89b84933c41}</Project>
+      <Name>X.Business.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\X.Data.Entend.Entities\X.Data.Entend.Entities.csproj">
+      <Project>{369ec0fc-888e-406b-a4d5-a606d001ae8f}</Project>
+      <Name>X.Data.Entend.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\X.Data.Extend.Monitor\X.Data.Extend.Monitor.csproj">
+      <Project>{98c3b89a-b25d-41b1-a4ae-03b74b2c44e2}</Project>
+      <Name>X.Data.Extend.Monitor</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\X.Util.Core\X.Util.Core.csproj">
+      <Project>{eabbc505-6258-40cd-b1b6-2d100ba45aec}</Project>
+      <Name>X.Util.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\X.Util.Extend\X.Util.Extend.csproj">
+      <Project>{ecc8b612-a8f0-4604-8ef6-ef9e09bcd5c9}</Project>
+      <Name>X.Util.Extend</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\X.Util.Other\X.Util.Other.csproj">
+      <Project>{534b9a37-9b27-42db-81e8-69f67600934b}</Project>
+      <Name>X.Util.Other</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+    <system.serviceModel>
+        <bindings>
+            <wsHttpBinding>
+                <binding name="WSHttpBinding_IDateService" maxBufferPoolSize="2147483647"
+                    maxReceivedMessageSize="2147483647">
+                    <readerQuotas maxDepth="2147483647" maxStringContentLength="2147483647"
+                        maxArrayLength="2147483647" maxBytesPerRead="2147483647" maxNameTableCharCount="2147483647" />
+                    <security mode="None" />
+                </binding>
+            </wsHttpBinding>
+        </bindings>
+        <client>
+            <endpoint address="http://222.73.55.27:8002/DateService/" binding="wsHttpBinding"
+                bindingConfiguration="WSHttpBinding_IDateService" contract="Services.IDateService"
+                name="WSHttpBinding_IDateService" />
+        </client>
+    </system.serviceModel>
+</configuration>

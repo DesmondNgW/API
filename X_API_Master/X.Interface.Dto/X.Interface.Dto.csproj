@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{4603DD54-FBC3-42AC-AD98-F0DBD0944F00}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>X.Interface.Dto</RootNamespace>
+    <AssemblyName>X.Interface.Dto</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\X.Interface.Dto.XML</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ApiResult.cs" />
+    <Compile Include="HttpRequestContext.cs" />
+    <Compile Include="HttpRequest\LoginRequestDto.cs" />
+    <Compile Include="HttpRequest\LogRemainRequestDto.cs" />
+    <Compile Include="UserRequestDtoBase.cs" />
+    <Compile Include="HttpResponse\CustomerDto.cs" />
+    <Compile Include="HttpResponse\FundCompanyDto.cs" />
+    <Compile Include="HttpResponse\FundDaysDto.cs" />
+    <Compile Include="HttpResponse\FundDto.cs" />
+    <Compile Include="HttpResponse\FundNavDto.cs" />
+    <Compile Include="HttpResponse\PublicKeyDto.cs" />
+    <Compile Include="HttpResponse\RouteInfoDto.cs" />
+    <Compile Include="Interface\IKeyManager.cs" />
+    <Compile Include="Interface\IUser.cs" />
+    <Compile Include="Interface\IWorkDay.cs" />
+    <Compile Include="Interface\IFund.cs" />
+    <Compile Include="Interface\ILogin.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\X.Util.Entities\X.Util.Entities.csproj">
+      <Project>{85a098ce-6ba6-4c4d-9c7f-1c3dfb5b0a15}</Project>
+      <Name>X.Util.Entities</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

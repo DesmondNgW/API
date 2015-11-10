@@ -1,0 +1,175 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{62E7F26F-A417-48FF-9DC7-6ECB46A75980}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>X.UI.Consoles</RootNamespace>
+    <AssemblyName>X.UI.Consoles</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Em.Entities, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+    <Reference Include="Em.FundTrade.Route.Entities, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\X.Ref\Em.FundTrade.Route.Entities.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net40\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.4.0.30506.0\lib\net40\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="APICacheTest.cs" />
+    <Compile Include="APITestMethods.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_Data\app.xml" />
+    <Content Include="App_Data\CacheDependency.xml" />
+    <Content Include="App_Data\Config.xml" />
+    <Content Include="App_Data\endpoint_1.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="App_Data\endpoint_2.xml" />
+    <Content Include="App_Data\endpoint_3.xml" />
+    <Content Include="App_Data\endpoint_4.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\X.Business.Core\X.Business.Core.csproj">
+      <Project>{4e052d22-2583-4f0c-92bf-a89b84933c41}</Project>
+      <Name>X.Business.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\X.Business.Entities\X.Business.Entities.csproj">
+      <Project>{3a4e1b51-bde8-4e07-bafc-35c0965313b9}</Project>
+      <Name>X.Business.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\X.Business.Extend\X.Business.Extend.csproj">
+      <Project>{98a9b3a4-eb60-4f42-9326-0559a3072677}</Project>
+      <Name>X.Business.Extend</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\X.Business.Helper\X.Business.Helper.csproj">
+      <Project>{c8dbf11d-7b1b-4c43-b2fe-4592e8b558f2}</Project>
+      <Name>X.Business.Helper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\X.Business.Other\X.Business.Other.csproj">
+      <Project>{15cd3e7a-9465-4c52-82eb-0e5bbb2e4220}</Project>
+      <Name>X.Business.Other</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\X.Business.Pay\X.Business.Pay.csproj">
+      <Project>{f19c3659-d1e3-4820-8f84-d44036b84a5c}</Project>
+      <Name>X.Business.Pay</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\X.Interface.Dto\X.Interface.Dto.csproj">
+      <Project>{4603dd54-fbc3-42ac-ad98-f0dbd0944f00}</Project>
+      <Name>X.Interface.Dto</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\X.UI.API\X.UI.API.csproj">
+      <Project>{a118b6c5-18a7-4a69-8483-7560f57feb14}</Project>
+      <Name>X.UI.API</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\X.Util.Core\X.Util.Core.csproj">
+      <Project>{eabbc505-6258-40cd-b1b6-2d100ba45aec}</Project>
+      <Name>X.Util.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\X.Util.Entities\X.Util.Entities.csproj">
+      <Project>{85a098ce-6ba6-4c4d-9c7f-1c3dfb5b0a15}</Project>
+      <Name>X.Util.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\X.Util.Extend\X.Util.Extend.csproj">
+      <Project>{ecc8b612-a8f0-4604-8ef6-ef9e09bcd5c9}</Project>
+      <Name>X.Util.Extend</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\X.Util.Other\X.Util.Other.csproj">
+      <Project>{534b9a37-9b27-42db-81e8-69f67600934b}</Project>
+      <Name>X.Util.Other</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\X.Util.Provider\X.Util.Provider.csproj">
+      <Project>{9a046362-e6e3-46dc-88ba-a488da92dd5e}</Project>
+      <Name>X.Util.Provider</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.0">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4 %28x86 和 x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.4.5">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 4.5</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
