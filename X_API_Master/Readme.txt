@@ -8,4 +8,3 @@ Interface：对Business数据整合，对外提供（UI）的API的接口
 UI：对外提供的接口，最终的API入口。（分为控制台测试、API接口，API测试）
 每次层次根据业务重要性，分为Core、Extend、Other，根据需要建立Helper。
 Ref：是外部dll存放地址
-ps:test.test
