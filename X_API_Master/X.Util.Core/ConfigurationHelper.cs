@@ -225,7 +225,7 @@ namespace X.Util.Core
         {
             var doc = XmlHelper.GetXmlDocCache(EndpointFile);
             var node = doc?.SelectSingleNode("/configuration/redis/server[@name='" + serverName + "']");
-            if (Equals(doc, null)) return null;
+            if (Equals(node, null)) return null;
             var config = new RedisClientManagerConfig();
             var readWriteHosts = new List<string>();
             var readOnlyHosts = new List<string>();
