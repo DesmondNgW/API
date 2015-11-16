@@ -1,4 +1,5 @@
-﻿using X.Util.Core;
+﻿using System;
+using X.Util.Core;
 using X.Util.Entities;
 
 namespace X.Util.Extend.Mongo
@@ -10,17 +11,17 @@ namespace X.Util.Extend.Mongo
     {
         public static void Info<T>(T t, LogMonitorDomain domain) where T : MongoBaseModel
         {
-            MongoDbBase.Default.AddMongo(t, "LogMonitor-Info", domain.ToString());
+            MongoDbBase.Default.AddMongo(t, "LogMonitor-Info", $"{domain}.{DateTime.Now.ToString("yyyy.MM")}");
         }
 
         public static void Error<T>(T t, LogMonitorDomain domain) where T : MongoBaseModel
         {
-            MongoDbBase.Default.AddMongo(t, "LogMonitor-Error", domain.ToString());
+            MongoDbBase.Default.AddMongo(t, "LogMonitor-Error", $"{domain}.{DateTime.Now.ToString("yyyy.MM")}");
         }
 
         public static void Debug<T>(T t, LogMonitorDomain domain) where T : MongoBaseModel
         {
-            MongoDbBase.Default.AddMongo(t, "LogMonitor-Debug", domain.ToString());
+            MongoDbBase.Default.AddMongo(t, "LogMonitor-Debug", $"{domain}.{DateTime.Now.ToString("yyyy.MM")}");
         }
     }
 }

@@ -5,7 +5,7 @@
 -->
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <_PublishTargetUrl>D:\Project\MyProject\X_API_Master\X.Publish\Realese</_PublishTargetUrl>
+    <_PublishTargetUrl>D:\Project\git\API\X_API_Master\X.Publish\Realese</_PublishTargetUrl>
   </PropertyGroup>
   <ItemGroup>
     <File Include="App_Data/app.xml">
@@ -57,10 +57,10 @@
       <publishTime>11/10/2015 10:26:35</publishTime>
     </File>
     <File Include="bin/App_global.asax.compiled">
-      <publishTime>11/16/2015 10:53:18</publishTime>
+      <publishTime>11/16/2015 11:16:56</publishTime>
     </File>
     <File Include="bin/App_global.asax.dll">
-      <publishTime>11/16/2015 10:53:18</publishTime>
+      <publishTime>11/16/2015 11:16:56</publishTime>
     </File>
     <File Include="bin/Couchbase.dll">
       <publishTime>11/10/2015 10:26:21</publishTime>
@@ -240,19 +240,19 @@
       <publishTime>11/10/2015 10:26:35</publishTime>
     </File>
     <File Include="bin/X.Business.Core.dll">
-      <publishTime>11/16/2015 10:53:13</publishTime>
+      <publishTime>11/16/2015 11:13:45</publishTime>
     </File>
     <File Include="bin/X.Data.Core.CoreCache.dll">
       <publishTime>09/22/2015 19:51:38</publishTime>
     </File>
     <File Include="bin/X.Data.Core.CoreReader.dll">
-      <publishTime>11/16/2015 10:53:12</publishTime>
+      <publishTime>11/16/2015 11:13:45</publishTime>
     </File>
     <File Include="bin/X.Data.Core.CoreWCFClient.dll">
       <publishTime>09/22/2015 19:51:38</publishTime>
     </File>
     <File Include="bin/X.Interface.Core.dll">
-      <publishTime>11/16/2015 10:53:13</publishTime>
+      <publishTime>11/16/2015 11:13:45</publishTime>
     </File>
     <File Include="bin/X.Interface.Dto.dll">
       <publishTime>11/16/2015 10:53:10</publishTime>
@@ -261,13 +261,13 @@
       <publishTime>11/16/2015 10:53:09</publishTime>
     </File>
     <File Include="bin/X.Interface.Other.dll">
-      <publishTime>11/16/2015 10:53:12</publishTime>
+      <publishTime>11/16/2015 11:13:45</publishTime>
     </File>
     <File Include="bin/X.UI.API.Compiled.dll">
       <publishTime>07/22/2015 19:59:52</publishTime>
     </File>
     <File Include="bin/X.UI.API.dll">
-      <publishTime>11/16/2015 10:53:14</publishTime>
+      <publishTime>11/16/2015 11:16:52</publishTime>
     </File>
     <File Include="bin/X.Util.Core.dll">
       <publishTime>11/16/2015 10:53:10</publishTime>
@@ -276,10 +276,10 @@
       <publishTime>11/16/2015 10:53:08</publishTime>
     </File>
     <File Include="bin/X.Util.Extend.dll">
-      <publishTime>11/16/2015 10:53:11</publishTime>
+      <publishTime>11/16/2015 11:13:44</publishTime>
     </File>
     <File Include="bin/X.Util.Other.dll">
-      <publishTime>11/16/2015 10:53:12</publishTime>
+      <publishTime>11/16/2015 11:13:44</publishTime>
     </File>
     <File Include="bin/X.Util.Provider.dll">
       <publishTime>11/16/2015 10:53:11</publishTime>
@@ -363,7 +363,7 @@
       <publishTime>11/10/2015 10:26:23</publishTime>
     </File>
     <File Include="PrecompiledApp.config">
-      <publishTime>11/16/2015 10:53:15</publishTime>
+      <publishTime>11/16/2015 11:16:53</publishTime>
     </File>
     <File Include="Web.config">
       <publishTime>11/16/2015 10:53:14</publishTime>
