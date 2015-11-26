@@ -4,7 +4,7 @@
   <mongodb>
     <server name="XMongo">
       <add host="127.0.0.1" port="27017" />
-      <socketPool maxConnectionPoolSize="10" minConnectionPoolSize="1" connectTimeout="00:00:30" maxConnectionLifeTime="00:30:00" />
+      <socketPool maxConnectionPoolSize="10" minConnectionPoolSize="1" waitQueueSize="10000" connectTimeout="00:00:30" maxConnectionLifeTime="00:30:00" />
     </server>
   </mongodb>
   <!--自定义Couchbase配置节点-->
