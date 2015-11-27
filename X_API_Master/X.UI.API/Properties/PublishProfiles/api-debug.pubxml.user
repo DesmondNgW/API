@@ -57,13 +57,13 @@
       <publishTime>11/10/2015 10:26:35</publishTime>
     </File>
     <File Include="bin/App_global.asax.compiled">
-      <publishTime>11/26/2015 11:31:00</publishTime>
+      <publishTime>11/27/2015 10:33:25</publishTime>
     </File>
     <File Include="bin/App_global.asax.dll">
-      <publishTime>11/26/2015 11:30:59</publishTime>
+      <publishTime>11/27/2015 10:33:25</publishTime>
     </File>
     <File Include="bin/App_global.asax.pdb">
-      <publishTime>11/26/2015 11:30:59</publishTime>
+      <publishTime>11/27/2015 10:33:25</publishTime>
     </File>
     <File Include="bin/Couchbase.dll">
       <publishTime>11/10/2015 10:26:21</publishTime>
@@ -243,10 +243,10 @@
       <publishTime>11/10/2015 10:26:35</publishTime>
     </File>
     <File Include="bin/X.Business.Core.dll">
-      <publishTime>11/26/2015 11:28:31</publishTime>
+      <publishTime>11/27/2015 10:31:58</publishTime>
     </File>
     <File Include="bin/X.Business.Core.pdb">
-      <publishTime>11/26/2015 11:28:31</publishTime>
+      <publishTime>11/27/2015 10:31:58</publishTime>
     </File>
     <File Include="bin/X.Data.Core.CoreCache.dll">
       <publishTime>09/22/2015 21:07:20</publishTime>
@@ -255,10 +255,10 @@
       <publishTime>09/22/2015 21:07:20</publishTime>
     </File>
     <File Include="bin/X.Data.Core.CoreReader.dll">
-      <publishTime>11/26/2015 11:28:31</publishTime>
+      <publishTime>11/27/2015 10:31:57</publishTime>
     </File>
     <File Include="bin/X.Data.Core.CoreReader.pdb">
-      <publishTime>11/26/2015 11:28:31</publishTime>
+      <publishTime>11/27/2015 10:31:57</publishTime>
     </File>
     <File Include="bin/X.Data.Core.CoreWCFClient.dll">
       <publishTime>09/22/2015 21:07:19</publishTime>
@@ -267,28 +267,28 @@
       <publishTime>09/22/2015 21:07:19</publishTime>
     </File>
     <File Include="bin/X.Interface.Core.dll">
-      <publishTime>11/26/2015 11:30:54</publishTime>
+      <publishTime>11/27/2015 10:31:58</publishTime>
     </File>
     <File Include="bin/X.Interface.Core.pdb">
-      <publishTime>11/26/2015 11:30:54</publishTime>
+      <publishTime>11/27/2015 10:31:58</publishTime>
     </File>
     <File Include="bin/X.Interface.Dto.dll">
-      <publishTime>11/26/2015 11:30:52</publishTime>
+      <publishTime>11/27/2015 10:31:56</publishTime>
     </File>
     <File Include="bin/X.Interface.Dto.pdb">
-      <publishTime>11/26/2015 11:30:52</publishTime>
+      <publishTime>11/27/2015 10:31:56</publishTime>
     </File>
     <File Include="bin/X.Interface.Extend.dll">
-      <publishTime>11/26/2015 10:58:39</publishTime>
+      <publishTime>11/27/2015 10:31:56</publishTime>
     </File>
     <File Include="bin/X.Interface.Extend.pdb">
-      <publishTime>11/26/2015 10:58:39</publishTime>
+      <publishTime>11/27/2015 10:31:56</publishTime>
     </File>
     <File Include="bin/X.Interface.Other.dll">
-      <publishTime>11/26/2015 11:30:54</publishTime>
+      <publishTime>11/27/2015 10:31:57</publishTime>
     </File>
     <File Include="bin/X.Interface.Other.pdb">
-      <publishTime>11/26/2015 11:30:54</publishTime>
+      <publishTime>11/27/2015 10:31:57</publishTime>
     </File>
     <File Include="bin/X.UI.API.Compiled.dll">
       <publishTime>07/22/2015 19:58:50</publishTime>
@@ -297,43 +297,43 @@
       <publishTime>07/22/2015 19:58:50</publishTime>
     </File>
     <File Include="bin/X.UI.API.dll">
-      <publishTime>11/26/2015 11:30:55</publishTime>
+      <publishTime>11/27/2015 10:31:58</publishTime>
     </File>
     <File Include="bin/X.UI.API.pdb">
-      <publishTime>11/26/2015 11:30:55</publishTime>
+      <publishTime>11/27/2015 10:31:58</publishTime>
     </File>
     <File Include="bin/X.UI.API.XML">
-      <publishTime>11/26/2015 11:30:55</publishTime>
+      <publishTime>11/27/2015 10:31:58</publishTime>
     </File>
     <File Include="bin/X.Util.Core.dll">
-      <publishTime>11/26/2015 11:28:29</publishTime>
+      <publishTime>11/27/2015 10:31:56</publishTime>
     </File>
     <File Include="bin/X.Util.Core.pdb">
-      <publishTime>11/26/2015 11:28:29</publishTime>
+      <publishTime>11/27/2015 10:31:56</publishTime>
     </File>
     <File Include="bin/X.Util.Entities.dll">
-      <publishTime>11/26/2015 10:58:37</publishTime>
+      <publishTime>11/27/2015 10:31:56</publishTime>
     </File>
     <File Include="bin/X.Util.Entities.pdb">
-      <publishTime>11/26/2015 10:58:37</publishTime>
+      <publishTime>11/27/2015 10:31:56</publishTime>
     </File>
     <File Include="bin/X.Util.Extend.dll">
-      <publishTime>11/26/2015 11:28:30</publishTime>
+      <publishTime>11/27/2015 10:31:57</publishTime>
     </File>
     <File Include="bin/X.Util.Extend.pdb">
-      <publishTime>11/26/2015 11:28:30</publishTime>
+      <publishTime>11/27/2015 10:31:57</publishTime>
     </File>
     <File Include="bin/X.Util.Other.dll">
-      <publishTime>11/26/2015 11:28:30</publishTime>
+      <publishTime>11/27/2015 10:31:57</publishTime>
     </File>
     <File Include="bin/X.Util.Other.pdb">
-      <publishTime>11/26/2015 11:28:30</publishTime>
+      <publishTime>11/27/2015 10:31:57</publishTime>
     </File>
     <File Include="bin/X.Util.Provider.dll">
-      <publishTime>11/26/2015 11:28:29</publishTime>
+      <publishTime>11/27/2015 10:31:56</publishTime>
     </File>
     <File Include="bin/X.Util.Provider.pdb">
-      <publishTime>11/26/2015 11:28:29</publishTime>
+      <publishTime>11/27/2015 10:31:56</publishTime>
     </File>
     <File Include="bin/zh-CHS/System.Data.SqlServerCe.resources.dll">
       <publishTime>06/04/2012 13:29:58</publishTime>
@@ -414,10 +414,10 @@
       <publishTime>11/10/2015 10:26:23</publishTime>
     </File>
     <File Include="PrecompiledApp.config">
-      <publishTime>11/26/2015 11:30:56</publishTime>
+      <publishTime>11/27/2015 10:32:41</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>11/26/2015 11:28:59</publishTime>
+      <publishTime>11/27/2015 10:32:31</publishTime>
     </File>
   </ItemGroup>
 </Project>
