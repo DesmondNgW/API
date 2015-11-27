@@ -43,6 +43,13 @@ namespace X.Util.Provider
             Collection = db.GetCollection(collection);
             _sw.Start();
         }
+        public MongoDbProvider(string database, string collection, Uri[] servers)
+        {
+            MongoSever = ConfigurationHelper.MongoClientConfiguration(servers).GetServer();
+            var db = MongoSever.GetDatabase(database);
+            Collection = db.GetCollection(collection);
+            _sw.Start();
+        }
         #endregion
 
         #region 实现方法

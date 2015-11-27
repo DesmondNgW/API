@@ -220,6 +220,23 @@ namespace X.Util.Core
         }
 
         /// <summary>
+        /// MongoDb Configuration
+        /// </summary>
+        /// <param name="servers"></param>
+        /// <returns></returns>
+        public static MongoClient MongoClientConfiguration(Uri[] servers)
+        {
+            var configuration = new MongoClientSettings
+            {
+                MaxConnectionPoolSize = 10,
+                MinConnectionPoolSize = 1,
+                WaitQueueSize = 10000,
+                Servers = servers.Select(uri => new MongoServerAddress(uri.Host, uri.Port))
+            };
+            return new MongoClient(configuration);
+        }
+
+        /// <summary>
         /// Redis Configuration
         /// </summary>
         public static PooledRedisClientManager GetRedisClientManager(string serverName)
