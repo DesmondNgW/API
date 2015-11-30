@@ -205,7 +205,7 @@ namespace X.Util.Core
                 switch (item.Name)
                 {
                     case "add":
-                        var uri = new Uri(XmlHelper.GetXmlAttributeValue(item, "uri", "127.0.0.1:27017"));
+                        var uri = new Uri(XmlHelper.GetXmlAttributeValue(item, "uri", "mongodb://127.0.0.1:27017"));
                         servers.Add(new MongoServerAddress(uri.Host, uri.Port));
                         break;
                     case "socketPool":
