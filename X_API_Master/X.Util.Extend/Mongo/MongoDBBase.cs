@@ -82,10 +82,10 @@ namespace X.Util.Extend.Mongo
         #region 增删改操作
         public void AddMongo<T>(T t, string database, string collection) where T : MongoBaseModel
         {
-            var property = typeof(T).GetProperty("id");
+            var property = typeof(T).GetProperty("Id");
             if (property != null && Equals(property.GetValue(t, null), null))
             {
-                typeof(T).GetProperty("id").SetValue(t, Guid.NewGuid().ToString(), null);
+                property.SetValue(t, Guid.NewGuid().ToString("N"), null);
             }
             var mc = new MongoDbProvider(database, collection, ServerName);
             CoreAccess.TryCallAsync(EDomain, mc.Collection.Save, t, WriteConcern.Acknowledged, CallSuccess, mc.Dispose, null, false, ServerName);
@@ -187,6 +187,19 @@ namespace X.Util.Extend.Mongo
         }
 
         /// <summary>
+        /// 查询MongoDB,取第一条
+        /// </summary>
+        /// <param name="database"></param>
+        /// <param name="collection"></param>
+        /// <param name="query">查询语句</param>
+        /// <returns></returns>
+        public BsonDocument FindOne(string database, string collection, IMongoQuery query)
+        {
+            var mc = new MongoDbProvider(database, collection, ServerName);
+            return CoreAccess.TryCall(EDomain, mc.Collection.FindOne, query, CoreBase.CallSuccess, mc.Dispose, true, ServerName);
+        }
+
+        /// <summary>
         /// 取MongoDB条数
         /// </summary>
         /// <param name="database"></param>
@@ -236,18 +249,28 @@ namespace X.Util.Extend.Mongo
         public static List<T> ToEntity<T>(MongoCursor<BsonDocument> docs)
         {
             var list = new List<T>();
-            var propertys = typeof(T).GetProperties();
             foreach (var doc in docs)
             {
-                var result = Activator.CreateInstance<T>();
-                var element = doc.ToDictionary();
-                foreach (var p in propertys)
-                {
-                    p.SetValue(result, element["id".Equals(p.Name.ToLower()) ? "_id" : p.Name], null);
-                }
+                var document = doc.ToDictionary();
+                var result = document.AutoMapper<T>();
+                typeof(T).GetProperty("Id").SetValue(result, document["_id"], null);
                 list.Add(result);
             }
             return list;
+        }
+
+        /// <summary>
+        /// MongoDB数据转为为实体List（需要实体和MongoDB字段一一对应）
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="doc"></param>
+        /// <returns></returns>
+        public static T ToEntity<T>(BsonDocument doc)
+        {
+            var document = doc.ToDictionary();
+            var result = document.AutoMapper<T>();
+            typeof(T).GetProperty("Id").SetValue(result, document["_id"], null);
+            return result;
         }
         #endregion
     }

@@ -41,7 +41,7 @@ namespace X.Util.Extend.Cryption
             var privateKey = loader();
             rsaKey = new RsaKey
             {
-                id = id,
+                Id = id,
                 TmpKey = tmpKey,
                 Modulus = StringConvert.Bytes2Hex(privateKey.Modulus),
                 Exponent = StringConvert.Bytes2Hex(privateKey.Exponent),
@@ -133,7 +133,7 @@ namespace X.Util.Extend.Cryption
                 var privateKey = GetPrivateKey(rsaKey);
                 rsa.ImportParameters(privateKey);
                 var cipherbytes = rsa.Decrypt(StringConvert.Hex2Bytes(content), false);
-                if (rsaKey.TmpKey) RemoveRsaKey(rsaKey.id);
+                if (rsaKey.TmpKey) RemoveRsaKey(rsaKey.Id);
                 return Encoding.UTF8.GetString(cipherbytes);
             }
             Logger.Error(MethodBase.GetCurrentMethod(), LogDomain.Util, null, "RSA Private Key Missing.");
@@ -157,7 +157,7 @@ namespace X.Util.Extend.Cryption
                 var privateKey = GetPrivateKey(rsaKey);
                 rsa.ImportParameters(privateKey);
                 var cipherbytes = rsa.Decrypt(StringConvert.Base64ToBytes(content), false);
-                if (rsaKey.TmpKey) RemoveRsaKey(rsaKey.id);
+                if (rsaKey.TmpKey) RemoveRsaKey(rsaKey.Id);
                 return Encoding.UTF8.GetString(cipherbytes);
             }
             Logger.Error(MethodBase.GetCurrentMethod(), LogDomain.Util, null, "RSA Private Key Missing.");

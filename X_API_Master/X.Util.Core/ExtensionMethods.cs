@@ -19,17 +19,17 @@ namespace X.Util.Core
 
         public static T FromJson<T>(this string json)
         {
-            return JsonConvert.DeserializeObject<T>(json, new JsonSerializerSettings { MaxDepth = int.MaxValue });
+            return JsonConvert.DeserializeObject<T>(json, new JsonSerializerSettings { MaxDepth = int.MaxValue, DateTimeZoneHandling = DateTimeZoneHandling.Local });
         }
 
         public static object FromJson(this string json, Type T)
         {
-            return JsonConvert.DeserializeObject(json, T, new JsonSerializerSettings { MaxDepth = int.MaxValue });
+            return JsonConvert.DeserializeObject(json, T, new JsonSerializerSettings { MaxDepth = int.MaxValue, DateTimeZoneHandling = DateTimeZoneHandling.Local });
         }
 
         public static string ToJson(this object t)
         {
-            return JsonConvert.SerializeObject(t, new JsonSerializerSettings { MaxDepth = int.MaxValue });
+            return JsonConvert.SerializeObject(t, new JsonSerializerSettings { MaxDepth = int.MaxValue, DateTimeZoneHandling = DateTimeZoneHandling.Local });
         }
 
         public static TDest AutoMapper<TDest>(this object src)

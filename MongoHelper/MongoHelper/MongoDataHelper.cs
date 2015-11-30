@@ -1,5 +1,7 @@
 ﻿using MongoDB.Bson;
 using System;
+using System.Collections.Generic;
+using MongoDB.Driver;
 
 namespace MongoDbHelper
 {
@@ -234,6 +236,22 @@ namespace MongoDbHelper
         }
         #endregion
 
+        public static List<T> ToEntity<T>(MongoCursor<BsonDocument> docs)
+        {
+            var list = new List<T>();
+            var propertys = typeof(T).GetProperties();
+            foreach (var doc in docs)
+            {
+                var result = Activator.CreateInstance<T>();
+                var element = doc.ToDictionary();
+                foreach (var p in propertys)
+                {
+                    p.SetValue(result, element["id".Equals(p.Name.ToLower()) ? "_id" : p.Name], null);
+                }
+                list.Add(result);
+            }
+            return list;
+        }
     }
     #endregion
 }

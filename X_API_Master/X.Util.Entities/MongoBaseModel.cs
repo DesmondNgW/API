@@ -5,7 +5,6 @@
     /// </summary>
     public class MongoBaseModel
     {
-        // ReSharper disable once InconsistentNaming
-        public string id { get; set; }
+        public string Id { get; set; }
     }
 }
