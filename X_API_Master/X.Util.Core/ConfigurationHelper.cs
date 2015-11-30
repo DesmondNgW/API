@@ -199,9 +199,8 @@ namespace X.Util.Core
                 switch (item.Name)
                 {
                     case "add":
-                        var host = XmlHelper.GetXmlAttributeValue(item, "host", "127.0.0.1");
-                        var port = XmlHelper.GetXmlAttributeValue(item, "port", 27017);
-                        servers.Add(new MongoServerAddress(host, port));
+                        var uri = new Uri(XmlHelper.GetXmlAttributeValue(item, "uri", "127.0.0.1:27017"));
+                        servers.Add(new MongoServerAddress(uri.Host, uri.Port));
                         break;
                     case "socketPool":
                         configuration.MaxConnectionPoolSize = XmlHelper.GetXmlAttributeValue(item, "maxConnectionPoolSize", 50);
@@ -224,7 +223,7 @@ namespace X.Util.Core
         /// </summary>
         /// <param name="servers"></param>
         /// <returns></returns>
-        public static MongoClient MongoClientConfiguration(Uri[] servers)
+        public static MongoClient MongoClientConfiguration(IEnumerable<Uri> servers)
         {
             var configuration = new MongoClientSettings
             {

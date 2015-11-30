@@ -1,6 +1,7 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Driver;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Reflection;
 using X.Util.Core;
@@ -43,7 +44,7 @@ namespace X.Util.Provider
             Collection = db.GetCollection(collection);
             _sw.Start();
         }
-        public MongoDbProvider(string database, string collection, Uri[] servers)
+        public MongoDbProvider(string database, string collection, IEnumerable<Uri> servers)
         {
             MongoSever = ConfigurationHelper.MongoClientConfiguration(servers).GetServer();
             var db = MongoSever.GetDatabase(database);

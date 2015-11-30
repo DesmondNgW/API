@@ -3,7 +3,7 @@
   <!--自定义MongoDb配置节点-->
   <mongodb>
     <server name="XMongo">
-      <add host="127.0.0.1" port="27017" />
+      <add uri="mongodb://127.0.0.1:27017" />
       <socketPool maxConnectionPoolSize="10" minConnectionPoolSize="1" waitQueueSize="10000" connectTimeout="00:00:30" maxConnectionLifeTime="00:30:00" />
     </server>
   </mongodb>
@@ -11,7 +11,7 @@
   <couchbase>
     <server name="XCouch" bucket="default" password="">
       <urls>
-        <add uri="http://172.16.87.109:8091/pools/default" />
+        <add uri="http://172.16.87.109:8091/pools/" />
       </urls>
       <socketPool minPoolSize="20" maxPoolSize="1000" connectionTimeout="00:00:02" deadTimeout="00:00:10" />
     </server>
