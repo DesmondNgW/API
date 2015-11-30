@@ -1,12 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading;
 using MongoDbHelper;
+using MongoDB.Driver;
 
 namespace TestConsole
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
             MongoDbConfig.Config("mongodb://127.0.0.1:27017");
             const int threadCount = 2;

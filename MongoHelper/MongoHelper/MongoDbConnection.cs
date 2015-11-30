@@ -23,28 +23,24 @@ namespace MongoDbHelper
         /// <param name="connectName"></param>
         /// <param name="userName"></param>
         /// <param name="password"></param>
-        public static void Configure(Uri[] servers, string connectName, string userName = "", string password = "")
+        public static void Configure(List<Uri> servers, string connectName, string userName = "", string password = "")
         {
             if (Configures.ContainsKey(connectName) && Configures[connectName] != null) return;
             lock (LockObj)
             {
                 if (Configures.ContainsKey(connectName) && Configures[connectName] != null) return;
-                var config = new MongoDbConfigure();
-                if (!string.IsNullOrEmpty(userName) && !string.IsNullOrEmpty(password))
+                var config = new MongoDbConfigure
                 {
-                    var credentials = MongoCredential.CreateMongoCRCredential("admin", userName, password);
-                    config.MongoClientSettings.Credentials = new List<MongoCredential> {credentials};
-                }
-                config.MongoClientSettings.MaxConnectionPoolSize = 20;
-                config.MongoClientSettings.MinConnectionPoolSize = 1;
-                config.MongoClientSettings.WaitQueueSize = 5000;
-                var list = new List<MongoServerAddress>();
-                if (servers != null && servers.Length > 0)
-                {
-                    list.AddRange(servers.Select(uri => new MongoServerAddress(uri.Host, uri.Port)));
-                    config.Servers = servers;
-                }
-                config.MongoClientSettings.Servers = list;
+                    Servers = servers,
+                    MongoClientSettings = new MongoClientSettings()
+                    {
+                        MaxConnectionPoolSize = 20,
+                        MinConnectionPoolSize = 1,
+                        WaitQueueSize = 5000,
+                        Servers = servers.Select(uri => new MongoServerAddress(uri.Host, uri.Port))
+                    }
+                };
+                if (!string.IsNullOrEmpty(userName) && !string.IsNullOrEmpty(password)) config.MongoClientSettings.Credentials = new List<MongoCredential> { MongoCredential.CreateMongoCRCredential("admin", userName, password) };
                 config.MongoClient = new MongoClient(config.MongoClientSettings);
                 Configures[connectName] = config;
             }
@@ -81,20 +77,11 @@ namespace MongoDbHelper
                 try
                 {
                     if (string.IsNullOrWhiteSpace(collection)) collection = "admin";
-                    if (!string.IsNullOrEmpty(userName) && !string.IsNullOrEmpty(password))
-                    {
-                        var credentials = MongoCredential.CreateMongoCRCredential(collection, userName, password);
-                        setting.MongoClientSettings.Credentials = new List<MongoCredential> { credentials };
-                    }
+                    if (!string.IsNullOrEmpty(userName) && !string.IsNullOrEmpty(password)) setting.MongoClientSettings.Credentials = new List<MongoCredential> { MongoCredential.CreateMongoCRCredential(collection, userName, password) };
                     setting.MongoClientSettings.MaxConnectionPoolSize = 20;
                     setting.MongoClientSettings.MinConnectionPoolSize = 1;
                     setting.MongoClientSettings.WaitQueueSize = 5000;
-                    if (setting.Servers != null && setting.Servers.Length > 0)
-                    {
-                        var list = new List<MongoServerAddress>();
-                        list.AddRange(setting.Servers.Select(uri => new MongoServerAddress(uri.Host, uri.Port)));
-                        setting.MongoClientSettings.Servers = list;
-                    }
+                    if (setting.Servers != null && setting.Servers.Count > 0) setting.MongoClientSettings.Servers = setting.Servers.Select(uri => new MongoServerAddress(uri.Host, uri.Port));
                     setting.MongoClient = new MongoClient(setting.MongoClientSettings);
                     Configures[connectName] = setting;
                     return setting.MongoClient;
@@ -123,7 +110,7 @@ namespace MongoDbHelper
     /// </summary>
     internal class MongoDbConfigure
     {
-        public Uri[] Servers { get; set; }
+        public List<Uri> Servers { get; set; }
 
         public MongoClient MongoClient { get; set; }
 

@@ -57,9 +57,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MongoHelper\MongoDBHelper.csproj">
+    <ProjectReference Include="..\MongoHelper\MongoDbHelper.csproj">
       <Project>{e5451aaf-cad5-448d-8d79-3f974d5110b6}</Project>
-      <Name>MongoDBHelper</Name>
+      <Name>MongoDbHelper</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

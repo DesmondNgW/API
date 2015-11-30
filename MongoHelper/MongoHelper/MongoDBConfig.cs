@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Text.RegularExpressions;
 
 namespace MongoDbHelper
@@ -25,19 +27,14 @@ namespace MongoDbHelper
             var connectName = info.Length == 3 && !string.IsNullOrEmpty(info[2]) ? info[2] : MongoDbConnection.DefaultConnectName;
             var list = match.Groups[2].Value.Split(',');
             if (list.Length <= 0) return;
-            var servers = new Uri[list.Length];
-            for (var i = 0; i < list.Length; i++)
-            {
-                servers[i] = new Uri("mongodb://" + list[i]);
-            }
-            MongoDbConnection.Configure(servers, connectName, userName, password);
+            MongoDbConnection.Configure(list.Select(t => new Uri("mongodb://" + t)).ToList(), connectName, userName, password);
         }
 
         /// <summary>
         /// 设置Mongo数据库连接地址
         /// </summary>
         /// <param name="servers">数据库地址列表Uri格式mongodb://host:port/</param>
-        public static void Config(Uri[] servers)
+        public static void Config(List<Uri> servers)
         {
             MongoDbConnection.Configure(servers, MongoDbConnection.DefaultConnectName, string.Empty, string.Empty);
         }
@@ -47,7 +44,7 @@ namespace MongoDbHelper
         /// </summary>
         /// <param name="servers">数据库地址列表Uri格式mongodb://host:port/</param>
         /// <param name="connectName">连接名称</param>
-        public static void Config(Uri[] servers, string connectName)
+        public static void Config(List<Uri> servers, string connectName)
         {
             MongoDbConnection.Configure(servers, connectName, string.Empty, string.Empty);
         }
@@ -58,7 +55,7 @@ namespace MongoDbHelper
         /// <param name="servers">数据库地址列表Uri格式mongodb://host:port/</param>
         /// <param name="userName">用户名</param>
         /// <param name="password">密码</param>
-        public static void Config(Uri[] servers, string userName, string password)
+        public static void Config(List<Uri> servers, string userName, string password)
         {
             MongoDbConnection.Configure(servers, MongoDbConnection.DefaultConnectName, userName, password);
         }
@@ -70,7 +67,7 @@ namespace MongoDbHelper
         /// <param name="connectName">连接名称</param>
         /// <param name="userName">用户名</param>
         /// <param name="password">密码</param>
-        public static void Config(Uri[] servers, string connectName, string userName, string password)
+        public static void Config(List<Uri> servers, string connectName, string userName, string password)
         {
             MongoDbConnection.Configure(servers, connectName, userName, password);
         }

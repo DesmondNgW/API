@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MongoDBHelper", "MongoHelper\MongoDBHelper.csproj", "{E5451AAF-CAD5-448D-8D79-3F974D5110B6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MongoDbHelper", "MongoHelper\MongoDbHelper.csproj", "{E5451AAF-CAD5-448D-8D79-3F974D5110B6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestConsole", "TestConsole\TestConsole.csproj", "{56336226-D0D3-46D8-BD04-2D18CB2072ED}"
 EndProject
