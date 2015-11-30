@@ -235,9 +235,9 @@ namespace X.Util.Core
                 MaxConnectionPoolSize = 10,
                 MinConnectionPoolSize = 1,
                 WaitQueueSize = 10000,
-                Servers = servers.Select(uri => new MongoServerAddress(uri.Host, uri.Port)),
-                Credentials = !string.IsNullOrWhiteSpace(userName) && !string.IsNullOrWhiteSpace(password) ? new List<MongoCredential> { MongoCredential.CreateMongoCRCredential("admin", userName, password) } : null
+                Servers = servers.Select(uri => new MongoServerAddress(uri.Host, uri.Port))
             };
+            if (!string.IsNullOrWhiteSpace(userName) && !string.IsNullOrWhiteSpace(password)) configuration.Credentials = new List<MongoCredential> { MongoCredential.CreateMongoCRCredential("admin", userName, password) };
             return new MongoClient(configuration);
         }
 
