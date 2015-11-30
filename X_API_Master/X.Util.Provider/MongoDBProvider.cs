@@ -44,9 +44,9 @@ namespace X.Util.Provider
             Collection = db.GetCollection(collection);
             _sw.Start();
         }
-        public MongoDbProvider(string database, string collection, IEnumerable<Uri> servers)
+        public MongoDbProvider(string database, string collection, IEnumerable<Uri> servers, string userName, string password)
         {
-            MongoSever = ConfigurationHelper.MongoClientConfiguration(servers).GetServer();
+            MongoSever = ConfigurationHelper.MongoClientConfiguration(servers, userName, password).GetServer();
             var db = MongoSever.GetDatabase(database);
             Collection = db.GetCollection(collection);
             _sw.Start();

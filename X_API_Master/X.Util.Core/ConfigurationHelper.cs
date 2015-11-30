@@ -144,7 +144,7 @@ namespace X.Util.Core
             if (Equals(doc, null)) return couchbaseClientConfiguration;
             var node = doc.SelectSingleNode("/configuration/couchbase/server[@name='" + serverName + "']");
             if (Equals(node, null)) return couchbaseClientConfiguration;
-            couchbaseClientConfiguration.Bucket = XmlHelper.GetXmlAttributeValue(node, "bucket", string.Empty);
+            couchbaseClientConfiguration.Bucket = XmlHelper.GetXmlAttributeValue(node, "bucket", "default");
             couchbaseClientConfiguration.BucketPassword = XmlHelper.GetXmlAttributeValue(node, "password", string.Empty);
             foreach (XmlNode item in node.ChildNodes)
             {
@@ -194,6 +194,12 @@ namespace X.Util.Core
             var node = doc.SelectSingleNode("/configuration/mongodb/server[@name='" + serverName + "']");
             if (Equals(node, null)) return configuration;
             var servers = new List<MongoServerAddress>();
+            var userName = XmlHelper.GetXmlAttributeValue(node, "username", string.Empty);
+            var password = XmlHelper.GetXmlAttributeValue(node, "password", string.Empty);
+            if (!string.IsNullOrWhiteSpace(userName) && !string.IsNullOrWhiteSpace(password))
+            {
+                configuration.Credentials = new List<MongoCredential> { MongoCredential.CreateMongoCRCredential("admin", userName, password) };
+            }
             foreach (XmlNode item in node.ChildNodes)
             {
                 switch (item.Name)
@@ -221,16 +227,16 @@ namespace X.Util.Core
         /// <summary>
         /// MongoDb Configuration
         /// </summary>
-        /// <param name="servers"></param>
         /// <returns></returns>
-        public static MongoClient MongoClientConfiguration(IEnumerable<Uri> servers)
+        public static MongoClient MongoClientConfiguration(IEnumerable<Uri> servers, string userName, string password)
         {
             var configuration = new MongoClientSettings
             {
                 MaxConnectionPoolSize = 10,
                 MinConnectionPoolSize = 1,
                 WaitQueueSize = 10000,
-                Servers = servers.Select(uri => new MongoServerAddress(uri.Host, uri.Port))
+                Servers = servers.Select(uri => new MongoServerAddress(uri.Host, uri.Port)),
+                Credentials = new List<MongoCredential> {MongoCredential.CreateMongoCRCredential("admin", userName, password)}
             };
             return new MongoClient(configuration);
         }
