@@ -1,7 +1,5 @@
 ﻿using MongoDB.Bson;
 using System;
-using System.Collections.Generic;
-using MongoDB.Driver;
 
 namespace MongoDbHelper
 {
@@ -16,20 +14,28 @@ namespace MongoDbHelper
         {
             try
             {
-                if (document[name].IsBsonDocument)
-                {
-                    return document[name] as BsonDocument;
-                }
+                return document[name].IsBsonDocument ? (BsonDocument)document[name] : new BsonDocument();
             }
             catch
             {
-                // ignored
+                return new BsonDocument();
             }
-            return new BsonDocument();
         }
         #endregion
 
         #region String
+        public static string GetString(BsonValue value)
+        {
+            try
+            {
+                return !value.IsBsonNull ? value.ToString().Trim() : string.Empty;
+            }
+            catch
+            {
+                return string.Empty;
+            }
+        }
+
         public static string GetString(BsonDocument document, string name)
         {
             try
@@ -41,6 +47,7 @@ namespace MongoDbHelper
                 return string.Empty;
             }
         }
+
         public static string GetString(BsonDocument document, string name, string defaultValue)
         {
             try
@@ -55,203 +62,238 @@ namespace MongoDbHelper
         #endregion
 
         #region Boolean
+        public static bool GetBoolean(BsonValue value)
+        {
+            bool result;
+            return bool.TryParse(GetString(value), out result) && result;
+        }
+
         public static bool GetBoolean(BsonDocument document, string name)
         {
-            return bool.Parse(GetString(document, name));
+            bool result;
+            return bool.TryParse(GetString(document, name), out result) && result;
+        }
+
+        public static bool GetBoolean(BsonValue value, bool defaultValue)
+        {
+            bool result;
+            return bool.TryParse(GetString(value), out result) ? result : defaultValue;
         }
 
         public static bool GetBoolean(BsonDocument document, string name, bool defaultValue)
         {
-            var value = GetString(document, name, string.Empty);
             bool result;
-            return bool.TryParse(value, out result) ? result : defaultValue;
+            return bool.TryParse(GetString(document, name, string.Empty), out result) ? result : defaultValue;
+        }
+
+        public static bool? GetBoolean(BsonValue value, bool? defaultValue)
+        {
+            bool result;
+            return bool.TryParse(GetString(value), out result) ? result : defaultValue;
         }
 
         public static bool? GetBoolean(BsonDocument document, string name, bool? defaultValue)
         {
-            var value = GetString(document, name, string.Empty);
             bool result;
-            return bool.TryParse(value, out result) ? result : defaultValue;
+            return bool.TryParse(GetString(document, name, string.Empty), out result) ? result : defaultValue;
         }
         #endregion
 
         #region Byte
+        public static byte GetByte(BsonValue value, byte defaultValue)
+        {
+            byte result;
+            return byte.TryParse(GetString(value), out result) ? result : defaultValue;
+        }
+
+        public static byte? GetByte(BsonValue value, byte? defaultValue)
+        {
+            byte result;
+            return byte.TryParse(GetString(value), out result) ? result : defaultValue;
+        }
+
         public static byte GetByte(BsonDocument document, string name, byte defaultValue)
         {
-            var value = GetString(document, name, string.Empty);
             byte result;
-            return byte.TryParse(value, out result) ? result : defaultValue;
+            return byte.TryParse(GetString(document, name, string.Empty), out result) ? result : defaultValue;
         }
         public static byte? GetByte(BsonDocument document, string name, byte? defaultValue)
         {
-            var value = GetString(document, name, string.Empty);
             byte result;
-            return byte.TryParse(value, out result) ? result : defaultValue;
+            return byte.TryParse(GetString(document, name, string.Empty), out result) ? result : defaultValue;
         }
+
         #endregion
 
         #region Int16/Short
+        public static short GetInt16(BsonValue value, short defaultValue)
+        {
+            short result;
+            return short.TryParse(GetString(value), out result) ? result : defaultValue;
+        }
+
+        public static short? GetInt16(BsonValue value, short? defaultValue)
+        {
+            short result;
+            return short.TryParse(GetString(value), out result) ? result : defaultValue;
+        }
+
         public static short GetInt16(BsonDocument document, string name, short defaultValue)
         {
-            var value = GetString(document, name, string.Empty);
             short result;
-            return short.TryParse(value, out result) ? result : defaultValue;
+            return short.TryParse(GetString(document, name, string.Empty), out result) ? result : defaultValue;
         }
+
         public static short? GetInt16(BsonDocument document, string name, short? defaultValue)
         {
-            var value = GetString(document, name, string.Empty);
             short result;
-            return short.TryParse(value, out result) ? result : defaultValue;
+            return short.TryParse(GetString(document, name, string.Empty), out result) ? result : defaultValue;
         }
         #endregion
 
         #region Int32
+        public static int GetInt32(BsonValue value, int defaultValue)
+        {
+            int result;
+            return int.TryParse(GetString(value), out result) ? result : defaultValue;
+        }
+
+        public static int? GetInt32(BsonValue value, int? defaultValue)
+        {
+            int result;
+            return int.TryParse(GetString(value), out result) ? result : defaultValue;
+        }
+
         public static int GetInt32(BsonDocument document, string name, int defaultValue)
         {
-            var value = GetString(document, name, string.Empty);
             int result;
-            return int.TryParse(value, out result) ? result : defaultValue;
+            return int.TryParse(GetString(document, name, string.Empty), out result) ? result : defaultValue;
         }
+
         public static int? GetInt32(BsonDocument document, string name, int? defaultValue)
         {
-            var value = GetString(document, name, string.Empty);
             int result;
-            return int.TryParse(value, out result) ? result : defaultValue;
+            return int.TryParse(GetString(document, name, string.Empty), out result) ? result : defaultValue;
         }
         #endregion
 
         #region Int64
+        public static long GetInt64(BsonValue value, long defaultValue)
+        {
+            long result;
+            return long.TryParse(GetString(value), out result) ? result : defaultValue;
+        }
+
+        public static long? GetInt64(BsonValue value, long? defaultValue)
+        {
+            long result;
+            return long.TryParse(GetString(value), out result) ? result : defaultValue;
+        }
+
         public static long GetInt64(BsonDocument document, string name, long defaultValue)
         {
-            var value = GetString(document, name, string.Empty);
             long result;
-            return long.TryParse(value, out result) ? result : defaultValue;
+            return long.TryParse(GetString(document, name, string.Empty), out result) ? result : defaultValue;
         }
+
         public static long? GetInt64(BsonDocument document, string name, long? defaultValue)
         {
-            var value = GetString(document, name, string.Empty);
             long result;
-            return long.TryParse(value, out result) ? result : defaultValue;
+            return long.TryParse(GetString(document, name, string.Empty), out result) ? result : defaultValue;
         }
         #endregion
 
         #region Double
+        public static double GetDouble(BsonValue value, double defaultValue)
+        {
+            double result;
+            return double.TryParse(GetString(value), out result) ? result : defaultValue;
+        }
+
+        public static double? GetDouble(BsonValue value, double? defaultValue)
+        {
+            double result;
+            return double.TryParse(GetString(value), out result) ? result : defaultValue;
+        }
+
         public static double GetDouble(BsonDocument document, string name, double defaultValue)
         {
-            var value = GetString(document, name, string.Empty);
             double result;
-            return double.TryParse(value, out result) ? result : defaultValue;
+            return double.TryParse(GetString(document, name, string.Empty), out result) ? result : defaultValue;
         }
+
         public static double? GetDouble(BsonDocument document, string name, double? defaultValue)
         {
-            var value = GetString(document, name, string.Empty);
             double result;
-            return double.TryParse(value, out result) ? result : defaultValue;
+            return double.TryParse(GetString(document, name, string.Empty), out result) ? result : defaultValue;
         }
         #endregion
 
         #region Decimal
+        public static decimal GetDecimal(BsonValue value, decimal defaultValue)
+        {
+            decimal result;
+            return decimal.TryParse(GetString(value), out result) ? result : defaultValue;
+        }
+
+        public static decimal? GetDecimal(BsonValue value, decimal? defaultValue)
+        {
+            decimal result;
+            return decimal.TryParse(GetString(value), out result) ? result : defaultValue;
+        }
+
         public static decimal GetDecimal(BsonDocument document, string name, decimal defaultValue)
         {
-            var value = GetString(document, name, string.Empty);
             decimal result;
-            return decimal.TryParse(value, out result) ? result : defaultValue;
+            return decimal.TryParse(GetString(document, name, string.Empty), out result) ? result : defaultValue;
         }
+
         public static decimal? GetDecimal(BsonDocument document, string name, decimal? defaultValue)
         {
-            var value = GetString(document, name, string.Empty);
             decimal result;
-            return decimal.TryParse(value, out result) ? result : defaultValue;
+            return decimal.TryParse(GetString(document, name, string.Empty), out result) ? result : defaultValue;
         }
         #endregion
 
         #region DateTime
+        public static DateTime GetDateTime(BsonValue value, DateTime defaultValue)
+        {
+            DateTime result;
+            return DateTime.TryParse(GetString(value), out result) ? result : defaultValue;
+        }
+
+        public static DateTime? GetDateTime(BsonValue value, DateTime? defaultValue)
+        {
+            DateTime result;
+            return DateTime.TryParse(GetString(value), out result) ? result : defaultValue;
+        }
+
         public static DateTime GetDateTime(BsonDocument document, string name, DateTime defaultValue)
         {
-            var value = GetString(document, name, string.Empty);
             DateTime result;
-            return DateTime.TryParse(value, out result) ? result : defaultValue;
+            return DateTime.TryParse(GetString(document, name, string.Empty), out result) ? result : defaultValue;
         }
+
         public static DateTime? GetDateTime(BsonDocument document, string name, DateTime? defaultValue)
         {
-            var value = GetString(document, name, string.Empty);
             DateTime result;
-            return DateTime.TryParse(value, out result) ? result : defaultValue;
+            return DateTime.TryParse(GetString(document, name, string.Empty), out result) ? result : defaultValue;
         }
         #endregion
 
         #region EnumValue        
-        /// <summary>
-        /// 根据枚举值返回枚举对象
-        /// </summary>
-        /// <typeparam name="T">枚举对象</typeparam>
-        /// <param name="document">BsonDocument</param>
-        /// <param name="name">字段名</param>
-        /// <param name="defaultValue">默认枚举对象</param>
-        /// <returns>
-        /// 枚举实例
-        /// </returns>
-        public static T GetEnumValue<T>(BsonDocument document, string name, T defaultValue)
+        public static T GetEnum<T>(BsonValue value, T defaultValue) where T : struct 
         {
-            var val = GetInt32(document, name, null);
-            if (!val.HasValue)
-            {
-                return defaultValue;
-            }
-            try
-            {
-                return (T)Enum.ToObject(typeof(T), val.Value);
-            }
-            catch //(Exception ex)
-            {
-                return defaultValue;
-            }
+            T result;
+            return Enum.TryParse(GetString(value), out result) ? result : defaultValue;
         }
 
-        /// <summary>
-        /// 根据枚举名返回枚举对象
-        /// </summary>
-        /// <typeparam name="T">枚举对象</typeparam>
-        /// <param name="document">BsonDocument</param>
-        /// <param name="name">字段名</param>
-        /// <param name="defaultValue">默认枚举对象</param>
-        /// <returns>
-        /// 枚举实例
-        /// </returns>
-        public static T GetEnumString<T>(BsonDocument document, string name, T defaultValue)
+        public static T GetEnum<T>(BsonDocument document, string name, T defaultValue) where T : struct
         {
-            var val = GetString(document, name);
-            if (string.IsNullOrEmpty(val))
-            {
-                return defaultValue;
-            }
-            try
-            {
-                return (T)Enum.Parse(typeof(T), val);
-            }
-            catch //(Exception ex)
-            {
-                return defaultValue;
-            }
+            T result;
+            return Enum.TryParse(GetString(document, name, string.Empty), out result) ? result : defaultValue;
         }
         #endregion
-
-        public static List<T> ToEntity<T>(MongoCursor<BsonDocument> docs)
-        {
-            var list = new List<T>();
-            var propertys = typeof(T).GetProperties();
-            foreach (var doc in docs)
-            {
-                var result = Activator.CreateInstance<T>();
-                var element = doc.ToDictionary();
-                foreach (var p in propertys)
-                {
-                    p.SetValue(result, element["id".Equals(p.Name.ToLower()) ? "_id" : p.Name], null);
-                }
-                list.Add(result);
-            }
-            return list;
-        }
     }
     #endregion
 }

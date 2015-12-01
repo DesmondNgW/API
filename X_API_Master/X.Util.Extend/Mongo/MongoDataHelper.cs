@@ -6,47 +6,55 @@ namespace X.Util.Extend.Mongo
 {
     public class MongoDataHelper
     {
-        #region String
-        public static string GetString(BsonValue value)
+        #region BsonDocument
+        public static BsonDocument GetBsonDocument(BsonDocument document, string name)
         {
-            var ret = string.Empty;
             try
             {
-                if (!value.IsBsonNull) ret = value.ToString().Trim();
+                return document[name].IsBsonDocument ? (BsonDocument)document[name] : new BsonDocument();
             }
             catch
             {
-                // ignored
+                return new BsonDocument();
             }
-            return ret;
+        }
+        #endregion
+
+        #region String
+        public static string GetString(BsonValue value)
+        {
+            try
+            {
+                return !value.IsBsonNull ? value.ToString().Trim() : string.Empty;
+            }
+            catch
+            {
+                return string.Empty;
+            }
         }
 
         public static string GetString(BsonDocument document, string name)
         {
-            var ret = string.Empty;
             try
             {
-                if (!document[name].IsBsonNull) ret = document[name].ToString().Trim();
+                return !document[name].IsBsonNull ? document[name].ToString().Trim() : string.Empty;
             }
             catch
             {
-                // ignored
+                return string.Empty;
             }
-            return ret;
         }
 
         public static string GetString(BsonDocument document, string name, string defaultValue)
         {
-            var ret = defaultValue;
             try
             {
-                if (!document[name].IsBsonNull) ret = document[name].ToString().Trim();
+                return !document[name].IsBsonNull ? document[name].ToString().Trim() : defaultValue;
             }
             catch
             {
-                // ignored
+                return defaultValue;
             }
-            return ret;
         }
         #endregion
 
@@ -226,6 +234,20 @@ namespace X.Util.Extend.Mongo
         public static DateTime? GetDateTime(BsonDocument document, string name, DateTime? defaultValue)
         {
             return CoreParse.GetDateTime(GetString(document, name, string.Empty), defaultValue);
+        }
+        #endregion
+
+        #region EnumValue        
+        public static T GetEnum<T>(BsonValue value, T defaultValue) where T : struct
+        {
+            T result;
+            return Enum.TryParse(GetString(value), out result) ? result : defaultValue;
+        }
+
+        public static T GetEnum<T>(BsonDocument document, string name, T defaultValue) where T : struct
+        {
+            T result;
+            return Enum.TryParse(GetString(document, name, string.Empty), out result) ? result : defaultValue;
         }
         #endregion
     }
