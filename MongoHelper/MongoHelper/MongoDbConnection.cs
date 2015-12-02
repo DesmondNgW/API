@@ -54,7 +54,7 @@ namespace MongoDbHelper
         /// <returns></returns>
         public static MongoClient Connection(string conn = DefaultConnectName)
         {
-            return Connection(string.Empty, string.Empty, string.Empty, conn);
+            return Connection(string.Empty, string.Empty, string.Empty, conn, null);
         }
 
         /// <summary>
@@ -64,20 +64,22 @@ namespace MongoDbHelper
         /// <param name="password">密码</param>
         /// <param name="collection">表collection</param>
         /// <param name="connectName">链接数据库名称</param>
+        /// <param name="reloadConfigure">重新加载配置文件</param>
         /// <param name="maxConnectionPoolSize">最大连接池</param>
         /// <returns>
         /// 返回数据库连接地址
         /// </returns>
-        public static MongoClient Connection(string userName, string password, string collection, string connectName, int maxConnectionPoolSize = MaxConnectionPoolSize)
+        public static MongoClient Connection(string userName, string password, string collection, string connectName, Action reloadConfigure, int maxConnectionPoolSize = MaxConnectionPoolSize)
         {
             var setting = Configures[connectName];
+            if (setting == null) reloadConfigure?.Invoke();
             if (setting?.MongoClient != null) return setting.MongoClient;
             lock (LockObj)
             {
-                if (setting?.MongoClient != null) return Configures[connectName].MongoClient;
-                if (setting == null) return null;
+                if (setting?.MongoClient != null) return Configures[connectName].MongoClient;   
                 try
                 {
+                    if (setting == null) throw new Exception("MongoDb缺少配置信息");
                     if (string.IsNullOrWhiteSpace(collection)) collection = "admin";
                     if (!string.IsNullOrEmpty(userName) && !string.IsNullOrEmpty(password)) setting.MongoClientSettings.Credentials = new List<MongoCredential> { MongoCredential.CreateMongoCRCredential(collection, userName, password) };
                     setting.MongoClientSettings.MaxConnectionPoolSize = maxConnectionPoolSize > 0 ? maxConnectionPoolSize : MaxConnectionPoolSize;
@@ -89,7 +91,7 @@ namespace MongoDbHelper
                 }
                 catch (Exception ex)
                 {
-                    throw (new Exception($"Servers: {setting.Servers.ToJson()} \r\n Exceptions: {ex}"));
+                    throw (new Exception($"Servers: {setting?.Servers.ToJson()} \r\n Exceptions: {ex}"));
                 }
             }
         }

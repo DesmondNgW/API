@@ -11,18 +11,19 @@ namespace MongoDbHelper
     /// </summary>
     public class MongoDbConfig
     {
-        private static readonly Regex RegConnectionString = new Regex(@"^mongodb://(.+)(\?.*)$", RegexOptions.IgnoreCase);
+        private static readonly Regex RegConnectionString = new Regex(@"^mongodb://([^?]+)(\?(.*))?$", RegexOptions.IgnoreCase);
 
         /// <summary>
         /// 连接字符串格式如下mongodb://host1[:port1][,host2[:port2],…[,hostN[:portN]]]?username=username&amp;password=password&amp;connectName=connectName
-        /// mongodb://127.0.0.1:27017,127.0.0.1:27017?username=
+        /// mongodb://127.0.0.1:27017,127.0.0.1:27017?username=username
+        /// 加载配置文件（也可以在使用时加载）
         /// </summary>
         /// <param name="connectionString"></param>
         public static void Config(string connectionString)
         {
             var match = RegConnectionString.Match(connectionString);
             if (match.Groups.Count <= 0) return;
-            var info = HttpUtility.ParseQueryString(match.Groups[1].Value);
+            var info = HttpUtility.ParseQueryString(match.Groups[2].Value);
             var userName = info["username"] ?? string.Empty;
             var password = info["password"] ?? string.Empty;
             var connectName = string.IsNullOrWhiteSpace(info["connectName"]) ? MongoDbConnection.DefaultConnectName: info["connectName"];
