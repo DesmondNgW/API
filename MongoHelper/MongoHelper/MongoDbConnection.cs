@@ -15,6 +15,7 @@ namespace MongoDbHelper
         private static readonly ConcurrentDictionary<string, MongoDbConfigure> Configures = new ConcurrentDictionary<string, MongoDbConfigure>();
         private static readonly object LockObj = new object();
         internal const string DefaultConnectName = "def";
+        internal const int MaxConnectionPoolSize = 8;
 
         /// <summary>
         /// 添加Mongo数据库配置
@@ -23,7 +24,8 @@ namespace MongoDbHelper
         /// <param name="connectName"></param>
         /// <param name="userName"></param>
         /// <param name="password"></param>
-        public static void Configure(List<Uri> servers, string connectName, string userName = "", string password = "")
+        /// <param name="maxConnectionPoolSize"></param>
+        public static void Configure(List<Uri> servers, string connectName, string userName = "", string password = "", int maxConnectionPoolSize = MaxConnectionPoolSize)
         {
             if (Configures.ContainsKey(connectName) && Configures[connectName] != null) return;
             lock (LockObj)
@@ -34,8 +36,7 @@ namespace MongoDbHelper
                     Servers = servers,
                     MongoClientSettings = new MongoClientSettings()
                     {
-                        MaxConnectionPoolSize = 20,
-                        MinConnectionPoolSize = 1,
+                        MaxConnectionPoolSize = maxConnectionPoolSize > 0 ? maxConnectionPoolSize : MaxConnectionPoolSize,
                         WaitQueueSize = 5000,
                         Servers = servers.Select(uri => new MongoServerAddress(uri.Host, uri.Port))
                     }
@@ -62,11 +63,12 @@ namespace MongoDbHelper
         /// <param name="userName">用户名</param>
         /// <param name="password">密码</param>
         /// <param name="collection">表collection</param>
-        /// <param name="connectName">数据库conn</param>
+        /// <param name="connectName">链接数据库名称</param>
+        /// <param name="maxConnectionPoolSize">最大连接池</param>
         /// <returns>
         /// 返回数据库连接地址
         /// </returns>
-        public static MongoClient Connection(string userName, string password, string collection, string connectName)
+        public static MongoClient Connection(string userName, string password, string collection, string connectName, int maxConnectionPoolSize = MaxConnectionPoolSize)
         {
             var setting = Configures[connectName];
             if (setting?.MongoClient != null) return setting.MongoClient;
@@ -78,8 +80,7 @@ namespace MongoDbHelper
                 {
                     if (string.IsNullOrWhiteSpace(collection)) collection = "admin";
                     if (!string.IsNullOrEmpty(userName) && !string.IsNullOrEmpty(password)) setting.MongoClientSettings.Credentials = new List<MongoCredential> { MongoCredential.CreateMongoCRCredential(collection, userName, password) };
-                    setting.MongoClientSettings.MaxConnectionPoolSize = 20;
-                    setting.MongoClientSettings.MinConnectionPoolSize = 1;
+                    setting.MongoClientSettings.MaxConnectionPoolSize = maxConnectionPoolSize > 0 ? maxConnectionPoolSize : MaxConnectionPoolSize;
                     setting.MongoClientSettings.WaitQueueSize = 5000;
                     if (setting.Servers != null && setting.Servers.Count > 0) setting.MongoClientSettings.Servers = setting.Servers.Select(uri => new MongoServerAddress(uri.Host, uri.Port));
                     setting.MongoClient = new MongoClient(setting.MongoClientSettings);

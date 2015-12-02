@@ -4,14 +4,6 @@ using MongoDbHelper;
 
 namespace TestConsole
 {
-    public enum Test
-    {
-        First,
-        Second,
-        Third
-    }
-
-
     class Program
     {
         static void Main()
