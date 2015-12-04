@@ -118,7 +118,7 @@ namespace X.Interface.Core
         public static string SetLoginStatus(string customerNo, string customerName, int zone)
         {
             if (string.IsNullOrEmpty(customerNo) || zone.Equals(0)) return string.Empty;
-            var uid = Guid.NewGuid().ToString("N");
+            var uid = GenerateToken();
             var token = ExecutionContext<RequestContext>.Current.Token;
             var key = Prefix + token + uid;
             var statusZone = GetStatusZone(token, uid);
