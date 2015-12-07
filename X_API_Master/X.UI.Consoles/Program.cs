@@ -1,7 +1,5 @@
 ﻿using System;
-using System.IO;
 using System.Linq;
-using X.Util.Core;
 
 namespace X.UI.Consoles
 {
@@ -9,9 +7,6 @@ namespace X.UI.Consoles
     {
         static void Main()
         {
-            //log4net config
-            LoggerConfig.Instance.Config(Path.Combine(AppDomain.CurrentDomain.BaseDirectory + "/../", "XConsoleLog"));
-
             Index();
         }
 

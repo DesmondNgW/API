@@ -1,5 +1,4 @@
-﻿using log4net;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -65,7 +64,7 @@ namespace X.Util.Core
         #region WriteFiles
         private static void Log(string ip, CoreMethodInfo methodInfo, LogDomain domain, LogType logtype, object returnValue, params string[] messages)
         {
-            var log = LogManager.GetLogger(domain.ToString(), methodInfo.ClassName + "." + methodInfo.MethodName);
+            var log = LoggerConfig.Instance.GetLogger(domain);
             try
             {
                 var message = new StringBuilder();
@@ -111,7 +110,7 @@ namespace X.Util.Core
 
         private static void Log(string ip, MethodBase declaringType, LogDomain domain, LogType logtype, object returnValue, string address, params string[] messages)
         {
-            var log = LogManager.GetLogger(domain.ToString(), declaringType.DeclaringType + "." + declaringType.Name);
+            var log = LoggerConfig.Instance.GetLogger(domain);
             var message = new StringBuilder();
             message.Append("[" + ip + "]");
             message.Append("\t\n");

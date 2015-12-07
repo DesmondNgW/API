@@ -4,6 +4,11 @@ namespace X.Util.Core
     public class AppConfig
     {
         /// <summary>
+        /// log4net 日志根目录
+        /// </summary>
+        public static string Log4NetBaseDirectory => ConfigurationHelper.GetAppSettingByName(nameof(Log4NetBaseDirectory), string.Empty);
+
+        /// <summary>
         /// 配置用户编号用户Debug模式
         /// </summary>
         public static string CustomerNo => ConfigurationHelper.GetAppSetting(nameof(CustomerNo));

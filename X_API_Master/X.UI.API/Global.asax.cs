@@ -20,7 +20,6 @@ namespace X.UI.API
 			FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
 			RouteConfig.RegisterRoutes(RouteTable.Routes);
 			BundleConfig.RegisterBundles(BundleTable.Bundles);
-            LoggerConfig.Instance.Config(Path.Combine(AppDomain.CurrentDomain.BaseDirectory + "/../", "XApiLog"));
         }
 
         protected void Application_Error(object sender, EventArgs e)
