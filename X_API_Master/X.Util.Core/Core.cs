@@ -20,17 +20,15 @@ namespace X.Util.Core
         /// <returns></returns>
         private static bool ContainsCache(string key, Func<T, bool> validState = null)
         {
-            var result = false;
             if (Equals(validState, null)) validState = T => true;
             try
             {
-                result = _cacheResult[key].Result != null && DateTime.Now < _cacheResult[key].ExpiryDate && validState(_cacheResult[key].Result);
+                return _cacheResult[key].Result != null && DateTime.Now < _cacheResult[key].ExpiryDate && validState(_cacheResult[key].Result);
             }
             catch
             {
-                // ignored
+                return false;
             }
-            return result;
         }
 
         /// <summary>

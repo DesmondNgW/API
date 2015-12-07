@@ -67,7 +67,7 @@ namespace X.Util.Core
                 }
                 catch
                 {
-                    return LogManager.GetLogger(repository, "default");
+                    return default(ILog);
                 }
             }
 
