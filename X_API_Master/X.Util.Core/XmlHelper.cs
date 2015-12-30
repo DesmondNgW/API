@@ -94,14 +94,14 @@ namespace X.Util.Core
         public static string GetXmlNodeValue(XmlNode node, string defaultValue)
         {
             var ret = defaultValue;
-            if (!string.IsNullOrWhiteSpace(node?.InnerText.Trim())) ret = node.InnerText.Trim();
+            if (node != null && !string.IsNullOrWhiteSpace(node.InnerText.Trim())) ret = node.InnerText.Trim();
             return ret;
         }
 
         public static string GetXmlNodeXml(XmlNode node, string defaultValue)
         {
             var ret = defaultValue;
-            if (!string.IsNullOrWhiteSpace(node?.InnerXml.Trim())) ret = node.InnerXml.Trim();
+            if (node != null && !string.IsNullOrWhiteSpace(node.InnerXml.Trim())) ret = node.InnerXml.Trim();
             return ret;
         }
 
@@ -109,8 +109,8 @@ namespace X.Util.Core
         {
             var ret = defaultValue;
             if (Equals(node, null)) return ret;
-            var attribute = node.Attributes?[attributeName];
-            if (!string.IsNullOrWhiteSpace(attribute?.Value.Trim())) ret = attribute.Value.Trim();
+            var attribute = node.Attributes != null ? node.Attributes[attributeName] : null;
+            if (attribute != null && !string.IsNullOrWhiteSpace(attribute.Value.Trim())) ret = attribute.Value.Trim();
             return ret;
         }
         #endregion

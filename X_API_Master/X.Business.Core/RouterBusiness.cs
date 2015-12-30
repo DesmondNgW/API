@@ -39,7 +39,7 @@ namespace X.Business.Core
         public Zone GetRouteZoneByCustomerNo(string customerNo)
         {
             var info = GetRouteInfoByCustomerNo(customerNo);
-            return info?.Zone ?? Zone.TradeOne;
+            return info != null ? info.Zone : Zone.TradeOne;
         }
 
         /// <summary>
@@ -50,7 +50,7 @@ namespace X.Business.Core
         public Zone GetRouteZoneByLoginInfo(string loginName)
         {
             var info = GetRouteInfoByLoginInfo(loginName);
-            return info?.Zone ?? Zone.TradeOne;
+            return info != null ? info.Zone : Zone.TradeOne;
         }
 
         /// <summary>

@@ -20,12 +20,12 @@ namespace X.UI.API.Util
             var statusCode = HttpStatusCode.OK;
             if ("404".Equals(message))
             {
-                message = $"未找到与请求 URI“{actionExecutedContext.Request.RequestUri}”匹配的 HTTP 资源。";
+                message = string.Format("未找到与请求 URI“{0}”匹配的 HTTP 资源。", actionExecutedContext.Request.RequestUri);
                 statusCode = HttpStatusCode.NotFound;
             }
             else
             {
-                string errorInfo = $"请求URI: {actionExecutedContext.Request.RequestUri} 发生异常, 异常信息: {actionExecutedContext.Exception}.";
+                string errorInfo = string.Format("请求URI: {0} 发生异常, 异常信息: {1}.", actionExecutedContext.Request.RequestUri, actionExecutedContext.Exception);
                 Logger.Error(System.Reflection.MethodBase.GetCurrentMethod(), LogDomain.Ui, null, errorInfo);
             }
             var newContent = new ApiResult<string>
@@ -36,8 +36,7 @@ namespace X.UI.API.Util
             };
             var contentType = actionExecutedContext.Request.Headers.Accept.ToString();
             ObjectContent content = contentType.ToLower().Contains("application/json") ? new ObjectContent<ApiResult<string>>(newContent, new JsonMediaTypeFormatter()) : new ObjectContent<ApiResult<string>>(newContent, new XmlMediaTypeFormatter());
-            actionExecutedContext.Response = new HttpResponseMessage {Content = content, StatusCode = statusCode};
-
+            actionExecutedContext.Response = new HttpResponseMessage { Content = content, StatusCode = statusCode };
         }
     }
 }

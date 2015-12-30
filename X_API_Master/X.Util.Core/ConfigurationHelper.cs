@@ -20,8 +20,14 @@ namespace X.Util.Core
         public const string MongoDefaultServername = "XMongo";
         public const string RedisDefaultServername = "XRedis";
         public const string CouchDefaultServername = "XCouch";
-        public static string EndpointFile => Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "App_Data\\endpoint_" + Math.Max(ExecutionContext<RequestContext>.Current.Zone, 1) + ".xml");
-        public static string ConfigFile => Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "App_Data\\Config.xml");
+        public static string EndpointFile
+        {
+            get { return Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "App_Data\\endpoint_" + Math.Max(ExecutionContext<RequestContext>.Current.Zone, 1) + ".xml"); }
+        }
+        public static string ConfigFile
+        {
+            get { return Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "App_Data\\Config.xml"); }
+        }
 
         #region GetAppSetting From web.config
         public static string GetAppSetting(string name)
@@ -56,7 +62,7 @@ namespace X.Util.Core
             var doc = XmlHelper.GetXmlDocCache(ConfigFile);
             if (Equals(doc, null)) return;
             var node = doc.SelectSingleNode("/configuration/AppSettings/add[@key='" + name + "']");
-            if (node?.Attributes != null)
+            if (node != null && node.Attributes != null)
             {
                 var attr = node.Attributes["value"] ?? doc.CreateAttribute("value");
                 attr.Value = value;
@@ -118,7 +124,7 @@ namespace X.Util.Core
             var result = LocalCache.Get<XmlServiceModel>(key);
             if (result != null) return result;
             var doc = XmlHelper.GetXmlDocCache(EndpointFile);
-            var node = doc?.SelectSingleNode("/configuration/client/endpoint[@name='" + name + "']");
+            var node = doc != null ? doc.SelectSingleNode("/configuration/client/endpoint[@name='" + name + "']") : null;
             if (Equals(node, null) || node.ChildNodes.Count <= 0) return null;
             result = new XmlServiceModel
             {
@@ -247,7 +253,7 @@ namespace X.Util.Core
         public static PooledRedisClientManager GetRedisClientManager(string serverName)
         {
             var doc = XmlHelper.GetXmlDocCache(EndpointFile);
-            var node = doc?.SelectSingleNode("/configuration/redis/server[@name='" + serverName + "']");
+            var node = doc != null ? doc.SelectSingleNode("/configuration/redis/server[@name='" + serverName + "']") : null;
             if (Equals(node, null)) return null;
             var config = new RedisClientManagerConfig();
             var readWriteHosts = new List<string>();

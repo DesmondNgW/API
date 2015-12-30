@@ -50,7 +50,7 @@ namespace X.Util.Extend.Core
 
         private static string GetCacheKeyPrefix(MethodBase method)
         {
-            var cacheKeyPrefix = method.DeclaringType?.FullName + "|" + method.Name;
+            var cacheKeyPrefix = method.DeclaringType.FullName + "|" + method.Name;
             return method.GetParameters().OrderBy(p => p.Position).Aggregate(cacheKeyPrefix, (current, p) => current + ("_" + p.Name));
         }
 

@@ -237,7 +237,7 @@ namespace X.Util.Extend.Mongo
         }
         #endregion
 
-        #region EnumValue        
+        #region EnumValue
         public static T GetEnum<T>(BsonValue value, T defaultValue) where T : struct
         {
             T result;

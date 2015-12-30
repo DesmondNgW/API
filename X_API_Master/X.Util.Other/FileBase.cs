@@ -47,7 +47,7 @@ namespace X.Util.Other
                 }
                 finally
                 {
-                    fs?.Close();
+                    if (fs != null) fs.Close();
                 }
             });
             return result;

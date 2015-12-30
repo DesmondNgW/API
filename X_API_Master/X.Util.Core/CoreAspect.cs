@@ -5,7 +5,10 @@ namespace X.Util.Core
     public class CoreAspect<T>
     {
         private Func<Func<T>, T> _chain;
-        public static CoreAspect<T> Define => new CoreAspect<T>();
+        public static CoreAspect<T> Define
+        {
+            get { return new CoreAspect<T>(); }
+        }
         public Delegate WorkDelegate { get; set; }
 
         public T Run(Func<T> work)

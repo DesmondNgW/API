@@ -14,7 +14,7 @@ namespace X.Util.Provider
         private const string Servername = ConfigurationHelper.MongoDefaultServername;
         private const string Database = "admin";
         private const string CollectionName = "Test";
-        private MongoServer MongoSever { get; }
+        private MongoServer MongoSever { get; set; }
         public MongoCollection<BsonDocument> Collection { get; set; }
         public MongoDbProvider()
         {

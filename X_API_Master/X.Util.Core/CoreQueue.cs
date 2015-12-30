@@ -16,7 +16,7 @@ namespace X.Util.Core
         /// <summary>
         /// 延迟队列处理方法
         /// </summary>
-        private Action<T> Method { get; }
+        private Action<T> Method { get; set; }
 
         /// <summary>
         /// 延迟队列

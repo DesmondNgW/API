@@ -18,7 +18,10 @@ namespace X.Util.Core
         private static readonly LevelRangeFilter InfoFilter = new LevelRangeFilter { LevelMax = Level.Info, LevelMin = Level.Info };
         private static readonly LevelRangeFilter DebugFilter = new LevelRangeFilter { LevelMax = Level.Debug, LevelMin = Level.Debug };
         private static LoggerConfig _instance;
-        public static LoggerConfig Instance => _instance ?? (_instance = new LoggerConfig());
+        public static LoggerConfig Instance
+        {
+            get { return _instance ?? (_instance = new LoggerConfig()); }
+        }
         private LoggerConfig()
         {
             ErrorFilter.ActivateOptions();

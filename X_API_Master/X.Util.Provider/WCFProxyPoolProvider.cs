@@ -27,17 +27,26 @@ namespace X.Util.Provider
         #region 内部实现
         private readonly Stopwatch _sw = new Stopwatch();
         private static TChannel _instance;
-        private static TimeSpan ValidTime => new TimeSpan(0, 10, 0);
+        private static TimeSpan ValidTime
+        {
+            get { return new TimeSpan(0, 10, 0); }
+        }
         private bool _channelFromCache = true;
         /// <summary>
         /// 缓存Key
         /// </summary>
-        private string CacheKey => ServiceUri + "_" + Size;
+        private string CacheKey
+        {
+            get { return ServiceUri + "_" + Size; }
+        }
 
         /// <summary>
         /// 连接池Size
         /// </summary>
-        private int Size => Math.Max(ServiceModel.MaxPoolSize, 20);
+        private int Size
+        {
+            get { return Math.Max(ServiceModel.MaxPoolSize, 20); }
+        }
 
         /// <summary>
         /// 初始化单个ChannelFactory
@@ -71,7 +80,10 @@ namespace X.Util.Provider
         /// <summary>
         /// ChannelFactory连接池实例
         /// </summary>
-        private CoreChannelFactoryPool<TChannel> CoreFactoryPool => Core<CoreChannelFactoryPool<TChannel>>.Instance(InitCoreFactoryPool, CacheKey);
+        private CoreChannelFactoryPool<TChannel> CoreFactoryPool
+        {
+            get { return Core<CoreChannelFactoryPool<TChannel>>.Instance(InitCoreFactoryPool, CacheKey); }
+        }
 
         /// <summary>
         /// 关闭Channel实例
@@ -140,7 +152,10 @@ namespace X.Util.Provider
         /// <summary>
         /// 调用WCF的EndpointAddress
         /// </summary>
-        public string ServiceUri => ServiceModel.EndpointAddress;
+        public string ServiceUri
+        {
+            get { return ServiceModel.EndpointAddress; }
+        }
 
         /// <summary>
         /// Provider提供的Channel实例

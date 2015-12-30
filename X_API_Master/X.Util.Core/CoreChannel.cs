@@ -46,7 +46,7 @@ namespace X.Util.Core
             {
                 if (endpoint.Contract != serviceEndpoint.Contract.ConfigurationName) continue;
                 var endpointAddress = endpoint.Address;
-                if (!string.IsNullOrEmpty(ServiceModel?.EndpointAddress)) endpointAddress = new Uri(ServiceModel.EndpointAddress);
+                if (ServiceModel != null && !string.IsNullOrEmpty(ServiceModel.EndpointAddress)) endpointAddress = new Uri(ServiceModel.EndpointAddress);
                 if (Equals(serviceEndpoint.Binding, null)) serviceEndpoint.Binding = ServiceModelTool.CreateBinding(endpoint.Binding, @group);
                 if (Equals(serviceEndpoint.Address, null)) serviceEndpoint.Address = new EndpointAddress(endpointAddress, ServiceModelTool.GetIdentity(endpoint.Identity), endpoint.Headers.Headers);
                 if (serviceEndpoint.Behaviors.Count.Equals(0) && !string.IsNullOrEmpty(endpoint.BehaviorConfiguration)) ServiceModelTool.AddBehaviors(endpoint.BehaviorConfiguration, serviceEndpoint, @group);

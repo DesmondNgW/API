@@ -99,7 +99,7 @@ namespace X.Util.Core
 
         public static void Close(MethodBase method, long elapsedMilliseconds, LogDomain edomain, string address = null)
         {
-            if (method.DeclaringType != null) Logger.Debug(method, edomain, null, address, $@"{method.DeclaringType.FullName}.{method.Name} finished, used {elapsedMilliseconds} ms.");
+            if (method.DeclaringType != null) Logger.Debug(method, edomain, null, address, string.Format(@"{0}.{1} finished, used {2} ms.", method.DeclaringType.FullName, method.Name, elapsedMilliseconds));
         }
 
         public static void Dispose(T channel, LogDomain edomain)

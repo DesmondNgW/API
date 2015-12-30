@@ -14,7 +14,7 @@ namespace X.Util.Extend.Cryption
         private static RsaKey GetRsaKey(string id)
         {
             var rsaKey = default(RsaKey);
-            var query = new QueryDocument {{"_id", id }};
+            var query = new QueryDocument { { "_id", id } };
             var list = MongoDbBase.ToEntity<RsaKey>(MongoDbBase.Default.ReadMongo("RSA", "RSA", query));
             if (list != null && list.Count > 0)
             {
@@ -25,7 +25,7 @@ namespace X.Util.Extend.Cryption
 
         private static void RemoveRsaKey(string id)
         {
-            var query = new QueryDocument {{"_id", id}};
+            var query = new QueryDocument { { "_id", id } };
             MongoDbBase.Default.RemoveMongo("RSA", "RSA", query, RemoveFlags.Single);
         }
 
@@ -62,7 +62,7 @@ namespace X.Util.Extend.Cryption
 
         public static RSAParameters GetPublicKey(string key, int size, string nonce, bool tmpKey)
         {
-            return GetPublicKey($"{key}_{size}_{nonce}", tmpKey, () => new RSACryptoServiceProvider(size).ExportParameters(true));
+            return GetPublicKey(string.Format("{0}_{1}_{2}", key, size, nonce), tmpKey, () => new RSACryptoServiceProvider(size).ExportParameters(true));
         }
 
         private static RSAParameters GetPrivateKey(RsaKey rsaKey)
@@ -127,7 +127,7 @@ namespace X.Util.Extend.Cryption
         public static string Decrypt(string key, string content, string nonce, int size = 1024)
         {
             var rsa = new RSACryptoServiceProvider(size);
-            var rsaKey = GetRsaKey($"{key}_{size}_{nonce}");
+            var rsaKey = GetRsaKey(string.Format("{0}_{1}_{2}", key, size, nonce));
             if (!Equals(rsaKey, default(RsaKey)))
             {
                 var privateKey = GetPrivateKey(rsaKey);
@@ -151,7 +151,7 @@ namespace X.Util.Extend.Cryption
         public static string DecryptFromBase64(string key, string content, string nonce, int size = 1024)
         {
             var rsa = new RSACryptoServiceProvider(size);
-            var rsaKey = GetRsaKey($"{key}_{size}_{nonce}");
+            var rsaKey = GetRsaKey(string.Format("{0}_{1}_{2}", key, size, nonce));
             if (!Equals(rsaKey, default(RsaKey)))
             {
                 var privateKey = GetPrivateKey(rsaKey);

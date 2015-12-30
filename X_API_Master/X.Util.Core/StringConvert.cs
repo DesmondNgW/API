@@ -32,7 +32,10 @@ namespace X.Util.Core
             }
         }
 
-        public static Random SysRandom => new Random(BitConverter.ToInt32(Guid.NewGuid().ToByteArray(), 0));
+        public static Random SysRandom
+        {
+            get { return new Random(BitConverter.ToInt32(Guid.NewGuid().ToByteArray(), 0)); }
+        }
 
         public static string Bytes2Hex(byte[] bytes)
         {

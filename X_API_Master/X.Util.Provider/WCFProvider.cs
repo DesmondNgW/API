@@ -25,13 +25,19 @@ namespace X.Util.Provider
         #endregion
 
         #region 内部实现
-        private static TimeSpan ValidTime => new TimeSpan(2, 0, 0);
+        private static TimeSpan ValidTime
+        {
+            get { return new TimeSpan(2, 0, 0); }
+        }
         private static T _instance;
         private readonly Stopwatch _sw = new Stopwatch();
         /// <summary>
         /// 缓存Key
         /// </summary>
-        private string CacheKey => EndpointAddress + Thread.CurrentThread.ManagedThreadId % ServiceModel.MaxPoolSize;
+        private string CacheKey
+        {
+            get { return EndpointAddress + Thread.CurrentThread.ManagedThreadId % ServiceModel.MaxPoolSize; }
+        }
 
         /// <summary>
         /// 初始化ChannelFactory
@@ -68,7 +74,10 @@ namespace X.Util.Provider
         /// <summary>
         /// 调用WCF的EndpointAddress
         /// </summary>
-        public string EndpointAddress => ServiceModel.EndpointAddress;
+        public string EndpointAddress
+        {
+            get { return ServiceModel.EndpointAddress; }
+        }
 
         /// <summary>
         /// Provider提供的Channel实例

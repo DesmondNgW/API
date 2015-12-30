@@ -96,7 +96,7 @@ namespace X.Util.Other
             {
                 var request = (HttpWebRequest)WebRequest.Create(uri);
                 request.Timeout = 10000;
-                request.IfModifiedSince = cache?.LastModified ?? DateTime.MinValue;
+                request.IfModifiedSince = cache != null ? cache.LastModified : DateTime.MinValue;
                 var response = (HttpWebResponse)request.GetResponse();
                 cache = new CacheResultInfo<T> { CacheKey = uri, Result = loader(response), LastModified = response.LastModified };
                 RuntimeCache.Set(uri, cache, new TimeSpan(1, 0, 0));

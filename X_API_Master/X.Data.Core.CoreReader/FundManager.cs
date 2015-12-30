@@ -28,7 +28,7 @@ namespace X.Data.Core.CoreReader
             {
                 var result = new ResultInfo<FundDays> { Succeed = false, Message = "fundcoe not exists" };
                 var list = GetFundDays();
-                if (list?.Result != null && list.Result.Count > 0)
+                if (list != null && list.Result != null && list.Result.Count > 0)
                 {
                     var funddays = list.Result.FirstOrDefault(p => Equals(p.FundCode, fundCode));
                     if (funddays != null) result = new ResultInfo<FundDays> { Succeed = true, Result = funddays, Message = string.Empty };

@@ -7,9 +7,15 @@ namespace X.Util.Core
 {
     public class ExecutionContext<T>
     {
-        public static T Current => (T)(CallContext.GetData(typeof(T).FullName) ?? Activator.CreateInstance<T>());
+        public static T Current
+        {
+            get { return (T)(CallContext.GetData(typeof(T).FullName) ?? Activator.CreateInstance<T>()); }
+        }
 
-        public static T LogicalCurrent => (T)(CallContext.LogicalGetData(typeof(T).FullName) ?? Activator.CreateInstance<T>());
+        public static T LogicalCurrent
+        {
+            get { return (T)(CallContext.LogicalGetData(typeof(T).FullName) ?? Activator.CreateInstance<T>()); }
+        }
 
         public static T Init(T context)
         {
