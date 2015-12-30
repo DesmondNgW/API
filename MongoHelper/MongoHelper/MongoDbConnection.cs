@@ -72,11 +72,11 @@ namespace MongoDbHelper
         public static MongoClient Connection(string userName, string password, string collection, string connectName, Action reloadConfigure, int maxConnectionPoolSize = MaxConnectionPoolSize)
         {
             var setting = Configures[connectName];
-            if (setting == null) reloadConfigure?.Invoke();
-            if (setting?.MongoClient != null) return setting.MongoClient;
+            if (setting == null && reloadConfigure != null) reloadConfigure.Invoke();
+            if (setting != null && setting.MongoClient != null) return setting.MongoClient;
             lock (LockObj)
             {
-                if (setting?.MongoClient != null) return Configures[connectName].MongoClient;   
+                if (setting != null && setting.MongoClient != null) return Configures[connectName].MongoClient;
                 try
                 {
                     if (setting == null) throw new Exception("MongoDb缺少配置信息");
@@ -91,7 +91,7 @@ namespace MongoDbHelper
                 }
                 catch (Exception ex)
                 {
-                    throw (new Exception($"Servers: {setting?.Servers.ToJson()} \r\n Exceptions: {ex}"));
+                    throw (new Exception(string.Format("Servers: {0} \r\n Exceptions: {1}", setting != null ? setting.Servers.ToJson() : "null", ex)));
                 }
             }
         }
@@ -103,7 +103,7 @@ namespace MongoDbHelper
         {
             foreach (var key in Configures.Keys)
             {
-                Console.WriteLine($@"connectName: {key}, Servers: {Configures[key].Servers.ToJson()}, Connnect: {Configures[key].MongoClient != null}");
+                Console.WriteLine(string.Format(@"connectName: {0}, Servers: {1}, Connnect: {2}", key, Configures[key].Servers.ToJson(), Configures[key].MongoClient != null));
             }
         }
     }
@@ -117,6 +117,10 @@ namespace MongoDbHelper
 
         public MongoClient MongoClient { get; set; }
 
-        public MongoClientSettings MongoClientSettings { get; set; } = new MongoClientSettings();
+        public MongoClientSettings MongoClientSettings
+        {
+            get { return new MongoClientSettings(); }
+            set { }
+        }
     }
 }

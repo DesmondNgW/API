@@ -30,13 +30,13 @@ namespace TestConsole
                     _id = cursor + "_" + i,
                     value = "this is a text string for test"
                 };
-                using(var mc = new MongoDbProvider("Route", "Data"))
+                using (var mc = new MongoDbProvider("Route", "Data"))
                 {
                     mc.Collection.Save(o);
                 }
             }
             MongoDbConfig.ShowStatus();
-            Console.WriteLine($@"current thread threadId : {Thread.CurrentThread.ManagedThreadId} end.");
+            Console.WriteLine(string.Format(@"current thread threadId : {0} end.", Thread.CurrentThread.ManagedThreadId));
         }
 
         private class Task

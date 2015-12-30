@@ -26,7 +26,7 @@ namespace MongoDbHelper
             var info = HttpUtility.ParseQueryString(match.Groups[2].Value);
             var userName = info["username"] ?? string.Empty;
             var password = info["password"] ?? string.Empty;
-            var connectName = string.IsNullOrWhiteSpace(info["connectName"]) ? MongoDbConnection.DefaultConnectName: info["connectName"];
+            var connectName = string.IsNullOrWhiteSpace(info["connectName"]) ? MongoDbConnection.DefaultConnectName : info["connectName"];
             int maxConnectionPoolSize;
             int.TryParse(info["maxConnectionPoolSize"], out maxConnectionPoolSize);
             var list = match.Groups[1].Value.Split(',');
