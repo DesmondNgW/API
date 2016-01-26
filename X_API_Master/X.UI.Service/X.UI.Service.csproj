@@ -7,8 +7,8 @@
     <ProjectGuid>{2CD4717A-03FB-42D2-A7F4-3FA7643D63F7}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>FundTrade.Service_Asp2Html</RootNamespace>
-    <AssemblyName>FundTrade.Service_Asp2Html</AssemblyName>
+    <RootNamespace>X.UI.Service</RootNamespace>
+    <AssemblyName>X.UI.Service</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -50,7 +50,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Work.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="install.bat" />
+    <None Include="uninstall.bat" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\app.xml" />
     <Content Include="App_Data\CacheDependency.xml" />

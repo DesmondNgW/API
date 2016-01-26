@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 using System.Diagnostics;
 using System.Reflection;
 
-namespace FundTrade.Service_Asp2Html
+namespace X.UI.Service
 {
     #region ManagerAgent 的摘要说明。
     /// <summary>
@@ -97,7 +97,7 @@ namespace FundTrade.Service_Asp2Html
             Console.WriteLine("┗━━━━━━━━━━━━━━━┛");
         }
 
-        protected static void Install(_ServiceInstaller srv)
+        internal static void Install(_ServiceInstaller srv)
         {
             if (srv.InstallService(Assembly.GetExecutingAssembly().Location, Name, DispName))
             {
@@ -109,7 +109,7 @@ namespace FundTrade.Service_Asp2Html
             }
         }
 
-        private static void Uninstall(_ServiceInstaller srv)
+        internal static void Uninstall(_ServiceInstaller srv)
         {
             if (srv.UnInstallService(Name))
             {
@@ -127,7 +127,7 @@ namespace FundTrade.Service_Asp2Html
     /// <summary>
     /// Summary description for ServiceInstaller.
     /// </summary>
-    class _ServiceInstaller
+    public class _ServiceInstaller
     {
         #region DLLImport
         [DllImport("advapi32.dll")]
