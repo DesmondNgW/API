@@ -1,1 +1,2 @@
-﻿X.UI.Service.exe /i
+X.UI.Service.exe /i
+pause

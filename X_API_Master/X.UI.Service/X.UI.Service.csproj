@@ -65,6 +65,28 @@
     <Content Include="App_Data\endpoint_3.xml" />
     <Content Include="App_Data\endpoint_4.xml" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\X.Util.Core\X.Util.Core.csproj">
+      <Project>{eabbc505-6258-40cd-b1b6-2d100ba45aec}</Project>
+      <Name>X.Util.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\X.Util.Entities\X.Util.Entities.csproj">
+      <Project>{85a098ce-6ba6-4c4d-9c7f-1c3dfb5b0a15}</Project>
+      <Name>X.Util.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\X.Util.Extend\X.Util.Extend.csproj">
+      <Project>{ecc8b612-a8f0-4604-8ef6-ef9e09bcd5c9}</Project>
+      <Name>X.Util.Extend</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\X.Util.Other\X.Util.Other.csproj">
+      <Project>{534b9a37-9b27-42db-81e8-69f67600934b}</Project>
+      <Name>X.Util.Other</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\X.Util.Provider\X.Util.Provider.csproj">
+      <Project>{9a046362-e6e3-46dc-88ba-a488da92dd5e}</Project>
+      <Name>X.Util.Provider</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

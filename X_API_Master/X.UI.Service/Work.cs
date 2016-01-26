@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Reflection;
 using System.Threading;
+using X.Util.Core;
 namespace X.UI.Service
 {
     public enum EnumTimerLevel
@@ -46,53 +48,67 @@ namespace X.UI.Service
             }
         }
 
-        protected static void MinuteInvoke(object obj)
+        public static void MinuteInvoke(object obj)
         {
-            Console.WriteLine(obj);
-            // code fix 
-            Thread.Sleep(Convert.ToInt32(obj) * 1000);
+            while (true)
+            {
+                // code fix 
+                Thread.Sleep(Convert.ToInt32(obj) * 1000 * 60);
+            }
         }
 
-        protected static void DoubleMinutesInvoke(object obj)
+        public static void DoubleMinutesInvoke(object obj)
         {
-            Console.WriteLine(obj);
-            // code fix 
-            Thread.Sleep(Convert.ToInt32(obj) * 1000);
+            while (true)
+            {
+                // code fix 
+                Thread.Sleep(Convert.ToInt32(obj) * 1000 * 60);
+            }
         }
 
-        protected static void FiveMinutesInvoke(object obj)
+        public static void FiveMinutesInvoke(object obj)
         {
-            Console.WriteLine(obj);
-            // code fix 
-            Thread.Sleep(Convert.ToInt32(obj) * 1000);
+            while (true)
+            {
+                // code fix 
+                Thread.Sleep(Convert.ToInt32(obj) * 1000 * 60);
+            }
         }
 
-        protected static void FifteenMinutesInvoke(object obj)
+        public static void FifteenMinutesInvoke(object obj)
         {
-            Console.WriteLine(obj);
-            // code fix 
-            Thread.Sleep(Convert.ToInt32(obj) * 1000);
+            while (true)
+            {
+                // code fix 
+                Thread.Sleep(Convert.ToInt32(obj) * 1000 * 60);
+            }
         }
 
-        protected static void HalfHourInvoke(object obj)
+        public static void HalfHourInvoke(object obj)
         {
-            Console.WriteLine(obj);
-            // code fix 
-            Thread.Sleep(Convert.ToInt32(obj) * 1000);
+            while (true)
+            {
+                // code fix 
+                Thread.Sleep(Convert.ToInt32(obj) * 1000 * 60);
+            }
         }
 
-        protected static void HourInvoke(object obj)
+        public static void HourInvoke(object obj)
         {
-            Console.WriteLine(obj);
-            // code fix 
-            Thread.Sleep(Convert.ToInt32(obj) * 1000);
+            while (true)
+            {
+                // code fix 
+                Thread.Sleep(Convert.ToInt32(obj) * 1000 * 60);
+            }
         }
 
-        protected static void HalfDayInvoke(object obj)
+        public static void HalfDayInvoke(object obj)
         {
-            Console.WriteLine(obj);
-            // code fix 
-            Thread.Sleep(Convert.ToInt32(obj) * 1000);
+            while (true)
+            {
+                // code fix 
+                Thread.Sleep(Convert.ToInt32(obj) * 1000 * 60);
+            }
         }
     }
 }

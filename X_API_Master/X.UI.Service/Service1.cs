@@ -43,7 +43,6 @@ namespace X.UI.Service
         [STAThread]
         static void Main(string[] args)
         {
-            WorkDebug();
             if (args == null || args.Length == 0)
             {
                 try
