@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+# Visual Studio 2013
+VisualStudioVersion = 12.0.40629.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "X.UI", "X.UI", "{7419F28B-842C-4C80-B933-0370273F4029}"
 EndProject
@@ -89,6 +89,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "X.Data.Core.CoreReader", "X.Data.Core.CoreReader\X.Data.Core.CoreReader.csproj", "{75DB993A-14F6-471E-B187-4E0AE2B24E71}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "X.Data.Core.ExtendReader", "X.Data.Core.ExtendReader\X.Data.Core.ExtendReader.csproj", "{6516966D-9499-42DD-A3D4-0C7E7C471911}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "X.UI.Service", "X.UI.Service\X.UI.Service.csproj", "{2CD4717A-03FB-42D2-A7F4-3FA7643D63F7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -196,6 +198,10 @@ Global
 		{6516966D-9499-42DD-A3D4-0C7E7C471911}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6516966D-9499-42DD-A3D4-0C7E7C471911}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6516966D-9499-42DD-A3D4-0C7E7C471911}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2CD4717A-03FB-42D2-A7F4-3FA7643D63F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2CD4717A-03FB-42D2-A7F4-3FA7643D63F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2CD4717A-03FB-42D2-A7F4-3FA7643D63F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2CD4717A-03FB-42D2-A7F4-3FA7643D63F7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -226,5 +232,6 @@ Global
 		{FD2D5673-7E88-4675-9A21-3075704C1AFC} = {18F9B71B-ABC3-451C-90E8-24FA5806FF05}
 		{75DB993A-14F6-471E-B187-4E0AE2B24E71} = {DF07EFEF-5977-4BAC-9DE5-10EEE73D773C}
 		{6516966D-9499-42DD-A3D4-0C7E7C471911} = {DF07EFEF-5977-4BAC-9DE5-10EEE73D773C}
+		{2CD4717A-03FB-42D2-A7F4-3FA7643D63F7} = {7419F28B-842C-4C80-B933-0370273F4029}
 	EndGlobalSection
 EndGlobal
