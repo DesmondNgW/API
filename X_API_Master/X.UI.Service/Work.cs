@@ -2,17 +2,18 @@
 using System.Reflection;
 using System.Threading;
 using X.Util.Core;
+using X.Util.Provider;
 namespace X.UI.Service
 {
     public enum EnumTimerLevel
     {
-        Minute = 1,
-        DoubleMinutes = 2,
-        FiveMinutes = 5,
-        FifteenMinutes = 15,
-        HalfHour = 30,
-        Hour = 60,
-        HalfDay = 720
+        //Minute = 1,
+        //DoubleMinutes = 2,
+        //FiveMinutes = 5,
+        //FifteenMinutes = 15,
+        //HalfHour = 30,
+        //Hour = 60,
+        //HalfDay = 720
     }
 
     public class Work
@@ -52,7 +53,10 @@ namespace X.UI.Service
         {
             while (true)
             {
-                // code fix 
+                Logger.Info(MethodBase.GetCurrentMethod(), LogDomain.Ui, null, string.Format("current thread BeginInvoke!"));
+                var provider = new InstanceProvider<Business>();
+                CoreAccess.TryCallAsync(LogDomain.Ui, provider.Instance.Task1, provider.Close, null);
+                Logger.Info(MethodBase.GetCurrentMethod(), LogDomain.Ui, null, string.Format("current thread Sleep!"));
                 Thread.Sleep(Convert.ToInt32(obj) * 1000 * 60);
             }
         }
@@ -61,7 +65,10 @@ namespace X.UI.Service
         {
             while (true)
             {
-                // code fix 
+                Logger.Info(MethodBase.GetCurrentMethod(), LogDomain.Ui, null, string.Format("current thread BeginInvoke!"));
+                var provider = new InstanceProvider<Business>();
+                CoreAccess.TryCallAsync(LogDomain.Ui, provider.Instance.Task1, provider.Close, null);
+                Logger.Info(MethodBase.GetCurrentMethod(), LogDomain.Ui, null, string.Format("current thread Sleep!"));
                 Thread.Sleep(Convert.ToInt32(obj) * 1000 * 60);
             }
         }
@@ -70,7 +77,10 @@ namespace X.UI.Service
         {
             while (true)
             {
-                // code fix 
+                Logger.Info(MethodBase.GetCurrentMethod(), LogDomain.Ui, null, string.Format("current thread BeginInvoke!"));
+                var provider = new InstanceProvider<Business>();
+                CoreAccess.TryCallAsync(LogDomain.Ui, provider.Instance.Task1, provider.Close, null);
+                Logger.Info(MethodBase.GetCurrentMethod(), LogDomain.Ui, null, string.Format("current thread Sleep!"));
                 Thread.Sleep(Convert.ToInt32(obj) * 1000 * 60);
             }
         }
@@ -79,7 +89,10 @@ namespace X.UI.Service
         {
             while (true)
             {
-                // code fix 
+                Logger.Info(MethodBase.GetCurrentMethod(), LogDomain.Ui, null, string.Format("current thread BeginInvoke!"));
+                var provider = new InstanceProvider<Business>();
+                CoreAccess.TryCallAsync(LogDomain.Ui, provider.Instance.Task1, provider.Close, null);
+                Logger.Info(MethodBase.GetCurrentMethod(), LogDomain.Ui, null, string.Format("current thread Sleep!"));
                 Thread.Sleep(Convert.ToInt32(obj) * 1000 * 60);
             }
         }
@@ -88,7 +101,10 @@ namespace X.UI.Service
         {
             while (true)
             {
-                // code fix 
+                Logger.Info(MethodBase.GetCurrentMethod(), LogDomain.Ui, null, string.Format("current thread BeginInvoke!"));
+                var provider = new InstanceProvider<Business>();
+                CoreAccess.TryCallAsync(LogDomain.Ui, provider.Instance.Task1, provider.Close, null);
+                Logger.Info(MethodBase.GetCurrentMethod(), LogDomain.Ui, null, string.Format("current thread Sleep!"));
                 Thread.Sleep(Convert.ToInt32(obj) * 1000 * 60);
             }
         }
@@ -97,7 +113,10 @@ namespace X.UI.Service
         {
             while (true)
             {
-                // code fix 
+                Logger.Info(MethodBase.GetCurrentMethod(), LogDomain.Ui, null, string.Format("current thread BeginInvoke!"));
+                var provider = new InstanceProvider<Business>();
+                CoreAccess.TryCallAsync(LogDomain.Ui, provider.Instance.Task1, provider.Close, null);
+                Logger.Info(MethodBase.GetCurrentMethod(), LogDomain.Ui, null, string.Format("current thread Sleep!"));
                 Thread.Sleep(Convert.ToInt32(obj) * 1000 * 60);
             }
         }
@@ -106,7 +125,10 @@ namespace X.UI.Service
         {
             while (true)
             {
-                // code fix 
+                Logger.Info(MethodBase.GetCurrentMethod(), LogDomain.Ui, null, string.Format("current thread BeginInvoke!"));
+                var provider = new InstanceProvider<Business>();
+                CoreAccess.TryCallAsync(LogDomain.Ui, provider.Instance.Task1, provider.Close, null);
+                Logger.Info(MethodBase.GetCurrentMethod(), LogDomain.Ui, null, string.Format("current thread Sleep!"));
                 Thread.Sleep(Convert.ToInt32(obj) * 1000 * 60);
             }
         }
