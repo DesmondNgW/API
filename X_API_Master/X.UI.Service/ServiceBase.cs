@@ -187,34 +187,10 @@ namespace X.UI.Service
                 if (sc_handle.ToInt32() != 0)
                 {
                     IntPtr sv_handle = CreateService(sc_handle, svcName, svcDispName, SERVICE_ALL_ACCESS, SERVICE_WIN32_OWN_PROCESS, SERVICE_AUTO_START, SERVICE_ERROR_NORMAL, svcPath, null, 0, null, null, null);
-                    if (sv_handle.ToInt32() == 0)
-                    {
-                        CloseServiceHandle(sc_handle);
-                        return false;
-                    }
-                    else
-                    {
-                        /*
-                        -------------------Modified by powerbang
-                        //now trying to start the service
-                        int i = StartService(sv_handle, 0, null);
-                        // If the value i is zero, then there was an error starting the service.
-                        // note: error may arise if the service is already running or some other problem.
-                        if (i == 0)
-                        {
-                            //Console.WriteLine("Couldnt start service");
-                            return false;
-                        }
-                        -------------------Modified by powerbang
-                        */
-                        CloseServiceHandle(sc_handle);
-                        return true;
-                    }
+                    CloseServiceHandle(sc_handle);
+                    if (sv_handle.ToInt32() != 0) return true;
                 }
-                else
-                    //Console.WriteLine("SCM not opened successfully");
-                    return false;
-
+                return false;
             }
             catch (Exception e)
             {
@@ -228,32 +204,17 @@ namespace X.UI.Service
         /// <param name="svcName">Name of the service to uninstall.</param>
         public bool UnInstallService(string svcName)
         {
-            int GENERIC_WRITE = 0x40000000;
-            IntPtr sc_hndl = OpenSCManager(null, null, GENERIC_WRITE);
+            IntPtr sc_hndl = OpenSCManager(null, null, 0x40000000);
             if (sc_hndl.ToInt32() != 0)
             {
-                int DELETE = 0x10000;
-                IntPtr svc_hndl = OpenService(sc_hndl, svcName, DELETE);
-                //Console.WriteLine(svc_hndl.ToInt32());
+                IntPtr svc_hndl = OpenService(sc_hndl, svcName, 0x10000);
                 if (svc_hndl.ToInt32() != 0)
                 {
-                    int i = DeleteService(svc_hndl);
-                    if (i != 0)
-                    {
-                        CloseServiceHandle(sc_hndl);
-                        return true;
-                    }
-                    else
-                    {
-                        CloseServiceHandle(sc_hndl);
-                        return false;
-                    }
+                    CloseServiceHandle(sc_hndl);
+                    if (DeleteService(svc_hndl) != 0) return true;
                 }
-                else
-                    return false;
             }
-            else
-                return false;
+            return false;
         }
     }
     #endregion
