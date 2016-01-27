@@ -2,7 +2,7 @@
 <configuration>
   <AppSettings>
     <!--log4net日志根目录-->
-    <add key="Log4NetBaseDirectory" value="DD:\git\API\X_API_Master\X.UI.Service\bin\XServiceLog" />
+    <add key="Log4NetBaseDirectory" value="" />
     <!--Key缓存版本号，修改使所有缓存失效-->
     <add key="CacheKeyVersion" value="0.0.1" />
     <!--路由缓存值版本号，修改使路由缓存失效-->
