@@ -21,26 +21,24 @@ namespace X.Win.TaskService
 
     public class Task
     {
-        protected static Thread[] pool { get; set; }
+        protected static Thread[] Pool { get; set; }
         public static void CreateThreads()
         {
             var list = (EnumTaskLevel[])Enum.GetValues(typeof(EnumTaskLevel));
-            pool = new Thread[list.Length];
+            Pool = new Thread[list.Length];
             for (var i = 0; i < list.Length; i++)
             {
-                pool[i] = new Thread(LoopCall) { IsBackground = true };
-                pool[i].Start(list[i].GetHashCode());
+                Pool[i] = new Thread(LoopCall) { IsBackground = true };
+                Pool[i].Start(list[i].GetHashCode());
             }
         }
 
         public static void AbortThreads()
         {
-            if (pool != null && pool.Length > 0)
+            if (Pool == null || Pool.Length <= 0) return;
+            foreach (var t in Pool)
             {
-                for (var i = 0; i < pool.Length; i++)
-                {
-                    pool[i].Abort();
-                }
+                t.Abort();
             }
         }
 
@@ -52,25 +50,25 @@ namespace X.Win.TaskService
             {
                 switch (i)
                 {
-                    case (int)EnumTaskLevel.Minute:
+                    case (int) EnumTaskLevel.Minute:
                         CoreAccess.TryCallAsync(LogDomain.Ui, provider.Instance.MinuteInvoke, provider.Close, null);
                         break;
-                    case (int)EnumTaskLevel.DoubleMinutes:
+                    case (int) EnumTaskLevel.DoubleMinutes:
                         CoreAccess.TryCallAsync(LogDomain.Ui, provider.Instance.DoubleMinuteInvoke, provider.Close, null);
                         break;
-                    case (int)EnumTaskLevel.FiveMinutes:
+                    case (int) EnumTaskLevel.FiveMinutes:
                         CoreAccess.TryCallAsync(LogDomain.Ui, provider.Instance.FiveMinuteInvoke, provider.Close, null);
                         break;
-                    case (int)EnumTaskLevel.FifteenMinutes:
+                    case (int) EnumTaskLevel.FifteenMinutes:
                         CoreAccess.TryCallAsync(LogDomain.Ui, provider.Instance.FifteenMinuteInvoke, provider.Close, null);
                         break;
-                    case (int)EnumTaskLevel.HalfHour:
+                    case (int) EnumTaskLevel.HalfHour:
                         CoreAccess.TryCallAsync(LogDomain.Ui, provider.Instance.HalfHourInvoke, provider.Close, null);
                         break;
-                    case (int)EnumTaskLevel.Hour:
+                    case (int) EnumTaskLevel.Hour:
                         CoreAccess.TryCallAsync(LogDomain.Ui, provider.Instance.HourInvoke, provider.Close, null);
                         break;
-                    case (int)EnumTaskLevel.HalfDay:
+                    case (int) EnumTaskLevel.HalfDay:
                         CoreAccess.TryCallAsync(LogDomain.Ui, provider.Instance.HalfDayInvoke, provider.Close, null);
                         break;
                 }
