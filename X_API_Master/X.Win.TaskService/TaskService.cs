@@ -1,4 +1,6 @@
-﻿using System.ServiceProcess;
+﻿using System;
+using System.Diagnostics;
+using System.ServiceProcess;
 
 namespace X.Win.TaskService
 {
@@ -11,12 +13,26 @@ namespace X.Win.TaskService
 
         protected override void OnStart(string[] args)
         {
-            Task.CreateThreads();
+            try
+            {
+                Task.CreateThreads();
+            }
+            catch (Exception e)
+            {
+                EventLog.WriteEntry("StartTask", e.Message, EventLogEntryType.Error);
+            }
         }
 
         protected override void OnStop()
         {
-            Task.AbortThreads();
+            try
+            {
+                Task.AbortThreads();
+            }
+            catch (Exception e)
+            {
+                EventLog.WriteEntry("StopTask", e.Message, EventLogEntryType.Error);
+            }
         }
     }
 }
