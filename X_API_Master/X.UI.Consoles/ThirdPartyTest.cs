@@ -21,7 +21,7 @@ namespace X.UI.Consoles
 
         public static void MongoTest()
         {
-            MongoDbBase.Default.AddMongo(new MongoTest { Dt = DateTime.Now, Value = "MongoTest", Key = "test" }, "Test", "test");
+            MongoDbBase.Default.SaveMongo(new MongoTest { Dt = DateTime.Now, Value = "MongoTest", Key = "test" }, "Test", "test");
         }
     }
 

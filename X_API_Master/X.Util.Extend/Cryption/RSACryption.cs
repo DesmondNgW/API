@@ -52,7 +52,7 @@ namespace X.Util.Extend.Cryption
                 P = StringConvert.Bytes2Hex(privateKey.P),
                 Q = StringConvert.Bytes2Hex(privateKey.Q)
             };
-            MongoDbBase.Default.AddMongo(rsaKey, "RSA", "RSA");
+            MongoDbBase.Default.SaveMongo(rsaKey, "RSA", "RSA");
             return new RSAParameters
             {
                 Modulus = StringConvert.Hex2Bytes(rsaKey.Modulus),

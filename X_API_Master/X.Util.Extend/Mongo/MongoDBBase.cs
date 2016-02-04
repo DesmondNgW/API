@@ -80,7 +80,7 @@ namespace X.Util.Extend.Mongo
         #endregion
 
         #region 增删改操作
-        public void AddMongo<T>(T t, string database, string collection) where T : MongoBaseModel
+        public void SaveMongo<T>(T t, string database, string collection) where T : MongoBaseModel
         {
             var property = typeof(T).GetProperty("Id");
             if (property != null && Equals(property.GetValue(t, null), null))
@@ -90,10 +90,49 @@ namespace X.Util.Extend.Mongo
             var mc = new MongoDbProvider(database, collection, ServerName);
             CoreAccess.TryCallAsync(EDomain, mc.Collection.Save, t, WriteConcern.Acknowledged, CallSuccess, mc.Dispose, null, false, ServerName);
         }
+        /// <summary>
+        /// 插入会失败（若有主键）
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="t"></param>
+        /// <param name="database"></param>
+        /// <param name="collection"></param>
+        public void InsertMongo<T>(T t, string database, string collection) where T : MongoBaseModel
+        {
+            var property = typeof(T).GetProperty("Id");
+            if (property != null && Equals(property.GetValue(t, null), null))
+            {
+                property.SetValue(t, Guid.NewGuid().ToString("N"), null);
+            }
+            var mc = new MongoDbProvider(database, collection, ServerName);
+            CoreAccess.TryCallAsync(EDomain, mc.Collection.Insert, t, WriteConcern.Acknowledged, CallSuccess, mc.Dispose, null, false, ServerName);
+        }
+
+        /// <summary>
+        /// 批量插入会失败（若有主键）
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="list"></param>
+        /// <param name="database"></param>
+        /// <param name="collection"></param>
+        public void InsertBatchMongo<T>(IEnumerable<T> list, string database, string collection) where T : MongoBaseModel
+        {
+            var property = typeof(T).GetProperty("Id");
+            foreach (var t in list)
+            {
+                if (property != null && Equals(property.GetValue(t, null), null))
+                {
+                    property.SetValue(t, Guid.NewGuid().ToString("N"), null);
+                }
+            }
+            var mc = new MongoDbProvider(database, collection, ServerName);
+            CoreAccess.TryCallAsync(EDomain, mc.Collection.InsertBatch, list, WriteConcern.Acknowledged, CallSuccess, mc.Dispose, null, false, ServerName);
+        }
+
 
         public void AddMongo<T>(Func<T> loader, string database, string collection) where T : MongoBaseModel
         {
-            AddMongo(loader(), database, collection);
+            SaveMongo(loader(), database, collection);
         }
 
         /// <summary>
@@ -233,6 +272,11 @@ namespace X.Util.Extend.Mongo
         private static bool CallSuccess(WriteConcernResult result)
         {
             return result != null && result.Ok;
+        }
+
+        private static bool CallSuccess(IEnumerable<WriteConcernResult> result)
+        {
+            return result != null && result.All(p => p.Ok) && result.Count() > 0;
         }
 
         private static bool CallSuccess(CommandResult result)
