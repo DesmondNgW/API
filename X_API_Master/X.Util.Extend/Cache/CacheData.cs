@@ -8,8 +8,8 @@ namespace X.Util.Extend.Cache
     public class CacheData
     {
         #region 构造函数
-        private static CouchCache _couch = CouchCache.Default;
-        private static RedisCache _redis = RedisCache.Default;
+        private CouchCache _couch = CouchCache.Default;
+        private RedisCache _redis = RedisCache.Default;
         private const string Prefix = "X.Util.Extend.Cache.CacheData";
         private static readonly string Path = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "App_Data\\CacheDependency.xml");//缓存依赖文件--用于删除本地缓存
         public CacheData() { }
