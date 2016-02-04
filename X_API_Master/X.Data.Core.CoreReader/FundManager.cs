@@ -26,7 +26,7 @@ namespace X.Data.Core.CoreReader
         {
             return CoreCache.GetAbsoluteCacheData(() =>
             {
-                var result = new ResultInfo<FundDays> { Succeed = false, Message = "fundcoe not exists" };
+                var result = new ResultInfo<FundDays> { Succeed = false, Message = "fundcode not exists." };
                 var list = GetFundDays();
                 if (list != null && list.Result != null && list.Result.Count > 0)
                 {
