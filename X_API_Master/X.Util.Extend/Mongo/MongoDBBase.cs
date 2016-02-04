@@ -129,8 +129,7 @@ namespace X.Util.Extend.Mongo
             CoreAccess.TryCallAsync(EDomain, mc.Collection.InsertBatch, list, WriteConcern.Acknowledged, CallSuccess, mc.Dispose, null, false, ServerName);
         }
 
-
-        public void AddMongo<T>(Func<T> loader, string database, string collection) where T : MongoBaseModel
+        public void SaveMongo<T>(Func<T> loader, string database, string collection) where T : MongoBaseModel
         {
             SaveMongo(loader(), database, collection);
         }
