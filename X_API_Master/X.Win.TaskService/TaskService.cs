@@ -3,9 +3,16 @@ using System.Diagnostics;
 using System.Reflection;
 using System.ServiceProcess;
 using X.Util.Core;
+using X.Util.Entities;
+using X.Util.Extend.Mongo;
 
 namespace X.Win.TaskService
 {
+    public class TaskLogModel : MongoBaseModel
+    {
+        public string content { get; set; }
+    }
+
     public partial class TaskService : ServiceBase
     {
         public TaskService()
@@ -23,7 +30,8 @@ namespace X.Win.TaskService
             {
                 EventLog.WriteEntry("StartTask", e.Message, EventLogEntryType.Error);
                 Logger.Error(MethodBase.GetCurrentMethod(), LogDomain.Ui, null, string.Format("StartTask has Exception:{0}", e.ToJson()));
-                //email.log or message.log
+                //email.log or message.log or db.log
+                LogMonitor.Error(new TaskLogModel() { content = string.Format("StartTask has Exception:{0}", e.ToJson()) }, LogMonitorDomain.Other);
             }
         }
 
@@ -37,7 +45,8 @@ namespace X.Win.TaskService
             {
                 EventLog.WriteEntry("StopTask", e.Message, EventLogEntryType.Error);
                 Logger.Error(MethodBase.GetCurrentMethod(), LogDomain.Ui, null, string.Format("StopTask has Exception:{0}", e.ToJson()));
-                //email.log or message.log
+                //email.log or message.log or db.log
+                LogMonitor.Error(new TaskLogModel() { content = string.Format("StopTask has Exception:{0}", e.ToJson()) }, LogMonitorDomain.Other);
             }
         }
     }
