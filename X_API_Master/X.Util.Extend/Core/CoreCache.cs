@@ -97,7 +97,7 @@ namespace X.Util.Extend.Core
         /// </summary>
         /// <param name="method"></param>
         /// <param name="paramsList"></param>
-        public static void ClearCache(MethodBase method, ICollection<object> paramsList)
+        public static void ClearCache(MethodBase method, ICollection<object> paramsList, EnumCacheType cacheType = EnumCacheType.MemBoth)
         {
             var cacheKeyName = string.Empty;
             if (paramsList != null && paramsList.Count > 0)
@@ -105,8 +105,26 @@ namespace X.Util.Extend.Core
                 cacheKeyName = paramsList.Aggregate(cacheKeyName, (current, o) => current + ("_" + o.ToJson()));
             }
             var key = GetCacheKeyPrefix(method) + cacheKeyName + "_" + AppConfig.CacheKeyVersion;
-            LocalCache.Remove(key);
-            CouchCache.Default.Remove(key);
+            switch (cacheType)
+            {
+                case EnumCacheType.Runtime:
+                    LocalCache.Remove(key);
+                    break;
+                case EnumCacheType.MemCache:
+                    CouchCache.Default.Remove(key);
+                    break;
+                case EnumCacheType.Redis:
+                    RedisCache.Default.Remove(key);
+                    break;
+                case EnumCacheType.MemBoth:
+                    LocalCache.Remove(key);
+                    CouchCache.Default.Remove(key);
+                    break;
+                case EnumCacheType.RedisBoth:
+                    LocalCache.Remove(key);
+                    RedisCache.Default.Remove(key);
+                    break;
+            }
         }
 
         /// <summary>

@@ -44,7 +44,13 @@ namespace X.Util.Extend.Cache
         {
             var redisProvider = new RedisProvider(ServerName);
             CoreAccess.TryCallAsync(EDomain, redisProvider.Client.Add, key, value.ToJson(), expire, CoreBase.CallSuccess, redisProvider.Close, null, false, ServerName);
-        } 
+        }
+
+        public void Remove(string key)
+        {
+            var redisProvider = new RedisProvider(ServerName);
+            CoreAccess.TryCallAsync(EDomain, redisProvider.Client.Remove, key, CoreBase.CallSuccess, redisProvider.Close, null, false, ServerName);
+        }
         #endregion
     }
 }
