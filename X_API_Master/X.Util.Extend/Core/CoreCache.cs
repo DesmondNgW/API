@@ -94,10 +94,13 @@ namespace X.Util.Extend.Core
 
         private static CacheKey GetCacheKey(MethodBase method, ICollection<object> paramsList, string cacheAppVersion, bool addContext)
         {
-            var result = new CacheKey {CacheKeyPrefix = GetCacheKeyPrefix(method)};
-            result.CacheKeyName = GetCacheKeyName(paramsList);
-            result.CacheKeyVersion = AppConfig.CacheKeyVersion;
-            result.CacheAppVersion = cacheAppVersion;
+            var result = new CacheKey
+            {
+                CacheKeyPrefix = GetCacheKeyPrefix(method),
+                CacheKeyName = GetCacheKeyName(paramsList),
+                CacheKeyVersion = AppConfig.CacheKeyVersion,
+                CacheAppVersion = cacheAppVersion
+            };
             result.FullCacheKeyName = FormatCacheKey(result.CacheKeyPrefix + result.CacheKeyName + "_" + result.CacheKeyVersion);
             if (addContext) AddContextCacheKeys(result.FullCacheKeyName);
             return result;
@@ -348,7 +351,7 @@ namespace X.Util.Extend.Core
             switch (cacheType)
             {
                 case EnumCacheType.Runtime:
-                    result = CacheData.GetRuntimeCacheData(cacheKey.FullCacheKeyName, cacheKey.CacheAppVersion, expire, loader);
+                    result = CacheData.GetRuntimeCacheData(cacheKey.FullCacheKeyName, cacheKey.CacheAppVersion, expire, loader, null);
                     break;
                 case EnumCacheType.MemCache:
                     result = CacheData.Default.GetCouchCacheData(cacheKey.FullCacheKeyName, cacheKey.CacheAppVersion, expire, loader);
@@ -368,6 +371,29 @@ namespace X.Util.Extend.Core
             return result;
         }
 
+        /// <summary>
+        /// 数据源是本地xml的缓存依赖
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="loader"></param>
+        /// <param name="method"></param>
+        /// <param name="paramsList"></param>
+        /// <param name="cacheAppVersion"></param>
+        /// <param name="debugWithoutCache"></param>
+        /// <param name="addContext"></param>
+        /// <param name="cacheTimeLevel"></param>
+        /// <param name="cacheTimeExpire"></param>
+        /// <param name="filepath"></param>
+        /// <returns></returns>
+        public static ResultInfo<T> GetSlidingCacheData<T>(Func<ResultInfo<T>> loader, MethodBase method, ICollection<object> paramsList, string cacheAppVersion, bool debugWithoutCache, bool addContext, EnumCacheTimeLevel cacheTimeLevel, int cacheTimeExpire,string filepath)
+        {
+            ResultInfo<T> result;
+            var cacheKey = GetCacheKey(method, paramsList, cacheAppVersion, addContext);
+            if (debugWithoutCache && HttpContext.Current.IsDebuggingEnabled) return loader();
+            var expire = GetCacheExpire(cacheTimeLevel, cacheTimeExpire) - DateTime.Now;
+            result = CacheData.GetRuntimeCacheData(cacheKey.FullCacheKeyName, cacheKey.CacheAppVersion, expire, loader, filepath);
+            return result;
+        }
         #endregion
     }
 }

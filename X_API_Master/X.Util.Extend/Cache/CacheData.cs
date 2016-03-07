@@ -42,7 +42,7 @@ namespace X.Util.Extend.Cache
             return setting;
         }
 
-        public static ResultInfo<T> GetRuntimeCacheData<T>(string key, string version, TimeSpan ts, Func<ResultInfo<T>> loader)
+        public static ResultInfo<T> GetRuntimeCacheData<T>(string key, string version, TimeSpan ts, Func<ResultInfo<T>> loader, string filepath)
         {
             var setting = RuntimeCache.GetJson<ResultInfo<T>>(key);
             if (setting != null && setting.Result != null && setting.Succeed && Equals(setting.preValue, version)) return setting;
@@ -55,7 +55,7 @@ namespace X.Util.Extend.Cache
                 if (Equals(setting, null)) return null;
                 setting.preValue = version;
                 setting.Succeed = iresult != null && iresult.Result != null && iresult.Succeed;
-                if (setting.Succeed) RuntimeCache.SetJson(key, setting, ts, new CacheDependency(Path));
+                if (setting.Succeed) RuntimeCache.SetJson(key, setting, ts, new CacheDependency(string.IsNullOrEmpty(filepath) ? Path : filepath));
             }
             return setting;
         }
