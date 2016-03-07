@@ -129,7 +129,7 @@ namespace X.Util.Core
             {
                 return result.Endpoints[result.Index];
             }
-            var uid = ExecutionContext<Entities.RequestContext>.Current.Uid;
+            var uid = ExecutionContext<Entities.RequestContext>.Current.CustomerNo;
             if (string.IsNullOrEmpty(uid)) uid = Guid.NewGuid().ToString("N");
             return CoreUtil.GetConsistentHash(result.Endpoints, uid);
         }
