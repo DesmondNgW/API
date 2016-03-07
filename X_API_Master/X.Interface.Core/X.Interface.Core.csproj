@@ -47,13 +47,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ErrorMessage.cs" />
     <Compile Include="KeyManagerService.cs" />
     <Compile Include="ServiceHelper.cs" />
-    <Compile Include="CustomerService.cs" />
-    <Compile Include="WorkDayService.cs" />
-    <Compile Include="FundService.cs" />
-    <Compile Include="LoginService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

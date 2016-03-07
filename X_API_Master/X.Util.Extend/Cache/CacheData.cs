@@ -24,11 +24,11 @@ namespace X.Util.Extend.Cache
         #region CacheData Api
         public static ResultInfo<T> GetRuntimeCacheData<T>(string key, string version, DateTime dt, Func<ResultInfo<T>> loader)
         {
-            var setting = RuntimeCache.Get<ResultInfo<T>>(key);
+            var setting = RuntimeCache.GetJson<ResultInfo<T>>(key);
             if (setting != null && setting.Result != null && setting.Succeed && Equals(setting.preValue, version)) return setting;
             lock (CoreUtil.Getlocker(Prefix + key))
             {
-                setting = RuntimeCache.Get<ResultInfo<T>>(key);
+                setting = RuntimeCache.GetJson<ResultInfo<T>>(key);
                 if (setting != null && setting.Result != null && setting.Succeed && Equals(setting.preValue, version)) return setting;
                 var iresult = loader();
                 setting = iresult;
@@ -36,7 +36,7 @@ namespace X.Util.Extend.Cache
                 {
                     setting.preValue = version;
                     setting.Succeed = iresult != null && iresult.Result != null && iresult.Succeed;
-                    if (setting.Succeed) RuntimeCache.Set(key, setting, dt, new CacheDependency(Path));
+                    if (setting.Succeed) RuntimeCache.SetJson(key, setting, dt, new CacheDependency(Path));
                 }
             }
             return setting;
@@ -44,18 +44,18 @@ namespace X.Util.Extend.Cache
 
         public static ResultInfo<T> GetRuntimeCacheData<T>(string key, string version, TimeSpan ts, Func<ResultInfo<T>> loader)
         {
-            var setting = RuntimeCache.Get<ResultInfo<T>>(key);
+            var setting = RuntimeCache.GetJson<ResultInfo<T>>(key);
             if (setting != null && setting.Result != null && setting.Succeed && Equals(setting.preValue, version)) return setting;
             lock (CoreUtil.Getlocker(Prefix + key))
             {
-                setting = RuntimeCache.Get<ResultInfo<T>>(key);
+                setting = RuntimeCache.GetJson<ResultInfo<T>>(key);
                 if (setting != null && setting.Result != null && setting.Succeed && Equals(setting.preValue, version)) return setting;
                 var iresult = loader();
                 setting = iresult;
                 if (Equals(setting, null)) return null;
                 setting.preValue = version;
                 setting.Succeed = iresult != null && iresult.Result != null && iresult.Succeed;
-                if (setting.Succeed) RuntimeCache.Set(key, setting, ts, new CacheDependency(Path));
+                if (setting.Succeed) RuntimeCache.SetJson(key, setting, ts, new CacheDependency(Path));
             }
             return setting;
         }
@@ -63,11 +63,11 @@ namespace X.Util.Extend.Cache
         public ResultInfo<T> GetCouchCacheData<T>(string key, string version, DateTime dt, Func<ResultInfo<T>> loader)
         {
             var lockKey = key + "couchlock";
-            var setting = _couch.Get<ResultInfo<T>>(key);
+            var setting = _couch.GetJson<ResultInfo<T>>(key);
             if (setting != null && setting.Result != null && setting.Succeed && Equals(setting.preValue, version)) return setting;
             lock (CoreUtil.Getlocker(Prefix + key))
             {
-                setting = RuntimeCache.Get<ResultInfo<T>>(lockKey);
+                setting = RuntimeCache.GetJson<ResultInfo<T>>(lockKey);
                 if (setting != null && setting.Result != null && setting.Succeed && Equals(setting.preValue, version)) return setting;
                 var iresult = loader();
                 setting = iresult;
@@ -75,8 +75,8 @@ namespace X.Util.Extend.Cache
                 setting.preValue = version;
                 setting.Succeed = iresult != null && iresult.Result != null && iresult.Succeed;
                 if (!setting.Succeed) return setting;
-                RuntimeCache.Set(lockKey, setting, DateTime.Now.AddSeconds(15), new CacheDependency(Path));
-                _couch.Set(key, setting, dt);
+                RuntimeCache.SetJson(lockKey, setting, DateTime.Now.AddSeconds(15), new CacheDependency(Path));
+                _couch.SetJson(key, setting, dt);
             }
             return setting;
         }
@@ -84,11 +84,11 @@ namespace X.Util.Extend.Cache
         public ResultInfo<T> GetCouchCacheData<T>(string key, string version, TimeSpan ts, Func<ResultInfo<T>> loader)
         {
             var lockKey = key + "couchlock";
-            var setting = _couch.Get<ResultInfo<T>>(key);
+            var setting = _couch.GetJson<ResultInfo<T>>(key);
             if (setting != null && setting.Result != null && setting.Succeed && Equals(setting.preValue, version)) return setting;
             lock (CoreUtil.Getlocker(Prefix + key))
             {
-                setting = RuntimeCache.Get<ResultInfo<T>>(lockKey);
+                setting = RuntimeCache.GetJson<ResultInfo<T>>(lockKey);
                 if (setting != null && setting.Result != null && setting.Succeed && Equals(setting.preValue, version)) return setting;
                 var iresult = loader();
                 setting = iresult;
@@ -96,8 +96,8 @@ namespace X.Util.Extend.Cache
                 setting.preValue = version;
                 setting.Succeed = iresult != null && iresult.Result != null && iresult.Succeed;
                 if (!setting.Succeed) return setting;
-                RuntimeCache.Set(lockKey, setting, DateTime.Now.AddSeconds(15), new CacheDependency(Path));
-                _couch.Set(key, setting, ts);
+                RuntimeCache.SetJson(lockKey, setting, DateTime.Now.AddSeconds(15), new CacheDependency(Path));
+                _couch.SetJson(key, setting, ts);
             }
             return setting;
         }
@@ -105,11 +105,11 @@ namespace X.Util.Extend.Cache
         public ResultInfo<T> GetRedisCacheData<T>(string key, string version, DateTime dt, Func<ResultInfo<T>> loader)
         {
             var lockKey = key + "redislock";
-            var setting = _redis.Get<ResultInfo<T>>(key);
+            var setting = _redis.GetJson<ResultInfo<T>>(key);
             if (setting != null && setting.Result != null && setting.Succeed && Equals(setting.preValue, version)) return setting;
             lock (CoreUtil.Getlocker(Prefix + key))
             {
-                setting = RuntimeCache.Get<ResultInfo<T>>(lockKey);
+                setting = RuntimeCache.GetJson<ResultInfo<T>>(lockKey);
                 if (setting != null && setting.Result != null && setting.Succeed && Equals(setting.preValue, version)) return setting;
                 var iresult = loader();
                 setting = iresult;
@@ -117,8 +117,8 @@ namespace X.Util.Extend.Cache
                 setting.preValue = version;
                 setting.Succeed = iresult != null && iresult.Result != null && iresult.Succeed;
                 if (!setting.Succeed) return setting;
-                RuntimeCache.Set(lockKey, setting, DateTime.Now.AddSeconds(15), new CacheDependency(Path));
-                _redis.Set(key, setting, dt);
+                RuntimeCache.SetJson(lockKey, setting, DateTime.Now.AddSeconds(15), new CacheDependency(Path));
+                _redis.SetJson(key, setting, dt);
             }
             return setting;
         }
@@ -126,11 +126,11 @@ namespace X.Util.Extend.Cache
         public ResultInfo<T> GetRedisCacheData<T>(string key, string version, TimeSpan ts, Func<ResultInfo<T>> loader)
         {
             var lockKey = key + "redislock";
-            var setting = _redis.Get<ResultInfo<T>>(key);
+            var setting = _redis.GetJson<ResultInfo<T>>(key);
             if (setting != null && setting.Result != null && setting.Succeed && Equals(setting.preValue, version)) return setting;
             lock (CoreUtil.Getlocker(Prefix + key))
             {
-                setting = RuntimeCache.Get<ResultInfo<T>>(lockKey);
+                setting = RuntimeCache.GetJson<ResultInfo<T>>(lockKey);
                 if (setting != null && setting.Result != null && setting.Succeed && Equals(setting.preValue, version)) return setting;
                 var iresult = loader();
                 setting = iresult;
@@ -138,8 +138,8 @@ namespace X.Util.Extend.Cache
                 setting.preValue = version;
                 setting.Succeed = iresult != null && iresult.Result != null && iresult.Succeed;
                 if (!setting.Succeed) return setting;
-                RuntimeCache.Set(lockKey, setting, DateTime.Now.AddSeconds(15), new CacheDependency(Path));
-                _redis.Set(key, setting, ts);
+                RuntimeCache.SetJson(lockKey, setting, DateTime.Now.AddSeconds(15), new CacheDependency(Path));
+                _redis.SetJson(key, setting, ts);
             }
             return setting;
         }

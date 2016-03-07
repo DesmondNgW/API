@@ -4,7 +4,7 @@ namespace X.Util.Extend.Core
 {
     public abstract class CoreBase
     {
-        public const string CoreDefaultMesssage = "中台服务器错误";
+        public const string CoreDefaultMesssage = "系统错误";
 
         public static bool CallSuccess<TResult>(TResult iresult)
         {

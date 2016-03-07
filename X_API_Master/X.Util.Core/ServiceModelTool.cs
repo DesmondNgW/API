@@ -125,8 +125,13 @@ namespace X.Util.Core
         {
             var result = ConfigurationHelper.GetEndpointAddressesByName(configurationName);
             if (Equals(result, null)) return string.Empty;
-            int count = result.Endpoints.Count, index = result.Index >= 0 && result.Index < count ? result.Index : StringConvert.SysRandom.Next(0, count);
-            return result.Endpoints[index];
+            if (result.Index >= 0 && result.Index < result.Endpoints.Count)
+            {
+                return result.Endpoints[result.Index];
+            }
+            var uid = ExecutionContext<Entities.RequestContext>.Current.Uid;
+            if (string.IsNullOrEmpty(uid)) uid = Guid.NewGuid().ToString("N");
+            return CoreUtil.GetConsistentHash(result.Endpoints, uid);
         }
 
         public static CoreServiceModel GetServiceModel<T>()

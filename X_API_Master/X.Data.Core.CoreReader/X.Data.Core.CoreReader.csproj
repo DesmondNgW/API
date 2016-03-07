@@ -37,14 +37,8 @@
     <Reference Include="Em.Entities">
       <HintPath>..\X.Ref\Em.Entities.dll</HintPath>
     </Reference>
-    <Reference Include="Em.FundTrade.Business.Contract">
-      <HintPath>..\X.Ref\Em.FundTrade.Business.Contract.dll</HintPath>
-    </Reference>
     <Reference Include="Em.FundTrade.Route.Entities">
       <HintPath>..\X.Ref\Em.FundTrade.Route.Entities.dll</HintPath>
-    </Reference>
-    <Reference Include="Em.FundTrade.Route.Services.Contract">
-      <HintPath>..\X.Ref\Em.FundTrade.Route.Services.Contract.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -57,14 +51,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AngieOneManager.cs" />
-    <Compile Include="CustomerManager.cs" />
-    <Compile Include="FundManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RouterManager.cs" />
-    <Compile Include="Services\Contract.cs" />
-    <Compile Include="Services\IDateService.cs" />
-    <Compile Include="WorkdayManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\X.Util.Core\X.Util.Core.csproj">
@@ -87,6 +74,9 @@
       <Project>{9a046362-e6e3-46dc-88ba-a488da92dd5e}</Project>
       <Name>X.Util.Provider</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Services\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

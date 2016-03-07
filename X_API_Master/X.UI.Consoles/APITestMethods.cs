@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using X.UI.API.Controllers;
 using X.Util.Core;
 using X.Util.Extend.Cryption;
 using X.Util.Other;
@@ -12,12 +11,9 @@ namespace X.UI.Consoles
         ApiMd5Test = 1,
         ApiCacheTest = 2,
         ApiWebHtmlTest = 3,
-        ApiWorkdayTest = 4,
-        ApiConsistentHashTest = 5,
-        ApiFundCompaniesTest = 6,
-        ApiFundsTest = 7,
-        ApiRsaEnTest = 8,
-        ApiRsaDeTest = 9
+        ApiConsistentHashTest = 4,
+        ApiRsaEnTest = 5,
+        ApiRsaDeTest = 6
     }
 
     public class ApiTestMethods
@@ -57,23 +53,6 @@ namespace X.UI.Consoles
             }
         }
 
-        public static void ApiWorkdayTest()
-        {
-            Console.WriteLine("从此时开始的后续多个交易日:");
-            string i;
-            var controller = new WorkDayController();
-            while (!string.IsNullOrEmpty(i = Console.ReadLine()))
-            {
-                int count;
-                int.TryParse(i, out count);
-                while (count > 0)
-                {
-                    Console.WriteLine("第" + count + "天:" + controller.GetPointWorkday(DateTime.Now, count).ToJson());
-                    count--;
-                }
-            }
-        }
-
         public static void ApiConsistentHashTest()
         {
             var nodes = new List<string> { "1", "2", "3" };
@@ -88,27 +67,6 @@ namespace X.UI.Consoles
                     else dic[r] = 1;
                     Console.WriteLine(DateTime.Now.ToString("HH:mm:ss.fff") + "\t序号：" + i + "\t值：" + r + "\t次数：" + dic[r]);
                 }
-            }
-            while (!string.IsNullOrEmpty(Console.ReadLine()));
-        }
-
-        public static void ApiFundCompaniesTest()
-        {
-            do
-            {
-                Console.WriteLine("所有基金公司的基金信息:");
-                var controller = new FundController();
-                Console.WriteLine(controller.GetFundCompanies().ToJson());
-            }
-            while (!string.IsNullOrEmpty(Console.ReadLine()));
-        }
-        public static void ApiFundsTest()
-        {
-            do
-            {
-                Console.WriteLine("所有的基金信息:");
-                var controller = new FundController();
-                Console.WriteLine(controller.GetFunds().ToJson());
             }
             while (!string.IsNullOrEmpty(Console.ReadLine()));
         }

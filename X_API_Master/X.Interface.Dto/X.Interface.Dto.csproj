@@ -42,24 +42,14 @@
   <ItemGroup>
     <Compile Include="ApiResult.cs" />
     <Compile Include="HttpRequestContext.cs" />
-    <Compile Include="HttpRequest\LoginRequestDto.cs" />
-    <Compile Include="HttpRequest\LogRemainRequestDto.cs" />
     <Compile Include="UserRequestDtoBase.cs" />
-    <Compile Include="HttpResponse\CustomerDto.cs" />
-    <Compile Include="HttpResponse\FundCompanyDto.cs" />
-    <Compile Include="HttpResponse\FundDaysDto.cs" />
-    <Compile Include="HttpResponse\FundDto.cs" />
-    <Compile Include="HttpResponse\FundNavDto.cs" />
     <Compile Include="HttpResponse\PublicKeyDto.cs" />
-    <Compile Include="HttpResponse\RouteInfoDto.cs" />
     <Compile Include="Interface\IKeyManager.cs" />
-    <Compile Include="Interface\IUser.cs" />
-    <Compile Include="Interface\IWorkDay.cs" />
-    <Compile Include="Interface\IFund.cs" />
-    <Compile Include="Interface\ILogin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="HttpRequest\" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\X.Util.Entities\X.Util.Entities.csproj">
       <Project>{85a098ce-6ba6-4c4d-9c7f-1c3dfb5b0a15}</Project>

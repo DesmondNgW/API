@@ -45,11 +45,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AngieBusiness.cs" />
-    <Compile Include="CustomerBusiness.cs" />
-    <Compile Include="FundBusiness.cs" />
-    <Compile Include="RouterBusiness.cs" />
-    <Compile Include="WorkdayBusiness.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

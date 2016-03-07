@@ -164,11 +164,6 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\KmsController.cs" />
-    <Compile Include="Controllers\ManagerController.cs" />
-    <Compile Include="Controllers\WorkDayController.cs" />
-    <Compile Include="Controllers\FundController.cs" />
-    <Compile Include="Controllers\LoginController.cs" />
-    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -177,8 +172,8 @@
     <Compile Include="Util\ControllerHelper.cs" />
     <Compile Include="Util\APIExceptionAttribute.cs" />
     <Compile Include="Util\UserAttribute.cs" />
-    <Compile Include="Util\UserBaseController.cs" />
     <Compile Include="Util\OutputCacheAttribute.cs" />
+    <Compile Include="Util\UserBaseController.cs" />
     <Compile Include="Util\VisitorAttribute.cs" />
     <Compile Include="Util\VisitorBaseController.cs" />
   </ItemGroup>
@@ -251,6 +246,7 @@
       <Name>X.Util.Provider</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
