@@ -2,6 +2,8 @@
 using System.Collections.Concurrent;
 using System.Diagnostics;
 using System.Reflection;
+using System.ServiceModel;
+using System.ServiceModel.Channels;
 using X.Util.Core;
 using X.Util.Entities;
 
@@ -165,6 +167,10 @@ namespace X.Util.Provider
             get
             {
                 _instance = Core<TChannel>.Instance(GetClient, CacheKey, new TimeSpan(0, 1, 0), Core<TChannel>.IsValid4CommunicationObject);
+                var scope = new OperationContextScope((IClientChannel)_instance);
+                var header = MessageHeader.CreateHeader("clientip", "http://tempuri.org", CoreUtil.GetIp());
+                OperationContext.Current.OutgoingMessageHeaders.Add(header);
+                scope.Dispose();
                 _sw.Start();
                 return _instance;
             }

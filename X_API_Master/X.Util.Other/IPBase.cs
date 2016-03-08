@@ -12,6 +12,11 @@ namespace X.Util.Other
             return CoreUtil.GetIp(context);
         }
 
+        public static string GetIp()
+        {
+            return CoreUtil.GetIp();
+        }
+
         public static string GetLocalIp()
         {
             var ipEntry = Dns.GetHostEntry(Dns.GetHostName());
