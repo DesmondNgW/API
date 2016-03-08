@@ -22,101 +22,6 @@
             </summary>
             <returns>指定对象序列化</returns>
         </member>
-        <member name="T:X.UI.API.Controllers.WorkDayController">
-            <summary>
-            工作日
-            </summary>
-        </member>
-        <member name="M:X.UI.API.Controllers.WorkDayController.GetCurrentWorkDay">
-            <summary>
-            获取当前工作日
-            </summary>
-            <returns>指定对象序列化</returns>
-        </member>
-        <member name="M:X.UI.API.Controllers.WorkDayController.GetWorkday(System.DateTime)">
-            <summary>
-            获取指定日期的工作日
-            </summary>
-            <param name="dt">指定的日期</param>
-            <returns>指定对象序列化</returns>
-        </member>
-        <member name="M:X.UI.API.Controllers.WorkDayController.GetPointWorkday(System.DateTime,System.Int32)">
-            <summary>
-            获取指定日期向前（后）推算指定天数的工作日
-            </summary>
-            <param name="dt">指定日期</param>
-            <param name="day">指定天数</param>
-            <returns>指定对象序列化</returns>
-        </member>
-        <member name="T:X.UI.API.Controllers.FundController">
-            <summary>
-            基金对象
-            </summary>
-        </member>
-        <member name="M:X.UI.API.Controllers.FundController.GetFundCompanies">
-            <summary>
-            获取基金公司列表
-            </summary>
-            <returns>基金公司对象序列化</returns>
-        </member>
-        <member name="M:X.UI.API.Controllers.FundController.GetFunds">
-            <summary>
-            获取基金列表
-            </summary>
-            <returns>基金对象序列化</returns>
-        </member>
-        <member name="M:X.UI.API.Controllers.FundController.GetFund(System.String)">
-            <summary>
-            获取基金信息
-            </summary>
-            <param name="fundCode">基金代码</param>
-            <returns>基金对象序列化</returns>
-        </member>
-        <member name="M:X.UI.API.Controllers.FundController.GetFundNav(System.String)">
-            <summary>
-            获取净值
-            </summary>
-            <param name="fundCode">基金代码</param>
-            <returns>基金净值对象序列化</returns>
-        </member>
-        <member name="M:X.UI.API.Controllers.FundController.GetFundDay(System.String)">
-            <summary>
-            获取基金确认日和到账日
-            </summary>
-            <param name="fundCode">基金代码</param>
-            <returns>基金到期日和对账日序列化</returns>
-        </member>
-        <member name="T:X.UI.API.Controllers.LoginController">
-            <summary>
-            登录
-            </summary>
-        </member>
-        <member name="M:X.UI.API.Controllers.LoginController.Login(X.Interface.Dto.HttpRequest.LoginRequestDto)">
-            <summary>
-            登录
-            </summary>
-            <param name="loginDto">登陆请求Dto</param>
-            <returns>指定对象序列化</returns>
-        </member>
-        <member name="T:X.UI.API.Controllers.UserController">
-            <summary>
-            用户管理
-            </summary>
-        </member>
-        <member name="M:X.UI.API.Controllers.UserController.Logout(X.Interface.Dto.UserRequestDtoBase)">
-            <summary>
-            退出登录
-            </summary>
-            <param name="context">登陆用户请求Dto</param>
-            <returns>指定对象序列化</returns>
-        </member>
-        <member name="M:X.UI.API.Controllers.UserController.GetUserInfo(X.Interface.Dto.UserRequestDtoBase)">
-            <summary>
-            获取登录用户对象
-            </summary>
-            <param name="context">登陆用户请求Dto</param>
-            <returns>指定对象序列化</returns>
-        </member>
         <member name="P:X.UI.API.Model.ApiRequestContext.UserAgent">
             <summary>
             UserAgent
@@ -234,17 +139,6 @@
              </summary>
              <param name="actionContext">操作上下文</param>
         </member>
-        <member name="T:X.UI.API.Util.UserBaseController">
-            <summary>
-            需要用户登录的Controller基类
-            </summary>
-        </member>
-        <member name="M:X.UI.API.Util.UserBaseController.UserIdentity(System.Web.Http.Controllers.HttpActionContext)">
-            <summary>
-            用户身份验证（登录状态、记录用户相关状态、监控Api调用）
-            </summary>
-            <param name="actionContext"></param>
-        </member>
         <member name="T:X.UI.API.Util.OutputCacheAttribute">
             <summary>
             需要OutputCache的Action加此特性
@@ -255,6 +149,17 @@
             在调用操作方法之后发生
             </summary>
             <param name="actionExecutedContext">操作执行的上下文</param>
+        </member>
+        <member name="T:X.UI.API.Util.UserBaseController">
+            <summary>
+            需要用户登录的Controller基类
+            </summary>
+        </member>
+        <member name="M:X.UI.API.Util.UserBaseController.UserIdentity(System.Web.Http.Controllers.HttpActionContext)">
+            <summary>
+            用户身份验证（登录状态、记录用户相关状态、监控Api调用）
+            </summary>
+            <param name="actionContext"></param>
         </member>
         <member name="T:X.UI.API.Util.VisitorAttribute">
             <summary>

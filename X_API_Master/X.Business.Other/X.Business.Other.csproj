@@ -30,12 +30,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Em.Entities">
-      <HintPath>..\X.Ref\Em.Entities.dll</HintPath>
-    </Reference>
-    <Reference Include="Em.FundTrade.Route.Entities">
-      <HintPath>..\X.Ref\Em.FundTrade.Route.Entities.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web" />

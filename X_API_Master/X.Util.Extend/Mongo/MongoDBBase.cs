@@ -118,15 +118,13 @@ namespace X.Util.Extend.Mongo
         public void InsertBatchMongo<T>(IEnumerable<T> list, string database, string collection) where T : MongoBaseModel
         {
             var property = typeof(T).GetProperty("Id");
-            foreach (var t in list)
+            var enumerable = list as T[] ?? list.ToArray();
+            foreach (var t in enumerable.Where(t => property != null && Equals(property.GetValue(t, null), null)))
             {
-                if (property != null && Equals(property.GetValue(t, null), null))
-                {
-                    property.SetValue(t, Guid.NewGuid().ToString("N"), null);
-                }
+                property.SetValue(t, Guid.NewGuid().ToString("N"), null);
             }
             var mc = new MongoDbProvider(database, collection, ServerName);
-            CoreAccess.TryCallAsync(EDomain, mc.Collection.InsertBatch, list, WriteConcern.Acknowledged, CallSuccess, mc.Dispose, null, false, ServerName);
+            CoreAccess.TryCallAsync(EDomain, mc.Collection.InsertBatch, enumerable, WriteConcern.Acknowledged, CallSuccess, mc.Dispose, null, false, ServerName);
         }
 
         public void SaveMongo<T>(Func<T> loader, string database, string collection) where T : MongoBaseModel
@@ -275,7 +273,8 @@ namespace X.Util.Extend.Mongo
 
         private static bool CallSuccess(IEnumerable<WriteConcernResult> result)
         {
-            return result != null && result.All(p => p.Ok) && result.Count() > 0;
+            var writeConcernResults = result as WriteConcernResult[] ?? result.ToArray();
+            return result != null && writeConcernResults.All(p => p.Ok) && writeConcernResults.Any();
         }
 
         private static bool CallSuccess(CommandResult result)

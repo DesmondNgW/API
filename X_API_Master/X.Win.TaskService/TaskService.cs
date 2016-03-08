@@ -10,7 +10,7 @@ namespace X.Win.TaskService
 {
     public class TaskLogModel : MongoBaseModel
     {
-        public string content { get; set; }
+        public string Content { get; set; }
     }
 
     public partial class TaskService : ServiceBase
@@ -31,7 +31,7 @@ namespace X.Win.TaskService
                 EventLog.WriteEntry("StartTask", e.Message, EventLogEntryType.Error);
                 Logger.Error(MethodBase.GetCurrentMethod(), LogDomain.Ui, null, string.Format("StartTask has Exception:{0}", e.ToJson()));
                 //email.log or message.log or db.log
-                LogMonitor.Error(new TaskLogModel() { content = string.Format("StartTask has Exception:{0}", e.ToJson()) }, LogMonitorDomain.Other);
+                LogMonitor.Error(new TaskLogModel() { Content = string.Format("StartTask has Exception:{0}", e.ToJson()) }, LogMonitorDomain.Other);
             }
         }
 
@@ -46,7 +46,7 @@ namespace X.Win.TaskService
                 EventLog.WriteEntry("StopTask", e.Message, EventLogEntryType.Error);
                 Logger.Error(MethodBase.GetCurrentMethod(), LogDomain.Ui, null, string.Format("StopTask has Exception:{0}", e.ToJson()));
                 //email.log or message.log or db.log
-                LogMonitor.Error(new TaskLogModel() { content = string.Format("StopTask has Exception:{0}", e.ToJson()) }, LogMonitorDomain.Other);
+                LogMonitor.Error(new TaskLogModel() { Content = string.Format("StopTask has Exception:{0}", e.ToJson()) }, LogMonitorDomain.Other);
             }
         }
     }

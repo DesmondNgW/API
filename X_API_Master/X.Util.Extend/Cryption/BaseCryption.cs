@@ -110,7 +110,6 @@ namespace X.Util.Extend.Cryption
                     return new HMACSHA384(bytes);
                 case HmacType.Sha512:
                     return new HMACSHA512(bytes);
-                case HmacType.Md5:
                 default:
                     return new HMACMD5(bytes);
             }
@@ -162,7 +161,6 @@ namespace X.Util.Extend.Cryption
                     transform = des.CreateEncryptor(bytes.Skip(17).Take(8).ToArray(), bytes.Skip(17).Take(16).ToArray());
                     des.Clear();
                     break;
-                case CryptionType.TripleDes:
                 default:
                     var tripleDes = new TripleDESCryptoServiceProvider {Mode = CipherMode.CBC};
                     transform = tripleDes.CreateEncryptor(bytes.Skip(17).Take(24).ToArray(), bytes.Skip(17).Take(16).ToArray());
@@ -190,7 +188,6 @@ namespace X.Util.Extend.Cryption
                     transform = des.CreateDecryptor(bytes.Skip(17).Take(8).ToArray(), bytes.Skip(17).Take(16).ToArray());
                     des.Clear();
                     break;
-                case CryptionType.TripleDes:
                 default:
                     var tripleDes = new TripleDESCryptoServiceProvider {Mode = CipherMode.CBC};
                     transform = tripleDes.CreateDecryptor(bytes.Skip(17).Take(24).ToArray(), bytes.Skip(17).Take(16).ToArray());

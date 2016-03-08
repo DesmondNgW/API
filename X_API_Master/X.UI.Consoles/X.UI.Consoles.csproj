@@ -47,11 +47,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Em.Entities, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
-    <Reference Include="Em.FundTrade.Route.Entities, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\X.Ref\Em.FundTrade.Route.Entities.dll</HintPath>
-    </Reference>
     <Reference Include="MongoDB.Bson, Version=1.10.0.62, Culture=neutral, PublicKeyToken=f686731cfb9cc103, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\X.Ref\MongoDB.Bson.dll</HintPath>
