@@ -54,10 +54,10 @@ namespace X.DataBase.Helper
         /// <summary>
         /// 取得UInt16值
         /// </summary>
-        public static UInt16? GetUInt16(object obj)
+        public static ushort? GetUInt16(object obj)
         {
-            UInt16 result;
-            return (obj != null && obj != DBNull.Value && UInt16.TryParse(obj.ToString(), out result)) ? (UInt16?)result : null;
+            ushort result;
+            return (obj != null && obj != DBNull.Value && ushort.TryParse(obj.ToString(), out result)) ? (ushort?)result : null;
         }
 
         /// <summary>
@@ -72,10 +72,10 @@ namespace X.DataBase.Helper
         /// <summary>
         /// 取得UInt值
         /// </summary>
-        public static UInt32? GetUInt(object obj)
+        public static uint? GetUInt(object obj)
         {
-            UInt32 result;
-            return (obj != null && obj != DBNull.Value && UInt32.TryParse(obj.ToString(), out result)) ? (UInt32?)result : null;
+            uint result;
+            return (obj != null && obj != DBNull.Value && uint.TryParse(obj.ToString(), out result)) ? (uint?)result : null;
         }
 
         /// <summary>
@@ -90,10 +90,10 @@ namespace X.DataBase.Helper
         /// <summary>
         /// 取得UInt64值
         /// </summary>
-        public static UInt64? GetULong(object obj)
+        public static ulong? GetULong(object obj)
         {
-            UInt64 result;
-            return (obj != null && obj != DBNull.Value && UInt64.TryParse(obj.ToString(), out result)) ? (UInt64?)result : null;
+            ulong result;
+            return (obj != null && obj != DBNull.Value && ulong.TryParse(obj.ToString(), out result)) ? (ulong?)result : null;
         }
 
         /// <summary>
@@ -108,10 +108,10 @@ namespace X.DataBase.Helper
         /// <summary>
         /// 取得sbyte值
         /// </summary>
-        public static SByte? GetSByte(object obj)
+        public static sbyte? GetSByte(object obj)
         {
-            SByte result;
-            return (obj != null && obj != DBNull.Value && SByte.TryParse(obj.ToString(), out result)) ? (SByte?)result : null;
+            sbyte result;
+            return (obj != null && obj != DBNull.Value && sbyte.TryParse(obj.ToString(), out result)) ? (sbyte?)result : null;
         }
 
         /// <summary>

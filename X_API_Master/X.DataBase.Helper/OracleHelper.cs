@@ -20,9 +20,9 @@ namespace X.DataBase.Helper
         /// <param name="start">起始索引，如每页10条则第1页的起始索引为0，第2页的起始索引为10</param>
         /// <param name="count">要取得的数据条数</param>
         /// <returns>返回用于分页的SQL语句</returns>
-        private string GetPagerSql(string tblName, string fldSort, string condition, int start, int count)
+        private static string GetPagerSql(string tblName, string fldSort, string condition, int start, int count)
         {
-            StringBuilder strSql = new StringBuilder("select X.* from(");
+            var strSql = new StringBuilder("select X.* from(");
             strSql.AppendFormat(" select row_number() over(order by {0}) as ROW_NO, * from {1}", fldSort, tblName);
             if (!string.IsNullOrEmpty(condition))
             {
@@ -47,7 +47,7 @@ namespace X.DataBase.Helper
         /// <param name="count">要取得的数据条数</param>
         public DbDataReader GetPageList(string connectionString, string tblName, string fldSort, string condition, int start, int count)
         {
-            string sql = GetPagerSql(tblName, fldSort, condition, start, count);
+            var sql = GetPagerSql(tblName, fldSort, condition, start, count);
             return ExecuteReader(connectionString, CommandType.Text, sql, null);
         }
 
@@ -56,9 +56,9 @@ namespace X.DataBase.Helper
         /// </summary>
         public int GetCount(string connectionString, string tblName, string condition)
         {
-            StringBuilder sql = new StringBuilder("select count(*) from " + tblName);
+            var sql = new StringBuilder("select count(*) from " + tblName);
             if (!string.IsNullOrEmpty(condition)) sql.Append(" where " + condition);
-            object count = ExecuteScalar(connectionString, CommandType.Text, sql.ToString(), null);
+            var count = ExecuteScalar(connectionString, CommandType.Text, sql.ToString(), null);
             return int.Parse(count.ToString());
         }
 
@@ -67,14 +67,14 @@ namespace X.DataBase.Helper
         /// </summary>
         public DataSet ExecuteQuery(string connectionString, CommandType cmdType, string cmdText, params DbParameter[] cmdParms)
         {
-            using (OracleConnection conn = new OracleConnection(connectionString))
+            using (var conn = new OracleConnection(connectionString))
             {
-                using (OracleCommand cmd = new OracleCommand())
+                using (var cmd = new OracleCommand())
                 {
                     PrepareCommand(cmd, conn, null, cmdType, cmdText, cmdParms);
-                    using (OracleDataAdapter da = new OracleDataAdapter(cmd))
+                    using (var da = new OracleDataAdapter(cmd))
                     {
-                        DataSet ds = new DataSet();
+                        var ds = new DataSet();
                         da.Fill(ds, "ds");
                         cmd.Parameters.Clear();
                         return ds;
@@ -88,10 +88,10 @@ namespace X.DataBase.Helper
         /// </summary>
         public DataSet ExecuteQuery(DbTransaction trans, CommandType cmdType, string cmdText, params DbParameter[] cmdParms)
         {
-            OracleCommand cmd = new OracleCommand();
+            var cmd = new OracleCommand();
             PrepareCommand(cmd, trans.Connection, trans, cmdType, cmdText, cmdParms);
-            OracleDataAdapter da = new OracleDataAdapter(cmd);
-            DataSet ds = new DataSet();
+            var da = new OracleDataAdapter(cmd);
+            var ds = new DataSet();
             da.Fill(ds, "ds");
             cmd.Parameters.Clear();
             return ds;
@@ -102,11 +102,11 @@ namespace X.DataBase.Helper
         /// </summary>
         public int ExecuteNonQuery(string connectionString, CommandType cmdType, string cmdText, params DbParameter[] cmdParms)
         {
-            OracleCommand cmd = new OracleCommand();
-            using (OracleConnection conn = new OracleConnection(connectionString))
+            var cmd = new OracleCommand();
+            using (var conn = new OracleConnection(connectionString))
             {
                 PrepareCommand(cmd, conn, null, cmdType, cmdText, cmdParms);
-                int val = cmd.ExecuteNonQuery();
+                var val = cmd.ExecuteNonQuery();
                 cmd.Parameters.Clear();
                 return val;
             }
@@ -117,9 +117,9 @@ namespace X.DataBase.Helper
         /// </summary>
         public int ExecuteNonQuery(DbTransaction trans, CommandType cmdType, string cmdText, params DbParameter[] cmdParms)
         {
-            OracleCommand cmd = new OracleCommand();
+            var cmd = new OracleCommand();
             PrepareCommand(cmd, trans.Connection, trans, cmdType, cmdText, cmdParms);
-            int val = cmd.ExecuteNonQuery();
+            var val = cmd.ExecuteNonQuery();
             cmd.Parameters.Clear();
             return val;
         }
@@ -129,12 +129,12 @@ namespace X.DataBase.Helper
         /// </summary>
         public DbDataReader ExecuteReader(string connectionString, CommandType cmdType, string cmdText, params DbParameter[] cmdParms)
         {
-            OracleCommand cmd = new OracleCommand();
-            OracleConnection conn = new OracleConnection(connectionString);
+            var cmd = new OracleCommand();
+            var conn = new OracleConnection(connectionString);
             try
             {
                 PrepareCommand(cmd, conn, null, cmdType, cmdText, cmdParms);
-                OracleDataReader rdr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+                var rdr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
                 cmd.Parameters.Clear();
                 return rdr;
             }
@@ -150,9 +150,9 @@ namespace X.DataBase.Helper
         /// </summary>
         public DbDataReader ExecuteReader(DbTransaction trans, CommandType cmdType, string cmdText, params DbParameter[] cmdParms)
         {
-            OracleCommand cmd = new OracleCommand();
+            var cmd = new OracleCommand();
             PrepareCommand(cmd, trans.Connection, trans, cmdType, cmdText, cmdParms);
-            OracleDataReader rdr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+            var rdr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
             cmd.Parameters.Clear();
             return rdr;
         }
@@ -162,11 +162,11 @@ namespace X.DataBase.Helper
         /// </summary>
         public object ExecuteScalar(string connectionString, CommandType cmdType, string cmdText, params DbParameter[] cmdParms)
         {
-            OracleCommand cmd = new OracleCommand();
-            using (OracleConnection connection = new OracleConnection(connectionString))
+            var cmd = new OracleCommand();
+            using (var connection = new OracleConnection(connectionString))
             {
                 PrepareCommand(cmd, connection, null, cmdType, cmdText, cmdParms);
-                object val = cmd.ExecuteScalar();
+                var val = cmd.ExecuteScalar();
                 cmd.Parameters.Clear();
                 return val;
             }
@@ -177,9 +177,9 @@ namespace X.DataBase.Helper
         /// </summary>
         public object ExecuteScalar(DbTransaction trans, CommandType cmdType, string cmdText, params DbParameter[] cmdParms)
         {
-            OracleCommand cmd = new OracleCommand();
+            var cmd = new OracleCommand();
             PrepareCommand(cmd, trans.Connection, trans, cmdType, cmdText, cmdParms);
-            object val = cmd.ExecuteScalar();
+            var val = cmd.ExecuteScalar();
             cmd.Parameters.Clear();
             return val;
         }
@@ -196,32 +196,30 @@ namespace X.DataBase.Helper
             cmd.CommandText = cmdText;
             if (trans != null) cmd.Transaction = trans;
             cmd.CommandType = cmdType;
-            if (cmdParms != null)
+            if (cmdParms == null) return;
+            foreach (var parm in cmdParms)
             {
-                foreach (DbParameter parm in cmdParms)
+                parm.ParameterName = parm.ParameterName.Replace("@", ":").Replace("?", ":");
+                switch (parm.DbType)
                 {
-                    parm.ParameterName = parm.ParameterName.Replace("@", ":").Replace("?", ":");
-                    switch (parm.DbType)
-                    {
-                        case DbType.AnsiString:
-                        case DbType.AnsiStringFixedLength:
-                        case DbType.Binary:
-                        case DbType.String:
-                        case DbType.StringFixedLength:
-                        case DbType.Xml:
-                        case DbType.Object:
-                            if (Equals(parm.Value, null)) parm.Value = DBNull.Value;
-                            break;
-                        case DbType.Date:
-                        case DbType.DateTime:
-                        case DbType.DateTime2:
-                        case DbType.Time:
-                        case DbType.DateTimeOffset:
-                            if (((DateTime)parm.Value).Equals(DateTime.MinValue)) parm.Value = DBNull.Value;
-                            break;
-                    }
-                    cmd.Parameters.Add(parm);
+                    case DbType.AnsiString:
+                    case DbType.AnsiStringFixedLength:
+                    case DbType.Binary:
+                    case DbType.String:
+                    case DbType.StringFixedLength:
+                    case DbType.Xml:
+                    case DbType.Object:
+                        if (Equals(parm.Value, null)) parm.Value = DBNull.Value;
+                        break;
+                    case DbType.Date:
+                    case DbType.DateTime:
+                    case DbType.DateTime2:
+                    case DbType.Time:
+                    case DbType.DateTimeOffset:
+                        if (((DateTime)parm.Value).Equals(DateTime.MinValue)) parm.Value = DBNull.Value;
+                        break;
                 }
+                cmd.Parameters.Add(parm);
             }
         }
     }

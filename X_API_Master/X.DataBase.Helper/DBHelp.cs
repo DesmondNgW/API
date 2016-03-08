@@ -22,7 +22,6 @@ namespace X.DataBase.Helper
         }
 
         private DatabaseTypes _databaseType;
-        private string _connectionString;
         private IDbHelper _dbHelper;
 
         public DbHelper() { }
@@ -30,7 +29,7 @@ namespace X.DataBase.Helper
         public DbHelper(DatabaseTypes databaseType, string connectionString)
         {
             DatabaseType = databaseType;
-            _connectionString = connectionString;
+            ConnectionString = connectionString;
         }
 
         /// <summary>
@@ -69,11 +68,7 @@ namespace X.DataBase.Helper
         /// <summary>
         /// 数据库连接字符串
         /// </summary>
-        public string ConnectionString
-        {
-            get { return _connectionString; }
-            set { _connectionString = value; }
-        }
+        public string ConnectionString { get; set; }
 
         /// <summary>
         /// 创建数据库连接
@@ -83,15 +78,15 @@ namespace X.DataBase.Helper
             switch (_databaseType)
             {
                 case DatabaseTypes.MySql:
-                    return new MySqlConnection(_connectionString);
+                    return new MySqlConnection(ConnectionString);
                 case DatabaseTypes.Oracle:
-                    return new OracleConnection(_connectionString);
+                    return new OracleConnection(ConnectionString);
                 case DatabaseTypes.OleDb:
-                    return new OleDbConnection(_connectionString);
+                    return new OleDbConnection(ConnectionString);
                 case DatabaseTypes.SqLite:
-                    return new SQLiteConnection(_connectionString);
+                    return new SQLiteConnection(ConnectionString);
                 default:
-                    return new SqlConnection(_connectionString);
+                    return new SqlConnection(ConnectionString);
             }
         }
 
@@ -190,7 +185,7 @@ namespace X.DataBase.Helper
         /// <returns></returns>
         public DbDataReader GetPageList(string tblName, string fldSort, string condition, int first, int last)
         {
-            return _dbHelper.GetPageList(_connectionString, tblName, fldSort, condition, first, last);
+            return _dbHelper.GetPageList(ConnectionString, tblName, fldSort, condition, first, last);
         }
 
         /// <summary>
@@ -198,7 +193,7 @@ namespace X.DataBase.Helper
         /// </summary>
         public int ExecuteNonQuery(CommandType cmdType, string cmdText, params DbParameter[] cmdParms)
         {
-            return _dbHelper.ExecuteNonQuery(_connectionString, cmdType, cmdText, cmdParms);
+            return _dbHelper.ExecuteNonQuery(ConnectionString, cmdType, cmdText, cmdParms);
         }
 
         /// <summary>
@@ -222,7 +217,7 @@ namespace X.DataBase.Helper
         /// </summary>
         public DataSet ExecuteQuery(CommandType cmdType, string cmdText, params DbParameter[] cmdParms)
         {
-            return _dbHelper.ExecuteQuery(_connectionString, cmdType, cmdText, cmdParms);
+            return _dbHelper.ExecuteQuery(ConnectionString, cmdType, cmdText, cmdParms);
         }
 
         /// <summary>
@@ -238,7 +233,7 @@ namespace X.DataBase.Helper
         /// </summary>
         public DbDataReader ExecuteReader(CommandType cmdType, string cmdText, params DbParameter[] cmdParms)
         {
-            return _dbHelper.ExecuteReader(_connectionString, cmdType, cmdText, cmdParms);
+            return _dbHelper.ExecuteReader(ConnectionString, cmdType, cmdText, cmdParms);
         }
 
         /// <summary>
@@ -254,7 +249,7 @@ namespace X.DataBase.Helper
         /// </summary>
         public object ExecuteScalar(CommandType cmdType, string cmdText, params DbParameter[] cmdParms)
         {
-            return _dbHelper.ExecuteScalar(_connectionString, cmdType, cmdText, cmdParms);
+            return _dbHelper.ExecuteScalar(ConnectionString, cmdType, cmdText, cmdParms);
         }
         #endregion
     }
