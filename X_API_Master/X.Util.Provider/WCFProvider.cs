@@ -32,6 +32,7 @@ namespace X.Util.Provider
             get { return new TimeSpan(2, 0, 0); }
         }
         private static T _instance;
+        private OperationContextScope _scope;
         private readonly Stopwatch _sw = new Stopwatch();
         /// <summary>
         /// 缓存Key
@@ -89,10 +90,9 @@ namespace X.Util.Provider
             get
             {
                 _instance = Core<T>.Instance(Init, CacheKey, ValidTime, Core<T>.IsValid4CommunicationObject);
-                var scope = new OperationContextScope((IClientChannel)_instance);
+                _scope = new OperationContextScope((IClientChannel)_instance);
                 var header = MessageHeader.CreateHeader("clientip", "http://tempuri.org", CoreUtil.GetIp());
                 OperationContext.Current.OutgoingMessageHeaders.Add(header);
-                scope.Dispose();
                 _sw.Start();
                 return _instance;
             }
@@ -102,6 +102,7 @@ namespace X.Util.Provider
         /// </summary>
         public void Dispose(MethodBase method, LogDomain eDomain)
         {
+            if (_scope != null) _scope.Dispose();
             _sw.Stop();
             Core<T>.Close(method, _sw.ElapsedMilliseconds, eDomain, EndpointAddress);
             _sw.Reset();

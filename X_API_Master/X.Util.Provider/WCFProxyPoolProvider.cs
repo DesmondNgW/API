@@ -29,6 +29,7 @@ namespace X.Util.Provider
         #region 内部实现
         private readonly Stopwatch _sw = new Stopwatch();
         private static TChannel _instance;
+        private OperationContextScope _scope;
         private static TimeSpan ValidTime
         {
             get { return new TimeSpan(0, 10, 0); }
@@ -167,10 +168,10 @@ namespace X.Util.Provider
             get
             {
                 _instance = Core<TChannel>.Instance(GetClient, CacheKey, new TimeSpan(0, 1, 0), Core<TChannel>.IsValid4CommunicationObject);
-                var scope = new OperationContextScope((IClientChannel)_instance);
+                _scope = new OperationContextScope((IClientChannel)_instance);
                 var header = MessageHeader.CreateHeader("clientip", "http://tempuri.org", CoreUtil.GetIp());
                 OperationContext.Current.OutgoingMessageHeaders.Add(header);
-                scope.Dispose();
+                _scope.Dispose();
                 _sw.Start();
                 return _instance;
             }
@@ -180,6 +181,7 @@ namespace X.Util.Provider
         /// </summary>
         public void Dispose(MethodBase method, LogDomain eDomain)
         {
+            if (_scope != null) _scope.Dispose();
             _sw.Stop();
             Core<TChannel>.Close(method, _sw.ElapsedMilliseconds, eDomain, ServiceUri);
             _sw.Reset();
