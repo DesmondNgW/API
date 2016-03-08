@@ -9,7 +9,7 @@ namespace X.Util.Core
     public class Core<T>
     {
         #region 内部实现
-        private static volatile IDictionary<string, CacheResultInfo<T>> _cacheResult = new Dictionary<string, CacheResultInfo<T>>();
+        private static volatile IDictionary<string, StatusCacheResult<T>> _cacheResult = new Dictionary<string, StatusCacheResult<T>>();
         private const string CoreDefaultCachekey = "CoreDefaultCacheKey";
         private const string LockerPrefix = "X.Util.Core.Prefix";
         private const int DayOfHour = 24;
@@ -127,7 +127,7 @@ namespace X.Util.Core
             lock (CoreUtil.Getlocker(LockerPrefix + cacheKey))
             {
                 if (!ContainsCache(cacheKey, validState))
-                    _cacheResult[cacheKey] = new CacheResultInfo<T>
+                    _cacheResult[cacheKey] = new StatusCacheResult<T>
                     {
                         Result = init(),
                         CacheKey = cacheKey,
@@ -145,7 +145,7 @@ namespace X.Util.Core
             lock (CoreUtil.Getlocker(LockerPrefix + key))
             {
                 if (!ContainsCache(key, validState))
-                    _cacheResult[key] = new CacheResultInfo<T>
+                    _cacheResult[key] = new StatusCacheResult<T>
                     {
                         Result = init(argument),
                         CacheKey = key,

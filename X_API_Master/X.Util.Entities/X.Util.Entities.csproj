@@ -43,7 +43,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CacheKey.cs" />
-    <Compile Include="CacheResultInfo.cs" />
+    <Compile Include="CacheResult.cs" />
+    <Compile Include="StatusCacheResult.cs" />
+    <Compile Include="HttpCacheResult.cs" />
     <Compile Include="MongoBaseModel.cs" />
     <Compile Include="ContextChannel.cs" />
     <Compile Include="CoreChannelFactoryPool.cs" />

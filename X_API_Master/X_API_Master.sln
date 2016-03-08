@@ -1,16 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+VisualStudioVersion = 12.0.40629.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "X.UI", "X.UI", "{7419F28B-842C-4C80-B933-0370273F4029}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "X.Ref", "X.Ref", "{3685770C-1EB5-4D81-9DD0-A0FB6BD70316}"
 	ProjectSection(SolutionItems) = preProject
-		X.Ref\Angie.Interface.dll = X.Ref\Angie.Interface.dll
 		X.Ref\Couchbase.dll = X.Ref\Couchbase.dll
-		X.Ref\Em.Entities.dll = X.Ref\Em.Entities.dll
-		X.Ref\Em.FundTrade.Route.Entities.dll = X.Ref\Em.FundTrade.Route.Entities.dll
 		X.Ref\Enyim.Caching.dll = X.Ref\Enyim.Caching.dll
 		X.Ref\log4net.dll = X.Ref\log4net.dll
 		X.Ref\MongoDB.Bson.dll = X.Ref\MongoDB.Bson.dll

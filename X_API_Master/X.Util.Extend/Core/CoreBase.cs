@@ -1,4 +1,4 @@
-﻿using Em.Entities;
+﻿using X.Util.Entities;
 
 namespace X.Util.Extend.Core
 {
@@ -11,7 +11,7 @@ namespace X.Util.Extend.Core
             return !Equals(iresult, default(TResult));
         }
 
-        public static bool CallSuccess<TResult>(ResultInfo<TResult> iresult)
+        public static bool CallSuccess<TResult>(CacheResult<TResult> iresult)
         {
             return iresult != null && iresult.Result != null && iresult.Succeed;
         }

@@ -1,15 +1,15 @@
-﻿using Em.Entities;
-using System;
+﻿using System;
 using System.Web.Caching;
 using X.Util.Core;
+using X.Util.Entities;
 
 namespace X.Util.Extend.Cache
 {
     public class CacheData
     {
         #region 构造函数
-        private CouchCache _couch = CouchCache.Default;
-        private RedisCache _redis = RedisCache.Default;
+        private readonly CouchCache _couch = CouchCache.Default;
+        private readonly RedisCache _redis = RedisCache.Default;
         private const string Prefix = "X.Util.Extend.Cache.CacheData";
         private static readonly string Path = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "App_Data\\CacheDependency.xml");//缓存依赖文件--用于删除本地缓存
         public CacheData() { }
@@ -22,57 +22,55 @@ namespace X.Util.Extend.Cache
         #endregion
 
         #region CacheData Api
-        public static ResultInfo<T> GetRuntimeCacheData<T>(string key, string version, DateTime dt, Func<ResultInfo<T>> loader)
+        public static CacheResult<T> GetRuntimeCacheData<T>(string key, string version, DateTime dt, Func<CacheResult<T>> loader)
         {
-            var setting = RuntimeCache.GetJson<ResultInfo<T>>(key);
-            if (setting != null && setting.Result != null && setting.Succeed && Equals(setting.preValue, version)) return setting;
+            var setting = RuntimeCache.GetJson<CacheResult<T>>(key);
+            if (setting != null && setting.Result != null && setting.Succeed && Equals(setting.AppVersion, version)) return setting;
             lock (CoreUtil.Getlocker(Prefix + key))
             {
-                setting = RuntimeCache.GetJson<ResultInfo<T>>(key);
-                if (setting != null && setting.Result != null && setting.Succeed && Equals(setting.preValue, version)) return setting;
+                setting = RuntimeCache.GetJson<CacheResult<T>>(key);
+                if (setting != null && setting.Result != null && setting.Succeed && Equals(setting.AppVersion, version)) return setting;
                 var iresult = loader();
                 setting = iresult;
-                if (setting != null)
-                {
-                    setting.preValue = version;
-                    setting.Succeed = iresult != null && iresult.Result != null && iresult.Succeed;
-                    if (setting.Succeed) RuntimeCache.SetJson(key, setting, dt, new CacheDependency(Path));
-                }
+                if (Equals(setting, null)) return null;
+                setting.AppVersion = version;
+                setting.Succeed = iresult != null && iresult.Result != null && iresult.Succeed;
+                if (setting.Succeed) RuntimeCache.SetJson(key, setting, dt, new CacheDependency(Path));
             }
             return setting;
         }
 
-        public static ResultInfo<T> GetRuntimeCacheData<T>(string key, string version, TimeSpan ts, Func<ResultInfo<T>> loader, string filepath)
+        public static CacheResult<T> GetRuntimeCacheData<T>(string key, string version, TimeSpan ts, Func<CacheResult<T>> loader, string filepath)
         {
-            var setting = RuntimeCache.GetJson<ResultInfo<T>>(key);
-            if (setting != null && setting.Result != null && setting.Succeed && Equals(setting.preValue, version)) return setting;
+            var setting = RuntimeCache.GetJson<CacheResult<T>>(key);
+            if (setting != null && setting.Result != null && setting.Succeed && Equals(setting.AppVersion, version)) return setting;
             lock (CoreUtil.Getlocker(Prefix + key))
             {
-                setting = RuntimeCache.GetJson<ResultInfo<T>>(key);
-                if (setting != null && setting.Result != null && setting.Succeed && Equals(setting.preValue, version)) return setting;
+                setting = RuntimeCache.GetJson<CacheResult<T>>(key);
+                if (setting != null && setting.Result != null && setting.Succeed && Equals(setting.AppVersion, version)) return setting;
                 var iresult = loader();
                 setting = iresult;
                 if (Equals(setting, null)) return null;
-                setting.preValue = version;
+                setting.AppVersion = version;
                 setting.Succeed = iresult != null && iresult.Result != null && iresult.Succeed;
                 if (setting.Succeed) RuntimeCache.SetJson(key, setting, ts, new CacheDependency(string.IsNullOrEmpty(filepath) ? Path : filepath));
             }
             return setting;
         }
 
-        public ResultInfo<T> GetCouchCacheData<T>(string key, string version, DateTime dt, Func<ResultInfo<T>> loader)
+        public CacheResult<T> GetCouchCacheData<T>(string key, string version, DateTime dt, Func<CacheResult<T>> loader)
         {
             var lockKey = key + "couchlock";
-            var setting = _couch.GetJson<ResultInfo<T>>(key);
-            if (setting != null && setting.Result != null && setting.Succeed && Equals(setting.preValue, version)) return setting;
+            var setting = _couch.GetJson<CacheResult<T>>(key);
+            if (setting != null && setting.Result != null && setting.Succeed && Equals(setting.AppVersion, version)) return setting;
             lock (CoreUtil.Getlocker(Prefix + key))
             {
-                setting = RuntimeCache.GetJson<ResultInfo<T>>(lockKey);
-                if (setting != null && setting.Result != null && setting.Succeed && Equals(setting.preValue, version)) return setting;
+                setting = RuntimeCache.GetJson<CacheResult<T>>(lockKey);
+                if (setting != null && setting.Result != null && setting.Succeed && Equals(setting.AppVersion, version)) return setting;
                 var iresult = loader();
                 setting = iresult;
                 if (Equals(setting, null)) return null;
-                setting.preValue = version;
+                setting.AppVersion = version;
                 setting.Succeed = iresult != null && iresult.Result != null && iresult.Succeed;
                 if (!setting.Succeed) return setting;
                 RuntimeCache.SetJson(lockKey, setting, DateTime.Now.AddSeconds(15), new CacheDependency(Path));
@@ -81,19 +79,19 @@ namespace X.Util.Extend.Cache
             return setting;
         }
 
-        public ResultInfo<T> GetCouchCacheData<T>(string key, string version, TimeSpan ts, Func<ResultInfo<T>> loader)
+        public CacheResult<T> GetCouchCacheData<T>(string key, string version, TimeSpan ts, Func<CacheResult<T>> loader)
         {
             var lockKey = key + "couchlock";
-            var setting = _couch.GetJson<ResultInfo<T>>(key);
-            if (setting != null && setting.Result != null && setting.Succeed && Equals(setting.preValue, version)) return setting;
+            var setting = _couch.GetJson<CacheResult<T>>(key);
+            if (setting != null && setting.Result != null && setting.Succeed && Equals(setting.AppVersion, version)) return setting;
             lock (CoreUtil.Getlocker(Prefix + key))
             {
-                setting = RuntimeCache.GetJson<ResultInfo<T>>(lockKey);
-                if (setting != null && setting.Result != null && setting.Succeed && Equals(setting.preValue, version)) return setting;
+                setting = RuntimeCache.GetJson<CacheResult<T>>(lockKey);
+                if (setting != null && setting.Result != null && setting.Succeed && Equals(setting.AppVersion, version)) return setting;
                 var iresult = loader();
                 setting = iresult;
                 if (Equals(setting, null)) return null;
-                setting.preValue = version;
+                setting.AppVersion = version;
                 setting.Succeed = iresult != null && iresult.Result != null && iresult.Succeed;
                 if (!setting.Succeed) return setting;
                 RuntimeCache.SetJson(lockKey, setting, DateTime.Now.AddSeconds(15), new CacheDependency(Path));
@@ -102,19 +100,19 @@ namespace X.Util.Extend.Cache
             return setting;
         }
 
-        public ResultInfo<T> GetRedisCacheData<T>(string key, string version, DateTime dt, Func<ResultInfo<T>> loader)
+        public CacheResult<T> GetRedisCacheData<T>(string key, string version, DateTime dt, Func<CacheResult<T>> loader)
         {
             var lockKey = key + "redislock";
-            var setting = _redis.GetJson<ResultInfo<T>>(key);
-            if (setting != null && setting.Result != null && setting.Succeed && Equals(setting.preValue, version)) return setting;
+            var setting = _redis.GetJson<CacheResult<T>>(key);
+            if (setting != null && setting.Result != null && setting.Succeed && Equals(setting.AppVersion, version)) return setting;
             lock (CoreUtil.Getlocker(Prefix + key))
             {
-                setting = RuntimeCache.GetJson<ResultInfo<T>>(lockKey);
-                if (setting != null && setting.Result != null && setting.Succeed && Equals(setting.preValue, version)) return setting;
+                setting = RuntimeCache.GetJson<CacheResult<T>>(lockKey);
+                if (setting != null && setting.Result != null && setting.Succeed && Equals(setting.AppVersion, version)) return setting;
                 var iresult = loader();
                 setting = iresult;
                 if (Equals(setting, null)) return null;
-                setting.preValue = version;
+                setting.AppVersion = version;
                 setting.Succeed = iresult != null && iresult.Result != null && iresult.Succeed;
                 if (!setting.Succeed) return setting;
                 RuntimeCache.SetJson(lockKey, setting, DateTime.Now.AddSeconds(15), new CacheDependency(Path));
@@ -123,19 +121,19 @@ namespace X.Util.Extend.Cache
             return setting;
         }
 
-        public ResultInfo<T> GetRedisCacheData<T>(string key, string version, TimeSpan ts, Func<ResultInfo<T>> loader)
+        public CacheResult<T> GetRedisCacheData<T>(string key, string version, TimeSpan ts, Func<CacheResult<T>> loader)
         {
             var lockKey = key + "redislock";
-            var setting = _redis.GetJson<ResultInfo<T>>(key);
-            if (setting != null && setting.Result != null && setting.Succeed && Equals(setting.preValue, version)) return setting;
+            var setting = _redis.GetJson<CacheResult<T>>(key);
+            if (setting != null && setting.Result != null && setting.Succeed && Equals(setting.AppVersion, version)) return setting;
             lock (CoreUtil.Getlocker(Prefix + key))
             {
-                setting = RuntimeCache.GetJson<ResultInfo<T>>(lockKey);
-                if (setting != null && setting.Result != null && setting.Succeed && Equals(setting.preValue, version)) return setting;
+                setting = RuntimeCache.GetJson<CacheResult<T>>(lockKey);
+                if (setting != null && setting.Result != null && setting.Succeed && Equals(setting.AppVersion, version)) return setting;
                 var iresult = loader();
                 setting = iresult;
                 if (Equals(setting, null)) return null;
-                setting.preValue = version;
+                setting.AppVersion = version;
                 setting.Succeed = iresult != null && iresult.Result != null && iresult.Succeed;
                 if (!setting.Succeed) return setting;
                 RuntimeCache.SetJson(lockKey, setting, DateTime.Now.AddSeconds(15), new CacheDependency(Path));

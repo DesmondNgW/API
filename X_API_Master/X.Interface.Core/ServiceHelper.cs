@@ -45,6 +45,21 @@ namespace X.Interface.Core
         public int StatusZone { get; set; }
     }
 
+    public enum Zone
+    {
+        TradeZero = 0,
+        TradeOne = 1,
+        TradeTwo = 2,
+        TradeThree = 3,
+        TradeFour = 4,
+        TradeFive = 5,
+        TradeSix = 6,
+        TradeSeven = 7,
+        TradeEight = 8,
+        TradeNine = 9,
+        TradeTen = 10,
+    }
+
     public class ServiceHelper
     {
         #region LoginStatus Api && TokenApi
@@ -61,7 +76,7 @@ namespace X.Interface.Core
             get
             {
                 var zones = new List<string>();
-                for (var i = 1; i < Enum.GetValues(typeof (Em.FundTrade.Route.Entities.Zone)).Length; i++)
+                for (var i = 1; i < Enum.GetValues(typeof(Zone)).Length; i++)
                 {
                     zones.Add(i.ToString());
                 }
@@ -185,9 +200,9 @@ namespace X.Interface.Core
         /// <param name="iresult">接口数据</param>
         /// <param name="init">初始化UI实体</param>
         /// <returns></returns>
-        public static ApiResult<T> Convert<T, TS>(Em.Entities.ResultInfo<TS> iresult, Func<T> init)
+        public static ApiResult<T> Convert<T, TS>(CacheResult<TS> iresult, Func<T> init)
         {
-            if (Equals(iresult, null)) iresult = new Em.Entities.ResultInfo<TS> { Succeed = false, Message = CoreBase.CoreDefaultMesssage };
+            if (Equals(iresult, null)) iresult = new CacheResult<TS> { Succeed = false, Message = CoreBase.CoreDefaultMesssage };
             var result = new ApiResult<T>
             {
                 Success = iresult.Succeed,

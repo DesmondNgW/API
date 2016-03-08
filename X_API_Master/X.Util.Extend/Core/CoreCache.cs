@@ -1,7 +1,5 @@
-﻿using Em.Entities;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Reflection;
 using X.Util.Core;
 using X.Util.Entities;
@@ -298,9 +296,9 @@ namespace X.Util.Extend.Core
         /// <param name="cacheTimeLevel">缓存过期时间级别</param>
         /// <param name="cacheTimeExpire">缓存过期时间</param>
         /// <returns></returns>
-        public static ResultInfo<T> GetAbsoluteCacheData<T>(Func<ResultInfo<T>> loader, MethodBase method, ICollection<object> paramsList, string cacheAppVersion, bool debugWithoutCache, bool addContext, EnumCacheType cacheType, EnumCacheTimeLevel cacheTimeLevel, int cacheTimeExpire)
+        public static CacheResult<T> GetAbsoluteCacheData<T>(Func<CacheResult<T>> loader, MethodBase method, ICollection<object> paramsList, string cacheAppVersion, bool debugWithoutCache, bool addContext, EnumCacheType cacheType, EnumCacheTimeLevel cacheTimeLevel, int cacheTimeExpire)
         {
-            var result = default(ResultInfo<T>);
+            var result = default(CacheResult<T>);
             var cacheKey = GetCacheKey(method, paramsList, cacheAppVersion, addContext);
             if (debugWithoutCache && HttpContext.Current.IsDebuggingEnabled || EnumCacheType.None.Equals(cacheType)) return loader();
             var expire = GetCacheExpire(cacheTimeLevel, cacheTimeExpire);
@@ -342,9 +340,9 @@ namespace X.Util.Extend.Core
         /// <param name="cacheTimeLevel">缓存过期时间级别</param>
         /// <param name="cacheTimeExpire">缓存过期时间</param>
         /// <returns></returns>
-        public static ResultInfo<T> GetSlidingCacheData<T>(Func<ResultInfo<T>> loader, MethodBase method, ICollection<object> paramsList, string cacheAppVersion, bool debugWithoutCache, bool addContext, EnumCacheType cacheType, EnumCacheTimeLevel cacheTimeLevel, int cacheTimeExpire)
+        public static CacheResult<T> GetSlidingCacheData<T>(Func<CacheResult<T>> loader, MethodBase method, ICollection<object> paramsList, string cacheAppVersion, bool debugWithoutCache, bool addContext, EnumCacheType cacheType, EnumCacheTimeLevel cacheTimeLevel, int cacheTimeExpire)
         {
-            var result = default(ResultInfo<T>);
+            var result = default(CacheResult<T>);
             var cacheKey = GetCacheKey(method, paramsList, cacheAppVersion, addContext);
             if (debugWithoutCache && HttpContext.Current.IsDebuggingEnabled || EnumCacheType.None.Equals(cacheType)) return loader();
             var expire = GetCacheExpire(cacheTimeLevel, cacheTimeExpire) - DateTime.Now;
@@ -386,13 +384,12 @@ namespace X.Util.Extend.Core
         /// <param name="cacheTimeExpire"></param>
         /// <param name="filepath"></param>
         /// <returns></returns>
-        public static ResultInfo<T> GetSlidingCacheData<T>(Func<ResultInfo<T>> loader, MethodBase method, ICollection<object> paramsList, string cacheAppVersion, bool debugWithoutCache, bool addContext, EnumCacheTimeLevel cacheTimeLevel, int cacheTimeExpire,string filepath)
+        public static CacheResult<T> GetSlidingCacheData<T>(Func<CacheResult<T>> loader, MethodBase method, ICollection<object> paramsList, string cacheAppVersion, bool debugWithoutCache, bool addContext, EnumCacheTimeLevel cacheTimeLevel, int cacheTimeExpire, string filepath)
         {
-            ResultInfo<T> result;
             var cacheKey = GetCacheKey(method, paramsList, cacheAppVersion, addContext);
             if (debugWithoutCache && HttpContext.Current.IsDebuggingEnabled) return loader();
             var expire = GetCacheExpire(cacheTimeLevel, cacheTimeExpire) - DateTime.Now;
-            result = CacheData.GetRuntimeCacheData(cacheKey.FullCacheKeyName, cacheKey.CacheAppVersion, expire, loader, filepath);
+            var result = CacheData.GetRuntimeCacheData(cacheKey.FullCacheKeyName, cacheKey.CacheAppVersion, expire, loader, filepath);
             return result;
         }
         #endregion

@@ -89,16 +89,16 @@ namespace X.Util.Other
         /// <summary>
         /// 含304的静态文件HTTP请求
         /// </summary>
-        public static CacheResultInfo<T> GetStaticInfo<T>(string uri, Func<HttpWebResponse, T> loader)
+        public static HttpCacheResult<T> GetStaticInfo<T>(string uri, Func<HttpWebResponse, T> loader)
         {
-            var cache = RuntimeCache.Get<CacheResultInfo<T>>(uri);
+            var cache = RuntimeCache.Get<HttpCacheResult<T>>(uri);
             try
             {
                 var request = (HttpWebRequest)WebRequest.Create(uri);
                 request.Timeout = 10000;
                 request.IfModifiedSince = cache != null ? cache.LastModified : DateTime.MinValue;
                 var response = (HttpWebResponse)request.GetResponse();
-                cache = new CacheResultInfo<T> { CacheKey = uri, Result = loader(response), LastModified = response.LastModified };
+                cache = new HttpCacheResult<T> { CacheKey = uri, Result = loader(response), LastModified = response.LastModified };
                 RuntimeCache.Set(uri, cache, new TimeSpan(1, 0, 0));
                 request.Abort();
                 response.Close();
@@ -107,12 +107,12 @@ namespace X.Util.Other
             {
                 var response = ex.Response as HttpWebResponse;
                 if (Equals(response, null) || (HttpStatusCode.NotModified.Equals(response.StatusCode) || response.StatusCode.GetHashCode() < 300)) return cache;
-                cache = new CacheResultInfo<T> { Result = default(T) };
+                cache = new HttpCacheResult<T> { Result = default(T) };
                 Logger.Error(MethodBase.GetCurrentMethod(), LogDomain.Util, null, "NetWork error:" + ex);
             }
             catch (Exception ex)
             {
-                cache = new CacheResultInfo<T> { Result = default(T) };
+                cache = new HttpCacheResult<T> { Result = default(T) };
                 Logger.Error(MethodBase.GetCurrentMethod(), LogDomain.Util, null, "NetWork error:" + ex);
             }
             return cache;
