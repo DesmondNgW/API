@@ -59,9 +59,19 @@ namespace X.Util.Core
             return (Math.Floor(d * (long)Math.Pow(10, length)) / (long)Math.Pow(10, length)).ToString("N" + length);
         }
 
+        public static decimal FloorDecimal(this decimal d, int length)
+        {
+            return Math.Floor(d * (long)Math.Pow(10, length)) / (long)Math.Pow(10, length);
+        }
+
         public static string CeilingString(this decimal d, int length)
         {
             return (Math.Ceiling(d * (long)Math.Pow(10, length)) / (long)Math.Pow(10, length)).ToString("N" + length);
+        }
+
+        public static decimal CeilingDecimal(this decimal d, int length)
+        {
+            return Math.Ceiling(d * (long)Math.Pow(10, length)) / (long)Math.Pow(10, length);
         }
 
         public static Version Add(this Version v, int major, int minor, int build, int revision)

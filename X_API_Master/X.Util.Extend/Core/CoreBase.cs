@@ -4,7 +4,8 @@ namespace X.Util.Extend.Core
 {
     public abstract class CoreBase
     {
-        public const string CoreDefaultMesssage = "系统错误";
+        public const string CoreDataMesssage = "网络不给力！";
+        public const string CoreCacheMesssage = "网络不给力！";
 
         public static bool CallSuccess<TResult>(TResult iresult)
         {

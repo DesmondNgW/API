@@ -25,33 +25,5 @@ namespace X.Util.Core
         {
             get { return ConfigurationHelper.GetAppSettingByName("CacheKeyVersion", "0.0.1"); }
         }
-        /// <summary>
-        /// 路由缓存的版本号
-        /// </summary>
-        public static string RouterCacheApp
-        {
-            get { return ConfigurationHelper.GetAppSettingByName("RouterCacheApp", "0.0.1"); }
-        }
-        /// <summary>
-        /// 基金缓存的版本号
-        /// </summary>
-        public static string FundCacheApp
-        {
-            get { return ConfigurationHelper.GetAppSettingByName("FundCacheApp", "0.0.1"); }
-        }
-        /// <summary>
-        /// 基金白名单的版本号
-        /// </summary>
-        public static string WhiteListCacheApp
-        {
-            get { return ConfigurationHelper.GetAppSettingByName("WhiteListCacheApp", "0.0.1"); }
-        }
-        /// <summary>
-        /// 用户缓存版本号
-        /// </summary>
-        public static string CustomerCacheApp
-        {
-            get { return ConfigurationHelper.GetAppSettingByName("CustomerCacheApp", "0.0.1"); }
-        }
     }
 }
