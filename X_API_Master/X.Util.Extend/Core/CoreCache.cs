@@ -35,7 +35,6 @@ namespace X.Util.Extend.Core
         Month,
         Year
     }
-
     public class CoreCache
     {
         #region 内部实现
@@ -107,7 +106,6 @@ namespace X.Util.Extend.Core
         #endregion
 
         #region Api
-
         /// <summary>
         /// 清除缓存
         /// </summary>

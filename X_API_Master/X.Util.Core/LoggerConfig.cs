@@ -73,7 +73,6 @@ namespace X.Util.Core
                     return default(ILog);
                 }
             }
-
         }
     }
 }
