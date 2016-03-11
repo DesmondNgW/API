@@ -87,7 +87,17 @@ namespace X.Util.Core
         public static bool RegexContains(this string input, string item, string split)
         {
             return Regex.IsMatch(input, "(^|" + split + ")" + item + "(" + split + "|$)");
-        } 
+        }
+
+        public static string Replace(this string s, string pattern, string value)
+        {
+            return new Regex(pattern).Replace(s, m => value);
+        }
+
+        public static string Replace(this string s, string pattern, Func<Match, string> match)
+        {
+            return new Regex(pattern).Replace(s, m => match(m));
+        }
         #endregion
 
         #region object
