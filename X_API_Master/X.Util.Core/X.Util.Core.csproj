@@ -30,6 +30,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Apache.NMS">
+      <HintPath>..\X.Ref\Apache.NMS.dll</HintPath>
+    </Reference>
+    <Reference Include="Apache.NMS.ActiveMQ">
+      <HintPath>..\X.Ref\Apache.NMS.ActiveMQ.dll</HintPath>
+    </Reference>
     <Reference Include="Couchbase">
       <HintPath>..\X.Ref\Couchbase.dll</HintPath>
     </Reference>
@@ -75,6 +81,7 @@
     <Compile Include="CoreAccess.cs" />
     <Compile Include="CoreAspect.cs" />
     <Compile Include="CoreChannel.cs" />
+    <Compile Include="CoreMessageQueue.cs" />
     <Compile Include="CoreParse.cs" />
     <Compile Include="CoreQueue.cs" />
     <Compile Include="CoreUtil.cs" />

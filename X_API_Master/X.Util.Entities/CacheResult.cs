@@ -14,5 +14,6 @@ namespace X.Util.Entities
         public string Message { get; set; }
         public string ErrorCode { get; set; }
         public string AppVersion { get; set; }
+        public DateTime CacheTime { get; set; }
     }
 }

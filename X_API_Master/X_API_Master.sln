@@ -7,6 +7,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "X.UI", "X.UI", "{7419F28B-8
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "X.Ref", "X.Ref", "{3685770C-1EB5-4D81-9DD0-A0FB6BD70316}"
 	ProjectSection(SolutionItems) = preProject
+		X.Ref\Apache.NMS.ActiveMQ.dll = X.Ref\Apache.NMS.ActiveMQ.dll
+		X.Ref\Apache.NMS.dll = X.Ref\Apache.NMS.dll
 		X.Ref\Couchbase.dll = X.Ref\Couchbase.dll
 		X.Ref\Enyim.Caching.dll = X.Ref\Enyim.Caching.dll
 		X.Ref\log4net.dll = X.Ref\log4net.dll
