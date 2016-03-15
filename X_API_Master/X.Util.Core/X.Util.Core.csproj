@@ -81,7 +81,6 @@
     <Compile Include="CoreAccess.cs" />
     <Compile Include="CoreAspect.cs" />
     <Compile Include="CoreChannel.cs" />
-    <Compile Include="CoreMessageQueue.cs" />
     <Compile Include="CoreParse.cs" />
     <Compile Include="CoreQueue.cs" />
     <Compile Include="CoreUtil.cs" />
