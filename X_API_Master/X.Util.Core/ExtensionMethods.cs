@@ -48,7 +48,7 @@ namespace X.Util.Core
         public static T Deserialize<T>(this byte[] b)
         {
             return (T)BinaryFormatter.Deserialize(new MemoryStream(b));
-        } 
+        }
         #endregion
 
         #region decimal

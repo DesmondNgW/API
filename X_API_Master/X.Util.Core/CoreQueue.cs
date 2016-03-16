@@ -36,10 +36,13 @@ namespace X.Util.Core
                 {
                     while (true)
                     {
-                        T context;
-                        if (ContextDictionary[method].TryDequeue(out context))
+                        if (ContextDictionary[method] != null && ContextDictionary[method].Count > 0)
                         {
-                            method.BeginInvoke(context, null, null);
+                            T context;
+                            if (ContextDictionary[method].TryDequeue(out context))
+                            {
+                                method.BeginInvoke(context, null, null);
+                            }
                         }
                         Thread.Sleep(sleep);
                     }
