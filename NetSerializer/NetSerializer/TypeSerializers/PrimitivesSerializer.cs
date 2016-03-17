@@ -8,16 +8,14 @@
 
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Text;
 
-namespace NetSerializer
+namespace NetSerializer.TypeSerializers
 {
-	sealed class PrimitivesSerializer : IStaticTypeSerializer
-	{
-		static Type[] s_primitives = new Type[] {
+    sealed class PrimitivesSerializer : IStaticTypeSerializer
+    {
+        static readonly Type[] SPrimitives = {
 				typeof(bool),
 				typeof(byte), typeof(sbyte),
 				typeof(char),
@@ -28,32 +26,32 @@ namespace NetSerializer
 				typeof(string),
 				typeof(DateTime),
 				typeof(byte[]),
-				typeof(Decimal),
+				typeof(decimal),
 			};
 
-		public bool Handles(Type type)
-		{
-			return s_primitives.Contains(type);
-		}
+        public bool Handles(Type type)
+        {
+            return SPrimitives.Contains(type);
+        }
 
-		public IEnumerable<Type> GetSubtypes(Type type)
-		{
-			return new Type[0];
-		}
+        public IEnumerable<Type> GetSubtypes(Type type)
+        {
+            return new Type[0];
+        }
 
-		public MethodInfo GetStaticWriter(Type type)
-		{
-			return Primitives.GetWritePrimitive(type);
-		}
+        public MethodInfo GetStaticWriter(Type type)
+        {
+            return Primitives.GetWritePrimitive(type);
+        }
 
-		public MethodInfo GetStaticReader(Type type)
-		{
-			return Primitives.GetReaderPrimitive(type);
-		}
+        public MethodInfo GetStaticReader(Type type)
+        {
+            return Primitives.GetReaderPrimitive(type);
+        }
 
-		public static IEnumerable<Type> GetSupportedTypes()
-		{
-			return s_primitives;
-		}
-	}
+        public static IEnumerable<Type> GetSupportedTypes()
+        {
+            return SPrimitives;
+        }
+    }
 }

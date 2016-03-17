@@ -7,68 +7,63 @@
  */
 
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Threading;
 
 namespace NetSerializer
 {
-	/// <summary>
-	/// Threadsafe TypeID -> TypeData list, which supports lockless reading.
-	/// </summary>
-	class TypeIDList
-	{
-		TypeData[] m_array;
-		object m_writeLock = new object();
+    /// <summary>
+    /// Threadsafe TypeID -> TypeData list, which supports lockless reading.
+    /// </summary>
+    class TypeIdList
+    {
+        TypeData[] _mArray;
+        readonly object _mWriteLock = new object();
 
-		const int InitialLength = 256;
+        const int InitialLength = 256;
 
-		public TypeIDList()
-		{
-			m_array = new TypeData[InitialLength];
-		}
+        public TypeIdList()
+        {
+            _mArray = new TypeData[InitialLength];
+        }
 
-		public bool ContainsTypeID(uint typeID)
-		{
-			return typeID < m_array.Length && m_array[typeID] != null;
-		}
+        public bool ContainsTypeId(uint typeId)
+        {
+            return typeId < _mArray.Length && _mArray[typeId] != null;
+        }
 
-		public TypeData this[uint idx]
-		{
-			get
-			{
-				return m_array[idx];
-			}
+        public TypeData this[uint idx]
+        {
+            get
+            {
+                return _mArray[idx];
+            }
 
-			set
-			{
-				lock (m_writeLock)
-				{
-					if (idx >= m_array.Length)
-					{
-						var newArray = new TypeData[NextPowOf2(idx + 1)];
-						Array.Copy(m_array, newArray, m_array.Length);
-						m_array = newArray;
-					}
+            set
+            {
+                lock (_mWriteLock)
+                {
+                    if (idx >= _mArray.Length)
+                    {
+                        var newArray = new TypeData[NextPowOf2(idx + 1)];
+                        Array.Copy(_mArray, newArray, _mArray.Length);
+                        _mArray = newArray;
+                    }
+                    Debug.Assert(_mArray[idx] == null);
+                    _mArray[idx] = value;
+                }
+            }
+        }
 
-					Debug.Assert(m_array[idx] == null);
-
-					m_array[idx] = value;
-				}
-			}
-		}
-
-		uint NextPowOf2(uint v)
-		{
-			v--;
-			v |= v >> 1;
-			v |= v >> 2;
-			v |= v >> 4;
-			v |= v >> 8;
-			v |= v >> 16;
-			v++;
-			return v;
-		}
-	}
+        static uint NextPowOf2(uint v)
+        {
+            v--;
+            v |= v >> 1;
+            v |= v >> 2;
+            v |= v >> 4;
+            v |= v >> 8;
+            v |= v >> 16;
+            v++;
+            return v;
+        }
+    }
 }
