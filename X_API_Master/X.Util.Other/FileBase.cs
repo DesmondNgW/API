@@ -23,7 +23,7 @@ namespace X.Util.Other
             }
             catch (Exception ex)
             {
-                Logger.Error(MethodBase.GetCurrentMethod(), LogDomain.Util, null, "Directory error:" + ex);
+                Logger.Error(MethodBase.GetCurrentMethod(), LogDomain.Util, null, string.Empty, "Directory error:" + ex);
             }
             var fm = FileBaseMode.Append.Equals(mode) ? FileMode.OpenOrCreate : FileMode.Create;
             FileStream fs = null;
@@ -43,7 +43,7 @@ namespace X.Util.Other
                 }
                 catch (Exception ex)
                 {
-                    Logger.Error(MethodBase.GetCurrentMethod(), LogDomain.Util, null, "save err：" + ex);
+                    Logger.Error(MethodBase.GetCurrentMethod(), LogDomain.Util, null, string.Empty, "save err：" + ex);
                 }
                 finally
                 {
@@ -77,7 +77,7 @@ namespace X.Util.Other
             }
             catch (Exception ex)
             {
-                Logger.Error(MethodBase.GetCurrentMethod(), LogDomain.Util, null, "Directory error:" + ex);
+                Logger.Error(MethodBase.GetCurrentMethod(), LogDomain.Util, null, string.Empty, "Directory error:" + ex);
             }
             return state;
         }

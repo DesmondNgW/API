@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Reflection;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text.RegularExpressions;
 using Newtonsoft.Json;
@@ -20,17 +21,33 @@ namespace X.Util.Core
 
         public static T FromJson<T>(this string json)
         {
-            return JsonConvert.DeserializeObject<T>(json, new JsonSerializerSettings { MaxDepth = int.MaxValue, DateTimeZoneHandling = DateTimeZoneHandling.Local });
+            try
+            {
+                return JsonConvert.DeserializeObject<T>(json, new JsonSerializerSettings { MaxDepth = int.MaxValue, DateTimeZoneHandling = DateTimeZoneHandling.Local });
+            }
+            catch (Exception e)
+            {
+                Logger.Error(MethodBase.GetCurrentMethod(), LogDomain.Util, null, string.Empty, e.ToString());
+            }
+            return Activator.CreateInstance<T>();
         }
 
         public static object FromJson(this string json, Type T)
         {
-            return JsonConvert.DeserializeObject(json, T, new JsonSerializerSettings { MaxDepth = int.MaxValue, DateTimeZoneHandling = DateTimeZoneHandling.Local });
+            try
+            {
+                return JsonConvert.DeserializeObject(json, T, new JsonSerializerSettings { MaxDepth = int.MaxValue, DateTimeZoneHandling = DateTimeZoneHandling.Local });
+            }
+            catch (Exception e)
+            {
+                Logger.Error(MethodBase.GetCurrentMethod(), LogDomain.Util, null, string.Empty, e.ToString());
+            }
+            return Activator.CreateInstance(T);
         }
 
         public static string ToJson(this object t)
         {
-            return JsonConvert.SerializeObject(t, new JsonSerializerSettings { MaxDepth = int.MaxValue, DateTimeZoneHandling = DateTimeZoneHandling.Local });
+            return t == null ? string.Empty : JsonConvert.SerializeObject(t, new JsonSerializerSettings { MaxDepth = int.MaxValue, DateTimeZoneHandling = DateTimeZoneHandling.Local });
         }
 
         public static TDest AutoMapper<TDest>(this object src)

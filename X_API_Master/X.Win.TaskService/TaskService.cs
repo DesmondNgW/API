@@ -29,7 +29,7 @@ namespace X.Win.TaskService
             catch (Exception e)
             {
                 EventLog.WriteEntry("StartTask", e.Message, EventLogEntryType.Error);
-                Logger.Error(MethodBase.GetCurrentMethod(), LogDomain.Ui, null, string.Format("StartTask has Exception:{0}", e.ToJson()));
+                Logger.Error(MethodBase.GetCurrentMethod(), LogDomain.Ui, null, string.Empty, string.Format("StartTask has Exception:{0}", e.ToJson()));
                 //email.log or message.log or db.log
                 LogMonitor.Error(new TaskLogModel() { Content = string.Format("StartTask has Exception:{0}", e.ToJson()) }, LogMonitorDomain.Other);
             }
@@ -44,7 +44,7 @@ namespace X.Win.TaskService
             catch (Exception e)
             {
                 EventLog.WriteEntry("StopTask", e.Message, EventLogEntryType.Error);
-                Logger.Error(MethodBase.GetCurrentMethod(), LogDomain.Ui, null, string.Format("StopTask has Exception:{0}", e.ToJson()));
+                Logger.Error(MethodBase.GetCurrentMethod(), LogDomain.Ui, null, string.Empty, string.Format("StopTask has Exception:{0}", e.ToJson()));
                 //email.log or message.log or db.log
                 LogMonitor.Error(new TaskLogModel() { Content = string.Format("StopTask has Exception:{0}", e.ToJson()) }, LogMonitorDomain.Other);
             }

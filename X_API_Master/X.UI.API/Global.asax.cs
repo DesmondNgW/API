@@ -24,7 +24,7 @@ namespace X.UI.API
         protected void Application_Error(object sender, EventArgs e)
 		{
 			Exception ex = Server.GetLastError();
-			Logger.Error(System.Reflection.MethodBase.GetCurrentMethod(), LogDomain.Ui, null, ex.ToString());
+            Logger.Error(System.Reflection.MethodBase.GetCurrentMethod(), LogDomain.Ui, null, string.Empty, ex.ToString());
 			throw ex;
 		}
 	}

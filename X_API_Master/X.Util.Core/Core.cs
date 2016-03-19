@@ -112,7 +112,7 @@ namespace X.Util.Core
             }
             catch (Exception ex)
             {
-                Logger.Error(MethodBase.GetCurrentMethod(), edomain, null, ex.ToString());
+                Logger.Error(MethodBase.GetCurrentMethod(), edomain, null, string.Empty, ex.ToString());
                 communicate.Abort();
             }
         }

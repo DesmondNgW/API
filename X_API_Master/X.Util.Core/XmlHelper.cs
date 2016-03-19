@@ -22,7 +22,7 @@ namespace X.Util.Core
             }
             catch (Exception ex)
             {
-                Logger.Error(MethodBase.GetCurrentMethod(), LogDomain.Util, null, "Xml error:" + ex);
+                Logger.Error(MethodBase.GetCurrentMethod(), LogDomain.Util, null, string.Empty, "Xml error:" + ex);
             }
             return doc;
         }
@@ -55,7 +55,7 @@ namespace X.Util.Core
                 }
                 catch (Exception ex)
                 {
-                    Logger.Error(MethodBase.GetCurrentMethod(), LogDomain.Util, null, "WriteXml error:" + ex);
+                    Logger.Error(MethodBase.GetCurrentMethod(), LogDomain.Util, null, string.Empty, "WriteXml error:" + ex);
                 }
             });
         }

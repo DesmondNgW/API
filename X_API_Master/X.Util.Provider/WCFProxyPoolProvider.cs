@@ -76,7 +76,7 @@ namespace X.Util.Provider
             }
             catch (Exception ex)
             {
-                Logger.Error(MethodBase.GetCurrentMethod(), LogDomain.Util, null, ex.ToString());
+                Logger.Error(MethodBase.GetCurrentMethod(), LogDomain.Util, null, string.Empty, ex.ToString());
             }
             return result;
         }
@@ -124,7 +124,7 @@ namespace X.Util.Provider
             }
             catch (Exception ex)
             {
-                Logger.Error(MethodBase.GetCurrentMethod(), LogDomain.Util, null, ex.ToString());
+                Logger.Error(MethodBase.GetCurrentMethod(), LogDomain.Util, null, string.Empty, ex.ToString());
             }
             return channel;
         }
@@ -146,7 +146,7 @@ namespace X.Util.Provider
             }
             catch (Exception ex)
             {
-                Logger.Error(MethodBase.GetCurrentMethod(), LogDomain.Util, null, ex.ToString());
+                Logger.Error(MethodBase.GetCurrentMethod(), LogDomain.Util, null, string.Empty, ex.ToString());
             }
         }
         #endregion

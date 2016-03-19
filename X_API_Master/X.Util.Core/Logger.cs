@@ -104,7 +104,7 @@ namespace X.Util.Core
             }
             catch (Exception ex)
             {
-                Error(MethodBase.GetCurrentMethod(), domain, logtype, null, ex.ToString());
+                Error(MethodBase.GetCurrentMethod(), domain, logtype, null, string.Empty, ex.ToString());
             }
         }
 

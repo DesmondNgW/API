@@ -26,7 +26,7 @@ namespace X.UI.API.Util
             else
             {
                 string errorInfo = string.Format("请求URI: {0} 发生异常, 异常信息: {1}.", actionExecutedContext.Request.RequestUri, actionExecutedContext.Exception);
-                Logger.Error(System.Reflection.MethodBase.GetCurrentMethod(), LogDomain.Ui, null, errorInfo);
+                Logger.Error(System.Reflection.MethodBase.GetCurrentMethod(), LogDomain.Ui, null, string.Empty, errorInfo);
             }
             var newContent = new ApiResult<string>
             {
