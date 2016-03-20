@@ -21,6 +21,7 @@ namespace X.Util.Core
 
         public static T FromJson<T>(this string json)
         {
+            if (json.IsNullOrEmpty()) return default(T);
             try
             {
                 return JsonConvert.DeserializeObject<T>(json, new JsonSerializerSettings { MaxDepth = int.MaxValue, DateTimeZoneHandling = DateTimeZoneHandling.Local });
@@ -29,11 +30,12 @@ namespace X.Util.Core
             {
                 Logger.Error(MethodBase.GetCurrentMethod(), LogDomain.Util, null, string.Empty, e.ToString());
             }
-            return Activator.CreateInstance<T>();
+            return default(T);
         }
 
         public static object FromJson(this string json, Type T)
         {
+            if (json.IsNullOrEmpty()) return null;
             try
             {
                 return JsonConvert.DeserializeObject(json, T, new JsonSerializerSettings { MaxDepth = int.MaxValue, DateTimeZoneHandling = DateTimeZoneHandling.Local });
@@ -42,7 +44,7 @@ namespace X.Util.Core
             {
                 Logger.Error(MethodBase.GetCurrentMethod(), LogDomain.Util, null, string.Empty, e.ToString());
             }
-            return Activator.CreateInstance(T);
+            return null;
         }
 
         public static string ToJson(this object t)
