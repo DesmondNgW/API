@@ -40,10 +40,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApiData.cs" />
+    <Compile Include="CookieHelper.cs" />
     <Compile Include="FileBase.cs" />
     <Compile Include="HttpRequestBase.cs" />
     <Compile Include="IPBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QueryInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\X.Util.Core\X.Util.Core.csproj">

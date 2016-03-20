@@ -25,5 +25,13 @@ namespace X.Util.Core
         {
             get { return ConfigurationHelper.GetAppSettingByName("CacheKeyVersion", "0.0.1"); }
         }
+
+        /// <summary>
+        /// CookieDomain
+        /// </summary>
+        public static string CookieDomain
+        {
+            get { return ConfigurationHelper.GetAppSetting("CookieDomain"); }
+        }
     }
 }
