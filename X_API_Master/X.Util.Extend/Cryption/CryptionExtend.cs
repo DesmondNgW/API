@@ -16,12 +16,12 @@ namespace X.Util.Extend.Cryption
         /// <returns></returns>
         public static string Encrypt(string plainStr, string key, CryptionType type)
         {
-            var byteArray = Encoding.UTF8.GetBytes(plainStr);
+            var byteArray = plainStr.ToUtf8Bytes();
             var mStream = new MemoryStream();
             var cStream = new CryptoStream(mStream, BaseCryption.CreateEncryptor(key, type), CryptoStreamMode.Write);
             cStream.Write(byteArray, 0, byteArray.Length);
             cStream.FlushFinalBlock();
-            var encrypt = StringConvert.Bytes2Hex(mStream.ToArray());
+            var encrypt = mStream.ToArray().Bytes2Hex();
             cStream.Close();
             return encrypt;
         }
@@ -35,12 +35,12 @@ namespace X.Util.Extend.Cryption
         /// <returns></returns>
         public static string Encrypt2Base64(string plainStr, string key, CryptionType type)
         {
-            var byteArray = Encoding.UTF8.GetBytes(plainStr);
+            var byteArray = plainStr.ToUtf8Bytes();
             var mStream = new MemoryStream();
             var cStream = new CryptoStream(mStream, BaseCryption.CreateEncryptor(key, type), CryptoStreamMode.Write);
             cStream.Write(byteArray, 0, byteArray.Length);
             cStream.FlushFinalBlock();
-            var encrypt = StringConvert.Bytes2Base64(mStream.ToArray());
+            var encrypt = mStream.ToArray().Bytes2Base64();
             cStream.Close();
             return encrypt;
         }
@@ -54,7 +54,7 @@ namespace X.Util.Extend.Cryption
         /// <returns></returns>
         public static string Decrypt(string encryptStr, string key, CryptionType type)
         {
-            var byteArray = StringConvert.Hex2Bytes(encryptStr);
+            var byteArray = encryptStr.Hex2Bytes();
             var mStream = new MemoryStream();
             var cStream = new CryptoStream(mStream, BaseCryption.CreateDecryptor(key, type), CryptoStreamMode.Write);
             cStream.Write(byteArray, 0, byteArray.Length);
@@ -73,7 +73,7 @@ namespace X.Util.Extend.Cryption
         /// <returns></returns>
         public static string DecryptFromBase64(string base64, string key, CryptionType type)
         {
-            var byteArray = StringConvert.Base64ToBytes(base64);
+            var byteArray = base64.Base64ToBytes();
             var mStream = new MemoryStream();
             var cStream = new CryptoStream(mStream, BaseCryption.CreateDecryptor(key, type), CryptoStreamMode.Write);
             cStream.Write(byteArray, 0, byteArray.Length);

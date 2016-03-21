@@ -18,8 +18,8 @@ namespace X.Interface.Core
             var publicKey = RsaCryption.GetPublicKey(key, size, nonce, true);
             var dto = new PublicKeyDto
             {
-                Exponent = StringConvert.Bytes2Hex(publicKey.Exponent),
-                Modulus = StringConvert.Bytes2Hex(publicKey.Modulus),
+                Exponent = publicKey.Exponent.Bytes2Hex(),
+                Modulus = publicKey.Modulus.Bytes2Hex(),
                 RsaKey = key,
                 Size = size,
                 Nonce = nonce

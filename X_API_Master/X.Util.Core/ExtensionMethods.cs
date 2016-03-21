@@ -2,6 +2,7 @@
 using System.IO;
 using System.Reflection;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Text;
 using System.Text.RegularExpressions;
 using Newtonsoft.Json;
 
@@ -92,6 +93,40 @@ namespace X.Util.Core
         } 
         #endregion
 
+        #region byte
+        public static string FromUtf8Bytes(this byte[] b)
+        {
+            return b != null ? Encoding.UTF8.GetString(b, 0, b.Length) : null;
+        }
+
+        public static string FromAsciiBytes(this byte[] b)
+        {
+            return b != null ? Encoding.ASCII.GetString(b, 0, b.Length) : null;
+        }
+
+        public static string FromDefaultBytes(this byte[] b)
+        {
+            return b != null ? Encoding.Default.GetString(b, 0, b.Length) : null;
+        }
+
+        public static string Bytes2Base64(this byte[] bytes)
+        {
+            var base64ArraySize = (int)Math.Ceiling(bytes.Length / 3d) * 4;
+            var charBuffer = new char[base64ArraySize];
+            Convert.ToBase64CharArray(bytes, 0, bytes.Length, charBuffer, 0);
+            return new string(charBuffer);
+        }
+
+        public static string Bytes2Hex(this byte[] bytes)
+        {
+            var hexString = new StringBuilder();
+            if (Equals(bytes, null)) return hexString.ToString();
+            foreach (var t in bytes) hexString.Append(t.ToString("x2"));
+            return hexString.ToString();
+        }
+
+        #endregion
+
         #region string
         public static bool IsNullOrEmpty(this string s)
         {
@@ -117,6 +152,55 @@ namespace X.Util.Core
         {
             return new Regex(pattern).Replace(s, m => match(m));
         }
+
+        public static byte[] ToUtf8Bytes(this string s)
+        {
+            return Encoding.UTF8.GetBytes(s);
+        }
+
+        public static byte[] ToAsciiBytes(this string s)
+        {
+            return Encoding.ASCII.GetBytes(s);
+        }
+
+        public static byte[] ToDefaultBytes(this string s)
+        {
+            return Encoding.Default.GetBytes(s);
+        }
+
+        public static string ToBase64(this string s)
+        {
+            var binBuffer = s.ToUtf8Bytes();
+            var base64ArraySize = (int)Math.Ceiling(binBuffer.Length / 3d) * 4;
+            var charBuffer = new char[base64ArraySize];
+            Convert.ToBase64CharArray(binBuffer, 0, binBuffer.Length, charBuffer, 0);
+            return new string(charBuffer);
+        }
+
+        public static string FromBase64(this string base64)
+        {
+            var charBuffer = base64.ToCharArray();
+            return Convert.FromBase64CharArray(charBuffer, 0, charBuffer.Length).FromUtf8Bytes();
+        }
+
+        public static byte[] Base64ToBytes(this string base64)
+        {
+            var charBuffer = base64.ToCharArray();
+            return Convert.FromBase64CharArray(charBuffer, 0, charBuffer.Length);
+        }
+
+        public static byte[] Hex2Bytes(this string s)
+        {
+            var l = s.Length / 2;
+            var ret = new byte[l];
+            for (var i = 0; i < l; i++)
+            {
+                var str = s.Substring(i * 2, 2);
+                ret[i] = Convert.ToByte(str, 16);
+            }
+            return ret;
+        }
+
         #endregion
 
         #region object

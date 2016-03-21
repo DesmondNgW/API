@@ -63,7 +63,7 @@ namespace X.Util.Core
         public static string Sha1(string s)
         {
             SHA1 sha1 = new SHA1CryptoServiceProvider();
-            var encryptedBytes = sha1.ComputeHash(Encoding.ASCII.GetBytes(s));
+            var encryptedBytes = sha1.ComputeHash(s.ToAsciiBytes());
             var sb = new StringBuilder();
             foreach (var t in encryptedBytes)
                 sb.AppendFormat("{0:x2}", t);

@@ -35,28 +35,28 @@ namespace X.Util.Extend.Cryption
             if (!Equals(rsaKey, default(RsaKey)))
                 return new RSAParameters
                 {
-                    Modulus = StringConvert.Hex2Bytes(rsaKey.Modulus),
-                    Exponent = StringConvert.Hex2Bytes(rsaKey.Exponent)
+                    Modulus = rsaKey.Modulus.Hex2Bytes(),
+                    Exponent = rsaKey.Exponent.Hex2Bytes()
                 };
             var privateKey = loader();
             rsaKey = new RsaKey
             {
                 Id = id,
                 TmpKey = tmpKey,
-                Modulus = StringConvert.Bytes2Hex(privateKey.Modulus),
-                Exponent = StringConvert.Bytes2Hex(privateKey.Exponent),
-                D = StringConvert.Bytes2Hex(privateKey.D),
-                Dp = StringConvert.Bytes2Hex(privateKey.DP),
-                Dq = StringConvert.Bytes2Hex(privateKey.DQ),
-                InverseQ = StringConvert.Bytes2Hex(privateKey.InverseQ),
-                P = StringConvert.Bytes2Hex(privateKey.P),
-                Q = StringConvert.Bytes2Hex(privateKey.Q)
+                Modulus = privateKey.Modulus.Bytes2Hex(),
+                Exponent = privateKey.Exponent.Bytes2Hex(),
+                D = privateKey.D.Bytes2Hex(),
+                Dp = privateKey.DP.Bytes2Hex(),
+                Dq = privateKey.DQ.Bytes2Hex(),
+                InverseQ = privateKey.InverseQ.Bytes2Hex(),
+                P = privateKey.P.Bytes2Hex(),
+                Q = privateKey.Q.Bytes2Hex()
             };
             MongoDbBase.Default.SaveMongo(rsaKey, "RSA", "RSA");
             return new RSAParameters
             {
-                Modulus = StringConvert.Hex2Bytes(rsaKey.Modulus),
-                Exponent = StringConvert.Hex2Bytes(rsaKey.Exponent)
+                Modulus = rsaKey.Modulus.Hex2Bytes(),
+                Exponent = rsaKey.Exponent.Hex2Bytes()
             };
         }
 
@@ -69,14 +69,14 @@ namespace X.Util.Extend.Cryption
         {
             return new RSAParameters
             {
-                Modulus = StringConvert.Hex2Bytes(rsaKey.Modulus),
-                Exponent = StringConvert.Hex2Bytes(rsaKey.Exponent),
-                D = StringConvert.Hex2Bytes(rsaKey.D),
-                DP = StringConvert.Hex2Bytes(rsaKey.Dp),
-                DQ = StringConvert.Hex2Bytes(rsaKey.Dq),
-                InverseQ = StringConvert.Hex2Bytes(rsaKey.InverseQ),
-                P = StringConvert.Hex2Bytes(rsaKey.P),
-                Q = StringConvert.Hex2Bytes(rsaKey.Q)
+                Modulus = rsaKey.Modulus.Hex2Bytes(),
+                Exponent = rsaKey.Exponent.Hex2Bytes(),
+                D = rsaKey.D.Hex2Bytes(),
+                DP = rsaKey.Dp.Hex2Bytes(),
+                DQ = rsaKey.Dq.Hex2Bytes(),
+                InverseQ = rsaKey.InverseQ.Hex2Bytes(),
+                P = rsaKey.P.Hex2Bytes(),
+                Q = rsaKey.Q.Hex2Bytes()
             };
         }
 
@@ -94,8 +94,8 @@ namespace X.Util.Extend.Cryption
             var rsa = new RSACryptoServiceProvider(size);
             var publicKey = GetPublicKey(key, size, nonce, tmpKey);
             rsa.ImportParameters(publicKey);
-            var cipherbytes = rsa.Encrypt(Encoding.UTF8.GetBytes(content), false);
-            return StringConvert.Bytes2Hex(cipherbytes);
+            var cipherbytes = rsa.Encrypt(content.ToUtf8Bytes(), false);
+            return cipherbytes.Bytes2Hex();
         }
 
         /// <summary>
@@ -112,8 +112,8 @@ namespace X.Util.Extend.Cryption
             var rsa = new RSACryptoServiceProvider(size);
             var publicKey = GetPublicKey(key, size, nonce, tmpKey);
             rsa.ImportParameters(publicKey);
-            var cipherbytes = rsa.Encrypt(Encoding.UTF8.GetBytes(content), false);
-            return StringConvert.Bytes2Base64(cipherbytes);
+            var cipherbytes = rsa.Encrypt(content.ToUtf8Bytes(), false);
+            return cipherbytes.Bytes2Base64();
         }
 
         /// <summary>
@@ -132,7 +132,7 @@ namespace X.Util.Extend.Cryption
             {
                 var privateKey = GetPrivateKey(rsaKey);
                 rsa.ImportParameters(privateKey);
-                var cipherbytes = rsa.Decrypt(StringConvert.Hex2Bytes(content), false);
+                var cipherbytes = rsa.Decrypt(content.Hex2Bytes(), false);
                 if (rsaKey.TmpKey) RemoveRsaKey(rsaKey.Id);
                 return Encoding.UTF8.GetString(cipherbytes);
             }
@@ -156,7 +156,7 @@ namespace X.Util.Extend.Cryption
             {
                 var privateKey = GetPrivateKey(rsaKey);
                 rsa.ImportParameters(privateKey);
-                var cipherbytes = rsa.Decrypt(StringConvert.Base64ToBytes(content), false);
+                var cipherbytes = rsa.Decrypt(content.Base64ToBytes(), false);
                 if (rsaKey.TmpKey) RemoveRsaKey(rsaKey.Id);
                 return Encoding.UTF8.GetString(cipherbytes);
             }

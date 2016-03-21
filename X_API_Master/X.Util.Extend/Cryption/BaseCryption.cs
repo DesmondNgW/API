@@ -20,7 +20,7 @@ namespace X.Util.Extend.Cryption
         public static string Md5Bit16(string s)
         {
             var md5 = new MD5CryptoServiceProvider();
-            var t2 = BitConverter.ToString(md5.ComputeHash(Encoding.Default.GetBytes(s)), 4, 8);
+            var t2 = BitConverter.ToString(md5.ComputeHash(s.ToDefaultBytes()), 4, 8);
             t2 = t2.Replace("-", "").ToLower();
             return t2;
         }
@@ -33,7 +33,7 @@ namespace X.Util.Extend.Cryption
         public static string Md5Bit32(string s)
         {
             var md5 = new MD5CryptoServiceProvider();
-            var encryptedBytes = md5.ComputeHash(Encoding.ASCII.GetBytes(s));
+            var encryptedBytes = md5.ComputeHash(s.ToAsciiBytes());
             var sb = new StringBuilder();
             foreach (var t in encryptedBytes) sb.AppendFormat("{0:x2}", t);
             return sb.ToString().ToLower();
@@ -47,7 +47,7 @@ namespace X.Util.Extend.Cryption
         public static string Sha1(string s)
         {
             SHA1 sha1 = new SHA1CryptoServiceProvider();
-            var encryptedBytes = sha1.ComputeHash(Encoding.ASCII.GetBytes(s));
+            var encryptedBytes = sha1.ComputeHash(s.ToAsciiBytes());
             var sb = new StringBuilder();
             foreach (var t in encryptedBytes) sb.AppendFormat("{0:x2}", t);
             return sb.ToString().ToLower();
@@ -61,7 +61,7 @@ namespace X.Util.Extend.Cryption
         public static string Sha256(string s)
         {
             SHA256 sha1 = new SHA256CryptoServiceProvider();
-            var encryptedBytes = sha1.ComputeHash(Encoding.ASCII.GetBytes(s));
+            var encryptedBytes = sha1.ComputeHash(s.ToAsciiBytes());
             var sb = new StringBuilder();
             foreach (var t in encryptedBytes) sb.AppendFormat("{0:x2}", t);
             return sb.ToString().ToLower();
@@ -75,7 +75,7 @@ namespace X.Util.Extend.Cryption
         public static string Sha384(string s)
         {
             SHA384 sha1 = new SHA384CryptoServiceProvider();
-            var encryptedBytes = sha1.ComputeHash(Encoding.ASCII.GetBytes(s));
+            var encryptedBytes = sha1.ComputeHash(s.ToAsciiBytes());
             var sb = new StringBuilder();
             foreach (var t in encryptedBytes) sb.AppendFormat("{0:x2}", t);
             return sb.ToString().ToLower();
@@ -89,7 +89,7 @@ namespace X.Util.Extend.Cryption
         public static string Sha512(string s)
         {
             SHA512 sha1 = new SHA512CryptoServiceProvider();
-            var encryptedBytes = sha1.ComputeHash(Encoding.ASCII.GetBytes(s));
+            var encryptedBytes = sha1.ComputeHash(s.ToAsciiBytes());
             var sb = new StringBuilder();
             foreach (var t in encryptedBytes) sb.AppendFormat("{0:x2}", t);
             return sb.ToString().ToLower();
@@ -97,7 +97,7 @@ namespace X.Util.Extend.Cryption
 
         private static HMAC GetHmac(string key, HmacType hmacType)
         {
-            var bytes = Encoding.Default.GetBytes(key);
+            var bytes = key.ToDefaultBytes();
             switch (hmacType)
             {
                 case HmacType.Ripemd160:
@@ -124,9 +124,9 @@ namespace X.Util.Extend.Cryption
         /// <returns></returns>
         public static string SignData(string key, string content, HmacType hmacType)
         {
-            var data = Encoding.Default.GetBytes(content);
+            var data = content.ToDefaultBytes();
             var alg = GetHmac(key, hmacType);
-            return StringConvert.Bytes2Base64(alg.ComputeHash(data).Concat(data).ToArray());
+            return alg.ComputeHash(data).Concat(data).ToArray().Bytes2Base64();
         }
 
         /// <summary>
@@ -138,7 +138,7 @@ namespace X.Util.Extend.Cryption
         /// <returns></returns>
         public static bool VerifyData(string key, string content, HmacType hmacType)
         {
-            var data = StringConvert.Base64ToBytes(content);
+            var data = content.Base64ToBytes();
             var alg = GetHmac(key, hmacType);
             return data.Take(alg.HashSize >> 3).SequenceEqual(alg.ComputeHash(data.Skip(alg.HashSize >> 3).ToArray()));
         }
@@ -147,7 +147,7 @@ namespace X.Util.Extend.Cryption
         {
             ICryptoTransform transform;
             SHA512 sha512 = new SHA512CryptoServiceProvider();
-            var bytes = sha512.ComputeHash(Encoding.ASCII.GetBytes(Sha1(key)));
+            var bytes = sha512.ComputeHash(Sha1(key).ToAsciiBytes());
             switch (type)
             {
                 case CryptionType.Aes:
@@ -174,7 +174,7 @@ namespace X.Util.Extend.Cryption
         {
             ICryptoTransform transform;
             SHA512 sha512 = new SHA512CryptoServiceProvider();
-            var bytes = sha512.ComputeHash(Encoding.ASCII.GetBytes(Sha1(key)));
+            var bytes = sha512.ComputeHash(Sha1(key).ToAsciiBytes());
             switch (type)
             {
                 case CryptionType.Aes:
