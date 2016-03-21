@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Reflection;
+using System.Runtime.Remoting.Messaging;
 using System.Web.Caching;
 using X.Util.Core;
 using X.Util.Entities;
@@ -22,6 +25,23 @@ namespace X.Util.Extend.Cache
         #endregion
 
         #region CacheData Api
+        private static void AddHitLevel(string key)
+        {
+            var value = CallContext.GetData(key);
+            if (value == null) CallContext.SetData(key, 1);
+            else
+            {
+                CallContext.SetData(key, value.GetHashCode() + 1);
+            }
+        }
+
+        public static void LogHitLevel(string key, Dictionary<int, string> dictionary, MethodBase method, LogDomain domain)
+        {
+            var value = CallContext.GetData(key);
+            var level = value == null ? 0 : value.GetHashCode();
+            Logger.Debug(method, domain, null, string.Empty, string.Format("{0}.{1} GetCacheData hit {2}, cache key is {3}.", method.DeclaringType.FullName, method.Name, dictionary.ContainsKey(level) ? dictionary[level] : "level-" + level, key));
+        }
+
         public static CacheResult<T> GetRuntimeCacheData<T>(string key, string version, DateTime dt, Func<CacheResult<T>> loader)
         {
             var setting = RuntimeCache.Get<CacheResult<T>>(key);
@@ -31,6 +51,7 @@ namespace X.Util.Extend.Cache
                 setting = RuntimeCache.Get<CacheResult<T>>(key);
                 if (setting != null && setting.Result != null && setting.Succeed && Equals(setting.AppVersion, version)) return setting;
                 var iresult = loader();
+                AddHitLevel(key);
                 setting = iresult;
                 if (Equals(setting, null)) return null;
                 setting.AppVersion = version;
@@ -50,6 +71,8 @@ namespace X.Util.Extend.Cache
                 setting = RuntimeCache.Get<CacheResult<T>>(key);
                 if (setting != null && setting.Result != null && setting.Succeed && Equals(setting.AppVersion, version)) return setting;
                 var iresult = loader();
+                AddHitLevel(key);
+                CallContext.SetData(key, 1);
                 setting = iresult;
                 if (Equals(setting, null)) return null;
                 setting.AppVersion = version;
@@ -70,6 +93,8 @@ namespace X.Util.Extend.Cache
                 setting = RuntimeCache.Get<CacheResult<T>>(lockKey);
                 if (setting != null && setting.Result != null && setting.Succeed && Equals(setting.AppVersion, version)) return setting;
                 var iresult = loader();
+                AddHitLevel(key);
+                CallContext.SetData(key, 1);
                 setting = iresult;
                 if (Equals(setting, null)) return null;
                 setting.AppVersion = version;
@@ -92,6 +117,7 @@ namespace X.Util.Extend.Cache
                 setting = RuntimeCache.Get<CacheResult<T>>(lockKey);
                 if (setting != null && setting.Result != null && setting.Succeed && Equals(setting.AppVersion, version)) return setting;
                 var iresult = loader();
+                AddHitLevel(key);
                 setting = iresult;
                 if (Equals(setting, null)) return null;
                 setting.AppVersion = version;
@@ -114,6 +140,7 @@ namespace X.Util.Extend.Cache
                 setting = RuntimeCache.Get<CacheResult<T>>(lockKey);
                 if (setting != null && setting.Result != null && setting.Succeed && Equals(setting.AppVersion, version)) return setting;
                 var iresult = loader();
+                AddHitLevel(key);
                 setting = iresult;
                 if (Equals(setting, null)) return null;
                 setting.AppVersion = version;
@@ -136,6 +163,7 @@ namespace X.Util.Extend.Cache
                 setting = RuntimeCache.Get<CacheResult<T>>(lockKey);
                 if (setting != null && setting.Result != null && setting.Succeed && Equals(setting.AppVersion, version)) return setting;
                 var iresult = loader();
+                AddHitLevel(key);
                 setting = iresult;
                 if (Equals(setting, null)) return null;
                 setting.AppVersion = version;

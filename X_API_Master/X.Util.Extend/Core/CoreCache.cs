@@ -305,18 +305,23 @@ namespace X.Util.Extend.Core
             {
                 case EnumCacheType.Runtime:
                     result = CacheData.GetRuntimeCacheData(cacheKey.FullCacheKeyName, cacheKey.CacheAppVersion, expire, loader);
+                    CacheData.LogHitLevel(cacheKey.FullCacheKeyName, new Dictionary<int, string> { { 0, "RuntimeCache" }, { 1, "InterfaceData" } }, method, LogDomain.Cache);
                     break;
                 case EnumCacheType.MemCache:
                     result = CacheData.Default.GetCouchCacheData(cacheKey.FullCacheKeyName, cacheKey.CacheAppVersion, expire, loader);
+                    CacheData.LogHitLevel(cacheKey.FullCacheKeyName, new Dictionary<int, string> { { 0, "MemCache" }, { 1, "InterfaceData" } }, method, LogDomain.Cache);
                     break;
                 case EnumCacheType.Redis:
                     result = CacheData.Default.GetRedisCacheData(cacheKey.FullCacheKeyName, cacheKey.CacheAppVersion, expire, loader);
+                    CacheData.LogHitLevel(cacheKey.FullCacheKeyName, new Dictionary<int, string> { { 0, "RedisCache" }, { 1, "InterfaceData" } }, method, LogDomain.Cache);
                     break;
                 case EnumCacheType.MemBoth:
                     result = CacheData.GetRuntimeCacheData(cacheKey.FullCacheKeyName, cacheKey.CacheAppVersion, local, () => CacheData.Default.GetCouchCacheData(cacheKey.FullCacheKeyName, cacheKey.CacheAppVersion, expire, loader));
+                    CacheData.LogHitLevel(cacheKey.FullCacheKeyName, new Dictionary<int, string> { { 0, "RuntimeCache" }, { 1, "MemCache" }, { 2, "InterfaceData" } }, method, LogDomain.Cache);
                     break;
                 case EnumCacheType.RedisBoth:
                     result = CacheData.GetRuntimeCacheData(cacheKey.FullCacheKeyName, cacheKey.CacheAppVersion, local, () => CacheData.Default.GetRedisCacheData(cacheKey.FullCacheKeyName, cacheKey.CacheAppVersion, expire, loader));
+                    CacheData.LogHitLevel(cacheKey.FullCacheKeyName, new Dictionary<int, string> { { 0, "RuntimeCache" }, { 1, "RedisCache" }, { 2, "InterfaceData" } }, method, LogDomain.Cache);
                     break;
                 case EnumCacheType.None:
                     break;
@@ -349,18 +354,23 @@ namespace X.Util.Extend.Core
             {
                 case EnumCacheType.Runtime:
                     result = CacheData.GetRuntimeCacheData(cacheKey.FullCacheKeyName, cacheKey.CacheAppVersion, expire, loader, null);
+                    CacheData.LogHitLevel(cacheKey.FullCacheKeyName, new Dictionary<int, string> { { 0, "RuntimeCache" }, { 1, "InterfaceData" } }, method, LogDomain.Cache);
                     break;
                 case EnumCacheType.MemCache:
                     result = CacheData.Default.GetCouchCacheData(cacheKey.FullCacheKeyName, cacheKey.CacheAppVersion, expire, loader);
+                    CacheData.LogHitLevel(cacheKey.FullCacheKeyName, new Dictionary<int, string> { { 0, "MemCache" }, { 1, "InterfaceData" } }, method, LogDomain.Cache);
                     break;
                 case EnumCacheType.Redis:
                     result = CacheData.Default.GetRedisCacheData(cacheKey.FullCacheKeyName, cacheKey.CacheAppVersion, expire, loader);
+                    CacheData.LogHitLevel(cacheKey.FullCacheKeyName, new Dictionary<int, string> { { 0, "RedisCache" }, { 1, "InterfaceData" } }, method, LogDomain.Cache);
                     break;
                 case EnumCacheType.MemBoth:
                     result = CacheData.GetRuntimeCacheData(cacheKey.FullCacheKeyName, cacheKey.CacheAppVersion, local, () => CacheData.Default.GetCouchCacheData(cacheKey.FullCacheKeyName, cacheKey.CacheAppVersion, expire, loader));
+                    CacheData.LogHitLevel(cacheKey.FullCacheKeyName, new Dictionary<int, string> { { 0, "RuntimeCache" }, { 1, "MemCache" }, { 2, "InterfaceData" } }, method, LogDomain.Cache);
                     break;
                 case EnumCacheType.RedisBoth:
                     result = CacheData.GetRuntimeCacheData(cacheKey.FullCacheKeyName, cacheKey.CacheAppVersion, local, () => CacheData.Default.GetRedisCacheData(cacheKey.FullCacheKeyName, cacheKey.CacheAppVersion, expire, loader));
+                    CacheData.LogHitLevel(cacheKey.FullCacheKeyName, new Dictionary<int, string> { { 0, "RuntimeCache" }, { 1, "RedisCache" }, { 2, "InterfaceData" } }, method, LogDomain.Cache);
                     break;
                 case EnumCacheType.None:
                     break;
@@ -388,6 +398,7 @@ namespace X.Util.Extend.Core
             if (debugWithoutCache && HttpContext.Current.IsDebuggingEnabled) return loader();
             var expire = GetCacheExpire(cacheTimeLevel, cacheTimeExpire) - DateTime.Now;
             var result = CacheData.GetRuntimeCacheData(cacheKey.FullCacheKeyName, cacheKey.CacheAppVersion, expire, loader, filepath);
+            CacheData.LogHitLevel(cacheKey.FullCacheKeyName, new Dictionary<int, string> { { 0, "RuntimeCache" }, { 1, "XmlFile" } }, method, LogDomain.Cache);
             return result;
         }
         #endregion
