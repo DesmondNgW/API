@@ -37,26 +37,6 @@ namespace X.Util.Core
             get { return new Random(BitConverter.ToInt32(Guid.NewGuid().ToByteArray(), 0)); }
         }
 
-        //public static string Bytes2Hex(byte[] bytes)
-        //{
-        //    var hexString = new StringBuilder();
-        //    if (Equals(bytes, null)) return hexString.ToString();
-        //    foreach (var t in bytes) hexString.Append(t.ToString("x2"));
-        //    return hexString.ToString();
-        //}
-
-        //public static byte[] Hex2Bytes(string src)
-        //{
-        //    var l = src.Length / 2;
-        //    var ret = new byte[l];
-        //    for (var i = 0; i < l; i++)
-        //    {
-        //        var str = src.Substring(i * 2, 2);
-        //        ret[i] = Convert.ToByte(str, 16);
-        //    }
-        //    return ret;
-        //}
-
         public static string JsEncode(string value)
         {
             var base64 = value.ToBase64();
