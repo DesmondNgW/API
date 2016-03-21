@@ -119,7 +119,6 @@ namespace X.Util.Core
         #endregion
 
         #region Get Instance
-
         public static T Instance(Func<T> init, string cacheKey, TimeSpan validTime, Func<T, bool> validState = null)
         {
             cacheKey += typeof (T).FullName;
@@ -137,8 +136,7 @@ namespace X.Util.Core
             return _cacheResult[cacheKey].Result;
         }
 
-        public static T Instance(Func<string, T> init, string argument, string cacheKey, TimeSpan validTime,
-            Func<T, bool> validState = null)
+        public static T Instance(Func<string, T> init, string argument, string cacheKey, TimeSpan validTime, Func<T, bool> validState = null)
         {
             var key = cacheKey + typeof (T).FullName;
             if (ContainsCache(key, validState)) return _cacheResult[key].Result;

@@ -5,6 +5,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Text.RegularExpressions;
 using Newtonsoft.Json;
+using X.Util.Entities;
 
 namespace X.Util.Core
 {
@@ -219,6 +220,21 @@ namespace X.Util.Core
         public static T EnsureNotNull<T>(this T t) where T : class
         {
             return t ?? Activator.CreateInstance<T>();
+        }
+
+        public static void On<T>(this T obj, string name, Action<T, Event<T>> callBack)
+        {
+            CoreEvent<T>.On(obj, name, callBack);
+        }
+
+        public static void Off<T>(this T obj, string name = "", Action<T, Event<T>> callBack = null)
+        {
+            CoreEvent<T>.Off(obj, name, callBack);
+        }
+
+        public static void Fire<T>(this T obj, string name)
+        {
+            CoreEvent<T>.Fire(obj, name);
         }
         #endregion
     }

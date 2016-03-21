@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="CacheKey.cs" />
     <Compile Include="CacheResult.cs" />
+    <Compile Include="Event.cs" />
     <Compile Include="StatusCacheResult.cs" />
     <Compile Include="HttpCacheResult.cs" />
     <Compile Include="MongoBaseModel.cs" />
