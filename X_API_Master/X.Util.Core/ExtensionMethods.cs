@@ -144,12 +144,12 @@ namespace X.Util.Core
             return Regex.IsMatch(input, "(^|" + split + ")" + item + "(" + split + "|$)");
         }
 
-        public static string Replace(this string s, string pattern, string value)
+        public static string ReplaceRegex(this string s, string pattern, string value)
         {
             return new Regex(pattern).Replace(s, m => value);
         }
 
-        public static string Replace(this string s, string pattern, Func<Match, string> match)
+        public static string ReplaceRegex(this string s, string pattern, Func<Match, string> match)
         {
             return new Regex(pattern).Replace(s, m => match(m));
         }

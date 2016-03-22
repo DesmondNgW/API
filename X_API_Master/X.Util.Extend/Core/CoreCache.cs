@@ -5,7 +5,6 @@ using X.Util.Core;
 using X.Util.Entities;
 using X.Util.Extend.Cache;
 using System.Linq;
-using System.Text.RegularExpressions;
 using System.Web;
 using X.Util.Extend.Cryption;
 
@@ -66,7 +65,7 @@ namespace X.Util.Extend.Core
 
         public static string FormatCacheKey(string key)
         {
-            key = new Regex("\\s").Replace(key, m => string.Empty);
+            key = key.ReplaceRegex("\\s", string.Empty);
             if (key.Length >= 250) key = BaseCryption.Sha512(key);
             return key;
         }
