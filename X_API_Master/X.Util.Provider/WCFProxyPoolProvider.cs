@@ -71,7 +71,7 @@ namespace X.Util.Provider
                 {
                     var channel = CoreChannelFactory.CreateChannel();
                     Core<TChannel>.InitChannel(channel, CloseChannel);
-                    result.ContextQueue.Enqueue(new ContextChannel<TChannel> { ChannelOpnedTime = DateTime.Now.Add(ValidTime), Channel = channel });
+                    result.ContextQueue.Enqueue(new ContextChannel<TChannel> { ChannelClosedTime = DateTime.Now.Add(ValidTime), Channel = channel });
                 }
             }
             catch (Exception ex)
@@ -112,7 +112,7 @@ namespace X.Util.Provider
                 ContextChannel<TChannel> contextChannel;
                 if (CoreFactoryPool.ContextQueue.TryDequeue(out contextChannel) && contextChannel != null)
                 {
-                    var unCreateChannel = contextChannel.ChannelOpnedTime > DateTime.Now && Core<TChannel>.IsValid4CommunicationObject(contextChannel.Channel);
+                    var unCreateChannel = contextChannel.ChannelClosedTime > DateTime.Now && Core<TChannel>.IsValid4CommunicationObject(contextChannel.Channel);
                     channel = contextChannel.Channel;
                     if (!unCreateChannel)
                     {
@@ -142,7 +142,7 @@ namespace X.Util.Provider
                     channel = CoreChannelFactory.CreateChannel();
                     Core<TChannel>.InitChannel(channel, CloseChannel);
                 }
-                CoreFactoryPool.ContextQueue.Enqueue(new ContextChannel<TChannel> { Channel = channel, ChannelOpnedTime = DateTime.Now.Add(ValidTime) });
+                CoreFactoryPool.ContextQueue.Enqueue(new ContextChannel<TChannel> { Channel = channel, ChannelClosedTime = DateTime.Now.Add(ValidTime) });
             }
             catch (Exception ex)
             {
