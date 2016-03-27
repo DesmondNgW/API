@@ -1,5 +1,7 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
+using X.Util.Core;
 
 namespace X.UI.Consoles
 {
@@ -7,7 +9,10 @@ namespace X.UI.Consoles
     {
         static void Main()
         {
-            Index();
+            //Index();
+            string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "App_Data\\test.cs");
+            ConfigurationHelper.GenerateWCfClient("http://222.73.55.27:8002/DateService/?wsdl", MetadataExchangeClientMode.HttpGet, path);
+            Console.ReadKey();
         }
 
         static void Index()

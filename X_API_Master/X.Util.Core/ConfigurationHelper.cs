@@ -3,16 +3,27 @@ using Couchbase.Configuration;
 using MongoDB.Driver;
 using ServiceStack.Redis;
 using System;
+using System.CodeDom;
+using System.CodeDom.Compiler;
 using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
 using System.Linq;
+using System.ServiceModel.Description;
 using System.Web.Caching;
 using System.Xml;
 using X.Util.Entities;
 
 namespace X.Util.Core
 {
+    public enum MetadataExchangeClientMode
+    {
+        // 使用 WS-Transfer Get 请求。
+        MetadataExchange = 0,
+        // 使用 HTTP GET 请求。
+        HttpGet = 1,
+    }
+
     public class ConfigurationHelper
     {
         private const string CacheConfigurationPrefix = "X.Util.Core.CacheConfigurationPrefix";
@@ -139,6 +150,34 @@ namespace X.Util.Core
             }
             LocalCache.SlidingExpirationSet(key, result, new CacheDependency(EndpointFile, DateTime.Now), new TimeSpan(1, 0, 0), CacheItemPriority.AboveNormal);
             return result;
+        }
+
+        /// <summary>
+        /// 根据元数据发布地址生成代理类
+        /// </summary>
+        /// <param name="address">元数据地址</param>
+        /// <param name="mode">交换元数据方式</param>
+        /// <param name="outPutFile">代理类文件路径</param>
+        public static void GenerateWCfClient(string address, MetadataExchangeClientMode mode, string outPutFile)
+        {
+            var mexClient = new MetadataExchangeClient(new Uri(address), (System.ServiceModel.Description.MetadataExchangeClientMode) mode);
+            var metadataSet = mexClient.GetMetadata();
+            var importer = new WsdlImporter(metadataSet);
+            var codeCompileUnit = new CodeCompileUnit();
+            var generator = new ServiceContractGenerator(codeCompileUnit);      
+            foreach (var endpoint in importer.ImportAllEndpoints())
+            {
+                generator.GenerateServiceContractType(endpoint.Contract);
+            }
+            var provider = CodeDomProvider.CreateProvider("CSharp");
+            using (var sw = new StreamWriter(outPutFile))
+            {
+                using (var textWriter = new IndentedTextWriter(sw))
+                {
+                    var options = new CodeGeneratorOptions();
+                    provider.GenerateCodeFromCompileUnit(codeCompileUnit, textWriter, options);
+                }
+            }
         }
         #endregion
 
