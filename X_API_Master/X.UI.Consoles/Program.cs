@@ -11,7 +11,8 @@ namespace X.UI.Consoles
         {
             //Index();
             string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "App_Data\\test.cs");
-            ConfigurationHelper.GenerateWCfClient("http://222.73.55.27:8002/DateService/?wsdl", MetadataExchangeClientMode.HttpGet, path);
+            string config = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "App_Data\\testconfig.xml");
+            ConfigurationHelper.GenerateWCfProxyAndConfig("http://222.73.55.27:8002/DateService/?wsdl", MetadataExchangeClientMode.HttpGet, path, config);
             Console.ReadKey();
         }
 

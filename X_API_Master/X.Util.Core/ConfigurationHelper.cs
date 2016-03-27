@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
 using System.Linq;
+using System.ServiceModel.Configuration;
 using System.ServiceModel.Description;
 using System.Web.Caching;
 using System.Xml;
@@ -157,20 +158,36 @@ namespace X.Util.Core
         /// </summary>
         /// <param name="address">元数据地址</param>
         /// <param name="mode">交换元数据方式</param>
-        /// <param name="outPutFile">代理类文件路径</param>
-        public static void GenerateWCfClient(string address, MetadataExchangeClientMode mode, string outPutFile)
+        /// <param name="outPutProxyFile">代理文件路径</param>
+        /// <param name="outPutConfigFile">配置文件路径</param>
+        public static void GenerateWCfProxyAndConfig(string address, MetadataExchangeClientMode mode, string outPutProxyFile, string outPutConfigFile)
         {
             var mexClient = new MetadataExchangeClient(new Uri(address), (System.ServiceModel.Description.MetadataExchangeClientMode) mode);
             var metadataSet = mexClient.GetMetadata();
             var importer = new WsdlImporter(metadataSet);
             var codeCompileUnit = new CodeCompileUnit();
-            var generator = new ServiceContractGenerator(codeCompileUnit);      
+            var config = ConfigurationManager.OpenMappedExeConfiguration(new ExeConfigurationFileMap { ExeConfigFilename = outPutConfigFile }, ConfigurationUserLevel.None);
+            var generator = new ServiceContractGenerator(codeCompileUnit, config);
+            var group = ServiceModelSectionGroup.GetSectionGroup(config);
             foreach (var endpoint in importer.ImportAllEndpoints())
             {
                 generator.GenerateServiceContractType(endpoint.Contract);
+                ChannelEndpointElement element;
+                if (group != null)
+                {
+                    element = group.Client.Endpoints.Cast<ChannelEndpointElement>().FirstOrDefault(p => p.Contract == endpoint.Contract.Name);
+                    if (element != null)
+                    {
+                        group.Bindings.BindingCollections.Remove(group.Bindings[element.Binding]);
+                        group.Client.Endpoints.Remove(element);
+                        group.Behaviors.EndpointBehaviors.Remove(group.Behaviors.EndpointBehaviors[element.BehaviorConfiguration]);
+                    }
+                }
+                generator.GenerateServiceEndpoint(endpoint, out element);
             }
+            generator.Configuration.Save();
             var provider = CodeDomProvider.CreateProvider("CSharp");
-            using (var sw = new StreamWriter(outPutFile))
+            using (var sw = new StreamWriter(outPutProxyFile))
             {
                 using (var textWriter = new IndentedTextWriter(sw))
                 {
