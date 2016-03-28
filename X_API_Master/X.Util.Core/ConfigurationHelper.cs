@@ -17,14 +17,6 @@ using X.Util.Entities;
 
 namespace X.Util.Core
 {
-    public enum MetadataExchangeClientMode
-    {
-        // 使用 WS-Transfer Get 请求。
-        MetadataExchange = 0,
-        // 使用 HTTP GET 请求。
-        HttpGet = 1,
-    }
-
     public class ConfigurationHelper
     {
         private const string CacheConfigurationPrefix = "X.Util.Core.CacheConfigurationPrefix";
@@ -160,7 +152,7 @@ namespace X.Util.Core
         /// <param name="mode">交换元数据方式</param>
         /// <param name="outPutProxyFile">代理文件路径</param>
         /// <param name="outPutConfigFile">配置文件路径</param>
-        public static void GenerateWCfProxyAndConfig(string address, MetadataExchangeClientMode mode, string outPutProxyFile, string outPutConfigFile)
+        private static void GenerateWCfProxyAndConfig(string address, Entities.MetadataExchangeClientMode mode, string outPutProxyFile, string outPutConfigFile)
         {
             var mexClient = new MetadataExchangeClient(new Uri(address), (System.ServiceModel.Description.MetadataExchangeClientMode) mode);
             var metadataSet = mexClient.GetMetadata();
@@ -168,21 +160,10 @@ namespace X.Util.Core
             var codeCompileUnit = new CodeCompileUnit();
             var config = ConfigurationManager.OpenMappedExeConfiguration(new ExeConfigurationFileMap { ExeConfigFilename = outPutConfigFile }, ConfigurationUserLevel.None);
             var generator = new ServiceContractGenerator(codeCompileUnit, config);
-            var group = ServiceModelSectionGroup.GetSectionGroup(config);
             foreach (var endpoint in importer.ImportAllEndpoints())
             {
                 generator.GenerateServiceContractType(endpoint.Contract);
                 ChannelEndpointElement element;
-                if (group != null)
-                {
-                    element = group.Client.Endpoints.Cast<ChannelEndpointElement>().FirstOrDefault(p => p.Contract == endpoint.Contract.Name);
-                    if (element != null)
-                    {
-                        group.Bindings.BindingCollections.Remove(group.Bindings[element.Binding]);
-                        group.Client.Endpoints.Remove(element);
-                        group.Behaviors.EndpointBehaviors.Remove(group.Behaviors.EndpointBehaviors[element.BehaviorConfiguration]);
-                    }
-                }
                 generator.GenerateServiceEndpoint(endpoint, out element);
             }
             generator.Configuration.Save();
@@ -194,6 +175,24 @@ namespace X.Util.Core
                     var options = new CodeGeneratorOptions();
                     provider.GenerateCodeFromCompileUnit(codeCompileUnit, textWriter, options);
                 }
+            }
+        }
+
+        /// <summary>
+        /// 根据元数据发布地址生成代理类
+        /// </summary>
+        /// <param name="config"></param>
+        public static void GenerateWCfProxyAndConfig(WCfConfig config)
+        {
+            if (config == null) return;
+            var file = new FileInfo(config.ConfigPathPath);
+            if (file.Exists)
+            {
+                file.Delete();
+            }
+            foreach (var item in config.ProxyList)
+            {
+                GenerateWCfProxyAndConfig(item.Address, item.Mode, item.ProxyFilePath, config.ConfigPathPath);
             }
         }
         #endregion

@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using X.Util.Core;
+using X.Util.Entities;
 
 namespace X.UI.Consoles
 {
@@ -9,11 +11,21 @@ namespace X.UI.Consoles
     {
         static void Main()
         {
+            var config = new WCfConfig()
+            {
+                ProxyList = new List<WCfProxy>()
+                {
+                    new WCfProxy()
+                    {
+                        Address = "http://222.73.55.27:8002/DateService/?wsdl", 
+                        Mode = MetadataExchangeClientMode.HttpGet, 
+                        ProxyFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "App_Data\\IDateService.cs")
+                    }
+                },
+                ConfigPathPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "App_Data\\testConfig.xml")
+            };
+            ConfigurationHelper.GenerateWCfProxyAndConfig(config);
             //Index();
-            string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "App_Data\\test.cs");
-            string config = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "App_Data\\testconfig.xml");
-            ConfigurationHelper.GenerateWCfProxyAndConfig("http://222.73.55.27:8002/DateService/?wsdl", MetadataExchangeClientMode.HttpGet, path, config);
-            Console.ReadKey();
         }
 
         static void Index()

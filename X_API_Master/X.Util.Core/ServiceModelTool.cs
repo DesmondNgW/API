@@ -13,11 +13,11 @@ using X.Util.Entities;
 
 namespace X.Util.Core
 {
+    [ServiceContractAttribute(ConfigurationName = "IDateService")]
     public class ServiceModelTool
     {
         private static readonly string AppConfigFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "App_Data\\app.xml");
         private const string EndpointPrefix = "X.Util.Core.EndpointPrefix";
-        private const string WcfNamePrefix = "X.Data.Core.";
 
         public static ServiceModelSectionGroup ConfigInit()
         {
@@ -116,11 +116,6 @@ namespace X.Util.Core
             return EndpointIdentity.CreateX509CertificateIdentity(primaryCertificate, supportingCertificates);
         }
 
-        private static string GetConfigurationName(string fullName)
-        {
-            return fullName.StartsWith(WcfNamePrefix) ? fullName.Substring(fullName.IndexOf('.', WcfNamePrefix.Length) + 1) : fullName;
-        }
-
         private static string GetEndpointAddress(string configurationName)
         {
             var result = ConfigurationHelper.GetEndpointAddressesByName(configurationName);
@@ -134,9 +129,15 @@ namespace X.Util.Core
             return CoreUtil.GetConsistentHash(result.Endpoints, uid);
         }
 
+        public static string GetConfigurationName<T>()
+        {
+            var contract = (ServiceContractAttribute) typeof (T).GetCustomAttributes(false)[0];
+            return contract != null && !string.IsNullOrEmpty(contract.ConfigurationName) ? contract.ConfigurationName : typeof(T).Name;
+        }
+
         public static CoreServiceModel GetServiceModel<T>()
         {
-            var configurationName = GetConfigurationName(typeof(T).FullName);
+            var configurationName = GetConfigurationName<T>();
             var model = ConfigurationHelper.GetEndpointAddressesByName(configurationName);
             if (Equals(model, null)) return GetServiceModel(configurationName);
             var core = new CoreServiceModel
