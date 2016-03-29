@@ -1,0 +1,161 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import namespace="http://schemas.datacontract.org/2004/07/Em.FundTrade.Route.Entities" />
+  <xs:import namespace="http://schemas.datacontract.org/2004/07/Em.FundTrade.Route.LoadBalance.Services.Contract" />
+  <xs:element name="GetRouteInfoByLoginInfo">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/Em.FundTrade.Route.Entities" minOccurs="0" name="info" nillable="true" type="q1:LoginInfo" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetRouteInfoByLoginInfoResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/Em.FundTrade.Route.Entities" minOccurs="0" name="GetRouteInfoByLoginInfoResult" nillable="true" type="q2:RouteInfo" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetRouteInfoByCustomerNo">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="customeNo" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetRouteInfoByCustomerNoResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/Em.FundTrade.Route.Entities" minOccurs="0" name="GetRouteInfoByCustomerNoResult" nillable="true" type="q3:RouteInfo" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AddRouteInfo">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="customerNo" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AddRouteInfoResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/Em.FundTrade.Route.Entities" minOccurs="0" name="AddRouteInfoResult" nillable="true" type="q4:RouteInfo" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="BindMobilePhone">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="customerNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="mobilePhone" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="BindMobilePhoneResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="BindMobilePhoneResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UnbindMobilePhone">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="customerNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="mobilePhone" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UnbindMobilePhoneResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="UnbindMobilePhoneResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="BindEastmonyPassport">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="customerNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="eastmoneyPassport" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="BindEastmonyPassportResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="BindEastmonyPassportResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UbindEastmoneyPassport">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="customerNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="eastmoneyPassport" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UbindEastmoneyPassportResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="UbindEastmoneyPassportResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Heartbeat">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="HeartbeatResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="HeartbeatResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Regist">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="url" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RegistResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="RegistResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UnRegist">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="url" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UnRegistResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="UnRegistResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AccessStatus">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="url" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AccessStatusResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/Em.FundTrade.Route.LoadBalance.Services.Contract" minOccurs="0" name="AccessStatusResult" nillable="true" type="q5:ArrayOfServiceAccessStatus" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

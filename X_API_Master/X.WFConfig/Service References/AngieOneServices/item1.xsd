@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/Em.Entities.Data" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Em.Entities.Data" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="ArrayOfFixedBagShare">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="FixedBagShare" nillable="true" type="tns:FixedBagShare" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfFixedBagShare" nillable="true" type="tns:ArrayOfFixedBagShare" />
+  <xs:complexType name="FixedBagShare">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Annual7D" type="xs:decimal" />
+      <xs:element minOccurs="0" name="AvailableVol" type="xs:decimal" />
+      <xs:element minOccurs="0" name="AverageCost" type="xs:decimal" />
+      <xs:element minOccurs="0" name="BusinFrozenVol" type="xs:decimal" />
+      <xs:element minOccurs="0" name="CustomerNo" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DefaultCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DemandRate" type="xs:decimal" />
+      <xs:element minOccurs="0" name="FixedCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FrozenVol" type="xs:decimal" />
+      <xs:element minOccurs="0" name="FundCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FundName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="NavDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="OnWayVol" type="xs:decimal" />
+      <xs:element minOccurs="0" name="OpenProfit" type="xs:decimal" />
+      <xs:element minOccurs="0" name="Priority" type="xs:decimal" />
+      <xs:element minOccurs="0" name="ShareId" type="xs:int" />
+      <xs:element minOccurs="0" name="TotalVol" type="xs:decimal" />
+      <xs:element minOccurs="0" name="UnPaid" type="xs:decimal" />
+      <xs:element minOccurs="0" name="UnitAccrual" type="xs:decimal" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="FixedBagShare" nillable="true" type="tns:FixedBagShare" />
+</xs:schema>

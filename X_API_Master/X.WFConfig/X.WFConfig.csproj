@@ -1,0 +1,630 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{DA55E9CB-47D7-40C9-8992-986405A5C8C5}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>X.WFConfig</RootNamespace>
+    <AssemblyName>X.WFConfig</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service References\AngieOneServices\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\Asset\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\CoreBusiness\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\DateService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\Query\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\Router\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <None Include="app.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <None Include="Service References\AngieOneServices\CoreWCFServices.wsdl" />
+    <None Include="Service References\AngieOneServices\item.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\AngieOneServices\item1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\AngieOneServices\item2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\AngieOneServices\item3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\AngieOneServices\item4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\AngieOneServices\X.WFConfig.AngieOneServices.CustDividendMethod.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\AngieOneServices\X.WFConfig.AngieOneServices.ResultInfoOfArrayOfBusinAppYJ36K23J.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\AngieOneServices\X.WFConfig.AngieOneServices.ResultInfoOfArrayOfBusinCfmYJ36K23J.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\AngieOneServices\X.WFConfig.AngieOneServices.ResultInfoOfArrayOfBusinDerivativesAppYJ36K23J.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\AngieOneServices\X.WFConfig.AngieOneServices.ResultInfoOfArrayOfCustDividendMethodYJ36K23J.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\AngieOneServices\X.WFConfig.AngieOneServices.ResultInfoOfArrayOfDividendCfmYJ36K23J.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\AngieOneServices\X.WFConfig.AngieOneServices.ResultInfoOfArrayOfFinancialShareLevel3YJ36K23J.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\AngieOneServices\X.WFConfig.AngieOneServices.ResultInfoOfArrayOfFinancialShareYJ36K23J.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\AngieOneServices\X.WFConfig.AngieOneServices.ResultInfoOfArrayOfFixedBagShare2GJrRq2U.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\AngieOneServices\X.WFConfig.AngieOneServices.ResultInfoOfArrayOfFundExtAttributeYJ36K23J.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\AngieOneServices\X.WFConfig.AngieOneServices.ResultInfoOfArrayOfFundExYJ36K23J.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\AngieOneServices\X.WFConfig.AngieOneServices.ResultInfoOfArrayOfFundRedeemTypeJourYJ36K23J.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\AngieOneServices\X.WFConfig.AngieOneServices.ResultInfoOfArrayOfFundRedeemTypeYJ36K23J.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\AngieOneServices\X.WFConfig.AngieOneServices.ResultInfoOfArrayOfFundSpecialStageYJ36K23J.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\AngieOneServices\X.WFConfig.AngieOneServices.ResultInfoOfArrayOfKeyValueOfstringdecimaluHEDJ7Dj.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\AngieOneServices\X.WFConfig.AngieOneServices.ResultInfoOfArrayOfShareFreezingYJ36K23J.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\AngieOneServices\X.WFConfig.AngieOneServices.ResultInfoOfArrayOfShareYJ36K23J.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\AngieOneServices\X.WFConfig.AngieOneServices.ResultInfoOfArrayOfstringuHEDJ7Dj.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\AngieOneServices\X.WFConfig.AngieOneServices.ResultInfoOfArrayOfWhiteListsYJ36K23J.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\AngieOneServices\X.WFConfig.AngieOneServices.ResultInfoOfboolean.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\AngieOneServices\X.WFConfig.AngieOneServices.ResultInfoOfBusinAppYJ36K23J.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\AngieOneServices\X.WFConfig.AngieOneServices.ResultInfoOfBusinDerivativesApplyYJ36K23J.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\AngieOneServices\X.WFConfig.AngieOneServices.ResultInfoOfBusinDerivativesAppYJ36K23J.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\AngieOneServices\X.WFConfig.AngieOneServices.ResultInfoOfCustDividendMethodYJ36K23J.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\AngieOneServices\X.WFConfig.AngieOneServices.ResultInfoOfdecimal.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\AngieOneServices\X.WFConfig.AngieOneServices.ResultInfoOfFinancialShareYJ36K23J.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\AngieOneServices\X.WFConfig.AngieOneServices.ResultInfoOfFixedBagShare2GJrRq2U.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\AngieOneServices\X.WFConfig.AngieOneServices.ResultInfoOfFundRedeemTypeYJ36K23J.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\AngieOneServices\X.WFConfig.AngieOneServices.ResultInfoOfFundSpecialStageYJ36K23J.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\AngieOneServices\X.WFConfig.AngieOneServices.ResultInfoOfFundYJ36K23J.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\AngieOneServices\X.WFConfig.AngieOneServices.ResultInfoOfint.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\AngieOneServices\X.WFConfig.AngieOneServices.ResultInfoOfShareFreezingYJ36K23J.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\AngieOneServices\X.WFConfig.AngieOneServices.ResultInfoOfShareYJ36K23J.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\AngieOneServices\X.WFConfig.AngieOneServices.ResultInfoOfstring.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Asset\Arrays.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\Asset\Em.Entities.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\Asset\Em.FundTrade.AssetHomePage.Entities.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\Asset\service.wsdl" />
+    <None Include="Service References\Asset\service.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\Asset\service1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\Asset\X.WFConfig.Asset.ResultInfoOfAssetData_Stkf6_SDP.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CoreBusiness\Arrays.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\CoreBusiness\Em.Entities.Data.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\CoreBusiness\Em.Entities.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\CoreBusiness\service.wsdl" />
+    <None Include="Service References\CoreBusiness\service.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\CoreBusiness\service1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\CoreBusiness\System.Collections.Generic.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\CoreBusiness\System.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\CoreBusiness\X.WFConfig.CoreBusiness.ResultInfoOfAccountAppYJ36K23J.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CoreBusiness\X.WFConfig.CoreBusiness.ResultInfoOfArrayOfAccountAppYJ36K23J.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CoreBusiness\X.WFConfig.CoreBusiness.ResultInfoOfArrayOfAssetShareYJ36K23J.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CoreBusiness\X.WFConfig.CoreBusiness.ResultInfoOfArrayOfBankAccountAppYJ36K23J.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CoreBusiness\X.WFConfig.CoreBusiness.ResultInfoOfArrayOfBankAccountYJ36K23J.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CoreBusiness\X.WFConfig.CoreBusiness.ResultInfoOfArrayOfBankCardBinYJ36K23J.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CoreBusiness\X.WFConfig.CoreBusiness.ResultInfoOfArrayOfBankCardChangeAppYJ36K23J.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CoreBusiness\X.WFConfig.CoreBusiness.ResultInfoOfArrayOfBankInfoYJ36K23J.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CoreBusiness\X.WFConfig.CoreBusiness.ResultInfoOfArrayOfBusinAppYJ36K23J.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CoreBusiness\X.WFConfig.CoreBusiness.ResultInfoOfArrayOfBusinCfmYJ36K23J.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CoreBusiness\X.WFConfig.CoreBusiness.ResultInfoOfArrayOfBusinDerivativesAppYJ36K23J.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CoreBusiness\X.WFConfig.CoreBusiness.ResultInfoOfArrayOfCashBagAnnual7DYJ36K23J.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CoreBusiness\X.WFConfig.CoreBusiness.ResultInfoOfArrayOfCashBagGroupYJ36K23J.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CoreBusiness\X.WFConfig.CoreBusiness.ResultInfoOfArrayOfCashBagPaymentYJ36K23J.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CoreBusiness\X.WFConfig.CoreBusiness.ResultInfoOfArrayOfCashBagShare2GJrRq2U.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CoreBusiness\X.WFConfig.CoreBusiness.ResultInfoOfArrayOfCashBagUnavailableShare2GJrRq2U.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CoreBusiness\X.WFConfig.CoreBusiness.ResultInfoOfArrayOfCashDaysYJ36K23J.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CoreBusiness\X.WFConfig.CoreBusiness.ResultInfoOfArrayOfCashShareHisYJ36K23J.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CoreBusiness\X.WFConfig.CoreBusiness.ResultInfoOfArrayOfComplaintHandlingYJ36K23J.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CoreBusiness\X.WFConfig.CoreBusiness.ResultInfoOfArrayOfComplaintYJ36K23J.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CoreBusiness\X.WFConfig.CoreBusiness.ResultInfoOfArrayOfCustDividendMethodYJ36K23J.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CoreBusiness\X.WFConfig.CoreBusiness.ResultInfoOfArrayOfCustomerBankAcctInfoYJ36K23J.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CoreBusiness\X.WFConfig.CoreBusiness.ResultInfoOfArrayOfCustomerYJ36K23J.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CoreBusiness\X.WFConfig.CoreBusiness.ResultInfoOfArrayOfDiscountRateYJ36K23J.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CoreBusiness\X.WFConfig.CoreBusiness.ResultInfoOfArrayOfDividendCfmYJ36K23J.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CoreBusiness\X.WFConfig.CoreBusiness.ResultInfoOfArrayOfEnumTypeYJ36K23J.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CoreBusiness\X.WFConfig.CoreBusiness.ResultInfoOfArrayOfFinancialShareYJ36K23J.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CoreBusiness\X.WFConfig.CoreBusiness.ResultInfoOfArrayOfFixedBagGroupYJ36K23J.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CoreBusiness\X.WFConfig.CoreBusiness.ResultInfoOfArrayOfFundCompanyYJ36K23J.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CoreBusiness\X.WFConfig.CoreBusiness.ResultInfoOfArrayOfFundDaysYJ36K23J.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CoreBusiness\X.WFConfig.CoreBusiness.ResultInfoOfArrayOfFundNavYJ36K23J.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CoreBusiness\X.WFConfig.CoreBusiness.ResultInfoOfArrayOfFundSpecialExtendYJ36K23J.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CoreBusiness\X.WFConfig.CoreBusiness.ResultInfoOfArrayOfFundYJ36K23J.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CoreBusiness\X.WFConfig.CoreBusiness.ResultInfoOfArrayOfHoldShareYJ36K23J.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CoreBusiness\X.WFConfig.CoreBusiness.ResultInfoOfArrayOfKeyValueOfstringbooleanuHEDJ7Dj.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CoreBusiness\X.WFConfig.CoreBusiness.ResultInfoOfArrayOfKeyValueOfstringstringuHEDJ7Dj.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CoreBusiness\X.WFConfig.CoreBusiness.ResultInfoOfArrayOfPlanCashbagBuyYJ36K23J.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CoreBusiness\X.WFConfig.CoreBusiness.ResultInfoOfArrayOfShareFreezingYJ36K23J.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CoreBusiness\X.WFConfig.CoreBusiness.ResultInfoOfArrayOfShareTransferBankYJ36K23J.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CoreBusiness\X.WFConfig.CoreBusiness.ResultInfoOfArrayOfShareYJ36K23J.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CoreBusiness\X.WFConfig.CoreBusiness.ResultInfoOfArrayOfstringuHEDJ7Dj.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CoreBusiness\X.WFConfig.CoreBusiness.ResultInfoOfArrayOfTupleOfstringdecimal5F2dSckg.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CoreBusiness\X.WFConfig.CoreBusiness.ResultInfoOfAssetInfoYJ36K23J.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CoreBusiness\X.WFConfig.CoreBusiness.ResultInfoOfBankAccountAppYJ36K23J.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CoreBusiness\X.WFConfig.CoreBusiness.ResultInfoOfBankAccountSpecialYJ36K23J.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CoreBusiness\X.WFConfig.CoreBusiness.ResultInfoOfBankAccountYJ36K23J.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CoreBusiness\X.WFConfig.CoreBusiness.ResultInfoOfBankBranchYJ36K23J.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CoreBusiness\X.WFConfig.CoreBusiness.ResultInfoOfBankCardChangeAppYJ36K23J.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CoreBusiness\X.WFConfig.CoreBusiness.ResultInfoOfboolean.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CoreBusiness\X.WFConfig.CoreBusiness.ResultInfoOfBusinAppYJ36K23J.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CoreBusiness\X.WFConfig.CoreBusiness.ResultInfoOfBusinCfmYJ36K23J.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CoreBusiness\X.WFConfig.CoreBusiness.ResultInfoOfBusinDerivativesApplyYJ36K23J.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CoreBusiness\X.WFConfig.CoreBusiness.ResultInfoOfBusinDerivativesAppYJ36K23J.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CoreBusiness\X.WFConfig.CoreBusiness.ResultInfoOfCashBagPaymentYJ36K23J.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CoreBusiness\X.WFConfig.CoreBusiness.ResultInfoOfCashBagShare2GJrRq2U.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CoreBusiness\X.WFConfig.CoreBusiness.ResultInfoOfCashBagYJ36K23J.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CoreBusiness\X.WFConfig.CoreBusiness.ResultInfoOfComplaintHandlingYJ36K23J.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CoreBusiness\X.WFConfig.CoreBusiness.ResultInfoOfComplaintYJ36K23J.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CoreBusiness\X.WFConfig.CoreBusiness.ResultInfoOfCustomerBankAcctInfoYJ36K23J.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CoreBusiness\X.WFConfig.CoreBusiness.ResultInfoOfCustomerDetailYJ36K23J.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CoreBusiness\X.WFConfig.CoreBusiness.ResultInfoOfCustomerYJ36K23J.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CoreBusiness\X.WFConfig.CoreBusiness.ResultInfoOfCustSecuritySettingYJ36K23J.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CoreBusiness\X.WFConfig.CoreBusiness.ResultInfoOfdateTime.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CoreBusiness\X.WFConfig.CoreBusiness.ResultInfoOfdecimal.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CoreBusiness\X.WFConfig.CoreBusiness.ResultInfoOfDiscountRateYJ36K23J.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CoreBusiness\X.WFConfig.CoreBusiness.ResultInfoOfFeedbackYJ36K23J.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CoreBusiness\X.WFConfig.CoreBusiness.ResultInfoOfFinancialProductAgreementYJ36K23J.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CoreBusiness\X.WFConfig.CoreBusiness.ResultInfoOfFundNavYJ36K23J.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CoreBusiness\X.WFConfig.CoreBusiness.ResultInfoOfFundSpecialExtendYJ36K23J.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CoreBusiness\X.WFConfig.CoreBusiness.ResultInfoOfFundYJ36K23J.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CoreBusiness\X.WFConfig.CoreBusiness.ResultInfoOfint.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CoreBusiness\X.WFConfig.CoreBusiness.ResultInfoOfKeyValuePairOfdoublestringR8RmUPp7.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CoreBusiness\X.WFConfig.CoreBusiness.ResultInfoOfLendingSettingsYJ36K23J.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CoreBusiness\X.WFConfig.CoreBusiness.ResultInfoOfNormalFundAssetInfoYJ36K23J.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CoreBusiness\X.WFConfig.CoreBusiness.ResultInfoOfQuestionnaireYJ36K23J.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CoreBusiness\X.WFConfig.CoreBusiness.ResultInfoOfShareYJ36K23J.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CoreBusiness\X.WFConfig.CoreBusiness.ResultInfoOfstring.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DateService\service.wsdl" />
+    <None Include="Service References\DateService\service.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\DateService\service1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\Query\Em.FundTrade.Query.Entities.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\Query\service.wsdl" />
+    <None Include="Service References\Query\service.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\Query\service1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\Query\X.WFConfig.Query.QueryResultOfArrayOfTradeStatementYTXI_Sx5q.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Router\Em.FundTrade.Route.Entities.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\Router\Em.FundTrade.Route.LoadBalance.Services.Contract.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\Router\service.wsdl" />
+    <None Include="Service References\Router\service.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\Router\service1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\Router\X.WFConfig.Router.RouteInfo.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Router\X.WFConfig.Router.ServiceAccessStatus.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\AngieOneServices\" />
+    <WCFMetadataStorage Include="Service References\Asset\" />
+    <WCFMetadataStorage Include="Service References\CoreBusiness\" />
+    <WCFMetadataStorage Include="Service References\DateService\" />
+    <WCFMetadataStorage Include="Service References\Query\" />
+    <WCFMetadataStorage Include="Service References\Router\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\Asset\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\Asset\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\Asset\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\Query\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\Query\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\Query\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\Router\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\Router\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\Router\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\DateService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\DateService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\DateService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\CoreBusiness\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\CoreBusiness\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\CoreBusiness\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\AngieOneServices\item.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\AngieOneServices\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\AngieOneServices\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\AngieOneServices\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

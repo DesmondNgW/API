@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="40f9aac5-5c09-4186-a0f9-80e29af931eb" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings>
+      <CollectionMapping TypeName="System.Collections.Generic.List`1" Category="List" />
+    </CollectionMappings>
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="net.tcp://172.16.86.56:8818/Tcp/mex" Protocol="mex" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="208207aa-f626-4926-a942-39154d0b5876" SourceId="1" SourceUrl="net.tcp://172.16.86.56:8818/Tcp/mex" />
+    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="f7d8387c-e9a4-40fb-aa50-dc64c7c1dc3d" SourceId="1" SourceUrl="net.tcp://172.16.86.56:8818/Tcp/mex" />
+    <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="8f793204-9fb9-4a9b-afca-f4af42098353" SourceId="1" SourceUrl="net.tcp://172.16.86.56:8818/Tcp/mex" />
+    <MetadataFile FileName="Em.Entities.xsd" MetadataType="Schema" ID="10fda0a1-a8f7-40d3-874e-605263340c03" SourceId="1" SourceUrl="net.tcp://172.16.86.56:8818/Tcp/mex" />
+    <MetadataFile FileName="Arrays.xsd" MetadataType="Schema" ID="0ed13b64-9559-452a-ad8c-78cc3066ded3" SourceId="1" SourceUrl="net.tcp://172.16.86.56:8818/Tcp/mex" />
+    <MetadataFile FileName="System.xsd" MetadataType="Schema" ID="17e7a4a2-b658-4311-ac94-60c80e8e02e0" SourceId="1" SourceUrl="net.tcp://172.16.86.56:8818/Tcp/mex" />
+    <MetadataFile FileName="System.Collections.Generic.xsd" MetadataType="Schema" ID="199d7680-4ed5-4df8-acd2-b58602353b1f" SourceId="1" SourceUrl="net.tcp://172.16.86.56:8818/Tcp/mex" />
+    <MetadataFile FileName="Em.Entities.Data.xsd" MetadataType="Schema" ID="c12de5c2-0147-4960-961f-e5c56d2f315b" SourceId="1" SourceUrl="net.tcp://172.16.86.56:8818/Tcp/mex" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

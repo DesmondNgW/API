@@ -1,0 +1,1283 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/Em.Entities" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Em.Entities" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://172.16.86.57:8001/AngieOneServices/?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+  <xs:import schemaLocation="http://172.16.86.57:8001/AngieOneServices/?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:import schemaLocation="http://172.16.86.57:8001/AngieOneServices/?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/Em.Entities.Data" />
+  <xs:complexType name="BusinDerivativesApply">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AppAmount" type="xs:decimal" />
+      <xs:element minOccurs="0" name="AppTime" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="AppVol" type="xs:decimal" />
+      <xs:element minOccurs="0" name="BankAccountNo" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="BankCardNo" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="BankCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="BusinExtType" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="BusinSerialNo" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="BusinType" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CfmAmount" type="xs:decimal" />
+      <xs:element minOccurs="0" name="CfmSheetSerialNo" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CfmVol" type="xs:decimal" />
+      <xs:element minOccurs="0" name="ChargeType" type="xs:int" />
+      <xs:element minOccurs="0" name="CreateTime" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="CustomerNo" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FlowType" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FundCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IsDel" type="xs:boolean" />
+      <xs:element minOccurs="0" name="IsEnabled" type="xs:boolean" />
+      <xs:element minOccurs="0" name="ObjectFundCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Remark" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ServiceCharge" type="xs:decimal" />
+      <xs:element minOccurs="0" name="State" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TraceNo" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TradeDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="UpdateTime" type="xs:dateTime" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="BusinDerivativesApply" nillable="true" type="tns:BusinDerivativesApply" />
+  <xs:complexType name="ResultInfoOfBusinDerivativesApplyYJ36K23J">
+    <xs:annotation>
+      <xs:appinfo>
+        <GenericType Name="ResultInfoOf{0}{#}" Namespace="http://schemas.datacontract.org/2004/07/Em.Entities" xmlns="http://schemas.microsoft.com/2003/10/Serialization/">
+          <GenericParameter Name="BusinDerivativesApply" Namespace="http://schemas.datacontract.org/2004/07/Em.Entities" />
+        </GenericType>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CodeMessage" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ErrorCode" nillable="true" type="xs:string" />
+      <xs:element xmlns:q1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="ErrorMessages" nillable="true" type="q1:ArrayOfstring" />
+      <xs:element minOccurs="0" name="Message" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="OldMessage" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Result" nillable="true" type="tns:BusinDerivativesApply" />
+      <xs:element minOccurs="0" name="Succeed" type="xs:boolean" />
+      <xs:element minOccurs="0" name="preValue" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ResultInfoOfBusinDerivativesApplyYJ36K23J" nillable="true" type="tns:ResultInfoOfBusinDerivativesApplyYJ36K23J" />
+  <xs:complexType name="ResultInfoOfboolean">
+    <xs:annotation>
+      <xs:appinfo>
+        <GenericType Name="ResultInfoOf{0}{#}" Namespace="http://schemas.datacontract.org/2004/07/Em.Entities" xmlns="http://schemas.microsoft.com/2003/10/Serialization/">
+          <GenericParameter Name="boolean" Namespace="http://www.w3.org/2001/XMLSchema" />
+        </GenericType>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CodeMessage" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ErrorCode" nillable="true" type="xs:string" />
+      <xs:element xmlns:q2="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="ErrorMessages" nillable="true" type="q2:ArrayOfstring" />
+      <xs:element minOccurs="0" name="Message" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="OldMessage" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Result" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Succeed" type="xs:boolean" />
+      <xs:element minOccurs="0" name="preValue" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ResultInfoOfboolean" nillable="true" type="tns:ResultInfoOfboolean" />
+  <xs:complexType name="ResultInfoOfdecimal">
+    <xs:annotation>
+      <xs:appinfo>
+        <GenericType Name="ResultInfoOf{0}{#}" Namespace="http://schemas.datacontract.org/2004/07/Em.Entities" xmlns="http://schemas.microsoft.com/2003/10/Serialization/">
+          <GenericParameter Name="decimal" Namespace="http://www.w3.org/2001/XMLSchema" />
+        </GenericType>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CodeMessage" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ErrorCode" nillable="true" type="xs:string" />
+      <xs:element xmlns:q3="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="ErrorMessages" nillable="true" type="q3:ArrayOfstring" />
+      <xs:element minOccurs="0" name="Message" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="OldMessage" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Result" type="xs:decimal" />
+      <xs:element minOccurs="0" name="Succeed" type="xs:boolean" />
+      <xs:element minOccurs="0" name="preValue" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ResultInfoOfdecimal" nillable="true" type="tns:ResultInfoOfdecimal" />
+  <xs:complexType name="ResultInfoOfBusinAppYJ36K23J">
+    <xs:annotation>
+      <xs:appinfo>
+        <GenericType Name="ResultInfoOf{0}{#}" Namespace="http://schemas.datacontract.org/2004/07/Em.Entities" xmlns="http://schemas.microsoft.com/2003/10/Serialization/">
+          <GenericParameter Name="BusinApp" Namespace="http://schemas.datacontract.org/2004/07/Em.Entities" />
+        </GenericType>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CodeMessage" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ErrorCode" nillable="true" type="xs:string" />
+      <xs:element xmlns:q4="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="ErrorMessages" nillable="true" type="q4:ArrayOfstring" />
+      <xs:element minOccurs="0" name="Message" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="OldMessage" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Result" nillable="true" type="tns:BusinApp" />
+      <xs:element minOccurs="0" name="Succeed" type="xs:boolean" />
+      <xs:element minOccurs="0" name="preValue" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ResultInfoOfBusinAppYJ36K23J" nillable="true" type="tns:ResultInfoOfBusinAppYJ36K23J" />
+  <xs:complexType name="BusinApp">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:CustEntityBase">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="AppAmount" type="xs:decimal" />
+          <xs:element minOccurs="0" name="AppSheetSerialNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="AppState" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="AppTime" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="AppVol" type="xs:decimal" />
+          <xs:element minOccurs="0" name="BankCardNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="BankCode" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="BusinType" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="CfmResult" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ChargeType" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="CheckState" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="CustomerRisk" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="DebitFlag" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="DepositAccountNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Discount" type="xs:decimal" />
+          <xs:element minOccurs="0" name="DividendMethod" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="FundCode" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="FundRisk" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="HsErrorMsg" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="HsSerialNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="HsSheetSerialNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="HsSyncState" type="tns:EnumHsSyncState" />
+          <xs:element minOccurs="0" name="IsSpecial" type="xs:boolean" />
+          <xs:element minOccurs="0" name="LargeRedemptionFlag" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="MatchResult" type="tns:EnumMatchResult" />
+          <xs:element minOccurs="0" name="ObjectFundCode" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="OriginalAppSheetNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ParentAppSheetSerialNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ParentBusinType" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Reference" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ReturnCode" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="TargetDistributorCode" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="TargetNetNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="TraceNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="TradeIp" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="TransactionDate" type="xs:dateTime" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="BusinApp" nillable="true" type="tns:BusinApp" />
+  <xs:complexType name="CustEntityBase">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:EntityBase">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="CustomerNo" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="CustEntityBase" nillable="true" type="tns:CustEntityBase" />
+  <xs:complexType name="EntityBase">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CreateTime" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="IsEnabled" type="xs:boolean" />
+      <xs:element minOccurs="0" name="UpdateTime" type="xs:dateTime" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="EntityBase" nillable="true" type="tns:EntityBase" />
+  <xs:simpleType name="EnumHsSyncState">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="AllDone" />
+      <xs:enumeration value="NotSync" />
+      <xs:enumeration value="UserAccountOpened" />
+      <xs:enumeration value="UserAccountVerified" />
+      <xs:enumeration value="DepositAccountOpened" />
+      <xs:enumeration value="DepositAccountVerified" />
+      <xs:enumeration value="CurrencyAccountOpened" />
+      <xs:enumeration value="BankAccountOpened" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="EnumHsSyncState" nillable="true" type="tns:EnumHsSyncState" />
+  <xs:simpleType name="EnumMatchResult">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Matched">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">1</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="UnMatched">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">0</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="EnumMatchResult" nillable="true" type="tns:EnumMatchResult" />
+  <xs:complexType name="ResultInfoOfArrayOfFinancialShareLevel3YJ36K23J">
+    <xs:annotation>
+      <xs:appinfo>
+        <GenericType Name="ResultInfoOf{0}{#}" Namespace="http://schemas.datacontract.org/2004/07/Em.Entities" xmlns="http://schemas.microsoft.com/2003/10/Serialization/">
+          <GenericParameter Name="ArrayOfFinancialShareLevel3" Namespace="http://schemas.datacontract.org/2004/07/Em.Entities" />
+        </GenericType>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CodeMessage" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ErrorCode" nillable="true" type="xs:string" />
+      <xs:element xmlns:q5="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="ErrorMessages" nillable="true" type="q5:ArrayOfstring" />
+      <xs:element minOccurs="0" name="Message" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="OldMessage" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Result" nillable="true" type="tns:ArrayOfFinancialShareLevel3" />
+      <xs:element minOccurs="0" name="Succeed" type="xs:boolean" />
+      <xs:element minOccurs="0" name="preValue" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ResultInfoOfArrayOfFinancialShareLevel3YJ36K23J" nillable="true" type="tns:ResultInfoOfArrayOfFinancialShareLevel3YJ36K23J" />
+  <xs:complexType name="ArrayOfFinancialShareLevel3">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="FinancialShareLevel3" nillable="true" type="tns:FinancialShareLevel3" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfFinancialShareLevel3" nillable="true" type="tns:ArrayOfFinancialShareLevel3" />
+  <xs:complexType name="FinancialShareLevel3">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AllowRedemptDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="BankCardNo" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="BankCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="BasisForCalculatingDividend" type="xs:decimal" />
+      <xs:element minOccurs="0" name="CfmSheetSerialNo" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CreateTime" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="CurAvailableVol" type="xs:decimal" />
+      <xs:element minOccurs="0" name="CustomerNo" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DepositAccountNo" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="EndDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="FundCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Id" type="xs:long" />
+      <xs:element minOccurs="0" name="LastAllowRedemptDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="LastBasis" type="xs:decimal" />
+      <xs:element minOccurs="0" name="Partition" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PrevEndDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="ShareRegisterDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="TotalVol" type="xs:decimal" />
+      <xs:element minOccurs="0" name="TransactionCfmDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Uori" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="UpdateTime" type="xs:dateTime" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="FinancialShareLevel3" nillable="true" type="tns:FinancialShareLevel3" />
+  <xs:simpleType name="EnumPayType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="BankCard" />
+      <xs:enumeration value="MoneyBag" />
+      <xs:enumeration value="NoNeed" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="EnumPayType" nillable="true" type="tns:EnumPayType" />
+  <xs:complexType name="ResultInfoOfFundYJ36K23J">
+    <xs:annotation>
+      <xs:appinfo>
+        <GenericType Name="ResultInfoOf{0}{#}" Namespace="http://schemas.datacontract.org/2004/07/Em.Entities" xmlns="http://schemas.microsoft.com/2003/10/Serialization/">
+          <GenericParameter Name="Fund" Namespace="http://schemas.datacontract.org/2004/07/Em.Entities" />
+        </GenericType>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CodeMessage" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ErrorCode" nillable="true" type="xs:string" />
+      <xs:element xmlns:q6="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="ErrorMessages" nillable="true" type="q6:ArrayOfstring" />
+      <xs:element minOccurs="0" name="Message" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="OldMessage" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Result" nillable="true" type="tns:Fund" />
+      <xs:element minOccurs="0" name="Succeed" type="xs:boolean" />
+      <xs:element minOccurs="0" name="preValue" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ResultInfoOfFundYJ36K23J" nillable="true" type="tns:ResultInfoOfFundYJ36K23J" />
+  <xs:complexType name="Fund">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:EntityBase">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="AllowBusin" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="CanCashBuy" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="CanCashRedeem" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="CashType" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ChargeType" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ChargeTypeName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="DefDividendMethod" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Discount" type="xs:decimal" />
+          <xs:element minOccurs="0" name="FinancialRound" type="xs:int" />
+          <xs:element minOccurs="0" name="FinancialTip" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="FinancialType" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="FundCode" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="FundCompany" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="FundCompanyNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="FundName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="FundRisk" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="FundRiskName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="FundState" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="FundStateName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="FundType" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="FundTypeName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="IPOBeginDate" nillable="true" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="IPOEndDate" nillable="true" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="MajorFundCode" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="MaxRedeem" nillable="true" type="xs:decimal" />
+          <xs:element minOccurs="0" name="MaxSg" nillable="true" type="xs:decimal" />
+          <xs:element minOccurs="0" name="MinHoldShare" type="xs:decimal" />
+          <xs:element minOccurs="0" name="MinRedeem" type="xs:decimal" />
+          <xs:element minOccurs="0" name="MinRgAppend" type="xs:decimal" />
+          <xs:element minOccurs="0" name="MinRgInvested" type="xs:decimal" />
+          <xs:element minOccurs="0" name="MinSgAppend" type="xs:decimal" />
+          <xs:element minOccurs="0" name="MinSgInvested" type="xs:decimal" />
+          <xs:element minOccurs="0" name="MinTimerSg" type="xs:decimal" />
+          <xs:element minOccurs="0" name="MinTrans" type="xs:decimal" />
+          <xs:element minOccurs="0" name="MoneyTypeB" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Nav" type="xs:decimal" />
+          <xs:element minOccurs="0" name="NavDate" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="Rate" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ReachDay" type="xs:int" />
+          <xs:element minOccurs="0" name="RedeemLimits" type="xs:decimal" />
+          <xs:element minOccurs="0" name="SecMinRgAppend" type="xs:decimal" />
+          <xs:element minOccurs="0" name="SecMinRgInvested" type="xs:decimal" />
+          <xs:element minOccurs="0" name="SecMinSgAppend" type="xs:decimal" />
+          <xs:element minOccurs="0" name="SecMinSgInvested" type="xs:decimal" />
+          <xs:element minOccurs="0" name="SecTimerSg" type="xs:decimal" />
+          <xs:element minOccurs="0" name="StablishDate" nillable="true" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="TransCodes" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="Fund" nillable="true" type="tns:Fund" />
+  <xs:complexType name="ResultInfoOfArrayOfFundSpecialStageYJ36K23J">
+    <xs:annotation>
+      <xs:appinfo>
+        <GenericType Name="ResultInfoOf{0}{#}" Namespace="http://schemas.datacontract.org/2004/07/Em.Entities" xmlns="http://schemas.microsoft.com/2003/10/Serialization/">
+          <GenericParameter Name="ArrayOfFundSpecialStage" Namespace="http://schemas.datacontract.org/2004/07/Em.Entities" />
+        </GenericType>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CodeMessage" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ErrorCode" nillable="true" type="xs:string" />
+      <xs:element xmlns:q7="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="ErrorMessages" nillable="true" type="q7:ArrayOfstring" />
+      <xs:element minOccurs="0" name="Message" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="OldMessage" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Result" nillable="true" type="tns:ArrayOfFundSpecialStage" />
+      <xs:element minOccurs="0" name="Succeed" type="xs:boolean" />
+      <xs:element minOccurs="0" name="preValue" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ResultInfoOfArrayOfFundSpecialStageYJ36K23J" nillable="true" type="tns:ResultInfoOfArrayOfFundSpecialStageYJ36K23J" />
+  <xs:complexType name="ArrayOfFundSpecialStage">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="FundSpecialStage" nillable="true" type="tns:FundSpecialStage" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfFundSpecialStage" nillable="true" type="tns:ArrayOfFundSpecialStage" />
+  <xs:complexType name="FundSpecialStage">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AppiontRedeemEndTime" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="CashBagBeginDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="CashBagEndDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="CreateTime" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="ExceptProfit" type="xs:decimal" />
+      <xs:element minOccurs="0" name="FundCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Id" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IsDel" type="xs:boolean" />
+      <xs:element minOccurs="0" name="IsEnableBuy" type="xs:boolean" />
+      <xs:element minOccurs="0" name="IsEnableRedeem" type="xs:boolean" />
+      <xs:element minOccurs="0" name="LastStageId" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="MarketBeginDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="MarketEndDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="MoneyTransferDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="OperationPeriod" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PeopleLimit" type="xs:int" />
+      <xs:element minOccurs="0" name="PeopleLimitsp" type="xs:int" />
+      <xs:element minOccurs="0" name="RedeemBeginDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="RedeemEndDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="RedeemType" type="xs:int" />
+      <xs:element minOccurs="0" name="SellBeginDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="SellEndDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="SellState" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="StageBeginDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="StageEndDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="StageTimeLimit" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="UpdateTime" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="WholeLimit" type="xs:decimal" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="FundSpecialStage" nillable="true" type="tns:FundSpecialStage" />
+  <xs:complexType name="ResultInfoOfFundSpecialStageYJ36K23J">
+    <xs:annotation>
+      <xs:appinfo>
+        <GenericType Name="ResultInfoOf{0}{#}" Namespace="http://schemas.datacontract.org/2004/07/Em.Entities" xmlns="http://schemas.microsoft.com/2003/10/Serialization/">
+          <GenericParameter Name="FundSpecialStage" Namespace="http://schemas.datacontract.org/2004/07/Em.Entities" />
+        </GenericType>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CodeMessage" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ErrorCode" nillable="true" type="xs:string" />
+      <xs:element xmlns:q8="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="ErrorMessages" nillable="true" type="q8:ArrayOfstring" />
+      <xs:element minOccurs="0" name="Message" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="OldMessage" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Result" nillable="true" type="tns:FundSpecialStage" />
+      <xs:element minOccurs="0" name="Succeed" type="xs:boolean" />
+      <xs:element minOccurs="0" name="preValue" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ResultInfoOfFundSpecialStageYJ36K23J" nillable="true" type="tns:ResultInfoOfFundSpecialStageYJ36K23J" />
+  <xs:complexType name="ResultInfoOfFundRedeemTypeYJ36K23J">
+    <xs:annotation>
+      <xs:appinfo>
+        <GenericType Name="ResultInfoOf{0}{#}" Namespace="http://schemas.datacontract.org/2004/07/Em.Entities" xmlns="http://schemas.microsoft.com/2003/10/Serialization/">
+          <GenericParameter Name="FundRedeemType" Namespace="http://schemas.datacontract.org/2004/07/Em.Entities" />
+        </GenericType>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CodeMessage" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ErrorCode" nillable="true" type="xs:string" />
+      <xs:element xmlns:q9="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="ErrorMessages" nillable="true" type="q9:ArrayOfstring" />
+      <xs:element minOccurs="0" name="Message" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="OldMessage" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Result" nillable="true" type="tns:FundRedeemType" />
+      <xs:element minOccurs="0" name="Succeed" type="xs:boolean" />
+      <xs:element minOccurs="0" name="preValue" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ResultInfoOfFundRedeemTypeYJ36K23J" nillable="true" type="tns:ResultInfoOfFundRedeemTypeYJ36K23J" />
+  <xs:complexType name="FundRedeemType">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CreateTime" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="CustomerNo" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FundCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Id" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IsDel" type="xs:boolean" />
+      <xs:element minOccurs="0" name="IsEnable" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Redeemtype" type="xs:int" />
+      <xs:element minOccurs="0" name="UpdateTime" type="xs:dateTime" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="FundRedeemType" nillable="true" type="tns:FundRedeemType" />
+  <xs:complexType name="ResultInfoOfArrayOfFundRedeemTypeYJ36K23J">
+    <xs:annotation>
+      <xs:appinfo>
+        <GenericType Name="ResultInfoOf{0}{#}" Namespace="http://schemas.datacontract.org/2004/07/Em.Entities" xmlns="http://schemas.microsoft.com/2003/10/Serialization/">
+          <GenericParameter Name="ArrayOfFundRedeemType" Namespace="http://schemas.datacontract.org/2004/07/Em.Entities" />
+        </GenericType>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CodeMessage" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ErrorCode" nillable="true" type="xs:string" />
+      <xs:element xmlns:q10="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="ErrorMessages" nillable="true" type="q10:ArrayOfstring" />
+      <xs:element minOccurs="0" name="Message" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="OldMessage" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Result" nillable="true" type="tns:ArrayOfFundRedeemType" />
+      <xs:element minOccurs="0" name="Succeed" type="xs:boolean" />
+      <xs:element minOccurs="0" name="preValue" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ResultInfoOfArrayOfFundRedeemTypeYJ36K23J" nillable="true" type="tns:ResultInfoOfArrayOfFundRedeemTypeYJ36K23J" />
+  <xs:complexType name="ArrayOfFundRedeemType">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="FundRedeemType" nillable="true" type="tns:FundRedeemType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfFundRedeemType" nillable="true" type="tns:ArrayOfFundRedeemType" />
+  <xs:complexType name="ResultInfoOfArrayOfFundRedeemTypeJourYJ36K23J">
+    <xs:annotation>
+      <xs:appinfo>
+        <GenericType Name="ResultInfoOf{0}{#}" Namespace="http://schemas.datacontract.org/2004/07/Em.Entities" xmlns="http://schemas.microsoft.com/2003/10/Serialization/">
+          <GenericParameter Name="ArrayOfFundRedeemTypeJour" Namespace="http://schemas.datacontract.org/2004/07/Em.Entities" />
+        </GenericType>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CodeMessage" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ErrorCode" nillable="true" type="xs:string" />
+      <xs:element xmlns:q11="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="ErrorMessages" nillable="true" type="q11:ArrayOfstring" />
+      <xs:element minOccurs="0" name="Message" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="OldMessage" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Result" nillable="true" type="tns:ArrayOfFundRedeemTypeJour" />
+      <xs:element minOccurs="0" name="Succeed" type="xs:boolean" />
+      <xs:element minOccurs="0" name="preValue" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ResultInfoOfArrayOfFundRedeemTypeJourYJ36K23J" nillable="true" type="tns:ResultInfoOfArrayOfFundRedeemTypeJourYJ36K23J" />
+  <xs:complexType name="ArrayOfFundRedeemTypeJour">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="FundRedeemTypeJour" nillable="true" type="tns:FundRedeemTypeJour" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfFundRedeemTypeJour" nillable="true" type="tns:ArrayOfFundRedeemTypeJour" />
+  <xs:complexType name="FundRedeemTypeJour">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CreateTime" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="CustomerNo" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FundCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Id" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IsDel" type="xs:boolean" />
+      <xs:element minOccurs="0" name="IsEnable" type="xs:boolean" />
+      <xs:element minOccurs="0" name="LastRedeemtype" type="xs:int" />
+      <xs:element minOccurs="0" name="OperatorType" type="xs:int" />
+      <xs:element minOccurs="0" name="TargetRedeemtype" type="xs:int" />
+      <xs:element minOccurs="0" name="UpdateTime" type="xs:dateTime" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="FundRedeemTypeJour" nillable="true" type="tns:FundRedeemTypeJour" />
+  <xs:complexType name="ResultInfoOfArrayOfstringuHEDJ7Dj">
+    <xs:annotation>
+      <xs:appinfo>
+        <GenericType Name="ResultInfoOf{0}{#}" Namespace="http://schemas.datacontract.org/2004/07/Em.Entities" xmlns="http://schemas.microsoft.com/2003/10/Serialization/">
+          <GenericParameter Name="ArrayOfstring" Namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+        </GenericType>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CodeMessage" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ErrorCode" nillable="true" type="xs:string" />
+      <xs:element xmlns:q12="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="ErrorMessages" nillable="true" type="q12:ArrayOfstring" />
+      <xs:element minOccurs="0" name="Message" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="OldMessage" nillable="true" type="xs:string" />
+      <xs:element xmlns:q13="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Result" nillable="true" type="q13:ArrayOfstring" />
+      <xs:element minOccurs="0" name="Succeed" type="xs:boolean" />
+      <xs:element minOccurs="0" name="preValue" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ResultInfoOfArrayOfstringuHEDJ7Dj" nillable="true" type="tns:ResultInfoOfArrayOfstringuHEDJ7Dj" />
+  <xs:complexType name="ResultInfoOfint">
+    <xs:annotation>
+      <xs:appinfo>
+        <GenericType Name="ResultInfoOf{0}{#}" Namespace="http://schemas.datacontract.org/2004/07/Em.Entities" xmlns="http://schemas.microsoft.com/2003/10/Serialization/">
+          <GenericParameter Name="int" Namespace="http://www.w3.org/2001/XMLSchema" />
+        </GenericType>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CodeMessage" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ErrorCode" nillable="true" type="xs:string" />
+      <xs:element xmlns:q14="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="ErrorMessages" nillable="true" type="q14:ArrayOfstring" />
+      <xs:element minOccurs="0" name="Message" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="OldMessage" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Result" type="xs:int" />
+      <xs:element minOccurs="0" name="Succeed" type="xs:boolean" />
+      <xs:element minOccurs="0" name="preValue" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ResultInfoOfint" nillable="true" type="tns:ResultInfoOfint" />
+  <xs:complexType name="ResultInfoOfBusinDerivativesAppYJ36K23J">
+    <xs:annotation>
+      <xs:appinfo>
+        <GenericType Name="ResultInfoOf{0}{#}" Namespace="http://schemas.datacontract.org/2004/07/Em.Entities" xmlns="http://schemas.microsoft.com/2003/10/Serialization/">
+          <GenericParameter Name="BusinDerivativesApp" Namespace="http://schemas.datacontract.org/2004/07/Em.Entities" />
+        </GenericType>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CodeMessage" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ErrorCode" nillable="true" type="xs:string" />
+      <xs:element xmlns:q15="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="ErrorMessages" nillable="true" type="q15:ArrayOfstring" />
+      <xs:element minOccurs="0" name="Message" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="OldMessage" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Result" nillable="true" type="tns:BusinDerivativesApp" />
+      <xs:element minOccurs="0" name="Succeed" type="xs:boolean" />
+      <xs:element minOccurs="0" name="preValue" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ResultInfoOfBusinDerivativesAppYJ36K23J" nillable="true" type="tns:ResultInfoOfBusinDerivativesAppYJ36K23J" />
+  <xs:complexType name="BusinDerivativesApp">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:CustEntityBase">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="BusinSerialNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="BusinType" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="CashBagParentNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="FlowType" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="OpenTime" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="Properties" nillable="true" type="tns:ArrayOfCustBusinDerivSetting" />
+          <xs:element minOccurs="0" name="State" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="TraceNo" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="BusinDerivativesApp" nillable="true" type="tns:BusinDerivativesApp" />
+  <xs:complexType name="ArrayOfCustBusinDerivSetting">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="CustBusinDerivSetting" nillable="true" type="tns:CustBusinDerivSetting" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfCustBusinDerivSetting" nillable="true" type="tns:ArrayOfCustBusinDerivSetting" />
+  <xs:complexType name="CustBusinDerivSetting">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:EntityBase">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="BusinSerialNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Id" type="xs:int" />
+          <xs:element minOccurs="0" name="PropertyCode" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Value" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="CustBusinDerivSetting" nillable="true" type="tns:CustBusinDerivSetting" />
+  <xs:complexType name="ResultInfoOfArrayOfFundExtAttributeYJ36K23J">
+    <xs:annotation>
+      <xs:appinfo>
+        <GenericType Name="ResultInfoOf{0}{#}" Namespace="http://schemas.datacontract.org/2004/07/Em.Entities" xmlns="http://schemas.microsoft.com/2003/10/Serialization/">
+          <GenericParameter Name="ArrayOfFundExtAttribute" Namespace="http://schemas.datacontract.org/2004/07/Em.Entities" />
+        </GenericType>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CodeMessage" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ErrorCode" nillable="true" type="xs:string" />
+      <xs:element xmlns:q16="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="ErrorMessages" nillable="true" type="q16:ArrayOfstring" />
+      <xs:element minOccurs="0" name="Message" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="OldMessage" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Result" nillable="true" type="tns:ArrayOfFundExtAttribute" />
+      <xs:element minOccurs="0" name="Succeed" type="xs:boolean" />
+      <xs:element minOccurs="0" name="preValue" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ResultInfoOfArrayOfFundExtAttributeYJ36K23J" nillable="true" type="tns:ResultInfoOfArrayOfFundExtAttributeYJ36K23J" />
+  <xs:complexType name="ArrayOfFundExtAttribute">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="FundExtAttribute" nillable="true" type="tns:FundExtAttribute" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfFundExtAttribute" nillable="true" type="tns:ArrayOfFundExtAttribute" />
+  <xs:complexType name="FundExtAttribute">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:EntityBase">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="ExtType" type="xs:int" />
+          <xs:element minOccurs="0" name="FundCode" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="FundName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ID" type="xs:int" />
+          <xs:element minOccurs="0" name="IsDel" type="xs:boolean" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="FundExtAttribute" nillable="true" type="tns:FundExtAttribute" />
+  <xs:complexType name="ResultInfoOfArrayOfBusinAppYJ36K23J">
+    <xs:annotation>
+      <xs:appinfo>
+        <GenericType Name="ResultInfoOf{0}{#}" Namespace="http://schemas.datacontract.org/2004/07/Em.Entities" xmlns="http://schemas.microsoft.com/2003/10/Serialization/">
+          <GenericParameter Name="ArrayOfBusinApp" Namespace="http://schemas.datacontract.org/2004/07/Em.Entities" />
+        </GenericType>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CodeMessage" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ErrorCode" nillable="true" type="xs:string" />
+      <xs:element xmlns:q17="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="ErrorMessages" nillable="true" type="q17:ArrayOfstring" />
+      <xs:element minOccurs="0" name="Message" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="OldMessage" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Result" nillable="true" type="tns:ArrayOfBusinApp" />
+      <xs:element minOccurs="0" name="Succeed" type="xs:boolean" />
+      <xs:element minOccurs="0" name="preValue" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ResultInfoOfArrayOfBusinAppYJ36K23J" nillable="true" type="tns:ResultInfoOfArrayOfBusinAppYJ36K23J" />
+  <xs:complexType name="ArrayOfBusinApp">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="BusinApp" nillable="true" type="tns:BusinApp" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfBusinApp" nillable="true" type="tns:ArrayOfBusinApp" />
+  <xs:complexType name="ResultInfoOfArrayOfFundExYJ36K23J">
+    <xs:annotation>
+      <xs:appinfo>
+        <GenericType Name="ResultInfoOf{0}{#}" Namespace="http://schemas.datacontract.org/2004/07/Em.Entities" xmlns="http://schemas.microsoft.com/2003/10/Serialization/">
+          <GenericParameter Name="ArrayOfFundEx" Namespace="http://schemas.datacontract.org/2004/07/Em.Entities" />
+        </GenericType>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CodeMessage" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ErrorCode" nillable="true" type="xs:string" />
+      <xs:element xmlns:q18="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="ErrorMessages" nillable="true" type="q18:ArrayOfstring" />
+      <xs:element minOccurs="0" name="Message" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="OldMessage" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Result" nillable="true" type="tns:ArrayOfFundEx" />
+      <xs:element minOccurs="0" name="Succeed" type="xs:boolean" />
+      <xs:element minOccurs="0" name="preValue" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ResultInfoOfArrayOfFundExYJ36K23J" nillable="true" type="tns:ResultInfoOfArrayOfFundExYJ36K23J" />
+  <xs:complexType name="ArrayOfFundEx">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="FundEx" nillable="true" type="tns:FundEx" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfFundEx" nillable="true" type="tns:ArrayOfFundEx" />
+  <xs:complexType name="FundEx">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CreateTime" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="FundCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FundGroup" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FundTypeEx" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FundTypeNameEx" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ID" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IsDel" type="xs:boolean" />
+      <xs:element minOccurs="0" name="UpdateTime" type="xs:dateTime" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="FundEx" nillable="true" type="tns:FundEx" />
+  <xs:complexType name="ResultInfoOfArrayOfDividendCfmYJ36K23J">
+    <xs:annotation>
+      <xs:appinfo>
+        <GenericType Name="ResultInfoOf{0}{#}" Namespace="http://schemas.datacontract.org/2004/07/Em.Entities" xmlns="http://schemas.microsoft.com/2003/10/Serialization/">
+          <GenericParameter Name="ArrayOfDividendCfm" Namespace="http://schemas.datacontract.org/2004/07/Em.Entities" />
+        </GenericType>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CodeMessage" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ErrorCode" nillable="true" type="xs:string" />
+      <xs:element xmlns:q19="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="ErrorMessages" nillable="true" type="q19:ArrayOfstring" />
+      <xs:element minOccurs="0" name="Message" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="OldMessage" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Result" nillable="true" type="tns:ArrayOfDividendCfm" />
+      <xs:element minOccurs="0" name="Succeed" type="xs:boolean" />
+      <xs:element minOccurs="0" name="preValue" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ResultInfoOfArrayOfDividendCfmYJ36K23J" nillable="true" type="tns:ResultInfoOfArrayOfDividendCfmYJ36K23J" />
+  <xs:complexType name="ArrayOfDividendCfm">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="DividendCfm" nillable="true" type="tns:DividendCfm" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfDividendCfm" nillable="true" type="tns:ArrayOfDividendCfm" />
+  <xs:complexType name="DividendCfm">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CustomerNo" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DividendAmount" type="xs:decimal" />
+      <xs:element minOccurs="0" name="DividendMethod" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DividendVol" type="xs:decimal" />
+      <xs:element minOccurs="0" name="FundCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FundName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Nav" type="xs:decimal" />
+      <xs:element minOccurs="0" name="TransactionCfmDate" type="xs:dateTime" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DividendCfm" nillable="true" type="tns:DividendCfm" />
+  <xs:complexType name="ResultInfoOfArrayOfFinancialShareYJ36K23J">
+    <xs:annotation>
+      <xs:appinfo>
+        <GenericType Name="ResultInfoOf{0}{#}" Namespace="http://schemas.datacontract.org/2004/07/Em.Entities" xmlns="http://schemas.microsoft.com/2003/10/Serialization/">
+          <GenericParameter Name="ArrayOfFinancialShare" Namespace="http://schemas.datacontract.org/2004/07/Em.Entities" />
+        </GenericType>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CodeMessage" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ErrorCode" nillable="true" type="xs:string" />
+      <xs:element xmlns:q20="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="ErrorMessages" nillable="true" type="q20:ArrayOfstring" />
+      <xs:element minOccurs="0" name="Message" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="OldMessage" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Result" nillable="true" type="tns:ArrayOfFinancialShare" />
+      <xs:element minOccurs="0" name="Succeed" type="xs:boolean" />
+      <xs:element minOccurs="0" name="preValue" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ResultInfoOfArrayOfFinancialShareYJ36K23J" nillable="true" type="tns:ResultInfoOfArrayOfFinancialShareYJ36K23J" />
+  <xs:complexType name="ArrayOfFinancialShare">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="FinancialShare" nillable="true" type="tns:FinancialShare" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfFinancialShare" nillable="true" type="tns:ArrayOfFinancialShare" />
+  <xs:complexType name="FinancialShare">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:CustEntityBase">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="AccountStatus" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="AllowRedemptDate" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="AvailableVol" type="xs:decimal" />
+          <xs:element minOccurs="0" name="BranchCode" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="CurAvailableVol" type="xs:decimal" />
+          <xs:element minOccurs="0" name="DefDividendMethod" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="DetailFlag" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="DistributorCode" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="EndDate" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="FundCode" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="GuaranteedAmount" type="xs:decimal" />
+          <xs:element minOccurs="0" name="Id" type="xs:int" />
+          <xs:element minOccurs="0" name="LastAllowredEmptDate" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="Periods" type="xs:int" />
+          <xs:element minOccurs="0" name="PrevEndDate" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="ShareClass" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ShareRegisterDate" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="SourceType" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="TAAccountID" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="TASerialNO" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="TotalBackendLoad" type="xs:decimal" />
+          <xs:element minOccurs="0" name="TotalFrozenVol" type="xs:decimal" />
+          <xs:element minOccurs="0" name="TotalVolOfDistributorInTA" type="xs:decimal" />
+          <xs:element minOccurs="0" name="TransactionAccountID" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="TransactionCfmDate" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="UndistributeIncome" type="xs:decimal" />
+          <xs:element minOccurs="0" name="UndistributeIncomeFlag" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="FinancialShare" nillable="true" type="tns:FinancialShare" />
+  <xs:complexType name="ResultInfoOfArrayOfFixedBagShare2GJrRq2U">
+    <xs:annotation>
+      <xs:appinfo>
+        <GenericType Name="ResultInfoOf{0}{#}" Namespace="http://schemas.datacontract.org/2004/07/Em.Entities" xmlns="http://schemas.microsoft.com/2003/10/Serialization/">
+          <GenericParameter Name="ArrayOfFixedBagShare" Namespace="http://schemas.datacontract.org/2004/07/Em.Entities.Data" />
+        </GenericType>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CodeMessage" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ErrorCode" nillable="true" type="xs:string" />
+      <xs:element xmlns:q21="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="ErrorMessages" nillable="true" type="q21:ArrayOfstring" />
+      <xs:element minOccurs="0" name="Message" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="OldMessage" nillable="true" type="xs:string" />
+      <xs:element xmlns:q22="http://schemas.datacontract.org/2004/07/Em.Entities.Data" minOccurs="0" name="Result" nillable="true" type="q22:ArrayOfFixedBagShare" />
+      <xs:element minOccurs="0" name="Succeed" type="xs:boolean" />
+      <xs:element minOccurs="0" name="preValue" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ResultInfoOfArrayOfFixedBagShare2GJrRq2U" nillable="true" type="tns:ResultInfoOfArrayOfFixedBagShare2GJrRq2U" />
+  <xs:complexType name="ResultInfoOfArrayOfShareYJ36K23J">
+    <xs:annotation>
+      <xs:appinfo>
+        <GenericType Name="ResultInfoOf{0}{#}" Namespace="http://schemas.datacontract.org/2004/07/Em.Entities" xmlns="http://schemas.microsoft.com/2003/10/Serialization/">
+          <GenericParameter Name="ArrayOfShare" Namespace="http://schemas.datacontract.org/2004/07/Em.Entities" />
+        </GenericType>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CodeMessage" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ErrorCode" nillable="true" type="xs:string" />
+      <xs:element xmlns:q23="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="ErrorMessages" nillable="true" type="q23:ArrayOfstring" />
+      <xs:element minOccurs="0" name="Message" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="OldMessage" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Result" nillable="true" type="tns:ArrayOfShare" />
+      <xs:element minOccurs="0" name="Succeed" type="xs:boolean" />
+      <xs:element minOccurs="0" name="preValue" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ResultInfoOfArrayOfShareYJ36K23J" nillable="true" type="tns:ResultInfoOfArrayOfShareYJ36K23J" />
+  <xs:complexType name="ArrayOfShare">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Share" nillable="true" type="tns:Share" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfShare" nillable="true" type="tns:ArrayOfShare" />
+  <xs:complexType name="Share">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:CustEntityBase">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="AvailableVol" type="xs:decimal" />
+          <xs:element minOccurs="0" name="AverageCost" type="xs:decimal" />
+          <xs:element minOccurs="0" name="BankCardNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="BankCode" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="BusinFrozenVol" type="xs:decimal" />
+          <xs:element minOccurs="0" name="ChargeType" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="DepositAccountNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="EmFrozenVol" type="xs:decimal" />
+          <xs:element minOccurs="0" name="EmRemark" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="FrozenVol" type="xs:decimal" />
+          <xs:element minOccurs="0" name="FundCode" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Id" type="xs:int" />
+          <xs:element minOccurs="0" name="OnwayVol" type="xs:decimal" />
+          <xs:element minOccurs="0" name="OpenProfit" type="xs:decimal" />
+          <xs:element minOccurs="0" name="TotalVol" type="xs:decimal" />
+          <xs:element minOccurs="0" name="UnPaid" type="xs:decimal" />
+          <xs:element minOccurs="0" name="UnPaidDate" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="UnitCost" type="xs:decimal" />
+          <xs:element minOccurs="0" name="UnitVal" type="xs:decimal" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="Share" nillable="true" type="tns:Share" />
+  <xs:complexType name="ResultInfoOfFixedBagShare2GJrRq2U">
+    <xs:annotation>
+      <xs:appinfo>
+        <GenericType Name="ResultInfoOf{0}{#}" Namespace="http://schemas.datacontract.org/2004/07/Em.Entities" xmlns="http://schemas.microsoft.com/2003/10/Serialization/">
+          <GenericParameter Name="FixedBagShare" Namespace="http://schemas.datacontract.org/2004/07/Em.Entities.Data" />
+        </GenericType>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CodeMessage" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ErrorCode" nillable="true" type="xs:string" />
+      <xs:element xmlns:q24="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="ErrorMessages" nillable="true" type="q24:ArrayOfstring" />
+      <xs:element minOccurs="0" name="Message" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="OldMessage" nillable="true" type="xs:string" />
+      <xs:element xmlns:q25="http://schemas.datacontract.org/2004/07/Em.Entities.Data" minOccurs="0" name="Result" nillable="true" type="q25:FixedBagShare" />
+      <xs:element minOccurs="0" name="Succeed" type="xs:boolean" />
+      <xs:element minOccurs="0" name="preValue" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ResultInfoOfFixedBagShare2GJrRq2U" nillable="true" type="tns:ResultInfoOfFixedBagShare2GJrRq2U" />
+  <xs:complexType name="ResultInfoOfFinancialShareYJ36K23J">
+    <xs:annotation>
+      <xs:appinfo>
+        <GenericType Name="ResultInfoOf{0}{#}" Namespace="http://schemas.datacontract.org/2004/07/Em.Entities" xmlns="http://schemas.microsoft.com/2003/10/Serialization/">
+          <GenericParameter Name="FinancialShare" Namespace="http://schemas.datacontract.org/2004/07/Em.Entities" />
+        </GenericType>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CodeMessage" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ErrorCode" nillable="true" type="xs:string" />
+      <xs:element xmlns:q26="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="ErrorMessages" nillable="true" type="q26:ArrayOfstring" />
+      <xs:element minOccurs="0" name="Message" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="OldMessage" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Result" nillable="true" type="tns:FinancialShare" />
+      <xs:element minOccurs="0" name="Succeed" type="xs:boolean" />
+      <xs:element minOccurs="0" name="preValue" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ResultInfoOfFinancialShareYJ36K23J" nillable="true" type="tns:ResultInfoOfFinancialShareYJ36K23J" />
+  <xs:complexType name="ResultInfoOfArrayOfKeyValueOfstringdecimaluHEDJ7Dj">
+    <xs:annotation>
+      <xs:appinfo>
+        <GenericType Name="ResultInfoOf{0}{#}" Namespace="http://schemas.datacontract.org/2004/07/Em.Entities" xmlns="http://schemas.microsoft.com/2003/10/Serialization/">
+          <GenericParameter Name="ArrayOfKeyValueOf{0}{1}{#}" Namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+            <GenericParameter Name="string" Namespace="http://www.w3.org/2001/XMLSchema" />
+            <GenericParameter Name="decimal" Namespace="http://www.w3.org/2001/XMLSchema" />
+          </GenericParameter>
+        </GenericType>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CodeMessage" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ErrorCode" nillable="true" type="xs:string" />
+      <xs:element xmlns:q27="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="ErrorMessages" nillable="true" type="q27:ArrayOfstring" />
+      <xs:element minOccurs="0" name="Message" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="OldMessage" nillable="true" type="xs:string" />
+      <xs:element xmlns:q28="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Result" nillable="true" type="q28:ArrayOfKeyValueOfstringdecimal" />
+      <xs:element minOccurs="0" name="Succeed" type="xs:boolean" />
+      <xs:element minOccurs="0" name="preValue" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ResultInfoOfArrayOfKeyValueOfstringdecimaluHEDJ7Dj" nillable="true" type="tns:ResultInfoOfArrayOfKeyValueOfstringdecimaluHEDJ7Dj" />
+  <xs:complexType name="ResultInfoOfArrayOfShareFreezingYJ36K23J">
+    <xs:annotation>
+      <xs:appinfo>
+        <GenericType Name="ResultInfoOf{0}{#}" Namespace="http://schemas.datacontract.org/2004/07/Em.Entities" xmlns="http://schemas.microsoft.com/2003/10/Serialization/">
+          <GenericParameter Name="ArrayOfShareFreezing" Namespace="http://schemas.datacontract.org/2004/07/Em.Entities" />
+        </GenericType>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CodeMessage" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ErrorCode" nillable="true" type="xs:string" />
+      <xs:element xmlns:q29="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="ErrorMessages" nillable="true" type="q29:ArrayOfstring" />
+      <xs:element minOccurs="0" name="Message" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="OldMessage" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Result" nillable="true" type="tns:ArrayOfShareFreezing" />
+      <xs:element minOccurs="0" name="Succeed" type="xs:boolean" />
+      <xs:element minOccurs="0" name="preValue" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ResultInfoOfArrayOfShareFreezingYJ36K23J" nillable="true" type="tns:ResultInfoOfArrayOfShareFreezingYJ36K23J" />
+  <xs:complexType name="ArrayOfShareFreezing">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ShareFreezing" nillable="true" type="tns:ShareFreezing" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfShareFreezing" nillable="true" type="tns:ArrayOfShareFreezing" />
+  <xs:complexType name="ShareFreezing">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:CustEntityBase">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="AppSheetSerialNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="FrozenRemark" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="FrozenShare" type="xs:decimal" />
+          <xs:element minOccurs="0" name="FrozenType" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="FundCode" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ParentSheetSerialNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ShareId" type="xs:int" />
+          <xs:element minOccurs="0" name="WorkDay" type="xs:dateTime" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="ShareFreezing" nillable="true" type="tns:ShareFreezing" />
+  <xs:complexType name="ResultInfoOfstring">
+    <xs:annotation>
+      <xs:appinfo>
+        <GenericType Name="ResultInfoOf{0}{#}" Namespace="http://schemas.datacontract.org/2004/07/Em.Entities" xmlns="http://schemas.microsoft.com/2003/10/Serialization/">
+          <GenericParameter Name="string" Namespace="http://www.w3.org/2001/XMLSchema" />
+        </GenericType>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CodeMessage" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ErrorCode" nillable="true" type="xs:string" />
+      <xs:element xmlns:q30="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="ErrorMessages" nillable="true" type="q30:ArrayOfstring" />
+      <xs:element minOccurs="0" name="Message" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="OldMessage" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Result" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Succeed" type="xs:boolean" />
+      <xs:element minOccurs="0" name="preValue" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ResultInfoOfstring" nillable="true" type="tns:ResultInfoOfstring" />
+  <xs:complexType name="ResultInfoOfCustDividendMethodYJ36K23J">
+    <xs:annotation>
+      <xs:appinfo>
+        <GenericType Name="ResultInfoOf{0}{#}" Namespace="http://schemas.datacontract.org/2004/07/Em.Entities" xmlns="http://schemas.microsoft.com/2003/10/Serialization/">
+          <GenericParameter Name="CustDividendMethod" Namespace="http://schemas.datacontract.org/2004/07/Em.Entities" />
+        </GenericType>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CodeMessage" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ErrorCode" nillable="true" type="xs:string" />
+      <xs:element xmlns:q31="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="ErrorMessages" nillable="true" type="q31:ArrayOfstring" />
+      <xs:element minOccurs="0" name="Message" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="OldMessage" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Result" nillable="true" type="tns:CustDividendMethod" />
+      <xs:element minOccurs="0" name="Succeed" type="xs:boolean" />
+      <xs:element minOccurs="0" name="preValue" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ResultInfoOfCustDividendMethodYJ36K23J" nillable="true" type="tns:ResultInfoOfCustDividendMethodYJ36K23J" />
+  <xs:complexType name="CustDividendMethod">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:CustEntityBase">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="ChargeType" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="DividendMethod" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="FundCode" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="FundName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Id" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="CustDividendMethod" nillable="true" type="tns:CustDividendMethod" />
+  <xs:complexType name="ArrayOfCustDividendMethod">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="CustDividendMethod" nillable="true" type="tns:CustDividendMethod" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfCustDividendMethod" nillable="true" type="tns:ArrayOfCustDividendMethod" />
+  <xs:complexType name="ResultInfoOfArrayOfCustDividendMethodYJ36K23J">
+    <xs:annotation>
+      <xs:appinfo>
+        <GenericType Name="ResultInfoOf{0}{#}" Namespace="http://schemas.datacontract.org/2004/07/Em.Entities" xmlns="http://schemas.microsoft.com/2003/10/Serialization/">
+          <GenericParameter Name="ArrayOfCustDividendMethod" Namespace="http://schemas.datacontract.org/2004/07/Em.Entities" />
+        </GenericType>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CodeMessage" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ErrorCode" nillable="true" type="xs:string" />
+      <xs:element xmlns:q32="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="ErrorMessages" nillable="true" type="q32:ArrayOfstring" />
+      <xs:element minOccurs="0" name="Message" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="OldMessage" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Result" nillable="true" type="tns:ArrayOfCustDividendMethod" />
+      <xs:element minOccurs="0" name="Succeed" type="xs:boolean" />
+      <xs:element minOccurs="0" name="preValue" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ResultInfoOfArrayOfCustDividendMethodYJ36K23J" nillable="true" type="tns:ResultInfoOfArrayOfCustDividendMethodYJ36K23J" />
+  <xs:complexType name="ResultInfoOfArrayOfWhiteListsYJ36K23J">
+    <xs:annotation>
+      <xs:appinfo>
+        <GenericType Name="ResultInfoOf{0}{#}" Namespace="http://schemas.datacontract.org/2004/07/Em.Entities" xmlns="http://schemas.microsoft.com/2003/10/Serialization/">
+          <GenericParameter Name="ArrayOfWhiteLists" Namespace="http://schemas.datacontract.org/2004/07/Em.Entities" />
+        </GenericType>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CodeMessage" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ErrorCode" nillable="true" type="xs:string" />
+      <xs:element xmlns:q33="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="ErrorMessages" nillable="true" type="q33:ArrayOfstring" />
+      <xs:element minOccurs="0" name="Message" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="OldMessage" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Result" nillable="true" type="tns:ArrayOfWhiteLists" />
+      <xs:element minOccurs="0" name="Succeed" type="xs:boolean" />
+      <xs:element minOccurs="0" name="preValue" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ResultInfoOfArrayOfWhiteListsYJ36K23J" nillable="true" type="tns:ResultInfoOfArrayOfWhiteListsYJ36K23J" />
+  <xs:complexType name="ArrayOfWhiteLists">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="WhiteLists" nillable="true" type="tns:WhiteLists" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfWhiteLists" nillable="true" type="tns:ArrayOfWhiteLists" />
+  <xs:complexType name="WhiteLists">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:CustEntityBase">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="BusinessType" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="FundCode" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="FundName" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="WhiteLists" nillable="true" type="tns:WhiteLists" />
+  <xs:complexType name="ResultInfoOfArrayOfBusinCfmYJ36K23J">
+    <xs:annotation>
+      <xs:appinfo>
+        <GenericType Name="ResultInfoOf{0}{#}" Namespace="http://schemas.datacontract.org/2004/07/Em.Entities" xmlns="http://schemas.microsoft.com/2003/10/Serialization/">
+          <GenericParameter Name="ArrayOfBusinCfm" Namespace="http://schemas.datacontract.org/2004/07/Em.Entities" />
+        </GenericType>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CodeMessage" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ErrorCode" nillable="true" type="xs:string" />
+      <xs:element xmlns:q34="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="ErrorMessages" nillable="true" type="q34:ArrayOfstring" />
+      <xs:element minOccurs="0" name="Message" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="OldMessage" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Result" nillable="true" type="tns:ArrayOfBusinCfm" />
+      <xs:element minOccurs="0" name="Succeed" type="xs:boolean" />
+      <xs:element minOccurs="0" name="preValue" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ResultInfoOfArrayOfBusinCfmYJ36K23J" nillable="true" type="tns:ResultInfoOfArrayOfBusinCfmYJ36K23J" />
+  <xs:complexType name="ArrayOfBusinCfm">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="BusinCfm" nillable="true" type="tns:BusinCfm" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfBusinCfm" nillable="true" type="tns:ArrayOfBusinCfm" />
+  <xs:complexType name="BusinCfm">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:CustEntityBase">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="AppSheetSerialNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="BankCardNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="BankCode" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="BusinName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="BusinType" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="CfmAmount" type="xs:decimal" />
+          <xs:element minOccurs="0" name="CfmResult" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="CfmSheetSerialNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="CfmState" type="tns:EnumCfmState" />
+          <xs:element minOccurs="0" name="CfmVol" type="xs:decimal" />
+          <xs:element minOccurs="0" name="Charge" type="xs:decimal" />
+          <xs:element minOccurs="0" name="ChargeType" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="DepositAccountNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="FundCode" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="FundCompany" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="FundCompanyNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="FundName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Nav" type="xs:decimal" />
+          <xs:element minOccurs="0" name="ObjectFundCode" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="OtherFare" type="xs:decimal" />
+          <xs:element minOccurs="0" name="ParentBusinType" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ReturnCode" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="StampTax" type="xs:decimal" />
+          <xs:element minOccurs="0" name="TaFare" type="xs:decimal" />
+          <xs:element minOccurs="0" name="TransactionCfmDate" type="xs:dateTime" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="BusinCfm" nillable="true" type="tns:BusinCfm" />
+  <xs:simpleType name="EnumCfmState">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Normal" />
+      <xs:enumeration value="ShareDealed" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="EnumCfmState" nillable="true" type="tns:EnumCfmState" />
+  <xs:complexType name="ResultInfoOfArrayOfBusinDerivativesAppYJ36K23J">
+    <xs:annotation>
+      <xs:appinfo>
+        <GenericType Name="ResultInfoOf{0}{#}" Namespace="http://schemas.datacontract.org/2004/07/Em.Entities" xmlns="http://schemas.microsoft.com/2003/10/Serialization/">
+          <GenericParameter Name="ArrayOfBusinDerivativesApp" Namespace="http://schemas.datacontract.org/2004/07/Em.Entities" />
+        </GenericType>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CodeMessage" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ErrorCode" nillable="true" type="xs:string" />
+      <xs:element xmlns:q35="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="ErrorMessages" nillable="true" type="q35:ArrayOfstring" />
+      <xs:element minOccurs="0" name="Message" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="OldMessage" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Result" nillable="true" type="tns:ArrayOfBusinDerivativesApp" />
+      <xs:element minOccurs="0" name="Succeed" type="xs:boolean" />
+      <xs:element minOccurs="0" name="preValue" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ResultInfoOfArrayOfBusinDerivativesAppYJ36K23J" nillable="true" type="tns:ResultInfoOfArrayOfBusinDerivativesAppYJ36K23J" />
+  <xs:complexType name="ArrayOfBusinDerivativesApp">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="BusinDerivativesApp" nillable="true" type="tns:BusinDerivativesApp" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfBusinDerivativesApp" nillable="true" type="tns:ArrayOfBusinDerivativesApp" />
+  <xs:simpleType name="EnumPayState">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Succeed">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">1</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Failed">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">0</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Waiting" />
+      <xs:enumeration value="Processing" />
+      <xs:enumeration value="Unknown" />
+      <xs:enumeration value="Other" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="EnumPayState" nillable="true" type="tns:EnumPayState" />
+  <xs:complexType name="ResultInfoOfShareYJ36K23J">
+    <xs:annotation>
+      <xs:appinfo>
+        <GenericType Name="ResultInfoOf{0}{#}" Namespace="http://schemas.datacontract.org/2004/07/Em.Entities" xmlns="http://schemas.microsoft.com/2003/10/Serialization/">
+          <GenericParameter Name="Share" Namespace="http://schemas.datacontract.org/2004/07/Em.Entities" />
+        </GenericType>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CodeMessage" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ErrorCode" nillable="true" type="xs:string" />
+      <xs:element xmlns:q36="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="ErrorMessages" nillable="true" type="q36:ArrayOfstring" />
+      <xs:element minOccurs="0" name="Message" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="OldMessage" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Result" nillable="true" type="tns:Share" />
+      <xs:element minOccurs="0" name="Succeed" type="xs:boolean" />
+      <xs:element minOccurs="0" name="preValue" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ResultInfoOfShareYJ36K23J" nillable="true" type="tns:ResultInfoOfShareYJ36K23J" />
+  <xs:complexType name="ResultInfoOfShareFreezingYJ36K23J">
+    <xs:annotation>
+      <xs:appinfo>
+        <GenericType Name="ResultInfoOf{0}{#}" Namespace="http://schemas.datacontract.org/2004/07/Em.Entities" xmlns="http://schemas.microsoft.com/2003/10/Serialization/">
+          <GenericParameter Name="ShareFreezing" Namespace="http://schemas.datacontract.org/2004/07/Em.Entities" />
+        </GenericType>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CodeMessage" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ErrorCode" nillable="true" type="xs:string" />
+      <xs:element xmlns:q37="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="ErrorMessages" nillable="true" type="q37:ArrayOfstring" />
+      <xs:element minOccurs="0" name="Message" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="OldMessage" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Result" nillable="true" type="tns:ShareFreezing" />
+      <xs:element minOccurs="0" name="Succeed" type="xs:boolean" />
+      <xs:element minOccurs="0" name="preValue" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ResultInfoOfShareFreezingYJ36K23J" nillable="true" type="tns:ResultInfoOfShareFreezingYJ36K23J" />
+</xs:schema>

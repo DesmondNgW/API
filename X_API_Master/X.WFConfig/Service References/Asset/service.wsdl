@@ -1,0 +1,288 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="Asset" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsp:Policy wsu:Id="NetTcpBinding_IAsset_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1">
+        </msb:BinaryEncoding>
+        <wsaw:UsingAddressing>
+        </wsaw:UsingAddressing>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="NetTcpBinding_IAssetManager_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1">
+        </msb:BinaryEncoding>
+        <wsaw:UsingAddressing>
+        </wsaw:UsingAddressing>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import namespace="http://tempuri.org/" />
+      <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/Em.Entities" />
+      <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/Em.FundTrade.AssetHomePage.Entities" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IAsset_GetAssertInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAssertInfo" />
+  </wsdl:message>
+  <wsdl:message name="IAsset_GetAssertInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAssertInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IAsset_GetAssertInfoWithoutCache_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAssertInfoWithoutCache" />
+  </wsdl:message>
+  <wsdl:message name="IAsset_GetAssertInfoWithoutCache_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAssertInfoWithoutCacheResponse" />
+  </wsdl:message>
+  <wsdl:message name="IAsset_GetAssertInfoInCache_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAssertInfoInCache" />
+  </wsdl:message>
+  <wsdl:message name="IAsset_GetAssertInfoInCache_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAssertInfoInCacheResponse" />
+  </wsdl:message>
+  <wsdl:message name="IAssetManager_CustomerInCache_InputMessage">
+    <wsdl:part name="parameters" element="tns:CustomerInCache" />
+  </wsdl:message>
+  <wsdl:message name="IAssetManager_CustomerInCache_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CustomerInCacheResponse" />
+  </wsdl:message>
+  <wsdl:message name="IAssetManager_UpdateAsset_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateAsset" />
+  </wsdl:message>
+  <wsdl:message name="IAssetManager_UpdateAsset_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateAssetResponse" />
+  </wsdl:message>
+  <wsdl:message name="IAssetManager_UpdateAssetByData_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateAssetByData" />
+  </wsdl:message>
+  <wsdl:message name="IAssetManager_UpdateAssetByData_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateAssetByDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="IAssetManager_GetCacheCount_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCacheCount" />
+  </wsdl:message>
+  <wsdl:message name="IAssetManager_GetCacheCount_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCacheCountResponse" />
+  </wsdl:message>
+  <wsdl:message name="IAssetManager_ClearCache_InputMessage">
+    <wsdl:part name="parameters" element="tns:ClearCache" />
+  </wsdl:message>
+  <wsdl:message name="IAssetManager_ClearCache_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ClearCacheResponse" />
+  </wsdl:message>
+  <wsdl:message name="IAssetManager_InvalidAsset_InputMessage">
+    <wsdl:part name="parameters" element="tns:InvalidAsset" />
+  </wsdl:message>
+  <wsdl:message name="IAssetManager_InvalidAsset_OutputMessage">
+    <wsdl:part name="parameters" element="tns:InvalidAssetResponse" />
+  </wsdl:message>
+  <wsdl:message name="IAssetManager_HasAsset_InputMessage">
+    <wsdl:part name="parameters" element="tns:HasAsset" />
+  </wsdl:message>
+  <wsdl:message name="IAssetManager_HasAsset_OutputMessage">
+    <wsdl:part name="parameters" element="tns:HasAssetResponse" />
+  </wsdl:message>
+  <wsdl:message name="IAssetManager_GetHitRatio_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetHitRatio" />
+  </wsdl:message>
+  <wsdl:message name="IAssetManager_GetHitRatio_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetHitRatioResponse" />
+  </wsdl:message>
+  <wsdl:message name="IAssetManager_ResetHitRatio_InputMessage">
+    <wsdl:part name="parameters" element="tns:ResetHitRatio" />
+  </wsdl:message>
+  <wsdl:message name="IAssetManager_ResetHitRatio_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ResetHitRatioResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IAsset">
+    <wsdl:operation name="GetAssertInfo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IAsset/GetAssertInfo" message="tns:IAsset_GetAssertInfo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IAsset/GetAssertInfoResponse" message="tns:IAsset_GetAssertInfo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAssertInfoWithoutCache">
+      <wsdl:input wsaw:Action="http://tempuri.org/IAsset/GetAssertInfoWithoutCache" message="tns:IAsset_GetAssertInfoWithoutCache_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IAsset/GetAssertInfoWithoutCacheResponse" message="tns:IAsset_GetAssertInfoWithoutCache_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAssertInfoInCache">
+      <wsdl:input wsaw:Action="http://tempuri.org/IAsset/GetAssertInfoInCache" message="tns:IAsset_GetAssertInfoInCache_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IAsset/GetAssertInfoInCacheResponse" message="tns:IAsset_GetAssertInfoInCache_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="IAssetManager">
+    <wsdl:operation name="CustomerInCache">
+      <wsdl:input wsaw:Action="http://tempuri.org/IAssetManager/CustomerInCache" message="tns:IAssetManager_CustomerInCache_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IAssetManager/CustomerInCacheResponse" message="tns:IAssetManager_CustomerInCache_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateAsset">
+      <wsdl:input wsaw:Action="http://tempuri.org/IAssetManager/UpdateAsset" message="tns:IAssetManager_UpdateAsset_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IAssetManager/UpdateAssetResponse" message="tns:IAssetManager_UpdateAsset_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateAssetByData">
+      <wsdl:input wsaw:Action="http://tempuri.org/IAssetManager/UpdateAssetByData" message="tns:IAssetManager_UpdateAssetByData_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IAssetManager/UpdateAssetByDataResponse" message="tns:IAssetManager_UpdateAssetByData_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCacheCount">
+      <wsdl:input wsaw:Action="http://tempuri.org/IAssetManager/GetCacheCount" message="tns:IAssetManager_GetCacheCount_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IAssetManager/GetCacheCountResponse" message="tns:IAssetManager_GetCacheCount_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ClearCache">
+      <wsdl:input wsaw:Action="http://tempuri.org/IAssetManager/ClearCache" message="tns:IAssetManager_ClearCache_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IAssetManager/ClearCacheResponse" message="tns:IAssetManager_ClearCache_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="InvalidAsset">
+      <wsdl:input wsaw:Action="http://tempuri.org/IAssetManager/InvalidAsset" message="tns:IAssetManager_InvalidAsset_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IAssetManager/InvalidAssetResponse" message="tns:IAssetManager_InvalidAsset_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="HasAsset">
+      <wsdl:input wsaw:Action="http://tempuri.org/IAssetManager/HasAsset" message="tns:IAssetManager_HasAsset_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IAssetManager/HasAssetResponse" message="tns:IAssetManager_HasAsset_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetHitRatio">
+      <wsdl:input wsaw:Action="http://tempuri.org/IAssetManager/GetHitRatio" message="tns:IAssetManager_GetHitRatio_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IAssetManager/GetHitRatioResponse" message="tns:IAssetManager_GetHitRatio_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ResetHitRatio">
+      <wsdl:input wsaw:Action="http://tempuri.org/IAssetManager/ResetHitRatio" message="tns:IAssetManager_ResetHitRatio_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IAssetManager/ResetHitRatioResponse" message="tns:IAssetManager_ResetHitRatio_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="NetTcpBinding_IAsset" type="tns:IAsset">
+    <wsp:PolicyReference URI="#NetTcpBinding_IAsset_policy">
+    </wsp:PolicyReference>
+    <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
+    <wsdl:operation name="GetAssertInfo">
+      <soap12:operation soapAction="http://tempuri.org/IAsset/GetAssertInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAssertInfoWithoutCache">
+      <soap12:operation soapAction="http://tempuri.org/IAsset/GetAssertInfoWithoutCache" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAssertInfoInCache">
+      <soap12:operation soapAction="http://tempuri.org/IAsset/GetAssertInfoInCache" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="NetTcpBinding_IAssetManager" type="tns:IAssetManager">
+    <wsp:PolicyReference URI="#NetTcpBinding_IAssetManager_policy">
+    </wsp:PolicyReference>
+    <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
+    <wsdl:operation name="CustomerInCache">
+      <soap12:operation soapAction="http://tempuri.org/IAssetManager/CustomerInCache" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateAsset">
+      <soap12:operation soapAction="http://tempuri.org/IAssetManager/UpdateAsset" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateAssetByData">
+      <soap12:operation soapAction="http://tempuri.org/IAssetManager/UpdateAssetByData" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCacheCount">
+      <soap12:operation soapAction="http://tempuri.org/IAssetManager/GetCacheCount" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ClearCache">
+      <soap12:operation soapAction="http://tempuri.org/IAssetManager/ClearCache" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InvalidAsset">
+      <soap12:operation soapAction="http://tempuri.org/IAssetManager/InvalidAsset" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="HasAsset">
+      <soap12:operation soapAction="http://tempuri.org/IAssetManager/HasAsset" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetHitRatio">
+      <soap12:operation soapAction="http://tempuri.org/IAssetManager/GetHitRatio" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ResetHitRatio">
+      <soap12:operation soapAction="http://tempuri.org/IAssetManager/ResetHitRatio" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Asset">
+    <wsdl:port name="NetTcpBinding_IAsset" binding="tns:NetTcpBinding_IAsset">
+      <soap12:address location="net.tcp://172.16.86.58:8814/Asset/Asset" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>net.tcp://172.16.86.58:8814/Asset/Asset</wsa10:Address>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+    <wsdl:port name="NetTcpBinding_IAssetManager" binding="tns:NetTcpBinding_IAssetManager">
+      <soap12:address location="net.tcp://172.16.86.58:8814/Asset/Management" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>net.tcp://172.16.86.58:8814/Asset/Management</wsa10:Address>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

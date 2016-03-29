@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/Em.FundTrade.Query.Entities" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Em.FundTrade.Query.Entities" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="QueryResultOfArrayOfTradeStatementYTXI_Sx5q">
+    <xs:annotation>
+      <xs:appinfo>
+        <GenericType Name="QueryResultOf{0}{#}" Namespace="http://schemas.datacontract.org/2004/07/Em.FundTrade.Query.Entities" xmlns="http://schemas.microsoft.com/2003/10/Serialization/">
+          <GenericParameter Name="ArrayOfTradeStatement" Namespace="http://schemas.datacontract.org/2004/07/Em.FundTrade.Query.Entities">
+          </GenericParameter>
+        </GenericType>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Message" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Result" nillable="true" type="tns:ArrayOfTradeStatement" />
+      <xs:element minOccurs="0" name="Success" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="QueryResultOfArrayOfTradeStatementYTXI_Sx5q" nillable="true" type="tns:QueryResultOfArrayOfTradeStatementYTXI_Sx5q" />
+  <xs:complexType name="ArrayOfTradeStatement">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="TradeStatement" nillable="true" type="tns:TradeStatement" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfTradeStatement" nillable="true" type="tns:ArrayOfTradeStatement" />
+  <xs:complexType name="TradeStatement">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="C_AVAILABLEVOL" type="xs:decimal" />
+      <xs:element minOccurs="0" name="C_AVERAGECOST" type="xs:decimal" />
+      <xs:element minOccurs="0" name="C_BANKCARDNO" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="C_BANKCODE" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="C_CREATETIME" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="C_CUSTOMERNO" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="C_DATE" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="C_FUNDCODE" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="C_FUNDNAV" type="xs:decimal" />
+      <xs:element minOccurs="0" name="C_ID" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="C_ISDEL" type="xs:boolean" />
+      <xs:element minOccurs="0" name="C_ISENABLED" type="xs:boolean" />
+      <xs:element minOccurs="0" name="C_NAVDATE" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="C_PRODUCTTYPE" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="C_TOTALVOL" type="xs:decimal" />
+      <xs:element minOccurs="0" name="C_UPDATETIME" type="xs:dateTime" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="TradeStatement" nillable="true" type="tns:TradeStatement" />
+</xs:schema>

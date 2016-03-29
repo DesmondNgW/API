@@ -1,0 +1,2807 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="CoreWCFServices" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsp:Policy wsu:Id="WSHttpBinding_ICoreServices_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <wsaw:UsingAddressing />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://172.16.86.57:8001/AngieOneServices/?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://172.16.86.57:8001/AngieOneServices/?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://172.16.86.57:8001/AngieOneServices/?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Em.Entities" />
+      <xsd:import schemaLocation="http://172.16.86.57:8001/AngieOneServices/?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+      <xsd:import schemaLocation="http://172.16.86.57:8001/AngieOneServices/?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/Em.Entities.Data" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="ICoreServices_AcceptQuicklyBackToCashBag_InputMessage">
+    <wsdl:part name="parameters" element="tns:AcceptQuicklyBackToCashBag" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_AcceptQuicklyBackToCashBag_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AcceptQuicklyBackToCashBagResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_AcceptQuicklyBackToCashBag_WithLargeRedemptionFlag_InputMessage">
+    <wsdl:part name="parameters" element="tns:AcceptQuicklyBackToCashBag_WithLargeRedemptionFlag" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_AcceptQuicklyBackToCashBag_WithLargeRedemptionFlag_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AcceptQuicklyBackToCashBag_WithLargeRedemptionFlagResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_IsValidQuicklyBackToCashBag_InputMessage">
+    <wsdl:part name="parameters" element="tns:IsValidQuicklyBackToCashBag" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_IsValidQuicklyBackToCashBag_OutputMessage">
+    <wsdl:part name="parameters" element="tns:IsValidQuicklyBackToCashBagResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_GetCurrentFreeAmount_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCurrentFreeAmount" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_GetCurrentFreeAmount_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCurrentFreeAmountResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_IsValidRedeemPlus_InputMessage">
+    <wsdl:part name="parameters" element="tns:IsValidRedeemPlus" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_IsValidRedeemPlus_OutputMessage">
+    <wsdl:part name="parameters" element="tns:IsValidRedeemPlusResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_AcceptRedeemApplyPlus_InputMessage">
+    <wsdl:part name="parameters" element="tns:AcceptRedeemApplyPlus" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_AcceptRedeemApplyPlus_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AcceptRedeemApplyPlusResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_GetFixedFinancialSharesGroupByDatePlus_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetFixedFinancialSharesGroupByDatePlus" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_GetFixedFinancialSharesGroupByDatePlus_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetFixedFinancialSharesGroupByDatePlusResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_GetFundFinancialSharesGroupByDatePlus_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetFundFinancialSharesGroupByDatePlus" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_GetFundFinancialSharesGroupByDatePlus_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetFundFinancialSharesGroupByDatePlusResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_GetFinancialSharesGroupByDatePlus_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetFinancialSharesGroupByDatePlus" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_GetFinancialSharesGroupByDatePlus_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetFinancialSharesGroupByDatePlusResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_AcceptBuyFinancialFund_InputMessage">
+    <wsdl:part name="parameters" element="tns:AcceptBuyFinancialFund" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_AcceptBuyFinancialFund_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AcceptBuyFinancialFundResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_IsValidBuyFinancialFund_InputMessage">
+    <wsdl:part name="parameters" element="tns:IsValidBuyFinancialFund" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_IsValidBuyFinancialFund_OutputMessage">
+    <wsdl:part name="parameters" element="tns:IsValidBuyFinancialFundResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_GetFinancialFundByCode_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetFinancialFundByCode" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_GetFinancialFundByCode_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetFinancialFundByCodeResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_GetFundSpecialStageList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetFundSpecialStageList" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_GetFundSpecialStageList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetFundSpecialStageListResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_GetLastFundSpecialStage_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetLastFundSpecialStage" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_GetLastFundSpecialStage_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetLastFundSpecialStageResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_GetFundSpecialStageByFundCode_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetFundSpecialStageByFundCode" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_GetFundSpecialStageByFundCode_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetFundSpecialStageByFundCodeResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_GetFinancialFundUnsoldAmount_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetFinancialFundUnsoldAmount" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_GetFinancialFundUnsoldAmount_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetFinancialFundUnsoldAmountResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_SetFundRedeemType_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetFundRedeemType" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_SetFundRedeemType_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetFundRedeemTypeResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_GetFundRedeemType_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetFundRedeemType" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_GetFundRedeemType_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetFundRedeemTypeResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_GetFundRedeemTypeJour_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetFundRedeemTypeJour" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_GetFundRedeemTypeJour_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetFundRedeemTypeJourResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_SetEnableBuy_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetEnableBuy" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_SetEnableBuy_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetEnableBuyResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_GetCashBagTransferAppsHistoryCount_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCashBagTransferAppsHistoryCount" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_GetCashBagTransferAppsHistoryCount_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCashBagTransferAppsHistoryCountResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_GetCashBagAppByCashbagParentNo_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCashBagAppByCashbagParentNo" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_GetCashBagAppByCashbagParentNo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCashBagAppByCashbagParentNoResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_GetCashBagAppByBusinSerialNo_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCashBagAppByBusinSerialNo" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_GetCashBagAppByBusinSerialNo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCashBagAppByBusinSerialNoResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_GetFundExtAttribute_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetFundExtAttribute" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_GetFundExtAttribute_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetFundExtAttributeResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_FetchBusinAppsBySpecialFund_InputMessage">
+    <wsdl:part name="parameters" element="tns:FetchBusinAppsBySpecialFund" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_FetchBusinAppsBySpecialFund_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FetchBusinAppsBySpecialFundResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_FetchBusinAppsCountBySpecialFund_InputMessage">
+    <wsdl:part name="parameters" element="tns:FetchBusinAppsCountBySpecialFund" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_FetchBusinAppsCountBySpecialFund_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FetchBusinAppsCountBySpecialFundResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_GetFundEx_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetFundEx" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_GetFundEx_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetFundExResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_RevokeBusinApplyByParentNo_InputMessage">
+    <wsdl:part name="parameters" element="tns:RevokeBusinApplyByParentNo" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_RevokeBusinApplyByParentNo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RevokeBusinApplyByParentNoResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_GetFixedDividendCfmsCount_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetFixedDividendCfmsCount" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_GetFixedDividendCfmsCount_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetFixedDividendCfmsCountResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_GetFixedDividendCfms_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetFixedDividendCfms" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_GetFixedDividendCfms_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetFixedDividendCfmsResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_GetFixedFinancialSharesGroupByDate_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetFixedFinancialSharesGroupByDate" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_GetFixedFinancialSharesGroupByDate_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetFixedFinancialSharesGroupByDateResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_GetFixedBagAssets_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetFixedBagAssets" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_GetFixedBagAssets_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetFixedBagAssetsResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_FetchFixBagBusinAppsCount_InputMessage">
+    <wsdl:part name="parameters" element="tns:FetchFixBagBusinAppsCount" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_FetchFixBagBusinAppsCount_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FetchFixBagBusinAppsCountResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_FetchFixBagBusinApps_InputMessage">
+    <wsdl:part name="parameters" element="tns:FetchFixBagBusinApps" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_FetchFixBagBusinApps_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FetchFixBagBusinAppsResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_GetFixedFundFinancialSharesGroupByDate_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetFixedFundFinancialSharesGroupByDate" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_GetFixedFundFinancialSharesGroupByDate_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetFixedFundFinancialSharesGroupByDateResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_GetFixedSharesByWorkday_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetFixedSharesByWorkday" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_GetFixedSharesByWorkday_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetFixedSharesByWorkdayResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_GetFixedBagShare_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetFixedBagShare" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_GetFixedBagShare_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetFixedBagShareResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_GetFundFixedBagShare_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetFundFixedBagShare" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_GetFundFixedBagShare_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetFundFixedBagShareResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_GetFixedCurWorkdaySucceedApps_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetFixedCurWorkdaySucceedApps" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_GetFixedCurWorkdaySucceedApps_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetFixedCurWorkdaySucceedAppsResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_GetFixedFinancialShareAtWorkday_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetFixedFinancialShareAtWorkday" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_GetFixedFinancialShareAtWorkday_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetFixedFinancialShareAtWorkdayResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_GetFixedWaitPayApps_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetFixedWaitPayApps" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_GetFixedWaitPayApps_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetFixedWaitPayAppsResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_GetFixedCurrentWorkdayApps_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetFixedCurrentWorkdayApps" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_GetFixedCurrentWorkdayApps_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetFixedCurrentWorkdayAppsResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_GetFundsAmountOnWayOfCustomer_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetFundsAmountOnWayOfCustomer" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_GetFundsAmountOnWayOfCustomer_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetFundsAmountOnWayOfCustomerResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_AcceptBuyCommon_InputMessage">
+    <wsdl:part name="parameters" element="tns:AcceptBuyCommon" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_AcceptBuyCommon_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AcceptBuyCommonResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_AcceptSubscribeCommon_InputMessage">
+    <wsdl:part name="parameters" element="tns:AcceptSubscribeCommon" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_AcceptSubscribeCommon_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AcceptSubscribeCommonResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_GetBusinAppListbyTraceNo_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetBusinAppListbyTraceNo" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_GetBusinAppListbyTraceNo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetBusinAppListbyTraceNoResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_MsgSearchAllBusinApps_InputMessage">
+    <wsdl:part name="parameters" element="tns:MsgSearchAllBusinApps" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_MsgSearchAllBusinApps_OutputMessage">
+    <wsdl:part name="parameters" element="tns:MsgSearchAllBusinAppsResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_GtFetchAllBusinApps_InputMessage">
+    <wsdl:part name="parameters" element="tns:GtFetchAllBusinApps" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_GtFetchAllBusinApps_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GtFetchAllBusinAppsResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_GtFetchAllBusinAppsCount_InputMessage">
+    <wsdl:part name="parameters" element="tns:GtFetchAllBusinAppsCount" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_GtFetchAllBusinAppsCount_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GtFetchAllBusinAppsCountResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_AcceptBuyWithProtocol_InputMessage">
+    <wsdl:part name="parameters" element="tns:AcceptBuyWithProtocol" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_AcceptBuyWithProtocol_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AcceptBuyWithProtocolResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_AcceptCashBagBuyWithProtocol_InputMessage">
+    <wsdl:part name="parameters" element="tns:AcceptCashBagBuyWithProtocol" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_AcceptCashBagBuyWithProtocol_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AcceptCashBagBuyWithProtocolResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_AcceptSubscribeWithProtocol_InputMessage">
+    <wsdl:part name="parameters" element="tns:AcceptSubscribeWithProtocol" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_AcceptSubscribeWithProtocol_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AcceptSubscribeWithProtocolResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_AcceptCashBagSubscribeWithProtocol_InputMessage">
+    <wsdl:part name="parameters" element="tns:AcceptCashBagSubscribeWithProtocol" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_AcceptCashBagSubscribeWithProtocol_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AcceptCashBagSubscribeWithProtocolResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_IsValidRedeemDebit_InputMessage">
+    <wsdl:part name="parameters" element="tns:IsValidRedeemDebit" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_IsValidRedeemDebit_OutputMessage">
+    <wsdl:part name="parameters" element="tns:IsValidRedeemDebitResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_AcceptRedeemApplyDebit_InputMessage">
+    <wsdl:part name="parameters" element="tns:AcceptRedeemApplyDebit" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_AcceptRedeemApplyDebit_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AcceptRedeemApplyDebitResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_GetCacheData_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCacheData" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_GetCacheData_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCacheDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_RevokeSFTransfer_InputMessage">
+    <wsdl:part name="parameters" element="tns:RevokeSFTransfer" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_RevokeSFTransfer_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RevokeSFTransferResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_FaultSFTransfer_InputMessage">
+    <wsdl:part name="parameters" element="tns:FaultSFTransfer" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_FaultSFTransfer_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FaultSFTransferResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_IsValidSFTransfer_InputMessage">
+    <wsdl:part name="parameters" element="tns:IsValidSFTransfer" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_IsValidSFTransfer_OutputMessage">
+    <wsdl:part name="parameters" element="tns:IsValidSFTransferResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_RevokeQuicklyBackToCashBag_InputMessage">
+    <wsdl:part name="parameters" element="tns:RevokeQuicklyBackToCashBag" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_RevokeQuicklyBackToCashBag_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RevokeQuicklyBackToCashBagResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_AcceptSFTransfer_InputMessage">
+    <wsdl:part name="parameters" element="tns:AcceptSFTransfer" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_AcceptSFTransfer_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AcceptSFTransferResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_AcceptSFTransfer_WithLargeRedemptionFlag_InputMessage">
+    <wsdl:part name="parameters" element="tns:AcceptSFTransfer_WithLargeRedemptionFlag" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_AcceptSFTransfer_WithLargeRedemptionFlag_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AcceptSFTransfer_WithLargeRedemptionFlagResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_GtUpdateFreezingShares_InputMessage">
+    <wsdl:part name="parameters" element="tns:GtUpdateFreezingShares" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_GtUpdateFreezingShares_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GtUpdateFreezingSharesResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_GtGetFreezingShareByID_InputMessage">
+    <wsdl:part name="parameters" element="tns:GtGetFreezingShareByID" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_GtGetFreezingShareByID_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GtGetFreezingShareByIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_FetchDividendMethod_InputMessage">
+    <wsdl:part name="parameters" element="tns:FetchDividendMethod" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_FetchDividendMethod_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FetchDividendMethodResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_GetDividendMethod_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetDividendMethod" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_GetDividendMethod_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetDividendMethodResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_IsExitDividendMethod_InputMessage">
+    <wsdl:part name="parameters" element="tns:IsExitDividendMethod" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_IsExitDividendMethod_OutputMessage">
+    <wsdl:part name="parameters" element="tns:IsExitDividendMethodResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_FetchDividendMethodById_InputMessage">
+    <wsdl:part name="parameters" element="tns:FetchDividendMethodById" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_FetchDividendMethodById_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FetchDividendMethodByIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_FetchDividendMethodByCustomerNo_InputMessage">
+    <wsdl:part name="parameters" element="tns:FetchDividendMethodByCustomerNo" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_FetchDividendMethodByCustomerNo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FetchDividendMethodByCustomerNoResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_FetchDividendMethods_InputMessage">
+    <wsdl:part name="parameters" element="tns:FetchDividendMethods" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_FetchDividendMethods_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FetchDividendMethodsResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_FetchDividendMethodsCount_InputMessage">
+    <wsdl:part name="parameters" element="tns:FetchDividendMethodsCount" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_FetchDividendMethodsCount_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FetchDividendMethodsCountResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_GetBonusBusinApps_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetBonusBusinApps" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_GetBonusBusinApps_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetBonusBusinAppsResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_FetchBusinAppsByCustomerNo_InputMessage">
+    <wsdl:part name="parameters" element="tns:FetchBusinAppsByCustomerNo" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_FetchBusinAppsByCustomerNo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FetchBusinAppsByCustomerNoResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_FetchBusinApps_InputMessage">
+    <wsdl:part name="parameters" element="tns:FetchBusinApps" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_FetchBusinApps_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FetchBusinAppsResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_FetchBusinAppsCount_InputMessage">
+    <wsdl:part name="parameters" element="tns:FetchBusinAppsCount" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_FetchBusinAppsCount_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FetchBusinAppsCountResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_FetchBusinApp_InputMessage">
+    <wsdl:part name="parameters" element="tns:FetchBusinApp" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_FetchBusinApp_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FetchBusinAppResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_GetWaitPayApps_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetWaitPayApps" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_GetWaitPayApps_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetWaitPayAppsResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_PostAccount_InputMessage">
+    <wsdl:part name="parameters" element="tns:PostAccount" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_PostAccount_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PostAccountResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_PostAccountSetState_InputMessage">
+    <wsdl:part name="parameters" element="tns:PostAccountSetState" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_PostAccountSetState_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PostAccountSetStateResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_GetCurrentWorkdayApps_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCurrentWorkdayApps" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_GetCurrentWorkdayApps_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCurrentWorkdayAppsResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_FetchAppsCfmingCount_InputMessage">
+    <wsdl:part name="parameters" element="tns:FetchAppsCfmingCount" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_FetchAppsCfmingCount_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FetchAppsCfmingCountResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_GetTradeCountByBankCardNo_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetTradeCountByBankCardNo" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_GetTradeCountByBankCardNo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetTradeCountByBankCardNoResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_GetPayStateByParentAppSheetSerialNo_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPayStateByParentAppSheetSerialNo" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_GetPayStateByParentAppSheetSerialNo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPayStateByParentAppSheetSerialNoResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_GetBusinAppByParentAppSheetSerialNo_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetBusinAppByParentAppSheetSerialNo" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_GetBusinAppByParentAppSheetSerialNo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetBusinAppByParentAppSheetSerialNoResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_GetFundWhiteList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetFundWhiteList" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_GetFundWhiteList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetFundWhiteListResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_GetCfmBusinAppByFundCode_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCfmBusinAppByFundCode" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_GetCfmBusinAppByFundCode_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCfmBusinAppByFundCodeResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_SetCustDividendMethod_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetCustDividendMethod" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_SetCustDividendMethod_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetCustDividendMethodResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_FetchBusinAppByHsSheetSerialNo_InputMessage">
+    <wsdl:part name="parameters" element="tns:FetchBusinAppByHsSheetSerialNo" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_FetchBusinAppByHsSheetSerialNo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FetchBusinAppByHsSheetSerialNoResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_UpdateBusinApp_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateBusinApp" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_UpdateBusinApp_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateBusinAppResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_SearchBusinApps_InputMessage">
+    <wsdl:part name="parameters" element="tns:SearchBusinApps" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_SearchBusinApps_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SearchBusinAppsResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_UpdateFreezingSharesIsEnabled_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateFreezingSharesIsEnabled" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_UpdateFreezingSharesIsEnabled_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateFreezingSharesIsEnabledResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_UpdateBusinAppByCmf_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateBusinAppByCmf" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_UpdateBusinAppByCmf_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateBusinAppByCmfResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_SyncPayStateByParentAppSheetSerialNo_InputMessage">
+    <wsdl:part name="parameters" element="tns:SyncPayStateByParentAppSheetSerialNo" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_SyncPayStateByParentAppSheetSerialNo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SyncPayStateByParentAppSheetSerialNoResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_GetBusinAppsByParentSerialNoForQS_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetBusinAppsByParentSerialNoForQS" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_GetBusinAppsByParentSerialNoForQS_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetBusinAppsByParentSerialNoForQSResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_SynchronousGuidNo_InputMessage">
+    <wsdl:part name="parameters" element="tns:SynchronousGuidNo" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_SynchronousGuidNo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SynchronousGuidNoResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_VerifyPassword_InputMessage">
+    <wsdl:part name="parameters" element="tns:VerifyPassword" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_VerifyPassword_OutputMessage">
+    <wsdl:part name="parameters" element="tns:VerifyPasswordResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_GetSpecialAccountsFund_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSpecialAccountsFund" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_GetSpecialAccountsFund_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSpecialAccountsFundResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_GetCashBagApps_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCashBagApps" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_GetCashBagApps_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCashBagAppsResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_GetCashBagAppsHistory_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCashBagAppsHistory" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_GetCashBagAppsHistory_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCashBagAppsHistoryResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_GetCashBagAppsCount_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCashBagAppsCount" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_GetCashBagAppsCount_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCashBagAppsCountResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_GetCashBagAppsHistoryCount_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCashBagAppsHistoryCount" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_GetCashBagAppsHistoryCount_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCashBagAppsHistoryCountResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_GetCashBagTransferApps_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCashBagTransferApps" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_GetCashBagTransferApps_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCashBagTransferAppsResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_GetCashBagTransferAppsHistory_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCashBagTransferAppsHistory" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_GetCashBagTransferAppsHistory_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCashBagTransferAppsHistoryResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_GetCashBagTransferAppsCount_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCashBagTransferAppsCount" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_GetCashBagTransferAppsCount_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCashBagTransferAppsCountResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_IsValidBuy_InputMessage">
+    <wsdl:part name="parameters" element="tns:IsValidBuy" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_IsValidBuy_OutputMessage">
+    <wsdl:part name="parameters" element="tns:IsValidBuyResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_IsValidBuyForParentBusinType_InputMessage">
+    <wsdl:part name="parameters" element="tns:IsValidBuyForParentBusinType" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_IsValidBuyForParentBusinType_OutputMessage">
+    <wsdl:part name="parameters" element="tns:IsValidBuyForParentBusinTypeResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_AcceptBuy_InputMessage">
+    <wsdl:part name="parameters" element="tns:AcceptBuy" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_AcceptBuy_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AcceptBuyResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_AcceptCashBagBuy_InputMessage">
+    <wsdl:part name="parameters" element="tns:AcceptCashBagBuy" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_AcceptCashBagBuy_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AcceptCashBagBuyResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_FundBuyAccept_InputMessage">
+    <wsdl:part name="parameters" element="tns:FundBuyAccept" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_FundBuyAccept_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FundBuyAcceptResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_AcceptActivityBuy_InputMessage">
+    <wsdl:part name="parameters" element="tns:AcceptActivityBuy" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_AcceptActivityBuy_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AcceptActivityBuyResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_AcceptShareAdjustBuy_InputMessage">
+    <wsdl:part name="parameters" element="tns:AcceptShareAdjustBuy" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_AcceptShareAdjustBuy_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AcceptShareAdjustBuyResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_AcceptCompleted_InputMessage">
+    <wsdl:part name="parameters" element="tns:AcceptCompleted" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_AcceptCompleted_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AcceptCompletedResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_AcceptCashBagCompleted_InputMessage">
+    <wsdl:part name="parameters" element="tns:AcceptCashBagCompleted" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_AcceptCashBagCompleted_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AcceptCashBagCompletedResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_IsValidSubscribe_InputMessage">
+    <wsdl:part name="parameters" element="tns:IsValidSubscribe" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_IsValidSubscribe_OutputMessage">
+    <wsdl:part name="parameters" element="tns:IsValidSubscribeResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_AcceptSubscribe_InputMessage">
+    <wsdl:part name="parameters" element="tns:AcceptSubscribe" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_AcceptSubscribe_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AcceptSubscribeResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_AcceptCashBagSubscribe_InputMessage">
+    <wsdl:part name="parameters" element="tns:AcceptCashBagSubscribe" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_AcceptCashBagSubscribe_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AcceptCashBagSubscribeResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_AcceptCashBagSubscribeCompleted_InputMessage">
+    <wsdl:part name="parameters" element="tns:AcceptCashBagSubscribeCompleted" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_AcceptCashBagSubscribeCompleted_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AcceptCashBagSubscribeCompletedResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_SubscribeCompleted_InputMessage">
+    <wsdl:part name="parameters" element="tns:SubscribeCompleted" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_SubscribeCompleted_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SubscribeCompletedResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_IsValidRedeem_InputMessage">
+    <wsdl:part name="parameters" element="tns:IsValidRedeem" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_IsValidRedeem_OutputMessage">
+    <wsdl:part name="parameters" element="tns:IsValidRedeemResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_AcceptRedeemApply_InputMessage">
+    <wsdl:part name="parameters" element="tns:AcceptRedeemApply" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_AcceptRedeemApply_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AcceptRedeemApplyResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_AcceptRedeemApplyWithReference_InputMessage">
+    <wsdl:part name="parameters" element="tns:AcceptRedeemApplyWithReference" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_AcceptRedeemApplyWithReference_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AcceptRedeemApplyWithReferenceResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_AcceptShareAdjustRedeem_InputMessage">
+    <wsdl:part name="parameters" element="tns:AcceptShareAdjustRedeem" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_AcceptShareAdjustRedeem_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AcceptShareAdjustRedeemResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_AcceptCashBagRedeemApply_InputMessage">
+    <wsdl:part name="parameters" element="tns:AcceptCashBagRedeemApply" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_AcceptCashBagRedeemApply_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AcceptCashBagRedeemApplyResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_IsValidBonus_InputMessage">
+    <wsdl:part name="parameters" element="tns:IsValidBonus" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_IsValidBonus_OutputMessage">
+    <wsdl:part name="parameters" element="tns:IsValidBonusResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_AcceptBonus_InputMessage">
+    <wsdl:part name="parameters" element="tns:AcceptBonus" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_AcceptBonus_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AcceptBonusResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_AcceptCustodyTransfer_InputMessage">
+    <wsdl:part name="parameters" element="tns:AcceptCustodyTransfer" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_AcceptCustodyTransfer_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AcceptCustodyTransferResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_AcceptCustodyTransferOut_InputMessage">
+    <wsdl:part name="parameters" element="tns:AcceptCustodyTransferOut" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_AcceptCustodyTransferOut_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AcceptCustodyTransferOutResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_IsValidZtg_InputMessage">
+    <wsdl:part name="parameters" element="tns:IsValidZtg" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_IsValidZtg_OutputMessage">
+    <wsdl:part name="parameters" element="tns:IsValidZtgResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_AcceptZtg_InputMessage">
+    <wsdl:part name="parameters" element="tns:AcceptZtg" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_AcceptZtg_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AcceptZtgResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_GetCurWorkdaySucceedAppsWithPayCanel_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCurWorkdaySucceedAppsWithPayCanel" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_GetCurWorkdaySucceedAppsWithPayCanel_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCurWorkdaySucceedAppsWithPayCanelResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_GetCurWorkdaySucceedApps_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCurWorkdaySucceedApps" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_GetCurWorkdaySucceedApps_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCurWorkdaySucceedAppsResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_BusinCanRevoke_InputMessage">
+    <wsdl:part name="parameters" element="tns:BusinCanRevoke" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_BusinCanRevoke_OutputMessage">
+    <wsdl:part name="parameters" element="tns:BusinCanRevokeResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_RevokeBusinApply_InputMessage">
+    <wsdl:part name="parameters" element="tns:RevokeBusinApply" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_RevokeBusinApply_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RevokeBusinApplyResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_IsRevokeCanRecover_InputMessage">
+    <wsdl:part name="parameters" element="tns:IsRevokeCanRecover" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_IsRevokeCanRecover_OutputMessage">
+    <wsdl:part name="parameters" element="tns:IsRevokeCanRecoverResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_RecoverRevokeApply_InputMessage">
+    <wsdl:part name="parameters" element="tns:RecoverRevokeApply" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_RecoverRevokeApply_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RecoverRevokeApplyResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_IsValidTransfer_InputMessage">
+    <wsdl:part name="parameters" element="tns:IsValidTransfer" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_IsValidTransfer_OutputMessage">
+    <wsdl:part name="parameters" element="tns:IsValidTransferResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_AcceptTransferApply_InputMessage">
+    <wsdl:part name="parameters" element="tns:AcceptTransferApply" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_AcceptTransferApply_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AcceptTransferApplyResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_FetchMinBusinLimit_InputMessage">
+    <wsdl:part name="parameters" element="tns:FetchMinBusinLimit" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_FetchMinBusinLimit_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FetchMinBusinLimitResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_FetchMinHolderLimit_InputMessage">
+    <wsdl:part name="parameters" element="tns:FetchMinHolderLimit" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_FetchMinHolderLimit_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FetchMinHolderLimitResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_FetchFreezingShares_InputMessage">
+    <wsdl:part name="parameters" element="tns:FetchFreezingShares" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_FetchFreezingShares_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FetchFreezingSharesResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_FetchFreezingShareById_InputMessage">
+    <wsdl:part name="parameters" element="tns:FetchFreezingShareById" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_FetchFreezingShareById_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FetchFreezingShareByIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_GetSharesOfCustomer_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSharesOfCustomer" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_GetSharesOfCustomer_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSharesOfCustomerResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_GetFundSharesOfCustomer_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetFundSharesOfCustomer" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_GetFundSharesOfCustomer_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetFundSharesOfCustomerResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_GetCustomerShare_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCustomerShare" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_GetCustomerShare_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCustomerShareResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_GtInsertShareFreezing_InputMessage">
+    <wsdl:part name="parameters" element="tns:GtInsertShareFreezing" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_GtInsertShareFreezing_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GtInsertShareFreezingResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_AppointmentInsertShareFreezing_InputMessage">
+    <wsdl:part name="parameters" element="tns:AppointmentInsertShareFreezing" />
+  </wsdl:message>
+  <wsdl:message name="ICoreServices_AppointmentInsertShareFreezing_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AppointmentInsertShareFreezingResponse" />
+  </wsdl:message>
+  <wsdl:portType name="ICoreServices">
+    <wsdl:operation name="AcceptQuicklyBackToCashBag">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICoreServices/AcceptQuicklyBackToCashBag" message="tns:ICoreServices_AcceptQuicklyBackToCashBag_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICoreServices/AcceptQuicklyBackToCashBagResponse" message="tns:ICoreServices_AcceptQuicklyBackToCashBag_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AcceptQuicklyBackToCashBag_WithLargeRedemptionFlag">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICoreServices/AcceptQuicklyBackToCashBag_WithLargeRedemptionFlag" message="tns:ICoreServices_AcceptQuicklyBackToCashBag_WithLargeRedemptionFlag_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICoreServices/AcceptQuicklyBackToCashBag_WithLargeRedemptionFlagResponse" message="tns:ICoreServices_AcceptQuicklyBackToCashBag_WithLargeRedemptionFlag_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="IsValidQuicklyBackToCashBag">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICoreServices/IsValidQuicklyBackToCashBag" message="tns:ICoreServices_IsValidQuicklyBackToCashBag_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICoreServices/IsValidQuicklyBackToCashBagResponse" message="tns:ICoreServices_IsValidQuicklyBackToCashBag_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCurrentFreeAmount">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICoreServices/GetCurrentFreeAmount" message="tns:ICoreServices_GetCurrentFreeAmount_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICoreServices/GetCurrentFreeAmountResponse" message="tns:ICoreServices_GetCurrentFreeAmount_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="IsValidRedeemPlus">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICoreServices/IsValidRedeemPlus" message="tns:ICoreServices_IsValidRedeemPlus_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICoreServices/IsValidRedeemPlusResponse" message="tns:ICoreServices_IsValidRedeemPlus_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AcceptRedeemApplyPlus">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICoreServices/AcceptRedeemApplyPlus" message="tns:ICoreServices_AcceptRedeemApplyPlus_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICoreServices/AcceptRedeemApplyPlusResponse" message="tns:ICoreServices_AcceptRedeemApplyPlus_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFixedFinancialSharesGroupByDatePlus">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICoreServices/GetFixedFinancialSharesGroupByDatePlus" message="tns:ICoreServices_GetFixedFinancialSharesGroupByDatePlus_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICoreServices/GetFixedFinancialSharesGroupByDatePlusResponse" message="tns:ICoreServices_GetFixedFinancialSharesGroupByDatePlus_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFundFinancialSharesGroupByDatePlus">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICoreServices/GetFundFinancialSharesGroupByDatePlus" message="tns:ICoreServices_GetFundFinancialSharesGroupByDatePlus_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICoreServices/GetFundFinancialSharesGroupByDatePlusResponse" message="tns:ICoreServices_GetFundFinancialSharesGroupByDatePlus_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFinancialSharesGroupByDatePlus">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICoreServices/GetFinancialSharesGroupByDatePlus" message="tns:ICoreServices_GetFinancialSharesGroupByDatePlus_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICoreServices/GetFinancialSharesGroupByDatePlusResponse" message="tns:ICoreServices_GetFinancialSharesGroupByDatePlus_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AcceptBuyFinancialFund">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICoreServices/AcceptBuyFinancialFund" message="tns:ICoreServices_AcceptBuyFinancialFund_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICoreServices/AcceptBuyFinancialFundResponse" message="tns:ICoreServices_AcceptBuyFinancialFund_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="IsValidBuyFinancialFund">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICoreServices/IsValidBuyFinancialFund" message="tns:ICoreServices_IsValidBuyFinancialFund_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICoreServices/IsValidBuyFinancialFundResponse" message="tns:ICoreServices_IsValidBuyFinancialFund_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFinancialFundByCode">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICoreServices/GetFinancialFundByCode" message="tns:ICoreServices_GetFinancialFundByCode_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICoreServices/GetFinancialFundByCodeResponse" message="tns:ICoreServices_GetFinancialFundByCode_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFundSpecialStageList">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICoreServices/GetFundSpecialStageList" message="tns:ICoreServices_GetFundSpecialStageList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICoreServices/GetFundSpecialStageListResponse" message="tns:ICoreServices_GetFundSpecialStageList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetLastFundSpecialStage">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICoreServices/GetLastFundSpecialStage" message="tns:ICoreServices_GetLastFundSpecialStage_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICoreServices/GetLastFundSpecialStageResponse" message="tns:ICoreServices_GetLastFundSpecialStage_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFundSpecialStageByFundCode">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICoreServices/GetFundSpecialStageByFundCode" message="tns:ICoreServices_GetFundSpecialStageByFundCode_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICoreServices/GetFundSpecialStageByFundCodeResponse" message="tns:ICoreServices_GetFundSpecialStageByFundCode_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFinancialFundUnsoldAmount">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICoreServices/GetFinancialFundUnsoldAmount" message="tns:ICoreServices_GetFinancialFundUnsoldAmount_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICoreServices/GetFinancialFundUnsoldAmountResponse" message="tns:ICoreServices_GetFinancialFundUnsoldAmount_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SetFundRedeemType">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICoreServices/SetFundRedeemType" message="tns:ICoreServices_SetFundRedeemType_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICoreServices/SetFundRedeemTypeResponse" message="tns:ICoreServices_SetFundRedeemType_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFundRedeemType">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICoreServices/GetFundRedeemType" message="tns:ICoreServices_GetFundRedeemType_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICoreServices/GetFundRedeemTypeResponse" message="tns:ICoreServices_GetFundRedeemType_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFundRedeemTypeJour">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICoreServices/GetFundRedeemTypeJour" message="tns:ICoreServices_GetFundRedeemTypeJour_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICoreServices/GetFundRedeemTypeJourResponse" message="tns:ICoreServices_GetFundRedeemTypeJour_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SetEnableBuy">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICoreServices/SetEnableBuy" message="tns:ICoreServices_SetEnableBuy_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICoreServices/SetEnableBuyResponse" message="tns:ICoreServices_SetEnableBuy_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCashBagTransferAppsHistoryCount">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICoreServices/GetCashBagTransferAppsHistoryCount" message="tns:ICoreServices_GetCashBagTransferAppsHistoryCount_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICoreServices/GetCashBagTransferAppsHistoryCountResponse" message="tns:ICoreServices_GetCashBagTransferAppsHistoryCount_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCashBagAppByCashbagParentNo">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICoreServices/GetCashBagAppByCashbagParentNo" message="tns:ICoreServices_GetCashBagAppByCashbagParentNo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICoreServices/GetCashBagAppByCashbagParentNoResponse" message="tns:ICoreServices_GetCashBagAppByCashbagParentNo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCashBagAppByBusinSerialNo">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICoreServices/GetCashBagAppByBusinSerialNo" message="tns:ICoreServices_GetCashBagAppByBusinSerialNo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICoreServices/GetCashBagAppByBusinSerialNoResponse" message="tns:ICoreServices_GetCashBagAppByBusinSerialNo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFundExtAttribute">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICoreServices/GetFundExtAttribute" message="tns:ICoreServices_GetFundExtAttribute_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICoreServices/GetFundExtAttributeResponse" message="tns:ICoreServices_GetFundExtAttribute_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="FetchBusinAppsBySpecialFund">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICoreServices/FetchBusinAppsBySpecialFund" message="tns:ICoreServices_FetchBusinAppsBySpecialFund_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICoreServices/FetchBusinAppsBySpecialFundResponse" message="tns:ICoreServices_FetchBusinAppsBySpecialFund_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="FetchBusinAppsCountBySpecialFund">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICoreServices/FetchBusinAppsCountBySpecialFund" message="tns:ICoreServices_FetchBusinAppsCountBySpecialFund_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICoreServices/FetchBusinAppsCountBySpecialFundResponse" message="tns:ICoreServices_FetchBusinAppsCountBySpecialFund_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFundEx">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICoreServices/GetFundEx" message="tns:ICoreServices_GetFundEx_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICoreServices/GetFundExResponse" message="tns:ICoreServices_GetFundEx_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RevokeBusinApplyByParentNo">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICoreServices/RevokeBusinApplyByParentNo" message="tns:ICoreServices_RevokeBusinApplyByParentNo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICoreServices/RevokeBusinApplyByParentNoResponse" message="tns:ICoreServices_RevokeBusinApplyByParentNo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFixedDividendCfmsCount">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICoreServices/GetFixedDividendCfmsCount" message="tns:ICoreServices_GetFixedDividendCfmsCount_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICoreServices/GetFixedDividendCfmsCountResponse" message="tns:ICoreServices_GetFixedDividendCfmsCount_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFixedDividendCfms">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICoreServices/GetFixedDividendCfms" message="tns:ICoreServices_GetFixedDividendCfms_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICoreServices/GetFixedDividendCfmsResponse" message="tns:ICoreServices_GetFixedDividendCfms_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFixedFinancialSharesGroupByDate">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICoreServices/GetFixedFinancialSharesGroupByDate" message="tns:ICoreServices_GetFixedFinancialSharesGroupByDate_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICoreServices/GetFixedFinancialSharesGroupByDateResponse" message="tns:ICoreServices_GetFixedFinancialSharesGroupByDate_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFixedBagAssets">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICoreServices/GetFixedBagAssets" message="tns:ICoreServices_GetFixedBagAssets_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICoreServices/GetFixedBagAssetsResponse" message="tns:ICoreServices_GetFixedBagAssets_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="FetchFixBagBusinAppsCount">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICoreServices/FetchFixBagBusinAppsCount" message="tns:ICoreServices_FetchFixBagBusinAppsCount_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICoreServices/FetchFixBagBusinAppsCountResponse" message="tns:ICoreServices_FetchFixBagBusinAppsCount_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="FetchFixBagBusinApps">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICoreServices/FetchFixBagBusinApps" message="tns:ICoreServices_FetchFixBagBusinApps_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICoreServices/FetchFixBagBusinAppsResponse" message="tns:ICoreServices_FetchFixBagBusinApps_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFixedFundFinancialSharesGroupByDate">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICoreServices/GetFixedFundFinancialSharesGroupByDate" message="tns:ICoreServices_GetFixedFundFinancialSharesGroupByDate_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICoreServices/GetFixedFundFinancialSharesGroupByDateResponse" message="tns:ICoreServices_GetFixedFundFinancialSharesGroupByDate_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFixedSharesByWorkday">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICoreServices/GetFixedSharesByWorkday" message="tns:ICoreServices_GetFixedSharesByWorkday_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICoreServices/GetFixedSharesByWorkdayResponse" message="tns:ICoreServices_GetFixedSharesByWorkday_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFixedBagShare">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICoreServices/GetFixedBagShare" message="tns:ICoreServices_GetFixedBagShare_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICoreServices/GetFixedBagShareResponse" message="tns:ICoreServices_GetFixedBagShare_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFundFixedBagShare">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICoreServices/GetFundFixedBagShare" message="tns:ICoreServices_GetFundFixedBagShare_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICoreServices/GetFundFixedBagShareResponse" message="tns:ICoreServices_GetFundFixedBagShare_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFixedCurWorkdaySucceedApps">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICoreServices/GetFixedCurWorkdaySucceedApps" message="tns:ICoreServices_GetFixedCurWorkdaySucceedApps_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICoreServices/GetFixedCurWorkdaySucceedAppsResponse" message="tns:ICoreServices_GetFixedCurWorkdaySucceedApps_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFixedFinancialShareAtWorkday">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICoreServices/GetFixedFinancialShareAtWorkday" message="tns:ICoreServices_GetFixedFinancialShareAtWorkday_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICoreServices/GetFixedFinancialShareAtWorkdayResponse" message="tns:ICoreServices_GetFixedFinancialShareAtWorkday_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFixedWaitPayApps">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICoreServices/GetFixedWaitPayApps" message="tns:ICoreServices_GetFixedWaitPayApps_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICoreServices/GetFixedWaitPayAppsResponse" message="tns:ICoreServices_GetFixedWaitPayApps_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFixedCurrentWorkdayApps">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICoreServices/GetFixedCurrentWorkdayApps" message="tns:ICoreServices_GetFixedCurrentWorkdayApps_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICoreServices/GetFixedCurrentWorkdayAppsResponse" message="tns:ICoreServices_GetFixedCurrentWorkdayApps_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFundsAmountOnWayOfCustomer">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICoreServices/GetFundsAmountOnWayOfCustomer" message="tns:ICoreServices_GetFundsAmountOnWayOfCustomer_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICoreServices/GetFundsAmountOnWayOfCustomerResponse" message="tns:ICoreServices_GetFundsAmountOnWayOfCustomer_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AcceptBuyCommon">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICoreServices/AcceptBuyCommon" message="tns:ICoreServices_AcceptBuyCommon_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICoreServices/AcceptBuyCommonResponse" message="tns:ICoreServices_AcceptBuyCommon_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AcceptSubscribeCommon">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICoreServices/AcceptSubscribeCommon" message="tns:ICoreServices_AcceptSubscribeCommon_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICoreServices/AcceptSubscribeCommonResponse" message="tns:ICoreServices_AcceptSubscribeCommon_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetBusinAppListbyTraceNo">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICoreServices/GetBusinAppListbyTraceNo" message="tns:ICoreServices_GetBusinAppListbyTraceNo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICoreServices/GetBusinAppListbyTraceNoResponse" message="tns:ICoreServices_GetBusinAppListbyTraceNo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="MsgSearchAllBusinApps">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICoreServices/MsgSearchAllBusinApps" message="tns:ICoreServices_MsgSearchAllBusinApps_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICoreServices/MsgSearchAllBusinAppsResponse" message="tns:ICoreServices_MsgSearchAllBusinApps_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GtFetchAllBusinApps">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICoreServices/GtFetchAllBusinApps" message="tns:ICoreServices_GtFetchAllBusinApps_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICoreServices/GtFetchAllBusinAppsResponse" message="tns:ICoreServices_GtFetchAllBusinApps_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GtFetchAllBusinAppsCount">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICoreServices/GtFetchAllBusinAppsCount" message="tns:ICoreServices_GtFetchAllBusinAppsCount_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICoreServices/GtFetchAllBusinAppsCountResponse" message="tns:ICoreServices_GtFetchAllBusinAppsCount_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AcceptBuyWithProtocol">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICoreServices/AcceptBuyWithProtocol" message="tns:ICoreServices_AcceptBuyWithProtocol_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICoreServices/AcceptBuyWithProtocolResponse" message="tns:ICoreServices_AcceptBuyWithProtocol_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AcceptCashBagBuyWithProtocol">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICoreServices/AcceptCashBagBuyWithProtocol" message="tns:ICoreServices_AcceptCashBagBuyWithProtocol_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICoreServices/AcceptCashBagBuyWithProtocolResponse" message="tns:ICoreServices_AcceptCashBagBuyWithProtocol_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AcceptSubscribeWithProtocol">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICoreServices/AcceptSubscribeWithProtocol" message="tns:ICoreServices_AcceptSubscribeWithProtocol_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICoreServices/AcceptSubscribeWithProtocolResponse" message="tns:ICoreServices_AcceptSubscribeWithProtocol_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AcceptCashBagSubscribeWithProtocol">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICoreServices/AcceptCashBagSubscribeWithProtocol" message="tns:ICoreServices_AcceptCashBagSubscribeWithProtocol_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICoreServices/AcceptCashBagSubscribeWithProtocolResponse" message="tns:ICoreServices_AcceptCashBagSubscribeWithProtocol_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="IsValidRedeemDebit">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICoreServices/IsValidRedeemDebit" message="tns:ICoreServices_IsValidRedeemDebit_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICoreServices/IsValidRedeemDebitResponse" message="tns:ICoreServices_IsValidRedeemDebit_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AcceptRedeemApplyDebit">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICoreServices/AcceptRedeemApplyDebit" message="tns:ICoreServices_AcceptRedeemApplyDebit_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICoreServices/AcceptRedeemApplyDebitResponse" message="tns:ICoreServices_AcceptRedeemApplyDebit_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCacheData">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICoreServices/GetCacheData" message="tns:ICoreServices_GetCacheData_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICoreServices/GetCacheDataResponse" message="tns:ICoreServices_GetCacheData_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RevokeSFTransfer">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICoreServices/RevokeSFTransfer" message="tns:ICoreServices_RevokeSFTransfer_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICoreServices/RevokeSFTransferResponse" message="tns:ICoreServices_RevokeSFTransfer_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="FaultSFTransfer">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICoreServices/FaultSFTransfer" message="tns:ICoreServices_FaultSFTransfer_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICoreServices/FaultSFTransferResponse" message="tns:ICoreServices_FaultSFTransfer_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="IsValidSFTransfer">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICoreServices/IsValidSFTransfer" message="tns:ICoreServices_IsValidSFTransfer_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICoreServices/IsValidSFTransferResponse" message="tns:ICoreServices_IsValidSFTransfer_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RevokeQuicklyBackToCashBag">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICoreServices/RevokeQuicklyBackToCashBag" message="tns:ICoreServices_RevokeQuicklyBackToCashBag_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICoreServices/RevokeQuicklyBackToCashBagResponse" message="tns:ICoreServices_RevokeQuicklyBackToCashBag_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AcceptSFTransfer">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICoreServices/AcceptSFTransfer" message="tns:ICoreServices_AcceptSFTransfer_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICoreServices/AcceptSFTransferResponse" message="tns:ICoreServices_AcceptSFTransfer_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AcceptSFTransfer_WithLargeRedemptionFlag">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICoreServices/AcceptSFTransfer_WithLargeRedemptionFlag" message="tns:ICoreServices_AcceptSFTransfer_WithLargeRedemptionFlag_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICoreServices/AcceptSFTransfer_WithLargeRedemptionFlagResponse" message="tns:ICoreServices_AcceptSFTransfer_WithLargeRedemptionFlag_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GtUpdateFreezingShares">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICoreServices/GtUpdateFreezingShares" message="tns:ICoreServices_GtUpdateFreezingShares_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICoreServices/GtUpdateFreezingSharesResponse" message="tns:ICoreServices_GtUpdateFreezingShares_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GtGetFreezingShareByID">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICoreServices/GtGetFreezingShareByID" message="tns:ICoreServices_GtGetFreezingShareByID_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICoreServices/GtGetFreezingShareByIDResponse" message="tns:ICoreServices_GtGetFreezingShareByID_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="FetchDividendMethod">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICoreServices/FetchDividendMethod" message="tns:ICoreServices_FetchDividendMethod_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICoreServices/FetchDividendMethodResponse" message="tns:ICoreServices_FetchDividendMethod_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDividendMethod">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICoreServices/GetDividendMethod" message="tns:ICoreServices_GetDividendMethod_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICoreServices/GetDividendMethodResponse" message="tns:ICoreServices_GetDividendMethod_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="IsExitDividendMethod">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICoreServices/IsExitDividendMethod" message="tns:ICoreServices_IsExitDividendMethod_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICoreServices/IsExitDividendMethodResponse" message="tns:ICoreServices_IsExitDividendMethod_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="FetchDividendMethodById">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICoreServices/FetchDividendMethodById" message="tns:ICoreServices_FetchDividendMethodById_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICoreServices/FetchDividendMethodByIdResponse" message="tns:ICoreServices_FetchDividendMethodById_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="FetchDividendMethodByCustomerNo">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICoreServices/FetchDividendMethodByCustomerNo" message="tns:ICoreServices_FetchDividendMethodByCustomerNo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICoreServices/FetchDividendMethodByCustomerNoResponse" message="tns:ICoreServices_FetchDividendMethodByCustomerNo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="FetchDividendMethods">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICoreServices/FetchDividendMethods" message="tns:ICoreServices_FetchDividendMethods_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICoreServices/FetchDividendMethodsResponse" message="tns:ICoreServices_FetchDividendMethods_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="FetchDividendMethodsCount">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICoreServices/FetchDividendMethodsCount" message="tns:ICoreServices_FetchDividendMethodsCount_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICoreServices/FetchDividendMethodsCountResponse" message="tns:ICoreServices_FetchDividendMethodsCount_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetBonusBusinApps">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICoreServices/GetBonusBusinApps" message="tns:ICoreServices_GetBonusBusinApps_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICoreServices/GetBonusBusinAppsResponse" message="tns:ICoreServices_GetBonusBusinApps_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="FetchBusinAppsByCustomerNo">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICoreServices/FetchBusinAppsByCustomerNo" message="tns:ICoreServices_FetchBusinAppsByCustomerNo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICoreServices/FetchBusinAppsByCustomerNoResponse" message="tns:ICoreServices_FetchBusinAppsByCustomerNo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="FetchBusinApps">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICoreServices/FetchBusinApps" message="tns:ICoreServices_FetchBusinApps_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICoreServices/FetchBusinAppsResponse" message="tns:ICoreServices_FetchBusinApps_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="FetchBusinAppsCount">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICoreServices/FetchBusinAppsCount" message="tns:ICoreServices_FetchBusinAppsCount_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICoreServices/FetchBusinAppsCountResponse" message="tns:ICoreServices_FetchBusinAppsCount_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="FetchBusinApp">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICoreServices/FetchBusinApp" message="tns:ICoreServices_FetchBusinApp_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICoreServices/FetchBusinAppResponse" message="tns:ICoreServices_FetchBusinApp_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetWaitPayApps">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICoreServices/GetWaitPayApps" message="tns:ICoreServices_GetWaitPayApps_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICoreServices/GetWaitPayAppsResponse" message="tns:ICoreServices_GetWaitPayApps_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="PostAccount">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICoreServices/PostAccount" message="tns:ICoreServices_PostAccount_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICoreServices/PostAccountResponse" message="tns:ICoreServices_PostAccount_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="PostAccountSetState">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICoreServices/PostAccountSetState" message="tns:ICoreServices_PostAccountSetState_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICoreServices/PostAccountSetStateResponse" message="tns:ICoreServices_PostAccountSetState_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCurrentWorkdayApps">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICoreServices/GetCurrentWorkdayApps" message="tns:ICoreServices_GetCurrentWorkdayApps_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICoreServices/GetCurrentWorkdayAppsResponse" message="tns:ICoreServices_GetCurrentWorkdayApps_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="FetchAppsCfmingCount">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICoreServices/FetchAppsCfmingCount" message="tns:ICoreServices_FetchAppsCfmingCount_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICoreServices/FetchAppsCfmingCountResponse" message="tns:ICoreServices_FetchAppsCfmingCount_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTradeCountByBankCardNo">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICoreServices/GetTradeCountByBankCardNo" message="tns:ICoreServices_GetTradeCountByBankCardNo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICoreServices/GetTradeCountByBankCardNoResponse" message="tns:ICoreServices_GetTradeCountByBankCardNo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPayStateByParentAppSheetSerialNo">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICoreServices/GetPayStateByParentAppSheetSerialNo" message="tns:ICoreServices_GetPayStateByParentAppSheetSerialNo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICoreServices/GetPayStateByParentAppSheetSerialNoResponse" message="tns:ICoreServices_GetPayStateByParentAppSheetSerialNo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetBusinAppByParentAppSheetSerialNo">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICoreServices/GetBusinAppByParentAppSheetSerialNo" message="tns:ICoreServices_GetBusinAppByParentAppSheetSerialNo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICoreServices/GetBusinAppByParentAppSheetSerialNoResponse" message="tns:ICoreServices_GetBusinAppByParentAppSheetSerialNo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFundWhiteList">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICoreServices/GetFundWhiteList" message="tns:ICoreServices_GetFundWhiteList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICoreServices/GetFundWhiteListResponse" message="tns:ICoreServices_GetFundWhiteList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCfmBusinAppByFundCode">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICoreServices/GetCfmBusinAppByFundCode" message="tns:ICoreServices_GetCfmBusinAppByFundCode_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICoreServices/GetCfmBusinAppByFundCodeResponse" message="tns:ICoreServices_GetCfmBusinAppByFundCode_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SetCustDividendMethod">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICoreServices/SetCustDividendMethod" message="tns:ICoreServices_SetCustDividendMethod_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICoreServices/SetCustDividendMethodResponse" message="tns:ICoreServices_SetCustDividendMethod_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="FetchBusinAppByHsSheetSerialNo">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICoreServices/FetchBusinAppByHsSheetSerialNo" message="tns:ICoreServices_FetchBusinAppByHsSheetSerialNo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICoreServices/FetchBusinAppByHsSheetSerialNoResponse" message="tns:ICoreServices_FetchBusinAppByHsSheetSerialNo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateBusinApp">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICoreServices/UpdateBusinApp" message="tns:ICoreServices_UpdateBusinApp_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICoreServices/UpdateBusinAppResponse" message="tns:ICoreServices_UpdateBusinApp_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SearchBusinApps">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICoreServices/SearchBusinApps" message="tns:ICoreServices_SearchBusinApps_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICoreServices/SearchBusinAppsResponse" message="tns:ICoreServices_SearchBusinApps_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateFreezingSharesIsEnabled">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICoreServices/UpdateFreezingSharesIsEnabled" message="tns:ICoreServices_UpdateFreezingSharesIsEnabled_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICoreServices/UpdateFreezingSharesIsEnabledResponse" message="tns:ICoreServices_UpdateFreezingSharesIsEnabled_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateBusinAppByCmf">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICoreServices/UpdateBusinAppByCmf" message="tns:ICoreServices_UpdateBusinAppByCmf_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICoreServices/UpdateBusinAppByCmfResponse" message="tns:ICoreServices_UpdateBusinAppByCmf_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SyncPayStateByParentAppSheetSerialNo">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICoreServices/SyncPayStateByParentAppSheetSerialNo" message="tns:ICoreServices_SyncPayStateByParentAppSheetSerialNo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICoreServices/SyncPayStateByParentAppSheetSerialNoResponse" message="tns:ICoreServices_SyncPayStateByParentAppSheetSerialNo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetBusinAppsByParentSerialNoForQS">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICoreServices/GetBusinAppsByParentSerialNoForQS" message="tns:ICoreServices_GetBusinAppsByParentSerialNoForQS_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICoreServices/GetBusinAppsByParentSerialNoForQSResponse" message="tns:ICoreServices_GetBusinAppsByParentSerialNoForQS_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SynchronousGuidNo">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICoreServices/SynchronousGuidNo" message="tns:ICoreServices_SynchronousGuidNo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICoreServices/SynchronousGuidNoResponse" message="tns:ICoreServices_SynchronousGuidNo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyPassword">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICoreServices/VerifyPassword" message="tns:ICoreServices_VerifyPassword_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICoreServices/VerifyPasswordResponse" message="tns:ICoreServices_VerifyPassword_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSpecialAccountsFund">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICoreServices/GetSpecialAccountsFund" message="tns:ICoreServices_GetSpecialAccountsFund_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICoreServices/GetSpecialAccountsFundResponse" message="tns:ICoreServices_GetSpecialAccountsFund_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCashBagApps">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICoreServices/GetCashBagApps" message="tns:ICoreServices_GetCashBagApps_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICoreServices/GetCashBagAppsResponse" message="tns:ICoreServices_GetCashBagApps_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCashBagAppsHistory">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICoreServices/GetCashBagAppsHistory" message="tns:ICoreServices_GetCashBagAppsHistory_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICoreServices/GetCashBagAppsHistoryResponse" message="tns:ICoreServices_GetCashBagAppsHistory_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCashBagAppsCount">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICoreServices/GetCashBagAppsCount" message="tns:ICoreServices_GetCashBagAppsCount_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICoreServices/GetCashBagAppsCountResponse" message="tns:ICoreServices_GetCashBagAppsCount_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCashBagAppsHistoryCount">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICoreServices/GetCashBagAppsHistoryCount" message="tns:ICoreServices_GetCashBagAppsHistoryCount_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICoreServices/GetCashBagAppsHistoryCountResponse" message="tns:ICoreServices_GetCashBagAppsHistoryCount_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCashBagTransferApps">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICoreServices/GetCashBagTransferApps" message="tns:ICoreServices_GetCashBagTransferApps_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICoreServices/GetCashBagTransferAppsResponse" message="tns:ICoreServices_GetCashBagTransferApps_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCashBagTransferAppsHistory">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICoreServices/GetCashBagTransferAppsHistory" message="tns:ICoreServices_GetCashBagTransferAppsHistory_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICoreServices/GetCashBagTransferAppsHistoryResponse" message="tns:ICoreServices_GetCashBagTransferAppsHistory_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCashBagTransferAppsCount">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICoreServices/GetCashBagTransferAppsCount" message="tns:ICoreServices_GetCashBagTransferAppsCount_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICoreServices/GetCashBagTransferAppsCountResponse" message="tns:ICoreServices_GetCashBagTransferAppsCount_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="IsValidBuy">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICoreServices/IsValidBuy" message="tns:ICoreServices_IsValidBuy_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICoreServices/IsValidBuyResponse" message="tns:ICoreServices_IsValidBuy_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="IsValidBuyForParentBusinType">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICoreServices/IsValidBuyForParentBusinType" message="tns:ICoreServices_IsValidBuyForParentBusinType_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICoreServices/IsValidBuyForParentBusinTypeResponse" message="tns:ICoreServices_IsValidBuyForParentBusinType_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AcceptBuy">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICoreServices/AcceptBuy" message="tns:ICoreServices_AcceptBuy_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICoreServices/AcceptBuyResponse" message="tns:ICoreServices_AcceptBuy_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AcceptCashBagBuy">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICoreServices/AcceptCashBagBuy" message="tns:ICoreServices_AcceptCashBagBuy_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICoreServices/AcceptCashBagBuyResponse" message="tns:ICoreServices_AcceptCashBagBuy_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="FundBuyAccept">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICoreServices/FundBuyAccept" message="tns:ICoreServices_FundBuyAccept_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICoreServices/FundBuyAcceptResponse" message="tns:ICoreServices_FundBuyAccept_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AcceptActivityBuy">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICoreServices/AcceptActivityBuy" message="tns:ICoreServices_AcceptActivityBuy_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICoreServices/AcceptActivityBuyResponse" message="tns:ICoreServices_AcceptActivityBuy_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AcceptShareAdjustBuy">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICoreServices/AcceptShareAdjustBuy" message="tns:ICoreServices_AcceptShareAdjustBuy_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICoreServices/AcceptShareAdjustBuyResponse" message="tns:ICoreServices_AcceptShareAdjustBuy_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AcceptCompleted">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICoreServices/AcceptCompleted" message="tns:ICoreServices_AcceptCompleted_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICoreServices/AcceptCompletedResponse" message="tns:ICoreServices_AcceptCompleted_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AcceptCashBagCompleted">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICoreServices/AcceptCashBagCompleted" message="tns:ICoreServices_AcceptCashBagCompleted_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICoreServices/AcceptCashBagCompletedResponse" message="tns:ICoreServices_AcceptCashBagCompleted_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="IsValidSubscribe">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICoreServices/IsValidSubscribe" message="tns:ICoreServices_IsValidSubscribe_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICoreServices/IsValidSubscribeResponse" message="tns:ICoreServices_IsValidSubscribe_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AcceptSubscribe">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICoreServices/AcceptSubscribe" message="tns:ICoreServices_AcceptSubscribe_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICoreServices/AcceptSubscribeResponse" message="tns:ICoreServices_AcceptSubscribe_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AcceptCashBagSubscribe">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICoreServices/AcceptCashBagSubscribe" message="tns:ICoreServices_AcceptCashBagSubscribe_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICoreServices/AcceptCashBagSubscribeResponse" message="tns:ICoreServices_AcceptCashBagSubscribe_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AcceptCashBagSubscribeCompleted">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICoreServices/AcceptCashBagSubscribeCompleted" message="tns:ICoreServices_AcceptCashBagSubscribeCompleted_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICoreServices/AcceptCashBagSubscribeCompletedResponse" message="tns:ICoreServices_AcceptCashBagSubscribeCompleted_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SubscribeCompleted">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICoreServices/SubscribeCompleted" message="tns:ICoreServices_SubscribeCompleted_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICoreServices/SubscribeCompletedResponse" message="tns:ICoreServices_SubscribeCompleted_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="IsValidRedeem">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICoreServices/IsValidRedeem" message="tns:ICoreServices_IsValidRedeem_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICoreServices/IsValidRedeemResponse" message="tns:ICoreServices_IsValidRedeem_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AcceptRedeemApply">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICoreServices/AcceptRedeemApply" message="tns:ICoreServices_AcceptRedeemApply_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICoreServices/AcceptRedeemApplyResponse" message="tns:ICoreServices_AcceptRedeemApply_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AcceptRedeemApplyWithReference">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICoreServices/AcceptRedeemApplyWithReference" message="tns:ICoreServices_AcceptRedeemApplyWithReference_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICoreServices/AcceptRedeemApplyWithReferenceResponse" message="tns:ICoreServices_AcceptRedeemApplyWithReference_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AcceptShareAdjustRedeem">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICoreServices/AcceptShareAdjustRedeem" message="tns:ICoreServices_AcceptShareAdjustRedeem_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICoreServices/AcceptShareAdjustRedeemResponse" message="tns:ICoreServices_AcceptShareAdjustRedeem_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AcceptCashBagRedeemApply">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICoreServices/AcceptCashBagRedeemApply" message="tns:ICoreServices_AcceptCashBagRedeemApply_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICoreServices/AcceptCashBagRedeemApplyResponse" message="tns:ICoreServices_AcceptCashBagRedeemApply_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="IsValidBonus">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICoreServices/IsValidBonus" message="tns:ICoreServices_IsValidBonus_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICoreServices/IsValidBonusResponse" message="tns:ICoreServices_IsValidBonus_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AcceptBonus">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICoreServices/AcceptBonus" message="tns:ICoreServices_AcceptBonus_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICoreServices/AcceptBonusResponse" message="tns:ICoreServices_AcceptBonus_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AcceptCustodyTransfer">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICoreServices/AcceptCustodyTransfer" message="tns:ICoreServices_AcceptCustodyTransfer_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICoreServices/AcceptCustodyTransferResponse" message="tns:ICoreServices_AcceptCustodyTransfer_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AcceptCustodyTransferOut">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICoreServices/AcceptCustodyTransferOut" message="tns:ICoreServices_AcceptCustodyTransferOut_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICoreServices/AcceptCustodyTransferOutResponse" message="tns:ICoreServices_AcceptCustodyTransferOut_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="IsValidZtg">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICoreServices/IsValidZtg" message="tns:ICoreServices_IsValidZtg_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICoreServices/IsValidZtgResponse" message="tns:ICoreServices_IsValidZtg_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AcceptZtg">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICoreServices/AcceptZtg" message="tns:ICoreServices_AcceptZtg_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICoreServices/AcceptZtgResponse" message="tns:ICoreServices_AcceptZtg_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCurWorkdaySucceedAppsWithPayCanel">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICoreServices/GetCurWorkdaySucceedAppsWithPayCanel" message="tns:ICoreServices_GetCurWorkdaySucceedAppsWithPayCanel_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICoreServices/GetCurWorkdaySucceedAppsWithPayCanelResponse" message="tns:ICoreServices_GetCurWorkdaySucceedAppsWithPayCanel_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCurWorkdaySucceedApps">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICoreServices/GetCurWorkdaySucceedApps" message="tns:ICoreServices_GetCurWorkdaySucceedApps_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICoreServices/GetCurWorkdaySucceedAppsResponse" message="tns:ICoreServices_GetCurWorkdaySucceedApps_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="BusinCanRevoke">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICoreServices/BusinCanRevoke" message="tns:ICoreServices_BusinCanRevoke_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICoreServices/BusinCanRevokeResponse" message="tns:ICoreServices_BusinCanRevoke_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RevokeBusinApply">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICoreServices/RevokeBusinApply" message="tns:ICoreServices_RevokeBusinApply_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICoreServices/RevokeBusinApplyResponse" message="tns:ICoreServices_RevokeBusinApply_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="IsRevokeCanRecover">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICoreServices/IsRevokeCanRecover" message="tns:ICoreServices_IsRevokeCanRecover_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICoreServices/IsRevokeCanRecoverResponse" message="tns:ICoreServices_IsRevokeCanRecover_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RecoverRevokeApply">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICoreServices/RecoverRevokeApply" message="tns:ICoreServices_RecoverRevokeApply_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICoreServices/RecoverRevokeApplyResponse" message="tns:ICoreServices_RecoverRevokeApply_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="IsValidTransfer">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICoreServices/IsValidTransfer" message="tns:ICoreServices_IsValidTransfer_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICoreServices/IsValidTransferResponse" message="tns:ICoreServices_IsValidTransfer_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AcceptTransferApply">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICoreServices/AcceptTransferApply" message="tns:ICoreServices_AcceptTransferApply_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICoreServices/AcceptTransferApplyResponse" message="tns:ICoreServices_AcceptTransferApply_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="FetchMinBusinLimit">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICoreServices/FetchMinBusinLimit" message="tns:ICoreServices_FetchMinBusinLimit_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICoreServices/FetchMinBusinLimitResponse" message="tns:ICoreServices_FetchMinBusinLimit_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="FetchMinHolderLimit">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICoreServices/FetchMinHolderLimit" message="tns:ICoreServices_FetchMinHolderLimit_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICoreServices/FetchMinHolderLimitResponse" message="tns:ICoreServices_FetchMinHolderLimit_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="FetchFreezingShares">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICoreServices/FetchFreezingShares" message="tns:ICoreServices_FetchFreezingShares_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICoreServices/FetchFreezingSharesResponse" message="tns:ICoreServices_FetchFreezingShares_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="FetchFreezingShareById">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICoreServices/FetchFreezingShareById" message="tns:ICoreServices_FetchFreezingShareById_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICoreServices/FetchFreezingShareByIdResponse" message="tns:ICoreServices_FetchFreezingShareById_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSharesOfCustomer">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICoreServices/GetSharesOfCustomer" message="tns:ICoreServices_GetSharesOfCustomer_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICoreServices/GetSharesOfCustomerResponse" message="tns:ICoreServices_GetSharesOfCustomer_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFundSharesOfCustomer">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICoreServices/GetFundSharesOfCustomer" message="tns:ICoreServices_GetFundSharesOfCustomer_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICoreServices/GetFundSharesOfCustomerResponse" message="tns:ICoreServices_GetFundSharesOfCustomer_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCustomerShare">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICoreServices/GetCustomerShare" message="tns:ICoreServices_GetCustomerShare_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICoreServices/GetCustomerShareResponse" message="tns:ICoreServices_GetCustomerShare_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GtInsertShareFreezing">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICoreServices/GtInsertShareFreezing" message="tns:ICoreServices_GtInsertShareFreezing_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICoreServices/GtInsertShareFreezingResponse" message="tns:ICoreServices_GtInsertShareFreezing_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AppointmentInsertShareFreezing">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICoreServices/AppointmentInsertShareFreezing" message="tns:ICoreServices_AppointmentInsertShareFreezing_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICoreServices/AppointmentInsertShareFreezingResponse" message="tns:ICoreServices_AppointmentInsertShareFreezing_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="WSHttpBinding_ICoreServices" type="tns:ICoreServices">
+    <wsp:PolicyReference URI="#WSHttpBinding_ICoreServices_policy" />
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="AcceptQuicklyBackToCashBag">
+      <soap12:operation soapAction="http://tempuri.org/ICoreServices/AcceptQuicklyBackToCashBag" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AcceptQuicklyBackToCashBag_WithLargeRedemptionFlag">
+      <soap12:operation soapAction="http://tempuri.org/ICoreServices/AcceptQuicklyBackToCashBag_WithLargeRedemptionFlag" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsValidQuicklyBackToCashBag">
+      <soap12:operation soapAction="http://tempuri.org/ICoreServices/IsValidQuicklyBackToCashBag" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCurrentFreeAmount">
+      <soap12:operation soapAction="http://tempuri.org/ICoreServices/GetCurrentFreeAmount" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsValidRedeemPlus">
+      <soap12:operation soapAction="http://tempuri.org/ICoreServices/IsValidRedeemPlus" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AcceptRedeemApplyPlus">
+      <soap12:operation soapAction="http://tempuri.org/ICoreServices/AcceptRedeemApplyPlus" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFixedFinancialSharesGroupByDatePlus">
+      <soap12:operation soapAction="http://tempuri.org/ICoreServices/GetFixedFinancialSharesGroupByDatePlus" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFundFinancialSharesGroupByDatePlus">
+      <soap12:operation soapAction="http://tempuri.org/ICoreServices/GetFundFinancialSharesGroupByDatePlus" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFinancialSharesGroupByDatePlus">
+      <soap12:operation soapAction="http://tempuri.org/ICoreServices/GetFinancialSharesGroupByDatePlus" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AcceptBuyFinancialFund">
+      <soap12:operation soapAction="http://tempuri.org/ICoreServices/AcceptBuyFinancialFund" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsValidBuyFinancialFund">
+      <soap12:operation soapAction="http://tempuri.org/ICoreServices/IsValidBuyFinancialFund" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFinancialFundByCode">
+      <soap12:operation soapAction="http://tempuri.org/ICoreServices/GetFinancialFundByCode" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFundSpecialStageList">
+      <soap12:operation soapAction="http://tempuri.org/ICoreServices/GetFundSpecialStageList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetLastFundSpecialStage">
+      <soap12:operation soapAction="http://tempuri.org/ICoreServices/GetLastFundSpecialStage" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFundSpecialStageByFundCode">
+      <soap12:operation soapAction="http://tempuri.org/ICoreServices/GetFundSpecialStageByFundCode" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFinancialFundUnsoldAmount">
+      <soap12:operation soapAction="http://tempuri.org/ICoreServices/GetFinancialFundUnsoldAmount" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetFundRedeemType">
+      <soap12:operation soapAction="http://tempuri.org/ICoreServices/SetFundRedeemType" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFundRedeemType">
+      <soap12:operation soapAction="http://tempuri.org/ICoreServices/GetFundRedeemType" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFundRedeemTypeJour">
+      <soap12:operation soapAction="http://tempuri.org/ICoreServices/GetFundRedeemTypeJour" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetEnableBuy">
+      <soap12:operation soapAction="http://tempuri.org/ICoreServices/SetEnableBuy" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCashBagTransferAppsHistoryCount">
+      <soap12:operation soapAction="http://tempuri.org/ICoreServices/GetCashBagTransferAppsHistoryCount" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCashBagAppByCashbagParentNo">
+      <soap12:operation soapAction="http://tempuri.org/ICoreServices/GetCashBagAppByCashbagParentNo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCashBagAppByBusinSerialNo">
+      <soap12:operation soapAction="http://tempuri.org/ICoreServices/GetCashBagAppByBusinSerialNo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFundExtAttribute">
+      <soap12:operation soapAction="http://tempuri.org/ICoreServices/GetFundExtAttribute" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FetchBusinAppsBySpecialFund">
+      <soap12:operation soapAction="http://tempuri.org/ICoreServices/FetchBusinAppsBySpecialFund" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FetchBusinAppsCountBySpecialFund">
+      <soap12:operation soapAction="http://tempuri.org/ICoreServices/FetchBusinAppsCountBySpecialFund" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFundEx">
+      <soap12:operation soapAction="http://tempuri.org/ICoreServices/GetFundEx" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RevokeBusinApplyByParentNo">
+      <soap12:operation soapAction="http://tempuri.org/ICoreServices/RevokeBusinApplyByParentNo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFixedDividendCfmsCount">
+      <soap12:operation soapAction="http://tempuri.org/ICoreServices/GetFixedDividendCfmsCount" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFixedDividendCfms">
+      <soap12:operation soapAction="http://tempuri.org/ICoreServices/GetFixedDividendCfms" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFixedFinancialSharesGroupByDate">
+      <soap12:operation soapAction="http://tempuri.org/ICoreServices/GetFixedFinancialSharesGroupByDate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFixedBagAssets">
+      <soap12:operation soapAction="http://tempuri.org/ICoreServices/GetFixedBagAssets" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FetchFixBagBusinAppsCount">
+      <soap12:operation soapAction="http://tempuri.org/ICoreServices/FetchFixBagBusinAppsCount" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FetchFixBagBusinApps">
+      <soap12:operation soapAction="http://tempuri.org/ICoreServices/FetchFixBagBusinApps" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFixedFundFinancialSharesGroupByDate">
+      <soap12:operation soapAction="http://tempuri.org/ICoreServices/GetFixedFundFinancialSharesGroupByDate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFixedSharesByWorkday">
+      <soap12:operation soapAction="http://tempuri.org/ICoreServices/GetFixedSharesByWorkday" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFixedBagShare">
+      <soap12:operation soapAction="http://tempuri.org/ICoreServices/GetFixedBagShare" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFundFixedBagShare">
+      <soap12:operation soapAction="http://tempuri.org/ICoreServices/GetFundFixedBagShare" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFixedCurWorkdaySucceedApps">
+      <soap12:operation soapAction="http://tempuri.org/ICoreServices/GetFixedCurWorkdaySucceedApps" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFixedFinancialShareAtWorkday">
+      <soap12:operation soapAction="http://tempuri.org/ICoreServices/GetFixedFinancialShareAtWorkday" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFixedWaitPayApps">
+      <soap12:operation soapAction="http://tempuri.org/ICoreServices/GetFixedWaitPayApps" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFixedCurrentWorkdayApps">
+      <soap12:operation soapAction="http://tempuri.org/ICoreServices/GetFixedCurrentWorkdayApps" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFundsAmountOnWayOfCustomer">
+      <soap12:operation soapAction="http://tempuri.org/ICoreServices/GetFundsAmountOnWayOfCustomer" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AcceptBuyCommon">
+      <soap12:operation soapAction="http://tempuri.org/ICoreServices/AcceptBuyCommon" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AcceptSubscribeCommon">
+      <soap12:operation soapAction="http://tempuri.org/ICoreServices/AcceptSubscribeCommon" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBusinAppListbyTraceNo">
+      <soap12:operation soapAction="http://tempuri.org/ICoreServices/GetBusinAppListbyTraceNo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MsgSearchAllBusinApps">
+      <soap12:operation soapAction="http://tempuri.org/ICoreServices/MsgSearchAllBusinApps" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GtFetchAllBusinApps">
+      <soap12:operation soapAction="http://tempuri.org/ICoreServices/GtFetchAllBusinApps" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GtFetchAllBusinAppsCount">
+      <soap12:operation soapAction="http://tempuri.org/ICoreServices/GtFetchAllBusinAppsCount" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AcceptBuyWithProtocol">
+      <soap12:operation soapAction="http://tempuri.org/ICoreServices/AcceptBuyWithProtocol" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AcceptCashBagBuyWithProtocol">
+      <soap12:operation soapAction="http://tempuri.org/ICoreServices/AcceptCashBagBuyWithProtocol" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AcceptSubscribeWithProtocol">
+      <soap12:operation soapAction="http://tempuri.org/ICoreServices/AcceptSubscribeWithProtocol" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AcceptCashBagSubscribeWithProtocol">
+      <soap12:operation soapAction="http://tempuri.org/ICoreServices/AcceptCashBagSubscribeWithProtocol" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsValidRedeemDebit">
+      <soap12:operation soapAction="http://tempuri.org/ICoreServices/IsValidRedeemDebit" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AcceptRedeemApplyDebit">
+      <soap12:operation soapAction="http://tempuri.org/ICoreServices/AcceptRedeemApplyDebit" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCacheData">
+      <soap12:operation soapAction="http://tempuri.org/ICoreServices/GetCacheData" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RevokeSFTransfer">
+      <soap12:operation soapAction="http://tempuri.org/ICoreServices/RevokeSFTransfer" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FaultSFTransfer">
+      <soap12:operation soapAction="http://tempuri.org/ICoreServices/FaultSFTransfer" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsValidSFTransfer">
+      <soap12:operation soapAction="http://tempuri.org/ICoreServices/IsValidSFTransfer" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RevokeQuicklyBackToCashBag">
+      <soap12:operation soapAction="http://tempuri.org/ICoreServices/RevokeQuicklyBackToCashBag" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AcceptSFTransfer">
+      <soap12:operation soapAction="http://tempuri.org/ICoreServices/AcceptSFTransfer" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AcceptSFTransfer_WithLargeRedemptionFlag">
+      <soap12:operation soapAction="http://tempuri.org/ICoreServices/AcceptSFTransfer_WithLargeRedemptionFlag" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GtUpdateFreezingShares">
+      <soap12:operation soapAction="http://tempuri.org/ICoreServices/GtUpdateFreezingShares" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GtGetFreezingShareByID">
+      <soap12:operation soapAction="http://tempuri.org/ICoreServices/GtGetFreezingShareByID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FetchDividendMethod">
+      <soap12:operation soapAction="http://tempuri.org/ICoreServices/FetchDividendMethod" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDividendMethod">
+      <soap12:operation soapAction="http://tempuri.org/ICoreServices/GetDividendMethod" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsExitDividendMethod">
+      <soap12:operation soapAction="http://tempuri.org/ICoreServices/IsExitDividendMethod" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FetchDividendMethodById">
+      <soap12:operation soapAction="http://tempuri.org/ICoreServices/FetchDividendMethodById" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FetchDividendMethodByCustomerNo">
+      <soap12:operation soapAction="http://tempuri.org/ICoreServices/FetchDividendMethodByCustomerNo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FetchDividendMethods">
+      <soap12:operation soapAction="http://tempuri.org/ICoreServices/FetchDividendMethods" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FetchDividendMethodsCount">
+      <soap12:operation soapAction="http://tempuri.org/ICoreServices/FetchDividendMethodsCount" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBonusBusinApps">
+      <soap12:operation soapAction="http://tempuri.org/ICoreServices/GetBonusBusinApps" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FetchBusinAppsByCustomerNo">
+      <soap12:operation soapAction="http://tempuri.org/ICoreServices/FetchBusinAppsByCustomerNo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FetchBusinApps">
+      <soap12:operation soapAction="http://tempuri.org/ICoreServices/FetchBusinApps" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FetchBusinAppsCount">
+      <soap12:operation soapAction="http://tempuri.org/ICoreServices/FetchBusinAppsCount" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FetchBusinApp">
+      <soap12:operation soapAction="http://tempuri.org/ICoreServices/FetchBusinApp" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetWaitPayApps">
+      <soap12:operation soapAction="http://tempuri.org/ICoreServices/GetWaitPayApps" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PostAccount">
+      <soap12:operation soapAction="http://tempuri.org/ICoreServices/PostAccount" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PostAccountSetState">
+      <soap12:operation soapAction="http://tempuri.org/ICoreServices/PostAccountSetState" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCurrentWorkdayApps">
+      <soap12:operation soapAction="http://tempuri.org/ICoreServices/GetCurrentWorkdayApps" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FetchAppsCfmingCount">
+      <soap12:operation soapAction="http://tempuri.org/ICoreServices/FetchAppsCfmingCount" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTradeCountByBankCardNo">
+      <soap12:operation soapAction="http://tempuri.org/ICoreServices/GetTradeCountByBankCardNo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPayStateByParentAppSheetSerialNo">
+      <soap12:operation soapAction="http://tempuri.org/ICoreServices/GetPayStateByParentAppSheetSerialNo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBusinAppByParentAppSheetSerialNo">
+      <soap12:operation soapAction="http://tempuri.org/ICoreServices/GetBusinAppByParentAppSheetSerialNo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFundWhiteList">
+      <soap12:operation soapAction="http://tempuri.org/ICoreServices/GetFundWhiteList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCfmBusinAppByFundCode">
+      <soap12:operation soapAction="http://tempuri.org/ICoreServices/GetCfmBusinAppByFundCode" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetCustDividendMethod">
+      <soap12:operation soapAction="http://tempuri.org/ICoreServices/SetCustDividendMethod" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FetchBusinAppByHsSheetSerialNo">
+      <soap12:operation soapAction="http://tempuri.org/ICoreServices/FetchBusinAppByHsSheetSerialNo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateBusinApp">
+      <soap12:operation soapAction="http://tempuri.org/ICoreServices/UpdateBusinApp" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SearchBusinApps">
+      <soap12:operation soapAction="http://tempuri.org/ICoreServices/SearchBusinApps" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateFreezingSharesIsEnabled">
+      <soap12:operation soapAction="http://tempuri.org/ICoreServices/UpdateFreezingSharesIsEnabled" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateBusinAppByCmf">
+      <soap12:operation soapAction="http://tempuri.org/ICoreServices/UpdateBusinAppByCmf" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SyncPayStateByParentAppSheetSerialNo">
+      <soap12:operation soapAction="http://tempuri.org/ICoreServices/SyncPayStateByParentAppSheetSerialNo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBusinAppsByParentSerialNoForQS">
+      <soap12:operation soapAction="http://tempuri.org/ICoreServices/GetBusinAppsByParentSerialNoForQS" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SynchronousGuidNo">
+      <soap12:operation soapAction="http://tempuri.org/ICoreServices/SynchronousGuidNo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyPassword">
+      <soap12:operation soapAction="http://tempuri.org/ICoreServices/VerifyPassword" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSpecialAccountsFund">
+      <soap12:operation soapAction="http://tempuri.org/ICoreServices/GetSpecialAccountsFund" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCashBagApps">
+      <soap12:operation soapAction="http://tempuri.org/ICoreServices/GetCashBagApps" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCashBagAppsHistory">
+      <soap12:operation soapAction="http://tempuri.org/ICoreServices/GetCashBagAppsHistory" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCashBagAppsCount">
+      <soap12:operation soapAction="http://tempuri.org/ICoreServices/GetCashBagAppsCount" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCashBagAppsHistoryCount">
+      <soap12:operation soapAction="http://tempuri.org/ICoreServices/GetCashBagAppsHistoryCount" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCashBagTransferApps">
+      <soap12:operation soapAction="http://tempuri.org/ICoreServices/GetCashBagTransferApps" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCashBagTransferAppsHistory">
+      <soap12:operation soapAction="http://tempuri.org/ICoreServices/GetCashBagTransferAppsHistory" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCashBagTransferAppsCount">
+      <soap12:operation soapAction="http://tempuri.org/ICoreServices/GetCashBagTransferAppsCount" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsValidBuy">
+      <soap12:operation soapAction="http://tempuri.org/ICoreServices/IsValidBuy" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsValidBuyForParentBusinType">
+      <soap12:operation soapAction="http://tempuri.org/ICoreServices/IsValidBuyForParentBusinType" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AcceptBuy">
+      <soap12:operation soapAction="http://tempuri.org/ICoreServices/AcceptBuy" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AcceptCashBagBuy">
+      <soap12:operation soapAction="http://tempuri.org/ICoreServices/AcceptCashBagBuy" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FundBuyAccept">
+      <soap12:operation soapAction="http://tempuri.org/ICoreServices/FundBuyAccept" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AcceptActivityBuy">
+      <soap12:operation soapAction="http://tempuri.org/ICoreServices/AcceptActivityBuy" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AcceptShareAdjustBuy">
+      <soap12:operation soapAction="http://tempuri.org/ICoreServices/AcceptShareAdjustBuy" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AcceptCompleted">
+      <soap12:operation soapAction="http://tempuri.org/ICoreServices/AcceptCompleted" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AcceptCashBagCompleted">
+      <soap12:operation soapAction="http://tempuri.org/ICoreServices/AcceptCashBagCompleted" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsValidSubscribe">
+      <soap12:operation soapAction="http://tempuri.org/ICoreServices/IsValidSubscribe" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AcceptSubscribe">
+      <soap12:operation soapAction="http://tempuri.org/ICoreServices/AcceptSubscribe" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AcceptCashBagSubscribe">
+      <soap12:operation soapAction="http://tempuri.org/ICoreServices/AcceptCashBagSubscribe" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AcceptCashBagSubscribeCompleted">
+      <soap12:operation soapAction="http://tempuri.org/ICoreServices/AcceptCashBagSubscribeCompleted" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SubscribeCompleted">
+      <soap12:operation soapAction="http://tempuri.org/ICoreServices/SubscribeCompleted" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsValidRedeem">
+      <soap12:operation soapAction="http://tempuri.org/ICoreServices/IsValidRedeem" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AcceptRedeemApply">
+      <soap12:operation soapAction="http://tempuri.org/ICoreServices/AcceptRedeemApply" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AcceptRedeemApplyWithReference">
+      <soap12:operation soapAction="http://tempuri.org/ICoreServices/AcceptRedeemApplyWithReference" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AcceptShareAdjustRedeem">
+      <soap12:operation soapAction="http://tempuri.org/ICoreServices/AcceptShareAdjustRedeem" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AcceptCashBagRedeemApply">
+      <soap12:operation soapAction="http://tempuri.org/ICoreServices/AcceptCashBagRedeemApply" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsValidBonus">
+      <soap12:operation soapAction="http://tempuri.org/ICoreServices/IsValidBonus" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AcceptBonus">
+      <soap12:operation soapAction="http://tempuri.org/ICoreServices/AcceptBonus" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AcceptCustodyTransfer">
+      <soap12:operation soapAction="http://tempuri.org/ICoreServices/AcceptCustodyTransfer" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AcceptCustodyTransferOut">
+      <soap12:operation soapAction="http://tempuri.org/ICoreServices/AcceptCustodyTransferOut" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsValidZtg">
+      <soap12:operation soapAction="http://tempuri.org/ICoreServices/IsValidZtg" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AcceptZtg">
+      <soap12:operation soapAction="http://tempuri.org/ICoreServices/AcceptZtg" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCurWorkdaySucceedAppsWithPayCanel">
+      <soap12:operation soapAction="http://tempuri.org/ICoreServices/GetCurWorkdaySucceedAppsWithPayCanel" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCurWorkdaySucceedApps">
+      <soap12:operation soapAction="http://tempuri.org/ICoreServices/GetCurWorkdaySucceedApps" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BusinCanRevoke">
+      <soap12:operation soapAction="http://tempuri.org/ICoreServices/BusinCanRevoke" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RevokeBusinApply">
+      <soap12:operation soapAction="http://tempuri.org/ICoreServices/RevokeBusinApply" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsRevokeCanRecover">
+      <soap12:operation soapAction="http://tempuri.org/ICoreServices/IsRevokeCanRecover" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RecoverRevokeApply">
+      <soap12:operation soapAction="http://tempuri.org/ICoreServices/RecoverRevokeApply" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsValidTransfer">
+      <soap12:operation soapAction="http://tempuri.org/ICoreServices/IsValidTransfer" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AcceptTransferApply">
+      <soap12:operation soapAction="http://tempuri.org/ICoreServices/AcceptTransferApply" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FetchMinBusinLimit">
+      <soap12:operation soapAction="http://tempuri.org/ICoreServices/FetchMinBusinLimit" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FetchMinHolderLimit">
+      <soap12:operation soapAction="http://tempuri.org/ICoreServices/FetchMinHolderLimit" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FetchFreezingShares">
+      <soap12:operation soapAction="http://tempuri.org/ICoreServices/FetchFreezingShares" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FetchFreezingShareById">
+      <soap12:operation soapAction="http://tempuri.org/ICoreServices/FetchFreezingShareById" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSharesOfCustomer">
+      <soap12:operation soapAction="http://tempuri.org/ICoreServices/GetSharesOfCustomer" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFundSharesOfCustomer">
+      <soap12:operation soapAction="http://tempuri.org/ICoreServices/GetFundSharesOfCustomer" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCustomerShare">
+      <soap12:operation soapAction="http://tempuri.org/ICoreServices/GetCustomerShare" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GtInsertShareFreezing">
+      <soap12:operation soapAction="http://tempuri.org/ICoreServices/GtInsertShareFreezing" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AppointmentInsertShareFreezing">
+      <soap12:operation soapAction="http://tempuri.org/ICoreServices/AppointmentInsertShareFreezing" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="CoreWCFServices">
+    <wsdl:port name="WSHttpBinding_ICoreServices" binding="tns:WSHttpBinding_ICoreServices">
+      <soap12:address location="http://172.16.86.57:8001/AngieOneServices/" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>http://172.16.86.57:8001/AngieOneServices/</wsa10:Address>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

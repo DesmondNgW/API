@@ -1,0 +1,2427 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://172.16.86.57:8001/AngieOneServices/?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Em.Entities" />
+  <xs:import schemaLocation="http://172.16.86.57:8001/AngieOneServices/?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+  <xs:element name="AcceptQuicklyBackToCashBag">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="businDerivativesApply" nillable="true" type="q1:BusinDerivativesApply" />
+        <xs:element minOccurs="0" name="reference" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="password" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="clientIP" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="protocolID" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AcceptQuicklyBackToCashBagResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="AcceptQuicklyBackToCashBagResult" nillable="true" type="q2:ResultInfoOfBusinDerivativesApplyYJ36K23J" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AcceptQuicklyBackToCashBag_WithLargeRedemptionFlag">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="businDerivativesApply" nillable="true" type="q3:BusinDerivativesApply" />
+        <xs:element minOccurs="0" name="reference" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="password" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="clientIP" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="protocolID" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="largeRedemptionFlag" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AcceptQuicklyBackToCashBag_WithLargeRedemptionFlagResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="AcceptQuicklyBackToCashBag_WithLargeRedemptionFlagResult" nillable="true" type="q4:ResultInfoOfBusinDerivativesApplyYJ36K23J" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="IsValidQuicklyBackToCashBag">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="customerNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="shareId" type="xs:int" />
+        <xs:element minOccurs="0" name="volume" type="xs:decimal" />
+        <xs:element minOccurs="0" name="objfundCode" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="IsValidQuicklyBackToCashBagResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="IsValidQuicklyBackToCashBagResult" nillable="true" type="q5:ResultInfoOfboolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCurrentFreeAmount">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="transactionDate" type="xs:dateTime" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCurrentFreeAmountResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="GetCurrentFreeAmountResult" nillable="true" type="q6:ResultInfoOfdecimal" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="IsValidRedeemPlus">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="customerNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="shareId" type="xs:int" />
+        <xs:element minOccurs="0" name="volume" type="xs:decimal" />
+        <xs:element minOccurs="0" name="debitFlag" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="IsValidRedeemPlusResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="IsValidRedeemPlusResult" nillable="true" type="q7:ResultInfoOfboolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AcceptRedeemApplyPlus">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="customerNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="shareId" type="xs:int" />
+        <xs:element minOccurs="0" name="volume" type="xs:decimal" />
+        <xs:element minOccurs="0" name="redemptionFlag" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="password" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="reference" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="debitFlag" type="xs:boolean" />
+        <xs:element minOccurs="0" name="protocolId" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AcceptRedeemApplyPlusResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="AcceptRedeemApplyPlusResult" nillable="true" type="q8:ResultInfoOfBusinAppYJ36K23J" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetFixedFinancialSharesGroupByDatePlus">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="customerNo" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetFixedFinancialSharesGroupByDatePlusResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="GetFixedFinancialSharesGroupByDatePlusResult" nillable="true" type="q9:ResultInfoOfArrayOfFinancialShareLevel3YJ36K23J" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetFundFinancialSharesGroupByDatePlus">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="customerNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="fundCode" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetFundFinancialSharesGroupByDatePlusResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="GetFundFinancialSharesGroupByDatePlusResult" nillable="true" type="q10:ResultInfoOfArrayOfFinancialShareLevel3YJ36K23J" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetFinancialSharesGroupByDatePlus">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="customerNo" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetFinancialSharesGroupByDatePlusResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="GetFinancialSharesGroupByDatePlusResult" nillable="true" type="q11:ResultInfoOfArrayOfFinancialShareLevel3YJ36K23J" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AcceptBuyFinancialFund">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="customerNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="fundCode" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="bankAccountNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="amount" type="xs:decimal" />
+        <xs:element minOccurs="0" name="protocolID" nillable="true" type="xs:string" />
+        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="payType" type="q12:EnumPayType" />
+        <xs:element minOccurs="0" name="chargeType" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="password" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="reference" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AcceptBuyFinancialFundResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="AcceptBuyFinancialFundResult" nillable="true" type="q13:ResultInfoOfBusinAppYJ36K23J" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="IsValidBuyFinancialFund">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="customerNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="fundCode" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="bankAccountNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="amount" type="xs:decimal" />
+        <xs:element minOccurs="0" name="protocolID" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="IsValidBuyFinancialFundResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="IsValidBuyFinancialFundResult" nillable="true" type="q14:ResultInfoOfboolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetFinancialFundByCode">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="fundCode" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetFinancialFundByCodeResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="GetFinancialFundByCodeResult" nillable="true" type="q15:ResultInfoOfFundYJ36K23J" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetFundSpecialStageList">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="fundCode" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="isSG" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetFundSpecialStageListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="GetFundSpecialStageListResult" nillable="true" type="q16:ResultInfoOfArrayOfFundSpecialStageYJ36K23J" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetLastFundSpecialStage">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="fundCode" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetLastFundSpecialStageResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q17="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="GetLastFundSpecialStageResult" nillable="true" type="q17:ResultInfoOfFundSpecialStageYJ36K23J" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetFundSpecialStageByFundCode">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="fundCode" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="redeemBeginDate" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="redeemEndDate" type="xs:dateTime" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetFundSpecialStageByFundCodeResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q18="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="GetFundSpecialStageByFundCodeResult" nillable="true" type="q18:ResultInfoOfFundSpecialStageYJ36K23J" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetFinancialFundUnsoldAmount">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="fundCode" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="appTime" type="xs:dateTime" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetFinancialFundUnsoldAmountResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q19="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="GetFinancialFundUnsoldAmountResult" nillable="true" type="q19:ResultInfoOfdecimal" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SetFundRedeemType">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="customerNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="fundcode" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="reedemType" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SetFundRedeemTypeResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q20="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="SetFundRedeemTypeResult" nillable="true" type="q20:ResultInfoOfFundRedeemTypeYJ36K23J" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetFundRedeemType">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="customerNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="fundcode" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetFundRedeemTypeResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q21="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="GetFundRedeemTypeResult" nillable="true" type="q21:ResultInfoOfArrayOfFundRedeemTypeYJ36K23J" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetFundRedeemTypeJour">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="customerNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="fundcode" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetFundRedeemTypeJourResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q22="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="GetFundRedeemTypeJourResult" nillable="true" type="q22:ResultInfoOfArrayOfFundRedeemTypeJourYJ36K23J" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SetEnableBuy">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="appTime" type="xs:dateTime" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SetEnableBuyResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q23="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="SetEnableBuyResult" nillable="true" type="q23:ResultInfoOfArrayOfstringuHEDJ7Dj" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCashBagTransferAppsHistoryCount">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="customerNo" nillable="true" type="xs:string" />
+        <xs:element xmlns:q24="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="enumCashBagStates" nillable="true" type="q24:ArrayOfstring" />
+        <xs:element minOccurs="0" name="dateTime" nillable="true" type="xs:dateTime" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCashBagTransferAppsHistoryCountResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q25="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="GetCashBagTransferAppsHistoryCountResult" nillable="true" type="q25:ResultInfoOfint" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCashBagAppByCashbagParentNo">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="businSerialNo" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCashBagAppByCashbagParentNoResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q26="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="GetCashBagAppByCashbagParentNoResult" nillable="true" type="q26:ResultInfoOfBusinDerivativesAppYJ36K23J" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCashBagAppByBusinSerialNo">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="businSerialNo" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCashBagAppByBusinSerialNoResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q27="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="GetCashBagAppByBusinSerialNoResult" nillable="true" type="q27:ResultInfoOfBusinDerivativesAppYJ36K23J" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetFundExtAttribute">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q28="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="extType" nillable="true" type="q28:ArrayOfint" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetFundExtAttributeResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q29="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="GetFundExtAttributeResult" nillable="true" type="q29:ResultInfoOfArrayOfFundExtAttributeYJ36K23J" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FetchBusinAppsBySpecialFund">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="customerNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="businType" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="bankCardNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="beginDate" nillable="true" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="endDate" nillable="true" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="pageIndex" type="xs:int" />
+        <xs:element minOccurs="0" name="countOfPage" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FetchBusinAppsBySpecialFundResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q30="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="FetchBusinAppsBySpecialFundResult" nillable="true" type="q30:ResultInfoOfArrayOfBusinAppYJ36K23J" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FetchBusinAppsCountBySpecialFund">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="customerNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="businType" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="bankCardNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="beginDate" nillable="true" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="endDate" nillable="true" type="xs:dateTime" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FetchBusinAppsCountBySpecialFundResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q31="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="FetchBusinAppsCountBySpecialFundResult" nillable="true" type="q31:ResultInfoOfint" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetFundEx">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="extType" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetFundExResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q32="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="GetFundExResult" nillable="true" type="q32:ResultInfoOfArrayOfFundExYJ36K23J" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RevokeBusinApplyByParentNo">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="parentSerialNo" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RevokeBusinApplyByParentNoResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q33="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="RevokeBusinApplyByParentNoResult" nillable="true" type="q33:ResultInfoOfArrayOfBusinAppYJ36K23J" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetFixedDividendCfmsCount">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="customerNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="beginDate" nillable="true" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="endDate" nillable="true" type="xs:dateTime" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetFixedDividendCfmsCountResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q34="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="GetFixedDividendCfmsCountResult" nillable="true" type="q34:ResultInfoOfint" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetFixedDividendCfms">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="customerNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="beginDate" nillable="true" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="endDate" nillable="true" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="pageIndex" type="xs:int" />
+        <xs:element minOccurs="0" name="countOfPage" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetFixedDividendCfmsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q35="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="GetFixedDividendCfmsResult" nillable="true" type="q35:ResultInfoOfArrayOfDividendCfmYJ36K23J" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetFixedFinancialSharesGroupByDate">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="customerNo" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetFixedFinancialSharesGroupByDateResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q36="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="GetFixedFinancialSharesGroupByDateResult" nillable="true" type="q36:ResultInfoOfArrayOfFinancialShareYJ36K23J" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetFixedBagAssets">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="customerNo" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetFixedBagAssetsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q37="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="GetFixedBagAssetsResult" nillable="true" type="q37:ResultInfoOfArrayOfFixedBagShare2GJrRq2U" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FetchFixBagBusinAppsCount">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="customerNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="businType" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="bankCardNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="beginDate" nillable="true" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="endDate" nillable="true" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="reference" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FetchFixBagBusinAppsCountResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q38="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="FetchFixBagBusinAppsCountResult" nillable="true" type="q38:ResultInfoOfint" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FetchFixBagBusinApps">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="customerNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="businType" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="bankCardNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="beginDate" nillable="true" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="endDate" nillable="true" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="pageIndex" type="xs:int" />
+        <xs:element minOccurs="0" name="countOfPage" type="xs:int" />
+        <xs:element minOccurs="0" name="reference" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FetchFixBagBusinAppsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q39="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="FetchFixBagBusinAppsResult" nillable="true" type="q39:ResultInfoOfArrayOfBusinAppYJ36K23J" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetFixedFundFinancialSharesGroupByDate">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="customerNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="fundCode" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetFixedFundFinancialSharesGroupByDateResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q40="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="GetFixedFundFinancialSharesGroupByDateResult" nillable="true" type="q40:ResultInfoOfArrayOfFinancialShareYJ36K23J" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetFixedSharesByWorkday">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="customerNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="fundCode" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="workday" type="xs:dateTime" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetFixedSharesByWorkdayResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q41="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="GetFixedSharesByWorkdayResult" nillable="true" type="q41:ResultInfoOfArrayOfShareYJ36K23J" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetFixedBagShare">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="customerNo" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetFixedBagShareResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q42="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="GetFixedBagShareResult" nillable="true" type="q42:ResultInfoOfFixedBagShare2GJrRq2U" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetFundFixedBagShare">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="customerNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="fundCode" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetFundFixedBagShareResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q43="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="GetFundFixedBagShareResult" nillable="true" type="q43:ResultInfoOfFixedBagShare2GJrRq2U" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetFixedCurWorkdaySucceedApps">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="customerNo" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetFixedCurWorkdaySucceedAppsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q44="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="GetFixedCurWorkdaySucceedAppsResult" nillable="true" type="q44:ResultInfoOfArrayOfBusinAppYJ36K23J" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetFixedFinancialShareAtWorkday">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="customerNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="fundCode" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="workday" type="xs:dateTime" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetFixedFinancialShareAtWorkdayResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q45="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="GetFixedFinancialShareAtWorkdayResult" nillable="true" type="q45:ResultInfoOfFinancialShareYJ36K23J" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetFixedWaitPayApps">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="customerNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="bankCardNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="beginDate" nillable="true" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="endDate" nillable="true" type="xs:dateTime" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetFixedWaitPayAppsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q46="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="GetFixedWaitPayAppsResult" nillable="true" type="q46:ResultInfoOfArrayOfBusinAppYJ36K23J" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetFixedCurrentWorkdayApps">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="customerNo" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetFixedCurrentWorkdayAppsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q47="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="GetFixedCurrentWorkdayAppsResult" nillable="true" type="q47:ResultInfoOfArrayOfBusinAppYJ36K23J" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetFundsAmountOnWayOfCustomer">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="customerNo" nillable="true" type="xs:string" />
+        <xs:element xmlns:q48="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="fundCodes" nillable="true" type="q48:ArrayOfstring" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetFundsAmountOnWayOfCustomerResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q49="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="GetFundsAmountOnWayOfCustomerResult" nillable="true" type="q49:ResultInfoOfArrayOfKeyValueOfstringdecimaluHEDJ7Dj" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AcceptBuyCommon">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="customerNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="fundCode" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="bankCode" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="bankCardNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="amount" type="xs:decimal" />
+        <xs:element xmlns:q50="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="payType" type="q50:EnumPayType" />
+        <xs:element minOccurs="0" name="chargeType" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="appTime" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="parentBusinType" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="parentSheetSerialNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="password" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="traceNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="reference" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AcceptBuyCommonResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q51="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="AcceptBuyCommonResult" nillable="true" type="q51:ResultInfoOfBusinAppYJ36K23J" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AcceptSubscribeCommon">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="customerNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="fundCode" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="bankCode" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="bankCardNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="amount" type="xs:decimal" />
+        <xs:element xmlns:q52="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="payType" type="q52:EnumPayType" />
+        <xs:element minOccurs="0" name="chargeType" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="appTime" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="parentBusinType" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="parentSheetSerialNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="password" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="traceNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="reference" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AcceptSubscribeCommonResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q53="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="AcceptSubscribeCommonResult" nillable="true" type="q53:ResultInfoOfBusinAppYJ36K23J" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetBusinAppListbyTraceNo">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="customerNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="traceNo" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetBusinAppListbyTraceNoResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q54="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="GetBusinAppListbyTraceNoResult" nillable="true" type="q54:ResultInfoOfArrayOfBusinAppYJ36K23J" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="MsgSearchAllBusinApps">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="customerNo" nillable="true" type="xs:string" />
+        <xs:element xmlns:q55="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="businTypes" nillable="true" type="q55:ArrayOfstring" />
+        <xs:element xmlns:q56="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="appStates" nillable="true" type="q56:ArrayOfstring" />
+        <xs:element minOccurs="0" name="hsSyncState" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="transactionDate" type="xs:dateTime" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="MsgSearchAllBusinAppsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q57="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="MsgSearchAllBusinAppsResult" nillable="true" type="q57:ResultInfoOfArrayOfBusinAppYJ36K23J" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GtFetchAllBusinApps">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="customerNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="businType" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="bankCardNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="beginDate" nillable="true" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="endDate" nillable="true" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="pageIndex" type="xs:int" />
+        <xs:element minOccurs="0" name="countOfPage" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GtFetchAllBusinAppsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q58="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="GtFetchAllBusinAppsResult" nillable="true" type="q58:ResultInfoOfArrayOfBusinAppYJ36K23J" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GtFetchAllBusinAppsCount">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="customerNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="businType" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="bankCardNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="beginDate" nillable="true" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="endDate" nillable="true" type="xs:dateTime" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GtFetchAllBusinAppsCountResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q59="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="GtFetchAllBusinAppsCountResult" nillable="true" type="q59:ResultInfoOfint" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AcceptBuyWithProtocol">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="customerNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="fundCode" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="bankCode" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="bankCardNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="amount" type="xs:decimal" />
+        <xs:element xmlns:q60="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="payType" type="q60:EnumPayType" />
+        <xs:element minOccurs="0" name="chargeType" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="appTime" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="parentBusinType" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="parentSheetSerialNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="password" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="reference" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="protocolId" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AcceptBuyWithProtocolResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q61="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="AcceptBuyWithProtocolResult" nillable="true" type="q61:ResultInfoOfBusinAppYJ36K23J" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AcceptCashBagBuyWithProtocol">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="fundCode" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="bankAccountNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="amount" type="xs:decimal" />
+        <xs:element xmlns:q62="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="payType" type="q62:EnumPayType" />
+        <xs:element minOccurs="0" name="chargeType" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="password" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="reference" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="protocolId" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AcceptCashBagBuyWithProtocolResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q63="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="AcceptCashBagBuyWithProtocolResult" nillable="true" type="q63:ResultInfoOfBusinAppYJ36K23J" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AcceptSubscribeWithProtocol">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="customerNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="fundCode" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="bankCode" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="bankCardNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="amount" type="xs:decimal" />
+        <xs:element xmlns:q64="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="payType" type="q64:EnumPayType" />
+        <xs:element minOccurs="0" name="chargeType" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="appTime" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="parentBusinType" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="parentSheetSerialNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="password" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="reference" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="protocolId" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AcceptSubscribeWithProtocolResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q65="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="AcceptSubscribeWithProtocolResult" nillable="true" type="q65:ResultInfoOfBusinAppYJ36K23J" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AcceptCashBagSubscribeWithProtocol">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="fundCode" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="bankAccountNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="amount" type="xs:decimal" />
+        <xs:element xmlns:q66="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="payType" type="q66:EnumPayType" />
+        <xs:element minOccurs="0" name="chargeType" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="password" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="reference" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="protocolId" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AcceptCashBagSubscribeWithProtocolResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q67="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="AcceptCashBagSubscribeWithProtocolResult" nillable="true" type="q67:ResultInfoOfBusinAppYJ36K23J" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="IsValidRedeemDebit">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="customerNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="shareId" type="xs:int" />
+        <xs:element minOccurs="0" name="volume" type="xs:decimal" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="IsValidRedeemDebitResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q68="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="IsValidRedeemDebitResult" nillable="true" type="q68:ResultInfoOfboolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AcceptRedeemApplyDebit">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="customerNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="shareId" type="xs:int" />
+        <xs:element minOccurs="0" name="volume" type="xs:decimal" />
+        <xs:element minOccurs="0" name="redemptionFlag" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="password" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="protocolId" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AcceptRedeemApplyDebitResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q69="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="AcceptRedeemApplyDebitResult" nillable="true" type="q69:ResultInfoOfBusinAppYJ36K23J" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCacheData">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="indexName" nillable="true" type="xs:string" />
+        <xs:element xmlns:q70="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="values" nillable="true" type="q70:ArrayOfstring" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCacheDataResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="GetCacheDataResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RevokeSFTransfer">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="appSheetSerialNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="password" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RevokeSFTransferResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q71="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="RevokeSFTransferResult" nillable="true" type="q71:ResultInfoOfBusinAppYJ36K23J" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FaultSFTransfer">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="appSheetSerialNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="remarks" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FaultSFTransferResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q72="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="FaultSFTransferResult" nillable="true" type="q72:ResultInfoOfBusinAppYJ36K23J" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="IsValidSFTransfer">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="customerNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="shareId" type="xs:int" />
+        <xs:element minOccurs="0" name="volume" type="xs:decimal" />
+        <xs:element minOccurs="0" name="objfundCode" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="IsValidSFTransferResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q73="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="IsValidSFTransferResult" nillable="true" type="q73:ResultInfoOfboolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RevokeQuicklyBackToCashBag">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="appSheetSerialNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="password" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RevokeQuicklyBackToCashBagResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q74="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="RevokeQuicklyBackToCashBagResult" nillable="true" type="q74:ResultInfoOfBusinAppYJ36K23J" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AcceptSFTransfer">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q75="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="businDerivativesApply" nillable="true" type="q75:BusinDerivativesApply" />
+        <xs:element minOccurs="0" name="reference" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="password" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="clientIP" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="protocolID" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AcceptSFTransferResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q76="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="AcceptSFTransferResult" nillable="true" type="q76:ResultInfoOfBusinDerivativesApplyYJ36K23J" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AcceptSFTransfer_WithLargeRedemptionFlag">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q77="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="businDerivativesApply" nillable="true" type="q77:BusinDerivativesApply" />
+        <xs:element minOccurs="0" name="reference" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="password" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="clientIP" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="protocolID" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="largeRedemptionFlag" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AcceptSFTransfer_WithLargeRedemptionFlagResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q78="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="AcceptSFTransfer_WithLargeRedemptionFlagResult" nillable="true" type="q78:ResultInfoOfBusinDerivativesApplyYJ36K23J" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GtUpdateFreezingShares">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="appSheetSerialNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="isEnabled" type="xs:boolean" />
+        <xs:element minOccurs="0" name="remark" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GtUpdateFreezingSharesResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q79="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="GtUpdateFreezingSharesResult" nillable="true" type="q79:ResultInfoOfboolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GtGetFreezingShareByID">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="shareid" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GtGetFreezingShareByIDResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q80="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="GtGetFreezingShareByIDResult" nillable="true" type="q80:ResultInfoOfArrayOfShareFreezingYJ36K23J" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FetchDividendMethod">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="customerNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="fundCode" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="chargeType" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FetchDividendMethodResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q81="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="FetchDividendMethodResult" nillable="true" type="q81:ResultInfoOfstring" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetDividendMethod">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="customerNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="fundCode" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="chargeType" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetDividendMethodResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q82="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="GetDividendMethodResult" nillable="true" type="q82:ResultInfoOfCustDividendMethodYJ36K23J" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="IsExitDividendMethod">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="customerNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="fundCode" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="chargeType" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="IsExitDividendMethodResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q83="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="IsExitDividendMethodResult" nillable="true" type="q83:ResultInfoOfstring" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FetchDividendMethodById">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="dividendMethodId" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FetchDividendMethodByIdResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q84="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="FetchDividendMethodByIdResult" nillable="true" type="q84:ResultInfoOfCustDividendMethodYJ36K23J" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FetchDividendMethodByCustomerNo">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="customerNo" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FetchDividendMethodByCustomerNoResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q85="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="FetchDividendMethodByCustomerNoResult" nillable="true" type="q85:ArrayOfCustDividendMethod" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FetchDividendMethods">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="customerNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="pageIndex" type="xs:int" />
+        <xs:element minOccurs="0" name="pageCaption" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FetchDividendMethodsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q86="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="FetchDividendMethodsResult" nillable="true" type="q86:ResultInfoOfArrayOfCustDividendMethodYJ36K23J" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FetchDividendMethodsCount">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="customerNo" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FetchDividendMethodsCountResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q87="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="FetchDividendMethodsCountResult" nillable="true" type="q87:ResultInfoOfint" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetBonusBusinApps">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="customerNo" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetBonusBusinAppsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q88="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="GetBonusBusinAppsResult" nillable="true" type="q88:ResultInfoOfArrayOfBusinAppYJ36K23J" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FetchBusinAppsByCustomerNo">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="customerNo" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FetchBusinAppsByCustomerNoResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q89="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="FetchBusinAppsByCustomerNoResult" nillable="true" type="q89:ResultInfoOfArrayOfBusinAppYJ36K23J" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FetchBusinApps">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="customerNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="businType" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="bankCardNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="beginDate" nillable="true" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="endDate" nillable="true" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="pageIndex" type="xs:int" />
+        <xs:element minOccurs="0" name="countOfPage" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FetchBusinAppsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q90="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="FetchBusinAppsResult" nillable="true" type="q90:ResultInfoOfArrayOfBusinAppYJ36K23J" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FetchBusinAppsCount">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="customerNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="businType" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="bankCardNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="beginDate" nillable="true" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="endDate" nillable="true" type="xs:dateTime" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FetchBusinAppsCountResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q91="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="FetchBusinAppsCountResult" nillable="true" type="q91:ResultInfoOfint" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FetchBusinApp">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="appSheetSerialNo" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FetchBusinAppResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q92="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="FetchBusinAppResult" nillable="true" type="q92:ResultInfoOfBusinAppYJ36K23J" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetWaitPayApps">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="customerNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="bankCardNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="beginDate" nillable="true" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="endDate" nillable="true" type="xs:dateTime" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetWaitPayAppsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q93="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="GetWaitPayAppsResult" nillable="true" type="q93:ResultInfoOfArrayOfBusinAppYJ36K23J" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PostAccount">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="appSheetSerialNo" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PostAccountResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q94="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="PostAccountResult" nillable="true" type="q94:ResultInfoOfboolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PostAccountSetState">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="appSheetSerialNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="state" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PostAccountSetStateResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q95="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="PostAccountSetStateResult" nillable="true" type="q95:ResultInfoOfboolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCurrentWorkdayApps">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="customerNo" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCurrentWorkdayAppsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q96="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="GetCurrentWorkdayAppsResult" nillable="true" type="q96:ResultInfoOfArrayOfBusinAppYJ36K23J" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FetchAppsCfmingCount">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="customerNo" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FetchAppsCfmingCountResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q97="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="FetchAppsCfmingCountResult" nillable="true" type="q97:ResultInfoOfint" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetTradeCountByBankCardNo">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="customerNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="bankCardNo" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetTradeCountByBankCardNoResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q98="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="GetTradeCountByBankCardNoResult" nillable="true" type="q98:ResultInfoOfint" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetPayStateByParentAppSheetSerialNo">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="parentAppSheetSerialNo" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetPayStateByParentAppSheetSerialNoResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q99="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="GetPayStateByParentAppSheetSerialNoResult" nillable="true" type="q99:ResultInfoOfstring" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetBusinAppByParentAppSheetSerialNo">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="parentAppSheetSerialNo" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetBusinAppByParentAppSheetSerialNoResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q100="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="GetBusinAppByParentAppSheetSerialNoResult" nillable="true" type="q100:ResultInfoOfBusinAppYJ36K23J" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetFundWhiteList">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetFundWhiteListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q101="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="GetFundWhiteListResult" nillable="true" type="q101:ResultInfoOfArrayOfWhiteListsYJ36K23J" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCfmBusinAppByFundCode">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="customerNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="fundCode" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="rowNum" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCfmBusinAppByFundCodeResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q102="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="GetCfmBusinAppByFundCodeResult" nillable="true" type="q102:ResultInfoOfArrayOfBusinCfmYJ36K23J" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SetCustDividendMethod">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="customerNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="fundCode" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="chargeType" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="dividendMethod" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SetCustDividendMethodResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FetchBusinAppByHsSheetSerialNo">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="hsSheetSerialNo" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FetchBusinAppByHsSheetSerialNoResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q103="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="FetchBusinAppByHsSheetSerialNoResult" nillable="true" type="q103:ResultInfoOfBusinAppYJ36K23J" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdateBusinApp">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q104="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="businApp" nillable="true" type="q104:BusinApp" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdateBusinAppResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q105="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="UpdateBusinAppResult" nillable="true" type="q105:ResultInfoOfboolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SearchBusinApps">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="customerNo" nillable="true" type="xs:string" />
+        <xs:element xmlns:q106="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="businTypes" nillable="true" type="q106:ArrayOfstring" />
+        <xs:element xmlns:q107="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="appStates" nillable="true" type="q107:ArrayOfstring" />
+        <xs:element minOccurs="0" name="hsSyncState" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="transactionDate" type="xs:dateTime" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SearchBusinAppsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q108="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="SearchBusinAppsResult" nillable="true" type="q108:ResultInfoOfArrayOfBusinAppYJ36K23J" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdateFreezingSharesIsEnabled">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="appSheetSerialNo" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdateFreezingSharesIsEnabledResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q109="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="UpdateFreezingSharesIsEnabledResult" nillable="true" type="q109:ResultInfoOfboolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdateBusinAppByCmf">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q110="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="businCfm" nillable="true" type="q110:BusinCfm" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdateBusinAppByCmfResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q111="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="UpdateBusinAppByCmfResult" nillable="true" type="q111:ResultInfoOfboolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SyncPayStateByParentAppSheetSerialNo">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="parentAppSheetSerialNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="newAppState" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SyncPayStateByParentAppSheetSerialNoResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q112="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="SyncPayStateByParentAppSheetSerialNoResult" nillable="true" type="q112:ResultInfoOfboolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetBusinAppsByParentSerialNoForQS">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="parentAppSheetSerialNo" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetBusinAppsByParentSerialNoForQSResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q113="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="GetBusinAppsByParentSerialNoForQSResult" nillable="true" type="q113:ResultInfoOfArrayOfBusinAppYJ36K23J" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SynchronousGuidNo">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q114="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="oldBusinApp" nillable="true" type="q114:ResultInfoOfBusinAppYJ36K23J" />
+        <xs:element xmlns:q115="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="newBusinApp" nillable="true" type="q115:ResultInfoOfBusinAppYJ36K23J" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SynchronousGuidNoResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q116="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="SynchronousGuidNoResult" nillable="true" type="q116:ResultInfoOfboolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="VerifyPassword">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="customerNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="password" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="VerifyPasswordResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q117="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="VerifyPasswordResult" nillable="true" type="q117:ResultInfoOfboolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetSpecialAccountsFund">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetSpecialAccountsFundResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q118="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="GetSpecialAccountsFundResult" nillable="true" type="q118:ResultInfoOfFundYJ36K23J" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCashBagApps">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="customerNo" nillable="true" type="xs:string" />
+        <xs:element xmlns:q119="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="cashbagTypes" nillable="true" type="q119:ArrayOfstring" />
+        <xs:element xmlns:q120="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="enumCashBagStates" nillable="true" type="q120:ArrayOfstring" />
+        <xs:element minOccurs="0" name="dateTime" nillable="true" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="pageIndex" type="xs:int" />
+        <xs:element minOccurs="0" name="pageCaption" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCashBagAppsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q121="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="GetCashBagAppsResult" nillable="true" type="q121:ResultInfoOfArrayOfBusinDerivativesAppYJ36K23J" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCashBagAppsHistory">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="customerNo" nillable="true" type="xs:string" />
+        <xs:element xmlns:q122="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="cashbagTypes" nillable="true" type="q122:ArrayOfstring" />
+        <xs:element xmlns:q123="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="enumCashBagStates" nillable="true" type="q123:ArrayOfstring" />
+        <xs:element minOccurs="0" name="dateTime" nillable="true" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="pageIndex" type="xs:int" />
+        <xs:element minOccurs="0" name="pageCaption" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCashBagAppsHistoryResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q124="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="GetCashBagAppsHistoryResult" nillable="true" type="q124:ResultInfoOfArrayOfBusinDerivativesAppYJ36K23J" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCashBagAppsCount">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="customerNo" nillable="true" type="xs:string" />
+        <xs:element xmlns:q125="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="cashbagTypes" nillable="true" type="q125:ArrayOfstring" />
+        <xs:element xmlns:q126="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="enumCashBagStates" nillable="true" type="q126:ArrayOfstring" />
+        <xs:element minOccurs="0" name="dateTime" nillable="true" type="xs:dateTime" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCashBagAppsCountResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q127="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="GetCashBagAppsCountResult" nillable="true" type="q127:ResultInfoOfint" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCashBagAppsHistoryCount">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="customerNo" nillable="true" type="xs:string" />
+        <xs:element xmlns:q128="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="cashbagTypes" nillable="true" type="q128:ArrayOfstring" />
+        <xs:element xmlns:q129="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="enumCashBagStates" nillable="true" type="q129:ArrayOfstring" />
+        <xs:element minOccurs="0" name="dateTime" nillable="true" type="xs:dateTime" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCashBagAppsHistoryCountResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q130="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="GetCashBagAppsHistoryCountResult" nillable="true" type="q130:ResultInfoOfint" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCashBagTransferApps">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="customerNo" nillable="true" type="xs:string" />
+        <xs:element xmlns:q131="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="enumCashBagStates" nillable="true" type="q131:ArrayOfstring" />
+        <xs:element minOccurs="0" name="dateTime" nillable="true" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="pageIndex" type="xs:int" />
+        <xs:element minOccurs="0" name="pageCaption" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCashBagTransferAppsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q132="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="GetCashBagTransferAppsResult" nillable="true" type="q132:ResultInfoOfArrayOfBusinDerivativesAppYJ36K23J" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCashBagTransferAppsHistory">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="customerNo" nillable="true" type="xs:string" />
+        <xs:element xmlns:q133="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="enumCashBagStates" nillable="true" type="q133:ArrayOfstring" />
+        <xs:element minOccurs="0" name="dateTime" nillable="true" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="pageIndex" type="xs:int" />
+        <xs:element minOccurs="0" name="pageCaption" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCashBagTransferAppsHistoryResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q134="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="GetCashBagTransferAppsHistoryResult" nillable="true" type="q134:ResultInfoOfArrayOfBusinDerivativesAppYJ36K23J" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCashBagTransferAppsCount">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="customerNo" nillable="true" type="xs:string" />
+        <xs:element xmlns:q135="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="enumCashBagStates" nillable="true" type="q135:ArrayOfstring" />
+        <xs:element minOccurs="0" name="dateTime" nillable="true" type="xs:dateTime" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCashBagTransferAppsCountResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q136="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="GetCashBagTransferAppsCountResult" nillable="true" type="q136:ResultInfoOfint" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="IsValidBuy">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="fundCode" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="bankAccountNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="amount" type="xs:decimal" />
+        <xs:element xmlns:q137="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="payType" type="q137:EnumPayType" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="IsValidBuyResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q138="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="IsValidBuyResult" nillable="true" type="q138:ResultInfoOfboolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="IsValidBuyForParentBusinType">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="fundCode" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="bankAccountNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="amount" type="xs:decimal" />
+        <xs:element xmlns:q139="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="payType" type="q139:EnumPayType" />
+        <xs:element minOccurs="0" name="parentBusinType" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="IsValidBuyForParentBusinTypeResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q140="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="IsValidBuyForParentBusinTypeResult" nillable="true" type="q140:ResultInfoOfboolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AcceptBuy">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="fundCode" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="bankAccountNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="amount" type="xs:decimal" />
+        <xs:element xmlns:q141="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="payType" type="q141:EnumPayType" />
+        <xs:element minOccurs="0" name="chargeType" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="password" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="reference" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AcceptBuyResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q142="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="AcceptBuyResult" nillable="true" type="q142:ResultInfoOfBusinAppYJ36K23J" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AcceptCashBagBuy">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="fundCode" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="bankAccountNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="amount" type="xs:decimal" />
+        <xs:element xmlns:q143="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="payType" type="q143:EnumPayType" />
+        <xs:element minOccurs="0" name="chargeType" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="password" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="reference" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AcceptCashBagBuyResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q144="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="AcceptCashBagBuyResult" nillable="true" type="q144:ResultInfoOfBusinAppYJ36K23J" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FundBuyAccept">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="customerNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="fundCode" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="bankCode" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="bankCardNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="amount" type="xs:decimal" />
+        <xs:element xmlns:q145="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="payType" type="q145:EnumPayType" />
+        <xs:element minOccurs="0" name="chargeType" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="appTime" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="parentBusinType" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="parentSheetSerialNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="password" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="reference" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FundBuyAcceptResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q146="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="FundBuyAcceptResult" nillable="true" type="q146:ResultInfoOfBusinAppYJ36K23J" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AcceptActivityBuy">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="utoken" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="customerNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="bankAccountNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="fundCode" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="applyAmount" type="xs:decimal" />
+        <xs:element minOccurs="0" name="chargeType" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="password" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="activityAppTime" type="xs:dateTime" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AcceptActivityBuyResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q147="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="AcceptActivityBuyResult" nillable="true" type="q147:ResultInfoOfBusinAppYJ36K23J" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AcceptShareAdjustBuy">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="utoken" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="customerNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="bankAccountNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="fundCode" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="applyAmount" type="xs:decimal" />
+        <xs:element minOccurs="0" name="chargeType" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="password" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="activityAppTime" type="xs:dateTime" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AcceptShareAdjustBuyResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q148="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="AcceptShareAdjustBuyResult" nillable="true" type="q148:ResultInfoOfBusinAppYJ36K23J" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AcceptCompleted">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="appSheetSerialNo" nillable="true" type="xs:string" />
+        <xs:element xmlns:q149="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="payState" type="q149:EnumPayState" />
+        <xs:element minOccurs="0" name="payTime" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="payResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AcceptCompletedResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q150="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="AcceptCompletedResult" nillable="true" type="q150:ResultInfoOfBusinAppYJ36K23J" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AcceptCashBagCompleted">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="appSheetSerialNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="appParentSheetSerialNo" nillable="true" type="xs:string" />
+        <xs:element xmlns:q151="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="payState" type="q151:EnumPayState" />
+        <xs:element minOccurs="0" name="payTime" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="payResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AcceptCashBagCompletedResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q152="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="AcceptCashBagCompletedResult" nillable="true" type="q152:ResultInfoOfBusinAppYJ36K23J" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="IsValidSubscribe">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="fundCode" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="bankAccountNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="amount" type="xs:decimal" />
+        <xs:element xmlns:q153="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="payType" type="q153:EnumPayType" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="IsValidSubscribeResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q154="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="IsValidSubscribeResult" nillable="true" type="q154:ResultInfoOfboolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AcceptSubscribe">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="fundCode" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="bankAccountNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="amount" type="xs:decimal" />
+        <xs:element xmlns:q155="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="payType" type="q155:EnumPayType" />
+        <xs:element minOccurs="0" name="chargeType" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="password" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="reference" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AcceptSubscribeResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q156="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="AcceptSubscribeResult" nillable="true" type="q156:ResultInfoOfBusinAppYJ36K23J" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AcceptCashBagSubscribe">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="fundCode" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="bankAccountNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="amount" type="xs:decimal" />
+        <xs:element xmlns:q157="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="payType" type="q157:EnumPayType" />
+        <xs:element minOccurs="0" name="chargeType" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="password" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="reference" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AcceptCashBagSubscribeResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q158="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="AcceptCashBagSubscribeResult" nillable="true" type="q158:ResultInfoOfBusinAppYJ36K23J" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AcceptCashBagSubscribeCompleted">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="appSheetSerialNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="appParentSheetSerialNo" nillable="true" type="xs:string" />
+        <xs:element xmlns:q159="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="payState" type="q159:EnumPayState" />
+        <xs:element minOccurs="0" name="payTime" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="payResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AcceptCashBagSubscribeCompletedResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q160="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="AcceptCashBagSubscribeCompletedResult" nillable="true" type="q160:ResultInfoOfBusinAppYJ36K23J" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SubscribeCompleted">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="appSheetSerialNo" nillable="true" type="xs:string" />
+        <xs:element xmlns:q161="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="payState" type="q161:EnumPayState" />
+        <xs:element minOccurs="0" name="payTime" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="payResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SubscribeCompletedResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q162="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="SubscribeCompletedResult" nillable="true" type="q162:ResultInfoOfBusinAppYJ36K23J" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="IsValidRedeem">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="customerNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="shareId" type="xs:int" />
+        <xs:element minOccurs="0" name="volume" type="xs:decimal" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="IsValidRedeemResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q163="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="IsValidRedeemResult" nillable="true" type="q163:ResultInfoOfboolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AcceptRedeemApply">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="customerNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="shareId" type="xs:int" />
+        <xs:element minOccurs="0" name="volume" type="xs:decimal" />
+        <xs:element minOccurs="0" name="redemptionFlag" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="password" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AcceptRedeemApplyResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q164="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="AcceptRedeemApplyResult" nillable="true" type="q164:ResultInfoOfBusinAppYJ36K23J" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AcceptRedeemApplyWithReference">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="customerNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="shareId" type="xs:int" />
+        <xs:element minOccurs="0" name="volume" type="xs:decimal" />
+        <xs:element minOccurs="0" name="redemptionFlag" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="password" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="reference" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AcceptRedeemApplyWithReferenceResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q165="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="AcceptRedeemApplyWithReferenceResult" nillable="true" type="q165:ResultInfoOfBusinAppYJ36K23J" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AcceptShareAdjustRedeem">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="utoken" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="customerNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="shareid" type="xs:int" />
+        <xs:element minOccurs="0" name="redeemFlag" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="applyVol" type="xs:decimal" />
+        <xs:element minOccurs="0" name="password" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="activityAppTime" type="xs:dateTime" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AcceptShareAdjustRedeemResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q166="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="AcceptShareAdjustRedeemResult" nillable="true" type="q166:ResultInfoOfBusinAppYJ36K23J" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AcceptCashBagRedeemApply">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="customerNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="shareId" type="xs:int" />
+        <xs:element minOccurs="0" name="volume" type="xs:decimal" />
+        <xs:element minOccurs="0" name="redemptionFlag" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="password" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="reference" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AcceptCashBagRedeemApplyResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q167="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="AcceptCashBagRedeemApplyResult" nillable="true" type="q167:ResultInfoOfBusinAppYJ36K23J" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="IsValidBonus">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="customerNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="dividendMethodId" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="IsValidBonusResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q168="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="IsValidBonusResult" nillable="true" type="q168:ResultInfoOfboolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AcceptBonus">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="customerNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="dividendMethodId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="dividendType" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AcceptBonusResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q169="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="AcceptBonusResult" nillable="true" type="q169:ResultInfoOfBusinAppYJ36K23J" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AcceptCustodyTransfer">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="customerNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="fundCode" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="volume" type="xs:decimal" />
+        <xs:element minOccurs="0" name="chargeType" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="bankCode" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="bankCardNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="targetDistributorCode" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="originAppSheetNo" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AcceptCustodyTransferResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q170="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="AcceptCustodyTransferResult" nillable="true" type="q170:ResultInfoOfBusinAppYJ36K23J" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AcceptCustodyTransferOut">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="customerNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="shareId" type="xs:int" />
+        <xs:element minOccurs="0" name="volume" type="xs:decimal" />
+        <xs:element minOccurs="0" name="targetDistributorCode" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AcceptCustodyTransferOutResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q171="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="AcceptCustodyTransferOutResult" nillable="true" type="q171:ResultInfoOfBusinAppYJ36K23J" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="IsValidZtg">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="customerNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="shareId" type="xs:int" />
+        <xs:element minOccurs="0" name="volume" type="xs:long" />
+        <xs:element minOccurs="0" name="targetNetNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="targetDistributorCode" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="IsValidZtgResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q172="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="IsValidZtgResult" nillable="true" type="q172:ResultInfoOfboolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AcceptZtg">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="customerNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="shareId" type="xs:int" />
+        <xs:element minOccurs="0" name="volume" type="xs:long" />
+        <xs:element minOccurs="0" name="targetNetNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="targetDistributorCode" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="password" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AcceptZtgResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q173="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="AcceptZtgResult" nillable="true" type="q173:ResultInfoOfBusinAppYJ36K23J" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCurWorkdaySucceedAppsWithPayCanel">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="customerNo" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCurWorkdaySucceedAppsWithPayCanelResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q174="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="GetCurWorkdaySucceedAppsWithPayCanelResult" nillable="true" type="q174:ResultInfoOfArrayOfBusinAppYJ36K23J" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCurWorkdaySucceedApps">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="customerNo" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCurWorkdaySucceedAppsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q175="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="GetCurWorkdaySucceedAppsResult" nillable="true" type="q175:ResultInfoOfArrayOfBusinAppYJ36K23J" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="BusinCanRevoke">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="appSheetSerialNo" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="BusinCanRevokeResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q176="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="BusinCanRevokeResult" nillable="true" type="q176:ResultInfoOfboolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RevokeBusinApply">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="appSheetSerialNo" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RevokeBusinApplyResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q177="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="RevokeBusinApplyResult" nillable="true" type="q177:ResultInfoOfBusinAppYJ36K23J" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="IsRevokeCanRecover">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="appSheetSerialNo" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="IsRevokeCanRecoverResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q178="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="IsRevokeCanRecoverResult" nillable="true" type="q178:ResultInfoOfboolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RecoverRevokeApply">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="appSheetSerialNo" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RecoverRevokeApplyResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q179="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="RecoverRevokeApplyResult" nillable="true" type="q179:ResultInfoOfBusinAppYJ36K23J" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="IsValidTransfer">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="customerNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="shareId" type="xs:int" />
+        <xs:element minOccurs="0" name="volume" type="xs:decimal" />
+        <xs:element minOccurs="0" name="objfundCode" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="IsValidTransferResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q180="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="IsValidTransferResult" nillable="true" type="q180:ResultInfoOfboolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AcceptTransferApply">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="customerNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="shareId" type="xs:int" />
+        <xs:element minOccurs="0" name="volume" type="xs:decimal" />
+        <xs:element minOccurs="0" name="fundCode" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="largeRedemptionFlag" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="password" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="reference" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AcceptTransferApplyResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q181="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="AcceptTransferApplyResult" nillable="true" type="q181:ResultInfoOfBusinAppYJ36K23J" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FetchMinBusinLimit">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="customerNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="fundCode" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="businType" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FetchMinBusinLimitResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="FetchMinBusinLimitResult" type="xs:decimal" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FetchMinHolderLimit">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="fundCode" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FetchMinHolderLimitResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="FetchMinHolderLimitResult" type="xs:decimal" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FetchFreezingShares">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="customerNo" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FetchFreezingSharesResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q182="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="FetchFreezingSharesResult" nillable="true" type="q182:ResultInfoOfArrayOfShareFreezingYJ36K23J" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FetchFreezingShareById">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="shareid" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FetchFreezingShareByIdResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q183="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="FetchFreezingShareByIdResult" nillable="true" type="q183:ResultInfoOfArrayOfShareFreezingYJ36K23J" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetSharesOfCustomer">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="customerNo" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetSharesOfCustomerResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q184="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="GetSharesOfCustomerResult" nillable="true" type="q184:ResultInfoOfArrayOfShareYJ36K23J" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetFundSharesOfCustomer">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="customerNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="fundCode" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetFundSharesOfCustomerResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q185="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="GetFundSharesOfCustomerResult" nillable="true" type="q185:ResultInfoOfArrayOfShareYJ36K23J" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCustomerShare">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="customerNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="shareId" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCustomerShareResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q186="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="GetCustomerShareResult" nillable="true" type="q186:ResultInfoOfShareYJ36K23J" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GtInsertShareFreezing">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="shareId" type="xs:int" />
+        <xs:element minOccurs="0" name="frozenShare" type="xs:decimal" />
+        <xs:element minOccurs="0" name="frozenType" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="frozenRemark" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GtInsertShareFreezingResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q187="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="GtInsertShareFreezingResult" nillable="true" type="q187:ResultInfoOfboolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AppointmentInsertShareFreezing">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="shareId" type="xs:int" />
+        <xs:element minOccurs="0" name="frozenShare" type="xs:decimal" />
+        <xs:element minOccurs="0" name="frozenType" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="frozenRemark" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="appSheetSerialNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="workday" type="xs:dateTime" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AppointmentInsertShareFreezingResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q188="http://schemas.datacontract.org/2004/07/Em.Entities" minOccurs="0" name="AppointmentInsertShareFreezingResult" nillable="true" type="q188:ResultInfoOfShareFreezingYJ36K23J" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
