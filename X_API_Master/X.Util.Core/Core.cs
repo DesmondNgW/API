@@ -38,8 +38,18 @@ namespace X.Util.Core
         /// <returns></returns>
         public static bool IsValid4CommunicationObject(T channel)
         {
-            var communicationObject = (ICommunicationObject)channel;
-            return communicationObject != null && communicationObject.State != CommunicationState.Closed && communicationObject.State != CommunicationState.Faulted && communicationObject.State != CommunicationState.Closing;
+            try
+            {
+                var communicationObject = (ICommunicationObject) channel;
+                var state = communicationObject != null && communicationObject.State != CommunicationState.Closed && communicationObject.State != CommunicationState.Faulted && communicationObject.State != CommunicationState.Closing;
+                if (state) communicationObject.Open();
+                return state;
+            }
+            catch (Exception e)
+            {
+                Logger.Error(MethodBase.GetCurrentMethod(), LogDomain.Util, null, string.Empty, e.ToString());
+                return false;
+            }
         }
 
         /// <summary>
