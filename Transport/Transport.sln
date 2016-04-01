@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Transport.Client", "Transpo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Transport.Services", "Transport.Services\Transport.Services.csproj", "{1B3420BE-1B7F-41C1-95D0-35A76F9FD986}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Transport.Protocol", "Transport.Protocol\Transport.Protocol.csproj", "{AB08BC8C-0AE4-4888-9684-EEA10764C3B8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{1B3420BE-1B7F-41C1-95D0-35A76F9FD986}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1B3420BE-1B7F-41C1-95D0-35A76F9FD986}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1B3420BE-1B7F-41C1-95D0-35A76F9FD986}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AB08BC8C-0AE4-4888-9684-EEA10764C3B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AB08BC8C-0AE4-4888-9684-EEA10764C3B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AB08BC8C-0AE4-4888-9684-EEA10764C3B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AB08BC8C-0AE4-4888-9684-EEA10764C3B8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
