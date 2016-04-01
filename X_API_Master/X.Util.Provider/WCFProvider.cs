@@ -39,7 +39,7 @@ namespace X.Util.Provider
         /// </summary>
         private string CacheKey
         {
-            get { return EndpointAddress + Thread.CurrentThread.ManagedThreadId % ServiceModel.MaxPoolSize; }
+            get { return EndpointAddress + StringConvert.SysRandom.Next(0, ServiceModel.MaxPoolSize); }
         }
 
         /// <summary>
