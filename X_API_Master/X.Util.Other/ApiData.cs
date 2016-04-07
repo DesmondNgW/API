@@ -39,8 +39,7 @@ namespace X.Util.Other
         /// <returns></returns>
         public static T Get<T>(string uri, Dictionary<string, string> arguments, Dictionary<string, string> extendHeaders)
         {
-            var cookie = string.Empty;
-            return HttpRequestBase.GetHttpInfo(GetUri(uri, arguments), "utf-8", "application/json", extendHeaders, ref cookie).FromJson<T>();
+            return HttpRequestBase.GetHttpInfo(GetUri(uri, arguments), "utf-8", "application/json", extendHeaders).FromJson<T>();
         }
 
         /// <summary>
@@ -53,8 +52,7 @@ namespace X.Util.Other
         /// <returns></returns>
         public static T Post<T>(string uri, object postdata, Dictionary<string, string> extendHeaders)
         {
-            var cookie = string.Empty;
-            return HttpRequestBase.PostHttpInfo(uri, "utf-8", postdata.ToJson(), "application/json", extendHeaders, ref cookie).FromJson<T>();
+            return HttpRequestBase.PostHttpInfo(uri, "utf-8", postdata.ToJson(), "application/json", extendHeaders).FromJson<T>();
         }
 
         /// <summary>
