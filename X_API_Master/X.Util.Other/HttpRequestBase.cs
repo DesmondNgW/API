@@ -11,49 +11,24 @@ using X.Util.Extend.Cache;
 
 namespace X.Util.Other
 {
+    /// <summary>
+    /// http请求结果
+    /// </summary>
+    public class HttpRequestResult
+    {
+        public string Content { get; set; }
+
+        public bool Success { get; set; }
+
+        public CookieCollection CookieCollection { get; set; }
+
+        public string Cookies { get; set; }
+    }
     public class HttpRequestBase
     {
-        private static string GetHttpRequest(string uri, string charset, string data, string method, string contentType, Dictionary<string, string> extendHeaders)
+        private static HttpRequestResult GetHttpRequest(string uri, string charset, string data, string method, string contentType, Dictionary<string, string> extendHeaders, string cookie)
         {
-            var request = (HttpWebRequest)WebRequest.Create(uri);
-            var encode = charset.Contains("utf8") || charset.Contains("utf-8") ? Encoding.UTF8 : charset.Contains("unicode") ? Encoding.Unicode : Encoding.GetEncoding(charset);
-            if (uri.StartsWith("https", StringComparison.OrdinalIgnoreCase)) ServicePointManager.ServerCertificateValidationCallback = (sender, certificate, chain, errors) => SslPolicyErrors.None.Equals(errors);
-            request.KeepAlive = true;
-            request.CookieContainer = new CookieContainer();
-            request.AllowAutoRedirect = true;
-            request.UserAgent = "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:30.0) Gecko/20100101 Firefox/30.0";
-            request.Timeout = 20000;
-            request.Method = method;
-            request.ContentType = "application/x-www-form-urlencoded";
-            if (extendHeaders != null)
-            {
-                foreach (var item in extendHeaders) request.Headers[item.Key] = item.Value;
-            }
-            if (!string.IsNullOrEmpty(contentType)) request.ContentType = contentType;
-            if (!string.IsNullOrWhiteSpace(data))
-            {
-                var dataBytes = encode.GetBytes(data);
-                var stream = request.GetRequestStream();
-                stream.Write(dataBytes, 0, dataBytes.Length);
-                stream.Close();
-            }
-            var response = (HttpWebResponse)request.GetResponse();
-            response.Cookies = request.CookieContainer.GetCookies(request.RequestUri);
-            var content = string.Empty;
-            var responseStream = response.GetResponseStream();
-            if (responseStream != null)
-            {
-                var sr = new StreamReader(responseStream, encode);
-                content = sr.ReadToEnd();
-                sr.Close();
-            }
-            request.Abort();
-            response.Close();
-            return content;
-        }
-
-        private static string GetHttpRequest(string uri, string charset, string data, string method, string contentType, Dictionary<string, string> extendHeaders, ref string cookie)
-        {
+            var result = new HttpRequestResult() {Success = false};
             var request = (HttpWebRequest)WebRequest.Create(uri);
             var encode = charset.Contains("utf8") || charset.Contains("utf-8") ? Encoding.UTF8 : charset.Contains("unicode") ? Encoding.Unicode : Encoding.GetEncoding(charset);
             if (uri.StartsWith("https", StringComparison.OrdinalIgnoreCase)) ServicePointManager.ServerCertificateValidationCallback = (sender, certificate, chain, errors) => SslPolicyErrors.None.Equals(errors);
@@ -77,147 +52,47 @@ namespace X.Util.Other
                 stream.Write(dataBytes, 0, dataBytes.Length);
                 stream.Close();
             }
-            var response = (HttpWebResponse)request.GetResponse();
-            response.Cookies = request.CookieContainer.GetCookies(request.RequestUri);
-            cookie = request.CookieContainer.GetCookieHeader(request.RequestUri);
-            var content = string.Empty;
-            var responseStream = response.GetResponseStream();
-            if (responseStream != null)
+            try
             {
-                var sr = new StreamReader(responseStream, encode);
-                content = sr.ReadToEnd();
-                sr.Close();
+                var response = (HttpWebResponse) request.GetResponse();
+                response.Cookies = request.CookieContainer.GetCookies(request.RequestUri);
+                result.Cookies = request.CookieContainer.GetCookieHeader(request.RequestUri);
+                result.CookieCollection = request.CookieContainer.GetCookies(request.RequestUri);
+                var content = string.Empty;
+                var responseStream = response.GetResponseStream();
+                if (responseStream != null)
+                {
+                    var sr = new StreamReader(responseStream, encode);
+                    content = sr.ReadToEnd();
+                    sr.Close();
+                }
+                result.Content = content;
+                result.Success = true;
+                request.Abort();
+                response.Close();
+                return result;
             }
-            request.Abort();
-            response.Close();
-            return content;
-        }
-
-        private static string GetHttpRequest(string uri, string charset, string data, string method, string contentType, Dictionary<string, string> extendHeaders, string cookie, out CookieCollection cookieCollection)
-        {
-            var request = (HttpWebRequest)WebRequest.Create(uri);
-            var encode = charset.Contains("utf8") || charset.Contains("utf-8") ? Encoding.UTF8 : charset.Contains("unicode") ? Encoding.Unicode : Encoding.GetEncoding(charset);
-            if (uri.StartsWith("https", StringComparison.OrdinalIgnoreCase)) ServicePointManager.ServerCertificateValidationCallback = (sender, certificate, chain, errors) => SslPolicyErrors.None.Equals(errors);
-            request.KeepAlive = true;
-            if (!string.IsNullOrWhiteSpace(cookie)) request.Headers.Add("Cookie:" + cookie);
-            request.CookieContainer = new CookieContainer();
-            request.AllowAutoRedirect = true;
-            request.UserAgent = "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:30.0) Gecko/20100101 Firefox/30.0";
-            request.Timeout = 20000;
-            request.Method = method;
-            request.ContentType = "application/x-www-form-urlencoded";
-            if (extendHeaders != null)
+            catch (Exception e)
             {
-                foreach (var item in extendHeaders) request.Headers[item.Key] = item.Value;
+                Logger.Error(MethodBase.GetCurrentMethod(), LogDomain.Util, null, string.Empty, e.ToString());
             }
-            if (!string.IsNullOrEmpty(contentType)) request.ContentType = contentType;
-            if (!string.IsNullOrWhiteSpace(data))
-            {
-                var dataBytes = encode.GetBytes(data);
-                var stream = request.GetRequestStream();
-                stream.Write(dataBytes, 0, dataBytes.Length);
-                stream.Close();
-            }
-            var response = (HttpWebResponse)request.GetResponse();
-            response.Cookies = request.CookieContainer.GetCookies(request.RequestUri);
-            cookieCollection = request.CookieContainer.GetCookies(request.RequestUri);
-            var content = string.Empty;
-            var responseStream = response.GetResponseStream();
-            if (responseStream != null)
-            {
-                var sr = new StreamReader(responseStream, encode);
-                content = sr.ReadToEnd();
-                sr.Close();
-            }
-            request.Abort();
-            response.Close();
-            return content;
+            return result;
         }
 
         /// <summary>
         /// GET HTTP
         /// </summary>
-        public static string GetHttpInfo(string uri, string charset, string contentType, Dictionary<string, string> extendHeaders)
+        public static HttpRequestResult GetHttpInfo(string uri, string charset, string contentType, Dictionary<string, string> extendHeaders, string cookie)
         {
-            try
-            {
-                return GetHttpRequest(uri, charset, string.Empty, "GET", contentType, extendHeaders);
-            }
-            catch (Exception e)
-            {
-                Logger.Error(MethodBase.GetCurrentMethod(), LogDomain.Util, null, string.Empty, e.ToString());
-                return string.Empty;
-            }
-        }
-
-        public static string GetHttpInfo(string uri, string charset, string contentType, Dictionary<string, string> extendHeaders, ref string cookie)
-        {
-            try
-            {
-                return GetHttpRequest(uri, charset, string.Empty, "GET", contentType, extendHeaders, ref cookie);
-            }
-            catch (Exception e)
-            {
-                Logger.Error(MethodBase.GetCurrentMethod(), LogDomain.Util, null, string.Empty, e.ToString());
-                return string.Empty;
-            }
-        }
-
-        public static string GetHttpInfo(string uri, string charset, string contentType, Dictionary<string, string> extendHeaders, string cookie, out CookieCollection cookieCollection)
-        {
-            cookieCollection = default(CookieCollection);
-            try
-            {
-                return GetHttpRequest(uri, charset, string.Empty, "GET", contentType, extendHeaders, cookie, out cookieCollection);
-            }
-            catch (Exception e)
-            {
-                Logger.Error(MethodBase.GetCurrentMethod(), LogDomain.Util, null, string.Empty, e.ToString());
-                return string.Empty;
-            }
+            return GetHttpRequest(uri, charset, string.Empty, "GET", contentType, extendHeaders, cookie);
         }
 
         /// <summary>
         /// POST HTTP
         /// </summary>
-        public static string PostHttpInfo(string uri, string charset, string postdata, string contentType, Dictionary<string, string> extendHeaders)
+        public static HttpRequestResult PostHttpInfo(string uri, string charset, string postdata, string contentType, Dictionary<string, string> extendHeaders, string cookie)
         {
-            try
-            {
-                return GetHttpRequest(uri, charset, postdata, "POST", contentType, extendHeaders);
-            }
-            catch (Exception e)
-            {
-                Logger.Error(MethodBase.GetCurrentMethod(), LogDomain.Util, null, string.Empty, e.ToString());
-                return string.Empty;
-            }
-        }
-
-        public static string PostHttpInfo(string uri, string charset, string postdata, string contentType, Dictionary<string, string> extendHeaders, ref string cookie)
-        {
-            try
-            {
-                return GetHttpRequest(uri, charset, postdata, "POST", contentType, extendHeaders, ref cookie);
-            }
-            catch (Exception e)
-            {
-                Logger.Error(MethodBase.GetCurrentMethod(), LogDomain.Util, null, string.Empty, e.ToString());
-                return string.Empty;
-            }
-        }
-
-        public static string PostHttpInfo(string uri, string charset, string postdata, string contentType, Dictionary<string, string> extendHeaders, string cookie, out CookieCollection cookieCollection)
-        {
-            cookieCollection = default(CookieCollection);
-            try
-            {
-                return GetHttpRequest(uri, charset, postdata, "POST", contentType, extendHeaders, cookie, out cookieCollection);
-            }
-            catch (Exception e)
-            {
-                Logger.Error(MethodBase.GetCurrentMethod(), LogDomain.Util, null, string.Empty, e.ToString());
-                return string.Empty;
-            }
+            return GetHttpRequest(uri, charset, postdata, "POST", contentType, extendHeaders, cookie);
         }
 
         /// <summary>

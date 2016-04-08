@@ -39,7 +39,8 @@ namespace X.Util.Other
         /// <returns></returns>
         public static T Get<T>(string uri, Dictionary<string, string> arguments, Dictionary<string, string> extendHeaders)
         {
-            return HttpRequestBase.GetHttpInfo(GetUri(uri, arguments), "utf-8", "application/json", extendHeaders).FromJson<T>();
+            var iresult = HttpRequestBase.GetHttpInfo(GetUri(uri, arguments), "utf-8", "application/json", extendHeaders, string.Empty);
+            return iresult.Success && !string.IsNullOrEmpty(iresult.Content) ? iresult.Content.FromJson<T>() : default(T);
         }
 
         /// <summary>
@@ -52,7 +53,8 @@ namespace X.Util.Other
         /// <returns></returns>
         public static T Post<T>(string uri, object postdata, Dictionary<string, string> extendHeaders)
         {
-            return HttpRequestBase.PostHttpInfo(uri, "utf-8", postdata.ToJson(), "application/json", extendHeaders).FromJson<T>();
+            var iresult = HttpRequestBase.PostHttpInfo(uri, "utf-8", postdata.ToJson(), "application/json", extendHeaders, string.Empty);
+            return iresult.Success && !string.IsNullOrEmpty(iresult.Content) ? iresult.Content.FromJson<T>() : default(T);
         }
 
         /// <summary>

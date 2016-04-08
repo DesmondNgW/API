@@ -49,7 +49,7 @@ namespace X.UI.Consoles
             var cookie = string.Empty;
             while (!string.IsNullOrEmpty(url = Console.ReadLine()))
             {
-                Console.WriteLine(HttpRequestBase.GetHttpInfo(url, "utf8", string.Empty, null, ref cookie));
+                Console.WriteLine(HttpRequestBase.GetHttpInfo(url, "utf8", string.Empty, null, cookie).ToJson());
             }
         }
 
