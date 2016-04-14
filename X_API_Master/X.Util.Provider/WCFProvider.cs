@@ -3,7 +3,6 @@ using System.Diagnostics;
 using System.Reflection;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
-using System.Threading;
 using X.Util.Core;
 using X.Util.Entities;
 
