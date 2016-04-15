@@ -25,7 +25,7 @@ namespace X.Util.Extend.Cache
         public T Get<T>(string key)
         {
             var redisProvider = new RedisProvider(ServerName);
-            return CoreAccess.TryCall(EDomain, redisProvider.ReadOnlyClient.Get<T>, key, CoreBase.CallSuccess, redisProvider.Close, true, ServerName);
+            return CoreAccess.TryCall(EDomain, redisProvider.ReadOnlyClient.Get<T>, key, CoreBase.CallSuccess, redisProvider.Close, 1, true, ServerName);
         }
 
         public T GetJson<T>(string key)

@@ -63,7 +63,7 @@ namespace X.Util.Extend.Mongo
         public bool IndexExists(string database, string collection, IndexKeysDocument index)
         {
             var mc = new MongoDbProvider(database, collection, ServerName);
-            return CoreAccess.TryCall(EDomain, mc.Collection.IndexExists, index, CoreBase.CallSuccess, mc.Dispose, true, ServerName);
+            return CoreAccess.TryCall(EDomain, mc.Collection.IndexExists, index, CoreBase.CallSuccess, mc.Dispose, 1, true, ServerName);
         }
 
         /// <summary>
@@ -75,7 +75,7 @@ namespace X.Util.Extend.Mongo
         public IndexKeysDocument GetAllIndexes(string database, string collection)
         {
             var mc = new MongoDbProvider(database, collection, ServerName);
-            return CoreAccess.TryCall(EDomain, mc.Collection.GetIndexes, iresult => iresult != null && iresult.Count > 0 && iresult.RawDocuments != null, mc.Dispose, true, ServerName).ToBsonDocument() as IndexKeysDocument;
+            return CoreAccess.TryCall(EDomain, mc.Collection.GetIndexes, iresult => iresult != null && iresult.Count > 0 && iresult.RawDocuments != null, mc.Dispose, 1, true, ServerName).ToBsonDocument() as IndexKeysDocument;
         }
         #endregion
 
@@ -219,7 +219,7 @@ namespace X.Util.Extend.Mongo
         public MongoCursor<BsonDocument> ReadMongo(string database, string collection, QueryDocument query, FieldsDocument field = null, SortByDocument sortBy = null, int limit = 0, int skip = 0)
         {
             var mc = new MongoDbProvider(database, collection, ServerName);
-            return CoreAccess.TryCall(EDomain, Find, mc, query, field, sortBy, limit, skip, iresult => iresult != null && iresult.Any(), mc.Dispose, true, ServerName);
+            return CoreAccess.TryCall(EDomain, Find, mc, query, field, sortBy, limit, skip, iresult => iresult != null && iresult.Any(), mc.Dispose, 1, true, ServerName);
         }
 
         /// <summary>
@@ -232,7 +232,7 @@ namespace X.Util.Extend.Mongo
         public BsonDocument FindOne(string database, string collection, IMongoQuery query)
         {
             var mc = new MongoDbProvider(database, collection, ServerName);
-            return CoreAccess.TryCall(EDomain, mc.Collection.FindOne, query, CoreBase.CallSuccess, mc.Dispose, true, ServerName);
+            return CoreAccess.TryCall(EDomain, mc.Collection.FindOne, query, CoreBase.CallSuccess, mc.Dispose, 1, true, ServerName);
         }
 
         /// <summary>
@@ -247,7 +247,7 @@ namespace X.Util.Extend.Mongo
         public long ReadMongoCount(string database, string collection, QueryDocument query, int limit = 0, int skip = 0)
         {
             var mc = new MongoDbProvider(database, collection, ServerName);
-            return CoreAccess.TryCall(EDomain, Count, mc, query, limit, skip, CoreBase.CallSuccess, mc.Dispose, true, ServerName);
+            return CoreAccess.TryCall(EDomain, Count, mc, query, limit, skip, CoreBase.CallSuccess, mc.Dispose, 1, true, ServerName);
         }
 
         /// <summary>
@@ -261,7 +261,7 @@ namespace X.Util.Extend.Mongo
         public IEnumerable<BsonValue> Distinct(string database, string collection, QueryDocument query, string field)
         {
             var mc = new MongoDbProvider(database, collection, ServerName);
-            return CoreAccess.TryCall(EDomain, mc.Collection.Distinct, field, query, CoreBase.CallSuccess, mc.Dispose, true, ServerName);
+            return CoreAccess.TryCall(EDomain, mc.Collection.Distinct, field, query, CoreBase.CallSuccess, mc.Dispose, 1, true, ServerName);
         }
         #endregion
 

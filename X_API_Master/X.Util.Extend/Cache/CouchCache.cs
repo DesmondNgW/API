@@ -32,7 +32,7 @@ namespace X.Util.Extend.Cache
         public object Get(string key)
         {
             var couchBaseProvider = new CouchBaseProvider(ServerName);
-            return CoreAccess.TryCall(EDomain, couchBaseProvider.Instance.Get, key, CoreBase.CallSuccess, couchBaseProvider.Close, true, ServerName);
+            return CoreAccess.TryCall(EDomain, couchBaseProvider.Instance.Get, key, CoreBase.CallSuccess, couchBaseProvider.Close, 1, true, ServerName);
         }
 
         public string GetJson(string key)
@@ -43,7 +43,7 @@ namespace X.Util.Extend.Cache
         public object Get(string key, DateTime dt)
         {
             var couchBaseProvider = new CouchBaseProvider(ServerName);
-            return CoreAccess.TryCall(EDomain, couchBaseProvider.Instance.Get, key, dt, CoreBase.CallSuccess, couchBaseProvider.Close, true, ServerName);
+            return CoreAccess.TryCall(EDomain, couchBaseProvider.Instance.Get, key, dt, CoreBase.CallSuccess, couchBaseProvider.Close, 1, true, ServerName);
         }
 
         public string GetJson(string key, DateTime dt)
@@ -54,7 +54,7 @@ namespace X.Util.Extend.Cache
         public T Get<T>(string key)
         {
             var couchBaseProvider = new CouchBaseProvider(ServerName);
-            return CoreAccess.TryCall(EDomain, couchBaseProvider.Instance.Get<T>, key, CoreBase.CallSuccess, couchBaseProvider.Close, true, ServerName);
+            return CoreAccess.TryCall(EDomain, couchBaseProvider.Instance.Get<T>, key, CoreBase.CallSuccess, couchBaseProvider.Close, 1, true, ServerName);
         }
 
         public T GetJson<T>(string key)
@@ -66,7 +66,7 @@ namespace X.Util.Extend.Cache
         public T Get<T>(string key, DateTime dt)
         {
             var couchBaseProvider = new CouchBaseProvider(ServerName);
-            return CoreAccess.TryCall(EDomain, couchBaseProvider.Instance.Get<T>, key, dt, CoreBase.CallSuccess, couchBaseProvider.Close, true, ServerName);
+            return CoreAccess.TryCall(EDomain, couchBaseProvider.Instance.Get<T>, key, dt, CoreBase.CallSuccess, couchBaseProvider.Close, 1, true, ServerName);
         }
 
         public T GetJson<T>(string key, DateTime dt)
