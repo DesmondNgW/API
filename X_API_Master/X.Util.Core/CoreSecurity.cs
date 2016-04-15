@@ -9,257 +9,240 @@ namespace X.Util.Core
     {
         public static T TryAgain<T>(Func<T> func, int maxTimes)
         {
-            var result = default(T);
             try
             {
-                result = func();
+                return func();
             }
             catch
             {
                 maxTimes--;
-                if (maxTimes > 0) result = TryAgain(func, maxTimes);
+                if (maxTimes > 0) return TryAgain(func, maxTimes);
+                throw;
             }
-            return result;
         }
 
         public static T TryAgain<T, T1>(Func<T1, T> func, T1 t1, int maxTimes)
         {
-            var result = default(T);
             try
             {
-                result = func(t1);
+                return func(t1);
             }
             catch
             {
                 maxTimes--;
-                if (maxTimes > 0) result = TryAgain(func, t1, maxTimes);
+                if (maxTimes > 0) return TryAgain(func, t1, maxTimes);
+                throw;
             }
-            return result;
         }
 
         public static T TryAgain<T, T1, T2>(Func<T1, T2, T> func, T1 t1, T2 t2, int maxTimes)
         {
-            var result = default(T);
             try
             {
-                result = func(t1, t2);
+                return func(t1, t2);
             }
             catch
             {
                 maxTimes--;
-                if (maxTimes > 0) result = TryAgain(func, t1, t2, maxTimes);
+                if (maxTimes > 0) return TryAgain(func, t1, t2, maxTimes);
+                throw;
             }
-            return result;
         }
 
         public static T TryAgain<T, T1, T2, T3>(Func<T1, T2, T3, T> func, T1 t1, T2 t2, T3 t3, int maxTimes)
         {
-            var result = default(T);
             try
             {
-                result = func(t1, t2, t3);
+                return func(t1, t2, t3);
             }
             catch
             {
                 maxTimes--;
-                if (maxTimes > 0) result = TryAgain(func, t1, t2, t3, maxTimes);
+                if (maxTimes > 0) return TryAgain(func, t1, t2, t3, maxTimes);
+                throw;
             }
-            return result;
         }
 
         public static T TryAgain<T, T1, T2, T3, T4>(Func<T1, T2, T3, T4, T> func, T1 t1, T2 t2, T3 t3, T4 t4, int maxTimes)
         {
-            var result = default(T);
             try
             {
-                result = func(t1, t2, t3, t4);
+                return func(t1, t2, t3, t4);
             }
             catch
             {
                 maxTimes--;
-                if (maxTimes > 0) result = TryAgain(func, t1, t2, t3, t4, maxTimes);
+                if (maxTimes > 0) return TryAgain(func, t1, t2, t3, t4, maxTimes);
+                throw;
             }
-            return result;
         }
 
         public static T TryAgain<T, T1, T2, T3, T4, T5>(Func<T1, T2, T3, T4, T5, T> func, T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, int maxTimes)
         {
-            var result = default(T);
             try
             {
-                result = func(t1, t2, t3, t4, t5);
+                return func(t1, t2, t3, t4, t5);
             }
             catch
             {
                 maxTimes--;
-                if (maxTimes > 0) result = TryAgain(func, t1, t2, t3, t4, t5, maxTimes);
+                if (maxTimes > 0) return TryAgain(func, t1, t2, t3, t4, t5, maxTimes);
+                throw;
             }
-            return result;
         }
 
         public static T TryAgain<T, T1, T2, T3, T4, T5, T6>(Func<T1, T2, T3, T4, T5, T6, T> func, T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6, int maxTimes)
         {
-            var result = default(T);
             try
             {
-                result = func(t1, t2, t3, t4, t5, t6);
+                return func(t1, t2, t3, t4, t5, t6);
             }
             catch
             {
                 maxTimes--;
-                if (maxTimes > 0) result = TryAgain(func, t1, t2, t3, t4, t5, t6, maxTimes);
+                if (maxTimes > 0) return TryAgain(func, t1, t2, t3, t4, t5, t6, maxTimes);
+                throw;
             }
-            return result;
         }
 
         public static T TryAgain<T, T1, T2, T3, T4, T5, T6, T7>(Func<T1, T2, T3, T4, T5, T6, T7, T> func, T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6, T7 t7, int maxTimes)
         {
-            var result = default(T);
             try
             {
-                result = func(t1, t2, t3, t4, t5, t6, t7);
+                return func(t1, t2, t3, t4, t5, t6, t7);
             }
             catch
             {
                 maxTimes--;
-                if (maxTimes > 0) result = TryAgain(func, t1, t2, t3, t4, t5, t6, t7, maxTimes);
+                if (maxTimes > 0) return TryAgain(func, t1, t2, t3, t4, t5, t6, t7, maxTimes);
+                throw;
             }
-            return result;
         }
 
         public static T TryAgain<T, T1, T2, T3, T4, T5, T6, T7, T8>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T> func, T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6, T7 t7, T8 t8, int maxTimes)
         {
-            var result = default(T);
             try
             {
-                result = func(t1, t2, t3, t4, t5, t6, t7, t8);
+                return func(t1, t2, t3, t4, t5, t6, t7, t8);
             }
             catch
             {
                 maxTimes--;
-                if (maxTimes > 0) result = TryAgain(func, t1, t2, t3, t4, t5, t6, t7, t8, maxTimes);
+                if (maxTimes > 0) return TryAgain(func, t1, t2, t3, t4, t5, t6, t7, t8, maxTimes);
+                throw;
             }
-            return result;
         }
 
         public static T TryAgain<T, T1, T2, T3, T4, T5, T6, T7, T8, T9>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T> func, T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6, T7 t7, T8 t8, T9 t9, int maxTimes)
         {
-            var result = default(T);
             try
             {
-                result = func(t1, t2, t3, t4, t5, t6, t7, t8, t9);
+                return func(t1, t2, t3, t4, t5, t6, t7, t8, t9);
             }
             catch
             {
                 maxTimes--;
-                if (maxTimes > 0) result = TryAgain(func, t1, t2, t3, t4, t5, t6, t7, t8, t9, maxTimes);
+                if (maxTimes > 0) return TryAgain(func, t1, t2, t3, t4, t5, t6, t7, t8, t9, maxTimes);
+                throw;
             }
-            return result;
         }
 
         public static T TryAgain<T, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T> func, T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6, T7 t7, T8 t8, T9 t9, T10 t10, int maxTimes)
         {
-            var result = default(T);
             try
             {
-                result = func(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10);
+                return func(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10);
             }
             catch
             {
                 maxTimes--;
-                if (maxTimes > 0) result = TryAgain(func, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, maxTimes);
+                if (maxTimes > 0) return TryAgain(func, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, maxTimes);
+                throw;
             }
-            return result;
         }
 
         public static T TryAgain<T, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T> func, T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6, T7 t7, T8 t8, T9 t9, T10 t10, T11 t11, int maxTimes)
         {
-            var result = default(T);
             try
             {
-                result = func(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11);
+                return func(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11);
             }
             catch
             {
                 maxTimes--;
-                if (maxTimes > 0) result = TryAgain(func, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, maxTimes);
+                if (maxTimes > 0) return TryAgain(func, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, maxTimes);
+                throw;
             }
-            return result;
         }
 
         public static T TryAgain<T, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T> func, T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6, T7 t7, T8 t8, T9 t9, T10 t10, T11 t11, T12 t12, int maxTimes)
         {
-            var result = default(T);
             try
             {
-                result = func(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12);
+                return func(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12);
             }
             catch
             {
                 maxTimes--;
-                if (maxTimes > 0) result = TryAgain(func, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, maxTimes);
+                if (maxTimes > 0) return TryAgain(func, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, maxTimes);
+                throw;
             }
-            return result;
         }
 
         public static T TryAgain<T, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T> func, T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6, T7 t7, T8 t8, T9 t9, T10 t10, T11 t11, T12 t12, T13 t13, int maxTimes)
         {
-            var result = default(T);
             try
             {
-                result = func(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13);
+                return func(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13);
             }
             catch
             {
                 maxTimes--;
-                if (maxTimes > 0) result = TryAgain(func, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, maxTimes);
+                if (maxTimes > 0) return TryAgain(func, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, maxTimes);
+                throw;
             }
-            return result;
         }
 
         public static T TryAgain<T, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T> func, T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6, T7 t7, T8 t8, T9 t9, T10 t10, T11 t11, T12 t12, T13 t13, T14 t14, int maxTimes)
         {
-            var result = default(T);
             try
             {
-                result = func(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14);
+                return func(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14);
             }
             catch
             {
                 maxTimes--;
-                if (maxTimes > 0) result = TryAgain(func, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, maxTimes);
+                if (maxTimes > 0) return TryAgain(func, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, maxTimes);
+                throw;
             }
-            return result;
         }
 
         public static T TryAgain<T, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T> func, T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6, T7 t7, T8 t8, T9 t9, T10 t10, T11 t11, T12 t12, T13 t13, T14 t14, T15 t15, int maxTimes)
         {
-            var result = default(T);
             try
             {
-                result = func(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15);
+                return func(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15);
             }
             catch
             {
                 maxTimes--;
-                if (maxTimes > 0) result = TryAgain(func, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, maxTimes);
+                if (maxTimes > 0) return TryAgain(func, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, maxTimes);
+                throw;
             }
-            return result;
         }
 
         public static T TryAgain<T, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T> func, T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6, T7 t7, T8 t8, T9 t9, T10 t10, T11 t11, T12 t12, T13 t13, T14 t14, T15 t15, T16 t16, int maxTimes)
-        {
-            var result = default(T);
+        {            
             try
             {
-                result = func(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16);
+                return func(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16);
             }
             catch
             {
                 maxTimes--;
-                if (maxTimes > 0) result = TryAgain(func, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16, maxTimes);
-            }
-            return result;
+                if (maxTimes > 0) return TryAgain(func, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16, maxTimes);
+                throw;
+            }          
         }
 
         public static void TryAgain(Action func, int maxTimes)
@@ -272,6 +255,7 @@ namespace X.Util.Core
             {
                 maxTimes--;
                 if (maxTimes > 0) TryAgain(func, maxTimes);
+                else throw;
             }
         }
 
@@ -285,6 +269,7 @@ namespace X.Util.Core
             {
                 maxTimes--;
                 if (maxTimes > 0) TryAgain(func, t1, maxTimes);
+                else throw;
             }
         }
 
@@ -298,6 +283,7 @@ namespace X.Util.Core
             {
                 maxTimes--;
                 if (maxTimes > 0) TryAgain(func, t1, t2, maxTimes);
+                else throw;
             }
         }
 
@@ -311,6 +297,7 @@ namespace X.Util.Core
             {
                 maxTimes--;
                 if (maxTimes > 0) TryAgain(func, t1, t2, t3, maxTimes);
+                else throw;
             }
         }
 
@@ -324,6 +311,7 @@ namespace X.Util.Core
             {
                 maxTimes--;
                 if (maxTimes > 0) TryAgain(func, t1, t2, t3, t4, maxTimes);
+                else throw;
             }
         }
 
@@ -337,6 +325,7 @@ namespace X.Util.Core
             {
                 maxTimes--;
                 if (maxTimes > 0) TryAgain(func, t1, t2, t3, t4, t5, maxTimes);
+                else throw;
             }
         }
 
@@ -350,6 +339,7 @@ namespace X.Util.Core
             {
                 maxTimes--;
                 if (maxTimes > 0) TryAgain(func, t1, t2, t3, t4, t5, t6, maxTimes);
+                else throw;
             }
         }
 
@@ -363,6 +353,7 @@ namespace X.Util.Core
             {
                 maxTimes--;
                 if (maxTimes > 0) TryAgain(func, t1, t2, t3, t4, t5, t6, t7, maxTimes);
+                else throw;
             }
         }
 
@@ -376,6 +367,7 @@ namespace X.Util.Core
             {
                 maxTimes--;
                 if (maxTimes > 0) TryAgain(func, t1, t2, t3, t4, t5, t6, t7, t8, maxTimes);
+                else throw;
             }
         }
 
@@ -389,6 +381,7 @@ namespace X.Util.Core
             {
                 maxTimes--;
                 if (maxTimes > 0) TryAgain(func, t1, t2, t3, t4, t5, t6, t7, t8, t9, maxTimes);
+                else throw;
             }
         }
 
@@ -402,6 +395,7 @@ namespace X.Util.Core
             {
                 maxTimes--;
                 if (maxTimes > 0) TryAgain(func, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, maxTimes);
+                else throw;
             }
         }
 
@@ -415,6 +409,7 @@ namespace X.Util.Core
             {
                 maxTimes--;
                 if (maxTimes > 0) TryAgain(func, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, maxTimes);
+                else throw;
             }
         }
 
@@ -428,6 +423,7 @@ namespace X.Util.Core
             {
                 maxTimes--;
                 if (maxTimes > 0) TryAgain(func, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, maxTimes);
+                else throw;
             }
         }
 
@@ -441,6 +437,7 @@ namespace X.Util.Core
             {
                 maxTimes--;
                 if (maxTimes > 0) TryAgain(func, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, maxTimes);
+                else throw;
             }
         }
 
@@ -454,6 +451,7 @@ namespace X.Util.Core
             {
                 maxTimes--;
                 if (maxTimes > 0) TryAgain(func, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, maxTimes);
+                else throw;
             }
         }
 
@@ -467,6 +465,7 @@ namespace X.Util.Core
             {
                 maxTimes--;
                 if (maxTimes > 0) TryAgain(func, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, maxTimes);
+                else throw;
             }
         }
 
@@ -480,6 +479,7 @@ namespace X.Util.Core
             {
                 maxTimes--;
                 if (maxTimes > 0) TryAgain(func, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16, maxTimes);
+                else throw;
             }
         }
     }
