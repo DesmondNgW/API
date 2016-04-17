@@ -13,7 +13,7 @@
       <urls>
         <add uri="http://172.16.87.109:8091/pools/" />
       </urls>
-      <socketPool minPoolSize="20" maxPoolSize="1000" connectionTimeout="00:00:02" deadTimeout="00:00:10" />
+      <socketPool minPoolSize="1" maxPoolSize="10" connectionTimeout="00:00:02" deadTimeout="00:00:10" />
     </server>
   </couchbase>
   <!--自定义Redis配置节点-->

@@ -278,8 +278,8 @@ namespace X.WFConfig
         /// <returns></returns>
         private static XmlElement GetCouchbaseElement(XmlDocument doc, CouchbaseConfig couchbase)
         {
-            if (couchbase.MinPoolSize == default(int)) couchbase.MinPoolSize = 20;
-            if (couchbase.MaxPoolSize == default(int)) couchbase.MaxPoolSize = 1000;
+            if (couchbase.MinPoolSize == default(int)) couchbase.MinPoolSize = 10;
+            if (couchbase.MaxPoolSize == default(int)) couchbase.MaxPoolSize = 20;
             if (couchbase.ConnectionTimeout == default(TimeSpan)) couchbase.ConnectionTimeout = new TimeSpan(0, 0, 2);
             if (couchbase.DeadTimeout == default(TimeSpan)) couchbase.DeadTimeout = new TimeSpan(0, 0, 10);
             if (couchbase.ReceiveTimeout == default(TimeSpan)) couchbase.ReceiveTimeout = new TimeSpan(0, 0, 10);

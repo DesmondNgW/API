@@ -215,8 +215,8 @@ namespace X.Util.Core
                         foreach (XmlNode uri in item.ChildNodes) couchbaseClientConfiguration.Urls.Add(new Uri(XmlHelper.GetXmlAttributeValue(uri, "uri", string.Empty)));
                         break;
                     case "socketPool":
-                        couchbaseClientConfiguration.SocketPool.MinPoolSize = CoreParse.GetInt32((XmlHelper.GetXmlAttributeValue(item, "minPoolSize", string.Empty)), 20);
-                        couchbaseClientConfiguration.SocketPool.MaxPoolSize = CoreParse.GetInt32((XmlHelper.GetXmlAttributeValue(item, "maxPoolSize", string.Empty)), 1000);
+                        couchbaseClientConfiguration.SocketPool.MinPoolSize = CoreParse.GetInt32((XmlHelper.GetXmlAttributeValue(item, "minPoolSize", string.Empty)), 10);
+                        couchbaseClientConfiguration.SocketPool.MaxPoolSize = CoreParse.GetInt32((XmlHelper.GetXmlAttributeValue(item, "maxPoolSize", string.Empty)), 20);
                         couchbaseClientConfiguration.SocketPool.ConnectionTimeout = TimeSpan.Parse(XmlHelper.GetXmlAttributeValue(item, "connectionTimeout", "00:00:02"));
                         couchbaseClientConfiguration.SocketPool.DeadTimeout = TimeSpan.Parse(XmlHelper.GetXmlAttributeValue(item, "deadTimeout", "00:00:10"));
                         couchbaseClientConfiguration.SocketPool.ReceiveTimeout = TimeSpan.Parse(XmlHelper.GetXmlAttributeValue(item, "receiveTimeout", "00:00:10"));
@@ -239,8 +239,8 @@ namespace X.Util.Core
             configuration.SocketPool.ConnectionTimeout = new TimeSpan(0, 0, 2);
             configuration.SocketPool.DeadTimeout = new TimeSpan(0, 0, 10);
             configuration.SocketPool.ReceiveTimeout = new TimeSpan(0, 0, 10);
-            configuration.SocketPool.MaxPoolSize = 1000;
-            configuration.SocketPool.MinPoolSize = 20;
+            configuration.SocketPool.MaxPoolSize = 20;
+            configuration.SocketPool.MinPoolSize = 10;
             return new CouchbaseClient(configuration);
         }
 
