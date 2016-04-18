@@ -41,36 +41,46 @@ namespace X.Util.Core
             }
             catch
             {
-                try
+                lock (CoreUtil.Getlocker(repository))
                 {
-                    var loggerRepository = LogManager.CreateRepository(repository);
-                    var log4NetBaseDirectory = AppConfig.Log4NetBaseDirectory;
-                    if (string.IsNullOrEmpty(log4NetBaseDirectory))
+                    try
                     {
-                        log4NetBaseDirectory = Path.Combine(AppDomain.CurrentDomain.BaseDirectory + "/../", "Log4NetBaseDirectory");
+                        return LogManager.GetLogger(repository, "default");
                     }
-                    foreach (var filter in Filters)
+                    catch
                     {
-                        var fileAppender = new RollingFileAppender
+                        try
                         {
-                            Name = domain + "_" + filter.Key + "_FileAppender",
-                            LockingModel = new FileAppender.MinimalLock(),
-                            File = log4NetBaseDirectory,
-                            AppendToFile = true,
-                            RollingStyle = RollingFileAppender.RollingMode.Date,
-                            DatePattern = "/yyyy-MM-dd'/" + domain + "/'yyyy-MM-dd HH'" + filter.Key + ".log'",
-                            StaticLogFileName = false,
-                            Layout = Layout
-                        };
-                        fileAppender.AddFilter(filter.Value);
-                        fileAppender.ActivateOptions();
-                        BasicConfigurator.Configure(loggerRepository, fileAppender);
+                            var loggerRepository = LogManager.CreateRepository(repository);
+                            var log4NetBaseDirectory = AppConfig.Log4NetBaseDirectory;
+                            if (string.IsNullOrEmpty(log4NetBaseDirectory))
+                            {
+                                log4NetBaseDirectory = Path.Combine(AppDomain.CurrentDomain.BaseDirectory + "/../", "Log4NetBaseDirectory");
+                            }
+                            foreach (var filter in Filters)
+                            {
+                                var fileAppender = new RollingFileAppender
+                                {
+                                    Name = domain + "_" + filter.Key + "_FileAppender",
+                                    LockingModel = new FileAppender.MinimalLock(),
+                                    File = log4NetBaseDirectory,
+                                    AppendToFile = true,
+                                    RollingStyle = RollingFileAppender.RollingMode.Date,
+                                    DatePattern = "/yyyy-MM-dd'/" + domain + "/'yyyy-MM-dd HH'" + filter.Key + ".log'",
+                                    StaticLogFileName = false,
+                                    Layout = Layout
+                                };
+                                fileAppender.AddFilter(filter.Value);
+                                fileAppender.ActivateOptions();
+                                BasicConfigurator.Configure(loggerRepository, fileAppender);
+                            }
+                            return LogManager.GetLogger(repository, "default");
+                        }
+                        catch
+                        {
+                            return default(ILog);
+                        }
                     }
-                    return LogManager.GetLogger(repository, "default");
-                }
-                catch
-                {
-                    return default(ILog);
                 }
             }
         }
