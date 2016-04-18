@@ -5,15 +5,15 @@ namespace X.Util.Core
     /// <summary>
     /// 反复重试调用方法多次
     /// </summary>
-    public class CoreSecurity
+    public class CoreSecurity<TS> where TS : Exception
     {
-        public static T TryAgain<T>(Func<T> func, int maxTimes)
+        public static T TryAgain<T>(Func<T> func, int maxTimes) 
         {
             try
             {
                 return func();
             }
-            catch
+            catch (TS)
             {
                 maxTimes--;
                 if (maxTimes > 0) return TryAgain(func, maxTimes);
@@ -27,7 +27,7 @@ namespace X.Util.Core
             {
                 return func(t1);
             }
-            catch
+            catch(TS)
             {
                 maxTimes--;
                 if (maxTimes > 0) return TryAgain(func, t1, maxTimes);
@@ -41,7 +41,7 @@ namespace X.Util.Core
             {
                 return func(t1, t2);
             }
-            catch
+            catch(TS)
             {
                 maxTimes--;
                 if (maxTimes > 0) return TryAgain(func, t1, t2, maxTimes);
@@ -55,7 +55,7 @@ namespace X.Util.Core
             {
                 return func(t1, t2, t3);
             }
-            catch
+            catch(TS)
             {
                 maxTimes--;
                 if (maxTimes > 0) return TryAgain(func, t1, t2, t3, maxTimes);
@@ -69,7 +69,7 @@ namespace X.Util.Core
             {
                 return func(t1, t2, t3, t4);
             }
-            catch
+            catch(TS)
             {
                 maxTimes--;
                 if (maxTimes > 0) return TryAgain(func, t1, t2, t3, t4, maxTimes);
@@ -83,7 +83,7 @@ namespace X.Util.Core
             {
                 return func(t1, t2, t3, t4, t5);
             }
-            catch
+            catch(TS)
             {
                 maxTimes--;
                 if (maxTimes > 0) return TryAgain(func, t1, t2, t3, t4, t5, maxTimes);
@@ -97,7 +97,7 @@ namespace X.Util.Core
             {
                 return func(t1, t2, t3, t4, t5, t6);
             }
-            catch
+            catch(TS)
             {
                 maxTimes--;
                 if (maxTimes > 0) return TryAgain(func, t1, t2, t3, t4, t5, t6, maxTimes);
@@ -111,7 +111,7 @@ namespace X.Util.Core
             {
                 return func(t1, t2, t3, t4, t5, t6, t7);
             }
-            catch
+            catch(TS)
             {
                 maxTimes--;
                 if (maxTimes > 0) return TryAgain(func, t1, t2, t3, t4, t5, t6, t7, maxTimes);
@@ -125,7 +125,7 @@ namespace X.Util.Core
             {
                 return func(t1, t2, t3, t4, t5, t6, t7, t8);
             }
-            catch
+            catch(TS)
             {
                 maxTimes--;
                 if (maxTimes > 0) return TryAgain(func, t1, t2, t3, t4, t5, t6, t7, t8, maxTimes);
@@ -139,7 +139,7 @@ namespace X.Util.Core
             {
                 return func(t1, t2, t3, t4, t5, t6, t7, t8, t9);
             }
-            catch
+            catch(TS)
             {
                 maxTimes--;
                 if (maxTimes > 0) return TryAgain(func, t1, t2, t3, t4, t5, t6, t7, t8, t9, maxTimes);
@@ -153,7 +153,7 @@ namespace X.Util.Core
             {
                 return func(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10);
             }
-            catch
+            catch(TS)
             {
                 maxTimes--;
                 if (maxTimes > 0) return TryAgain(func, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, maxTimes);
@@ -167,7 +167,7 @@ namespace X.Util.Core
             {
                 return func(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11);
             }
-            catch
+            catch(TS)
             {
                 maxTimes--;
                 if (maxTimes > 0) return TryAgain(func, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, maxTimes);
@@ -181,7 +181,7 @@ namespace X.Util.Core
             {
                 return func(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12);
             }
-            catch
+            catch(TS)
             {
                 maxTimes--;
                 if (maxTimes > 0) return TryAgain(func, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, maxTimes);
@@ -195,7 +195,7 @@ namespace X.Util.Core
             {
                 return func(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13);
             }
-            catch
+            catch(TS)
             {
                 maxTimes--;
                 if (maxTimes > 0) return TryAgain(func, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, maxTimes);
@@ -209,7 +209,7 @@ namespace X.Util.Core
             {
                 return func(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14);
             }
-            catch
+            catch(TS)
             {
                 maxTimes--;
                 if (maxTimes > 0) return TryAgain(func, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, maxTimes);
@@ -223,7 +223,7 @@ namespace X.Util.Core
             {
                 return func(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15);
             }
-            catch
+            catch(TS)
             {
                 maxTimes--;
                 if (maxTimes > 0) return TryAgain(func, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, maxTimes);
@@ -237,7 +237,7 @@ namespace X.Util.Core
             {
                 return func(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16);
             }
-            catch
+            catch(TS)
             {
                 maxTimes--;
                 if (maxTimes > 0) return TryAgain(func, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16, maxTimes);
@@ -251,7 +251,7 @@ namespace X.Util.Core
             {
                 func();
             }
-            catch
+            catch(TS)
             {
                 maxTimes--;
                 if (maxTimes > 0) TryAgain(func, maxTimes);
@@ -265,7 +265,7 @@ namespace X.Util.Core
             {
                func(t1);
             }
-            catch
+            catch(TS)
             {
                 maxTimes--;
                 if (maxTimes > 0) TryAgain(func, t1, maxTimes);
@@ -279,7 +279,7 @@ namespace X.Util.Core
             {
                 func(t1, t2);
             }
-            catch
+            catch(TS)
             {
                 maxTimes--;
                 if (maxTimes > 0) TryAgain(func, t1, t2, maxTimes);
@@ -293,7 +293,7 @@ namespace X.Util.Core
             {
                 func(t1, t2, t3);
             }
-            catch
+            catch(TS)
             {
                 maxTimes--;
                 if (maxTimes > 0) TryAgain(func, t1, t2, t3, maxTimes);
@@ -307,7 +307,7 @@ namespace X.Util.Core
             {
                 func(t1, t2, t3, t4);
             }
-            catch
+            catch(TS)
             {
                 maxTimes--;
                 if (maxTimes > 0) TryAgain(func, t1, t2, t3, t4, maxTimes);
@@ -321,7 +321,7 @@ namespace X.Util.Core
             {
                 func(t1, t2, t3, t4, t5);
             }
-            catch
+            catch(TS)
             {
                 maxTimes--;
                 if (maxTimes > 0) TryAgain(func, t1, t2, t3, t4, t5, maxTimes);
@@ -335,7 +335,7 @@ namespace X.Util.Core
             {
                 func(t1, t2, t3, t4, t5, t6);
             }
-            catch
+            catch(TS)
             {
                 maxTimes--;
                 if (maxTimes > 0) TryAgain(func, t1, t2, t3, t4, t5, t6, maxTimes);
@@ -349,7 +349,7 @@ namespace X.Util.Core
             {
                 func(t1, t2, t3, t4, t5, t6, t7);
             }
-            catch
+            catch(TS)
             {
                 maxTimes--;
                 if (maxTimes > 0) TryAgain(func, t1, t2, t3, t4, t5, t6, t7, maxTimes);
@@ -363,7 +363,7 @@ namespace X.Util.Core
             {
                 func(t1, t2, t3, t4, t5, t6, t7, t8);
             }
-            catch
+            catch(TS)
             {
                 maxTimes--;
                 if (maxTimes > 0) TryAgain(func, t1, t2, t3, t4, t5, t6, t7, t8, maxTimes);
@@ -377,7 +377,7 @@ namespace X.Util.Core
             {
                 func(t1, t2, t3, t4, t5, t6, t7, t8, t9);
             }
-            catch
+            catch(TS)
             {
                 maxTimes--;
                 if (maxTimes > 0) TryAgain(func, t1, t2, t3, t4, t5, t6, t7, t8, t9, maxTimes);
@@ -391,7 +391,7 @@ namespace X.Util.Core
             {
                 func(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10);
             }
-            catch
+            catch(TS)
             {
                 maxTimes--;
                 if (maxTimes > 0) TryAgain(func, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, maxTimes);
@@ -405,7 +405,7 @@ namespace X.Util.Core
             {
                 func(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11);
             }
-            catch
+            catch(TS)
             {
                 maxTimes--;
                 if (maxTimes > 0) TryAgain(func, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, maxTimes);
@@ -419,7 +419,7 @@ namespace X.Util.Core
             {
                 func(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12);
             }
-            catch
+            catch(TS)
             {
                 maxTimes--;
                 if (maxTimes > 0) TryAgain(func, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, maxTimes);
@@ -433,7 +433,7 @@ namespace X.Util.Core
             {
                 func(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13);
             }
-            catch
+            catch(TS)
             {
                 maxTimes--;
                 if (maxTimes > 0) TryAgain(func, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, maxTimes);
@@ -447,7 +447,7 @@ namespace X.Util.Core
             {
                 func(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14);
             }
-            catch
+            catch(TS)
             {
                 maxTimes--;
                 if (maxTimes > 0) TryAgain(func, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, maxTimes);
@@ -461,7 +461,7 @@ namespace X.Util.Core
             {
                 func(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15);
             }
-            catch
+            catch(TS)
             {
                 maxTimes--;
                 if (maxTimes > 0) TryAgain(func, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, maxTimes);
@@ -475,7 +475,7 @@ namespace X.Util.Core
             {
                 func(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16);
             }
-            catch
+            catch(TS)
             {
                 maxTimes--;
                 if (maxTimes > 0) TryAgain(func, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16, maxTimes);

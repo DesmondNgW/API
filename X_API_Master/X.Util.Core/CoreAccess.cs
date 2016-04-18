@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Reflection;
 using System.Runtime.Remoting.Messaging;
+using System.ServiceModel;
 
 namespace X.Util.Core
 {
@@ -13,7 +14,7 @@ namespace X.Util.Core
         {
             var method = Logger.GetMethodInfo(func.Method, new object[] { }, address);
             if (needLogInfo) Logger.Info(method, eDomain, null, string.Format("{0}.{1} BeginInvoke.", func.Method.DeclaringType.FullName, func.Method.Name));
-            var iresult = CoreSecurity.TryAgain(func, Math.Max(1, againTimes));
+            var iresult = CoreSecurity<CommunicationException>.TryAgain(func, Math.Max(1, againTimes));
             releaseClient(func.Method, eDomain);
             if (callSuccess(iresult))
             {
@@ -31,7 +32,7 @@ namespace X.Util.Core
             try
             {
                 if (needLogInfo) Logger.Info(method, eDomain, null, string.Format("{0}.{1} BeginInvoke.", func.Method.DeclaringType.FullName, func.Method.Name));
-                var iresult = CoreSecurity.TryAgain(func, Math.Max(1, againTimes));
+                var iresult = CoreSecurity<CommunicationException>.TryAgain(func, Math.Max(1, againTimes));
                 result = iresult;
                 releaseClient(func.Method, eDomain);
                 if (callSuccess(iresult))
@@ -128,7 +129,7 @@ namespace X.Util.Core
         {
             var method = Logger.GetMethodInfo(func.Method, new object[] { t1 }, address);
             if (needLogInfo) Logger.Info(method, eDomain, null, string.Format("{0}.{1} BeginInvoke.", func.Method.DeclaringType.FullName, func.Method.Name));
-            var iresult = CoreSecurity.TryAgain(func, t1, Math.Max(1, againTimes));
+            var iresult = CoreSecurity<CommunicationException>.TryAgain(func, t1, Math.Max(1, againTimes));
             releaseClient(func.Method, eDomain);
             if (callSuccess(iresult))
             {
@@ -146,7 +147,7 @@ namespace X.Util.Core
             try
             {
                 if (needLogInfo) Logger.Info(method, eDomain, null, string.Format("{0}.{1} BeginInvoke.", func.Method.DeclaringType.FullName, func.Method.Name));
-                var iresult = CoreSecurity.TryAgain(func, t1, Math.Max(1, againTimes));
+                var iresult = CoreSecurity<CommunicationException>.TryAgain(func, t1, Math.Max(1, againTimes));
                 result = iresult;
                 releaseClient(func.Method, eDomain);
                 if (callSuccess(iresult))
@@ -243,7 +244,7 @@ namespace X.Util.Core
         {
             var method = Logger.GetMethodInfo(func.Method, new object[] { t1, t2 }, address);
             if (needLogInfo) Logger.Info(method, eDomain, null, string.Format("{0}.{1} BeginInvoke.", func.Method.DeclaringType.FullName, func.Method.Name));
-            var iresult = CoreSecurity.TryAgain(func, t1, t2, Math.Max(1, againTimes));
+            var iresult = CoreSecurity<CommunicationException>.TryAgain(func, t1, t2, Math.Max(1, againTimes));
             releaseClient(func.Method, eDomain);
             if (callSuccess(iresult))
             {
@@ -261,7 +262,7 @@ namespace X.Util.Core
             try
             {
                 if (needLogInfo) Logger.Info(method, eDomain, null, string.Format("{0}.{1} BeginInvoke.", func.Method.DeclaringType.FullName, func.Method.Name));
-                var iresult = CoreSecurity.TryAgain(func, t1, t2, Math.Max(1, againTimes));
+                var iresult = CoreSecurity<CommunicationException>.TryAgain(func, t1, t2, Math.Max(1, againTimes));
                 result = iresult;
                 releaseClient(func.Method, eDomain);
                 if (callSuccess(iresult))
@@ -365,7 +366,7 @@ namespace X.Util.Core
         {
             var method = Logger.GetMethodInfo(func.Method, new object[] { t1, t2, t3 }, address);
             if (needLogInfo) Logger.Info(method, eDomain, null, string.Format("{0}.{1} BeginInvoke.", func.Method.DeclaringType.FullName, func.Method.Name));
-            var iresult = CoreSecurity.TryAgain(func, t1, t2, t3, Math.Max(1, againTimes));
+            var iresult = CoreSecurity<CommunicationException>.TryAgain(func, t1, t2, t3, Math.Max(1, againTimes));
             releaseClient(func.Method, eDomain);
             if (callSuccess(iresult))
             {
@@ -383,7 +384,7 @@ namespace X.Util.Core
             try
             {
                 if (needLogInfo) Logger.Info(method, eDomain, null, string.Format("{0}.{1} BeginInvoke.", func.Method.DeclaringType.FullName, func.Method.Name));
-                var iresult = CoreSecurity.TryAgain(func, t1, t2, t3, Math.Max(1, againTimes));
+                var iresult = CoreSecurity<CommunicationException>.TryAgain(func, t1, t2, t3, Math.Max(1, againTimes));
                 result = iresult;
                 releaseClient(func.Method, eDomain);
                 if (callSuccess(iresult))
@@ -480,7 +481,7 @@ namespace X.Util.Core
         {
             var method = Logger.GetMethodInfo(func.Method, new object[] { t1, t2, t3, t4 }, address);
             if (needLogInfo) Logger.Info(method, eDomain, null, string.Format("{0}.{1} BeginInvoke.", func.Method.DeclaringType.FullName, func.Method.Name));
-            var iresult = CoreSecurity.TryAgain(func, t1, t2, t3, t4, Math.Max(1, againTimes));
+            var iresult = CoreSecurity<CommunicationException>.TryAgain(func, t1, t2, t3, t4, Math.Max(1, againTimes));
             releaseClient(func.Method, eDomain);
             if (callSuccess(iresult))
             {
@@ -498,7 +499,7 @@ namespace X.Util.Core
             try
             {
                 if (needLogInfo) Logger.Info(method, eDomain, null, string.Format("{0}.{1} BeginInvoke.", func.Method.DeclaringType.FullName, func.Method.Name));
-                var iresult = CoreSecurity.TryAgain(func, t1, t2, t3, t4, Math.Max(1, againTimes));
+                var iresult = CoreSecurity<CommunicationException>.TryAgain(func, t1, t2, t3, t4, Math.Max(1, againTimes));
                 result = iresult;
                 releaseClient(func.Method, eDomain);
                 if (callSuccess(iresult))
@@ -595,7 +596,7 @@ namespace X.Util.Core
         {
             var method = Logger.GetMethodInfo(func.Method, new object[] { t1, t2, t3, t4, t5 }, address);
             if (needLogInfo) Logger.Info(method, eDomain, null, string.Format("{0}.{1} BeginInvoke.", func.Method.DeclaringType.FullName, func.Method.Name));
-            var iresult = CoreSecurity.TryAgain(func, t1, t2, t3, t4, t5, Math.Max(1, againTimes));
+            var iresult = CoreSecurity<CommunicationException>.TryAgain(func, t1, t2, t3, t4, t5, Math.Max(1, againTimes));
             releaseClient(func.Method, eDomain);
             if (callSuccess(iresult))
             {
@@ -613,7 +614,7 @@ namespace X.Util.Core
             try
             {
                 if (needLogInfo) Logger.Info(method, eDomain, null, string.Format("{0}.{1} BeginInvoke.", func.Method.DeclaringType.FullName, func.Method.Name));
-                var iresult = CoreSecurity.TryAgain(func, t1, t2, t3, t4, t5, Math.Max(1, againTimes));
+                var iresult = CoreSecurity<CommunicationException>.TryAgain(func, t1, t2, t3, t4, t5, Math.Max(1, againTimes));
                 result = iresult;
                 releaseClient(func.Method, eDomain);
                 if (callSuccess(iresult))
@@ -710,7 +711,7 @@ namespace X.Util.Core
         {
             var method = Logger.GetMethodInfo(func.Method, new object[] { t1, t2, t3, t4, t5, t6 }, address);
             if (needLogInfo) Logger.Info(method, eDomain, null, string.Format("{0}.{1} BeginInvoke.", func.Method.DeclaringType.FullName, func.Method.Name));
-            var iresult = CoreSecurity.TryAgain(func, t1, t2, t3, t4, t5, t6, Math.Max(1, againTimes));
+            var iresult = CoreSecurity<CommunicationException>.TryAgain(func, t1, t2, t3, t4, t5, t6, Math.Max(1, againTimes));
             releaseClient(func.Method, eDomain);
             if (callSuccess(iresult))
             {
@@ -728,7 +729,7 @@ namespace X.Util.Core
             try
             {
                 if (needLogInfo) Logger.Info(method, eDomain, null, string.Format("{0}.{1} BeginInvoke.", func.Method.DeclaringType.FullName, func.Method.Name));
-                var iresult = CoreSecurity.TryAgain(func, t1, t2, t3, t4, t5, t6, Math.Max(1, againTimes));
+                var iresult = CoreSecurity<CommunicationException>.TryAgain(func, t1, t2, t3, t4, t5, t6, Math.Max(1, againTimes));
                 result = iresult;
                 releaseClient(func.Method, eDomain);
                 if (callSuccess(iresult))
@@ -825,7 +826,7 @@ namespace X.Util.Core
         {
             var method = Logger.GetMethodInfo(func.Method, new object[] { t1, t2, t3, t4, t5, t6, t7 }, address);
             if (needLogInfo) Logger.Info(method, eDomain, null, string.Format("{0}.{1} BeginInvoke.", func.Method.DeclaringType.FullName, func.Method.Name));
-            var iresult = CoreSecurity.TryAgain(func, t1, t2, t3, t4, t5, t6, t7, Math.Max(1, againTimes));
+            var iresult = CoreSecurity<CommunicationException>.TryAgain(func, t1, t2, t3, t4, t5, t6, t7, Math.Max(1, againTimes));
             releaseClient(func.Method, eDomain);
             if (callSuccess(iresult))
             {
@@ -843,7 +844,7 @@ namespace X.Util.Core
             try
             {
                 if (needLogInfo) Logger.Info(method, eDomain, null, string.Format("{0}.{1} BeginInvoke.", func.Method.DeclaringType.FullName, func.Method.Name));
-                var iresult = CoreSecurity.TryAgain(func, t1, t2, t3, t4, t5, t6, t7, Math.Max(1, againTimes));
+                var iresult = CoreSecurity<CommunicationException>.TryAgain(func, t1, t2, t3, t4, t5, t6, t7, Math.Max(1, againTimes));
                 result = iresult;
                 releaseClient(func.Method, eDomain);
                 if (callSuccess(iresult))
@@ -940,7 +941,7 @@ namespace X.Util.Core
         {
             var method = Logger.GetMethodInfo(func.Method, new object[] { t1, t2, t3, t4, t5, t6, t7, t8 }, address);
             if (needLogInfo) Logger.Info(method, eDomain, null, string.Format("{0}.{1} BeginInvoke.", func.Method.DeclaringType.FullName, func.Method.Name));
-            var iresult = CoreSecurity.TryAgain(func, t1, t2, t3, t4, t5, t6, t7, t8, Math.Max(1, againTimes));
+            var iresult = CoreSecurity<CommunicationException>.TryAgain(func, t1, t2, t3, t4, t5, t6, t7, t8, Math.Max(1, againTimes));
             releaseClient(func.Method, eDomain);
             if (callSuccess(iresult))
             {
@@ -958,7 +959,7 @@ namespace X.Util.Core
             try
             {
                 if (needLogInfo) Logger.Info(method, eDomain, null, string.Format("{0}.{1} BeginInvoke.", func.Method.DeclaringType.FullName, func.Method.Name));
-                var iresult = CoreSecurity.TryAgain(func, t1, t2, t3, t4, t5, t6, t7, t8, Math.Max(1, againTimes));
+                var iresult = CoreSecurity<CommunicationException>.TryAgain(func, t1, t2, t3, t4, t5, t6, t7, t8, Math.Max(1, againTimes));
                 result = iresult;
                 releaseClient(func.Method, eDomain);
                 if (callSuccess(iresult))
@@ -1055,7 +1056,7 @@ namespace X.Util.Core
         {
             var method = Logger.GetMethodInfo(func.Method, new object[] { t1, t2, t3, t4, t5, t6, t7, t8, t9 }, address);
             if (needLogInfo) Logger.Info(method, eDomain, null, string.Format("{0}.{1} BeginInvoke.", func.Method.DeclaringType.FullName, func.Method.Name));
-            var iresult = CoreSecurity.TryAgain(func, t1, t2, t3, t4, t5, t6, t7, t8, t9, Math.Max(1, againTimes));
+            var iresult = CoreSecurity<CommunicationException>.TryAgain(func, t1, t2, t3, t4, t5, t6, t7, t8, t9, Math.Max(1, againTimes));
             releaseClient(func.Method, eDomain);
             if (callSuccess(iresult))
             {
@@ -1073,7 +1074,7 @@ namespace X.Util.Core
             try
             {
                 if (needLogInfo) Logger.Info(method, eDomain, null, string.Format("{0}.{1} BeginInvoke.", func.Method.DeclaringType.FullName, func.Method.Name));
-                var iresult = CoreSecurity.TryAgain(func, t1, t2, t3, t4, t5, t6, t7, t8, t9, Math.Max(1, againTimes));
+                var iresult = CoreSecurity<CommunicationException>.TryAgain(func, t1, t2, t3, t4, t5, t6, t7, t8, t9, Math.Max(1, againTimes));
                 result = iresult;
                 releaseClient(func.Method, eDomain);
                 if (callSuccess(iresult))
@@ -1170,7 +1171,7 @@ namespace X.Util.Core
         {
             var method = Logger.GetMethodInfo(func.Method, new object[] { t1, t2, t3, t4, t5, t6, t7, t8, t9, t10 }, address);
             if (needLogInfo) Logger.Info(method, eDomain, null, string.Format("{0}.{1} BeginInvoke.", func.Method.DeclaringType.FullName, func.Method.Name));
-            var iresult = CoreSecurity.TryAgain(func, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, Math.Max(1, againTimes));
+            var iresult = CoreSecurity<CommunicationException>.TryAgain(func, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, Math.Max(1, againTimes));
             releaseClient(func.Method, eDomain);
             if (callSuccess(iresult))
             {
@@ -1188,7 +1189,7 @@ namespace X.Util.Core
             try
             {
                 if (needLogInfo) Logger.Info(method, eDomain, null, string.Format("{0}.{1} BeginInvoke.", func.Method.DeclaringType.FullName, func.Method.Name));
-                var iresult = CoreSecurity.TryAgain(func, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, Math.Max(1, againTimes));
+                var iresult = CoreSecurity<CommunicationException>.TryAgain(func, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, Math.Max(1, againTimes));
                 result = iresult;
                 releaseClient(func.Method, eDomain);
                 if (callSuccess(iresult))
@@ -1285,7 +1286,7 @@ namespace X.Util.Core
         {
             var method = Logger.GetMethodInfo(func.Method, new object[] { t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11 }, address);
             if (needLogInfo) Logger.Info(method, eDomain, null, string.Format("{0}.{1} BeginInvoke.", func.Method.DeclaringType.FullName, func.Method.Name));
-            var iresult = CoreSecurity.TryAgain(func, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, Math.Max(1, againTimes));
+            var iresult = CoreSecurity<CommunicationException>.TryAgain(func, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, Math.Max(1, againTimes));
             releaseClient(func.Method, eDomain);
             if (callSuccess(iresult))
             {
@@ -1303,7 +1304,7 @@ namespace X.Util.Core
             try
             {
                 if (needLogInfo) Logger.Info(method, eDomain, null, string.Format("{0}.{1} BeginInvoke.", func.Method.DeclaringType.FullName, func.Method.Name));
-                var iresult = CoreSecurity.TryAgain(func, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, Math.Max(1, againTimes));
+                var iresult = CoreSecurity<CommunicationException>.TryAgain(func, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, Math.Max(1, againTimes));
                 result = iresult;
                 releaseClient(func.Method, eDomain);
                 if (callSuccess(iresult))
@@ -1400,7 +1401,7 @@ namespace X.Util.Core
         {
             var method = Logger.GetMethodInfo(func.Method, new object[] { t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12 }, address);
             if (needLogInfo) Logger.Info(method, eDomain, null, string.Format("{0}.{1} BeginInvoke.", func.Method.DeclaringType.FullName, func.Method.Name));
-            var iresult = CoreSecurity.TryAgain(func, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, Math.Max(1, againTimes));
+            var iresult = CoreSecurity<CommunicationException>.TryAgain(func, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, Math.Max(1, againTimes));
             releaseClient(func.Method, eDomain);
             if (callSuccess(iresult))
             {
@@ -1418,7 +1419,7 @@ namespace X.Util.Core
             try
             {
                 if (needLogInfo) Logger.Info(method, eDomain, null, string.Format("{0}.{1} BeginInvoke.", func.Method.DeclaringType.FullName, func.Method.Name));
-                var iresult = CoreSecurity.TryAgain(func, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, Math.Max(1, againTimes));
+                var iresult = CoreSecurity<CommunicationException>.TryAgain(func, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, Math.Max(1, againTimes));
                 result = iresult;
                 releaseClient(func.Method, eDomain);
                 if (callSuccess(iresult))
@@ -1515,7 +1516,7 @@ namespace X.Util.Core
         {
             var method = Logger.GetMethodInfo(func.Method, new object[] { t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13 }, address);
             if (needLogInfo) Logger.Info(method, eDomain, null, string.Format("{0}.{1} BeginInvoke.", func.Method.DeclaringType.FullName, func.Method.Name));
-            var iresult = CoreSecurity.TryAgain(func, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, Math.Max(1, againTimes));
+            var iresult = CoreSecurity<CommunicationException>.TryAgain(func, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, Math.Max(1, againTimes));
             releaseClient(func.Method, eDomain);
             if (callSuccess(iresult))
             {
@@ -1533,7 +1534,7 @@ namespace X.Util.Core
             try
             {
                 if (needLogInfo) Logger.Info(method, eDomain, null, string.Format("{0}.{1} BeginInvoke.", func.Method.DeclaringType.FullName, func.Method.Name));
-                var iresult = CoreSecurity.TryAgain(func, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, Math.Max(1, againTimes));
+                var iresult = CoreSecurity<CommunicationException>.TryAgain(func, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, Math.Max(1, againTimes));
                 result = iresult;
                 releaseClient(func.Method, eDomain);
                 if (callSuccess(iresult))
@@ -1630,7 +1631,7 @@ namespace X.Util.Core
         {
             var method = Logger.GetMethodInfo(func.Method, new object[] { t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14 }, address);
             if (needLogInfo) Logger.Info(method, eDomain, null, string.Format("{0}.{1} BeginInvoke.", func.Method.DeclaringType.FullName, func.Method.Name));
-            var iresult = CoreSecurity.TryAgain(func, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, Math.Max(1, againTimes));
+            var iresult = CoreSecurity<CommunicationException>.TryAgain(func, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, Math.Max(1, againTimes));
             releaseClient(func.Method, eDomain);
             if (callSuccess(iresult))
             {
@@ -1648,7 +1649,7 @@ namespace X.Util.Core
             try
             {
                 if (needLogInfo) Logger.Info(method, eDomain, null, string.Format("{0}.{1} BeginInvoke.", func.Method.DeclaringType.FullName, func.Method.Name));
-                var iresult = CoreSecurity.TryAgain(func, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, Math.Max(1, againTimes));
+                var iresult = CoreSecurity<CommunicationException>.TryAgain(func, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, Math.Max(1, againTimes));
                 result = iresult;
                 releaseClient(func.Method, eDomain);
                 if (callSuccess(iresult))
@@ -1745,7 +1746,7 @@ namespace X.Util.Core
         {
             var method = Logger.GetMethodInfo(func.Method, new object[] { t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15 }, address);
             if (needLogInfo) Logger.Info(method, eDomain, null, string.Format("{0}.{1} BeginInvoke.", func.Method.DeclaringType.FullName, func.Method.Name));
-            var iresult = CoreSecurity.TryAgain(func, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, Math.Max(1, againTimes));
+            var iresult = CoreSecurity<CommunicationException>.TryAgain(func, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, Math.Max(1, againTimes));
             releaseClient(func.Method, eDomain);
             if (callSuccess(iresult))
             {
@@ -1763,7 +1764,7 @@ namespace X.Util.Core
             try
             {
                 if (needLogInfo) Logger.Info(method, eDomain, null, string.Format("{0}.{1} BeginInvoke.", func.Method.DeclaringType.FullName, func.Method.Name));
-                var iresult = CoreSecurity.TryAgain(func, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, Math.Max(1, againTimes));
+                var iresult = CoreSecurity<CommunicationException>.TryAgain(func, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, Math.Max(1, againTimes));
                 result = iresult;
                 releaseClient(func.Method, eDomain);
                 if (callSuccess(iresult))
@@ -1860,7 +1861,7 @@ namespace X.Util.Core
         {
             var method = Logger.GetMethodInfo(func.Method, new object[] { t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16 }, address);
             if (needLogInfo) Logger.Info(method, eDomain, null, string.Format("{0}.{1} BeginInvoke.", func.Method.DeclaringType.FullName, func.Method.Name));
-            var iresult = CoreSecurity.TryAgain(func, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16, Math.Max(1, againTimes));
+            var iresult = CoreSecurity<CommunicationException>.TryAgain(func, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16, Math.Max(1, againTimes));
             releaseClient(func.Method, eDomain);
             if (callSuccess(iresult))
             {
@@ -1878,7 +1879,7 @@ namespace X.Util.Core
             try
             {
                 if (needLogInfo) Logger.Info(method, eDomain, null, string.Format("{0}.{1} BeginInvoke.", func.Method.DeclaringType.FullName, func.Method.Name));
-                var iresult = CoreSecurity.TryAgain(func, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16, Math.Max(1, againTimes));
+                var iresult = CoreSecurity<CommunicationException>.TryAgain(func, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16, Math.Max(1, againTimes));
                 result = iresult;
                 releaseClient(func.Method, eDomain);
                 if (callSuccess(iresult))
