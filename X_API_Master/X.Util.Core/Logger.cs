@@ -68,7 +68,7 @@ namespace X.Util.Core
             try
             {
                 var message = new StringBuilder();
-                message.Append("[" + ip + "]");
+                message.Append("[" + ip + "][" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff") + "]");
                 message.Append("\t\n");
                 if (methodInfo.ParamList != null && methodInfo.ParamList.Count > 0)
                 {
@@ -112,7 +112,7 @@ namespace X.Util.Core
         {
             var log = LoggerConfig.Instance.GetLogger(domain);
             var message = new StringBuilder();
-            message.Append("[" + ip + "]");
+            message.Append("[" + ip + "][" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff") + "]");
             message.Append("\t\n");
             if (!string.IsNullOrEmpty(address))
             {
