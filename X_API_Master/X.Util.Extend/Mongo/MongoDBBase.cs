@@ -37,7 +37,7 @@ namespace X.Util.Extend.Mongo
         public void CreateIndex(string database, string collection, IndexKeysDocument index)
         {
             var mc = new MongoDbProvider(database, collection, ServerName);
-            CoreAccess.TryCallAsync(EDomain, mc.Collection.CreateIndex, index, CallSuccess, mc.Dispose, null, false, ServerName);
+            CoreAccess<Exception>.TryCallAsync(EDomain, mc.Collection.CreateIndex, index, CallSuccess, mc.Dispose, null, false, ServerName);
         }
 
         /// <summary>
@@ -50,7 +50,7 @@ namespace X.Util.Extend.Mongo
         public void DropIndex(string database, string collection, IndexKeysDocument index)
         {
             var mc = new MongoDbProvider(database, collection, ServerName);
-            CoreAccess.TryCallAsync(EDomain, mc.Collection.DropIndex, index, CallSuccess, mc.Dispose, null, false, ServerName);
+            CoreAccess<Exception>.TryCallAsync(EDomain, mc.Collection.DropIndex, index, CallSuccess, mc.Dispose, null, false, ServerName);
         }
 
         /// <summary>
@@ -63,7 +63,7 @@ namespace X.Util.Extend.Mongo
         public bool IndexExists(string database, string collection, IndexKeysDocument index)
         {
             var mc = new MongoDbProvider(database, collection, ServerName);
-            return CoreAccess.TryCall(EDomain, mc.Collection.IndexExists, index, CoreBase.CallSuccess, mc.Dispose, 1, true, ServerName);
+            return CoreAccess<Exception>.TryCall(EDomain, mc.Collection.IndexExists, index, CoreBase.CallSuccess, mc.Dispose, 1, true, ServerName);
         }
 
         /// <summary>
@@ -75,7 +75,7 @@ namespace X.Util.Extend.Mongo
         public IndexKeysDocument GetAllIndexes(string database, string collection)
         {
             var mc = new MongoDbProvider(database, collection, ServerName);
-            return CoreAccess.TryCall(EDomain, mc.Collection.GetIndexes, iresult => iresult != null && iresult.Count > 0 && iresult.RawDocuments != null, mc.Dispose, 1, true, ServerName).ToBsonDocument() as IndexKeysDocument;
+            return CoreAccess<Exception>.TryCall(EDomain, mc.Collection.GetIndexes, iresult => iresult != null && iresult.Count > 0 && iresult.RawDocuments != null, mc.Dispose, 1, true, ServerName).ToBsonDocument() as IndexKeysDocument;
         }
         #endregion
 
@@ -88,7 +88,7 @@ namespace X.Util.Extend.Mongo
                 property.SetValue(t, Guid.NewGuid().ToString("N"), null);
             }
             var mc = new MongoDbProvider(database, collection, ServerName);
-            CoreAccess.TryCallAsync(EDomain, mc.Collection.Save, t, WriteConcern.Acknowledged, CallSuccess, mc.Dispose, null, false, ServerName);
+            CoreAccess<Exception>.TryCallAsync(EDomain, mc.Collection.Save, t, WriteConcern.Acknowledged, CallSuccess, mc.Dispose, null, false, ServerName);
         }
         /// <summary>
         /// 插入会失败（若有主键）
@@ -105,7 +105,7 @@ namespace X.Util.Extend.Mongo
                 property.SetValue(t, Guid.NewGuid().ToString("N"), null);
             }
             var mc = new MongoDbProvider(database, collection, ServerName);
-            CoreAccess.TryCallAsync(EDomain, mc.Collection.Insert, t, WriteConcern.Acknowledged, CallSuccess, mc.Dispose, null, false, ServerName);
+            CoreAccess<Exception>.TryCallAsync(EDomain, mc.Collection.Insert, t, WriteConcern.Acknowledged, CallSuccess, mc.Dispose, null, false, ServerName);
         }
 
         /// <summary>
@@ -124,7 +124,7 @@ namespace X.Util.Extend.Mongo
                 property.SetValue(t, Guid.NewGuid().ToString("N"), null);
             }
             var mc = new MongoDbProvider(database, collection, ServerName);
-            CoreAccess.TryCallAsync(EDomain, mc.Collection.InsertBatch, enumerable, WriteConcern.Acknowledged, CallSuccess, mc.Dispose, null, false, ServerName);
+            CoreAccess<Exception>.TryCallAsync(EDomain, mc.Collection.InsertBatch, enumerable, WriteConcern.Acknowledged, CallSuccess, mc.Dispose, null, false, ServerName);
         }
 
         public void SaveMongo<T>(Func<T> loader, string database, string collection) where T : MongoBaseModel
@@ -144,7 +144,7 @@ namespace X.Util.Extend.Mongo
         public void UpdateMongo(string database, string collection, QueryDocument query, UpdateDocument update, UpdateFlags flag = UpdateFlags.Multi)
         {
             var mc = new MongoDbProvider(database, collection, ServerName);
-            CoreAccess.TryCallAsync(EDomain, mc.Collection.Update, query, update, flag, WriteConcern.Acknowledged, CallSuccess, mc.Dispose, null, false, ServerName);
+            CoreAccess<Exception>.TryCallAsync(EDomain, mc.Collection.Update, query, update, flag, WriteConcern.Acknowledged, CallSuccess, mc.Dispose, null, false, ServerName);
         }
 
         /// <summary>
@@ -158,7 +158,7 @@ namespace X.Util.Extend.Mongo
         public void RemoveMongo(string database, string collection, QueryDocument query, RemoveFlags flag = RemoveFlags.None)
         {
             var mc = new MongoDbProvider(database, collection, ServerName);
-            CoreAccess.TryCallAsync(EDomain, mc.Collection.Remove, query, flag, WriteConcern.Acknowledged, CallSuccess, mc.Dispose, null, false, ServerName);
+            CoreAccess<Exception>.TryCallAsync(EDomain, mc.Collection.Remove, query, flag, WriteConcern.Acknowledged, CallSuccess, mc.Dispose, null, false, ServerName);
         }
 
         /// <summary>
@@ -170,7 +170,7 @@ namespace X.Util.Extend.Mongo
         public void RemoveAllMongo(string database, string collection)
         {
             var mc = new MongoDbProvider(database, collection, ServerName);
-            CoreAccess.TryCallAsync(EDomain, mc.Collection.RemoveAll, WriteConcern.Acknowledged, CallSuccess, mc.Dispose, null, false, ServerName);
+            CoreAccess<Exception>.TryCallAsync(EDomain, mc.Collection.RemoveAll, WriteConcern.Acknowledged, CallSuccess, mc.Dispose, null, false, ServerName);
         }
 
         /// <summary>
@@ -182,7 +182,7 @@ namespace X.Util.Extend.Mongo
         public void DropMongo(string database, string collection)
         {
             var mc = new MongoDbProvider(database, collection, ServerName);
-            CoreAccess.TryCallAsync(EDomain, mc.Collection.Drop, CallSuccess, mc.Dispose, null, false, ServerName);
+            CoreAccess<Exception>.TryCallAsync(EDomain, mc.Collection.Drop, CallSuccess, mc.Dispose, null, false, ServerName);
         }
         #endregion
 
@@ -219,7 +219,7 @@ namespace X.Util.Extend.Mongo
         public MongoCursor<BsonDocument> ReadMongo(string database, string collection, QueryDocument query, FieldsDocument field = null, SortByDocument sortBy = null, int limit = 0, int skip = 0)
         {
             var mc = new MongoDbProvider(database, collection, ServerName);
-            return CoreAccess.TryCall(EDomain, Find, mc, query, field, sortBy, limit, skip, iresult => iresult != null && iresult.Any(), mc.Dispose, 1, true, ServerName);
+            return CoreAccess<Exception>.TryCall(EDomain, Find, mc, query, field, sortBy, limit, skip, iresult => iresult != null && iresult.Any(), mc.Dispose, 1, true, ServerName);
         }
 
         /// <summary>
@@ -232,7 +232,7 @@ namespace X.Util.Extend.Mongo
         public BsonDocument FindOne(string database, string collection, IMongoQuery query)
         {
             var mc = new MongoDbProvider(database, collection, ServerName);
-            return CoreAccess.TryCall(EDomain, mc.Collection.FindOne, query, CoreBase.CallSuccess, mc.Dispose, 1, true, ServerName);
+            return CoreAccess<Exception>.TryCall(EDomain, mc.Collection.FindOne, query, CoreBase.CallSuccess, mc.Dispose, 1, true, ServerName);
         }
 
         /// <summary>
@@ -247,7 +247,7 @@ namespace X.Util.Extend.Mongo
         public long ReadMongoCount(string database, string collection, QueryDocument query, int limit = 0, int skip = 0)
         {
             var mc = new MongoDbProvider(database, collection, ServerName);
-            return CoreAccess.TryCall(EDomain, Count, mc, query, limit, skip, CoreBase.CallSuccess, mc.Dispose, 1, true, ServerName);
+            return CoreAccess<Exception>.TryCall(EDomain, Count, mc, query, limit, skip, CoreBase.CallSuccess, mc.Dispose, 1, true, ServerName);
         }
 
         /// <summary>
@@ -261,7 +261,7 @@ namespace X.Util.Extend.Mongo
         public IEnumerable<BsonValue> Distinct(string database, string collection, QueryDocument query, string field)
         {
             var mc = new MongoDbProvider(database, collection, ServerName);
-            return CoreAccess.TryCall(EDomain, mc.Collection.Distinct, field, query, CoreBase.CallSuccess, mc.Dispose, 1, true, ServerName);
+            return CoreAccess<Exception>.TryCall(EDomain, mc.Collection.Distinct, field, query, CoreBase.CallSuccess, mc.Dispose, 1, true, ServerName);
         }
         #endregion
 
