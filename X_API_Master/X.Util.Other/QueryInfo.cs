@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.IO;
+using System.Text.RegularExpressions;
 using System.Web;
 using X.Util.Core;
 
@@ -9,12 +10,23 @@ namespace X.Util.Other
 {
     public class QueryInfo
     {
+        public static string FilterXss(string html)
+        {
+            if (string.IsNullOrEmpty(html)) return string.Empty;
+            var regex = new Regex("javascript|vbscript|expression|applet|meta|xml|blink|link|style|script|embed|object|iframe|frame|frameset|ilayer|layer|bgsound|title|base|alert|onabort|onactivate|onafterprint|onafterupdate|onbeforeactivate|onbeforecopy|onbeforecut|onbeforedeactivate|onbeforeeditfocus|onbeforepaste|onbeforeprint|onbeforeunload|onbeforeupdate|onblur|onbounce|oncellchange|onchange|onclick|oncontextmenu|oncontrolselect|oncopy|oncut|ondataavailable|ondatasetchanged|ondatasetcomplete|ondblclick|ondeactivate|ondrag|ondragend|ondragenter|ondragleave|ondragover|ondragstart|ondrop|onerror|onerrorupdate|onfilterchange|onfinish|onfocus|onfocusin|onfocusout|onhelp|onkeydown|onkeypress|onkeyup|onlayoutcomplete|onload|onlosecapture|onmousedown|onmouseenter|onmouseleave|onmousemove|onmouseout|onmouseover|onmouseup|onmousewheel|onmove|onmoveend|onmovestart|onpaste|onpropertychange|onreadystatechange|onreset|onresize|onresizeend|onresizestart|onrowenter|onrowexit|onrowsdelete|onrowsinserted|onscroll|onselect|onselectionchange|onselectstart|onstart|onstop|onsubmit|onunload");
+            while (regex.IsMatch(html))
+            {
+                html = regex.Replace(html, p => string.Empty);
+            }
+            return html;
+        }
+
         #region GetQuery
         public static string GetQueryString(HttpContextWrapper httpContext, string strName, string defValue)
         {
             try
             {
-                var decode = HttpUtility.UrlDecode(httpContext.Request.QueryString[strName] ?? defValue);
+                var decode = FilterXss(HttpUtility.UrlDecode(httpContext.Request.QueryString[strName] ?? defValue));
                 return decode != null ? decode.Trim() : defValue;
             }
             catch
@@ -78,7 +90,7 @@ namespace X.Util.Other
             var collection = (NameValueCollection)httpContext.Items["paramsCollection"];
             if (collection != null) return collection[strName] ?? defValue;
             var reader = new StreamReader(httpContext.Request.InputStream);
-            var urlDecode = HttpUtility.UrlDecode(reader.ReadToEnd());
+            var urlDecode = FilterXss(HttpUtility.UrlDecode(reader.ReadToEnd()));
             if (Equals(urlDecode, null)) return string.Empty;
             var paramsInput = urlDecode.Trim();
             if (string.IsNullOrWhiteSpace(paramsInput)) return defValue;
