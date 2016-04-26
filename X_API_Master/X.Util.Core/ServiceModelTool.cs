@@ -13,7 +13,6 @@ using X.Util.Entities;
 
 namespace X.Util.Core
 {
-    [ServiceContractAttribute(ConfigurationName = "IDateService")]
     public class ServiceModelTool
     {
         private static readonly string AppConfigFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "App_Data\\app.xml");
@@ -34,11 +33,7 @@ namespace X.Util.Core
         public static Binding CreateBinding(string bindingName, ServiceModelSectionGroup group)
         {
             var bindingElementCollection = group.Bindings[bindingName];
-            if (bindingElementCollection.ConfiguredBindings.Count > 0)
-            {
-                return GetBinding(bindingElementCollection.ConfiguredBindings[0]);
-            }
-            return null;
+            return bindingElementCollection.ConfiguredBindings.Count > 0 ? GetBinding(bindingElementCollection.ConfiguredBindings[0]) : null;
         }
 
         private static Binding GetBinding<T>(IBindingConfigurationElement configurationElement) where T : Binding
