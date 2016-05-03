@@ -51,25 +51,25 @@ namespace X.Win.TaskService
                 switch (i)
                 {
                     case (int) EnumTaskLevel.Minute:
-                        CoreAccess<Exception>.TryCallAsync(LogDomain.Ui, provider.Client.MinuteInvoke, provider.Close, null);
+                        CoreAccess<TaskBusiness>.TryCallAsync(LogDomain.Ui, provider.Client.MinuteInvoke, provider, null);
                         break;
                     case (int) EnumTaskLevel.DoubleMinutes:
-                        CoreAccess<Exception>.TryCallAsync(LogDomain.Ui, provider.Client.DoubleMinuteInvoke, provider.Close, null);
+                        CoreAccess<TaskBusiness>.TryCallAsync(LogDomain.Ui, provider.Client.DoubleMinuteInvoke, provider, null);
                         break;
                     case (int) EnumTaskLevel.FiveMinutes:
-                        CoreAccess<Exception>.TryCallAsync(LogDomain.Ui, provider.Client.FiveMinuteInvoke, provider.Close, null);
+                        CoreAccess<TaskBusiness>.TryCallAsync(LogDomain.Ui, provider.Client.FiveMinuteInvoke, provider, null);
                         break;
                     case (int) EnumTaskLevel.FifteenMinutes:
-                        CoreAccess<Exception>.TryCallAsync(LogDomain.Ui, provider.Client.FifteenMinuteInvoke, provider.Close, null);
+                        CoreAccess<TaskBusiness>.TryCallAsync(LogDomain.Ui, provider.Client.FifteenMinuteInvoke, provider, null);
                         break;
                     case (int) EnumTaskLevel.HalfHour:
-                        CoreAccess<Exception>.TryCallAsync(LogDomain.Ui, provider.Client.HalfHourInvoke, provider.Close, null);
+                        CoreAccess<TaskBusiness>.TryCallAsync(LogDomain.Ui, provider.Client.HalfHourInvoke, provider, null);
                         break;
                     case (int) EnumTaskLevel.Hour:
-                        CoreAccess<Exception>.TryCallAsync(LogDomain.Ui, provider.Client.HourInvoke, provider.Close, null);
+                        CoreAccess<TaskBusiness>.TryCallAsync(LogDomain.Ui, provider.Client.HourInvoke, provider, null);
                         break;
                     case (int) EnumTaskLevel.HalfDay:
-                        CoreAccess<Exception>.TryCallAsync(LogDomain.Ui, provider.Client.HalfDayInvoke, provider.Close, null);
+                        CoreAccess<TaskBusiness>.TryCallAsync(LogDomain.Ui, provider.Client.HalfDayInvoke, provider, null);
                         break;
                 }
                 Thread.Sleep(1000 * 60 * i);

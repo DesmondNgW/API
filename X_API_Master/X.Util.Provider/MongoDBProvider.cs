@@ -8,37 +8,38 @@ using X.Util.Core;
 
 namespace X.Util.Provider
 {
-    public sealed class MongoDbProvider
+    public sealed class MongoDbProvider : IProvider<MongoCollection<BsonDocument>>
     {
         #region 构造函数
-        private const string Servername = ConfigurationHelper.MongoDefaultServername;
+        private static string _servername = ConfigurationHelper.MongoDefaultServername;
         private const string Database = "admin";
         private const string CollectionName = "Test";
         private MongoServer MongoSever { get; set; }
-        public MongoCollection<BsonDocument> Collection { get; set; }
+        private MongoCollection<BsonDocument> Collection { get; set; }
         public MongoDbProvider()
         {
-            MongoSever = Init(Servername);
+            MongoSever = Init(_servername);
             var db = MongoSever.GetDatabase(Database);
             Collection = db.GetCollection(CollectionName);
             _sw.Start();
         }
         public MongoDbProvider(string collection)
         {
-            MongoSever = Init(Servername);
+            MongoSever = Init(_servername);
             var db = MongoSever.GetDatabase(Database);
             Collection = db.GetCollection(collection);
             _sw.Start();
         }
         public MongoDbProvider(string database, string collection)
         {
-            MongoSever = Init(Servername);
+            MongoSever = Init(_servername);
             var db = MongoSever.GetDatabase(database);
             Collection = db.GetCollection(collection);
             _sw.Start();
         }
         public MongoDbProvider(string database, string collection, string serverName)
         {
+            _servername = serverName;
             MongoSever = Init(serverName);
             var db = MongoSever.GetDatabase(database);
             Collection = db.GetCollection(collection);
@@ -82,15 +83,28 @@ namespace X.Util.Provider
             }
             return mongoServer;
         }
+        #endregion
+
+        #region 对外公开属性和方法
+        public string EndpointAddress
+        {
+            get { return _servername; }
+        }
+
+        public MongoCollection<BsonDocument> Client
+        {
+            get { return Collection; }
+        }
+
         /// <summary>
         /// 关闭连接
         /// </summary>
-        public void Dispose(MethodBase method, LogDomain eDomain)
+        public void Close(MethodBase method, LogDomain eDomain)
         {
             _sw.Stop();
             Core<MongoServer>.Close(method, _sw.ElapsedMilliseconds, eDomain);
             _sw.Reset();
-        }
+        } 
         #endregion
     }
 }
