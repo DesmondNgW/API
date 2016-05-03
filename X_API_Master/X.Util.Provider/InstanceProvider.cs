@@ -5,7 +5,7 @@ using X.Util.Core;
 
 namespace X.Util.Provider
 {
-    public sealed class InstanceProvider<T>
+    public sealed class InstanceProvider<T> : IProvider<T>
     {
         #region 构造函数
         public readonly Type Type = typeof(T);
@@ -23,10 +23,14 @@ namespace X.Util.Provider
         #endregion
 
         #region 对外公开属性和方法
+        public string EndpointAddress
+        {
+            get { return Type.FullName; }
+        }
         /// <summary>
         /// Provider提供的实例
         /// </summary>
-        public T Instance
+        public T Client
         {
             get
             {

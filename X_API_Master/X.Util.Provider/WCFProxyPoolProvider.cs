@@ -13,7 +13,7 @@ namespace X.Util.Provider
     /// WCF ClientPool Provider
     /// </summary>
     /// <typeparam name="TChannel"></typeparam>
-    public sealed class WcfProxyPoolProvider<TChannel>
+    public sealed class WcfProxyPoolProvider<TChannel> : IWcfProvider<TChannel>
     {
         #region 构造函数
         public readonly LogDomain EDomain = LogDomain.Core;
@@ -40,7 +40,7 @@ namespace X.Util.Provider
         /// </summary>
         private string CacheKey
         {
-            get { return ServiceUri + "_" + Size; }
+            get { return EndpointAddress + "_" + Size; }
         }
 
         /// <summary>
@@ -56,7 +56,7 @@ namespace X.Util.Provider
         /// </summary>
         private CoreChannel<TChannel> CoreChannelFactory
         {
-            get { return Core<CoreChannel<TChannel>>.Instance(() => new CoreChannel<TChannel>(ServiceModel), ServiceUri, Core<CoreChannel<TChannel>>.IsValid4CommunicationObject); }
+            get { return Core<CoreChannel<TChannel>>.Instance(() => new CoreChannel<TChannel>(ServiceModel), EndpointAddress, Core<CoreChannel<TChannel>>.IsValid4CommunicationObject); }
         }
         /// <summary>
         /// 初始化ChannelFactory连接池
@@ -64,7 +64,7 @@ namespace X.Util.Provider
         /// <returns></returns>
         private CoreChannelFactoryPool<TChannel> InitCoreFactoryPool()
         {
-            var result = new CoreChannelFactoryPool<TChannel> { ServiceUri = ServiceUri, Size = Size, ContextQueue = new ConcurrentQueue<ContextChannel<TChannel>>() };
+            var result = new CoreChannelFactoryPool<TChannel> { ServiceUri = EndpointAddress, Size = Size, ContextQueue = new ConcurrentQueue<ContextChannel<TChannel>>() };
             try
             {
                 for (var i = 0; i < ServiceModel.MaxPoolSize; i++)
@@ -155,7 +155,7 @@ namespace X.Util.Provider
         /// <summary>
         /// 调用WCF的EndpointAddress
         /// </summary>
-        public string ServiceUri
+        public string EndpointAddress
         {
             get { return ServiceModel.EndpointAddress; }
         }
@@ -163,7 +163,7 @@ namespace X.Util.Provider
         /// <summary>
         /// Provider提供的Channel实例
         /// </summary>
-        public TChannel Instance
+        public TChannel Client
         {
             get
             {
@@ -179,13 +179,23 @@ namespace X.Util.Provider
         /// <summary>
         /// 关闭Channel实例（不回收）
         /// </summary>
-        public void Dispose(MethodBase method, LogDomain eDomain)
+        public void Close(MethodBase method, LogDomain eDomain)
         {
             if (_scope != null) _scope.Dispose();
             _sw.Stop();
-            Core<TChannel>.Close(method, _sw.ElapsedMilliseconds, eDomain, ServiceUri);
+            Core<TChannel>.Close(method, _sw.ElapsedMilliseconds, eDomain, EndpointAddress);
             _sw.Reset();
             ReleaseClient(_instance);
+        }
+
+        /// <summary>
+        /// 回收
+        /// </summary>
+        /// <param name="eDomain"></param>
+        public void Dispose(LogDomain eDomain)
+        {
+            if (_scope != null) _scope.Dispose();
+            Core<TChannel>.Dispose(_instance, eDomain);
         }
         #endregion
     }

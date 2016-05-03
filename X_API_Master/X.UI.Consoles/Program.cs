@@ -7,11 +7,40 @@ using X.Util.Entities;
 
 namespace X.UI.Consoles
 {
+    public class Run
+    {
+        public static Run Client
+        {
+            get
+            {
+                Console.WriteLine("Run");
+                return new Run();
+            }
+        }
+
+        public void Test()
+        {
+            Console.WriteLine("Test");
+        }
+    }
+
+
     class Program
     {
+        static void tRun(Action action)
+        {
+            int i = 3;
+            while ((i--) > 0)
+            {
+                action();
+            }
+        }
+
         static void Main()
         {
-            Index();
+            //Index();
+            tRun(Run.Client.Test);
+            Console.ReadKey();
         }
 
         static void Index()

@@ -12,7 +12,7 @@ namespace X.Util.Provider
     /// WCF client Provider
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public sealed class WcfProvider<T>
+    public sealed class WcfProvider<T> : IWcfProvider<T>
     {
         #region 构造函数
         public readonly CoreServiceModel ServiceModel = ServiceModelTool.GetServiceModel<T>();
@@ -84,7 +84,7 @@ namespace X.Util.Provider
         /// <summary>
         /// Provider提供的Channel实例
         /// </summary>
-        public T Instance
+        public T Client
         {
             get
             {
@@ -99,12 +99,22 @@ namespace X.Util.Provider
         /// <summary>
         /// 关闭Channel连接
         /// </summary>
-        public void Dispose(MethodBase method, LogDomain eDomain)
+        public void Close(MethodBase method, LogDomain eDomain)
         {
             if (_scope != null) _scope.Dispose();
             _sw.Stop();
             Core<T>.Close(method, _sw.ElapsedMilliseconds, eDomain, EndpointAddress);
             _sw.Reset();
+        }
+
+        /// <summary>
+        /// 回收
+        /// </summary>
+        /// <param name="eDomain"></param>
+        public void Dispose(LogDomain eDomain)
+        {
+            if (_scope != null) _scope.Dispose();
+            Core<T>.Dispose(_instance, eDomain);
         }
         #endregion
     }

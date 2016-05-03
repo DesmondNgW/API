@@ -5,7 +5,7 @@ using System.Reflection;
 
 namespace X.Util.Provider
 {
-    public sealed class RedisProvider
+    public sealed class RedisProvider : IProvider<IRedisClient>
     {
         #region 构造函数
         public readonly string ServerName = ConfigurationHelper.RedisDefaultServername;
@@ -29,6 +29,10 @@ namespace X.Util.Provider
         #endregion
 
         #region 对外公开属性和方法
+        public string EndpointAddress
+        {
+            get { return ServerName; }
+        }
         /// <summary>
         /// Provider提供的RedisClient实例
         /// </summary>

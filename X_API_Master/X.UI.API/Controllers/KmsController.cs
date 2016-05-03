@@ -25,7 +25,7 @@ namespace X.UI.API.Controllers
         public ApiResult<PublicKeyDto> GetPublicKey(int size)
         {
             var provider = new InstanceProvider<IKeyManager>(typeof(KeyManagerService));
-            return CoreAccess<Exception>.Call(ControllerHelper.EDomain, provider.Instance.GetPublicKey, size, ControllerHelper.CallSuccess, provider.Close);
+            return CoreAccess<Exception>.Call(ControllerHelper.EDomain, provider.Client.GetPublicKey, size, ControllerHelper.CallSuccess, provider.Close);
         }
 
         /// <summary>
@@ -36,7 +36,7 @@ namespace X.UI.API.Controllers
         public ApiResult<string> GetToken()
         {
             var provider = new InstanceProvider<IKeyManager>(typeof(KeyManagerService));
-            return CoreAccess<Exception>.Call(ControllerHelper.EDomain, provider.Instance.GetToken, ControllerHelper.CallSuccess, provider.Close);
+            return CoreAccess<Exception>.Call(ControllerHelper.EDomain, provider.Client.GetToken, ControllerHelper.CallSuccess, provider.Close);
         }
 
         [HttpGet]

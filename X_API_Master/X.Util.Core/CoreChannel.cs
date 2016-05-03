@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reflection;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
 using System.ServiceModel.Configuration;
@@ -7,6 +8,34 @@ using X.Util.Entities;
 
 namespace X.Util.Core
 {
+    public interface IProvider<out T>
+    {
+        /// <summary>
+        /// 实例
+        /// </summary>
+        T Client { get; }
+
+        /// <summary>
+        /// 关闭实例
+        /// </summary>
+        /// <param name="method"></param>
+        /// <param name="eDomain"></param>
+        void Close(MethodBase method, LogDomain eDomain);
+
+        /// <summary>
+        /// 远程uri地址
+        /// </summary>
+        string EndpointAddress { get; }
+    }
+
+    public interface IWcfProvider<out T> : IProvider<T>
+    {
+        /// <summary>
+        /// 回收实例
+        /// </summary>
+        void Dispose(LogDomain eDomain);
+    }
+
     public class CoreChannel<T> : ChannelFactory<T>
     {
         public CoreServiceModel ServiceModel;

@@ -5,7 +5,7 @@ using X.Util.Core;
 
 namespace X.Util.Provider
 {
-    public sealed class CouchBaseProvider
+    public sealed class CouchBaseProvider : IProvider<CouchbaseClient>
     {
         #region 构造函数
         public readonly string ServerName = ConfigurationHelper.CouchDefaultServername;
@@ -31,10 +31,14 @@ namespace X.Util.Provider
         #endregion
 
         #region 对外公开属性和方法
+        public string EndpointAddress
+        {
+            get { return ServerName; }
+        }
         /// <summary>
         /// Provider提供的CouchbaseClient实例
         /// </summary>
-        public CouchbaseClient Instance
+        public CouchbaseClient Client
         {
             get
             {
