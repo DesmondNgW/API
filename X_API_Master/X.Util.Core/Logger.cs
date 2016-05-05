@@ -14,10 +14,7 @@ namespace X.Util.Core
         private static readonly Action<string, MethodBase, LogDomain, LogType, object, string, string[]> MAction = Log;
 
         private Logger() { }
-        public static ILogger Client
-        {
-            get { return new Logger(); }
-        }
+        public static ILogger Client = new Logger();
 
         /// <summary>
         /// GetMethodInfo
