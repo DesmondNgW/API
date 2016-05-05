@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using X.Util.Core;
 using X.Util.Entities;
+using X.Util.Entities.Interface;
 using X.Util.Extend.Core;
 using X.Util.Provider;
 
@@ -13,11 +14,11 @@ namespace X.Util.Extend.Mongo
     /// <summary>
     /// 读写mongoDB
     /// </summary>
-    public sealed class MongoDbBase
+    public sealed class MongoDbBase : IMongoDbBase
     {
         #region 构造函数
         public string ServerName = ConfigurationHelper.MongoDefaultServername;
-        public static MongoDbBase Default = new MongoDbBase();
+        public static IMongoDbBase Default = new MongoDbBase();
         private const LogDomain EDomain = LogDomain.ThirdParty;
         private MongoDbBase() { }
         public MongoDbBase(string serverName)
