@@ -1,6 +1,8 @@
 ﻿using System;
 using ServiceStack.Redis;
 using X.Util.Core;
+using X.Util.Entities;
+using X.Util.Entities.Interface;
 using X.Util.Extend.Core;
 using X.Util.Provider;
 
@@ -9,11 +11,11 @@ namespace X.Util.Extend.Cache
     /// <summary>
     /// 缓存基础类
     /// </summary>
-    public sealed class RedisCache
+    public sealed class RedisCache : IRedisCache
     {
         #region 构造函数
         public readonly string ServerName = ConfigurationHelper.RedisDefaultServername;
-        public static readonly RedisCache Default = new RedisCache();
+        public static readonly IRedisCache Default = new RedisCache();
         public const LogDomain EDomain = LogDomain.ThirdParty;
         public RedisCache() { }
         public RedisCache(string serverName)

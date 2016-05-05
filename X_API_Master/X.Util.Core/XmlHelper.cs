@@ -5,6 +5,7 @@ using System.Reflection;
 using System.Web.Caching;
 using System.Xml;
 using System.Xml.Serialization;
+using X.Util.Entities;
 
 namespace X.Util.Core
 {
@@ -22,7 +23,7 @@ namespace X.Util.Core
             }
             catch (Exception ex)
             {
-                Logger.Error(MethodBase.GetCurrentMethod(), LogDomain.Util, null, string.Empty, "Xml error:" + ex);
+                Logger.Client.Error(MethodBase.GetCurrentMethod(), LogDomain.Util, null, string.Empty, "Xml error:" + ex);
             }
             return doc;
         }
@@ -55,7 +56,7 @@ namespace X.Util.Core
                 }
                 catch (Exception ex)
                 {
-                    Logger.Error(MethodBase.GetCurrentMethod(), LogDomain.Util, null, string.Empty, "WriteXml error:" + ex);
+                    Logger.Client.Error(MethodBase.GetCurrentMethod(), LogDomain.Util, null, string.Empty, "WriteXml error:" + ex);
                 }
             });
         }

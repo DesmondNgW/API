@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Reflection;
 using X.Util.Core;
+using X.Util.Entities;
+using X.Util.Entities.Interface;
 
 namespace X.Util.Provider
 {
@@ -79,7 +81,7 @@ namespace X.Util.Provider
             }
             catch (Exception ex)
             {
-                Logger.Error(MethodBase.GetCurrentMethod(), LogDomain.Util, null, string.Empty, ex.ToString());
+                Logger.Client.Error(MethodBase.GetCurrentMethod(), LogDomain.Util, null, string.Empty, ex.ToString());
             }
             return mongoServer;
         }
@@ -99,7 +101,7 @@ namespace X.Util.Provider
         /// <summary>
         /// 关闭连接
         /// </summary>
-        public void Close(MethodBase method, LogDomain eDomain)
+        public void LogElapsed(MethodBase method, LogDomain eDomain)
         {
             _sw.Stop();
             Core<MongoServer>.Close(method, _sw.ElapsedMilliseconds, eDomain);

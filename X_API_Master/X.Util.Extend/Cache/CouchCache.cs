@@ -2,6 +2,8 @@
 using System;
 using Couchbase;
 using X.Util.Core;
+using X.Util.Entities;
+using X.Util.Entities.Interface;
 using X.Util.Extend.Core;
 using X.Util.Provider;
 
@@ -10,12 +12,12 @@ namespace X.Util.Extend.Cache
     /// <summary>
     /// 缓存基础类
     /// </summary>
-    public sealed class CouchCache
+    public sealed class CouchCache : ICouchCache
     {
         #region 构造函数
         public readonly string ServerName = ConfigurationHelper.CouchDefaultServername;
         public CouchCache() { }
-        public static readonly CouchCache Default = new CouchCache();
+        public static readonly ICouchCache Default = new CouchCache();
         public const LogDomain EDomain = LogDomain.ThirdParty;
 
         public CouchCache(string serverName)
@@ -33,7 +35,7 @@ namespace X.Util.Extend.Cache
         public object Get(string key)
         {
             var couchBaseProvider = new CouchBaseProvider(ServerName);
-            return CoreAccess<CouchbaseClient>.TryCall(EDomain, couchBaseProvider.Client.Get, key, CoreBase.CallSuccess, couchBaseProvider);
+            return CoreAccess<ICouchbaseClient>.TryCall(EDomain, couchBaseProvider.Client.Get, key, CoreBase.CallSuccess, couchBaseProvider);
         }
 
         public string GetJson(string key)
@@ -44,7 +46,7 @@ namespace X.Util.Extend.Cache
         public object Get(string key, DateTime dt)
         {
             var couchBaseProvider = new CouchBaseProvider(ServerName);
-            return CoreAccess<CouchbaseClient>.TryCall(EDomain, couchBaseProvider.Client.Get, key, dt, CoreBase.CallSuccess, couchBaseProvider);
+            return CoreAccess<ICouchbaseClient>.TryCall(EDomain, couchBaseProvider.Client.Get, key, dt, CoreBase.CallSuccess, couchBaseProvider);
         }
 
         public string GetJson(string key, DateTime dt)
@@ -55,7 +57,7 @@ namespace X.Util.Extend.Cache
         public T Get<T>(string key)
         {
             var couchBaseProvider = new CouchBaseProvider(ServerName);
-            return CoreAccess<CouchbaseClient>.TryCall(EDomain, couchBaseProvider.Client.Get<T>, key, CoreBase.CallSuccess, couchBaseProvider);
+            return CoreAccess<ICouchbaseClient>.TryCall(EDomain, couchBaseProvider.Client.Get<T>, key, CoreBase.CallSuccess, couchBaseProvider);
         }
 
         public T GetJson<T>(string key)
@@ -67,7 +69,7 @@ namespace X.Util.Extend.Cache
         public T Get<T>(string key, DateTime dt)
         {
             var couchBaseProvider = new CouchBaseProvider(ServerName);
-            return CoreAccess<CouchbaseClient>.TryCall(EDomain, couchBaseProvider.Client.Get<T>, key, dt, CoreBase.CallSuccess, couchBaseProvider);
+            return CoreAccess<ICouchbaseClient>.TryCall(EDomain, couchBaseProvider.Client.Get<T>, key, dt, CoreBase.CallSuccess, couchBaseProvider);
         }
 
         public T GetJson<T>(string key, DateTime dt)
@@ -103,43 +105,43 @@ namespace X.Util.Extend.Cache
         public void Set(string key, object obj)
         {
             var couchBaseProvider = new CouchBaseProvider(ServerName);
-            CoreAccess<CouchbaseClient>.TryCallAsync(EDomain, couchBaseProvider.Client.Cas, StoreMode.Set, key, obj, (ulong)0, CallSuccess, couchBaseProvider, null, false);
+            CoreAccess<ICouchbaseClient>.TryCallAsync(EDomain, couchBaseProvider.Client.Cas, StoreMode.Set, key, obj, (ulong)0, CallSuccess, couchBaseProvider, null, false);
         }
 
         public void SetJson(string key, object obj)
         {
             var couchBaseProvider = new CouchBaseProvider(ServerName);
-            CoreAccess<CouchbaseClient>.TryCallAsync(EDomain, couchBaseProvider.Client.Cas, StoreMode.Set, key, obj.ToJson(), (ulong)0, CallSuccess, couchBaseProvider, null, false);
+            CoreAccess<ICouchbaseClient>.TryCallAsync(EDomain, couchBaseProvider.Client.Cas, StoreMode.Set, key, obj.ToJson(), (ulong)0, CallSuccess, couchBaseProvider, null, false);
         }
 
         public void Set(string key, object obj, DateTime dt)
         {
             var couchBaseProvider = new CouchBaseProvider(ServerName);
-            CoreAccess<CouchbaseClient>.TryCallAsync(EDomain, couchBaseProvider.Client.Cas, StoreMode.Set, key, obj, dt, (ulong)0, CallSuccess, couchBaseProvider, null, false);
+            CoreAccess<ICouchbaseClient>.TryCallAsync(EDomain, couchBaseProvider.Client.Cas, StoreMode.Set, key, obj, dt, (ulong)0, CallSuccess, couchBaseProvider, null, false);
         }
 
         public void SetJson(string key, object obj, DateTime dt)
         {
             var couchBaseProvider = new CouchBaseProvider(ServerName);
-            CoreAccess<CouchbaseClient>.TryCallAsync(EDomain, couchBaseProvider.Client.Cas, StoreMode.Set, key, obj.ToJson(), dt, (ulong)0, CallSuccess, couchBaseProvider, null, false);
+            CoreAccess<ICouchbaseClient>.TryCallAsync(EDomain, couchBaseProvider.Client.Cas, StoreMode.Set, key, obj.ToJson(), dt, (ulong)0, CallSuccess, couchBaseProvider, null, false);
         }
 
         public void Set(string key, object obj, TimeSpan ts)
         {
             var couchBaseProvider = new CouchBaseProvider(ServerName);
-            CoreAccess<CouchbaseClient>.TryCallAsync(EDomain, couchBaseProvider.Client.Cas, StoreMode.Set, key, obj, ts, (ulong)0, CallSuccess, couchBaseProvider, null, false);
+            CoreAccess<ICouchbaseClient>.TryCallAsync(EDomain, couchBaseProvider.Client.Cas, StoreMode.Set, key, obj, ts, (ulong)0, CallSuccess, couchBaseProvider, null, false);
         }
 
         public void SetJson(string key, object obj, TimeSpan ts)
         {
             var couchBaseProvider = new CouchBaseProvider(ServerName);
-            CoreAccess<CouchbaseClient>.TryCallAsync(EDomain, couchBaseProvider.Client.Cas, StoreMode.Set, key, obj.ToJson(), ts, (ulong)0, CallSuccess, couchBaseProvider, null, false);
+            CoreAccess<ICouchbaseClient>.TryCallAsync(EDomain, couchBaseProvider.Client.Cas, StoreMode.Set, key, obj.ToJson(), ts, (ulong)0, CallSuccess, couchBaseProvider, null, false);
         }
 
         public void Remove(string key)
         {
             var couchBaseProvider = new CouchBaseProvider(ServerName);
-            CoreAccess<CouchbaseClient>.TryCallAsync(EDomain, couchBaseProvider.Client.Remove, key, CoreBase.CallSuccess, couchBaseProvider, null, false);
+            CoreAccess<ICouchbaseClient>.TryCallAsync(EDomain, couchBaseProvider.Client.Remove, key, CoreBase.CallSuccess, couchBaseProvider, null, false);
         }
         #endregion
     }

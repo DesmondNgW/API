@@ -3,6 +3,7 @@ using System.IO;
 using System.Reflection;
 using System.Text;
 using X.Util.Core;
+using X.Util.Entities;
 
 namespace X.Util.Other
 {
@@ -23,7 +24,7 @@ namespace X.Util.Other
             }
             catch (Exception ex)
             {
-                Logger.Error(MethodBase.GetCurrentMethod(), LogDomain.Util, null, string.Empty, "Directory error:" + ex);
+                Logger.Client.Error(MethodBase.GetCurrentMethod(), LogDomain.Util, null, string.Empty, "Directory error:" + ex);
             }
             var fm = FileBaseMode.Append.Equals(mode) ? FileMode.OpenOrCreate : FileMode.Create;
             FileStream fs = null;
@@ -43,7 +44,7 @@ namespace X.Util.Other
                 }
                 catch (Exception ex)
                 {
-                    Logger.Error(MethodBase.GetCurrentMethod(), LogDomain.Util, null, string.Empty, "save err：" + ex);
+                    Logger.Client.Error(MethodBase.GetCurrentMethod(), LogDomain.Util, null, string.Empty, "save err：" + ex);
                 }
                 finally
                 {
@@ -77,7 +78,7 @@ namespace X.Util.Other
             }
             catch (Exception ex)
             {
-                Logger.Error(MethodBase.GetCurrentMethod(), LogDomain.Util, null, string.Empty, "Directory error:" + ex);
+                Logger.Client.Error(MethodBase.GetCurrentMethod(), LogDomain.Util, null, string.Empty, "Directory error:" + ex);
             }
             return state;
         }

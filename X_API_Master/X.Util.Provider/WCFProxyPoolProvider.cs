@@ -6,6 +6,7 @@ using System.ServiceModel;
 using System.ServiceModel.Channels;
 using X.Util.Core;
 using X.Util.Entities;
+using X.Util.Entities.Interface;
 
 namespace X.Util.Provider
 {
@@ -76,7 +77,7 @@ namespace X.Util.Provider
             }
             catch (Exception ex)
             {
-                Logger.Error(MethodBase.GetCurrentMethod(), LogDomain.Util, null, string.Empty, ex.ToString());
+                Logger.Client.Error(MethodBase.GetCurrentMethod(), LogDomain.Util, null, string.Empty, ex.ToString());
             }
             return result;
         }
@@ -124,7 +125,7 @@ namespace X.Util.Provider
             }
             catch (Exception ex)
             {
-                Logger.Error(MethodBase.GetCurrentMethod(), LogDomain.Util, null, string.Empty, ex.ToString());
+                Logger.Client.Error(MethodBase.GetCurrentMethod(), LogDomain.Util, null, string.Empty, ex.ToString());
             }
             return channel;
         }
@@ -146,7 +147,7 @@ namespace X.Util.Provider
             }
             catch (Exception ex)
             {
-                Logger.Error(MethodBase.GetCurrentMethod(), LogDomain.Util, null, string.Empty, ex.ToString());
+                Logger.Client.Error(MethodBase.GetCurrentMethod(), LogDomain.Util, null, string.Empty, ex.ToString());
             }
         }
         #endregion
@@ -179,7 +180,7 @@ namespace X.Util.Provider
         /// <summary>
         /// 关闭Channel实例（不回收）
         /// </summary>
-        public void Close(MethodBase method, LogDomain eDomain)
+        public void LogElapsed(MethodBase method, LogDomain eDomain)
         {
             if (_scope != null) _scope.Dispose();
             _sw.Stop();

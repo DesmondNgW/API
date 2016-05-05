@@ -4,55 +4,32 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using X.Util.Entities;
+using X.Util.Entities.Interface;
 
 namespace X.Util.Core
 {
-    public enum LogDomain
-    {
-        Util,
-        ThirdParty,
-        Core,
-        CoreExtend,
-        Cache,
-        Business,
-        Interface,
-        Db,
-        Ui
-    }
-    /// <summary>
-    /// 日志监控模块
-    /// </summary>
-    public enum LogMonitorDomain
-    {
-        Trade,
-        User,
-        Query,
-        Pay,
-        Test,
-        Other
-    }
-    public enum LogType
-    {
-        Error,
-        Info,
-        Debug
-    }
-    public sealed class Logger
+    public sealed class Logger : ILogger
     {
         private static readonly Action<string, CoreMethodInfo, LogDomain, LogType, object, string[]> NAction = Log;
         private static readonly Action<string, MethodBase, LogDomain, LogType, object, string, string[]> MAction = Log;
 
+        private Logger() { }
+        public static ILogger Client
+        {
+            get { return new Logger(); }
+        }
+
         /// <summary>
         /// GetMethodInfo
         /// </summary>
-        public static CoreMethodInfo GetMethodInfo(MethodBase declaringType, object[] values, string address)
+        public CoreMethodInfo GetMethodInfo(MethodBase declaringType, object[] values, string address)
         {
             return new CoreMethodInfo { ClassName = declaringType.DeclaringType, MethodName = declaringType.Name, DeclaringType = declaringType, ParamList = GetParamList(declaringType, values), Address = address };
         }
         /// <summary>
         /// GetMethodParamList
         /// </summary>
-        private static Dictionary<string, object> GetParamList(MethodBase declaringType, IList<object> values)
+        private Dictionary<string, object> GetParamList(MethodBase declaringType, IList<object> values)
         {
             var arguments = declaringType.GetParameters().OrderBy(p => p.Position).ToList();
             if (arguments.Count.Equals(0) || arguments.Count != values.Count) return null;
@@ -104,7 +81,7 @@ namespace X.Util.Core
             }
             catch (Exception ex)
             {
-                Error(MethodBase.GetCurrentMethod(), domain, logtype, null, string.Empty, ex.ToString());
+                Client.Error(MethodBase.GetCurrentMethod(), domain, logtype, null, string.Empty, ex.ToString());
             }
         }
 
@@ -141,32 +118,32 @@ namespace X.Util.Core
             }
         }
 
-        public static void Info(CoreMethodInfo methodInfo, LogDomain domain, object returnValue, params string[] messages)
+        public void Info(CoreMethodInfo methodInfo, LogDomain domain, object returnValue, params string[] messages)
         {
             NAction.BeginInvoke(CoreUtil.GetIp(), methodInfo, domain, LogType.Info, returnValue, messages, null, null);
         }
 
-        public static void Debug(CoreMethodInfo methodInfo, LogDomain domain, object returnValue, params string[] messages)
+        public void Debug(CoreMethodInfo methodInfo, LogDomain domain, object returnValue, params string[] messages)
         {
             NAction.BeginInvoke(CoreUtil.GetIp(), methodInfo, domain, LogType.Debug, returnValue, messages, null, null);
         }
 
-        public static void Error(CoreMethodInfo methodInfo, LogDomain domain, object returnValue, params string[] messages)
+        public void Error(CoreMethodInfo methodInfo, LogDomain domain, object returnValue, params string[] messages)
         {
             NAction.BeginInvoke(CoreUtil.GetIp(), methodInfo, domain, LogType.Error, returnValue, messages, null, null);
         }
 
-        public static void Debug(MethodBase declaringType, LogDomain domain, object returnValue, string address, params string[] messages)
+        public void Debug(MethodBase declaringType, LogDomain domain, object returnValue, string address, params string[] messages)
         {
             MAction.BeginInvoke(CoreUtil.GetIp(), declaringType, domain, LogType.Debug, returnValue, address, messages, null, null);
         }
 
-        public static void Error(MethodBase declaringType, LogDomain domain, object returnValue, string address, params string[] messages)
+        public void Error(MethodBase declaringType, LogDomain domain, object returnValue, string address, params string[] messages)
         {
             MAction.BeginInvoke(CoreUtil.GetIp(), declaringType, domain, LogType.Error, returnValue, address, messages, null, null);
         }
 
-        public static void Info(MethodBase declaringType, LogDomain domain, object returnValue, string address, params string[] messages)
+        public void Info(MethodBase declaringType, LogDomain domain, object returnValue, string address, params string[] messages)
         {
             MAction.BeginInvoke(CoreUtil.GetIp(), declaringType, domain, LogType.Info, returnValue, address, messages, null, null);
         }

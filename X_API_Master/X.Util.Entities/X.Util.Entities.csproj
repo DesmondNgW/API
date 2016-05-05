@@ -44,7 +44,13 @@
   <ItemGroup>
     <Compile Include="CacheKey.cs" />
     <Compile Include="CacheResult.cs" />
+    <Compile Include="EnumInfo.cs" />
     <Compile Include="Event.cs" />
+    <Compile Include="Interface\ICacheData.cs" />
+    <Compile Include="Interface\ICouchCache.cs" />
+    <Compile Include="Interface\ILogger.cs" />
+    <Compile Include="Interface\IProvider.cs" />
+    <Compile Include="Interface\IRedisCache.cs" />
     <Compile Include="StatusCacheResult.cs" />
     <Compile Include="HttpCacheResult.cs" />
     <Compile Include="MongoBaseModel.cs" />
@@ -59,6 +65,7 @@
     <Compile Include="WCfProxyConfig.cs" />
     <Compile Include="XmlServiceModel.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

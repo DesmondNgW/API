@@ -5,6 +5,7 @@ using System.Data.SqlClient;
 using System.Reflection;
 using System.Text;
 using X.Util.Core;
+using X.Util.Entities;
 
 namespace X.DataBase.Helper
 {
@@ -139,7 +140,7 @@ namespace X.DataBase.Helper
             catch (Exception e)
             {
                 conn.Close();
-                Logger.Error(MethodBase.GetCurrentMethod(), LogDomain.Db, null, string.Empty, e.ToString());
+                Logger.Client.Error(MethodBase.GetCurrentMethod(), LogDomain.Db, null, string.Empty, e.ToString());
                 throw;
             }
         }

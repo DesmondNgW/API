@@ -7,6 +7,7 @@ using log4net.Layout;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using X.Util.Entities;
 
 namespace X.Util.Core
 {

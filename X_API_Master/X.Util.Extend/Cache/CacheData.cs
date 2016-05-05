@@ -5,18 +5,19 @@ using System.Runtime.Remoting.Messaging;
 using System.Web.Caching;
 using X.Util.Core;
 using X.Util.Entities;
+using X.Util.Entities.Interface;
 
 namespace X.Util.Extend.Cache
 {
-    public class CacheData
+    public class CacheData : ICacheData
     {
         #region 构造函数
-        private readonly CouchCache _couch = CouchCache.Default;
-        private readonly RedisCache _redis = RedisCache.Default;
+        private readonly ICouchCache _couch = CouchCache.Default;
+        private readonly IRedisCache _redis = RedisCache.Default;
         private const string Prefix = "X.Util.Extend.Cache.CacheData";
         private static readonly string Path = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "App_Data\\CacheDependency.xml");//缓存依赖文件--用于删除本地缓存
         public CacheData() { }
-        public static readonly CacheData Default = new CacheData();
+        public static readonly ICacheData Default = new CacheData();
         public CacheData(string couchName, string redisName)
         {
             _couch = new CouchCache(couchName);
@@ -39,7 +40,7 @@ namespace X.Util.Extend.Cache
         {
             var value = CallContext.GetData(key);
             var level = value == null ? 0 : value.GetHashCode();
-            Logger.Debug(method, domain, null, string.Empty, string.Format("{0}.{1} GetCacheData hit {2}, cache key is {3}.", method.DeclaringType.FullName, method.Name, dictionary.ContainsKey(level) ? dictionary[level] : "level-" + level, key));
+            Logger.Client.Debug(method, domain, null, string.Empty, string.Format("{0}.{1} GetCacheData hit {2}, cache key is {3}.", method.DeclaringType.FullName, method.Name, dictionary.ContainsKey(level) ? dictionary[level] : "level-" + level, key));
         }
 
         public static CacheResult<T> GetRuntimeCacheData<T>(string key, string version, DateTime dt, Func<CacheResult<T>> loader)

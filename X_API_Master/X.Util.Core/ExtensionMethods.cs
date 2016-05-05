@@ -30,7 +30,7 @@ namespace X.Util.Core
             }
             catch (Exception e)
             {
-                Logger.Error(MethodBase.GetCurrentMethod(), LogDomain.Util, null, string.Empty, e.ToString());
+                Logger.Client.Error(MethodBase.GetCurrentMethod(), LogDomain.Util, null, string.Empty, e.ToString());
             }
             return default(T);
         }
@@ -44,7 +44,7 @@ namespace X.Util.Core
             }
             catch (Exception e)
             {
-                Logger.Error(MethodBase.GetCurrentMethod(), LogDomain.Util, null, string.Empty, e.ToString());
+                Logger.Client.Error(MethodBase.GetCurrentMethod(), LogDomain.Util, null, string.Empty, e.ToString());
             }
             return null;
         }

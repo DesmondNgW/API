@@ -2,6 +2,8 @@
 using ServiceStack.Redis;
 using X.Util.Core;
 using System.Reflection;
+using X.Util.Entities;
+using X.Util.Entities.Interface;
 
 namespace X.Util.Provider
 {
@@ -58,7 +60,7 @@ namespace X.Util.Provider
         /// <summary>
         /// 关闭连接
         /// </summary>
-        public void Close(MethodBase method, LogDomain eDomain)
+        public void LogElapsed(MethodBase method, LogDomain eDomain)
         {
             _sw.Stop();
             Core<RedisClient>.Close(method, _sw.ElapsedMilliseconds, eDomain);

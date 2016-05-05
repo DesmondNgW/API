@@ -4,6 +4,7 @@ using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 using X.Util.Core;
+using X.Util.Entities;
 
 namespace X.UI.API
 {
@@ -24,7 +25,7 @@ namespace X.UI.API
         protected void Application_Error(object sender, EventArgs e)
 		{
 			Exception ex = Server.GetLastError();
-            Logger.Error(System.Reflection.MethodBase.GetCurrentMethod(), LogDomain.Ui, null, string.Empty, ex.ToString());
+            Logger.Client.Error(System.Reflection.MethodBase.GetCurrentMethod(), LogDomain.Ui, null, string.Empty, ex.ToString());
 			throw ex;
 		}
 	}

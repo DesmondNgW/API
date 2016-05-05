@@ -7,6 +7,7 @@ using System.Reflection;
 using System.ServiceModel.Configuration;
 using System.Xml;
 using X.Util.Core;
+using X.Util.Entities;
 
 namespace X.WFConfig
 {
@@ -36,7 +37,7 @@ namespace X.WFConfig
             }
             catch (Exception ex)
             {
-                Logger.Error(MethodBase.GetCurrentMethod(), LogDomain.Util, null, string.Empty, "Directory error:" + ex);
+                Logger.Client.Error(MethodBase.GetCurrentMethod(), LogDomain.Util, null, string.Empty, "Directory error:" + ex);
             }
         }
 
@@ -57,7 +58,7 @@ namespace X.WFConfig
             }
             catch (Exception ex)
             {
-                Logger.Error(MethodBase.GetCurrentMethod(), LogDomain.Util, null, string.Empty, "Directory error:" + ex);
+                Logger.Client.Error(MethodBase.GetCurrentMethod(), LogDomain.Util, null, string.Empty, "Directory error:" + ex);
             }
         }
 

@@ -98,7 +98,7 @@ namespace X.Util.Core
         #region Debug模式，记录方法调用时间
         public static void Close(MethodBase method, long elapsedMilliseconds, LogDomain edomain, string address = null)
         {
-            if (method.DeclaringType != null) Logger.Debug(method, edomain, null, address, string.Format(@"{0}.{1} finished, used {2} ms.", method.DeclaringType.FullName, method.Name, elapsedMilliseconds));
+            if (method.DeclaringType != null) Logger.Client.Debug(method, edomain, null, address, string.Format(@"{0}.{1} finished, used {2} ms.", method.DeclaringType.FullName, method.Name, elapsedMilliseconds));
         }
 
         public static void Dispose(T channel, LogDomain edomain)
@@ -111,7 +111,7 @@ namespace X.Util.Core
             }
             catch (Exception ex)
             {
-                Logger.Error(MethodBase.GetCurrentMethod(), edomain, null, string.Empty, ex.ToString());
+                Logger.Client.Error(MethodBase.GetCurrentMethod(), edomain, null, string.Empty, ex.ToString());
                 communicate.Abort();
             }
         }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading;
 using X.Util.Core;
+using X.Util.Entities;
 using X.Util.Provider;
 
 namespace X.Win.TaskService

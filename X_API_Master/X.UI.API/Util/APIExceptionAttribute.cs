@@ -4,6 +4,7 @@ using System.Net.Http.Formatting;
 using System.Web.Http.Filters;
 using X.Interface.Dto;
 using X.Util.Core;
+using X.Util.Entities;
 
 namespace X.UI.API.Util
 {
@@ -26,7 +27,7 @@ namespace X.UI.API.Util
             else
             {
                 string errorInfo = string.Format("请求URI: {0} 发生异常, 异常信息: {1}.", actionExecutedContext.Request.RequestUri, actionExecutedContext.Exception);
-                Logger.Error(System.Reflection.MethodBase.GetCurrentMethod(), LogDomain.Ui, null, string.Empty, errorInfo);
+                Logger.Client.Error(System.Reflection.MethodBase.GetCurrentMethod(), LogDomain.Ui, null, string.Empty, errorInfo);
             }
             var newContent = new ApiResult<string>
             {

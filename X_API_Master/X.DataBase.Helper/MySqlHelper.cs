@@ -5,6 +5,7 @@ using System.Text;
 using MySql.Data.MySqlClient;
 using X.Util.Core;
 using System.Reflection;
+using X.Util.Entities;
 
 namespace X.DataBase.Helper
 {
@@ -131,7 +132,7 @@ namespace X.DataBase.Helper
             catch (Exception e)
             {
                 conn.Close();
-                Logger.Error(MethodBase.GetCurrentMethod(), LogDomain.Db, null, string.Empty, e.ToString());
+                Logger.Client.Error(MethodBase.GetCurrentMethod(), LogDomain.Db, null, string.Empty, e.ToString());
                 throw;
             }
         }

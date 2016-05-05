@@ -93,7 +93,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServiceModelTool.cs" />
     <Compile Include="StringConvert.cs" />
-    <Compile Include="CoreSecurity.cs" />
     <Compile Include="XmlHelper.cs" />
   </ItemGroup>
   <ItemGroup>

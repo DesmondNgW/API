@@ -2,10 +2,12 @@
 using System.Diagnostics;
 using System.Reflection;
 using X.Util.Core;
+using X.Util.Entities;
+using X.Util.Entities.Interface;
 
 namespace X.Util.Provider
 {
-    public sealed class CouchBaseProvider : IProvider<CouchbaseClient>
+    public sealed class CouchBaseProvider : IProvider<ICouchbaseClient>
     {
         #region 构造函数
         public readonly string ServerName = ConfigurationHelper.CouchDefaultServername;
@@ -38,7 +40,7 @@ namespace X.Util.Provider
         /// <summary>
         /// Provider提供的CouchbaseClient实例
         /// </summary>
-        public CouchbaseClient Client
+        public ICouchbaseClient Client
         {
             get
             {
@@ -50,7 +52,7 @@ namespace X.Util.Provider
         /// <summary>
         /// 关闭连接
         /// </summary>
-        public void Close(MethodBase method, LogDomain eDomain)
+        public void LogElapsed(MethodBase method, LogDomain eDomain)
         {
             _sw.Stop();
             Core<CouchbaseClient>.Close(method, _sw.ElapsedMilliseconds, eDomain);
