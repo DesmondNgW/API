@@ -2,6 +2,9 @@
 
 namespace X.Util.Entities.Interface
 {
+    /// <summary>
+    /// Redis Cache Interface
+    /// </summary>
     public interface IRedisCache
     {
         T Get<T>(string key);

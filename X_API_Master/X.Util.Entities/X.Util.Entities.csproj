@@ -47,6 +47,7 @@
     <Compile Include="EnumInfo.cs" />
     <Compile Include="Event.cs" />
     <Compile Include="Interface\ICacheData.cs" />
+    <Compile Include="Interface\ICoreCache.cs" />
     <Compile Include="Interface\ICouchCache.cs" />
     <Compile Include="Interface\ILogger.cs" />
     <Compile Include="Interface\IProvider.cs" />

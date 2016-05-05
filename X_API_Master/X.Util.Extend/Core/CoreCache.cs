@@ -6,36 +6,23 @@ using X.Util.Entities;
 using X.Util.Extend.Cache;
 using System.Linq;
 using System.Web;
+using X.Util.Entities.Interface;
 using X.Util.Extend.Cryption;
 
 namespace X.Util.Extend.Core
 {
-    /// <summary>
-    /// 缓存类型
-    /// </summary>
-    public enum EnumCacheType
+    public class CoreCache : ICoreCache
     {
-        None,
-        Runtime,
-        MemCache,
-        Redis,
-        RedisBoth,
-        MemBoth
-    }
-    /// <summary>
-    /// 缓存过期时间级别
-    /// </summary>
-    public enum EnumCacheTimeLevel
-    {
-        Second,
-        Minute,
-        Hour,
-        Day,
-        Month,
-        Year
-    }
-    public class CoreCache
-    {
+        #region 构造函数
+        public static ICoreCache Default = new CoreCache();
+        public readonly ICacheData CacheData = Cache.CacheData.Default;
+        private CoreCache() { }
+        public CoreCache(string couchName, string redisName)
+        {
+            CacheData = new CacheData(couchName, redisName);
+        }
+        #endregion
+
         #region 内部实现
         private static void AddContextCacheKeys(string key)
         {
@@ -53,7 +40,7 @@ namespace X.Util.Extend.Core
             return method.GetParameters().OrderBy(p => p.Position).Aggregate(cacheKeyPrefix, (current, p) => current + ("_" + p.Name));
         }
 
-        public static string GetCacheKeyName(ICollection<object> paramsList)
+        private static string GetCacheKeyName(ICollection<object> paramsList)
         {
             var cacheKeyName = string.Empty;
             if (paramsList != null && paramsList.Count > 0)
@@ -63,7 +50,7 @@ namespace X.Util.Extend.Core
             return cacheKeyName;
         }
 
-        public static string FormatCacheKey(string key)
+        private static string FormatCacheKey(string key)
         {
             key = key.ReplaceRegex("\\s", string.Empty);
             if (key.Length >= 250) key = BaseCryption.Sha512(key);
@@ -111,7 +98,7 @@ namespace X.Util.Extend.Core
         /// <param name="method"></param>
         /// <param name="paramsList"></param>
         /// <param name="cacheType"></param>
-        public static void ClearCache(MethodBase method, ICollection<object> paramsList, EnumCacheType cacheType)
+        public void ClearCache(MethodBase method, ICollection<object> paramsList, EnumCacheType cacheType)
         {
             var key = GetCacheKeyPrefix(method) + GetCacheKeyName(paramsList) + "_" + AppConfig.CacheKeyVersion;
             key = FormatCacheKey(key);
@@ -138,142 +125,142 @@ namespace X.Util.Extend.Core
         }
 
         #region Action
-        public static void ClearCache(Action method, ICollection<object> paramsList, EnumCacheType cacheType)
+        public void ClearCache(Action method, ICollection<object> paramsList, EnumCacheType cacheType)
         {
             ClearCache(method.Method, paramsList, cacheType);
         }
-        public static void ClearCache<T>(Action<T> method, ICollection<object> paramsList, EnumCacheType cacheType)
+        public void ClearCache<T>(Action<T> method, ICollection<object> paramsList, EnumCacheType cacheType)
         {
             ClearCache(method.Method, paramsList, cacheType);
         }
-        public static void ClearCache<T1, T2>(Action<T1, T2> method, ICollection<object> paramsList, EnumCacheType cacheType)
+        public void ClearCache<T1, T2>(Action<T1, T2> method, ICollection<object> paramsList, EnumCacheType cacheType)
         {
             ClearCache(method.Method, paramsList, cacheType);
         }
-        public static void ClearCache<T1, T2, T3>(Action<T1, T2, T3> method, ICollection<object> paramsList, EnumCacheType cacheType)
+        public void ClearCache<T1, T2, T3>(Action<T1, T2, T3> method, ICollection<object> paramsList, EnumCacheType cacheType)
         {
             ClearCache(method.Method, paramsList, cacheType);
         }
-        public static void ClearCache<T1, T2, T3, T4>(Action<T1, T2, T3, T4> method, ICollection<object> paramsList, EnumCacheType cacheType)
+        public void ClearCache<T1, T2, T3, T4>(Action<T1, T2, T3, T4> method, ICollection<object> paramsList, EnumCacheType cacheType)
         {
             ClearCache(method.Method, paramsList, cacheType);
         }
-        public static void ClearCache<T1, T2, T3, T4, T5>(Action<T1, T2, T3, T4, T5> method, ICollection<object> paramsList, EnumCacheType cacheType)
+        public void ClearCache<T1, T2, T3, T4, T5>(Action<T1, T2, T3, T4, T5> method, ICollection<object> paramsList, EnumCacheType cacheType)
         {
             ClearCache(method.Method, paramsList, cacheType);
         }
-        public static void ClearCache<T1, T2, T3, T4, T5, T6>(Action<T1, T2, T3, T4, T5, T6> method, ICollection<object> paramsList, EnumCacheType cacheType)
+        public void ClearCache<T1, T2, T3, T4, T5, T6>(Action<T1, T2, T3, T4, T5, T6> method, ICollection<object> paramsList, EnumCacheType cacheType)
         {
             ClearCache(method.Method, paramsList, cacheType);
         }
-        public static void ClearCache<T1, T2, T3, T4, T5, T6, T7>(Action<T1, T2, T3, T4, T5, T6, T7> method, ICollection<object> paramsList, EnumCacheType cacheType)
+        public void ClearCache<T1, T2, T3, T4, T5, T6, T7>(Action<T1, T2, T3, T4, T5, T6, T7> method, ICollection<object> paramsList, EnumCacheType cacheType)
         {
             ClearCache(method.Method, paramsList, cacheType);
         }
-        public static void ClearCache<T1, T2, T3, T4, T5, T6, T7, T8>(Action<T1, T2, T3, T4, T5, T6, T7, T8> method, ICollection<object> paramsList, EnumCacheType cacheType)
+        public void ClearCache<T1, T2, T3, T4, T5, T6, T7, T8>(Action<T1, T2, T3, T4, T5, T6, T7, T8> method, ICollection<object> paramsList, EnumCacheType cacheType)
         {
             ClearCache(method.Method, paramsList, cacheType);
         }
-        public static void ClearCache<T1, T2, T3, T4, T5, T6, T7, T8, T9>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9> method, ICollection<object> paramsList, EnumCacheType cacheType)
+        public void ClearCache<T1, T2, T3, T4, T5, T6, T7, T8, T9>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9> method, ICollection<object> paramsList, EnumCacheType cacheType)
         {
             ClearCache(method.Method, paramsList, cacheType);
         }
-        public static void ClearCache<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> method, ICollection<object> paramsList, EnumCacheType cacheType)
+        public void ClearCache<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> method, ICollection<object> paramsList, EnumCacheType cacheType)
         {
             ClearCache(method.Method, paramsList, cacheType);
         }
-        public static void ClearCache<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> method, ICollection<object> paramsList, EnumCacheType cacheType)
+        public void ClearCache<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> method, ICollection<object> paramsList, EnumCacheType cacheType)
         {
             ClearCache(method.Method, paramsList, cacheType);
         }
-        public static void ClearCache<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> method, ICollection<object> paramsList, EnumCacheType cacheType)
+        public void ClearCache<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> method, ICollection<object> paramsList, EnumCacheType cacheType)
         {
             ClearCache(method.Method, paramsList, cacheType);
         }
-        public static void ClearCache<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> method, ICollection<object> paramsList, EnumCacheType cacheType)
+        public void ClearCache<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> method, ICollection<object> paramsList, EnumCacheType cacheType)
         {
             ClearCache(method.Method, paramsList, cacheType);
         }
-        public static void ClearCache<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> method, ICollection<object> paramsList, EnumCacheType cacheType)
+        public void ClearCache<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> method, ICollection<object> paramsList, EnumCacheType cacheType)
         {
             ClearCache(method.Method, paramsList, cacheType);
         }
-        public static void ClearCache<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> method, ICollection<object> paramsList, EnumCacheType cacheType)
+        public void ClearCache<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> method, ICollection<object> paramsList, EnumCacheType cacheType)
         {
             ClearCache(method.Method, paramsList, cacheType);
         }
-        public static void ClearCache<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> method, ICollection<object> paramsList, EnumCacheType cacheType)
+        public void ClearCache<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> method, ICollection<object> paramsList, EnumCacheType cacheType)
         {
             ClearCache(method.Method, paramsList, cacheType);
         } 
         #endregion
 
         #region Function
-        public static void ClearCache<T>(Func<T> method, ICollection<object> paramsList, EnumCacheType cacheType)
+        public void ClearCache<T>(Func<T> method, ICollection<object> paramsList, EnumCacheType cacheType)
         {
             ClearCache(method.Method, paramsList, cacheType);
         }
-        public static void ClearCache<T1, T2>(Func<T1, T2> method, ICollection<object> paramsList, EnumCacheType cacheType)
+        public void ClearCache<T1, T2>(Func<T1, T2> method, ICollection<object> paramsList, EnumCacheType cacheType)
         {
             ClearCache(method.Method, paramsList, cacheType);
         }
-        public static void ClearCache<T1, T2, T3>(Func<T1, T2, T3> method, ICollection<object> paramsList, EnumCacheType cacheType)
+        public void ClearCache<T1, T2, T3>(Func<T1, T2, T3> method, ICollection<object> paramsList, EnumCacheType cacheType)
         {
             ClearCache(method.Method, paramsList, cacheType);
         }
-        public static void ClearCache<T1, T2, T3, T4>(Func<T1, T2, T3, T4> method, ICollection<object> paramsList, EnumCacheType cacheType)
+        public void ClearCache<T1, T2, T3, T4>(Func<T1, T2, T3, T4> method, ICollection<object> paramsList, EnumCacheType cacheType)
         {
             ClearCache(method.Method, paramsList, cacheType);
         }
-        public static void ClearCache<T1, T2, T3, T4, T5>(Func<T1, T2, T3, T4, T5> method, ICollection<object> paramsList, EnumCacheType cacheType)
+        public void ClearCache<T1, T2, T3, T4, T5>(Func<T1, T2, T3, T4, T5> method, ICollection<object> paramsList, EnumCacheType cacheType)
         {
             ClearCache(method.Method, paramsList, cacheType);
         }
-        public static void ClearCache<T1, T2, T3, T4, T5, T6>(Func<T1, T2, T3, T4, T5, T6> method, ICollection<object> paramsList, EnumCacheType cacheType)
+        public void ClearCache<T1, T2, T3, T4, T5, T6>(Func<T1, T2, T3, T4, T5, T6> method, ICollection<object> paramsList, EnumCacheType cacheType)
         {
             ClearCache(method.Method, paramsList, cacheType);
         }
-        public static void ClearCache<T1, T2, T3, T4, T5, T6, T7>(Func<T1, T2, T3, T4, T5, T6, T7> method, ICollection<object> paramsList, EnumCacheType cacheType)
+        public void ClearCache<T1, T2, T3, T4, T5, T6, T7>(Func<T1, T2, T3, T4, T5, T6, T7> method, ICollection<object> paramsList, EnumCacheType cacheType)
         {
             ClearCache(method.Method, paramsList, cacheType);
         }
-        public static void ClearCache<T1, T2, T3, T4, T5, T6, T7, T8>(Func<T1, T2, T3, T4, T5, T6, T7, T8> method, ICollection<object> paramsList, EnumCacheType cacheType)
+        public void ClearCache<T1, T2, T3, T4, T5, T6, T7, T8>(Func<T1, T2, T3, T4, T5, T6, T7, T8> method, ICollection<object> paramsList, EnumCacheType cacheType)
         {
             ClearCache(method.Method, paramsList, cacheType);
         }
-        public static void ClearCache<T1, T2, T3, T4, T5, T6, T7, T8, T9>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9> method, ICollection<object> paramsList, EnumCacheType cacheType)
+        public void ClearCache<T1, T2, T3, T4, T5, T6, T7, T8, T9>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9> method, ICollection<object> paramsList, EnumCacheType cacheType)
         {
             ClearCache(method.Method, paramsList, cacheType);
         }
-        public static void ClearCache<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> method, ICollection<object> paramsList, EnumCacheType cacheType)
+        public void ClearCache<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> method, ICollection<object> paramsList, EnumCacheType cacheType)
         {
             ClearCache(method.Method, paramsList, cacheType);
         }
-        public static void ClearCache<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> method, ICollection<object> paramsList, EnumCacheType cacheType)
+        public void ClearCache<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> method, ICollection<object> paramsList, EnumCacheType cacheType)
         {
             ClearCache(method.Method, paramsList, cacheType);
         }
-        public static void ClearCache<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> method, ICollection<object> paramsList, EnumCacheType cacheType)
+        public void ClearCache<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> method, ICollection<object> paramsList, EnumCacheType cacheType)
         {
             ClearCache(method.Method, paramsList, cacheType);
         }
-        public static void ClearCache<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> method, ICollection<object> paramsList, EnumCacheType cacheType)
+        public void ClearCache<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> method, ICollection<object> paramsList, EnumCacheType cacheType)
         {
             ClearCache(method.Method, paramsList, cacheType);
         }
-        public static void ClearCache<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> method, ICollection<object> paramsList, EnumCacheType cacheType)
+        public void ClearCache<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> method, ICollection<object> paramsList, EnumCacheType cacheType)
         {
             ClearCache(method.Method, paramsList, cacheType);
         }
-        public static void ClearCache<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> method, ICollection<object> paramsList, EnumCacheType cacheType)
+        public void ClearCache<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> method, ICollection<object> paramsList, EnumCacheType cacheType)
         {
             ClearCache(method.Method, paramsList, cacheType);
         }
-        public static void ClearCache<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> method, ICollection<object> paramsList, EnumCacheType cacheType)
+        public void ClearCache<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> method, ICollection<object> paramsList, EnumCacheType cacheType)
         {
             ClearCache(method.Method, paramsList, cacheType);
         }
-        public static void ClearCache<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17> method, ICollection<object> paramsList, EnumCacheType cacheType)
+        public void ClearCache<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17> method, ICollection<object> paramsList, EnumCacheType cacheType)
         {
             ClearCache(method.Method, paramsList, cacheType);
         }
@@ -293,7 +280,7 @@ namespace X.Util.Extend.Core
         /// <param name="cacheTimeLevel">缓存过期时间级别</param>
         /// <param name="cacheTimeExpire">缓存过期时间</param>
         /// <returns></returns>
-        public static CacheResult<T> GetAbsoluteCacheData<T>(Func<CacheResult<T>> loader, MethodBase method, ICollection<object> paramsList, string cacheAppVersion, bool debugWithoutCache, bool addContext, EnumCacheType cacheType, EnumCacheTimeLevel cacheTimeLevel, int cacheTimeExpire)
+        public CacheResult<T> GetAbsoluteCacheData<T>(Func<CacheResult<T>> loader, MethodBase method, ICollection<object> paramsList, string cacheAppVersion, bool debugWithoutCache, bool addContext, EnumCacheType cacheType, EnumCacheTimeLevel cacheTimeLevel, int cacheTimeExpire)
         {
             var result = default(CacheResult<T>);
             var cacheKey = GetCacheKey(method, paramsList, cacheAppVersion, addContext);
@@ -303,24 +290,24 @@ namespace X.Util.Extend.Core
             switch (cacheType)
             {
                 case EnumCacheType.Runtime:
-                    result = CacheData.GetRuntimeCacheData(cacheKey.FullCacheKeyName, cacheKey.CacheAppVersion, expire, loader);
-                    CacheData.LogHitLevel(cacheKey.FullCacheKeyName, new Dictionary<int, string> { { 0, "RuntimeCache" }, { 1, "InterfaceData" } }, method, LogDomain.Cache);
+                    result = Cache.CacheData.GetRuntimeCacheData(cacheKey.FullCacheKeyName, cacheKey.CacheAppVersion, expire, loader);
+                    Cache.CacheData.LogHitLevel(cacheKey.FullCacheKeyName, new Dictionary<int, string> { { 0, "RuntimeCache" }, { 1, "InterfaceData" } }, method, LogDomain.Cache);
                     break;
                 case EnumCacheType.MemCache:
-                    result = CacheData.Default.GetCouchCacheData(cacheKey.FullCacheKeyName, cacheKey.CacheAppVersion, expire, loader);
-                    CacheData.LogHitLevel(cacheKey.FullCacheKeyName, new Dictionary<int, string> { { 0, "MemCache" }, { 1, "InterfaceData" } }, method, LogDomain.Cache);
+                    result = CacheData.GetCouchCacheData(cacheKey.FullCacheKeyName, cacheKey.CacheAppVersion, expire, loader);
+                    Cache.CacheData.LogHitLevel(cacheKey.FullCacheKeyName, new Dictionary<int, string> { { 0, "MemCache" }, { 1, "InterfaceData" } }, method, LogDomain.Cache);
                     break;
                 case EnumCacheType.Redis:
-                    result = CacheData.Default.GetRedisCacheData(cacheKey.FullCacheKeyName, cacheKey.CacheAppVersion, expire, loader);
-                    CacheData.LogHitLevel(cacheKey.FullCacheKeyName, new Dictionary<int, string> { { 0, "RedisCache" }, { 1, "InterfaceData" } }, method, LogDomain.Cache);
+                    result = CacheData.GetRedisCacheData(cacheKey.FullCacheKeyName, cacheKey.CacheAppVersion, expire, loader);
+                    Cache.CacheData.LogHitLevel(cacheKey.FullCacheKeyName, new Dictionary<int, string> { { 0, "RedisCache" }, { 1, "InterfaceData" } }, method, LogDomain.Cache);
                     break;
                 case EnumCacheType.MemBoth:
-                    result = CacheData.GetRuntimeCacheData(cacheKey.FullCacheKeyName, cacheKey.CacheAppVersion, local, () => CacheData.Default.GetCouchCacheData(cacheKey.FullCacheKeyName, cacheKey.CacheAppVersion, expire, loader));
-                    CacheData.LogHitLevel(cacheKey.FullCacheKeyName, new Dictionary<int, string> { { 0, "RuntimeCache" }, { 1, "MemCache" }, { 2, "InterfaceData" } }, method, LogDomain.Cache);
+                    result = Cache.CacheData.GetRuntimeCacheData(cacheKey.FullCacheKeyName, cacheKey.CacheAppVersion, local, () => CacheData.GetCouchCacheData(cacheKey.FullCacheKeyName, cacheKey.CacheAppVersion, expire, loader));
+                    Cache.CacheData.LogHitLevel(cacheKey.FullCacheKeyName, new Dictionary<int, string> { { 0, "RuntimeCache" }, { 1, "MemCache" }, { 2, "InterfaceData" } }, method, LogDomain.Cache);
                     break;
                 case EnumCacheType.RedisBoth:
-                    result = CacheData.GetRuntimeCacheData(cacheKey.FullCacheKeyName, cacheKey.CacheAppVersion, local, () => CacheData.Default.GetRedisCacheData(cacheKey.FullCacheKeyName, cacheKey.CacheAppVersion, expire, loader));
-                    CacheData.LogHitLevel(cacheKey.FullCacheKeyName, new Dictionary<int, string> { { 0, "RuntimeCache" }, { 1, "RedisCache" }, { 2, "InterfaceData" } }, method, LogDomain.Cache);
+                    result = Cache.CacheData.GetRuntimeCacheData(cacheKey.FullCacheKeyName, cacheKey.CacheAppVersion, local, () => CacheData.GetRedisCacheData(cacheKey.FullCacheKeyName, cacheKey.CacheAppVersion, expire, loader));
+                    Cache.CacheData.LogHitLevel(cacheKey.FullCacheKeyName, new Dictionary<int, string> { { 0, "RuntimeCache" }, { 1, "RedisCache" }, { 2, "InterfaceData" } }, method, LogDomain.Cache);
                     break;
                 case EnumCacheType.None:
                     break;
@@ -342,7 +329,7 @@ namespace X.Util.Extend.Core
         /// <param name="cacheTimeLevel">缓存过期时间级别</param>
         /// <param name="cacheTimeExpire">缓存过期时间</param>
         /// <returns></returns>
-        public static CacheResult<T> GetSlidingCacheData<T>(Func<CacheResult<T>> loader, MethodBase method, ICollection<object> paramsList, string cacheAppVersion, bool debugWithoutCache, bool addContext, EnumCacheType cacheType, EnumCacheTimeLevel cacheTimeLevel, int cacheTimeExpire)
+        public CacheResult<T> GetSlidingCacheData<T>(Func<CacheResult<T>> loader, MethodBase method, ICollection<object> paramsList, string cacheAppVersion, bool debugWithoutCache, bool addContext, EnumCacheType cacheType, EnumCacheTimeLevel cacheTimeLevel, int cacheTimeExpire)
         {
             var result = default(CacheResult<T>);
             var cacheKey = GetCacheKey(method, paramsList, cacheAppVersion, addContext);
@@ -352,24 +339,24 @@ namespace X.Util.Extend.Core
             switch (cacheType)
             {
                 case EnumCacheType.Runtime:
-                    result = CacheData.GetRuntimeCacheData(cacheKey.FullCacheKeyName, cacheKey.CacheAppVersion, expire, loader, null);
-                    CacheData.LogHitLevel(cacheKey.FullCacheKeyName, new Dictionary<int, string> { { 0, "RuntimeCache" }, { 1, "InterfaceData" } }, method, LogDomain.Cache);
+                    result = Cache.CacheData.GetRuntimeCacheData(cacheKey.FullCacheKeyName, cacheKey.CacheAppVersion, expire, loader, null);
+                    Cache.CacheData.LogHitLevel(cacheKey.FullCacheKeyName, new Dictionary<int, string> { { 0, "RuntimeCache" }, { 1, "InterfaceData" } }, method, LogDomain.Cache);
                     break;
                 case EnumCacheType.MemCache:
-                    result = CacheData.Default.GetCouchCacheData(cacheKey.FullCacheKeyName, cacheKey.CacheAppVersion, expire, loader);
-                    CacheData.LogHitLevel(cacheKey.FullCacheKeyName, new Dictionary<int, string> { { 0, "MemCache" }, { 1, "InterfaceData" } }, method, LogDomain.Cache);
+                    result = CacheData.GetCouchCacheData(cacheKey.FullCacheKeyName, cacheKey.CacheAppVersion, expire, loader);
+                    Cache.CacheData.LogHitLevel(cacheKey.FullCacheKeyName, new Dictionary<int, string> { { 0, "MemCache" }, { 1, "InterfaceData" } }, method, LogDomain.Cache);
                     break;
                 case EnumCacheType.Redis:
-                    result = CacheData.Default.GetRedisCacheData(cacheKey.FullCacheKeyName, cacheKey.CacheAppVersion, expire, loader);
-                    CacheData.LogHitLevel(cacheKey.FullCacheKeyName, new Dictionary<int, string> { { 0, "RedisCache" }, { 1, "InterfaceData" } }, method, LogDomain.Cache);
+                    result = CacheData.GetRedisCacheData(cacheKey.FullCacheKeyName, cacheKey.CacheAppVersion, expire, loader);
+                    Cache.CacheData.LogHitLevel(cacheKey.FullCacheKeyName, new Dictionary<int, string> { { 0, "RedisCache" }, { 1, "InterfaceData" } }, method, LogDomain.Cache);
                     break;
                 case EnumCacheType.MemBoth:
-                    result = CacheData.GetRuntimeCacheData(cacheKey.FullCacheKeyName, cacheKey.CacheAppVersion, local, () => CacheData.Default.GetCouchCacheData(cacheKey.FullCacheKeyName, cacheKey.CacheAppVersion, expire, loader));
-                    CacheData.LogHitLevel(cacheKey.FullCacheKeyName, new Dictionary<int, string> { { 0, "RuntimeCache" }, { 1, "MemCache" }, { 2, "InterfaceData" } }, method, LogDomain.Cache);
+                    result = Cache.CacheData.GetRuntimeCacheData(cacheKey.FullCacheKeyName, cacheKey.CacheAppVersion, local, () => CacheData.GetCouchCacheData(cacheKey.FullCacheKeyName, cacheKey.CacheAppVersion, expire, loader));
+                    Cache.CacheData.LogHitLevel(cacheKey.FullCacheKeyName, new Dictionary<int, string> { { 0, "RuntimeCache" }, { 1, "MemCache" }, { 2, "InterfaceData" } }, method, LogDomain.Cache);
                     break;
                 case EnumCacheType.RedisBoth:
-                    result = CacheData.GetRuntimeCacheData(cacheKey.FullCacheKeyName, cacheKey.CacheAppVersion, local, () => CacheData.Default.GetRedisCacheData(cacheKey.FullCacheKeyName, cacheKey.CacheAppVersion, expire, loader));
-                    CacheData.LogHitLevel(cacheKey.FullCacheKeyName, new Dictionary<int, string> { { 0, "RuntimeCache" }, { 1, "RedisCache" }, { 2, "InterfaceData" } }, method, LogDomain.Cache);
+                    result = Cache.CacheData.GetRuntimeCacheData(cacheKey.FullCacheKeyName, cacheKey.CacheAppVersion, local, () => CacheData.GetRedisCacheData(cacheKey.FullCacheKeyName, cacheKey.CacheAppVersion, expire, loader));
+                    Cache.CacheData.LogHitLevel(cacheKey.FullCacheKeyName, new Dictionary<int, string> { { 0, "RuntimeCache" }, { 1, "RedisCache" }, { 2, "InterfaceData" } }, method, LogDomain.Cache);
                     break;
                 case EnumCacheType.None:
                     break;
@@ -391,13 +378,13 @@ namespace X.Util.Extend.Core
         /// <param name="cacheTimeExpire"></param>
         /// <param name="filepath"></param>
         /// <returns></returns>
-        public static CacheResult<T> GetSlidingCacheData<T>(Func<CacheResult<T>> loader, MethodBase method, ICollection<object> paramsList, string cacheAppVersion, bool debugWithoutCache, bool addContext, EnumCacheTimeLevel cacheTimeLevel, int cacheTimeExpire, string filepath)
+        public CacheResult<T> GetSlidingCacheData<T>(Func<CacheResult<T>> loader, MethodBase method, ICollection<object> paramsList, string cacheAppVersion, bool debugWithoutCache, bool addContext, EnumCacheTimeLevel cacheTimeLevel, int cacheTimeExpire, string filepath)
         {
             var cacheKey = GetCacheKey(method, paramsList, cacheAppVersion, addContext);
             if (debugWithoutCache && HttpContext.Current.IsDebuggingEnabled) return loader();
             var expire = GetCacheExpire(cacheTimeLevel, cacheTimeExpire) - DateTime.Now;
-            var result = CacheData.GetRuntimeCacheData(cacheKey.FullCacheKeyName, cacheKey.CacheAppVersion, expire, loader, filepath);
-            CacheData.LogHitLevel(cacheKey.FullCacheKeyName, new Dictionary<int, string> { { 0, "RuntimeCache" }, { 1, "XmlFile" } }, method, LogDomain.Cache);
+            var result = Cache.CacheData.GetRuntimeCacheData(cacheKey.FullCacheKeyName, cacheKey.CacheAppVersion, expire, loader, filepath);
+            Cache.CacheData.LogHitLevel(cacheKey.FullCacheKeyName, new Dictionary<int, string> { { 0, "RuntimeCache" }, { 1, "XmlFile" } }, method, LogDomain.Cache);
             return result;
         }
         #endregion

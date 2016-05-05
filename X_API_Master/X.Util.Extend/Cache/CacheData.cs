@@ -16,7 +16,7 @@ namespace X.Util.Extend.Cache
         private readonly IRedisCache _redis = RedisCache.Default;
         private const string Prefix = "X.Util.Extend.Cache.CacheData";
         private static readonly string Path = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "App_Data\\CacheDependency.xml");//缓存依赖文件--用于删除本地缓存
-        public CacheData() { }
+        private CacheData() { }
         public static readonly ICacheData Default = new CacheData();
         public CacheData(string couchName, string redisName)
         {

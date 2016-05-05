@@ -2,6 +2,9 @@
 
 namespace X.Util.Entities.Interface
 {
+    /// <summary>
+    /// Couchbase Cache Interface
+    /// </summary>
     public interface ICouchCache
     {
         object Get(string key);

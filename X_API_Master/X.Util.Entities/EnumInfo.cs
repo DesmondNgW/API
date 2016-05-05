@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace X.Util.Entities
+﻿namespace X.Util.Entities
 {
     public enum LogDomain
     {
@@ -34,5 +29,30 @@ namespace X.Util.Entities
         Error,
         Info,
         Debug
+    }
+
+    /// <summary>
+    /// 缓存类型
+    /// </summary>
+    public enum EnumCacheType
+    {
+        None,
+        Runtime,
+        MemCache,
+        Redis,
+        RedisBoth,
+        MemBoth
+    }
+    /// <summary>
+    /// 缓存过期时间级别
+    /// </summary>
+    public enum EnumCacheTimeLevel
+    {
+        Second,
+        Minute,
+        Hour,
+        Day,
+        Month,
+        Year
     }
 }

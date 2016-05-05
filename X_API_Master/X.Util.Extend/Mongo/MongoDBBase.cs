@@ -19,7 +19,7 @@ namespace X.Util.Extend.Mongo
         public string ServerName = ConfigurationHelper.MongoDefaultServername;
         public static MongoDbBase Default = new MongoDbBase();
         private const LogDomain EDomain = LogDomain.ThirdParty;
-        public MongoDbBase() { }
+        private MongoDbBase() { }
         public MongoDbBase(string serverName)
         {
             ServerName = serverName;

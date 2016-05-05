@@ -17,7 +17,7 @@ namespace X.Util.Extend.Cache
         public readonly string ServerName = ConfigurationHelper.RedisDefaultServername;
         public static readonly IRedisCache Default = new RedisCache();
         public const LogDomain EDomain = LogDomain.ThirdParty;
-        public RedisCache() { }
+        private RedisCache() { }
         public RedisCache(string serverName)
         {
             ServerName = serverName;

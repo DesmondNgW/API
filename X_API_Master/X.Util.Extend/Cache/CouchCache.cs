@@ -16,7 +16,7 @@ namespace X.Util.Extend.Cache
     {
         #region 构造函数
         public readonly string ServerName = ConfigurationHelper.CouchDefaultServername;
-        public CouchCache() { }
+        private CouchCache() { }
         public static readonly ICouchCache Default = new CouchCache();
         public const LogDomain EDomain = LogDomain.ThirdParty;
 
