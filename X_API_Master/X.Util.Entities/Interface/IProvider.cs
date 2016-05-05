@@ -10,6 +10,11 @@ namespace X.Util.Entities.Interface
         T Client { get; }
 
         /// <summary>
+        /// 开始计算耗时
+        /// </summary>
+        void StartElapsed();
+
+        /// <summary>
         /// 记录耗时
         /// </summary>
         /// <param name="method"></param>

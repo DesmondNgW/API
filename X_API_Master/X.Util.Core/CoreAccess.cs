@@ -14,6 +14,7 @@ namespace X.Util.Core
         {
             var method = Logger.Client.GetMethodInfo(func.Method, new object[] { }, channel.EndpointAddress);
             if (needLogInfo) Logger.Client.Info(method, eDomain, null, string.Format("{0}.{1} BeginInvoke.", typeof(TChannel).FullName, func.Method.Name));
+            channel.StartElapsed();
             var iresult = func();
             channel.LogElapsed(func.Method, eDomain);
             if (callSuccess(iresult))
@@ -32,6 +33,7 @@ namespace X.Util.Core
             try
             {
                 if (needLogInfo) Logger.Client.Info(method, eDomain, null, string.Format("{0}.{1} BeginInvoke.", typeof(TChannel).FullName, func.Method.Name));
+                channel.StartElapsed();
                 var iresult = func();
                 result = iresult;
                 channel.LogElapsed(func.Method, eDomain);
@@ -55,8 +57,10 @@ namespace X.Util.Core
         {
             var method = Logger.Client.GetMethodInfo(func.Method, new object[] { }, channel.EndpointAddress);
             if (needLogInfo) Logger.Client.Info(method, eDomain, null, string.Format("{0}.{1} BeginInvoke.", typeof(TChannel).FullName, func.Method.Name));
+            channel.StartElapsed();
             func.BeginInvoke(result =>
             {
+                
                 ((Action)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
                 channel.LogElapsed(func.Method, eDomain);
                 if (needLogInfo) Logger.Client.Info(method, eDomain, null, string.Format("{0}.{1} EndInvoke.", typeof(TChannel).FullName, func.Method.Name));
@@ -68,6 +72,7 @@ namespace X.Util.Core
         {
             var method = Logger.Client.GetMethodInfo(func.Method, new object[] { }, channel.EndpointAddress);
             if (needLogInfo) Logger.Client.Info(method, eDomain, null, string.Format("{0}.{1} BeginInvoke.", typeof(TChannel).FullName, func.Method.Name));
+            channel.StartElapsed();
             func.BeginInvoke(result =>
             {
                 try
@@ -90,6 +95,7 @@ namespace X.Util.Core
         {
             var method = Logger.Client.GetMethodInfo(func.Method, new object[] { }, channel.EndpointAddress);
             if (needLogInfo) Logger.Client.Info(method, eDomain, null, string.Format("{0}.{1} BeginInvoke.", typeof(TChannel).FullName, func.Method.Name));
+            channel.StartElapsed();
             func.BeginInvoke(result =>
             {
                 var iresult = ((Func<TResult>)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
@@ -108,6 +114,7 @@ namespace X.Util.Core
         {
             var method = Logger.Client.GetMethodInfo(func.Method, new object[] { }, channel.EndpointAddress);
             if (needLogInfo) Logger.Client.Info(method, eDomain, null, string.Format("{0}.{1} BeginInvoke.", typeof(TChannel).FullName, func.Method.Name));
+            channel.StartElapsed();
             func.BeginInvoke(result =>
             {
                 try
@@ -135,6 +142,7 @@ namespace X.Util.Core
         {
             var method = Logger.Client.GetMethodInfo(func.Method, new object[] { t1 }, channel.EndpointAddress);
             if (needLogInfo) Logger.Client.Info(method, eDomain, null, string.Format("{0}.{1} BeginInvoke.", typeof(TChannel).FullName, func.Method.Name));
+            channel.StartElapsed();
             var iresult = func(t1);
             channel.LogElapsed(func.Method, eDomain);
             if (callSuccess(iresult))
@@ -153,6 +161,7 @@ namespace X.Util.Core
             try
             {
                 if (needLogInfo) Logger.Client.Info(method, eDomain, null, string.Format("{0}.{1} BeginInvoke.", typeof(TChannel).FullName, func.Method.Name));
+                channel.StartElapsed();
                 var iresult = func(t1);
                 result = iresult;
                 channel.LogElapsed(func.Method, eDomain);
@@ -176,6 +185,7 @@ namespace X.Util.Core
         {
             var method = Logger.Client.GetMethodInfo(func.Method, new object[] { t1 }, channel.EndpointAddress);
             if (needLogInfo) Logger.Client.Info(method, eDomain, null, string.Format("{0}.{1} BeginInvoke.", typeof(TChannel).FullName, func.Method.Name));
+            channel.StartElapsed();
             func.BeginInvoke(t1, result =>
             {
                 ((Action<T1>)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
@@ -189,6 +199,7 @@ namespace X.Util.Core
         {
             var method = Logger.Client.GetMethodInfo(func.Method, new object[] { t1 }, channel.EndpointAddress);
             if (needLogInfo) Logger.Client.Info(method, eDomain, null, string.Format("{0}.{1} BeginInvoke.", typeof(TChannel).FullName, func.Method.Name));
+            channel.StartElapsed();
             func.BeginInvoke(t1, result =>
             {
                 try
@@ -211,6 +222,7 @@ namespace X.Util.Core
         {
             var method = Logger.Client.GetMethodInfo(func.Method, new object[] { t1 }, channel.EndpointAddress);
             if (needLogInfo) Logger.Client.Info(method, eDomain, null, string.Format("{0}.{1} BeginInvoke.", typeof(TChannel).FullName, func.Method.Name));
+            channel.StartElapsed();
             func.BeginInvoke(t1, result =>
             {
                 var iresult = ((Func<TResult>)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
@@ -229,6 +241,7 @@ namespace X.Util.Core
         {
             var method = Logger.Client.GetMethodInfo(func.Method, new object[] { t1 }, channel.EndpointAddress);
             if (needLogInfo) Logger.Client.Info(method, eDomain, null, string.Format("{0}.{1} BeginInvoke.", typeof(TChannel).FullName, func.Method.Name));
+            channel.StartElapsed();
             func.BeginInvoke(t1, result =>
             {
                 try
@@ -256,6 +269,7 @@ namespace X.Util.Core
         {
             var method = Logger.Client.GetMethodInfo(func.Method, new object[] { t1, t2 }, channel.EndpointAddress);
             if (needLogInfo) Logger.Client.Info(method, eDomain, null, string.Format("{0}.{1} BeginInvoke.", typeof(TChannel).FullName, func.Method.Name));
+            channel.StartElapsed();
             var iresult = func(t1, t2);
             channel.LogElapsed(func.Method, eDomain);
             if (callSuccess(iresult))
@@ -274,6 +288,7 @@ namespace X.Util.Core
             try
             {
                 if (needLogInfo) Logger.Client.Info(method, eDomain, null, string.Format("{0}.{1} BeginInvoke.", typeof(TChannel).FullName, func.Method.Name));
+                channel.StartElapsed();
                 var iresult = func(t1, t2);
                 result = iresult;
                 channel.LogElapsed(func.Method, eDomain);
@@ -299,6 +314,7 @@ namespace X.Util.Core
             try
             {
                 if (needLogInfo) Logger.Client.Info(method, eDomain, null, string.Format("{0}.{1} BeginInvoke.", typeof(TChannel).FullName, func.Method.Name));
+                channel.StartElapsed();
                 func.BeginInvoke(t1, t2, result =>
                 {
                     ((Action<T1, T2>)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
@@ -317,6 +333,7 @@ namespace X.Util.Core
         {
             var method = Logger.Client.GetMethodInfo(func.Method, new object[] { t1, t2 }, channel.EndpointAddress);
             if (needLogInfo) Logger.Client.Info(method, eDomain, null, string.Format("{0}.{1} BeginInvoke.", typeof(TChannel).FullName, func.Method.Name));
+            channel.StartElapsed();
             func.BeginInvoke(t1, t2, result =>
             {
                 try
@@ -339,6 +356,7 @@ namespace X.Util.Core
         {
             var method = Logger.Client.GetMethodInfo(func.Method, new object[] { t1, t2 }, channel.EndpointAddress);
             if (needLogInfo) Logger.Client.Info(method, eDomain, null, string.Format("{0}.{1} BeginInvoke.", typeof(TChannel).FullName, func.Method.Name));
+            channel.StartElapsed();
             func.BeginInvoke(t1, t2, result =>
             {
                 var iresult = ((Func<T1, T2, TResult>)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
@@ -357,6 +375,7 @@ namespace X.Util.Core
         {
             var method = Logger.Client.GetMethodInfo(func.Method, new object[] { t1, t2 }, channel.EndpointAddress);
             if (needLogInfo) Logger.Client.Info(method, eDomain, null, string.Format("{0}.{1} BeginInvoke.", typeof(TChannel).FullName, func.Method.Name));
+            channel.StartElapsed();
             func.BeginInvoke(t1, t2, result =>
             {
                 try
@@ -384,6 +403,7 @@ namespace X.Util.Core
         {
             var method = Logger.Client.GetMethodInfo(func.Method, new object[] { t1, t2, t3 }, channel.EndpointAddress);
             if (needLogInfo) Logger.Client.Info(method, eDomain, null, string.Format("{0}.{1} BeginInvoke.", typeof(TChannel).FullName, func.Method.Name));
+            channel.StartElapsed();
             var iresult = func(t1, t2, t3);
             channel.LogElapsed(func.Method, eDomain);
             if (callSuccess(iresult))
@@ -402,6 +422,7 @@ namespace X.Util.Core
             try
             {
                 if (needLogInfo) Logger.Client.Info(method, eDomain, null, string.Format("{0}.{1} BeginInvoke.", typeof(TChannel).FullName, func.Method.Name));
+                channel.StartElapsed();
                 var iresult = func(t1, t2, t3);
                 result = iresult;
                 channel.LogElapsed(func.Method, eDomain);
@@ -425,6 +446,7 @@ namespace X.Util.Core
         {
             var method = Logger.Client.GetMethodInfo(func.Method, new object[] { t1, t2, t3 }, channel.EndpointAddress);
             if (needLogInfo) Logger.Client.Info(method, eDomain, null, string.Format("{0}.{1} BeginInvoke.", typeof(TChannel).FullName, func.Method.Name));
+            channel.StartElapsed();
             func.BeginInvoke(t1, t2, t3, result =>
             {
                 ((Action<T1, T2, T3>)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
@@ -438,6 +460,7 @@ namespace X.Util.Core
         {
             var method = Logger.Client.GetMethodInfo(func.Method, new object[] { t1, t2, t3 }, channel.EndpointAddress);
             if (needLogInfo) Logger.Client.Info(method, eDomain, null, string.Format("{0}.{1} BeginInvoke.", typeof(TChannel).FullName, func.Method.Name));
+            channel.StartElapsed();
             func.BeginInvoke(t1, t2, t3, result =>
             {
                 try
@@ -460,6 +483,7 @@ namespace X.Util.Core
         {
             var method = Logger.Client.GetMethodInfo(func.Method, new object[] { t1, t2, t3 }, channel.EndpointAddress);
             if (needLogInfo) Logger.Client.Info(method, eDomain, null, string.Format("{0}.{1} BeginInvoke.", typeof(TChannel).FullName, func.Method.Name));
+            channel.StartElapsed();
             func.BeginInvoke(t1, t2, t3, result =>
             {
                 var iresult = ((Func<T1, T2, T3, TResult>)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
@@ -478,6 +502,7 @@ namespace X.Util.Core
         {
             var method = Logger.Client.GetMethodInfo(func.Method, new object[] { t1, t2, t3 }, channel.EndpointAddress);
             if (needLogInfo) Logger.Client.Info(method, eDomain, null, string.Format("{0}.{1} BeginInvoke.", typeof(TChannel).FullName, func.Method.Name));
+            channel.StartElapsed();
             func.BeginInvoke(t1, t2, t3, result =>
             {
                 try
@@ -505,6 +530,7 @@ namespace X.Util.Core
         {
             var method = Logger.Client.GetMethodInfo(func.Method, new object[] { t1, t2, t3, t4 }, channel.EndpointAddress);
             if (needLogInfo) Logger.Client.Info(method, eDomain, null, string.Format("{0}.{1} BeginInvoke.", typeof(TChannel).FullName, func.Method.Name));
+            channel.StartElapsed();
             var iresult = func(t1, t2, t3, t4);
             channel.LogElapsed(func.Method, eDomain);
             if (callSuccess(iresult))
@@ -523,6 +549,7 @@ namespace X.Util.Core
             try
             {
                 if (needLogInfo) Logger.Client.Info(method, eDomain, null, string.Format("{0}.{1} BeginInvoke.", typeof(TChannel).FullName, func.Method.Name));
+                channel.StartElapsed();
                 var iresult = func(t1, t2, t3, t4);
                 result = iresult;
                 channel.LogElapsed(func.Method, eDomain);
@@ -546,6 +573,7 @@ namespace X.Util.Core
         {
             var method = Logger.Client.GetMethodInfo(func.Method, new object[] { t1, t2, t3, t4 }, channel.EndpointAddress);
             if (needLogInfo) Logger.Client.Info(method, eDomain, null, string.Format("{0}.{1} BeginInvoke.", typeof(TChannel).FullName, func.Method.Name));
+            channel.StartElapsed();
             func.BeginInvoke(t1, t2, t3, t4, result =>
             {
                 ((Action<T1, T2, T3, T4>)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
@@ -559,6 +587,7 @@ namespace X.Util.Core
         {
             var method = Logger.Client.GetMethodInfo(func.Method, new object[] { t1, t2, t3, t4 }, channel.EndpointAddress);
             if (needLogInfo) Logger.Client.Info(method, eDomain, null, string.Format("{0}.{1} BeginInvoke.", typeof(TChannel).FullName, func.Method.Name));
+            channel.StartElapsed();
             func.BeginInvoke(t1, t2, t3, t4, result =>
             {
                 try
@@ -581,6 +610,7 @@ namespace X.Util.Core
         {
             var method = Logger.Client.GetMethodInfo(func.Method, new object[] { t1, t2, t3, t4 }, channel.EndpointAddress);
             if (needLogInfo) Logger.Client.Info(method, eDomain, null, string.Format("{0}.{1} BeginInvoke.", typeof(TChannel).FullName, func.Method.Name));
+            channel.StartElapsed();
             func.BeginInvoke(t1, t2, t3, t4, result =>
             {
                 var iresult = ((Func<T1, T2, T3, T4, TResult>)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
@@ -599,6 +629,7 @@ namespace X.Util.Core
         {
             var method = Logger.Client.GetMethodInfo(func.Method, new object[] { t1, t2, t3, t4 }, channel.EndpointAddress);
             if (needLogInfo) Logger.Client.Info(method, eDomain, null, string.Format("{0}.{1} BeginInvoke.", typeof(TChannel).FullName, func.Method.Name));
+            channel.StartElapsed();
             func.BeginInvoke(t1, t2, t3, t4, result =>
             {
                 try
@@ -626,6 +657,7 @@ namespace X.Util.Core
         {
             var method = Logger.Client.GetMethodInfo(func.Method, new object[] { t1, t2, t3, t4, t5 }, channel.EndpointAddress);
             if (needLogInfo) Logger.Client.Info(method, eDomain, null, string.Format("{0}.{1} BeginInvoke.", typeof(TChannel).FullName, func.Method.Name));
+            channel.StartElapsed();
             var iresult = func(t1, t2, t3, t4, t5);
             channel.LogElapsed(func.Method, eDomain);
             if (callSuccess(iresult))
@@ -644,6 +676,7 @@ namespace X.Util.Core
             try
             {
                 if (needLogInfo) Logger.Client.Info(method, eDomain, null, string.Format("{0}.{1} BeginInvoke.", typeof(TChannel).FullName, func.Method.Name));
+                channel.StartElapsed();
                 var iresult = func(t1, t2, t3, t4, t5);
                 result = iresult;
                 channel.LogElapsed(func.Method, eDomain);
@@ -667,6 +700,7 @@ namespace X.Util.Core
         {
             var method = Logger.Client.GetMethodInfo(func.Method, new object[] { t1, t2, t3, t4, t5 }, channel.EndpointAddress);
             if (needLogInfo) Logger.Client.Info(method, eDomain, null, string.Format("{0}.{1} BeginInvoke.", typeof(TChannel).FullName, func.Method.Name));
+            channel.StartElapsed();
             func.BeginInvoke(t1, t2, t3, t4, t5, result =>
             {
                 ((Action<T1, T2, T3, T4, T5>)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
@@ -680,6 +714,7 @@ namespace X.Util.Core
         {
             var method = Logger.Client.GetMethodInfo(func.Method, new object[] { t1, t2, t3, t4, t5 }, channel.EndpointAddress);
             if (needLogInfo) Logger.Client.Info(method, eDomain, null, string.Format("{0}.{1} BeginInvoke.", typeof(TChannel).FullName, func.Method.Name));
+            channel.StartElapsed();
             func.BeginInvoke(t1, t2, t3, t4, t5, result =>
             {
                 try
@@ -702,6 +737,7 @@ namespace X.Util.Core
         {
             var method = Logger.Client.GetMethodInfo(func.Method, new object[] { t1, t2, t3, t4, t5 }, channel.EndpointAddress);
             if (needLogInfo) Logger.Client.Info(method, eDomain, null, string.Format("{0}.{1} BeginInvoke.", typeof(TChannel).FullName, func.Method.Name));
+            channel.StartElapsed();
             func.BeginInvoke(t1, t2, t3, t4, t5, result =>
             {
                 var iresult = ((Func<T1, T2, T3, T4, T5, TResult>)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
@@ -720,6 +756,7 @@ namespace X.Util.Core
         {
             var method = Logger.Client.GetMethodInfo(func.Method, new object[] { t1, t2, t3, t4, t5 }, channel.EndpointAddress);
             if (needLogInfo) Logger.Client.Info(method, eDomain, null, string.Format("{0}.{1} BeginInvoke.", typeof(TChannel).FullName, func.Method.Name));
+            channel.StartElapsed();
             func.BeginInvoke(t1, t2, t3, t4, t5, result =>
             {
                 try
@@ -747,6 +784,7 @@ namespace X.Util.Core
         {
             var method = Logger.Client.GetMethodInfo(func.Method, new object[] { t1, t2, t3, t4, t5, t6 }, channel.EndpointAddress);
             if (needLogInfo) Logger.Client.Info(method, eDomain, null, string.Format("{0}.{1} BeginInvoke.", typeof(TChannel).FullName, func.Method.Name));
+            channel.StartElapsed();
             var iresult = func(t1, t2, t3, t4, t5, t6);
             channel.LogElapsed(func.Method, eDomain);
             if (callSuccess(iresult))
@@ -765,6 +803,7 @@ namespace X.Util.Core
             try
             {
                 if (needLogInfo) Logger.Client.Info(method, eDomain, null, string.Format("{0}.{1} BeginInvoke.", typeof(TChannel).FullName, func.Method.Name));
+                channel.StartElapsed();
                 var iresult = func(t1, t2, t3, t4, t5, t6);
                 result = iresult;
                 channel.LogElapsed(func.Method, eDomain);
@@ -788,6 +827,7 @@ namespace X.Util.Core
         {
             var method = Logger.Client.GetMethodInfo(func.Method, new object[] { t1, t2, t3, t4, t5, t6 }, channel.EndpointAddress);
             if (needLogInfo) Logger.Client.Info(method, eDomain, null, string.Format("{0}.{1} BeginInvoke.", typeof(TChannel).FullName, func.Method.Name));
+            channel.StartElapsed();
             func.BeginInvoke(t1, t2, t3, t4, t5, t6, result =>
             {
                 ((Action<T1, T2, T3, T4, T5, T6>)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
@@ -801,6 +841,7 @@ namespace X.Util.Core
         {
             var method = Logger.Client.GetMethodInfo(func.Method, new object[] { t1, t2, t3, t4, t5, t6 }, channel.EndpointAddress);
             if (needLogInfo) Logger.Client.Info(method, eDomain, null, string.Format("{0}.{1} BeginInvoke.", typeof(TChannel).FullName, func.Method.Name));
+            channel.StartElapsed();
             func.BeginInvoke(t1, t2, t3, t4, t5, t6, result =>
             {
                 try
@@ -823,6 +864,7 @@ namespace X.Util.Core
         {
             var method = Logger.Client.GetMethodInfo(func.Method, new object[] { t1, t2, t3, t4, t5, t6 }, channel.EndpointAddress);
             if (needLogInfo) Logger.Client.Info(method, eDomain, null, string.Format("{0}.{1} BeginInvoke.", typeof(TChannel).FullName, func.Method.Name));
+            channel.StartElapsed();
             func.BeginInvoke(t1, t2, t3, t4, t5, t6, result =>
             {
                 var iresult = ((Func<T1, T2, T3, T4, T5, T6, TResult>)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
@@ -841,6 +883,7 @@ namespace X.Util.Core
         {
             var method = Logger.Client.GetMethodInfo(func.Method, new object[] { t1, t2, t3, t4, t5, t6 }, channel.EndpointAddress);
             if (needLogInfo) Logger.Client.Info(method, eDomain, null, string.Format("{0}.{1} BeginInvoke.", typeof(TChannel).FullName, func.Method.Name));
+            channel.StartElapsed();
             func.BeginInvoke(t1, t2, t3, t4, t5, t6, result =>
             {
                 try
@@ -868,6 +911,7 @@ namespace X.Util.Core
         {
             var method = Logger.Client.GetMethodInfo(func.Method, new object[] { t1, t2, t3, t4, t5, t6, t7 }, channel.EndpointAddress);
             if (needLogInfo) Logger.Client.Info(method, eDomain, null, string.Format("{0}.{1} BeginInvoke.", typeof(TChannel).FullName, func.Method.Name));
+            channel.StartElapsed();
             var iresult = func(t1, t2, t3, t4, t5, t6, t7);
             channel.LogElapsed(func.Method, eDomain);
             if (callSuccess(iresult))
@@ -886,6 +930,7 @@ namespace X.Util.Core
             try
             {
                 if (needLogInfo) Logger.Client.Info(method, eDomain, null, string.Format("{0}.{1} BeginInvoke.", typeof(TChannel).FullName, func.Method.Name));
+                channel.StartElapsed();
                 var iresult = func(t1, t2, t3, t4, t5, t6, t7);
                 result = iresult;
                 channel.LogElapsed(func.Method, eDomain);
@@ -909,6 +954,7 @@ namespace X.Util.Core
         {
             var method = Logger.Client.GetMethodInfo(func.Method, new object[] { t1, t2, t3, t4, t5, t6, t7 }, channel.EndpointAddress);
             if (needLogInfo) Logger.Client.Info(method, eDomain, null, string.Format("{0}.{1} BeginInvoke.", typeof(TChannel).FullName, func.Method.Name));
+            channel.StartElapsed();
             func.BeginInvoke(t1, t2, t3, t4, t5, t6, t7, result =>
             {
                 ((Action<T1, T2, T3, T4, T5, T6, T7>)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
@@ -922,6 +968,7 @@ namespace X.Util.Core
         {
             var method = Logger.Client.GetMethodInfo(func.Method, new object[] { t1, t2, t3, t4, t5, t6, t7 }, channel.EndpointAddress);
             if (needLogInfo) Logger.Client.Info(method, eDomain, null, string.Format("{0}.{1} BeginInvoke.", typeof(TChannel).FullName, func.Method.Name));
+            channel.StartElapsed();
             func.BeginInvoke(t1, t2, t3, t4, t5, t6, t7, result =>
             {
                 try
@@ -944,6 +991,7 @@ namespace X.Util.Core
         {
             var method = Logger.Client.GetMethodInfo(func.Method, new object[] { t1, t2, t3, t4, t5, t6, t7 }, channel.EndpointAddress);
             if (needLogInfo) Logger.Client.Info(method, eDomain, null, string.Format("{0}.{1} BeginInvoke.", typeof(TChannel).FullName, func.Method.Name));
+            channel.StartElapsed();
             func.BeginInvoke(t1, t2, t3, t4, t5, t6, t7, result =>
             {
                 var iresult = ((Func<T1, T2, T3, T4, T5, T6, T7, TResult>)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
@@ -962,6 +1010,7 @@ namespace X.Util.Core
         {
             var method = Logger.Client.GetMethodInfo(func.Method, new object[] { t1, t2, t3, t4, t5, t6, t7 }, channel.EndpointAddress);
             if (needLogInfo) Logger.Client.Info(method, eDomain, null, string.Format("{0}.{1} BeginInvoke.", typeof(TChannel).FullName, func.Method.Name));
+            channel.StartElapsed();
             func.BeginInvoke(t1, t2, t3, t4, t5, t6, t7, result =>
             {
                 try
@@ -989,6 +1038,7 @@ namespace X.Util.Core
         {
             var method = Logger.Client.GetMethodInfo(func.Method, new object[] { t1, t2, t3, t4, t5, t6, t7, t8 }, channel.EndpointAddress);
             if (needLogInfo) Logger.Client.Info(method, eDomain, null, string.Format("{0}.{1} BeginInvoke.", typeof(TChannel).FullName, func.Method.Name));
+            channel.StartElapsed();
             var iresult = func(t1, t2, t3, t4, t5, t6, t7, t8);
             channel.LogElapsed(func.Method, eDomain);
             if (callSuccess(iresult))
@@ -1007,6 +1057,7 @@ namespace X.Util.Core
             try
             {
                 if (needLogInfo) Logger.Client.Info(method, eDomain, null, string.Format("{0}.{1} BeginInvoke.", typeof(TChannel).FullName, func.Method.Name));
+                channel.StartElapsed();
                 var iresult = func(t1, t2, t3, t4, t5, t6, t7, t8);
                 result = iresult;
                 channel.LogElapsed(func.Method, eDomain);
@@ -1030,6 +1081,7 @@ namespace X.Util.Core
         {
             var method = Logger.Client.GetMethodInfo(func.Method, new object[] { t1, t2, t3, t4, t5, t6, t7, t8 }, channel.EndpointAddress);
             if (needLogInfo) Logger.Client.Info(method, eDomain, null, string.Format("{0}.{1} BeginInvoke.", typeof(TChannel).FullName, func.Method.Name));
+            channel.StartElapsed();
             func.BeginInvoke(t1, t2, t3, t4, t5, t6, t7, t8, result =>
             {
                 ((Action<T1, T2, T3, T4, T5, T6, T7, T8>)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
@@ -1043,6 +1095,7 @@ namespace X.Util.Core
         {
             var method = Logger.Client.GetMethodInfo(func.Method, new object[] { t1, t2, t3, t4, t5, t6, t7, t8 }, channel.EndpointAddress);
             if (needLogInfo) Logger.Client.Info(method, eDomain, null, string.Format("{0}.{1} BeginInvoke.", typeof(TChannel).FullName, func.Method.Name));
+            channel.StartElapsed();
             func.BeginInvoke(t1, t2, t3, t4, t5, t6, t7, t8, result =>
             {
                 try
@@ -1065,6 +1118,7 @@ namespace X.Util.Core
         {
             var method = Logger.Client.GetMethodInfo(func.Method, new object[] { t1, t2, t3, t4, t5, t6, t7, t8 }, channel.EndpointAddress);
             if (needLogInfo) Logger.Client.Info(method, eDomain, null, string.Format("{0}.{1} BeginInvoke.", typeof(TChannel).FullName, func.Method.Name));
+            channel.StartElapsed();
             func.BeginInvoke(t1, t2, t3, t4, t5, t6, t7, t8, result =>
             {
                 var iresult = ((Func<T1, T2, T3, T4, T5, T6, T7, T8, TResult>)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
@@ -1083,6 +1137,7 @@ namespace X.Util.Core
         {
             var method = Logger.Client.GetMethodInfo(func.Method, new object[] { t1, t2, t3, t4, t5, t6, t7, t8 }, channel.EndpointAddress);
             if (needLogInfo) Logger.Client.Info(method, eDomain, null, string.Format("{0}.{1} BeginInvoke.", typeof(TChannel).FullName, func.Method.Name));
+            channel.StartElapsed();
             func.BeginInvoke(t1, t2, t3, t4, t5, t6, t7, t8, result =>
             {
                 try
@@ -1110,6 +1165,7 @@ namespace X.Util.Core
         {
             var method = Logger.Client.GetMethodInfo(func.Method, new object[] { t1, t2, t3, t4, t5, t6, t7, t8, t9 }, channel.EndpointAddress);
             if (needLogInfo) Logger.Client.Info(method, eDomain, null, string.Format("{0}.{1} BeginInvoke.", typeof(TChannel).FullName, func.Method.Name));
+            channel.StartElapsed();
             var iresult = func(t1, t2, t3, t4, t5, t6, t7, t8, t9);
             channel.LogElapsed(func.Method, eDomain);
             if (callSuccess(iresult))
@@ -1128,6 +1184,7 @@ namespace X.Util.Core
             try
             {
                 if (needLogInfo) Logger.Client.Info(method, eDomain, null, string.Format("{0}.{1} BeginInvoke.", typeof(TChannel).FullName, func.Method.Name));
+                channel.StartElapsed();
                 var iresult = func(t1, t2, t3, t4, t5, t6, t7, t8, t9);
                 result = iresult;
                 channel.LogElapsed(func.Method, eDomain);
@@ -1151,6 +1208,7 @@ namespace X.Util.Core
         {
             var method = Logger.Client.GetMethodInfo(func.Method, new object[] { t1, t2, t3, t4, t5, t6, t7, t8, t9 }, channel.EndpointAddress);
             if (needLogInfo) Logger.Client.Info(method, eDomain, null, string.Format("{0}.{1} BeginInvoke.", typeof(TChannel).FullName, func.Method.Name));
+            channel.StartElapsed();
             func.BeginInvoke(t1, t2, t3, t4, t5, t6, t7, t8, t9, result =>
             {
                 ((Action<T1, T2, T3, T4, T5, T6, T7, T8, T9>)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
@@ -1164,6 +1222,7 @@ namespace X.Util.Core
         {
             var method = Logger.Client.GetMethodInfo(func.Method, new object[] { t1, t2, t3, t4, t5, t6, t7, t8, t9 }, channel.EndpointAddress);
             if (needLogInfo) Logger.Client.Info(method, eDomain, null, string.Format("{0}.{1} BeginInvoke.", typeof(TChannel).FullName, func.Method.Name));
+            channel.StartElapsed();
             func.BeginInvoke(t1, t2, t3, t4, t5, t6, t7, t8, t9, result =>
             {
                 try
@@ -1186,6 +1245,7 @@ namespace X.Util.Core
         {
             var method = Logger.Client.GetMethodInfo(func.Method, new object[] { t1, t2, t3, t4, t5, t6, t7, t8, t9 }, channel.EndpointAddress);
             if (needLogInfo) Logger.Client.Info(method, eDomain, null, string.Format("{0}.{1} BeginInvoke.", typeof(TChannel).FullName, func.Method.Name));
+            channel.StartElapsed();
             func.BeginInvoke(t1, t2, t3, t4, t5, t6, t7, t8, t9, result =>
             {
                 var iresult = ((Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
@@ -1204,6 +1264,7 @@ namespace X.Util.Core
         {
             var method = Logger.Client.GetMethodInfo(func.Method, new object[] { t1, t2, t3, t4, t5, t6, t7, t8, t9 }, channel.EndpointAddress);
             if (needLogInfo) Logger.Client.Info(method, eDomain, null, string.Format("{0}.{1} BeginInvoke.", typeof(TChannel).FullName, func.Method.Name));
+            channel.StartElapsed();
             func.BeginInvoke(t1, t2, t3, t4, t5, t6, t7, t8, t9, result =>
             {
                 try
@@ -1231,6 +1292,7 @@ namespace X.Util.Core
         {
             var method = Logger.Client.GetMethodInfo(func.Method, new object[] { t1, t2, t3, t4, t5, t6, t7, t8, t9, t10 }, channel.EndpointAddress);
             if (needLogInfo) Logger.Client.Info(method, eDomain, null, string.Format("{0}.{1} BeginInvoke.", typeof(TChannel).FullName, func.Method.Name));
+            channel.StartElapsed();
             var iresult = func(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10);
             channel.LogElapsed(func.Method, eDomain);
             if (callSuccess(iresult))
@@ -1249,6 +1311,7 @@ namespace X.Util.Core
             try
             {
                 if (needLogInfo) Logger.Client.Info(method, eDomain, null, string.Format("{0}.{1} BeginInvoke.", typeof(TChannel).FullName, func.Method.Name));
+                channel.StartElapsed();
                 var iresult = func(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10);
                 result = iresult;
                 channel.LogElapsed(func.Method, eDomain);
@@ -1272,6 +1335,7 @@ namespace X.Util.Core
         {
             var method = Logger.Client.GetMethodInfo(func.Method, new object[] { t1, t2, t3, t4, t5, t6, t7, t8, t9, t10 }, channel.EndpointAddress);
             if (needLogInfo) Logger.Client.Info(method, eDomain, null, string.Format("{0}.{1} BeginInvoke.", typeof(TChannel).FullName, func.Method.Name));
+            channel.StartElapsed();
             func.BeginInvoke(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, result =>
             {
                 ((Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
@@ -1285,6 +1349,7 @@ namespace X.Util.Core
         {
             var method = Logger.Client.GetMethodInfo(func.Method, new object[] { t1, t2, t3, t4, t5, t6, t7, t8, t9, t10 }, channel.EndpointAddress);
             if (needLogInfo) Logger.Client.Info(method, eDomain, null, string.Format("{0}.{1} BeginInvoke.", typeof(TChannel).FullName, func.Method.Name));
+            channel.StartElapsed();
             func.BeginInvoke(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, result =>
             {
                 try
@@ -1307,6 +1372,7 @@ namespace X.Util.Core
         {
             var method = Logger.Client.GetMethodInfo(func.Method, new object[] { t1, t2, t3, t4, t5, t6, t7, t8, t9, t10 }, channel.EndpointAddress);
             if (needLogInfo) Logger.Client.Info(method, eDomain, null, string.Format("{0}.{1} BeginInvoke.", typeof(TChannel).FullName, func.Method.Name));
+            channel.StartElapsed();
             func.BeginInvoke(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, result =>
             {
                 var iresult = ((Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult>)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
@@ -1325,6 +1391,7 @@ namespace X.Util.Core
         {
             var method = Logger.Client.GetMethodInfo(func.Method, new object[] { t1, t2, t3, t4, t5, t6, t7, t8, t9, t10 }, channel.EndpointAddress);
             if (needLogInfo) Logger.Client.Info(method, eDomain, null, string.Format("{0}.{1} BeginInvoke.", typeof(TChannel).FullName, func.Method.Name));
+            channel.StartElapsed();
             func.BeginInvoke(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, result =>
             {
                 try
@@ -1352,6 +1419,7 @@ namespace X.Util.Core
         {
             var method = Logger.Client.GetMethodInfo(func.Method, new object[] { t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11 }, channel.EndpointAddress);
             if (needLogInfo) Logger.Client.Info(method, eDomain, null, string.Format("{0}.{1} BeginInvoke.", typeof(TChannel).FullName, func.Method.Name));
+            channel.StartElapsed();
             var iresult = func(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11);
             channel.LogElapsed(func.Method, eDomain);
             if (callSuccess(iresult))
@@ -1370,6 +1438,7 @@ namespace X.Util.Core
             try
             {
                 if (needLogInfo) Logger.Client.Info(method, eDomain, null, string.Format("{0}.{1} BeginInvoke.", typeof(TChannel).FullName, func.Method.Name));
+                channel.StartElapsed();
                 var iresult = func(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11);
                 result = iresult;
                 channel.LogElapsed(func.Method, eDomain);
@@ -1393,6 +1462,7 @@ namespace X.Util.Core
         {
             var method = Logger.Client.GetMethodInfo(func.Method, new object[] { t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11 }, channel.EndpointAddress);
             if (needLogInfo) Logger.Client.Info(method, eDomain, null, string.Format("{0}.{1} BeginInvoke.", typeof(TChannel).FullName, func.Method.Name));
+            channel.StartElapsed();
             func.BeginInvoke(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, result =>
             {
                 ((Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
@@ -1406,6 +1476,7 @@ namespace X.Util.Core
         {
             var method = Logger.Client.GetMethodInfo(func.Method, new object[] { t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11 }, channel.EndpointAddress);
             if (needLogInfo) Logger.Client.Info(method, eDomain, null, string.Format("{0}.{1} BeginInvoke.", typeof(TChannel).FullName, func.Method.Name));
+            channel.StartElapsed();
             func.BeginInvoke(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, result =>
             {
                 try
@@ -1428,6 +1499,7 @@ namespace X.Util.Core
         {
             var method = Logger.Client.GetMethodInfo(func.Method, new object[] { t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11 }, channel.EndpointAddress);
             if (needLogInfo) Logger.Client.Info(method, eDomain, null, string.Format("{0}.{1} BeginInvoke.", typeof(TChannel).FullName, func.Method.Name));
+            channel.StartElapsed();
             func.BeginInvoke(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, result =>
             {
                 var iresult = ((Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult>)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
@@ -1446,6 +1518,7 @@ namespace X.Util.Core
         {
             var method = Logger.Client.GetMethodInfo(func.Method, new object[] { t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11 }, channel.EndpointAddress);
             if (needLogInfo) Logger.Client.Info(method, eDomain, null, string.Format("{0}.{1} BeginInvoke.", typeof(TChannel).FullName, func.Method.Name));
+            channel.StartElapsed();
             func.BeginInvoke(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, result =>
             {
                 try
@@ -1473,6 +1546,7 @@ namespace X.Util.Core
         {
             var method = Logger.Client.GetMethodInfo(func.Method, new object[] { t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12 }, channel.EndpointAddress);
             if (needLogInfo) Logger.Client.Info(method, eDomain, null, string.Format("{0}.{1} BeginInvoke.", typeof(TChannel).FullName, func.Method.Name));
+            channel.StartElapsed();
             var iresult = func(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12);
             channel.LogElapsed(func.Method, eDomain);
             if (callSuccess(iresult))
@@ -1491,6 +1565,7 @@ namespace X.Util.Core
             try
             {
                 if (needLogInfo) Logger.Client.Info(method, eDomain, null, string.Format("{0}.{1} BeginInvoke.", typeof(TChannel).FullName, func.Method.Name));
+                channel.StartElapsed();
                 var iresult = func(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12);
                 result = iresult;
                 channel.LogElapsed(func.Method, eDomain);
@@ -1514,6 +1589,7 @@ namespace X.Util.Core
         {
             var method = Logger.Client.GetMethodInfo(func.Method, new object[] { t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12 }, channel.EndpointAddress);
             if (needLogInfo) Logger.Client.Info(method, eDomain, null, string.Format("{0}.{1} BeginInvoke.", typeof(TChannel).FullName, func.Method.Name));
+            channel.StartElapsed();
             func.BeginInvoke(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, result =>
             {
                 ((Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
@@ -1527,6 +1603,7 @@ namespace X.Util.Core
         {
             var method = Logger.Client.GetMethodInfo(func.Method, new object[] { t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12 }, channel.EndpointAddress);
             if (needLogInfo) Logger.Client.Info(method, eDomain, null, string.Format("{0}.{1} BeginInvoke.", typeof(TChannel).FullName, func.Method.Name));
+            channel.StartElapsed();
             func.BeginInvoke(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, result =>
             {
                 try
@@ -1549,6 +1626,7 @@ namespace X.Util.Core
         {
             var method = Logger.Client.GetMethodInfo(func.Method, new object[] { t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12 }, channel.EndpointAddress);
             if (needLogInfo) Logger.Client.Info(method, eDomain, null, string.Format("{0}.{1} BeginInvoke.", typeof(TChannel).FullName, func.Method.Name));
+            channel.StartElapsed();
             func.BeginInvoke(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, result =>
             {
                 var iresult = ((Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult>)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
@@ -1567,6 +1645,7 @@ namespace X.Util.Core
         {
             var method = Logger.Client.GetMethodInfo(func.Method, new object[] { t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12 }, channel.EndpointAddress);
             if (needLogInfo) Logger.Client.Info(method, eDomain, null, string.Format("{0}.{1} BeginInvoke.", typeof(TChannel).FullName, func.Method.Name));
+            channel.StartElapsed();
             func.BeginInvoke(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, result =>
             {
                 try
@@ -1594,6 +1673,7 @@ namespace X.Util.Core
         {
             var method = Logger.Client.GetMethodInfo(func.Method, new object[] { t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13 }, channel.EndpointAddress);
             if (needLogInfo) Logger.Client.Info(method, eDomain, null, string.Format("{0}.{1} BeginInvoke.", typeof(TChannel).FullName, func.Method.Name));
+            channel.StartElapsed();
             var iresult = func(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13);
             channel.LogElapsed(func.Method, eDomain);
             if (callSuccess(iresult))
@@ -1612,6 +1692,7 @@ namespace X.Util.Core
             try
             {
                 if (needLogInfo) Logger.Client.Info(method, eDomain, null, string.Format("{0}.{1} BeginInvoke.", typeof(TChannel).FullName, func.Method.Name));
+                channel.StartElapsed();
                 var iresult = func(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13);
                 result = iresult;
                 channel.LogElapsed(func.Method, eDomain);
@@ -1635,6 +1716,7 @@ namespace X.Util.Core
         {
             var method = Logger.Client.GetMethodInfo(func.Method, new object[] { t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13 }, channel.EndpointAddress);
             if (needLogInfo) Logger.Client.Info(method, eDomain, null, string.Format("{0}.{1} BeginInvoke.", typeof(TChannel).FullName, func.Method.Name));
+            channel.StartElapsed();
             func.BeginInvoke(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, result =>
             {
                 ((Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
@@ -1648,6 +1730,7 @@ namespace X.Util.Core
         {
             var method = Logger.Client.GetMethodInfo(func.Method, new object[] { t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13 }, channel.EndpointAddress);
             if (needLogInfo) Logger.Client.Info(method, eDomain, null, string.Format("{0}.{1} BeginInvoke.", typeof(TChannel).FullName, func.Method.Name));
+            channel.StartElapsed();
             func.BeginInvoke(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, result =>
             {
                 try
@@ -1670,6 +1753,7 @@ namespace X.Util.Core
         {
             var method = Logger.Client.GetMethodInfo(func.Method, new object[] { t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13 }, channel.EndpointAddress);
             if (needLogInfo) Logger.Client.Info(method, eDomain, null, string.Format("{0}.{1} BeginInvoke.", typeof(TChannel).FullName, func.Method.Name));
+            channel.StartElapsed();
             func.BeginInvoke(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, result =>
             {
                 var iresult = ((Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult>)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
@@ -1688,6 +1772,7 @@ namespace X.Util.Core
         {
             var method = Logger.Client.GetMethodInfo(func.Method, new object[] { t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13 }, channel.EndpointAddress);
             if (needLogInfo) Logger.Client.Info(method, eDomain, null, string.Format("{0}.{1} BeginInvoke.", typeof(TChannel).FullName, func.Method.Name));
+            channel.StartElapsed();
             func.BeginInvoke(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, result =>
             {
                 try
@@ -1715,6 +1800,7 @@ namespace X.Util.Core
         {
             var method = Logger.Client.GetMethodInfo(func.Method, new object[] { t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14 }, channel.EndpointAddress);
             if (needLogInfo) Logger.Client.Info(method, eDomain, null, string.Format("{0}.{1} BeginInvoke.", typeof(TChannel).FullName, func.Method.Name));
+            channel.StartElapsed();
             var iresult = func(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14);
             channel.LogElapsed(func.Method, eDomain);
             if (callSuccess(iresult))
@@ -1733,6 +1819,7 @@ namespace X.Util.Core
             try
             {
                 if (needLogInfo) Logger.Client.Info(method, eDomain, null, string.Format("{0}.{1} BeginInvoke.", typeof(TChannel).FullName, func.Method.Name));
+                channel.StartElapsed();
                 var iresult = func(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14);
                 result = iresult;
                 channel.LogElapsed(func.Method, eDomain);
@@ -1756,6 +1843,7 @@ namespace X.Util.Core
         {
             var method = Logger.Client.GetMethodInfo(func.Method, new object[] { t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14 }, channel.EndpointAddress);
             if (needLogInfo) Logger.Client.Info(method, eDomain, null, string.Format("{0}.{1} BeginInvoke.", typeof(TChannel).FullName, func.Method.Name));
+            channel.StartElapsed();
             func.BeginInvoke(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, result =>
             {
                 ((Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
@@ -1769,6 +1857,7 @@ namespace X.Util.Core
         {
             var method = Logger.Client.GetMethodInfo(func.Method, new object[] { t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14 }, channel.EndpointAddress);
             if (needLogInfo) Logger.Client.Info(method, eDomain, null, string.Format("{0}.{1} BeginInvoke.", typeof(TChannel).FullName, func.Method.Name));
+            channel.StartElapsed();
             func.BeginInvoke(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, result =>
             {
                 try
@@ -1791,6 +1880,7 @@ namespace X.Util.Core
         {
             var method = Logger.Client.GetMethodInfo(func.Method, new object[] { t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14 }, channel.EndpointAddress);
             if (needLogInfo) Logger.Client.Info(method, eDomain, null, string.Format("{0}.{1} BeginInvoke.", typeof(TChannel).FullName, func.Method.Name));
+            channel.StartElapsed();
             func.BeginInvoke(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, result =>
             {
                 var iresult = ((Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult>)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
@@ -1809,6 +1899,7 @@ namespace X.Util.Core
         {
             var method = Logger.Client.GetMethodInfo(func.Method, new object[] { t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14 }, channel.EndpointAddress);
             if (needLogInfo) Logger.Client.Info(method, eDomain, null, string.Format("{0}.{1} BeginInvoke.", typeof(TChannel).FullName, func.Method.Name));
+            channel.StartElapsed();
             func.BeginInvoke(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, result =>
             {
                 try
@@ -1836,6 +1927,7 @@ namespace X.Util.Core
         {
             var method = Logger.Client.GetMethodInfo(func.Method, new object[] { t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15 }, channel.EndpointAddress);
             if (needLogInfo) Logger.Client.Info(method, eDomain, null, string.Format("{0}.{1} BeginInvoke.", typeof(TChannel).FullName, func.Method.Name));
+            channel.StartElapsed();
             var iresult = func(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15);
             channel.LogElapsed(func.Method, eDomain);
             if (callSuccess(iresult))
@@ -1854,6 +1946,7 @@ namespace X.Util.Core
             try
             {
                 if (needLogInfo) Logger.Client.Info(method, eDomain, null, string.Format("{0}.{1} BeginInvoke.", typeof(TChannel).FullName, func.Method.Name));
+                channel.StartElapsed();
                 var iresult = func(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15);
                 result = iresult;
                 channel.LogElapsed(func.Method, eDomain);
@@ -1877,6 +1970,7 @@ namespace X.Util.Core
         {
             var method = Logger.Client.GetMethodInfo(func.Method, new object[] { t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15 }, channel.EndpointAddress);
             if (needLogInfo) Logger.Client.Info(method, eDomain, null, string.Format("{0}.{1} BeginInvoke.", typeof(TChannel).FullName, func.Method.Name));
+            channel.StartElapsed();
             func.BeginInvoke(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, result =>
             {
                 ((Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
@@ -1890,6 +1984,7 @@ namespace X.Util.Core
         {
             var method = Logger.Client.GetMethodInfo(func.Method, new object[] { t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15 }, channel.EndpointAddress);
             if (needLogInfo) Logger.Client.Info(method, eDomain, null, string.Format("{0}.{1} BeginInvoke.", typeof(TChannel).FullName, func.Method.Name));
+            channel.StartElapsed();
             func.BeginInvoke(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, result =>
             {
                 try
@@ -1912,6 +2007,7 @@ namespace X.Util.Core
         {
             var method = Logger.Client.GetMethodInfo(func.Method, new object[] { t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15 }, channel.EndpointAddress);
             if (needLogInfo) Logger.Client.Info(method, eDomain, null, string.Format("{0}.{1} BeginInvoke.", typeof(TChannel).FullName, func.Method.Name));
+            channel.StartElapsed();
             func.BeginInvoke(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, result =>
             {
                 var iresult = ((Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult>)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
@@ -1930,6 +2026,7 @@ namespace X.Util.Core
         {
             var method = Logger.Client.GetMethodInfo(func.Method, new object[] { t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15 }, channel.EndpointAddress);
             if (needLogInfo) Logger.Client.Info(method, eDomain, null, string.Format("{0}.{1} BeginInvoke.", typeof(TChannel).FullName, func.Method.Name));
+            channel.StartElapsed();
             func.BeginInvoke(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, result =>
             {
                 try
@@ -1957,6 +2054,7 @@ namespace X.Util.Core
         {
             var method = Logger.Client.GetMethodInfo(func.Method, new object[] { t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16 }, channel.EndpointAddress);
             if (needLogInfo) Logger.Client.Info(method, eDomain, null, string.Format("{0}.{1} BeginInvoke.", typeof(TChannel).FullName, func.Method.Name));
+            channel.StartElapsed();
             var iresult = func(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16);
             channel.LogElapsed(func.Method, eDomain);
             if (callSuccess(iresult))
@@ -1975,6 +2073,7 @@ namespace X.Util.Core
             try
             {
                 if (needLogInfo) Logger.Client.Info(method, eDomain, null, string.Format("{0}.{1} BeginInvoke.", typeof(TChannel).FullName, func.Method.Name));
+                channel.StartElapsed();
                 var iresult = func(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16);
                 result = iresult;
                 channel.LogElapsed(func.Method, eDomain);
@@ -1998,6 +2097,7 @@ namespace X.Util.Core
         {
             var method = Logger.Client.GetMethodInfo(func.Method, new object[] { t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16 }, channel.EndpointAddress);
             if (needLogInfo) Logger.Client.Info(method, eDomain, null, string.Format("{0}.{1} BeginInvoke.", typeof(TChannel).FullName, func.Method.Name));
+            channel.StartElapsed();
             func.BeginInvoke(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16, result =>
             {
                 ((Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
@@ -2011,6 +2111,7 @@ namespace X.Util.Core
         {
             var method = Logger.Client.GetMethodInfo(func.Method, new object[] { t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16 }, channel.EndpointAddress);
             if (needLogInfo) Logger.Client.Info(method, eDomain, null, string.Format("{0}.{1} BeginInvoke.", typeof(TChannel).FullName, func.Method.Name));
+            channel.StartElapsed();
             func.BeginInvoke(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16, result =>
             {
                 try
@@ -2033,6 +2134,7 @@ namespace X.Util.Core
         {
             var method = Logger.Client.GetMethodInfo(func.Method, new object[] { t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16 }, channel.EndpointAddress);
             if (needLogInfo) Logger.Client.Info(method, eDomain, null, string.Format("{0}.{1} BeginInvoke.", typeof(TChannel).FullName, func.Method.Name));
+            channel.StartElapsed();
             func.BeginInvoke(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16, result =>
             {
                 var iresult = ((Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult>)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
@@ -2051,6 +2153,7 @@ namespace X.Util.Core
         {
             var method = Logger.Client.GetMethodInfo(func.Method, new object[] { t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16 }, channel.EndpointAddress);
             if (needLogInfo) Logger.Client.Info(method, eDomain, null, string.Format("{0}.{1} BeginInvoke.", typeof(TChannel).FullName, func.Method.Name));
+            channel.StartElapsed();
             func.BeginInvoke(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16, result =>
             {
                 try

@@ -21,7 +21,6 @@ namespace X.Util.Provider
 
         #region 内部实现
         private readonly Stopwatch _sw = new Stopwatch();
-        private static T _instance;
         #endregion
 
         #region 对外公开属性和方法
@@ -36,14 +35,15 @@ namespace X.Util.Provider
         {
             get
             {
-                _instance = Core<T>.Instance(() => (T)Activator.CreateInstance(Type));
-                _sw.Start();
-                return _instance;
+                return Core<T>.Instance(() => (T)Activator.CreateInstance(Type));
             }
         }
-        /// <summary>
-        /// 关闭连接
-        /// </summary>
+
+        public void StartElapsed()
+        {
+            _sw.Start();
+        }
+
         public void LogElapsed(MethodBase method, LogDomain eDomain)
         {
             _sw.Stop();

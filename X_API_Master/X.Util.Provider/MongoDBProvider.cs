@@ -23,21 +23,18 @@ namespace X.Util.Provider
             MongoSever = Init(_servername);
             var db = MongoSever.GetDatabase(Database);
             Collection = db.GetCollection(CollectionName);
-            _sw.Start();
         }
         public MongoDbProvider(string collection)
         {
             MongoSever = Init(_servername);
             var db = MongoSever.GetDatabase(Database);
             Collection = db.GetCollection(collection);
-            _sw.Start();
         }
         public MongoDbProvider(string database, string collection)
         {
             MongoSever = Init(_servername);
             var db = MongoSever.GetDatabase(database);
             Collection = db.GetCollection(collection);
-            _sw.Start();
         }
         public MongoDbProvider(string database, string collection, string serverName)
         {
@@ -45,14 +42,12 @@ namespace X.Util.Provider
             MongoSever = Init(serverName);
             var db = MongoSever.GetDatabase(database);
             Collection = db.GetCollection(collection);
-            _sw.Start();
         }
         public MongoDbProvider(string database, string collection, IEnumerable<Uri> servers, string userName, string password)
         {
             MongoSever = ConfigurationHelper.MongoClientConfiguration(servers, userName, password).GetServer();
             var db = MongoSever.GetDatabase(database);
             Collection = db.GetCollection(collection);
-            _sw.Start();
         }
         #endregion
 
@@ -98,9 +93,11 @@ namespace X.Util.Provider
             get { return Collection; }
         }
 
-        /// <summary>
-        /// 关闭连接
-        /// </summary>
+        public void StartElapsed()
+        {
+            _sw.Start();
+        }
+
         public void LogElapsed(MethodBase method, LogDomain eDomain)
         {
             _sw.Stop();

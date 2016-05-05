@@ -70,21 +70,14 @@ namespace X.Util.Provider
         {
             Core<T>.Dispose((T)sender, EDomain);
         }
-
         #endregion
 
         #region 对外公开方法和属性
-        /// <summary>
-        /// 调用WCF的EndpointAddress
-        /// </summary>
         public string EndpointAddress
         {
             get { return ServiceModel.EndpointAddress; }
         }
 
-        /// <summary>
-        /// Provider提供的Channel实例
-        /// </summary>
         public T Client
         {
             get
@@ -93,13 +86,15 @@ namespace X.Util.Provider
                 _scope = new OperationContextScope((IClientChannel)_instance);
                 var header = MessageHeader.CreateHeader("clientip", "http://tempuri.org", CoreUtil.GetIp());
                 OperationContext.Current.OutgoingMessageHeaders.Add(header);
-                _sw.Start();
                 return _instance;
             }
         }
-        /// <summary>
-        /// 关闭Channel连接
-        /// </summary>
+
+        public void StartElapsed()
+        {
+            _sw.Start();
+        }
+
         public void LogElapsed(MethodBase method, LogDomain eDomain)
         {
             if (_scope != null) _scope.Dispose();
@@ -108,10 +103,6 @@ namespace X.Util.Provider
             _sw.Reset();
         }
 
-        /// <summary>
-        /// 回收
-        /// </summary>
-        /// <param name="eDomain"></param>
         public void Dispose(LogDomain eDomain)
         {
             if (_scope != null) _scope.Dispose();

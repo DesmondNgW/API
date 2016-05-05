@@ -20,7 +20,6 @@ namespace X.Util.Provider
 
         #region 内部实现
         private readonly Stopwatch _sw = new Stopwatch();
-        private static CouchbaseClient _client = default(CouchbaseClient);
         /// <summary>
         /// 初始化CouchbaseClient
         /// </summary>
@@ -37,21 +36,20 @@ namespace X.Util.Provider
         {
             get { return ServerName; }
         }
-        /// <summary>
-        /// Provider提供的CouchbaseClient实例
-        /// </summary>
+
         public ICouchbaseClient Client
         {
             get
             {
-                _client = Core<CouchbaseClient>.Instance(Init, ServerName, ConfigurationHelper.EndpointFile + ServerName);
-                _sw.Start();
-                return _client;
+                return Core<CouchbaseClient>.Instance(Init, ServerName, ConfigurationHelper.EndpointFile + ServerName);
             }
         }
-        /// <summary>
-        /// 关闭连接
-        /// </summary>
+
+        public void StartElapsed()
+        {
+            _sw.Start();
+        }
+
         public void LogElapsed(MethodBase method, LogDomain eDomain)
         {
             _sw.Stop();
