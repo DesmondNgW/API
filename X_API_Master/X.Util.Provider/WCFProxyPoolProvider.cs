@@ -33,7 +33,7 @@ namespace X.Util.Provider
         private OperationContextScope _scope;
         private static TimeSpan ValidTime
         {
-            get { return new TimeSpan(0, 10, 0); }
+            get { return new TimeSpan(0, 5, 0); }
         }
         private bool _channelFromCache = true;
         /// <summary>

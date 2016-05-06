@@ -29,7 +29,7 @@ namespace X.Util.Provider
         #region 内部实现
         private static TimeSpan ValidTime
         {
-            get { return new TimeSpan(2, 0, 0); }
+            get { return new TimeSpan(0, 5, 0); }
         }
         private static T _instance;
         private OperationContextScope _scope;
