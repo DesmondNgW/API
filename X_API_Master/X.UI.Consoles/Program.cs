@@ -7,39 +7,45 @@ using X.Util.Entities;
 
 namespace X.UI.Consoles
 {
-    public class Run
+    public class Channel
     {
-        public static Run Client
-        {
-            get
-            {
-                Console.WriteLine("Run");
-                return new Run();
-            }
-        }
-
         public void Test()
         {
             Console.WriteLine("Test");
         }
     }
 
+    public class Run<T> where T : new()
+    {
+        public T Client
+        {
+            get
+            {
+                Console.WriteLine("Run");
+                return new T();
+            }
+        }
+    }
+
 
     class Program
     {
-        static void tRun(Action action)
+        static void tRun(Action action, Run<Channel> c)
         {
+            Action acion = Delegate.CreateDelegate(typeof(Action), c.Client, action.Method) as Action;
             int i = 3;
             while ((i--) > 0)
             {
                 action();
+                acion();
             }
         }
 
         static void Main()
         {
             //Index();
-            tRun(Run.Client.Test);
+            var c = new Run<Channel>();
+            tRun(c.Client.Test, c);
             Console.ReadKey();
         }
 

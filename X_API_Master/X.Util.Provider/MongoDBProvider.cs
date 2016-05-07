@@ -2,7 +2,6 @@
 using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Reflection;
 using X.Util.Core;
 using X.Util.Entities;
@@ -52,7 +51,6 @@ namespace X.Util.Provider
         #endregion
 
         #region 实现方法
-        private readonly Stopwatch _sw = new Stopwatch();
         /// <summary>
         /// 初始化MongoDBClient
         /// </summary>
@@ -88,22 +86,15 @@ namespace X.Util.Provider
             get { return _servername; }
         }
 
+        public LogDomain Domain
+        {
+            get { return LogDomain.ThirdParty; }
+        }
+
         public MongoCollection<BsonDocument> Client
         {
             get { return Collection; }
         }
-
-        public void StartElapsed()
-        {
-            _sw.Start();
-        }
-
-        public void LogElapsed(MethodBase method, LogDomain eDomain)
-        {
-            _sw.Stop();
-            Core<MongoServer>.Close(method, _sw.ElapsedMilliseconds, eDomain);
-            _sw.Reset();
-        } 
         #endregion
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -26,7 +27,7 @@ namespace X.Util.Core
         /// <summary>
         /// GetMethodParamList
         /// </summary>
-        private Dictionary<string, object> GetParamList(MethodBase declaringType, IList<object> values)
+        private static Dictionary<string, object> GetParamList(MethodBase declaringType, IList<object> values)
         {
             var arguments = declaringType.GetParameters().OrderBy(p => p.Position).ToList();
             if (arguments.Count.Equals(0) || arguments.Count != values.Count) return null;
@@ -113,6 +114,23 @@ namespace X.Util.Core
                     log.Info(message);
                     break;
             }
+        }
+
+        public void Elapsed(MethodBase method, long elapsedMilliseconds, LogDomain edomain, string address = null)
+        {
+            if (method.DeclaringType != null) Client.Debug(method, edomain, null, address, string.Format(@"{0}.{1} finished, used {2} ms.", method.DeclaringType.FullName, method.Name, elapsedMilliseconds));
+        }
+
+        public Action GetStopElapsed(MethodBase method, LogDomain edomain, string address = null)
+        {
+            var sw = new Stopwatch();
+            sw.Start();
+            return () =>
+            {
+                sw.Stop();
+                Elapsed(method, sw.ElapsedMilliseconds, edomain, address);
+                sw.Reset();
+            };
         }
 
         public void Info(CoreMethodInfo methodInfo, LogDomain domain, object returnValue, params string[] messages)

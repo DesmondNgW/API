@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
-using System.Reflection;
 using X.Util.Core;
 using X.Util.Entities;
 using X.Util.Entities.Interface;
@@ -11,16 +9,27 @@ namespace X.Util.Provider
     {
         #region 构造函数
         public readonly Type Type = typeof(T);
+        public readonly LogDomain EDomain = LogDomain.Business;
         public InstanceProvider() { }
+
+        public InstanceProvider(LogDomain eDomain)
+        {
+            EDomain = eDomain;
+        }
 
         public InstanceProvider(Type t)
         {
             Type = t;
         }
+
+        public InstanceProvider(Type t, LogDomain eDomain)
+        {
+            Type = t;
+            EDomain = eDomain;
+        }
         #endregion
 
         #region 内部实现
-        private readonly Stopwatch _sw = new Stopwatch();
         #endregion
 
         #region 对外公开属性和方法
@@ -28,6 +37,12 @@ namespace X.Util.Provider
         {
             get { return Type.FullName; }
         }
+
+        public LogDomain Domain
+        {
+            get { return EDomain; }
+        }
+
         /// <summary>
         /// Provider提供的实例
         /// </summary>
@@ -37,18 +52,6 @@ namespace X.Util.Provider
             {
                 return Core<T>.Instance(() => (T)Activator.CreateInstance(Type));
             }
-        }
-
-        public void StartElapsed()
-        {
-            _sw.Start();
-        }
-
-        public void LogElapsed(MethodBase method, LogDomain eDomain)
-        {
-            _sw.Stop();
-            Core<T>.Close(method, _sw.ElapsedMilliseconds, eDomain);
-            _sw.Reset();
         }
         #endregion
     }

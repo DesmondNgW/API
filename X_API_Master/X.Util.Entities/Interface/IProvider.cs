@@ -1,6 +1,4 @@
-﻿using System.Reflection;
-
-namespace X.Util.Entities.Interface
+﻿namespace X.Util.Entities.Interface
 {
     public interface IProvider<out T>
     {
@@ -10,16 +8,9 @@ namespace X.Util.Entities.Interface
         T Client { get; }
 
         /// <summary>
-        /// 开始计算耗时
+        /// LogDomain
         /// </summary>
-        void StartElapsed();
-
-        /// <summary>
-        /// 记录耗时
-        /// </summary>
-        /// <param name="method"></param>
-        /// <param name="eDomain"></param>
-        void LogElapsed(MethodBase method, LogDomain eDomain);
+        LogDomain Domain { get; }
 
         /// <summary>
         /// 远程uri地址
@@ -27,11 +18,16 @@ namespace X.Util.Entities.Interface
         string EndpointAddress { get; }
     }
 
-    public interface IWcfProvider<out T> : IProvider<T>
+    public interface IClientProvider<out T> : IProvider<T>
     {
+        /// <summary>
+        /// 销毁实例
+        /// </summary>
+        void Dispose(LogDomain eDomain);
+
         /// <summary>
         /// 回收实例
         /// </summary>
-        void Dispose(LogDomain eDomain);
+        void ReleaseClient();
     }
 }

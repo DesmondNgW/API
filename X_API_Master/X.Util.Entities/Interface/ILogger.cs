@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System;
+using System.Reflection;
 
 namespace X.Util.Entities.Interface
 {
@@ -69,5 +70,23 @@ namespace X.Util.Entities.Interface
         /// <param name="address"></param>
         /// <param name="messages"></param>
         void Info(MethodBase declaringType, LogDomain domain, object returnValue, string address, params string[] messages);
+
+        /// <summary>
+        /// 记录方法调用耗时
+        /// </summary>
+        /// <param name="method"></param>
+        /// <param name="elapsedMilliseconds"></param>
+        /// <param name="edomain"></param>
+        /// <param name="address"></param>
+        void Elapsed(MethodBase method, long elapsedMilliseconds, LogDomain edomain, string address = null);
+
+        /// <summary>
+        /// 获取记录耗时的action
+        /// </summary>
+        /// <param name="method"></param>
+        /// <param name="edomain"></param>
+        /// <param name="address"></param>
+        /// <returns></returns>
+        Action GetStopElapsed(MethodBase method, LogDomain edomain, string address = null);
     }
 }

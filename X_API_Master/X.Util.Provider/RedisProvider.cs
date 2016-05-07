@@ -1,7 +1,5 @@
-﻿using System.Diagnostics;
-using ServiceStack.Redis;
+﻿using ServiceStack.Redis;
 using X.Util.Core;
-using System.Reflection;
 using X.Util.Entities;
 using X.Util.Entities.Interface;
 
@@ -19,7 +17,6 @@ namespace X.Util.Provider
         #endregion
 
         #region 内部实现
-        private readonly Stopwatch _sw = new Stopwatch();
         /// <summary>
         /// 缓冲池管理
         /// </summary>
@@ -33,6 +30,11 @@ namespace X.Util.Provider
         public string EndpointAddress
         {
             get { return ServerName; }
+        }
+
+        public LogDomain Domain
+        {
+            get { return LogDomain.ThirdParty; }
         }
 
         public IRedisClient Client
@@ -49,18 +51,6 @@ namespace X.Util.Provider
             {
                 return PooledClientManager(ServerName).GetReadOnlyClient();
             }
-        }
-
-        public void StartElapsed()
-        {
-            _sw.Start();
-        }
-
-        public void LogElapsed(MethodBase method, LogDomain eDomain)
-        {
-            _sw.Stop();
-            Core<RedisClient>.Close(method, _sw.ElapsedMilliseconds, eDomain);
-            _sw.Reset();
         }
         #endregion
     }

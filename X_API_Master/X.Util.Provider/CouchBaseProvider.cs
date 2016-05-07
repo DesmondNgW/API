@@ -1,6 +1,4 @@
 ﻿using Couchbase;
-using System.Diagnostics;
-using System.Reflection;
 using X.Util.Core;
 using X.Util.Entities;
 using X.Util.Entities.Interface;
@@ -19,7 +17,6 @@ namespace X.Util.Provider
         #endregion
 
         #region 内部实现
-        private readonly Stopwatch _sw = new Stopwatch();
         /// <summary>
         /// 初始化CouchbaseClient
         /// </summary>
@@ -37,24 +34,17 @@ namespace X.Util.Provider
             get { return ServerName; }
         }
 
+        public LogDomain Domain
+        {
+            get { return LogDomain.ThirdParty; }
+        }
+
         public ICouchbaseClient Client
         {
             get
             {
                 return Core<CouchbaseClient>.Instance(Init, ServerName, ConfigurationHelper.EndpointFile + ServerName);
             }
-        }
-
-        public void StartElapsed()
-        {
-            _sw.Start();
-        }
-
-        public void LogElapsed(MethodBase method, LogDomain eDomain)
-        {
-            _sw.Stop();
-            Core<CouchbaseClient>.Close(method, _sw.ElapsedMilliseconds, eDomain);
-            _sw.Reset();
         }
         #endregion
     }

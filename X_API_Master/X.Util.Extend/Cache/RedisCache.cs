@@ -16,7 +16,6 @@ namespace X.Util.Extend.Cache
         #region 构造函数
         public readonly string ServerName = ConfigurationHelper.RedisDefaultServername;
         public static readonly IRedisCache Default = new RedisCache();
-        public const LogDomain EDomain = LogDomain.ThirdParty;
         private RedisCache() { }
         public RedisCache(string serverName)
         {
@@ -28,7 +27,7 @@ namespace X.Util.Extend.Cache
         public T Get<T>(string key)
         {
             var redisProvider = new RedisProvider(ServerName);
-            return CoreAccess<IRedisClient>.TryCall(EDomain, redisProvider.ReadOnlyClient.Get<T>, key, CoreBase.CallSuccess, redisProvider);
+            return CoreAccess<IRedisClient>.TryCall(redisProvider.ReadOnlyClient.Get<T>, key, CoreBase.CallSuccess, redisProvider);
         }
 
         public T GetJson<T>(string key)
@@ -40,42 +39,42 @@ namespace X.Util.Extend.Cache
         public void Set<T>(string key, T value)
         {
             var redisProvider = new RedisProvider(ServerName);
-            CoreAccess<IRedisClient>.TryCallAsync(EDomain, redisProvider.Client.Add, key, value, CoreBase.CallSuccess, redisProvider, null, false);
+            CoreAccess<IRedisClient>.TryCallAsync(redisProvider.Client.Add, key, value, CoreBase.CallSuccess, redisProvider, null, false);
         }
 
         public void SetJson<T>(string key, T value)
         {
             var redisProvider = new RedisProvider(ServerName);
-            CoreAccess<IRedisClient>.TryCallAsync(EDomain, redisProvider.Client.Add, key, value.ToJson(), CoreBase.CallSuccess, redisProvider, null, false);
+            CoreAccess<IRedisClient>.TryCallAsync(redisProvider.Client.Add, key, value.ToJson(), CoreBase.CallSuccess, redisProvider, null, false);
         }
 
         public void Set<T>(string key, T value, DateTime expire)
         {
             var redisProvider = new RedisProvider(ServerName);
-            CoreAccess<IRedisClient>.TryCallAsync(EDomain, redisProvider.Client.Add, key, value, expire, CoreBase.CallSuccess, redisProvider, null, false);
+            CoreAccess<IRedisClient>.TryCallAsync(redisProvider.Client.Add, key, value, expire, CoreBase.CallSuccess, redisProvider, null, false);
         }
 
         public void SetJson<T>(string key, T value, DateTime expire)
         {
             var redisProvider = new RedisProvider(ServerName);
-            CoreAccess<IRedisClient>.TryCallAsync(EDomain, redisProvider.Client.Add, key, value.ToJson(), expire, CoreBase.CallSuccess, redisProvider, null, false);
+            CoreAccess<IRedisClient>.TryCallAsync(redisProvider.Client.Add, key, value.ToJson(), expire, CoreBase.CallSuccess, redisProvider, null, false);
         }
 
         public void Set<T>(string key, T value, TimeSpan expire)
         {
             var redisProvider = new RedisProvider(ServerName);
-            CoreAccess<IRedisClient>.TryCallAsync(EDomain, redisProvider.Client.Add, key, value, expire, CoreBase.CallSuccess, redisProvider, null, false);
+            CoreAccess<IRedisClient>.TryCallAsync(redisProvider.Client.Add, key, value, expire, CoreBase.CallSuccess, redisProvider, null, false);
         }
         public void SetJson<T>(string key, T value, TimeSpan expire)
         {
             var redisProvider = new RedisProvider(ServerName);
-            CoreAccess<IRedisClient>.TryCallAsync(EDomain, redisProvider.Client.Add, key, value.ToJson(), expire, CoreBase.CallSuccess, redisProvider, null, false);
+            CoreAccess<IRedisClient>.TryCallAsync(redisProvider.Client.Add, key, value.ToJson(), expire, CoreBase.CallSuccess, redisProvider, null, false);
         }
 
         public void Remove(string key)
         {
             var redisProvider = new RedisProvider(ServerName);
-            CoreAccess<IRedisClient>.TryCallAsync(EDomain, redisProvider.Client.Remove, key, CoreBase.CallSuccess, redisProvider, null, false);
+            CoreAccess<IRedisClient>.TryCallAsync(redisProvider.Client.Remove, key, CoreBase.CallSuccess, redisProvider, null, false);
         }
         #endregion
     }

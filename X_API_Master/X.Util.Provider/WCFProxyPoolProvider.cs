@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Concurrent;
-using System.Diagnostics;
 using System.Reflection;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
@@ -14,7 +13,7 @@ namespace X.Util.Provider
     /// WCF ClientPool Provider
     /// </summary>
     /// <typeparam name="TChannel"></typeparam>
-    public sealed class WcfProxyPoolProvider<TChannel> : IWcfProvider<TChannel>
+    public sealed class WcfProxyPoolProvider<TChannel> : IClientProvider<TChannel>
     {
         #region 构造函数
         public readonly LogDomain EDomain = LogDomain.Core;
@@ -28,12 +27,11 @@ namespace X.Util.Provider
         #endregion
 
         #region 内部实现
-        private readonly Stopwatch _sw = new Stopwatch();
         private static TChannel _instance;
         private OperationContextScope _scope;
         private static TimeSpan ValidTime
         {
-            get { return new TimeSpan(0, 5, 0); }
+            get { return new TimeSpan(0, 1, 30); }
         }
         private bool _channelFromCache = true;
         /// <summary>
@@ -158,31 +156,27 @@ namespace X.Util.Provider
             get { return ServiceModel.EndpointAddress; }
         }
 
+        public LogDomain Domain
+        {
+            get { return EDomain; }
+        }
+
         public TChannel Client
         {
             get
             {
-                _instance = Core<TChannel>.Instance(GetClient, CacheKey, new TimeSpan(0, 1, 0), Core<TChannel>.IsValid4CommunicationObject);
+                _instance = Core<TChannel>.Instance(GetClient, CacheKey, new TimeSpan(0, 0, 15), Core<TChannel>.IsValid4CommunicationObject);
                 _scope = new OperationContextScope((IClientChannel)_instance);
                 var header = MessageHeader.CreateHeader("clientip", "http://tempuri.org", CoreUtil.GetIp());
                 OperationContext.Current.OutgoingMessageHeaders.Add(header);
                 _scope.Dispose();
-                _sw.Start();
                 return _instance;
             }
         }
 
-        public void StartElapsed()
-        {
-            _sw.Start();
-        }
-
-        public void LogElapsed(MethodBase method, LogDomain eDomain)
+        public void ReleaseClient()
         {
             if (_scope != null) _scope.Dispose();
-            _sw.Stop();
-            Core<TChannel>.Close(method, _sw.ElapsedMilliseconds, eDomain, EndpointAddress);
-            _sw.Reset();
             ReleaseClient(_instance);
         }
 
