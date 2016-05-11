@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.Reflection;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
@@ -29,6 +29,7 @@ namespace X.Util.Provider
 
         #region 内部实现
         private static TChannel _instance;
+        private static readonly ManualResetEvent EventWait = new ManualResetEvent(false);
         private OperationContextScope _scope;
         private static TimeSpan ValidTime
         {
@@ -63,7 +64,7 @@ namespace X.Util.Provider
         /// <returns></returns>
         private CoreChannelFactoryPool<TChannel> InitCoreFactoryPool()
         {
-            var result = new CoreChannelFactoryPool<TChannel> { ServiceUri = EndpointAddress, Size = Size, ContextQueue = new ConcurrentQueue<ContextChannel<TChannel>>() };
+            var result = new CoreChannelFactoryPool<TChannel> { ServiceUri = EndpointAddress, Size = Size, ContextQueue = new Queue<ContextChannel<TChannel>>() };
             try
             {
                 for (var i = 0; i < ServiceModel.MaxPoolSize; i++)
@@ -105,23 +106,22 @@ namespace X.Util.Provider
         /// <returns></returns>
         private TChannel GetClient()
         {
-            var channel = default(TChannel);
-            try
+            lock (CoreUtil.Getlocker(typeof (TChannel) + "WcfProxyPoolProvider.GetClient"))
             {
-                lock (CoreUtil.Getlocker(typeof (TChannel) + "WcfProxyPoolProvider.GetClient"))
+                var channel = default(TChannel);
+                try
                 {
                     var now = DateTime.Now;
                     while (CoreFactoryPool.ContextQueue.Count <= 0)
                     {
-                        if ((DateTime.Now - now).TotalSeconds > 60)
-                        {
-                            if (CoreFactoryPool.ContextQueue.Count < 2*Size) ReleaseClient(channel);
-                            return channel;
-                        }
-                        Thread.Sleep(1);
+                        EventWait.Reset();
+                        EventWait.WaitOne();
+                        if (!((DateTime.Now - now).TotalSeconds > 60)) continue;
+                        if (CoreFactoryPool.ContextQueue.Count < 2*Size) ReleaseClient(channel);
+                        return channel;
                     }
-                    ContextChannel<TChannel> contextChannel;
-                    if (CoreFactoryPool.ContextQueue.TryDequeue(out contextChannel) && contextChannel != null)
+                    var contextChannel = CoreFactoryPool.ContextQueue.Dequeue();
+                    if (contextChannel != null)
                     {
                         var unCreateChannel = contextChannel.ChannelClosedTime > DateTime.Now && Core<TChannel>.IsValid4CommunicationObject(contextChannel.Channel);
                         channel = contextChannel.Channel;
@@ -131,33 +131,40 @@ namespace X.Util.Provider
                             Core<TChannel>.InitChannel(channel, CloseChannel);
                         }
                     }
+
                 }
+                catch (Exception ex)
+                {
+                    EventWait.Set();
+                    Logger.Client.Error(MethodBase.GetCurrentMethod(), LogDomain.Util, null, string.Empty, ex.ToString());
+                }
+                return channel;
             }
-            catch (Exception ex)
-            {
-                Logger.Client.Error(MethodBase.GetCurrentMethod(), LogDomain.Util, null, string.Empty, ex.ToString());
-            }
-            return channel;
-            
         }
+
         /// <summary>
         /// 把Channel实例回收到连接池
         /// </summary>
         /// <param name="channel"></param>
         private void ReleaseClient(TChannel channel)
         {
-            try
+            lock (CoreUtil.Getlocker(typeof(TChannel) + "WcfProxyPoolProvider.ReleaseClient"))
             {
-                if (!Core<TChannel>.IsValid4CommunicationObject(channel))
+                try
                 {
-                    channel = CoreChannelFactory.CreateChannel();
-                    Core<TChannel>.InitChannel(channel, CloseChannel);
+                    if (!Core<TChannel>.IsValid4CommunicationObject(channel))
+                    {
+                        channel = CoreChannelFactory.CreateChannel();
+                        Core<TChannel>.InitChannel(channel, CloseChannel);
+                    }
+                    CoreFactoryPool.ContextQueue.Enqueue(new ContextChannel<TChannel> { Channel = channel, ChannelClosedTime = DateTime.Now.Add(ValidTime) });
+                    EventWait.Set();
                 }
-                CoreFactoryPool.ContextQueue.Enqueue(new ContextChannel<TChannel> { Channel = channel, ChannelClosedTime = DateTime.Now.Add(ValidTime) });
-            }
-            catch (Exception ex)
-            {
-                Logger.Client.Error(MethodBase.GetCurrentMethod(), LogDomain.Util, null, string.Empty, ex.ToString());
+                catch (Exception ex)
+                {
+                    EventWait.Set();
+                    Logger.Client.Error(MethodBase.GetCurrentMethod(), LogDomain.Util, null, string.Empty, ex.ToString());
+                }
             }
         }
         #endregion

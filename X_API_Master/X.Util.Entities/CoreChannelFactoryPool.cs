@@ -1,4 +1,4 @@
-﻿using System.Collections.Concurrent;
+﻿using System.Collections.Generic;
 
 namespace X.Util.Entities
 {
@@ -6,6 +6,6 @@ namespace X.Util.Entities
     {
         public int Size { get; set; }
         public string ServiceUri { get; set; }
-        public ConcurrentQueue<ContextChannel<TChannel>> ContextQueue { get; set; }
+        public Queue<ContextChannel<TChannel>> ContextQueue { get; set; }
     }
 }

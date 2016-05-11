@@ -13,6 +13,7 @@ namespace X.UI.Consoles
     {
         public static ConcurrentQueue<int> Queue = new ConcurrentQueue<int>(){};
         private static object locker = new object();
+        private static ManualResetEvent _eventWait = new ManualResetEvent(false);
 
         public void Init()
         {
@@ -22,6 +23,10 @@ namespace X.UI.Consoles
         public void In(int i)
         {
             Queue.Enqueue(i);
+            lock (locker)
+            {
+                _eventWait.Set();
+            }
         }
 
         public int Out()
@@ -38,7 +43,9 @@ namespace X.UI.Consoles
             {
                 while (Queue.Count == 0)
                 {
-                    Thread.Sleep(1);
+                    _eventWait.Reset();
+                    _eventWait.WaitOne();
+                    //Thread.Sleep(1);
                 }
                 var o = Out();
                 Console.WriteLine(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff") + o);
