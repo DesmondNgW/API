@@ -29,7 +29,6 @@ namespace X.Util.Provider
 
         #region 内部实现
         private static TChannel _instance;
-        private static readonly ManualResetEvent EventWait = new ManualResetEvent(false);
         private OperationContextScope _scope;
         private static TimeSpan ValidTime
         {
@@ -64,7 +63,7 @@ namespace X.Util.Provider
         /// <returns></returns>
         private CoreChannelFactoryPool<TChannel> InitCoreFactoryPool()
         {
-            var result = new CoreChannelFactoryPool<TChannel> { ServiceUri = EndpointAddress, Size = Size, ContextQueue = new Queue<ContextChannel<TChannel>>() };
+            var result = new CoreChannelFactoryPool<TChannel> { ServiceUri = EndpointAddress, Size = Size, ContextQueue = new Queue<ContextChannel<TChannel>>(), EventWait = new ManualResetEvent(false) };
             try
             {
                 for (var i = 0; i < ServiceModel.MaxPoolSize; i++)
@@ -114,8 +113,8 @@ namespace X.Util.Provider
                     var now = DateTime.Now;
                     while (CoreFactoryPool.ContextQueue.Count <= 0)
                     {
-                        EventWait.Reset();
-                        EventWait.WaitOne();
+                        CoreFactoryPool.EventWait.Reset();
+                        CoreFactoryPool.EventWait.WaitOne();
                         if (!((DateTime.Now - now).TotalSeconds > 60)) continue;
                         if (CoreFactoryPool.ContextQueue.Count < 2*Size) ReleaseClient(channel);
                         return channel;
@@ -135,7 +134,7 @@ namespace X.Util.Provider
                 }
                 catch (Exception ex)
                 {
-                    EventWait.Set();
+                    CoreFactoryPool.EventWait.Set();
                     Logger.Client.Error(MethodBase.GetCurrentMethod(), LogDomain.Util, null, string.Empty, ex.ToString());
                 }
                 return channel;
@@ -158,11 +157,11 @@ namespace X.Util.Provider
                         Core<TChannel>.InitChannel(channel, CloseChannel);
                     }
                     CoreFactoryPool.ContextQueue.Enqueue(new ContextChannel<TChannel> { Channel = channel, ChannelClosedTime = DateTime.Now.Add(ValidTime) });
-                    EventWait.Set();
+                    CoreFactoryPool.EventWait.Set();
                 }
                 catch (Exception ex)
                 {
-                    EventWait.Set();
+                    CoreFactoryPool.EventWait.Set();
                     Logger.Client.Error(MethodBase.GetCurrentMethod(), LogDomain.Util, null, string.Empty, ex.ToString());
                 }
             }
