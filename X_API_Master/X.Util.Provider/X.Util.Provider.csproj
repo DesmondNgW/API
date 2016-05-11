@@ -72,7 +72,6 @@
     <Compile Include="InstanceProvider.cs" />
     <Compile Include="MongoDBProvider.cs" />
     <Compile Include="RedisProvider.cs" />
-    <Compile Include="WCFProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WCFProxyPoolProvider.cs" />
   </ItemGroup>

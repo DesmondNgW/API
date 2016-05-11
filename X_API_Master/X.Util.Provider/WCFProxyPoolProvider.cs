@@ -3,6 +3,7 @@ using System.Collections.Concurrent;
 using System.Reflection;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
+using System.Threading;
 using X.Util.Core;
 using X.Util.Entities;
 using X.Util.Entities.Interface;
@@ -31,9 +32,8 @@ namespace X.Util.Provider
         private OperationContextScope _scope;
         private static TimeSpan ValidTime
         {
-            get { return new TimeSpan(0, 1, 30); }
+            get { return new TimeSpan(0, 3, 0); }
         }
-        private bool _channelFromCache = true;
         /// <summary>
         /// 缓存Key
         /// </summary>
@@ -108,6 +108,14 @@ namespace X.Util.Provider
             var channel = default(TChannel);
             try
             {
+                var now = DateTime.Now;
+                while (CoreFactoryPool.ContextQueue.Count <= 0)
+                {
+                    Thread.Sleep(1);
+                    if (!((DateTime.Now - now).TotalSeconds > 60)) continue;
+                    if (CoreFactoryPool.ContextQueue.Count < 2 * Size) ReleaseClient(channel);
+                    return channel;
+                }
                 ContextChannel<TChannel> contextChannel;
                 if (CoreFactoryPool.ContextQueue.TryDequeue(out contextChannel) && contextChannel != null)
                 {
@@ -118,7 +126,6 @@ namespace X.Util.Provider
                         channel = CoreChannelFactory.CreateChannel();
                         Core<TChannel>.InitChannel(channel, CloseChannel);
                     }
-                    _channelFromCache = false;
                 }
             }
             catch (Exception ex)
@@ -135,7 +142,6 @@ namespace X.Util.Provider
         {
             try
             {
-                if (_channelFromCache) return;
                 if (!Core<TChannel>.IsValid4CommunicationObject(channel))
                 {
                     channel = CoreChannelFactory.CreateChannel();
@@ -165,7 +171,7 @@ namespace X.Util.Provider
         {
             get
             {
-                _instance = Core<TChannel>.Instance(GetClient, CacheKey, new TimeSpan(0, 0, 15), Core<TChannel>.IsValid4CommunicationObject);
+                _instance = GetClient();
                 _scope = new OperationContextScope((IClientChannel)_instance);
                 var header = MessageHeader.CreateHeader("clientip", "http://tempuri.org", CoreUtil.GetIp());
                 OperationContext.Current.OutgoingMessageHeaders.Add(header);
