@@ -113,10 +113,12 @@ namespace X.Util.Provider
                     var now = DateTime.Now;
                     while (CoreFactoryPool.ContextQueue.Count <= 0)
                     {
+                        if ((DateTime.Now - now).TotalSeconds > 60)
+                        {
+                            if (CoreFactoryPool.ContextQueue.Count < 2*Size) ReleaseClient(channel);
+                            return channel;
+                        }
                         Thread.Sleep(1);
-                        if (!((DateTime.Now - now).TotalSeconds > 60)) continue;
-                        if (CoreFactoryPool.ContextQueue.Count < 2*Size) ReleaseClient(channel);
-                        return channel;
                     }
                     ContextChannel<TChannel> contextChannel;
                     if (CoreFactoryPool.ContextQueue.TryDequeue(out contextChannel) && contextChannel != null)
