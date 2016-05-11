@@ -108,23 +108,26 @@ namespace X.Util.Provider
             var channel = default(TChannel);
             try
             {
-                var now = DateTime.Now;
-                while (CoreFactoryPool.ContextQueue.Count <= 0)
+                lock (CoreUtil.Getlocker(typeof (TChannel) + "WcfProxyPoolProvider.GetClient"))
                 {
-                    Thread.Sleep(1);
-                    if (!((DateTime.Now - now).TotalSeconds > 60)) continue;
-                    if (CoreFactoryPool.ContextQueue.Count < 2 * Size) ReleaseClient(channel);
-                    return channel;
-                }
-                ContextChannel<TChannel> contextChannel;
-                if (CoreFactoryPool.ContextQueue.TryDequeue(out contextChannel) && contextChannel != null)
-                {
-                    var unCreateChannel = contextChannel.ChannelClosedTime > DateTime.Now && Core<TChannel>.IsValid4CommunicationObject(contextChannel.Channel);
-                    channel = contextChannel.Channel;
-                    if (!unCreateChannel)
+                    var now = DateTime.Now;
+                    while (CoreFactoryPool.ContextQueue.Count <= 0)
                     {
-                        channel = CoreChannelFactory.CreateChannel();
-                        Core<TChannel>.InitChannel(channel, CloseChannel);
+                        Thread.Sleep(1);
+                        if (!((DateTime.Now - now).TotalSeconds > 60)) continue;
+                        if (CoreFactoryPool.ContextQueue.Count < 2*Size) ReleaseClient(channel);
+                        return channel;
+                    }
+                    ContextChannel<TChannel> contextChannel;
+                    if (CoreFactoryPool.ContextQueue.TryDequeue(out contextChannel) && contextChannel != null)
+                    {
+                        var unCreateChannel = contextChannel.ChannelClosedTime > DateTime.Now && Core<TChannel>.IsValid4CommunicationObject(contextChannel.Channel);
+                        channel = contextChannel.Channel;
+                        if (!unCreateChannel)
+                        {
+                            channel = CoreChannelFactory.CreateChannel();
+                            Core<TChannel>.InitChannel(channel, CloseChannel);
+                        }
                     }
                 }
             }
@@ -133,6 +136,7 @@ namespace X.Util.Provider
                 Logger.Client.Error(MethodBase.GetCurrentMethod(), LogDomain.Util, null, string.Empty, ex.ToString());
             }
             return channel;
+            
         }
         /// <summary>
         /// 把Channel实例回收到连接池

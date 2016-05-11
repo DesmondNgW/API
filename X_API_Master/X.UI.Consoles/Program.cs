@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using X.Util.Core;
 using X.Util.Entities;
 
@@ -9,43 +11,70 @@ namespace X.UI.Consoles
 {
     public class Channel
     {
+        public static ConcurrentQueue<int> Queue = new ConcurrentQueue<int>(){};
+        private static object locker = new object();
+
+        public void Init()
+        {
+            for (var i = 4; i < 5; i++) In(i);
+        }
+
+        public void In(int i)
+        {
+            Queue.Enqueue(i);
+        }
+
+        public int Out()
+        {
+            int r;
+            Queue.TryDequeue(out r);
+            Thread.Sleep(1000);
+            return r;
+        }
+
         public void Test()
         {
-            Console.WriteLine("Test");
-        }
-    }
-
-    public class Run<T> where T : new()
-    {
-        public T Client
-        {
-            get
+            lock (locker)
             {
-                Console.WriteLine("Run");
-                return new T();
+                while (Queue.Count == 0)
+                {
+                    Thread.Sleep(1);
+                }
+                var o = Out();
+                Console.WriteLine(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff") + o);
             }
         }
     }
-
 
     class Program
     {
-        static void tRun(Action action, Run<Channel> c)
-        {
-            Action acion = Delegate.CreateDelegate(typeof(Action), c.Client, action.Method) as Action;
-            int i = 3;
-            while ((i--) > 0)
-            {
-                action();
-                acion();
-            }
-        }
-
         static void Main()
         {
             //Index();
-            var c = new Run<Channel>();
-            tRun(c.Client.Test, c);
+            var c1 = new Channel();
+            var c2 = new Channel();
+            var c3 = new Channel();
+            c2.Init();
+            Thread th =new Thread(() =>
+            {
+                c1.Test();
+                c1.In(7);
+            });
+            Thread th2 = new Thread(() =>
+            {
+                c2.Test();
+                c2.In(8);
+            });
+            Thread th3 = new Thread(() =>
+            {
+                c3.Test();
+                c3.In(9);
+            });
+            th.Start();
+            th2.Start();
+            th3.Start();
+
+
             Console.ReadKey();
         }
 
