@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Collections.Concurrent;
 using System.Reflection;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
@@ -63,7 +63,7 @@ namespace X.Util.Provider
         /// <returns></returns>
         private CoreChannelFactoryPool<TChannel> InitCoreFactoryPool()
         {
-            var result = new CoreChannelFactoryPool<TChannel> { ServiceUri = EndpointAddress, Size = Size, ContextQueue = new Queue<ContextChannel<TChannel>>(), EventWait = new ManualResetEvent(false) };
+            var result = new CoreChannelFactoryPool<TChannel> { ServiceUri = EndpointAddress, Size = Size, ContextQueue = new ConcurrentQueue<ContextChannel<TChannel>>(), EventWait = new ManualResetEvent(false) };
             try
             {
                 for (var i = 0; i < ServiceModel.MaxPoolSize; i++)
@@ -105,39 +105,35 @@ namespace X.Util.Provider
         /// <returns></returns>
         private TChannel GetClient()
         {
-            lock (CoreUtil.Getlocker(typeof (TChannel) + "WcfProxyPoolProvider.GetClient"))
+            var now = DateTime.Now;
+            while (true)
             {
                 var channel = default(TChannel);
                 try
                 {
-                    var now = DateTime.Now;
-                    while (CoreFactoryPool.ContextQueue.Count <= 0)
-                    {
-                        CoreFactoryPool.EventWait.Reset();
-                        CoreFactoryPool.EventWait.WaitOne();
-                        if (!((DateTime.Now - now).TotalSeconds > 60)) continue;
-                        if (CoreFactoryPool.ContextQueue.Count < 2*Size) ReleaseClient(channel);
-                        return channel;
-                    }
-                    var contextChannel = CoreFactoryPool.ContextQueue.Dequeue();
-                    if (contextChannel != null)
+                    ContextChannel<TChannel> contextChannel;
+                    CoreFactoryPool.ContextQueue.TryDequeue(out contextChannel);
+                    if (CoreFactoryPool.ContextQueue.TryDequeue(out contextChannel) && contextChannel != null)
                     {
                         var unCreateChannel = contextChannel.ChannelClosedTime > DateTime.Now && Core<TChannel>.IsValid4CommunicationObject(contextChannel.Channel);
                         channel = contextChannel.Channel;
-                        if (!unCreateChannel)
-                        {
-                            channel = CoreChannelFactory.CreateChannel();
-                            Core<TChannel>.InitChannel(channel, CloseChannel);
-                        }
+                        if (unCreateChannel) return channel;
+                        channel = CoreChannelFactory.CreateChannel();
+                        Core<TChannel>.InitChannel(channel, CloseChannel);
+                        return channel;
                     }
-
+                    CoreFactoryPool.EventWait.Reset();
+                    CoreFactoryPool.EventWait.WaitOne();
+                    if (!((DateTime.Now - now).TotalSeconds > 60)) continue;
+                    if (CoreFactoryPool.ContextQueue.Count < 2 * Size) ReleaseClient(channel);
+                    return channel;
                 }
                 catch (Exception ex)
                 {
                     CoreFactoryPool.EventWait.Set();
                     Logger.Client.Error(MethodBase.GetCurrentMethod(), LogDomain.Util, null, string.Empty, ex.ToString());
+                    return channel;
                 }
-                return channel;
             }
         }
 
@@ -147,23 +143,20 @@ namespace X.Util.Provider
         /// <param name="channel"></param>
         private void ReleaseClient(TChannel channel)
         {
-            lock (CoreUtil.Getlocker(typeof(TChannel) + "WcfProxyPoolProvider.ReleaseClient"))
+            try
             {
-                try
+                if (!Core<TChannel>.IsValid4CommunicationObject(channel))
                 {
-                    if (!Core<TChannel>.IsValid4CommunicationObject(channel))
-                    {
-                        channel = CoreChannelFactory.CreateChannel();
-                        Core<TChannel>.InitChannel(channel, CloseChannel);
-                    }
-                    CoreFactoryPool.ContextQueue.Enqueue(new ContextChannel<TChannel> { Channel = channel, ChannelClosedTime = DateTime.Now.Add(ValidTime) });
-                    CoreFactoryPool.EventWait.Set();
+                    channel = CoreChannelFactory.CreateChannel();
+                    Core<TChannel>.InitChannel(channel, CloseChannel);
                 }
-                catch (Exception ex)
-                {
-                    CoreFactoryPool.EventWait.Set();
-                    Logger.Client.Error(MethodBase.GetCurrentMethod(), LogDomain.Util, null, string.Empty, ex.ToString());
-                }
+                CoreFactoryPool.ContextQueue.Enqueue(new ContextChannel<TChannel> { Channel = channel, ChannelClosedTime = DateTime.Now.Add(ValidTime) });
+                CoreFactoryPool.EventWait.Set();
+            }
+            catch (Exception ex)
+            {
+                CoreFactoryPool.EventWait.Set();
+                Logger.Client.Error(MethodBase.GetCurrentMethod(), LogDomain.Util, null, string.Empty, ex.ToString());
             }
         }
         #endregion

@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections.Concurrent;
 using System.Threading;
 
 namespace X.Util.Entities
@@ -8,6 +8,6 @@ namespace X.Util.Entities
         public int Size { get; set; }
         public string ServiceUri { get; set; }
         public ManualResetEvent EventWait { get; set; }
-        public Queue<ContextChannel<TChannel>> ContextQueue { get; set; }
+        public ConcurrentQueue<ContextChannel<TChannel>> ContextQueue { get; set; }
     }
 }
