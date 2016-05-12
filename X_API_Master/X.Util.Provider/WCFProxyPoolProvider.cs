@@ -82,7 +82,7 @@ namespace X.Util.Provider
         /// <summary>
         /// ChannelFactory连接池实例
         /// </summary>
-        private CoreChannelFactoryPool<TChannel> CoreFactoryPool
+        internal CoreChannelFactoryPool<TChannel> CoreFactoryPool
         {
             get { return Core<CoreChannelFactoryPool<TChannel>>.Instance(InitCoreFactoryPool, CacheKey); }
         }
@@ -112,7 +112,6 @@ namespace X.Util.Provider
                 try
                 {
                     ContextChannel<TChannel> contextChannel;
-                    CoreFactoryPool.ContextQueue.TryDequeue(out contextChannel);
                     if (CoreFactoryPool.ContextQueue.TryDequeue(out contextChannel) && contextChannel != null)
                     {
                         var unCreateChannel = contextChannel.ChannelClosedTime > DateTime.Now && Core<TChannel>.IsValid4CommunicationObject(contextChannel.Channel);
