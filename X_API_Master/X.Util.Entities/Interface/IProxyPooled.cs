@@ -3,11 +3,6 @@
     public interface IProxyPooled<TChannel>
     {
         /// <summary>
-        /// 连接池
-        /// </summary>
-        CoreChannelFactoryPool<TChannel> CoreFactoryPool { get; }
-
-        /// <summary>
         /// 获取Client
         /// </summary>
         /// <returns></returns>

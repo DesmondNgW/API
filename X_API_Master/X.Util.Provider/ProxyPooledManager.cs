@@ -24,6 +24,10 @@ namespace X.Util.Provider
             CacheKey = string.Format("{0}_{1}", Request.EndpointAddress, Request.PoolSize);
         }
 
+        /// <summary>
+        /// 连接池初始化
+        /// </summary>
+        /// <returns></returns>
         private CoreChannelFactoryPool<TChannel> InitCoreFactoryPool()
         {
             var result = new CoreChannelFactoryPool<TChannel> { ServiceUri = Request.EndpointAddress, Size = Request.PoolSize, ContextQueue = new ConcurrentQueue<ContextChannel<TChannel>>(), EventWait = new ManualResetEvent(false) };
@@ -43,7 +47,10 @@ namespace X.Util.Provider
             return result;
         }
 
-        public CoreChannelFactoryPool<TChannel> CoreFactoryPool
+        /// <summary>
+        /// 连接池单例
+        /// </summary>
+        private CoreChannelFactoryPool<TChannel> CoreFactoryPool
         {
             get { return Core<CoreChannelFactoryPool<TChannel>>.Instance(InitCoreFactoryPool, CacheKey); }
         }

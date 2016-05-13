@@ -15,9 +15,9 @@ namespace X.Util.Provider
     {
         #region 构造函数
         public readonly LogDomain EDomain = LogDomain.Core;
-        public readonly ProxyPooledManager<TChannel> ProxyPooledManager;
+        public readonly IProxyPooled<TChannel> ProxyPooledManager;
         public readonly CoreServiceModel ServiceModel = ServiceModelTool.GetServiceModel<TChannel>();
-        private ProxyPooledManager<TChannel> GetProxyPooledManager()
+        private IProxyPooled<TChannel> GetProxyPooledManager()
         {
             return new ProxyPooledManager<TChannel>(new ProxyPooledRequest<TChannel>()
             {
