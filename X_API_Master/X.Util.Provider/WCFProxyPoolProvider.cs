@@ -82,7 +82,7 @@ namespace X.Util.Provider
         /// <summary>
         /// ChannelFactory连接池实例
         /// </summary>
-        internal CoreChannelFactoryPool<TChannel> CoreFactoryPool
+        private CoreChannelFactoryPool<TChannel> CoreFactoryPool
         {
             get { return Core<CoreChannelFactoryPool<TChannel>>.Instance(InitCoreFactoryPool, CacheKey); }
         }

@@ -1,18 +1,14 @@
 ﻿using System;
 using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Threading;
-using X.Util.Core;
-using X.Util.Entities;
 
 namespace X.UI.Consoles
 {
     public class Channel
     {
-        public static ConcurrentQueue<int> Queue = new ConcurrentQueue<int>(){};
-        private static ManualResetEvent _eventWait = new ManualResetEvent(false);
+        public static ConcurrentQueue<int> Queue = new ConcurrentQueue<int>();
+        private static readonly ManualResetEvent EventWait = new ManualResetEvent(false);
 
         public void Init()
         {
@@ -22,7 +18,7 @@ namespace X.UI.Consoles
         public void In(int i)
         {
             Queue.Enqueue(i);
-            _eventWait.Set();
+            EventWait.Set();
         }
 
         public int Out()
@@ -40,8 +36,8 @@ namespace X.UI.Consoles
                 var o = Out();
                 if (o == default(int))
                 {
-                    _eventWait.Reset();
-                    _eventWait.WaitOne();
+                    EventWait.Reset();
+                    EventWait.WaitOne();
                 }
                 else
                 {
