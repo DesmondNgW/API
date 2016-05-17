@@ -51,7 +51,6 @@
     <Compile Include="CacheKey.cs" />
     <Compile Include="CacheResult.cs" />
     <Compile Include="EnumInfo.cs" />
-    <Compile Include="Event.cs" />
     <Compile Include="Interface\ICacheData.cs" />
     <Compile Include="Interface\ICoreCache.cs" />
     <Compile Include="Interface\ICouchCache.cs" />
