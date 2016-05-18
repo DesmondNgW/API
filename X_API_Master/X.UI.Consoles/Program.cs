@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Concurrent;
+//using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 
@@ -57,17 +58,17 @@ namespace X.UI.Consoles
             var c2 = new Channel();
             var c3 = new Channel();
             c2.Init();
-            Thread th =new Thread(() =>
+            var th = new Thread(() =>
             {
                 c1.Test();
                 c1.In(7);
             });
-            Thread th2 = new Thread(() =>
+            var th2 = new Thread(() =>
             {
                 c2.Test();
                 c2.In(8);
             });
-            Thread th3 = new Thread(() =>
+            var th3 = new Thread(() =>
             {
                 c3.Test();
                 c3.In(9);
@@ -76,7 +77,24 @@ namespace X.UI.Consoles
             th2.Start();
             th3.Start();
 
+            //Func<string, int, string> pad = (s, c) => s.Length < c ? string.Join("0", new string[c - s.Length + 1]) + s : s;
 
+            //var result = new List<string>();
+            //for (var i = 2; i <= 999999; i++)
+            //{
+            //    var count = 0;
+            //    for (var j = 2; j <= Math.Sqrt(i); j++)
+            //    {
+            //        if (i%j != 0) continue;
+            //        count++;
+            //        break;
+            //    }
+            //    if (count != 0) continue;
+            //    if ((i >= 1000 || i <= 0) && (i < 2000 || i >= 3000) && (i < 300000 || i >= 301000) &&
+            //        (i < 600000 || i >= 610000)) continue;
+            //    Console.WriteLine(pad(i.ToString(), 6));
+            //    result.Add(pad(i.ToString(), 6));
+            //}
             Console.ReadKey();
         }
 

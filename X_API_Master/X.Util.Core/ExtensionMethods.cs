@@ -221,21 +221,6 @@ namespace X.Util.Core
         {
             return t ?? Activator.CreateInstance<T>();
         }
-
-        public static void On<T>(this T obj, string name, Action<T, Event<T>> callBack)
-        {
-            CoreEvent<T>.On(obj, name, callBack);
-        }
-
-        public static void Off<T>(this T obj, string name = "", Action<T, Event<T>> callBack = null)
-        {
-            CoreEvent<T>.Off(obj, name, callBack);
-        }
-
-        public static void Fire<T>(this T obj, string name)
-        {
-            CoreEvent<T>.Fire(obj, name);
-        }
         #endregion
     }
 }
