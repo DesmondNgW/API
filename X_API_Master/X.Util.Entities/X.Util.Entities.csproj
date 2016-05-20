@@ -48,6 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ActionContext.cs" />
     <Compile Include="CacheKey.cs" />
     <Compile Include="CacheResult.cs" />
     <Compile Include="EnumInfo.cs" />
