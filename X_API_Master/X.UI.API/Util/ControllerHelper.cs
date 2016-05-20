@@ -18,7 +18,8 @@ namespace X.UI.API.Util
 {
     public class ControllerHelper
     {
-        public const string ArgumentName = "Uid";
+        private const string ArgumentName = "Uid";
+        private const string TokenName = "Token";
         public const LogDomain EDomain = LogDomain.Interface;
 
         #region 解析ApiController上下文
@@ -64,7 +65,8 @@ namespace X.UI.API.Util
                     if (Equals(item.Value, null)) throw new ArgumentNullException(item.Key);
                     if (!(item.Value is UserRequestDtoBase)) continue;
                     var dtoProps = item.Value.GetType().GetProperties();
-                    foreach (var p in dtoProps.Where(p => Equals(p.GetValue(item.Value, null), null)))
+                    var item1 = item;
+                    foreach (var p in dtoProps.Where(p => Equals(p.GetValue(item1.Value, null), null)))
                     {
                         throw new ArgumentNullException(p.Name);
                     }
@@ -83,7 +85,7 @@ namespace X.UI.API.Util
             apiContext.ActionArgument = actionContext.ActionArguments.ToJson();
             apiContext.Now = DateTime.Now;
             apiContext.Cid = Thread.CurrentThread.ManagedThreadId.ToString();
-            if (string.IsNullOrEmpty((apiContext.Token))) throw new ArgumentNullException("Token");
+            if (string.IsNullOrEmpty((apiContext.Token))) throw new ArgumentNullException(TokenName);
             if (!ServiceHelper.VerifyToken(apiContext.Token)) throw new InvalidOperationException("token错误或过期");
             return apiContext;
         } 

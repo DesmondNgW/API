@@ -1,4 +1,5 @@
 ﻿using System.Net;
+using System.ServiceModel.Web;
 using System.Text.RegularExpressions;
 using System.Web;
 using X.Util.Core;
@@ -7,14 +8,19 @@ namespace X.Util.Other
 {
     public class IpBase
     {
-		public static string GetIp(HttpContextWrapper context)
+        public static string GetIp()
+        {
+            return CoreUtil.GetIp();
+        }
+        
+        public static string GetIp(HttpContextWrapper context)
         {
             return CoreUtil.GetIp(context);
         }
 
-        public static string GetIp()
+        public static string GetIp(WebOperationContext context)
         {
-            return CoreUtil.GetIp();
+            return CoreUtil.GetIp(context);
         }
 
         public static string GetLocalIp()
