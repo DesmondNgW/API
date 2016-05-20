@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Web;
 using System.Linq;
 using System.Security.Cryptography;
-using System.ServiceModel.Web;
 using System.Text;
 
 namespace X.Util.Core
@@ -20,28 +19,13 @@ namespace X.Util.Core
         /// <returns></returns>
         public static string GetIp()
         {
-            return Equals(HttpContext.Current, null) ? Equals(WebOperationContext.Current, null) ? LocalIp : GetIp(WebOperationContext.Current) : GetIp(new HttpContextWrapper(HttpContext.Current));
+            return Equals(HttpContext.Current, null) ? LocalIp : GetIp(new HttpContextWrapper(HttpContext.Current));
         }
 
         public static string GetIp(HttpContextWrapper context)
         {
             if (Equals(context, null)) return LocalIp;
             var ips = new[] { LocalIp, context.Request.ServerVariables["REMOTE_ADDR"], context.Request.ServerVariables["HTTP_X_FORWARDED_FOR"] };
-            var length = ips.Length;
-            var ret = ips[0];
-            while (length-- > 0)
-            {
-                if (string.IsNullOrWhiteSpace(ips[length]) || Equals(ips[length], "::1")) continue;
-                ret = ips[length];
-                break;
-            }
-            return ret;
-        }
-
-        public static string GetIp(WebOperationContext context)
-        {
-            if (Equals(context, null)) return LocalIp;
-            var ips = new[] { LocalIp, context.IncomingRequest.Headers["REMOTE_ADDR"], context.IncomingRequest.Headers["HTTP_X_FORWARDED_FOR"] };
             var length = ips.Length;
             var ret = ips[0];
             while (length-- > 0)

@@ -1,5 +1,4 @@
 ﻿using System.Net;
-using System.ServiceModel.Web;
 using System.Text.RegularExpressions;
 using System.Web;
 using X.Util.Core;
@@ -14,11 +13,6 @@ namespace X.Util.Other
         }
         
         public static string GetIp(HttpContextWrapper context)
-        {
-            return CoreUtil.GetIp(context);
-        }
-
-        public static string GetIp(WebOperationContext context)
         {
             return CoreUtil.GetIp(context);
         }
