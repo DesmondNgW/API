@@ -10,6 +10,6 @@ namespace X.Util.Entities
         public string MethodName { get; set; }
         public string Address { get; set; }
         public Dictionary<string, object> ParamList { get; set; }
-        public MethodBase DeclaringType { get; set; }
+        public MethodBase Method { get; set; }
     }
 }

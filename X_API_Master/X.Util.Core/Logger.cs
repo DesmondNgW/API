@@ -22,7 +22,7 @@ namespace X.Util.Core
         /// </summary>
         public CoreMethodInfo GetMethodInfo(MethodBase declaringType, object[] values, string address)
         {
-            return new CoreMethodInfo { ClassName = declaringType.DeclaringType, MethodName = declaringType.Name, DeclaringType = declaringType, ParamList = GetParamList(declaringType, values), Address = address };
+            return new CoreMethodInfo { ClassName = declaringType.DeclaringType, MethodName = declaringType.Name, Method = declaringType, ParamList = GetParamList(declaringType, values), Address = address };
         }
         /// <summary>
         /// GetMethodParamList

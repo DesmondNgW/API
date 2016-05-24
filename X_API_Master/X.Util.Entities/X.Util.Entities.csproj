@@ -48,10 +48,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ActionContext.cs" />
+    <Compile Include="ActionRequest.cs" />
+    <Compile Include="ActionResponse.cs" />
     <Compile Include="CacheKey.cs" />
     <Compile Include="CacheResult.cs" />
     <Compile Include="EnumInfo.cs" />
     <Compile Include="Interface\ICacheData.cs" />
+    <Compile Include="Interface\IContext.cs" />
     <Compile Include="Interface\ICoreCache.cs" />
     <Compile Include="Interface\ICouchCache.cs" />
     <Compile Include="Interface\ILogger.cs" />

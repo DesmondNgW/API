@@ -77,7 +77,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppConfig.cs" />
+    <Compile Include="Context\ChannelContext.cs" />
     <Compile Include="ConfigurationHelper.cs" />
+    <Compile Include="Context\ContextHelper.cs" />
     <Compile Include="Core.cs" />
     <Compile Include="CoreAccess.cs" />
     <Compile Include="CoreAspect.cs" />
@@ -90,6 +92,7 @@
     <Compile Include="LocalCache.cs" />
     <Compile Include="Logger.cs" />
     <Compile Include="LoggerConfig.cs" />
+    <Compile Include="Context\LoggerContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServiceModelTool.cs" />
     <Compile Include="StringConvert.cs" />
