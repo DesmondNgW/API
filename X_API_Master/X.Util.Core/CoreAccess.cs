@@ -155,7 +155,7 @@ namespace X.Util.Core
             foreach (var item in list) item.Calling(context);
             func.BeginInvoke(t1, result =>
             {
-                ((Action)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
+                ((Action<T1>)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
                 foreach (var item in list) item.Called(context);
                 if (callBack != null) callBack.Invoke();
             }, null);
@@ -170,7 +170,7 @@ namespace X.Util.Core
             {
                 try
                 {
-                    ((Action)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
+                    ((Action<T1>)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
                     foreach (var item in list) item.Called(context);
                     if (callBack != null) callBack.Invoke();
                 }
@@ -190,7 +190,7 @@ namespace X.Util.Core
             foreach (var item in list) item.Calling(context);
             func.BeginInvoke(t1, result =>
             {
-                var iresult = ((Func<TResult>)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
+                var iresult = ((Func<T1, TResult>)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
                 ContextHelper.AddResponse(context, iresult, null, null);
                 foreach (var item in list) item.Called(context);
                 if (callBack != null) callBack.Invoke(iresult);
@@ -206,7 +206,7 @@ namespace X.Util.Core
             {
                 try
                 {
-                    var iresult = ((Func<TResult>)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
+                    var iresult = ((Func<T1, TResult>)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
                     ContextHelper.AddResponse(context, iresult, null, null);
                     foreach (var item in list) item.Called(context);
                     if (callBack != null) callBack.Invoke(iresult);
@@ -260,7 +260,7 @@ namespace X.Util.Core
             foreach (var item in list) item.Calling(context);
             func.BeginInvoke(t1, t2, result =>
             {
-                ((Action)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
+                ((Action<T1, T2>)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
                 foreach (var item in list) item.Called(context);
                 if (callBack != null) callBack.Invoke();
             }, null);
@@ -275,7 +275,7 @@ namespace X.Util.Core
             {
                 try
                 {
-                    ((Action)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
+                    ((Action<T1, T2>)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
                     foreach (var item in list) item.Called(context);
                     if (callBack != null) callBack.Invoke();
                 }
@@ -295,7 +295,7 @@ namespace X.Util.Core
             foreach (var item in list) item.Calling(context);
             func.BeginInvoke(t1, t2, result =>
             {
-                var iresult = ((Func<TResult>)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
+                var iresult = ((Func<T1, T2, TResult>)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
                 ContextHelper.AddResponse(context, iresult, null, null);
                 foreach (var item in list) item.Called(context);
                 if (callBack != null) callBack.Invoke(iresult);
@@ -311,7 +311,7 @@ namespace X.Util.Core
             {
                 try
                 {
-                    var iresult = ((Func<TResult>)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
+                    var iresult = ((Func<T1, T2, TResult>)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
                     ContextHelper.AddResponse(context, iresult, null, null);
                     foreach (var item in list) item.Called(context);
                     if (callBack != null) callBack.Invoke(iresult);
@@ -365,7 +365,7 @@ namespace X.Util.Core
             foreach (var item in list) item.Calling(context);
             func.BeginInvoke(t1, t2, t3, result =>
             {
-                ((Action)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
+                ((Action<T1, T2, T3>)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
                 foreach (var item in list) item.Called(context);
                 if (callBack != null) callBack.Invoke();
             }, null);
@@ -380,7 +380,7 @@ namespace X.Util.Core
             {
                 try
                 {
-                    ((Action)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
+                    ((Action<T1, T2, T3>)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
                     foreach (var item in list) item.Called(context);
                     if (callBack != null) callBack.Invoke();
                 }
@@ -400,7 +400,7 @@ namespace X.Util.Core
             foreach (var item in list) item.Calling(context);
             func.BeginInvoke(t1, t2, t3, result =>
             {
-                var iresult = ((Func<TResult>)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
+                var iresult = ((Func<T1, T2, T3, TResult>)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
                 ContextHelper.AddResponse(context, iresult, null, null);
                 foreach (var item in list) item.Called(context);
                 if (callBack != null) callBack.Invoke(iresult);
@@ -416,7 +416,7 @@ namespace X.Util.Core
             {
                 try
                 {
-                    var iresult = ((Func<TResult>)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
+                    var iresult = ((Func<T1, T2, T3, TResult>)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
                     ContextHelper.AddResponse(context, iresult, null, null);
                     foreach (var item in list) item.Called(context);
                     if (callBack != null) callBack.Invoke(iresult);
@@ -470,7 +470,7 @@ namespace X.Util.Core
             foreach (var item in list) item.Calling(context);
             func.BeginInvoke(t1, t2, t3, t4, result =>
             {
-                ((Action)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
+                ((Action<T1, T2, T3, T4>)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
                 foreach (var item in list) item.Called(context);
                 if (callBack != null) callBack.Invoke();
             }, null);
@@ -485,7 +485,7 @@ namespace X.Util.Core
             {
                 try
                 {
-                    ((Action)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
+                    ((Action<T1, T2, T3, T4>)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
                     foreach (var item in list) item.Called(context);
                     if (callBack != null) callBack.Invoke();
                 }
@@ -505,7 +505,7 @@ namespace X.Util.Core
             foreach (var item in list) item.Calling(context);
             func.BeginInvoke(t1, t2, t3, t4, result =>
             {
-                var iresult = ((Func<TResult>)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
+                var iresult = ((Func<T1, T2, T3, T4, TResult>)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
                 ContextHelper.AddResponse(context, iresult, null, null);
                 foreach (var item in list) item.Called(context);
                 if (callBack != null) callBack.Invoke(iresult);
@@ -521,7 +521,7 @@ namespace X.Util.Core
             {
                 try
                 {
-                    var iresult = ((Func<TResult>)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
+                    var iresult = ((Func<T1, T2, T3, T4, TResult>)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
                     ContextHelper.AddResponse(context, iresult, null, null);
                     foreach (var item in list) item.Called(context);
                     if (callBack != null) callBack.Invoke(iresult);
@@ -575,7 +575,7 @@ namespace X.Util.Core
             foreach (var item in list) item.Calling(context);
             func.BeginInvoke(t1, t2, t3, t4, t5, result =>
             {
-                ((Action)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
+                ((Action<T1, T2, T3, T4, T5>)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
                 foreach (var item in list) item.Called(context);
                 if (callBack != null) callBack.Invoke();
             }, null);
@@ -590,7 +590,7 @@ namespace X.Util.Core
             {
                 try
                 {
-                    ((Action)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
+                    ((Action<T1, T2, T3, T4, T5>)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
                     foreach (var item in list) item.Called(context);
                     if (callBack != null) callBack.Invoke();
                 }
@@ -610,7 +610,7 @@ namespace X.Util.Core
             foreach (var item in list) item.Calling(context);
             func.BeginInvoke(t1, t2, t3, t4, t5, result =>
             {
-                var iresult = ((Func<TResult>)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
+                var iresult = ((Func<T1, T2, T3, T4, T5, TResult>)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
                 ContextHelper.AddResponse(context, iresult, null, null);
                 foreach (var item in list) item.Called(context);
                 if (callBack != null) callBack.Invoke(iresult);
@@ -626,7 +626,7 @@ namespace X.Util.Core
             {
                 try
                 {
-                    var iresult = ((Func<TResult>)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
+                    var iresult = ((Func<T1, T2, T3, T4, T5, TResult>)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
                     ContextHelper.AddResponse(context, iresult, null, null);
                     foreach (var item in list) item.Called(context);
                     if (callBack != null) callBack.Invoke(iresult);
@@ -680,7 +680,7 @@ namespace X.Util.Core
             foreach (var item in list) item.Calling(context);
             func.BeginInvoke(t1, t2, t3, t4, t5, t6, result =>
             {
-                ((Action)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
+                ((Action<T1, T2, T3, T4, T5, T6>)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
                 foreach (var item in list) item.Called(context);
                 if (callBack != null) callBack.Invoke();
             }, null);
@@ -695,7 +695,7 @@ namespace X.Util.Core
             {
                 try
                 {
-                    ((Action)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
+                    ((Action<T1, T2, T3, T4, T5, T6>)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
                     foreach (var item in list) item.Called(context);
                     if (callBack != null) callBack.Invoke();
                 }
@@ -715,7 +715,7 @@ namespace X.Util.Core
             foreach (var item in list) item.Calling(context);
             func.BeginInvoke(t1, t2, t3, t4, t5, t6, result =>
             {
-                var iresult = ((Func<TResult>)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
+                var iresult = ((Func<T1, T2, T3, T4, T5, T6, TResult>)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
                 ContextHelper.AddResponse(context, iresult, null, null);
                 foreach (var item in list) item.Called(context);
                 if (callBack != null) callBack.Invoke(iresult);
@@ -731,7 +731,7 @@ namespace X.Util.Core
             {
                 try
                 {
-                    var iresult = ((Func<TResult>)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
+                    var iresult = ((Func<T1, T2, T3, T4, T5, T6, TResult>)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
                     ContextHelper.AddResponse(context, iresult, null, null);
                     foreach (var item in list) item.Called(context);
                     if (callBack != null) callBack.Invoke(iresult);
@@ -785,7 +785,7 @@ namespace X.Util.Core
             foreach (var item in list) item.Calling(context);
             func.BeginInvoke(t1, t2, t3, t4, t5, t6, t7, result =>
             {
-                ((Action)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
+                ((Action<T1, T2, T3, T4, T5, T6, T7>)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
                 foreach (var item in list) item.Called(context);
                 if (callBack != null) callBack.Invoke();
             }, null);
@@ -800,7 +800,7 @@ namespace X.Util.Core
             {
                 try
                 {
-                    ((Action)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
+                    ((Action<T1, T2, T3, T4, T5, T6, T7>)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
                     foreach (var item in list) item.Called(context);
                     if (callBack != null) callBack.Invoke();
                 }
@@ -820,7 +820,7 @@ namespace X.Util.Core
             foreach (var item in list) item.Calling(context);
             func.BeginInvoke(t1, t2, t3, t4, t5, t6, t7, result =>
             {
-                var iresult = ((Func<TResult>)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
+                var iresult = ((Func<T1, T2, T3, T4, T5, T6, T7, TResult>)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
                 ContextHelper.AddResponse(context, iresult, null, null);
                 foreach (var item in list) item.Called(context);
                 if (callBack != null) callBack.Invoke(iresult);
@@ -836,7 +836,7 @@ namespace X.Util.Core
             {
                 try
                 {
-                    var iresult = ((Func<TResult>)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
+                    var iresult = ((Func<T1, T2, T3, T4, T5, T6, T7, TResult>)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
                     ContextHelper.AddResponse(context, iresult, null, null);
                     foreach (var item in list) item.Called(context);
                     if (callBack != null) callBack.Invoke(iresult);
@@ -890,7 +890,7 @@ namespace X.Util.Core
             foreach (var item in list) item.Calling(context);
             func.BeginInvoke(t1, t2, t3, t4, t5, t6, t7, t8, result =>
             {
-                ((Action)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
+                ((Action<T1, T2, T3, T4, T5, T6, T7, T8>)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
                 foreach (var item in list) item.Called(context);
                 if (callBack != null) callBack.Invoke();
             }, null);
@@ -905,7 +905,7 @@ namespace X.Util.Core
             {
                 try
                 {
-                    ((Action)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
+                    ((Action<T1, T2, T3, T4, T5, T6, T7, T8>)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
                     foreach (var item in list) item.Called(context);
                     if (callBack != null) callBack.Invoke();
                 }
@@ -925,7 +925,7 @@ namespace X.Util.Core
             foreach (var item in list) item.Calling(context);
             func.BeginInvoke(t1, t2, t3, t4, t5, t6, t7, t8, result =>
             {
-                var iresult = ((Func<TResult>)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
+                var iresult = ((Func<T1, T2, T3, T4, T5, T6, T7, T8, TResult>)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
                 ContextHelper.AddResponse(context, iresult, null, null);
                 foreach (var item in list) item.Called(context);
                 if (callBack != null) callBack.Invoke(iresult);
@@ -941,7 +941,7 @@ namespace X.Util.Core
             {
                 try
                 {
-                    var iresult = ((Func<TResult>)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
+                    var iresult = ((Func<T1, T2, T3, T4, T5, T6, T7, T8, TResult>)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
                     ContextHelper.AddResponse(context, iresult, null, null);
                     foreach (var item in list) item.Called(context);
                     if (callBack != null) callBack.Invoke(iresult);
@@ -995,7 +995,7 @@ namespace X.Util.Core
             foreach (var item in list) item.Calling(context);
             func.BeginInvoke(t1, t2, t3, t4, t5, t6, t7, t8, t9, result =>
             {
-                ((Action)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
+                ((Action<T1, T2, T3, T4, T5, T6, T7, T8, T9>)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
                 foreach (var item in list) item.Called(context);
                 if (callBack != null) callBack.Invoke();
             }, null);
@@ -1010,7 +1010,7 @@ namespace X.Util.Core
             {
                 try
                 {
-                    ((Action)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
+                    ((Action<T1, T2, T3, T4, T5, T6, T7, T8, T9>)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
                     foreach (var item in list) item.Called(context);
                     if (callBack != null) callBack.Invoke();
                 }
@@ -1030,7 +1030,7 @@ namespace X.Util.Core
             foreach (var item in list) item.Calling(context);
             func.BeginInvoke(t1, t2, t3, t4, t5, t6, t7, t8, t9, result =>
             {
-                var iresult = ((Func<TResult>)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
+                var iresult = ((Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
                 ContextHelper.AddResponse(context, iresult, null, null);
                 foreach (var item in list) item.Called(context);
                 if (callBack != null) callBack.Invoke(iresult);
@@ -1046,7 +1046,7 @@ namespace X.Util.Core
             {
                 try
                 {
-                    var iresult = ((Func<TResult>)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
+                    var iresult = ((Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
                     ContextHelper.AddResponse(context, iresult, null, null);
                     foreach (var item in list) item.Called(context);
                     if (callBack != null) callBack.Invoke(iresult);
@@ -1100,7 +1100,7 @@ namespace X.Util.Core
             foreach (var item in list) item.Calling(context);
             func.BeginInvoke(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, result =>
             {
-                ((Action)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
+                ((Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
                 foreach (var item in list) item.Called(context);
                 if (callBack != null) callBack.Invoke();
             }, null);
@@ -1115,7 +1115,7 @@ namespace X.Util.Core
             {
                 try
                 {
-                    ((Action)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
+                    ((Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
                     foreach (var item in list) item.Called(context);
                     if (callBack != null) callBack.Invoke();
                 }
@@ -1135,7 +1135,7 @@ namespace X.Util.Core
             foreach (var item in list) item.Calling(context);
             func.BeginInvoke(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, result =>
             {
-                var iresult = ((Func<TResult>)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
+                var iresult = ((Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult>)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
                 ContextHelper.AddResponse(context, iresult, null, null);
                 foreach (var item in list) item.Called(context);
                 if (callBack != null) callBack.Invoke(iresult);
@@ -1151,7 +1151,7 @@ namespace X.Util.Core
             {
                 try
                 {
-                    var iresult = ((Func<TResult>)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
+                    var iresult = ((Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult>)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
                     ContextHelper.AddResponse(context, iresult, null, null);
                     foreach (var item in list) item.Called(context);
                     if (callBack != null) callBack.Invoke(iresult);
@@ -1205,7 +1205,7 @@ namespace X.Util.Core
             foreach (var item in list) item.Calling(context);
             func.BeginInvoke(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, result =>
             {
-                ((Action)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
+                ((Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
                 foreach (var item in list) item.Called(context);
                 if (callBack != null) callBack.Invoke();
             }, null);
@@ -1220,7 +1220,7 @@ namespace X.Util.Core
             {
                 try
                 {
-                    ((Action)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
+                    ((Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
                     foreach (var item in list) item.Called(context);
                     if (callBack != null) callBack.Invoke();
                 }
@@ -1240,7 +1240,7 @@ namespace X.Util.Core
             foreach (var item in list) item.Calling(context);
             func.BeginInvoke(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, result =>
             {
-                var iresult = ((Func<TResult>)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
+                var iresult = ((Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult>)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
                 ContextHelper.AddResponse(context, iresult, null, null);
                 foreach (var item in list) item.Called(context);
                 if (callBack != null) callBack.Invoke(iresult);
@@ -1256,7 +1256,7 @@ namespace X.Util.Core
             {
                 try
                 {
-                    var iresult = ((Func<TResult>)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
+                    var iresult = ((Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult>)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
                     ContextHelper.AddResponse(context, iresult, null, null);
                     foreach (var item in list) item.Called(context);
                     if (callBack != null) callBack.Invoke(iresult);
@@ -1310,7 +1310,7 @@ namespace X.Util.Core
             foreach (var item in list) item.Calling(context);
             func.BeginInvoke(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, result =>
             {
-                ((Action)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
+                ((Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
                 foreach (var item in list) item.Called(context);
                 if (callBack != null) callBack.Invoke();
             }, null);
@@ -1325,7 +1325,7 @@ namespace X.Util.Core
             {
                 try
                 {
-                    ((Action)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
+                    ((Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
                     foreach (var item in list) item.Called(context);
                     if (callBack != null) callBack.Invoke();
                 }
@@ -1345,7 +1345,7 @@ namespace X.Util.Core
             foreach (var item in list) item.Calling(context);
             func.BeginInvoke(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, result =>
             {
-                var iresult = ((Func<TResult>)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
+                var iresult = ((Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult>)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
                 ContextHelper.AddResponse(context, iresult, null, null);
                 foreach (var item in list) item.Called(context);
                 if (callBack != null) callBack.Invoke(iresult);
@@ -1361,7 +1361,7 @@ namespace X.Util.Core
             {
                 try
                 {
-                    var iresult = ((Func<TResult>)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
+                    var iresult = ((Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult>)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
                     ContextHelper.AddResponse(context, iresult, null, null);
                     foreach (var item in list) item.Called(context);
                     if (callBack != null) callBack.Invoke(iresult);
@@ -1415,7 +1415,7 @@ namespace X.Util.Core
             foreach (var item in list) item.Calling(context);
             func.BeginInvoke(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, result =>
             {
-                ((Action)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
+                ((Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
                 foreach (var item in list) item.Called(context);
                 if (callBack != null) callBack.Invoke();
             }, null);
@@ -1430,7 +1430,7 @@ namespace X.Util.Core
             {
                 try
                 {
-                    ((Action)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
+                    ((Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
                     foreach (var item in list) item.Called(context);
                     if (callBack != null) callBack.Invoke();
                 }
@@ -1450,7 +1450,7 @@ namespace X.Util.Core
             foreach (var item in list) item.Calling(context);
             func.BeginInvoke(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, result =>
             {
-                var iresult = ((Func<TResult>)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
+                var iresult = ((Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult>)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
                 ContextHelper.AddResponse(context, iresult, null, null);
                 foreach (var item in list) item.Called(context);
                 if (callBack != null) callBack.Invoke(iresult);
@@ -1466,7 +1466,7 @@ namespace X.Util.Core
             {
                 try
                 {
-                    var iresult = ((Func<TResult>)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
+                    var iresult = ((Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult>)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
                     ContextHelper.AddResponse(context, iresult, null, null);
                     foreach (var item in list) item.Called(context);
                     if (callBack != null) callBack.Invoke(iresult);
@@ -1520,7 +1520,7 @@ namespace X.Util.Core
             foreach (var item in list) item.Calling(context);
             func.BeginInvoke(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, result =>
             {
-                ((Action)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
+                ((Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
                 foreach (var item in list) item.Called(context);
                 if (callBack != null) callBack.Invoke();
             }, null);
@@ -1535,7 +1535,7 @@ namespace X.Util.Core
             {
                 try
                 {
-                    ((Action)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
+                    ((Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
                     foreach (var item in list) item.Called(context);
                     if (callBack != null) callBack.Invoke();
                 }
@@ -1555,7 +1555,7 @@ namespace X.Util.Core
             foreach (var item in list) item.Calling(context);
             func.BeginInvoke(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, result =>
             {
-                var iresult = ((Func<TResult>)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
+                var iresult = ((Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult>)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
                 ContextHelper.AddResponse(context, iresult, null, null);
                 foreach (var item in list) item.Called(context);
                 if (callBack != null) callBack.Invoke(iresult);
@@ -1571,7 +1571,7 @@ namespace X.Util.Core
             {
                 try
                 {
-                    var iresult = ((Func<TResult>)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
+                    var iresult = ((Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult>)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
                     ContextHelper.AddResponse(context, iresult, null, null);
                     foreach (var item in list) item.Called(context);
                     if (callBack != null) callBack.Invoke(iresult);
@@ -1625,7 +1625,7 @@ namespace X.Util.Core
             foreach (var item in list) item.Calling(context);
             func.BeginInvoke(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, result =>
             {
-                ((Action)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
+                ((Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
                 foreach (var item in list) item.Called(context);
                 if (callBack != null) callBack.Invoke();
             }, null);
@@ -1640,7 +1640,7 @@ namespace X.Util.Core
             {
                 try
                 {
-                    ((Action)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
+                    ((Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
                     foreach (var item in list) item.Called(context);
                     if (callBack != null) callBack.Invoke();
                 }
@@ -1660,7 +1660,7 @@ namespace X.Util.Core
             foreach (var item in list) item.Calling(context);
             func.BeginInvoke(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, result =>
             {
-                var iresult = ((Func<TResult>)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
+                var iresult = ((Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult>)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
                 ContextHelper.AddResponse(context, iresult, null, null);
                 foreach (var item in list) item.Called(context);
                 if (callBack != null) callBack.Invoke(iresult);
@@ -1676,7 +1676,7 @@ namespace X.Util.Core
             {
                 try
                 {
-                    var iresult = ((Func<TResult>)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
+                    var iresult = ((Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult>)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
                     ContextHelper.AddResponse(context, iresult, null, null);
                     foreach (var item in list) item.Called(context);
                     if (callBack != null) callBack.Invoke(iresult);
@@ -1730,7 +1730,7 @@ namespace X.Util.Core
             foreach (var item in list) item.Calling(context);
             func.BeginInvoke(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16, result =>
             {
-                ((Action)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
+                ((Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
                 foreach (var item in list) item.Called(context);
                 if (callBack != null) callBack.Invoke();
             }, null);
@@ -1745,7 +1745,7 @@ namespace X.Util.Core
             {
                 try
                 {
-                    ((Action)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
+                    ((Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
                     foreach (var item in list) item.Called(context);
                     if (callBack != null) callBack.Invoke();
                 }
@@ -1765,7 +1765,7 @@ namespace X.Util.Core
             foreach (var item in list) item.Calling(context);
             func.BeginInvoke(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16, result =>
             {
-                var iresult = ((Func<TResult>)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
+                var iresult = ((Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult>)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
                 ContextHelper.AddResponse(context, iresult, null, null);
                 foreach (var item in list) item.Called(context);
                 if (callBack != null) callBack.Invoke(iresult);
@@ -1781,7 +1781,7 @@ namespace X.Util.Core
             {
                 try
                 {
-                    var iresult = ((Func<TResult>)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
+                    var iresult = ((Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult>)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
                     ContextHelper.AddResponse(context, iresult, null, null);
                     foreach (var item in list) item.Called(context);
                     if (callBack != null) callBack.Invoke(iresult);
