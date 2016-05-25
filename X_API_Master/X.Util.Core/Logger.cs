@@ -37,24 +37,68 @@ namespace X.Util.Core
         }
 
         #region WriteFiles
+
         private static void Log(string ip, CoreMethodInfo methodInfo, LogDomain domain, LogType logtype, object returnValue, params string[] messages)
         {
-            var log = LoggerConfig.Instance.GetLogger(domain);
-            try
+            CoreUtil.CoderLocker("X.Util.Core.Log." + domain + logtype, () =>
             {
+                var log = LoggerConfig.Instance.GetLogger(domain);
+                try
+                {
+                    var message = new StringBuilder();
+                    message.Append("[" + ip + "][" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff") + "]");
+                    message.Append("\t\n");
+                    if (methodInfo.ParamList != null && methodInfo.ParamList.Count > 0)
+                    {
+                        message.Append("param：");
+                        message.Append(methodInfo.ParamList.ToJson());
+                        message.Append("\t\n");
+                    }
+                    if (!string.IsNullOrEmpty(methodInfo.Address))
+                    {
+                        message.Append("address：");
+                        message.Append(methodInfo.Address);
+                        message.Append("\t\n");
+                    }
+                    if (returnValue != null)
+                    {
+                        message.Append("Result：");
+                        message.Append(returnValue.ToJson());
+                        message.Append("\t\n");
+                    }
+                    if (messages.Length > 0) message.Append(string.Join("\t\n", messages) + "\t\n");
+                    switch (logtype)
+                    {
+                        case LogType.Error:
+                            log.Error(message);
+                            break;
+                        case LogType.Debug:
+                            log.Debug(message);
+                            break;
+                        case LogType.Info:
+                            log.Info(message);
+                            break;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Client.Error(MethodBase.GetCurrentMethod(), domain, logtype, null, string.Empty, ex.ToString());
+                }
+            });
+        }
+
+        private static void Log(string ip, MethodBase declaringType, LogDomain domain, LogType logtype, object returnValue, string address, params string[] messages)
+        {
+            CoreUtil.CoderLocker("X.Util.Core.Log." + domain + logtype, () =>
+            {
+                var log = LoggerConfig.Instance.GetLogger(domain);
                 var message = new StringBuilder();
                 message.Append("[" + ip + "][" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff") + "]");
                 message.Append("\t\n");
-                if (methodInfo.ParamList != null && methodInfo.ParamList.Count > 0)
-                {
-                    message.Append("param：");
-                    message.Append(methodInfo.ParamList.ToJson());
-                    message.Append("\t\n");
-                }
-                if (!string.IsNullOrEmpty(methodInfo.Address))
+                if (!string.IsNullOrEmpty(address))
                 {
                     message.Append("address：");
-                    message.Append(methodInfo.Address);
+                    message.Append(address);
                     message.Append("\t\n");
                 }
                 if (returnValue != null)
@@ -76,44 +120,7 @@ namespace X.Util.Core
                         log.Info(message);
                         break;
                 }
-            }
-            catch (Exception ex)
-            {
-                Client.Error(MethodBase.GetCurrentMethod(), domain, logtype, null, string.Empty, ex.ToString());
-            }
-        }
-
-        private static void Log(string ip, MethodBase declaringType, LogDomain domain, LogType logtype, object returnValue, string address, params string[] messages)
-        {
-            var log = LoggerConfig.Instance.GetLogger(domain);
-            var message = new StringBuilder();
-            message.Append("[" + ip + "][" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff") + "]");
-            message.Append("\t\n");
-            if (!string.IsNullOrEmpty(address))
-            {
-                message.Append("address：");
-                message.Append(address);
-                message.Append("\t\n");
-            }
-            if (returnValue != null)
-            {
-                message.Append("Result：");
-                message.Append(returnValue.ToJson());
-                message.Append("\t\n");
-            }
-            if (messages.Length > 0) message.Append(string.Join("\t\n", messages) + "\t\n");
-            switch (logtype)
-            {
-                case LogType.Error:
-                    log.Error(message);
-                    break;
-                case LogType.Debug:
-                    log.Debug(message);
-                    break;
-                case LogType.Info:
-                    log.Info(message);
-                    break;
-            }
+            });
         }
 
         public void Elapsed(MethodBase method, long elapsedMilliseconds, LogDomain edomain, string address = null)
