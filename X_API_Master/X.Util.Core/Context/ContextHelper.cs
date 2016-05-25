@@ -9,7 +9,7 @@ namespace X.Util.Core.Context
 {
     public class ContextHelper
     {
-        public static List<IContext<TResult, TChannel>> GetContext<TResult, TChannel>(IProvider<TChannel> channel, Func<TResult, bool> callSuccess,MethodBase method, bool needElapsed, bool needLogInfo)
+        public static List<IContext<TResult, TChannel>> GetContext<TResult, TChannel>(IProvider<TChannel> channel, Func<TResult, bool> callSuccess, MethodBase method, bool needElapsed, bool needLogInfo)
         {
             var list = new List<IContext<TResult, TChannel>>
             {

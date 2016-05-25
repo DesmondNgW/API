@@ -1,8 +1,14 @@
 ﻿using System;
 using System.Collections.Concurrent;
-//using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Threading;
+using X.Util.Core;
+using X.Util.Entities;
+using X.Util.Entities.Interface;
+using X.Util.Other;
+using X.Util.Provider;
 
 namespace X.UI.Consoles
 {
@@ -54,30 +60,30 @@ namespace X.UI.Consoles
         static void Main()
         {
             //Index();
-            //var c1 = new Channel();
-            //var c2 = new Channel();
-            //var c3 = new Channel();
-            //c2.Init();
-            //var th = new Thread(() =>
-            //{
-            //    c1.Test();
-            //    c1.In(7);
-            //});
-            //var th2 = new Thread(() =>
-            //{
-            //    c2.Test();
-            //    c2.In(8);
-            //});
-            //var th3 = new Thread(() =>
-            //{
-            //    c3.Test();
-            //    c3.In(9);
-            //});
-            //th.Start();
-            //th2.Start();
-            //th3.Start();
+            var c1 = new Channel();
+            var c2 = new Channel();
+            var c3 = new Channel();
+            c2.Init();
+            var th = new Thread(() =>
+            {
+                c1.Test();
+                c1.In(7);
+            });
+            var th2 = new Thread(() =>
+            {
+                c2.Test();
+                c2.In(8);
+            });
+            var th3 = new Thread(() =>
+            {
+                c3.Test();
+                c3.In(9);
+            });
+            th.Start();
+            th2.Start();
+            th3.Start();
 
-            Console.WriteLine(ThirdPartyTest.CouchBaseTest());
+            //Console.WriteLine(ThirdPartyTest.CouchBaseTest());
 
             //Func<string, int, string> pad = (s, c) => s.Length < c ? string.Join("0", new string[c - s.Length + 1]) + s : s;
 
@@ -87,16 +93,20 @@ namespace X.UI.Consoles
             //    var count = 0;
             //    for (var j = 2; j <= Math.Sqrt(i); j++)
             //    {
-            //        if (i%j != 0) continue;
+            //        if (i % j != 0) continue;
             //        count++;
             //        break;
             //    }
             //    if (count != 0) continue;
             //    if ((i >= 1000 || i <= 0) && (i < 2000 || i >= 3000) && (i < 300000 || i >= 301000) &&
             //        (i < 600000 || i >= 610000)) continue;
+            //    var uri = "http://hq.sinajs.cn/list=sh" + pad(i.ToString(), 6);
+            //    var d = HttpRequestBase.GetHttpInfo(uri, "utf-8", "application/json", null, string.Empty);
+            //    if (d.Content.Length < 50) continue;
             //    Console.WriteLine(pad(i.ToString(), 6));
             //    result.Add(pad(i.ToString(), 6));
             //}
+            //Console.WriteLine(result.ToJson());
             Console.ReadKey();
         }
 
