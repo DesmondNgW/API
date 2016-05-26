@@ -16,7 +16,7 @@ namespace X.Util.Core.Xml
     public class XmlHelper
     {
         #region Load && Write && Read Xml
-        private const string XmlPrefix = "X.Util.Core.XmlPrefix";
+        private const string XmlPrefix = "X.Util.Core.Xml.XmlPrefix";
         private static XmlDocument GetXmlDoc(string filePath)
         {
             XmlDocument doc = null;

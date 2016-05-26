@@ -12,7 +12,7 @@ namespace X.Util.Core.Kernel
         #region 内部实现
         private static volatile IDictionary<string, StatusCacheResult<T>> _cacheResult = new Dictionary<string, StatusCacheResult<T>>();
         private const string CoreDefaultCachekey = "CoreDefaultCacheKey";
-        private const string LockerPrefix = "X.Util.Core.Prefix";
+        private const string LockerPrefix = "X.Util.Core.Kernel.Prefix";
         private const int DayOfHour = 24;
 
         /// <summary>

@@ -12,7 +12,7 @@ namespace X.Util.Core.Kernel
     public class CoreQueue<T>
     {
         private static readonly IDictionary<Action<T>, ConcurrentQueue<T>> ContextDictionary = new Dictionary<Action<T>, ConcurrentQueue<T>>();
-        private const string LockerPrefix = "X.Util.Core.CoreQueue.Prefix";
+        private const string LockerPrefix = "X.Util.Core.Kernel.CoreQueue.Prefix";
         /// <summary>
         /// 延迟队列处理方法
         /// </summary>

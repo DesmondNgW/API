@@ -12,7 +12,7 @@ namespace X.Util.Core.Kernel
     public class CoreUtil
     {
         private static volatile ConcurrentDictionary<string, object> _locker = new ConcurrentDictionary<string, object>();
-        private const string CoderLockerPrefix = "X.Util.Core.CoderLockerPrefix";
+        private const string CoderLockerPrefix = "X.Util.Core.Kernel.CoderLockerPrefix";
         public const string LocalIp = "127.0.0.1";
         /// <summary>
         /// GetIP

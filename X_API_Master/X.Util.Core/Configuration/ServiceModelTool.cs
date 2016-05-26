@@ -18,7 +18,7 @@ namespace X.Util.Core.Configuration
     public class ServiceModelTool
     {
         private static readonly string AppConfigFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "App_Data\\app.xml");
-        private const string EndpointPrefix = "X.Util.Core.EndpointPrefix";
+        private const string EndpointPrefix = "X.Util.Core.Configuration.EndpointPrefix";
 
         public static ServiceModelSectionGroup ConfigInit()
         {
