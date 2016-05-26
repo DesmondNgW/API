@@ -4,6 +4,7 @@ using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 using X.Util.Core;
+using X.Util.Core.Log;
 using X.Util.Entities;
 
 namespace X.UI.API

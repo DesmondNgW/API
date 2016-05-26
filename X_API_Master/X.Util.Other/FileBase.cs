@@ -3,6 +3,8 @@ using System.IO;
 using System.Reflection;
 using System.Text;
 using X.Util.Core;
+using X.Util.Core.Kernel;
+using X.Util.Core.Log;
 using X.Util.Entities;
 
 namespace X.Util.Other

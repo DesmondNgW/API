@@ -5,6 +5,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Text.RegularExpressions;
 using Newtonsoft.Json;
+using X.Util.Core.Log;
 using X.Util.Entities;
 
 namespace X.Util.Core

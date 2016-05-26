@@ -2,6 +2,8 @@
 using System.ServiceModel;
 using System.ServiceModel.Channels;
 using X.Util.Core;
+using X.Util.Core.Configuration;
+using X.Util.Core.Kernel;
 using X.Util.Entities;
 using X.Util.Entities.Interface;
 
@@ -11,7 +13,7 @@ namespace X.Util.Provider
     /// WCF ClientPool Provider
     /// </summary>
     /// <typeparam name="TChannel"></typeparam>
-    public sealed class WcfProxyPoolProvider<TChannel> : IClientProvider<TChannel>
+    public sealed class WcfProxyPoolProvider<TChannel> : IClientProvider<TChannel>, IDisposable
     {
         #region 构造函数
         public readonly LogDomain EDomain = LogDomain.Core;
@@ -83,7 +85,6 @@ namespace X.Util.Provider
                 _scope = new OperationContextScope((IClientChannel)_instance);
                 var header = MessageHeader.CreateHeader("clientip", "http://tempuri.org", CoreUtil.GetIp());
                 OperationContext.Current.OutgoingMessageHeaders.Add(header);
-                _scope.Dispose();
                 return _instance;
             }
         }
@@ -99,6 +100,11 @@ namespace X.Util.Provider
             if (_scope != null) _scope.Dispose();
             Core<TChannel>.Dispose(_instance, eDomain);
             ProxyPooledManager.ReleaseClient(_instance);
+        }
+
+        public void Dispose()
+        {
+            if (_scope != null) _scope.Dispose();
         }
         #endregion
     }

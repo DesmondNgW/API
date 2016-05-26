@@ -4,6 +4,7 @@ using X.Interface.Dto;
 using X.Interface.Dto.HttpResponse;
 using X.Interface.Dto.Interface;
 using X.Util.Core;
+using X.Util.Core.Kernel;
 using X.Util.Extend.Cryption;
 
 namespace X.Interface.Core

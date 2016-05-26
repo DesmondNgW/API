@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using X.Util.Core;
+using X.Util.Core.Kernel;
 using X.Util.Extend.Cryption;
 using X.Util.Other;
 

@@ -3,9 +3,10 @@ using System.ServiceModel;
 using System.ServiceModel.Channels;
 using System.ServiceModel.Configuration;
 using System.ServiceModel.Description;
+using X.Util.Core.Configuration;
 using X.Util.Entities;
 
-namespace X.Util.Core
+namespace X.Util.Core.Kernel
 {
     public class CoreChannel<T> : ChannelFactory<T>
     {

@@ -7,6 +7,9 @@ using System.Reflection;
 using System.ServiceModel.Configuration;
 using System.Xml;
 using X.Util.Core;
+using X.Util.Core.Common;
+using X.Util.Core.Log;
+using X.Util.Core.Xml;
 using X.Util.Entities;
 
 namespace X.WFConfig

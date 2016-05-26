@@ -76,27 +76,27 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AppConfig.cs" />
-    <Compile Include="Context\ChannelContext.cs" />
-    <Compile Include="ConfigurationHelper.cs" />
-    <Compile Include="Context\ContextHelper.cs" />
-    <Compile Include="Core.cs" />
-    <Compile Include="CoreAccess.cs" />
-    <Compile Include="CoreAspect.cs" />
-    <Compile Include="CoreChannel.cs" />
-    <Compile Include="CoreParse.cs" />
-    <Compile Include="CoreQueue.cs" />
-    <Compile Include="CoreUtil.cs" />
-    <Compile Include="ExecutionContext.cs" />
+    <Compile Include="Configuration\AppConfig.cs" />
+    <Compile Include="Kernel\ChannelContext.cs" />
+    <Compile Include="Configuration\ConfigurationHelper.cs" />
+    <Compile Include="Kernel\ContextHelper.cs" />
+    <Compile Include="Kernel\Core.cs" />
+    <Compile Include="Kernel\CoreAccess.cs" />
+    <Compile Include="Kernel\CoreAspect.cs" />
+    <Compile Include="Kernel\CoreChannel.cs" />
+    <Compile Include="Common\CoreParse.cs" />
+    <Compile Include="Kernel\CoreQueue.cs" />
+    <Compile Include="Kernel\CoreUtil.cs" />
+    <Compile Include="Kernel\ExecutionContext.cs" />
     <Compile Include="ExtensionMethods.cs" />
-    <Compile Include="LocalCache.cs" />
-    <Compile Include="Logger.cs" />
-    <Compile Include="LoggerConfig.cs" />
-    <Compile Include="Context\LoggerContext.cs" />
+    <Compile Include="Cache\LocalCache.cs" />
+    <Compile Include="Log\Logger.cs" />
+    <Compile Include="Log\LoggerConfig.cs" />
+    <Compile Include="Log\LoggerContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ServiceModelTool.cs" />
-    <Compile Include="StringConvert.cs" />
-    <Compile Include="XmlHelper.cs" />
+    <Compile Include="Configuration\ServiceModelTool.cs" />
+    <Compile Include="Common\StringConvert.cs" />
+    <Compile Include="Xml\XmlHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\X.Util.Entities\X.Util.Entities.csproj">
@@ -104,6 +104,7 @@
       <Name>X.Util.Entities</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

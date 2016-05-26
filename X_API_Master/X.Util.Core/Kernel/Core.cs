@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using System.Reflection;
 using System.ServiceModel;
+using X.Util.Core.Log;
 using X.Util.Entities;
 
-namespace X.Util.Core
+namespace X.Util.Core.Kernel
 {
     public class Core<T>
     {

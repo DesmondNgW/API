@@ -9,6 +9,7 @@ using X.Interface.Core;
 using X.Interface.Dto;
 using X.UI.API.Model;
 using X.Util.Core;
+using X.Util.Core.Kernel;
 using X.Util.Entities;
 using X.Util.Extend.Cache;
 using X.Util.Extend.Mongo;

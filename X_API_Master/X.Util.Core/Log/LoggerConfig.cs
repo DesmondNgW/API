@@ -1,15 +1,17 @@
-﻿using log4net;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using log4net;
 using log4net.Appender;
 using log4net.Config;
 using log4net.Core;
 using log4net.Filter;
 using log4net.Layout;
-using System;
-using System.Collections.Generic;
-using System.IO;
+using X.Util.Core.Configuration;
+using X.Util.Core.Kernel;
 using X.Util.Entities;
 
-namespace X.Util.Core
+namespace X.Util.Core.Log
 {
     public sealed class LoggerConfig
     {

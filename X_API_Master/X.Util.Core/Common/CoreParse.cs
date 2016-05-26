@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Globalization;
 
-namespace X.Util.Core
+namespace X.Util.Core.Common
 {
     public class CoreParse
     {

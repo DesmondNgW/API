@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using X.Util.Entities;
 using X.Util.Entities.Interface;
 
-namespace X.Util.Core.Context
+namespace X.Util.Core.Log
 {
     public class LoggerContext<TResult, TChannel> : IContext<TResult, TChannel>
     {
@@ -66,6 +66,8 @@ namespace X.Util.Core.Context
             var method = Logger.Client.GetMethodInfo(context.Request.Method, context.Request.ActionArguments, Channel.EndpointAddress);
             Logger.Client.Error(method, Channel.Domain, null, context.Response.Exception.ToString());
         }
+
+        public int Priority { get { return int.MaxValue; } }
     }
 
     public class LoggerContext<TChannel> : IContext<TChannel>
@@ -117,5 +119,7 @@ namespace X.Util.Core.Context
             var method = Logger.Client.GetMethodInfo(context.Request.Method, context.Request.ActionArguments, Channel.EndpointAddress);
             Logger.Client.Error(method, Channel.Domain, null, context.Response.Exception.ToString());
         }
+
+        public int Priority { get { return int.MaxValue; } }
     }
 }

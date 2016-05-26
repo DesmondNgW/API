@@ -4,6 +4,7 @@ using System.Net.Http.Formatting;
 using System.Web.Http.Filters;
 using X.Interface.Dto;
 using X.Util.Core;
+using X.Util.Core.Log;
 using X.Util.Entities;
 
 namespace X.UI.API.Util

@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using X.Interface.Dto;
 using X.Util.Core;
+using X.Util.Core.Common;
+using X.Util.Core.Kernel;
 using X.Util.Entities;
 using X.Util.Extend.Cache;
 using X.Util.Extend.Core;

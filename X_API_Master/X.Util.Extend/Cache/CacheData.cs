@@ -4,6 +4,8 @@ using System.Reflection;
 using System.Runtime.Remoting.Messaging;
 using System.Web.Caching;
 using X.Util.Core;
+using X.Util.Core.Kernel;
+using X.Util.Core.Log;
 using X.Util.Entities;
 using X.Util.Entities.Interface;
 

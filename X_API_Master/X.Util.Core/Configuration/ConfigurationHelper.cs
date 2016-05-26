@@ -1,8 +1,4 @@
-﻿using Couchbase;
-using Couchbase.Configuration;
-using MongoDB.Driver;
-using ServiceStack.Redis;
-using System;
+﻿using System;
 using System.CodeDom;
 using System.CodeDom.Compiler;
 using System.Collections.Generic;
@@ -13,13 +9,21 @@ using System.ServiceModel.Configuration;
 using System.ServiceModel.Description;
 using System.Web.Caching;
 using System.Xml;
+using Couchbase;
+using Couchbase.Configuration;
+using MongoDB.Driver;
+using ServiceStack.Redis;
+using X.Util.Core.Cache;
+using X.Util.Core.Common;
+using X.Util.Core.Kernel;
+using X.Util.Core.Xml;
 using X.Util.Entities;
 
-namespace X.Util.Core
+namespace X.Util.Core.Configuration
 {
     public class ConfigurationHelper
     {
-        private const string CacheConfigurationPrefix = "X.Util.Core.CacheConfigurationPrefix";
+        private const string CacheConfigurationPrefix = "X.Util.Core.Configuration.CacheConfigurationPrefix";
         public const int MaxPoolSize = 1;
         public const string MongoDefaultServername = "XMongo";
         public const string RedisDefaultServername = "XRedis";
@@ -170,11 +174,9 @@ namespace X.Util.Core
             var provider = CodeDomProvider.CreateProvider("CSharp");
             using (var sw = new StreamWriter(outPutProxyFile))
             {
-                using (var textWriter = new IndentedTextWriter(sw))
-                {
-                    var options = new CodeGeneratorOptions();
-                    provider.GenerateCodeFromCompileUnit(codeCompileUnit, textWriter, options);
-                }
+                var textWriter = new IndentedTextWriter(sw);
+                var options = new CodeGeneratorOptions();
+                provider.GenerateCodeFromCompileUnit(codeCompileUnit, textWriter, options);
             }
         }
 

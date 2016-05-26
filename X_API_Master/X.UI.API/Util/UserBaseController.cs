@@ -3,6 +3,8 @@ using System.Web.Http;
 using System.Web.Http.Controllers;
 using X.Interface.Core;
 using X.Util.Core;
+using X.Util.Core.Configuration;
+using X.Util.Core.Kernel;
 using X.Util.Entities;
 
 namespace X.UI.API.Util

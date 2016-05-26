@@ -5,9 +5,13 @@ using System.Reflection;
 using System.Web.Caching;
 using System.Xml;
 using System.Xml.Serialization;
+using X.Util.Core.Cache;
+using X.Util.Core.Common;
+using X.Util.Core.Kernel;
+using X.Util.Core.Log;
 using X.Util.Entities;
 
-namespace X.Util.Core
+namespace X.Util.Core.Xml
 {
     public class XmlHelper
     {

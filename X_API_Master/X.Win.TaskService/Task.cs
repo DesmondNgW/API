@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading;
 using X.Util.Core;
+using X.Util.Core.Kernel;
 using X.Util.Entities;
 using X.Util.Provider;
 

@@ -1,7 +1,7 @@
 ﻿using X.Util.Entities;
 using X.Util.Entities.Interface;
 
-namespace X.Util.Core.Context
+namespace X.Util.Core.Kernel
 {
     public class ChannelContext<TResult, TChannel> : IContext<TResult, TChannel>
     {
@@ -31,6 +31,8 @@ namespace X.Util.Core.Context
             if (channel == null) return;
             channel.Dispose(channel.Domain);
         }
+
+        public int Priority { get { return int.MaxValue; } }
     }
 
     public class ChannelContext<TChannel> : IContext<TChannel>
@@ -61,5 +63,7 @@ namespace X.Util.Core.Context
             if (channel == null) return;
             channel.Dispose(channel.Domain);
         }
+
+        public int Priority { get { return int.MaxValue; } }
     }
 }

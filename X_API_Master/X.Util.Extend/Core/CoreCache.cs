@@ -6,6 +6,9 @@ using X.Util.Entities;
 using X.Util.Extend.Cache;
 using System.Linq;
 using System.Web;
+using X.Util.Core.Cache;
+using X.Util.Core.Configuration;
+using X.Util.Core.Kernel;
 using X.Util.Entities.Interface;
 using X.Util.Extend.Cryption;
 

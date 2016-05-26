@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Runtime.Remoting.Messaging;
-using X.Util.Core.Context;
 using X.Util.Entities.Interface;
 
-namespace X.Util.Core
+namespace X.Util.Core.Kernel
 {
     /// <summary>
     /// 方法的委托调用（记录日志以及异常处理）

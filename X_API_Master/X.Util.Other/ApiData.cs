@@ -2,6 +2,7 @@
 using System.Text;
 using System.Text.RegularExpressions;
 using X.Util.Core;
+using X.Util.Core.Kernel;
 
 namespace X.Util.Other
 {

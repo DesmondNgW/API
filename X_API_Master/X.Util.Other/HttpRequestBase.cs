@@ -6,6 +6,7 @@ using System.Net.Security;
 using System.Reflection;
 using System.Text;
 using X.Util.Core;
+using X.Util.Core.Log;
 using X.Util.Entities;
 using X.Util.Extend.Cache;
 

@@ -4,6 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Threading;
+using X.Util.Entities;
+using X.Util.Entities.Interface;
+using X.Util.Provider;
 
 namespace X.UI.Consoles
 {
@@ -55,28 +58,28 @@ namespace X.UI.Consoles
         static void Main()
         {
             //Index();
-            var c1 = new Channel();
-            var c2 = new Channel();
-            var c3 = new Channel();
-            c2.Init();
-            var th = new Thread(() =>
-            {
-                c1.Test();
-                c1.In(7);
-            });
-            var th2 = new Thread(() =>
-            {
-                c2.Test();
-                c2.In(8);
-            });
-            var th3 = new Thread(() =>
-            {
-                c3.Test();
-                c3.In(9);
-            });
-            th.Start();
-            th2.Start();
-            th3.Start();
+            //var c1 = new Channel();
+            //var c2 = new Channel();
+            //var c3 = new Channel();
+            //c2.Init();
+            //var th = new Thread(() =>
+            //{
+            //    c1.Test();
+            //    c1.In(7);
+            //});
+            //var th2 = new Thread(() =>
+            //{
+            //    c2.Test();
+            //    c2.In(8);
+            //});
+            //var th3 = new Thread(() =>
+            //{
+            //    c3.Test();
+            //    c3.In(9);
+            //});
+            //th.Start();
+            //th2.Start();
+            //th3.Start();
 
             //Console.WriteLine(ThirdPartyTest.CouchBaseTest());
 

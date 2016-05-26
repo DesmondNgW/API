@@ -4,6 +4,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using X.Util.Core;
+using X.Util.Core.Configuration;
+using X.Util.Core.Kernel;
 using X.Util.Entities;
 using X.Util.Entities.Interface;
 using X.Util.Extend.Core;

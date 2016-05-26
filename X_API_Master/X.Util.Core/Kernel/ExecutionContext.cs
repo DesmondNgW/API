@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Remoting.Messaging;
 
-namespace X.Util.Core
+namespace X.Util.Core.Kernel
 {
     public class ExecutionContext<T>
     {

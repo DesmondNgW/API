@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Web;
 using System.Web.Caching;
+using X.Util.Core.Kernel;
 
-namespace X.Util.Core
+namespace X.Util.Core.Cache
 {
     public class LocalCache
     {
@@ -18,22 +19,22 @@ namespace X.Util.Core
 
         public static void AbsoluteExpirationSet(string key, object value, CacheDependency dependencies, DateTime absoluteExpiration, CacheItemPriority level)
         {
-            HttpRuntime.Cache.Insert(key, value, dependencies, absoluteExpiration, Cache.NoSlidingExpiration, level, null);
+            HttpRuntime.Cache.Insert(key, value, dependencies, absoluteExpiration, System.Web.Caching.Cache.NoSlidingExpiration, level, null);
         }
 
         public static void AbsoluteExpirationSetJson(string key, object value, CacheDependency dependencies, DateTime absoluteExpiration, CacheItemPriority level)
         {
-            HttpRuntime.Cache.Insert(key, value.ToJson(), dependencies, absoluteExpiration, Cache.NoSlidingExpiration, level, null);
+            HttpRuntime.Cache.Insert(key, value.ToJson(), dependencies, absoluteExpiration, System.Web.Caching.Cache.NoSlidingExpiration, level, null);
         }
 
         public static void SlidingExpirationSet(string key, object value, CacheDependency dependencies, TimeSpan slidingExpiration, CacheItemPriority level)
         {
-            HttpRuntime.Cache.Insert(key, value, dependencies, Cache.NoAbsoluteExpiration, slidingExpiration, level, null);
+            HttpRuntime.Cache.Insert(key, value, dependencies, System.Web.Caching.Cache.NoAbsoluteExpiration, slidingExpiration, level, null);
         }
 
         public static void SlidingExpirationSetJson(string key, object value, CacheDependency dependencies, TimeSpan slidingExpiration, CacheItemPriority level)
         {
-            HttpRuntime.Cache.Insert(key, value.ToJson(), dependencies, Cache.NoAbsoluteExpiration, slidingExpiration, level, null);
+            HttpRuntime.Cache.Insert(key, value.ToJson(), dependencies, System.Web.Caching.Cache.NoAbsoluteExpiration, slidingExpiration, level, null);
         }
 
         public static object Remove(string key)
@@ -55,42 +56,42 @@ namespace X.Util.Core
 
         public static void Set(string key, object value, DateTime dt)
         {
-            HttpRuntime.Cache.Insert(key, value, null, dt, Cache.NoSlidingExpiration, CacheItemPriority.AboveNormal, null);
+            HttpRuntime.Cache.Insert(key, value, null, dt, System.Web.Caching.Cache.NoSlidingExpiration, CacheItemPriority.AboveNormal, null);
         }
 
         public static void SetJson(string key, object value, DateTime dt)
         {
-            HttpRuntime.Cache.Insert(key, value.ToJson(), null, dt, Cache.NoSlidingExpiration, CacheItemPriority.AboveNormal, null);
+            HttpRuntime.Cache.Insert(key, value.ToJson(), null, dt, System.Web.Caching.Cache.NoSlidingExpiration, CacheItemPriority.AboveNormal, null);
         }
 
         public static void Set(string key, object value, TimeSpan ts)
         {
-            HttpRuntime.Cache.Insert(key, value, null, Cache.NoAbsoluteExpiration, ts, CacheItemPriority.AboveNormal, null);
+            HttpRuntime.Cache.Insert(key, value, null, System.Web.Caching.Cache.NoAbsoluteExpiration, ts, CacheItemPriority.AboveNormal, null);
         }
 
         public static void SetJson(string key, object value, TimeSpan ts)
         {
-            HttpRuntime.Cache.Insert(key, value.ToJson(), null, Cache.NoAbsoluteExpiration, ts, CacheItemPriority.AboveNormal, null);
+            HttpRuntime.Cache.Insert(key, value.ToJson(), null, System.Web.Caching.Cache.NoAbsoluteExpiration, ts, CacheItemPriority.AboveNormal, null);
         }
 
         public static void Set(string key, object value, DateTime dt, CacheDependency dency)
         {
-            HttpRuntime.Cache.Insert(key, value, dency, dt, Cache.NoSlidingExpiration, CacheItemPriority.AboveNormal, null);
+            HttpRuntime.Cache.Insert(key, value, dency, dt, System.Web.Caching.Cache.NoSlidingExpiration, CacheItemPriority.AboveNormal, null);
         }
 
         public static void SetJson(string key, object value, DateTime dt, CacheDependency dency)
         {
-            HttpRuntime.Cache.Insert(key, value.ToJson(), dency, dt, Cache.NoSlidingExpiration, CacheItemPriority.AboveNormal, null);
+            HttpRuntime.Cache.Insert(key, value.ToJson(), dency, dt, System.Web.Caching.Cache.NoSlidingExpiration, CacheItemPriority.AboveNormal, null);
         }
 
         public static void Set(string key, object value, TimeSpan ts, CacheDependency dency)
         {
-            HttpRuntime.Cache.Insert(key, value, dency, Cache.NoAbsoluteExpiration, ts, CacheItemPriority.AboveNormal, null);
+            HttpRuntime.Cache.Insert(key, value, dency, System.Web.Caching.Cache.NoAbsoluteExpiration, ts, CacheItemPriority.AboveNormal, null);
         }
 
         public static void SetJson(string key, object value, TimeSpan ts, CacheDependency dency)
         {
-            HttpRuntime.Cache.Insert(key, value.ToJson(), dency, Cache.NoAbsoluteExpiration, ts, CacheItemPriority.AboveNormal, null);
+            HttpRuntime.Cache.Insert(key, value.ToJson(), dency, System.Web.Caching.Cache.NoAbsoluteExpiration, ts, CacheItemPriority.AboveNormal, null);
         }
     }
 }

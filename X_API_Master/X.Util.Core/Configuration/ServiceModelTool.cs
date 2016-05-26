@@ -9,9 +9,11 @@ using System.ServiceModel.Channels;
 using System.ServiceModel.Configuration;
 using System.ServiceModel.Description;
 using System.Web.Caching;
+using X.Util.Core.Cache;
+using X.Util.Core.Kernel;
 using X.Util.Entities;
 
-namespace X.Util.Core
+namespace X.Util.Core.Configuration
 {
     public class ServiceModelTool
     {

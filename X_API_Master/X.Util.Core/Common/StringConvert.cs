@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using X.Util.Core.Kernel;
 
-namespace X.Util.Core
+namespace X.Util.Core.Common
 {
     public class StringConvert
     {

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Web;
 using X.Util.Core;
+using X.Util.Core.Configuration;
 
 namespace X.Util.Other
 {

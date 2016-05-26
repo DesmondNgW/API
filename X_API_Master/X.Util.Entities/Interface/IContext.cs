@@ -9,6 +9,8 @@
         void Called(ActionContext<TResult> context);
 
         void OnException(ActionContext<TResult> context);
+
+        int Priority { get; }
     }
 
     public interface IContext<out TChannel>
@@ -20,5 +22,7 @@
         void Called(ActionContext context);
 
         void OnException(ActionContext context);
+
+        int Priority { get; }
     }
 }

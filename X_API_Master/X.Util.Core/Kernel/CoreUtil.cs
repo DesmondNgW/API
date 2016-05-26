@@ -1,16 +1,13 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.Web;
 using System.Linq;
-using System.Reflection;
 using System.Security.Cryptography;
 using System.Text;
-using X.Util.Core.Context;
-using X.Util.Entities;
-using X.Util.Entities.Interface;
+using System.Web;
+using X.Util.Core.Cache;
 
-namespace X.Util.Core
+namespace X.Util.Core.Kernel
 {
     public class CoreUtil
     {

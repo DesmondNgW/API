@@ -1,5 +1,5 @@
 ﻿
-namespace X.Util.Core
+namespace X.Util.Core.Configuration
 {
     public class AppConfig
     {

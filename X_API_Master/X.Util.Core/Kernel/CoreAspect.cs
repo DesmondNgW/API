@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace X.Util.Core
+namespace X.Util.Core.Kernel
 {
     public class CoreAspect<T>
     {
