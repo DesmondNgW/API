@@ -7,23 +7,13 @@ namespace X.Util.Core.Log
 {
     public class LoggerContext<TResult, TChannel> : IContext<TResult, TChannel>
     {
-        public bool NeedElapsed = true;
-        public bool NeedLogInfo = true;
         private readonly IProvider<TChannel> _channel;
-        public readonly Func<TResult, bool> CallSuccess;
+        public readonly LogOptions<TResult> Options;
 
-        public LoggerContext(IProvider<TChannel> channel, Func<TResult, bool> callSuccess)
+        public LoggerContext(IProvider<TChannel> channel, LogOptions<TResult> options)
         {
             _channel = channel;
-            CallSuccess = callSuccess;
-        }
-
-        public LoggerContext(IProvider<TChannel> channel, Func<TResult, bool> callSuccess, bool needElapsed, bool needLogInfo)
-        {
-            _channel = channel;
-            CallSuccess = callSuccess;
-            NeedElapsed = needElapsed;
-            NeedLogInfo = needLogInfo;
+            Options = options ?? new LogOptions<TResult>(null);
         }
 
         public IProvider<TChannel> Channel
@@ -37,28 +27,28 @@ namespace X.Util.Core.Log
             var crm = context.Request.Method;
             var method = Logger.Client.GetMethodInfo(crm, context.Request.ActionArguments, Channel.EndpointAddress);
             context.ContextArguments["CoreMethodInfo"] = method;
-            if (NeedLogInfo) Logger.Client.Info(method, Channel.Domain, null, string.Format("{0}.{1} BeginInvoke.", method.ClassName.FullName, method.MethodName));
-            if (!NeedElapsed) return;
+            if (Options.NeedLogInfo) Logger.Client.Info(method, Channel.Domain, null, string.Format("{0}.{1} BeginInvoke.", method.ClassName.FullName, method.MethodName));
+            if (!Options.NeedElapsed) return;
             var stopElapsed = Logger.Client.GetStopElapsed(crm, Channel.Domain, Channel.EndpointAddress);
             context.ContextArguments["StopElapsed"] = stopElapsed;
         }
 
         public void Called(ActionContext<TResult> context)
         {
-            var stopElapsed = NeedElapsed && context.ContextArguments != null ? context.ContextArguments["StopElapsed"] as Action : null;
+            var stopElapsed = Options.NeedElapsed && context.ContextArguments != null ? context.ContextArguments["StopElapsed"] as Action : null;
             var method = context.ContextArguments != null ? context.ContextArguments["CoreMethodInfo"] as CoreMethodInfo : null;
             var iresult = context.Response.Result;
             if (stopElapsed != null) stopElapsed();
             if (method == null) return;
-            if (CallSuccess != null)
+            if (Options.CallSuccess != null)
             {
-                if (CallSuccess(iresult))
+                if (Options.CallSuccess(iresult))
                 {
-                    if (NeedLogInfo) Logger.Client.Info(method, Channel.Domain, iresult);
+                    if (Options.NeedLogInfo) Logger.Client.Info(method, Channel.Domain, iresult);
                 }
                 else Logger.Client.Error(method, Channel.Domain, iresult);
             }
-            if (NeedLogInfo) Logger.Client.Info(method, Channel.Domain, null, string.Format("{0}.{1} EndInvoke.", method.ClassName.FullName, method.MethodName));
+            if (Options.NeedLogInfo) Logger.Client.Info(method, Channel.Domain, null, string.Format("{0}.{1} EndInvoke.", method.ClassName.FullName, method.MethodName));
         }
 
         public void OnException(ActionContext<TResult> context)
@@ -72,20 +62,18 @@ namespace X.Util.Core.Log
 
     public class LoggerContext<TChannel> : IContext<TChannel>
     {
-        public bool NeedElapsed = true;
-        public bool NeedLogInfo = true;
         private readonly IProvider<TChannel> _channel;
+        public readonly LogOptions Options;
 
         public LoggerContext(IProvider<TChannel> channel)
         {
             _channel = channel;
         }
 
-        public LoggerContext(IProvider<TChannel> channel, bool needElapsed, bool needLogInfo)
+        public LoggerContext(IProvider<TChannel> channel, LogOptions options)
         {
             _channel = channel;
-            NeedElapsed = needElapsed;
-            NeedLogInfo = needLogInfo;
+            Options = options ?? new LogOptions();
         }
 
         public IProvider<TChannel> Channel
@@ -99,19 +87,19 @@ namespace X.Util.Core.Log
             var crm = context.Request.Method;
             var method = Logger.Client.GetMethodInfo(crm, context.Request.ActionArguments, Channel.EndpointAddress);
             context.ContextArguments["CoreMethodInfo"] = method;
-            if (NeedLogInfo) Logger.Client.Info(method, Channel.Domain, null, string.Format("{0}.{1} BeginInvoke.", method.ClassName.FullName, method.MethodName));
-            if (!NeedElapsed) return;
+            if (Options.NeedLogInfo) Logger.Client.Info(method, Channel.Domain, null, string.Format("{0}.{1} BeginInvoke.", method.ClassName.FullName, method.MethodName));
+            if (!Options.NeedElapsed) return;
             var stopElapsed = Logger.Client.GetStopElapsed(crm, Channel.Domain, Channel.EndpointAddress);
             context.ContextArguments["StopElapsed"] = stopElapsed;
         }
 
         public void Called(ActionContext context)
         {
-            var stopElapsed = NeedElapsed && context.ContextArguments != null ? context.ContextArguments["StopElapsed"] as Action : null;
+            var stopElapsed = Options.NeedElapsed && context.ContextArguments != null ? context.ContextArguments["StopElapsed"] as Action : null;
             var method = context.ContextArguments != null ? context.ContextArguments["CoreMethodInfo"] as CoreMethodInfo : null;
             if (stopElapsed != null) stopElapsed();
             if (method == null) return;
-            if (NeedLogInfo) Logger.Client.Info(method, Channel.Domain, null, string.Format("{0}.{1} EndInvoke.", method.ClassName.FullName, method.MethodName));
+            if (Options.NeedLogInfo) Logger.Client.Info(method, Channel.Domain, null, string.Format("{0}.{1} EndInvoke.", method.ClassName.FullName, method.MethodName));
         }
 
         public void OnException(ActionContext context)

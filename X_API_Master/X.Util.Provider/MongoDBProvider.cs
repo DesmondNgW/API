@@ -3,7 +3,6 @@ using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
-using X.Util.Core;
 using X.Util.Core.Configuration;
 using X.Util.Core.Kernel;
 using X.Util.Core.Log;

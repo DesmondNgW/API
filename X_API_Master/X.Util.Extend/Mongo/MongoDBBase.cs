@@ -39,7 +39,7 @@ namespace X.Util.Extend.Mongo
         public void CreateIndex(string database, string collection, IndexKeysDocument index)
         {
             var mc = new MongoDbProvider(database, collection);
-            CoreAccess<MongoCollection<BsonDocument>>.TryCallAsync(mc.Client.CreateIndex, index, CallSuccess, mc, null, false);
+            CoreAccess<MongoCollection<BsonDocument>>.TryCallAsync(mc.Client.CreateIndex, index, mc, null, new LogOptions<WriteConcernResult>(CallSuccess, true, false));
         }
 
         /// <summary>
@@ -52,7 +52,7 @@ namespace X.Util.Extend.Mongo
         public void DropIndex(string database, string collection, IndexKeysDocument index)
         {
             var mc = new MongoDbProvider(database, collection);
-            CoreAccess<MongoCollection<BsonDocument>>.TryCallAsync(mc.Client.DropIndex, index, CallSuccess, mc, null, false);
+            CoreAccess<MongoCollection<BsonDocument>>.TryCallAsync(mc.Client.DropIndex, index, mc, null, new LogOptions<CommandResult>(CallSuccess, true, false));
         }
 
         /// <summary>
@@ -65,7 +65,7 @@ namespace X.Util.Extend.Mongo
         public bool IndexExists(string database, string collection, IndexKeysDocument index)
         {
             var mc = new MongoDbProvider(database, collection);
-            return CoreAccess<MongoCollection<BsonDocument>>.TryCall(mc.Client.IndexExists, index, CoreBase.CallSuccess, mc);
+            return CoreAccess<MongoCollection<BsonDocument>>.TryCall(mc.Client.IndexExists, index, mc, new LogOptions<bool>(CoreBase.CallSuccess, true, false));
         }
 
         /// <summary>
@@ -77,7 +77,7 @@ namespace X.Util.Extend.Mongo
         public IndexKeysDocument GetAllIndexes(string database, string collection)
         {
             var mc = new MongoDbProvider(database, collection);
-            return CoreAccess<MongoCollection<BsonDocument>>.TryCall(mc.Client.GetIndexes, iresult => iresult != null && iresult.Count > 0 && iresult.RawDocuments != null, mc).ToBsonDocument() as IndexKeysDocument;
+            return CoreAccess<MongoCollection<BsonDocument>>.TryCall(mc.Client.GetIndexes, mc, new LogOptions<GetIndexesResult>(iresult => iresult != null && iresult.Count > 0 && iresult.RawDocuments != null)).ToBsonDocument() as IndexKeysDocument;
         }
         #endregion
 
@@ -90,7 +90,7 @@ namespace X.Util.Extend.Mongo
                 property.SetValue(t, Guid.NewGuid().ToString("N"), null);
             }
             var mc = new MongoDbProvider(database, collection);
-            CoreAccess<MongoCollection<BsonDocument>>.TryCallAsync(mc.Client.Save, t, WriteConcern.Acknowledged, CallSuccess, mc, null, false);
+            CoreAccess<MongoCollection<BsonDocument>>.TryCallAsync(mc.Client.Save, t, WriteConcern.Acknowledged, mc, null, new LogOptions<WriteConcernResult>(CallSuccess, true, false));
         }
         /// <summary>
         /// 插入会失败（若有主键）
@@ -107,7 +107,7 @@ namespace X.Util.Extend.Mongo
                 property.SetValue(t, Guid.NewGuid().ToString("N"), null);
             }
             var mc = new MongoDbProvider(database, collection);
-            CoreAccess<MongoCollection<BsonDocument>>.TryCallAsync(mc.Client.Insert, t, WriteConcern.Acknowledged, CallSuccess, mc, null, false);
+            CoreAccess<MongoCollection<BsonDocument>>.TryCallAsync(mc.Client.Insert, t, WriteConcern.Acknowledged, mc, null, new LogOptions<WriteConcernResult>(CallSuccess, true, false));
         }
 
         /// <summary>
@@ -126,7 +126,7 @@ namespace X.Util.Extend.Mongo
                 property.SetValue(t, Guid.NewGuid().ToString("N"), null);
             }
             var mc = new MongoDbProvider(database, collection);
-            CoreAccess<MongoCollection<BsonDocument>>.TryCallAsync(mc.Client.InsertBatch, enumerable, WriteConcern.Acknowledged, CallSuccess, mc, null, false);
+            CoreAccess<MongoCollection<BsonDocument>>.TryCallAsync(mc.Client.InsertBatch, enumerable, WriteConcern.Acknowledged, mc, null, new LogOptions<IEnumerable<WriteConcernResult>>(CallSuccess, true, false));
         }
 
         public void SaveMongo<T>(Func<T> loader, string database, string collection) where T : MongoBaseModel
@@ -146,7 +146,7 @@ namespace X.Util.Extend.Mongo
         public void UpdateMongo(string database, string collection, QueryDocument query, UpdateDocument update, UpdateFlags flag = UpdateFlags.Multi)
         {
             var mc = new MongoDbProvider(database, collection);
-            CoreAccess<MongoCollection<BsonDocument>>.TryCallAsync(mc.Client.Update, query, update, flag, WriteConcern.Acknowledged, CallSuccess, mc, null, false);
+            CoreAccess<MongoCollection<BsonDocument>>.TryCallAsync(mc.Client.Update, query, update, flag, WriteConcern.Acknowledged, mc, null, new LogOptions<WriteConcernResult>(CallSuccess, true, false));
         }
 
         /// <summary>
@@ -160,7 +160,7 @@ namespace X.Util.Extend.Mongo
         public void RemoveMongo(string database, string collection, QueryDocument query, RemoveFlags flag = RemoveFlags.None)
         {
             var mc = new MongoDbProvider(database, collection);
-            CoreAccess<MongoCollection<BsonDocument>>.TryCallAsync(mc.Client.Remove, query, flag, WriteConcern.Acknowledged, CallSuccess, mc, null, false);
+            CoreAccess<MongoCollection<BsonDocument>>.TryCallAsync(mc.Client.Remove, query, flag, WriteConcern.Acknowledged, mc, null, new LogOptions<WriteConcernResult>(CallSuccess, true, false));
         }
 
         /// <summary>
@@ -172,7 +172,7 @@ namespace X.Util.Extend.Mongo
         public void RemoveAllMongo(string database, string collection)
         {
             var mc = new MongoDbProvider(database, collection);
-            CoreAccess<MongoCollection<BsonDocument>>.TryCallAsync(mc.Client.RemoveAll, WriteConcern.Acknowledged, CallSuccess, mc, null, false);
+            CoreAccess<MongoCollection<BsonDocument>>.TryCallAsync(mc.Client.RemoveAll, WriteConcern.Acknowledged, mc, null, new LogOptions<WriteConcernResult>(CallSuccess, true, false));
         }
 
         /// <summary>
@@ -184,7 +184,7 @@ namespace X.Util.Extend.Mongo
         public void DropMongo(string database, string collection)
         {
             var mc = new MongoDbProvider(database, collection);
-            CoreAccess<MongoCollection<BsonDocument>>.TryCallAsync(mc.Client.Drop, CallSuccess, mc, null, false);
+            CoreAccess<MongoCollection<BsonDocument>>.TryCallAsync(mc.Client.Drop, mc, null, new LogOptions<CommandResult>(CallSuccess, true, false));
         }
         #endregion
 
@@ -221,7 +221,7 @@ namespace X.Util.Extend.Mongo
         public MongoCursor<BsonDocument> ReadMongo(string database, string collection, QueryDocument query, FieldsDocument field = null, SortByDocument sortBy = null, int limit = 0, int skip = 0)
         {
             var mc = new MongoDbProvider(database, collection);
-            return CoreAccess<MongoCollection<BsonDocument>>.TryCall(Find, mc, query, field, sortBy, limit, skip, iresult => iresult != null && iresult.Any(), mc);
+            return CoreAccess<MongoCollection<BsonDocument>>.TryCall(Find, mc, query, field, sortBy, limit, skip, mc, new LogOptions<MongoCursor<BsonDocument>>(iresult => iresult != null && iresult.Any()));
         }
 
         /// <summary>
@@ -234,7 +234,7 @@ namespace X.Util.Extend.Mongo
         public BsonDocument FindOne(string database, string collection, IMongoQuery query)
         {
             var mc = new MongoDbProvider(database, collection);
-            return CoreAccess<MongoCollection<BsonDocument>>.TryCall(mc.Client.FindOne, query, CoreBase.CallSuccess, mc);
+            return CoreAccess<MongoCollection<BsonDocument>>.TryCall(mc.Client.FindOne, query, mc, new LogOptions<BsonDocument>(CoreBase.CallSuccess));
         }
 
         /// <summary>
@@ -249,7 +249,7 @@ namespace X.Util.Extend.Mongo
         public long ReadMongoCount(string database, string collection, QueryDocument query, int limit = 0, int skip = 0)
         {
             var mc = new MongoDbProvider(database, collection);
-            return CoreAccess<MongoCollection<BsonDocument>>.TryCall(Count, mc, query, limit, skip, CoreBase.CallSuccess, mc);
+            return CoreAccess<MongoCollection<BsonDocument>>.TryCall(Count, mc, query, limit, skip, mc, new LogOptions<long>(CoreBase.CallSuccess));
         }
 
         /// <summary>
@@ -263,7 +263,7 @@ namespace X.Util.Extend.Mongo
         public IEnumerable<BsonValue> Distinct(string database, string collection, QueryDocument query, string field)
         {
             var mc = new MongoDbProvider(database, collection);
-            return CoreAccess<MongoCollection<BsonDocument>>.TryCall(mc.Client.Distinct, field, query, CoreBase.CallSuccess, mc);
+            return CoreAccess<MongoCollection<BsonDocument>>.TryCall(mc.Client.Distinct, field, query, mc, new LogOptions<IEnumerable<BsonValue>>(CoreBase.CallSuccess));
         }
         #endregion
 

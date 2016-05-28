@@ -1,6 +1,5 @@
 ﻿using MongoDB.Bson;
 using System;
-using X.Util.Core;
 using X.Util.Core.Common;
 
 namespace X.Util.Extend.Mongo

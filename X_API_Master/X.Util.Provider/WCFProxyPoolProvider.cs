@@ -1,7 +1,6 @@
 ﻿using System;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
-using X.Util.Core;
 using X.Util.Core.Configuration;
 using X.Util.Core.Kernel;
 using X.Util.Entities;

@@ -63,6 +63,7 @@
     <Compile Include="Interface\IProvider.cs" />
     <Compile Include="Interface\IProxyPooled.cs" />
     <Compile Include="Interface\IRedisCache.cs" />
+    <Compile Include="LogOptions.cs" />
     <Compile Include="ProxyPooledRequest.cs" />
     <Compile Include="StatusCacheResult.cs" />
     <Compile Include="HttpCacheResult.cs" />

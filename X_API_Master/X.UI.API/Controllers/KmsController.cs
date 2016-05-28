@@ -5,8 +5,8 @@ using X.Interface.Dto;
 using X.Interface.Dto.HttpResponse;
 using X.Interface.Dto.Interface;
 using X.UI.API.Util;
-using X.Util.Core;
 using X.Util.Core.Kernel;
+using X.Util.Entities;
 using X.Util.Provider;
 
 namespace X.UI.API.Controllers
@@ -26,7 +26,7 @@ namespace X.UI.API.Controllers
         public ApiResult<PublicKeyDto> GetPublicKey(int size)
         {
             var provider = new InstanceProvider<IKeyManager>(typeof(KeyManagerService), ControllerHelper.EDomain);
-            return CoreAccess<IKeyManager>.Call(provider.Client.GetPublicKey, size, ControllerHelper.CallSuccess, provider);
+            return CoreAccess<IKeyManager>.Call(provider.Client.GetPublicKey, size, provider, new LogOptions<ApiResult<PublicKeyDto>>(ControllerHelper.CallSuccess));
         }
 
         /// <summary>
@@ -37,7 +37,7 @@ namespace X.UI.API.Controllers
         public ApiResult<string> GetToken()
         {
             var provider = new InstanceProvider<IKeyManager>(typeof(KeyManagerService), ControllerHelper.EDomain);
-            return CoreAccess<IKeyManager>.Call(provider.Client.GetToken, ControllerHelper.CallSuccess, provider);
+            return CoreAccess<IKeyManager>.Call(provider.Client.GetToken, provider, new LogOptions<ApiResult<string>>(ControllerHelper.CallSuccess));
         }
 
         [HttpGet]

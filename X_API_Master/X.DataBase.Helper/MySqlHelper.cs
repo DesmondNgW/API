@@ -3,7 +3,6 @@ using System.Data;
 using System.Data.Common;
 using System.Text;
 using MySql.Data.MySqlClient;
-using X.Util.Core;
 using System.Reflection;
 using X.Util.Core.Log;
 using X.Util.Entities;

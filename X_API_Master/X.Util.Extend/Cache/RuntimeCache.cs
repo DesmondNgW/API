@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Web.Caching;
-using X.Util.Core;
 using X.Util.Core.Cache;
 
 namespace X.Util.Extend.Cache

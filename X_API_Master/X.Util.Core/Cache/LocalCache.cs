@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Web;
 using System.Web.Caching;
-using X.Util.Core.Kernel;
 
 namespace X.Util.Core.Cache
 {

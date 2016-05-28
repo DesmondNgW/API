@@ -6,7 +6,6 @@ using System.Text.RegularExpressions;
 using System.Web;
 using X.Util.Core;
 using X.Util.Core.Common;
-using X.Util.Core.Kernel;
 
 namespace X.Util.Other
 {

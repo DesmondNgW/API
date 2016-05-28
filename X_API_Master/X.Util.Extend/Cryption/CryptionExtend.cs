@@ -2,7 +2,6 @@
 using System.Security.Cryptography;
 using System.Text;
 using X.Util.Core;
-using X.Util.Core.Kernel;
 
 namespace X.Util.Extend.Cryption
 {

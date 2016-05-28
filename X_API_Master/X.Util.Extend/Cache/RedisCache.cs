@@ -29,7 +29,7 @@ namespace X.Util.Extend.Cache
         public T Get<T>(string key)
         {
             var redisProvider = new RedisProvider(ServerName);
-            return CoreAccess<IRedisClient>.TryCall(redisProvider.ReadOnlyClient.Get<T>, key, CoreBase.CallSuccess, redisProvider);
+            return CoreAccess<IRedisClient>.TryCall(redisProvider.ReadOnlyClient.Get<T>, key, redisProvider, new LogOptions<T>(CoreBase.CallSuccess));
         }
 
         public T GetJson<T>(string key)
@@ -41,42 +41,42 @@ namespace X.Util.Extend.Cache
         public void Set<T>(string key, T value)
         {
             var redisProvider = new RedisProvider(ServerName);
-            CoreAccess<IRedisClient>.TryCallAsync(redisProvider.Client.Add, key, value, CoreBase.CallSuccess, redisProvider, null, false);
+            CoreAccess<IRedisClient>.TryCallAsync(redisProvider.Client.Add, key, value, redisProvider, null, new LogOptions<bool>(CoreBase.CallSuccess, true, false));
         }
 
         public void SetJson<T>(string key, T value)
         {
             var redisProvider = new RedisProvider(ServerName);
-            CoreAccess<IRedisClient>.TryCallAsync(redisProvider.Client.Add, key, value.ToJson(), CoreBase.CallSuccess, redisProvider, null, false);
+            CoreAccess<IRedisClient>.TryCallAsync(redisProvider.Client.Add, key, value.ToJson(), redisProvider, null, new LogOptions<bool>(CoreBase.CallSuccess, true, false));
         }
 
         public void Set<T>(string key, T value, DateTime expire)
         {
             var redisProvider = new RedisProvider(ServerName);
-            CoreAccess<IRedisClient>.TryCallAsync(redisProvider.Client.Add, key, value, expire, CoreBase.CallSuccess, redisProvider, null, false);
+            CoreAccess<IRedisClient>.TryCallAsync(redisProvider.Client.Add, key, value, expire, redisProvider, null, new LogOptions<bool>(CoreBase.CallSuccess, true, false));
         }
 
         public void SetJson<T>(string key, T value, DateTime expire)
         {
             var redisProvider = new RedisProvider(ServerName);
-            CoreAccess<IRedisClient>.TryCallAsync(redisProvider.Client.Add, key, value.ToJson(), expire, CoreBase.CallSuccess, redisProvider, null, false);
+            CoreAccess<IRedisClient>.TryCallAsync(redisProvider.Client.Add, key, value.ToJson(), expire, redisProvider, null, new LogOptions<bool>(CoreBase.CallSuccess, true, false));
         }
 
         public void Set<T>(string key, T value, TimeSpan expire)
         {
             var redisProvider = new RedisProvider(ServerName);
-            CoreAccess<IRedisClient>.TryCallAsync(redisProvider.Client.Add, key, value, expire, CoreBase.CallSuccess, redisProvider, null, false);
+            CoreAccess<IRedisClient>.TryCallAsync(redisProvider.Client.Add, key, value, expire, redisProvider, null, new LogOptions<bool>(CoreBase.CallSuccess, true, false));
         }
         public void SetJson<T>(string key, T value, TimeSpan expire)
         {
             var redisProvider = new RedisProvider(ServerName);
-            CoreAccess<IRedisClient>.TryCallAsync(redisProvider.Client.Add, key, value.ToJson(), expire, CoreBase.CallSuccess, redisProvider, null, false);
+            CoreAccess<IRedisClient>.TryCallAsync(redisProvider.Client.Add, key, value.ToJson(), expire, redisProvider, null, new LogOptions<bool>(CoreBase.CallSuccess, true, false));
         }
 
         public void Remove(string key)
         {
             var redisProvider = new RedisProvider(ServerName);
-            CoreAccess<IRedisClient>.TryCallAsync(redisProvider.Client.Remove, key, CoreBase.CallSuccess, redisProvider, null, false);
+            CoreAccess<IRedisClient>.TryCallAsync(redisProvider.Client.Remove, key, redisProvider, null, new LogOptions<bool>(CoreBase.CallSuccess, true, false));
         }
         #endregion
     }
