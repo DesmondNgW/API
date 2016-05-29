@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using System.Runtime.Remoting.Messaging;
 using System.Web.Caching;
+using X.Util.Core;
 using X.Util.Core.Kernel;
 using X.Util.Core.Log;
 using X.Util.Entities;
@@ -41,7 +42,7 @@ namespace X.Util.Extend.Cache
         {
             var value = CallContext.GetData(key);
             var level = value == null ? 0 : value.GetHashCode();
-            Logger.Client.Debug(method, domain, null, string.Empty, string.Format("{0}.{1} GetCacheData hit {2}, cache key is {3}.", method.DeclaringType.FullName, method.Name, dictionary.ContainsKey(level) ? dictionary[level] : "level-" + level, key));
+            Logger.Client.Debug(method, domain, null, string.Empty, string.Format("{0}.{1} GetCacheData hit {2}, cache key is {3}.", method.GetDeclaringFullName(), method.Name, dictionary.ContainsKey(level) ? dictionary[level] : "level-" + level, key));
         }
 
         public static CacheResult<T> GetRuntimeCacheData<T>(string key, string version, DateTime dt, Func<CacheResult<T>> loader)

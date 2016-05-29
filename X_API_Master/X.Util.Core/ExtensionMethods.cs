@@ -222,6 +222,16 @@ namespace X.Util.Core
         {
             return t ?? Activator.CreateInstance<T>();
         }
+
+        public static string GetDeclaringFullName(this MethodBase m)
+        {
+            return m.DeclaringType != null ? m.DeclaringType.FullName : "NullDeclaringType";
+        }
+
+        public static string GetFullName(this Type m)
+        {
+            return m != null ? m.FullName : "NullType";
+        }
         #endregion
     }
 }

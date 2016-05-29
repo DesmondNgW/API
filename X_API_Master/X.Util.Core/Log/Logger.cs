@@ -126,7 +126,7 @@ namespace X.Util.Core.Log
 
         public void Elapsed(MethodBase method, long elapsedMilliseconds, LogDomain edomain, string address = null)
         {
-            if (method.DeclaringType != null) Client.Debug(method, edomain, null, address, string.Format(@"{0}.{1} finished, used {2} ms.", method.DeclaringType.FullName, method.Name, elapsedMilliseconds));
+            Client.Debug(method, edomain, null, address, string.Format(@"{0}.{1} finished, used {2} ms.", method.GetDeclaringFullName(), method.Name, elapsedMilliseconds));
         }
 
         public Action GetStopElapsed(MethodBase method, LogDomain edomain, string address = null)
