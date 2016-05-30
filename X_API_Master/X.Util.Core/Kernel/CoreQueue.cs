@@ -26,8 +26,14 @@ namespace X.Util.Core.Kernel
         /// </summary>
         public string QueueId { get; set; }
 
+        /// <summary>
+        /// 队列
+        /// </summary>
         public ConcurrentQueue<QueueItem<T>> Queue { get; set; }
 
+        /// <summary>
+        /// 同步事件
+        /// </summary>
         public ManualResetEvent EventWait { get; set; }
     }
 
