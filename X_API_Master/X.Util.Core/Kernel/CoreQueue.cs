@@ -5,58 +5,83 @@ using System.Threading;
 
 namespace X.Util.Core.Kernel
 {
+    public class QueueItem<T>
+    {
+        /// <summary>
+        /// 队列处理方法
+        /// </summary>
+        public Action<T> Method { get; set; }
+
+        /// <summary>
+        /// 队列处理的参数
+        /// </summary>
+        public T Context { get; set; }
+    }
+
+
+    public class QueueContext<T>
+    {
+        /// <summary>
+        /// 队列ID
+        /// </summary>
+        public string QueueId { get; set; }
+
+        public ConcurrentQueue<QueueItem<T>> Queue { get; set; }
+
+        public ManualResetEvent EventWait { get; set; }
+    }
+
     /// <summary>
     /// 队列延迟处理
     /// </summary>
     /// <typeparam name="T">处理方法的参数</typeparam>
     public class CoreQueue<T>
     {
-        private static readonly IDictionary<Action<T>, ConcurrentQueue<T>> ContextDictionary = new Dictionary<Action<T>, ConcurrentQueue<T>>();
+        private static readonly IDictionary<string, QueueContext<T>> Queue = new Dictionary<string, QueueContext<T>>();
         private const string LockerPrefix = "X.Util.Core.Kernel.CoreQueue.Prefix";
-        /// <summary>
-        /// 延迟队列处理方法
-        /// </summary>
-        private Action<T> Method { get; set; }
+        public string QueueId { get; set; }
 
-        /// <summary>
-        /// 延迟队列
-        /// </summary>
-        /// <param name="method">延迟队列处理方法</param>
-        /// <param name="sleep">睡眠时间</param>
-        public CoreQueue(Action<T> method, int sleep)
+        public CoreQueue(string queueId)
         {
-            if (Equals(method, null)) return;
-            if (ContextDictionary.ContainsKey(method)) return;
+            if (string.IsNullOrEmpty(queueId)) return;
+            QueueId = queueId;
+            if (Queue.ContainsKey(queueId)) return;
             lock (CoreUtil.Getlocker(LockerPrefix + typeof (T).FullName))
             {
-                if (ContextDictionary.ContainsKey(method)) return;
-                Method = method;
-                ContextDictionary[method] = new ConcurrentQueue<T>();
+                if (Queue.ContainsKey(queueId)) return;
+                Queue[queueId] = new QueueContext<T>()
+                {
+                    QueueId = queueId,
+                    EventWait = new ManualResetEvent(false),
+                    Queue = new ConcurrentQueue<QueueItem<T>>()
+                };
                 var thread = new Thread(() =>
                 {
                     while (true)
                     {
-                        if (ContextDictionary[method] != null && ContextDictionary[method].Count > 0)
+                        QueueItem<T> item;
+                        if (Queue[queueId].Queue.TryDequeue(out item) && item != null)
                         {
-                            T context;
-                            if (ContextDictionary[method].TryDequeue(out context))
-                            {
-                                method.BeginInvoke(context, null, null);
-                            }
+                            item.Method.BeginInvoke(item.Context, null, null);
                         }
-                        Thread.Sleep(sleep);
+                        else
+                        {
+                            Queue[queueId].EventWait.Reset();
+                            Queue[queueId].EventWait.WaitOne();
+                        }
                     }
                 }) {IsBackground = true};
                 thread.Start();
             }
         }
 
-        public void Enqueue(T context)
+        public void Enqueue(QueueItem<T> item)
         {
-            if (Equals(Method, null)) return;
+            if (Equals(item, null)) return;
             lock (CoreUtil.Getlocker(LockerPrefix + typeof(T).FullName))
             {
-                ContextDictionary[Method].Enqueue(context);
+                Queue[QueueId].Queue.Enqueue(item);
+                Queue[QueueId].EventWait.Set();
             }
         }
     }
