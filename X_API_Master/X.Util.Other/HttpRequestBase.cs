@@ -11,19 +11,6 @@ using X.Util.Extend.Cache;
 
 namespace X.Util.Other
 {
-    /// <summary>
-    /// http请求结果
-    /// </summary>
-    public class HttpRequestResult
-    {
-        public string Content { get; set; }
-
-        public bool Success { get; set; }
-
-        public CookieCollection CookieCollection { get; set; }
-
-        public string Cookies { get; set; }
-    }
     public class HttpRequestBase
     {
         private static HttpRequestResult GetHttpRequest(string uri, string charset, string data, string method, string contentType, Dictionary<string, string> extendHeaders, string cookie)

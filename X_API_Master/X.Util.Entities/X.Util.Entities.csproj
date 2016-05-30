@@ -54,6 +54,7 @@
     <Compile Include="CacheKey.cs" />
     <Compile Include="CacheResult.cs" />
     <Compile Include="EnumInfo.cs" />
+    <Compile Include="HttpRequestResult.cs" />
     <Compile Include="Interface\ICacheData.cs" />
     <Compile Include="Interface\IContext.cs" />
     <Compile Include="Interface\ICoreCache.cs" />
@@ -65,6 +66,7 @@
     <Compile Include="Interface\IRedisCache.cs" />
     <Compile Include="LogOptions.cs" />
     <Compile Include="ProxyPooledRequest.cs" />
+    <Compile Include="QueueContext.cs" />
     <Compile Include="StatusCacheResult.cs" />
     <Compile Include="HttpCacheResult.cs" />
     <Compile Include="MongoBaseModel.cs" />

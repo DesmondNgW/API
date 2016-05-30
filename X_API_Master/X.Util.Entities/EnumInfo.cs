@@ -55,4 +55,10 @@
         Month,
         Year
     }
+
+    public enum FileBaseMode
+    {
+        Create,
+        Append
+    }
 }

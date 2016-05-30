@@ -9,11 +9,6 @@ using X.Util.Entities;
 
 namespace X.Util.Other
 {
-    public enum FileBaseMode
-    {
-        Create,
-        Append
-    }
     public class FileBase
     {
         public static bool WriteFile(string filePath, string fileName, string content, string encode, FileBaseMode mode)
