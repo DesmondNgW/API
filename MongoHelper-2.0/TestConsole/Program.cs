@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Threading;
 using MongoDbHelper;
+using MongoDB.Bson;
+using MongoDB.Driver;
 
 namespace TestConsole
 {
@@ -32,22 +34,25 @@ namespace TestConsole
         static void RunTest(object obj)
         {
             var cursor = Convert.ToInt32(obj);
-            var list = new List<TestModel>();
-            for (var i = 0; i < 2000; i++)
+            //var list = new List<TestModel>();
+            for (var i = 0; i < 1; i++)
             {
                 //var o = new BsonDocument();
                 //o.Add("_id", cursor + "_" + i);
                 //o.Add("Text", "this is a text string for test");
-                list.Add(new TestModel
+                var o = new TestModel
                 {
                     Id = cursor + "_" + i,
-                    Text = "this is a text string for test www"
-                });
+                    Text = "this is a text string for test www  2222"
+                };
+                using (var mc = new MongoDbProvider<TestModel>("newdatabase", "Data"))
+                {
+                    //mc.ICollection.InsertOne(o);
+                    mc.ICollection.ReplaceOne(m => true, o, new UpdateOptions() {IsUpsert = true});
+                    //var a = mc.ICollection.Find(m => m.Id == cursor + "_" + i).ToList();
+                }
             }
-            using (var mc = new MongoDbProvider<TestModel>("newdatabase", "Data"))
-            {
-                mc.ICollection.InsertMany(list);
-            }
+
             MongoDbConfig.ShowStatus();
             Console.WriteLine(@"current thread threadId : {0} end.", Thread.CurrentThread.ManagedThreadId);
         }
