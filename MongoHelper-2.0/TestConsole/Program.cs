@@ -48,7 +48,7 @@ namespace TestConsole
                 using (var mc = new MongoDbProvider<TestModel>("newdatabase", "Data"))
                 {
                     //mc.ICollection.InsertOne(o);
-                    mc.ICollection.ReplaceOne(m => true, o, new UpdateOptions() {IsUpsert = true});
+                    //mc.ICollection.ReplaceOne(m => true, o, new UpdateOptions() {IsUpsert = true});
                     //var a = mc.ICollection.Find(m => m.Id == cursor + "_" + i).ToList();
                 }
             }
