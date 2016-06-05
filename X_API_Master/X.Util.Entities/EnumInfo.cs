@@ -61,4 +61,11 @@
         Create,
         Append
     }
+
+    public enum MongoCredentialType
+    {
+        MongoCr,
+        ScramSha1,
+        Plain
+    }
 }

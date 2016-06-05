@@ -1,5 +1,4 @@
-﻿using MongoDB.Bson;
-using MongoDB.Driver;
+﻿using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
@@ -11,44 +10,49 @@ using X.Util.Entities.Interface;
 
 namespace X.Util.Provider
 {
-    public sealed class MongoDbProvider : IProvider<MongoCollection<BsonDocument>>
+    public class MongoDbProvider<TDocument> : IProvider<MongoCollection<TDocument>>
     {
         #region 构造函数
-        private static string _servername = ConfigurationHelper.MongoDefaultServername;
+        private readonly string _servername = ConfigurationHelper.MongoDefaultServername;
         private const string Database = "admin";
         private const string CollectionName = "Test";
+        private readonly string _credentialDataBase = string.Empty;
         private MongoServer MongoSever { get; set; }
-        private MongoCollection<BsonDocument> Collection { get; set; }
-        public MongoDbProvider()
+        private MongoCollection<TDocument> Collection { get; set; }
+        public MongoDbProvider(string credentialDataBase = null)
         {
+            _credentialDataBase = credentialDataBase;
             MongoSever = Init(_servername);
             var db = MongoSever.GetDatabase(Database);
-            Collection = db.GetCollection(CollectionName);
+            Collection = db.GetCollection<TDocument>(CollectionName);
         }
-        public MongoDbProvider(string collection)
+        public MongoDbProvider(string collection, string credentialDataBase = null)
         {
+            _credentialDataBase = credentialDataBase;
             MongoSever = Init(_servername);
             var db = MongoSever.GetDatabase(Database);
-            Collection = db.GetCollection(collection);
+            Collection = db.GetCollection<TDocument>(collection);
         }
-        public MongoDbProvider(string database, string collection)
+        public MongoDbProvider(string database, string collection, string credentialDataBase = null)
         {
+            _credentialDataBase = credentialDataBase;
             MongoSever = Init(_servername);
             var db = MongoSever.GetDatabase(database);
-            Collection = db.GetCollection(collection);
+            Collection = db.GetCollection<TDocument>(collection);
         }
-        public MongoDbProvider(string database, string collection, string serverName)
+        public MongoDbProvider(string database, string collection, string serverName, string credentialDataBase = null)
         {
+            _credentialDataBase = credentialDataBase;
             _servername = serverName;
             MongoSever = Init(serverName);
             var db = MongoSever.GetDatabase(database);
-            Collection = db.GetCollection(collection);
+            Collection = db.GetCollection<TDocument>(collection);
         }
-        public MongoDbProvider(string database, string collection, IEnumerable<Uri> servers, string userName, string password)
+        public MongoDbProvider(string database, string collection, IEnumerable<Uri> servers, string userName, string password, MongoCredentialType type, string credentialDataBase = "admin")
         {
-            MongoSever = ConfigurationHelper.MongoClientConfiguration(servers, userName, password).GetServer();
+            MongoSever = ConfigurationHelper.MongoClientConfiguration(servers, userName, password, credentialDataBase, type).GetServer();
             var db = MongoSever.GetDatabase(database);
-            Collection = db.GetCollection(collection);
+            Collection = db.GetCollection<TDocument>(collection);
         }
         #endregion
 
@@ -58,7 +62,7 @@ namespace X.Util.Provider
         /// </summary>
         /// <param name="serverName"></param>
         /// <returns></returns>
-        private static MongoClient GetMongoClient(string serverName)
+        private MongoClient GetMongoClient(string serverName)
         {
             return new MongoClient(ConfigurationHelper.MongoClientConfiguration(serverName));
         }
@@ -67,12 +71,12 @@ namespace X.Util.Provider
         /// </summary>
         /// <param name="serverName"></param>
         /// <returns></returns>
-        private static MongoServer Init(string serverName)
+        private MongoServer Init(string serverName)
         {
             MongoServer mongoServer = null;
             try
             {
-                mongoServer = Core<MongoClient>.Instance(GetMongoClient, serverName, ConfigurationHelper.EndpointFile + serverName).GetServer();
+                mongoServer = Core<MongoClient>.Instance(GetMongoClient, serverName, ConfigurationHelper.EndpointFile + serverName + (string.IsNullOrEmpty(_credentialDataBase) ? string.Empty : _credentialDataBase)).GetServer();
             }
             catch (Exception ex)
             {
@@ -93,7 +97,7 @@ namespace X.Util.Provider
             get { return LogDomain.ThirdParty; }
         }
 
-        public MongoCollection<BsonDocument> Client
+        public MongoCollection<TDocument> Client
         {
             get { return Collection; }
         }

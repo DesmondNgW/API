@@ -246,6 +246,20 @@ namespace X.Util.Core.Configuration
             return new CouchbaseClient(configuration);
         }
 
+        public static IEnumerable<MongoCredential> GetMongoCredential(string userName, string password, string credentialDataBase, MongoCredentialType type)
+        {
+            switch (type)
+            {
+                case MongoCredentialType.Plain:
+                    return new List<MongoCredential> { MongoCredential.CreatePlainCredential(credentialDataBase, userName, password) };
+                case MongoCredentialType.ScramSha1:
+                    return new List<MongoCredential> { MongoCredential.CreateScramSha1Credential(credentialDataBase, userName, password) };
+                default:
+                    return new List<MongoCredential> { MongoCredential.CreateMongoCRCredential(credentialDataBase, userName, password) };
+            }
+        }
+
+
         /// <summary>
         /// MongoDb Configuration
         /// </summary>
@@ -261,7 +275,8 @@ namespace X.Util.Core.Configuration
             var password = XmlHelper.GetXmlAttributeValue(node, "password", string.Empty);
             if (!string.IsNullOrWhiteSpace(userName) && !string.IsNullOrWhiteSpace(password))
             {
-                configuration.Credentials = new List<MongoCredential> { MongoCredential.CreateMongoCRCredential("admin", userName, password) };
+                var type = (MongoCredentialType)Enum.Parse(typeof(MongoCredentialType), XmlHelper.GetXmlAttributeValue(node, "credential", "MongoCr"), true);
+                configuration.Credentials = GetMongoCredential(userName, password, XmlHelper.GetXmlAttributeValue(node, "db", "admin"), type);
             }
             foreach (XmlNode item in node.ChildNodes)
             {
@@ -291,7 +306,7 @@ namespace X.Util.Core.Configuration
         /// MongoDb Configuration
         /// </summary>
         /// <returns></returns>
-        public static MongoClient MongoClientConfiguration(IEnumerable<Uri> servers, string userName, string password)
+        public static MongoClient MongoClientConfiguration(IEnumerable<Uri> servers, string userName, string password, string credentialDataBase, MongoCredentialType type)
         {
             var configuration = new MongoClientSettings
             {
@@ -300,7 +315,7 @@ namespace X.Util.Core.Configuration
                 WaitQueueSize = 10000,
                 Servers = servers.Select(uri => new MongoServerAddress(uri.Host, uri.Port))
             };
-            if (!string.IsNullOrWhiteSpace(userName) && !string.IsNullOrWhiteSpace(password)) configuration.Credentials = new List<MongoCredential> { MongoCredential.CreateMongoCRCredential("admin", userName, password) };
+            if (!string.IsNullOrWhiteSpace(userName) && !string.IsNullOrWhiteSpace(password)) configuration.Credentials = GetMongoCredential(userName, password, credentialDataBase, type);
             return new MongoClient(configuration);
         }
 
