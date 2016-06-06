@@ -126,15 +126,24 @@ namespace MongoDbHelper
         /// <param name="reloadConfigure"></param>
         /// <returns></returns>
         public static MongoClient Connection(string userName, string password, string database, string connectName, Action reloadConfigure)
-        {
+        {    
+            if (!_configures.ContainsKey(connectName) || _configures[connectName] == null) throw new Exception("MongoDb缺少配置信息");
             if (reloadConfigure != null) reloadConfigure.Invoke();
-            if (string.IsNullOrEmpty(userName) || string.IsNullOrEmpty(password) || string.IsNullOrEmpty(database)) database = string.Empty;
+            if (string.IsNullOrEmpty(userName)) userName = _configures[connectName].UserName;
+            if (string.IsNullOrEmpty(password)) password = _configures[connectName].Password;
+            if (!string.IsNullOrEmpty(userName) && !string.IsNullOrEmpty(password))
+            {
+                if (string.IsNullOrEmpty(database)) database = "admin";
+            }
+            else
+            {
+                database = string.Empty;
+            }
             var key = Sha1(connectName + database);
             if (MongoClientPools.ContainsKey(key) && reloadConfigure == null) return MongoClientPools[key];
             lock (ClientLockObj)
             {
                 if (MongoClientPools.ContainsKey(key) && reloadConfigure == null) return MongoClientPools[key];
-                if (!_configures.ContainsKey(connectName) || _configures[connectName] == null) throw new Exception("MongoDb缺少配置信息");
                 var setting = GetMongoClientSettings(_configures[connectName]);
                 MongoClientPools[key] = new MongoClient(setting);
             }
