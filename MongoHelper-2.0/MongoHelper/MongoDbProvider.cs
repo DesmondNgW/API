@@ -9,36 +9,30 @@ namespace MongoDbHelper
     /// </summary>
     public class MongoDbProvider<TDocument> : IDisposable
     {
-        /// <summary>
-        /// 数据库
-        /// </summary>
-        public IMongoDatabase IDataBase;
-        [Obsolete("Use the new API instead.")]
-        public MongoDatabase DataBase;
-
+        #region 对外Api
         /// <summary>
         /// 集合表
         /// </summary>
         public IMongoCollection<TDocument> ICollection { get; set; }
         [Obsolete("Use the new API instead.")]
-        public MongoCollection<TDocument> Collection { get; set; }
+        public MongoCollection<TDocument> Collection { get; set; } 
+        #endregion
 
+        #region 构造函数
         /// <summary>
         /// MongoDBProvider
         /// 自动创建数据库连接
         /// </summary>
         /// <param name="database">数据库名</param>
         /// <param name="collection">Collection</param>
-        /// <param name="credentialDataBase"></param>
         /// <param name="reloadConfigure">重新加载配置文件（用于初次加载失败后重新加载）</param>
-        /// <param name="maxConnectionPoolSize">连接池大小</param>
-        public MongoDbProvider(string database, string collection, string credentialDataBase = "", Action reloadConfigure = null, int maxConnectionPoolSize = MongoDbConnection.MaxConnectionPoolSize)
+        public MongoDbProvider(string database, string collection, Action reloadConfigure = null)
         {
-            var mongoSever = MongoDbConnection.Connection(string.Empty, string.Empty, credentialDataBase, MongoDbConnection.DefaultConnectName, reloadConfigure, maxConnectionPoolSize);
-            IDataBase = mongoSever.GetDatabase(database);
-            ICollection = IDataBase.GetCollection<TDocument>(collection);
-            DataBase = mongoSever.GetServer().GetDatabase(database);
-            Collection = DataBase.GetCollection<TDocument>(collection);
+            var mongoSever = MongoDbConnection.Connection(string.Empty, string.Empty, string.Empty, MongoDbConnection.DefaultConnectName, reloadConfigure);
+            var idataBase = mongoSever.GetDatabase(database);
+            ICollection = idataBase.GetCollection<TDocument>(collection);
+            var dataBase = mongoSever.GetServer().GetDatabase(database);
+            Collection = dataBase.GetCollection<TDocument>(collection);
         }
 
         /// <summary>
@@ -51,14 +45,13 @@ namespace MongoDbHelper
         /// <param name="password"></param>
         /// <param name="credentialDataBase"></param>
         /// <param name="reloadConfigure">重新加载配置文件（用于初次加载失败后重新加载）</param>
-        /// <param name="maxConnectionPoolSize">连接池大小</param>
-        public MongoDbProvider(string database, string collection, string userName, string password, string credentialDataBase = "", Action reloadConfigure = null, int maxConnectionPoolSize = MongoDbConnection.MaxConnectionPoolSize)
+        public MongoDbProvider(string database, string collection, string userName, string password, string credentialDataBase = null, Action reloadConfigure = null)
         {
-            var mongoSever = MongoDbConnection.Connection(userName, password, credentialDataBase, MongoDbConnection.DefaultConnectName, reloadConfigure, maxConnectionPoolSize);
-            IDataBase = mongoSever.GetDatabase(database);
-            ICollection = IDataBase.GetCollection<TDocument>(collection);
-            DataBase = mongoSever.GetServer().GetDatabase(database);
-            Collection = DataBase.GetCollection<TDocument>(collection);
+            var mongoSever = MongoDbConnection.Connection(userName, password, credentialDataBase, MongoDbConnection.DefaultConnectName, reloadConfigure);
+            var idataBase = mongoSever.GetDatabase(database);
+            ICollection = idataBase.GetCollection<TDocument>(collection);
+            var dataBase = mongoSever.GetServer().GetDatabase(database);
+            Collection = dataBase.GetCollection<TDocument>(collection);
         }
 
         /// <summary>
@@ -69,15 +62,13 @@ namespace MongoDbHelper
         /// <param name="database"></param>
         /// <param name="collection"></param>
         /// <param name="reloadConfigure">重新加载配置文件（用于初次加载失败后重新加载）</param>
-        /// <param name="credentialDataBase"></param>
-        /// <param name="maxConnectionPoolSize">连接池大小</param>
-        public MongoDbProvider(string connectName, string database, string collection, Action reloadConfigure, string credentialDataBase = "", int maxConnectionPoolSize = MongoDbConnection.MaxConnectionPoolSize)
+        public MongoDbProvider(string connectName, string database, string collection, Action reloadConfigure)
         {
-            var mongoSever = MongoDbConnection.Connection(string.Empty, string.Empty, credentialDataBase, connectName, reloadConfigure, maxConnectionPoolSize);
-            IDataBase = mongoSever.GetDatabase(database);
-            ICollection = IDataBase.GetCollection<TDocument>(collection);
-            DataBase = mongoSever.GetServer().GetDatabase(database);
-            Collection = DataBase.GetCollection<TDocument>(collection);
+            var mongoSever = MongoDbConnection.Connection(string.Empty, string.Empty, string.Empty, connectName, reloadConfigure);
+            var idataBase = mongoSever.GetDatabase(database);
+            ICollection = idataBase.GetCollection<TDocument>(collection);
+            var dataBase = mongoSever.GetServer().GetDatabase(database);
+            Collection = dataBase.GetCollection<TDocument>(collection);
         }
 
         /// <summary>
@@ -91,25 +82,23 @@ namespace MongoDbHelper
         /// <param name="password"></param>
         /// <param name="reloadConfigure">重新加载配置文件（用于初次加载失败后重新加载）</param>
         /// <param name="credentialDataBase"></param>
-        /// <param name="maxConnectionPoolSize">连接池大小</param>
-        public MongoDbProvider(string connectName, string database, string collection, string userName, string password, Action reloadConfigure, string credentialDataBase = "", int maxConnectionPoolSize = MongoDbConnection.MaxConnectionPoolSize)
+        public MongoDbProvider(string connectName, string database, string collection, string userName, string password, Action reloadConfigure, string credentialDataBase = null)
         {
-            var mongoSever = MongoDbConnection.Connection(userName, password, credentialDataBase, connectName, reloadConfigure, maxConnectionPoolSize);
-            IDataBase = mongoSever.GetDatabase(database);
-            ICollection = IDataBase.GetCollection<TDocument>(collection);
-            DataBase = mongoSever.GetServer().GetDatabase(database);
-            Collection = DataBase.GetCollection<TDocument>(collection);
-        }
+            var mongoSever = MongoDbConnection.Connection(userName, password, credentialDataBase, connectName, reloadConfigure);
+            var idataBase = mongoSever.GetDatabase(database);
+            ICollection = idataBase.GetCollection<TDocument>(collection);
+            var dataBase = mongoSever.GetServer().GetDatabase(database);
+            Collection = dataBase.GetCollection<TDocument>(collection);
+        } 
+        #endregion
 
-        #region IDisposable 成员
         /// <summary>
-        /// 
+        /// Dispose
         /// </summary>
         public void Dispose()
         {
 
         }
-        #endregion
     }
     #endregion
 }

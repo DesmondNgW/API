@@ -27,12 +27,13 @@ namespace MongoDbHelper
             var userName = info["username"] ?? string.Empty;
             var password = info["password"] ?? string.Empty;
             var credentialDb = info["db"] ?? string.Empty;
+            var credential = (MongoDbCredential) Enum.Parse(typeof (MongoDbCredential), info["credential"] ?? "ScramSha1");
             var connectName = string.IsNullOrWhiteSpace(info["connectName"]) ? MongoDbConnection.DefaultConnectName : info["connectName"];
             int maxConnectionPoolSize;
             int.TryParse(info["maxConnectionPoolSize"], out maxConnectionPoolSize);
             var list = match.Groups[1].Value.Split(',');
             if (list.Length <= 0) return;
-            MongoDbConnection.Configure(list.Select(t => new Uri("mongodb://" + t)).ToList(), connectName, userName, password, credentialDb, maxConnectionPoolSize);
+            MongoDbConnection.Configure(list.Select(t => new Uri("mongodb://" + t)).ToList(), connectName, userName, password, credentialDb, maxConnectionPoolSize, credential);
         }
 
         /// <summary>
@@ -41,9 +42,10 @@ namespace MongoDbHelper
         /// <param name="servers">数据库地址列表Uri格式mongodb://host:port/</param>
         /// <param name="credentialDataBase">用户名密码所在db</param>
         /// <param name="maxConnectionPoolSize"></param>
-        public static void Config(List<Uri> servers, string credentialDataBase = "admin", int maxConnectionPoolSize = MongoDbConnection.MaxConnectionPoolSize)
+        /// <param name="credential"></param>
+        public static void Config(List<Uri> servers, string credentialDataBase, int maxConnectionPoolSize = MongoDbConnection.MaxConnectionPoolSize, MongoDbCredential credential = MongoDbCredential.ScramSha1)
         {
-            MongoDbConnection.Configure(servers, MongoDbConnection.DefaultConnectName, string.Empty, string.Empty, credentialDataBase, maxConnectionPoolSize);
+            MongoDbConnection.Configure(servers, MongoDbConnection.DefaultConnectName, string.Empty, string.Empty, credentialDataBase, maxConnectionPoolSize, credential);
         }
 
         /// <summary>
@@ -53,9 +55,10 @@ namespace MongoDbHelper
         /// <param name="connectName">连接名称</param>
         /// <param name="credentialDataBase">用户名密码所在db</param>
         /// <param name="maxConnectionPoolSize"></param>
-        public static void Config(List<Uri> servers, string connectName, string credentialDataBase = "admin", int maxConnectionPoolSize = MongoDbConnection.MaxConnectionPoolSize)
+        /// <param name="credential"></param>
+        public static void Config(List<Uri> servers, string connectName, string credentialDataBase, int maxConnectionPoolSize = MongoDbConnection.MaxConnectionPoolSize, MongoDbCredential credential = MongoDbCredential.ScramSha1)
         {
-            MongoDbConnection.Configure(servers, connectName, string.Empty, string.Empty, credentialDataBase, maxConnectionPoolSize);
+            MongoDbConnection.Configure(servers, connectName, string.Empty, string.Empty, credentialDataBase, maxConnectionPoolSize, credential);
         }
 
         /// <summary>
@@ -66,9 +69,10 @@ namespace MongoDbHelper
         /// <param name="password">密码</param>
         /// <param name="credentialDataBase">用户名密码所在db</param>
         /// <param name="maxConnectionPoolSize"></param>
-        public static void Config(List<Uri> servers, string userName, string password, string credentialDataBase = "admin", int maxConnectionPoolSize = MongoDbConnection.MaxConnectionPoolSize)
+        /// <param name="credential"></param>
+        public static void Config(List<Uri> servers, string userName, string password, string credentialDataBase, int maxConnectionPoolSize = MongoDbConnection.MaxConnectionPoolSize, MongoDbCredential credential = MongoDbCredential.ScramSha1)
         {
-            MongoDbConnection.Configure(servers, MongoDbConnection.DefaultConnectName, userName, password, credentialDataBase, maxConnectionPoolSize);
+            MongoDbConnection.Configure(servers, MongoDbConnection.DefaultConnectName, userName, password, credentialDataBase, maxConnectionPoolSize, credential);
         }
 
         /// <summary>
@@ -80,9 +84,10 @@ namespace MongoDbHelper
         /// <param name="password">密码</param>
         /// <param name="credentialDataBase">用户名密码所在db</param>
         /// <param name="maxConnectionPoolSize"></param>
-        public static void Config(List<Uri> servers, string connectName, string userName, string password, string credentialDataBase = "admin", int maxConnectionPoolSize = MongoDbConnection.MaxConnectionPoolSize)
+        /// <param name="credential"></param>
+        public static void Config(List<Uri> servers, string connectName, string userName, string password, string credentialDataBase, int maxConnectionPoolSize = MongoDbConnection.MaxConnectionPoolSize, MongoDbCredential credential = MongoDbCredential.ScramSha1)
         {
-            MongoDbConnection.Configure(servers, connectName, userName, password, credentialDataBase, maxConnectionPoolSize);
+            MongoDbConnection.Configure(servers, connectName, userName, password, credentialDataBase, maxConnectionPoolSize, credential);
         }
 
         /// <summary>
