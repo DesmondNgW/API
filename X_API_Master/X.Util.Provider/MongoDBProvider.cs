@@ -57,14 +57,16 @@ namespace X.Util.Provider
         #endregion
 
         #region 实现方法
+
         /// <summary>
         /// 初始化MongoDBClient
         /// </summary>
         /// <param name="serverName"></param>
+        /// <param name="credentialDataBase"></param>
         /// <returns></returns>
-        private MongoClient GetMongoClient(string serverName)
+        private static MongoClient GetMongoClient(string serverName, string credentialDataBase = null)
         {
-            return new MongoClient(ConfigurationHelper.MongoClientConfiguration(serverName));
+            return new MongoClient(ConfigurationHelper.MongoClientConfiguration(serverName, credentialDataBase));
         }
         /// <summary>
         /// 初始化MongoDBServer的连接
@@ -76,7 +78,7 @@ namespace X.Util.Provider
             MongoServer mongoServer = null;
             try
             {
-                mongoServer = Core<MongoClient>.Instance(GetMongoClient, serverName, ConfigurationHelper.EndpointFile + serverName + (string.IsNullOrEmpty(_credentialDataBase) ? string.Empty : _credentialDataBase)).GetServer();
+                mongoServer = string.IsNullOrEmpty(_credentialDataBase) ? Core<MongoClient>.Instance(GetMongoClient, serverName, null, ConfigurationHelper.EndpointFile + serverName).GetServer() : Core<MongoClient>.Instance(GetMongoClient, serverName, _credentialDataBase, ConfigurationHelper.EndpointFile + serverName + _credentialDataBase).GetServer();
             }
             catch (Exception ex)
             {

@@ -146,9 +146,31 @@ namespace X.Util.Core.Kernel
             return _cacheResult[key].Result;
         }
 
+        public static T Instance(Func<string, string, T> init, string argument1, string argument2, string cacheKey, TimeSpan validTime, Func<T, bool> validState = null)
+        {
+            var key = cacheKey + typeof(T).FullName;
+            if (ContainsCache(key, validState)) return _cacheResult[key].Result;
+            lock (CoreUtil.Getlocker(LockerPrefix + key))
+            {
+                if (!ContainsCache(key, validState))
+                    _cacheResult[key] = new StatusCacheResult<T>
+                    {
+                        Result = init(argument1, argument2),
+                        CacheKey = key,
+                        ExpiryDate = DateTime.Now.Add(validTime)
+                    };
+            }
+            return _cacheResult[key].Result;
+        }
+
         public static T Instance(Func<string, T> init, string argument, string cacheKey, Func<T, bool> validState = null)
         {
             return Instance(init, argument, cacheKey, new TimeSpan(DayOfHour, 0, 0), validState);
+        }
+
+        public static T Instance(Func<string, string, T> init, string argument1, string argument2, string cacheKey, Func<T, bool> validState = null)
+        {
+            return Instance(init, argument1, argument2, cacheKey, new TimeSpan(DayOfHour, 0, 0), validState);
         }
 
         public static T Instance(Func<T> init, string cacheKey, Func<T, bool> validState = null)

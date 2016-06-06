@@ -248,6 +248,7 @@ namespace X.Util.Core.Configuration
 
         public static IEnumerable<MongoCredential> GetMongoCredential(string userName, string password, string credentialDataBase, MongoCredentialType type)
         {
+            if (string.IsNullOrEmpty(credentialDataBase)) credentialDataBase = "admin";
             switch (type)
             {
                 case MongoCredentialType.Plain:
@@ -259,11 +260,10 @@ namespace X.Util.Core.Configuration
             }
         }
 
-
         /// <summary>
         /// MongoDb Configuration
         /// </summary>
-        public static MongoClientSettings MongoClientConfiguration(string serverName)
+        public static MongoClientSettings MongoClientConfiguration(string serverName, string credentialDataBase = null)
         {
             var configuration = new MongoClientSettings();
             var doc = XmlHelper.GetXmlDocCache(EndpointFile);
@@ -276,7 +276,7 @@ namespace X.Util.Core.Configuration
             if (!string.IsNullOrWhiteSpace(userName) && !string.IsNullOrWhiteSpace(password))
             {
                 var type = (MongoCredentialType)Enum.Parse(typeof(MongoCredentialType), XmlHelper.GetXmlAttributeValue(node, "credential", "MongoCr"), true);
-                configuration.Credentials = GetMongoCredential(userName, password, XmlHelper.GetXmlAttributeValue(node, "db", "admin"), type);
+                configuration.Credentials = GetMongoCredential(userName, password, credentialDataBase ?? XmlHelper.GetXmlAttributeValue(node, "db", "admin"), type);
             }
             foreach (XmlNode item in node.ChildNodes)
             {
