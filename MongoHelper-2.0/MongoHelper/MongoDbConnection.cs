@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
-using MongoDB.Bson;
 using MongoDB.Driver;
 
 namespace MongoDbHelper
@@ -149,7 +148,8 @@ namespace MongoDbHelper
         {
             foreach (var key in MongoClientPools.Keys)
             {
-                Console.WriteLine(@"connectName: {0}, Servers: {1}, Connnect: {2}", key, MongoClientPools[key].Settings.Servers.ToJson(), MongoClientPools[key] != null);
+                var s = MongoClientPools[key].Settings.Servers.Aggregate(string.Empty, (current, sb) => current + ("," + sb.Host + ":" + sb.Port)).Substring(1);
+                Console.WriteLine(@"connectName: {0}, Servers: {1}, Connnect: {2}", key, s, MongoClientPools[key] != null);
             }
         }
     }
