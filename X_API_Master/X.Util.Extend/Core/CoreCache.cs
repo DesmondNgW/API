@@ -62,21 +62,14 @@ namespace X.Util.Extend.Core
 
         private static DateTime GetCacheExpire(EnumCacheTimeLevel cacheTimeLevel, int cacheTimeExpire)
         {
-            switch (cacheTimeLevel)
-            {
-                case EnumCacheTimeLevel.Year:
-                    return DateTime.Now.AddYears(cacheTimeExpire);
-                case EnumCacheTimeLevel.Month:
-                    return DateTime.Now.AddMonths(cacheTimeExpire);
-                case EnumCacheTimeLevel.Day:
-                    return DateTime.Now.AddDays(cacheTimeExpire);
-                case EnumCacheTimeLevel.Hour:
-                    return DateTime.Now.AddHours(cacheTimeExpire);
-                case EnumCacheTimeLevel.Minute:
-                    return DateTime.Now.AddMinutes(cacheTimeExpire);
-                default:
-                    return DateTime.Now.AddSeconds(cacheTimeExpire);
-            }
+            DateTime expire;
+            return cacheTimeLevel == EnumCacheTimeLevel.Year && (expire = DateTime.Now.AddYears(cacheTimeExpire)) != DateTime.MinValue
+                || cacheTimeLevel == EnumCacheTimeLevel.Month && (expire = DateTime.Now.AddMonths(cacheTimeExpire)) != DateTime.MinValue
+                || cacheTimeLevel == EnumCacheTimeLevel.Day && (expire = DateTime.Now.AddDays(cacheTimeExpire)) != DateTime.MinValue
+                || cacheTimeLevel == EnumCacheTimeLevel.Hour && (expire = DateTime.Now.AddHours(cacheTimeExpire)) != DateTime.MinValue
+                || cacheTimeLevel == EnumCacheTimeLevel.Minute && (expire = DateTime.Now.AddMinutes(cacheTimeExpire)) != DateTime.MinValue
+                || cacheTimeLevel == EnumCacheTimeLevel.Second && (expire = DateTime.Now.AddSeconds(cacheTimeExpire)) != DateTime.MinValue
+                ? expire : DateTime.MinValue;
         }
 
         private static CacheKey GetCacheKey(MethodBase method, ICollection<object> paramsList, string cacheAppVersion, bool addContext)

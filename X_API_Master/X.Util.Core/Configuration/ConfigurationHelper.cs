@@ -249,15 +249,14 @@ namespace X.Util.Core.Configuration
         public static IEnumerable<MongoCredential> GetMongoCredential(string userName, string password, string credentialDataBase, MongoCredentialType type)
         {
             if (string.IsNullOrEmpty(credentialDataBase)) credentialDataBase = "admin";
-            switch (type)
+            return new List<MongoCredential>
             {
-                case MongoCredentialType.Plain:
-                    return new List<MongoCredential> { MongoCredential.CreatePlainCredential(credentialDataBase, userName, password) };
-                case MongoCredentialType.ScramSha1:
-                    return new List<MongoCredential> { MongoCredential.CreateScramSha1Credential(credentialDataBase, userName, password) };
-                default:
-                    return new List<MongoCredential> { MongoCredential.CreateMongoCRCredential(credentialDataBase, userName, password) };
-            }
+                MongoCredentialType.Plain == type
+                    ? MongoCredential.CreatePlainCredential(credentialDataBase, userName, password)
+                    : MongoCredentialType.ScramSha1 == type
+                        ? MongoCredential.CreateScramSha1Credential(credentialDataBase, userName, password)
+                        : MongoCredential.CreateMongoCRCredential(credentialDataBase, userName, password)
+            };
         }
 
         /// <summary>
