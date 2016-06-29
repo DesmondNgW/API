@@ -54,8 +54,7 @@ namespace X.Util.Other
         {
             var cookie = context != null ? context.Request.Cookies[strName] : null;
             if (Equals(cookie, null)) return;
-            cookie.Expires = DateTime.Now.AddDays(-1);
-            context.Response.Cookies.Remove(strName);
+            cookie.Expires = DateTime.MinValue;
             context.Response.Cookies.Add(cookie);
         }
         #endregion
