@@ -142,6 +142,7 @@ namespace X.UI.API.Util
         public static void OnActionExecuted(HttpActionExecutedContext actionExecutedContext)
         {
             actionExecutedContext.Response.Headers.Add("Tid", Thread.CurrentThread.ManagedThreadId.ToString());
+            actionExecutedContext.Response.Headers.Add("Via", IpBase.GetLocalIp());
             actionExecutedContext.Response.Headers.Add("Access-Control-Allow-Origin", "*");
         }
 
