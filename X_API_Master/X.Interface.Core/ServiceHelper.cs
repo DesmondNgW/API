@@ -163,11 +163,12 @@ namespace X.Interface.Core
         /// <param name="customerNo"></param>
         /// <param name="customerName"></param>
         /// <param name="zone"></param>
+        /// <param name="clientId"></param>
         /// <returns></returns>
-        public static string SetLoginStatus(string customerNo, string customerName, int zone)
+        public static string SetLoginStatus(string customerNo, string customerName, int zone, string clientId)
         {
             if (string.IsNullOrEmpty(customerNo) || zone.Equals(0)) return string.Empty;
-            var uid = GenerateToken();
+            var uid = GenerateToken(clientId);
             var token = ExecutionContext<RequestContext>.Current.Token;
             var key = Prefix + token + uid;
             var statusZone = GetStatusZone(token, uid);
@@ -202,10 +203,10 @@ namespace X.Interface.Core
         /// 生成token
         /// </summary>
         /// <returns></returns>
-        public static string GenerateToken()
+        public static string GenerateToken(string clientId)
         {
-            var token = BaseCryption.SignData(GenerateHmacKey, Guid.NewGuid().ToString("N"), HmacType.Md5);
-            var key = Prefix + token;
+            var token = BaseCryption.SignData(clientId, Guid.NewGuid().ToString("N"), HmacType.Md5);
+            var key = Prefix + token + clientId;
             ExecutionContext<RequestContext>.Update("Zone", GetTokenZone(token));
             CouchCache.Default.Set(key, key, DateTime.Now.AddMinutes(Exp));
             return token;
@@ -214,12 +215,13 @@ namespace X.Interface.Core
         /// <summary>
         /// 验证token
         /// </summary>
+        /// <param name="clientId"></param>
         /// <param name="token"></param>
         /// <returns></returns>
-        public static bool VerifyToken(string token)
+        public static bool VerifyToken(string clientId, string token)
         {
             if (!BaseCryption.VerifyData(GenerateHmacKey, token, HmacType.Md5)) return false;
-            var key = Prefix + token;
+            var key = Prefix + token + clientId;
             ExecutionContext<RequestContext>.Update("Zone", GetTokenZone(token));
             var obj = CouchCache.Default.Get<string>(key);
             return key.Equals(obj);

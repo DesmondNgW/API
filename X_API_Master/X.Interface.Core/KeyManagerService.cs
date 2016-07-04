@@ -27,9 +27,9 @@ namespace X.Interface.Core
             return new ApiResult<PublicKeyDto> {Success = true, Data = dto};
         }
 
-        public ApiResult<string> GetToken()
+        public ApiResult<string> GetToken(string clientId)
         {
-            return new ApiResult<string> {Success = true, Data = ServiceHelper.GenerateToken() };
+            return new ApiResult<string> { Success = true, Data = ServiceHelper.GenerateToken(clientId) };
         }
     }
 }

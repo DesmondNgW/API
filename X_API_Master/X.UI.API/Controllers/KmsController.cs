@@ -34,10 +34,10 @@ namespace X.UI.API.Controllers
         /// </summary>
         /// <returns>指定对象序列化</returns>
         [HttpGet]
-        public ApiResult<string> GetToken()
+        public ApiResult<string> GetToken(string clientId)
         {
             var provider = new InstanceProvider<IKeyManager>(typeof(KeyManagerService), ControllerHelper.EDomain);
-            return CoreAccess<IKeyManager>.Call(provider.Client.GetToken, provider, new LogOptions<ApiResult<string>>(ControllerHelper.CallSuccess));
+            return CoreAccess<IKeyManager>.Call(provider.Client.GetToken, clientId, provider, new LogOptions<ApiResult<string>>(ControllerHelper.CallSuccess));
         }
 
         [HttpGet]

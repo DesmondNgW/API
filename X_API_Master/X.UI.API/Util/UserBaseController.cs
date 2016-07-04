@@ -23,7 +23,7 @@ namespace X.UI.API.Util
         {
             var context = ControllerHelper.GetApiRequestContext(actionContext);
             var uid = ControllerHelper.GetUid(actionContext);
-            if(!ServiceHelper.VerifyToken(uid)) throw new InvalidOperationException("uid错误或过期");
+            if (!ServiceHelper.VerifyToken(context.ClientId, uid)) throw new InvalidOperationException("uid错误或过期");
             var statusZone = ServiceHelper.GetStatusZone(context.Token, uid);
             var loginState = ServiceHelper.GetLoginStatus(context.Token, uid, statusZone);
             if (Equals(loginState, null) || loginState.StatusZone != statusZone || loginState.Token != context.Token || loginState.Uid != uid) throw new InvalidOperationException("token过期或与uid不匹配");

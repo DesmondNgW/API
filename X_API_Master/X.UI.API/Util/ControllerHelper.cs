@@ -87,7 +87,7 @@ namespace X.UI.API.Util
             apiContext.Now = DateTime.Now;
             apiContext.Cid = Thread.CurrentThread.ManagedThreadId.ToString();
             if (string.IsNullOrEmpty((apiContext.Token))) throw new ArgumentNullException(TokenName);
-            if (!ServiceHelper.VerifyToken(apiContext.Token)) throw new InvalidOperationException("token错误或过期");
+            if (!ServiceHelper.VerifyToken(apiContext.ClientId, apiContext.Token)) throw new InvalidOperationException("token错误或过期");
             return apiContext;
         } 
         #endregion

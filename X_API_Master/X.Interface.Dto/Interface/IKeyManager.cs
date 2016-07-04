@@ -17,7 +17,8 @@ namespace X.Interface.Dto.Interface
         /// <summary>
         /// 获取token
         /// </summary>
+        /// <param name="clientId">秘钥长度</param>
         /// <returns>指定对象序列化</returns>
-        ApiResult<string> GetToken();
+        ApiResult<string> GetToken(string clientId);
     }
 }
