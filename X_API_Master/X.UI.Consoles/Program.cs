@@ -52,6 +52,7 @@ namespace X.UI.Consoles
     {
         static void Main()
         {
+            Console.WriteLine(ThirdPartyTest.CouchBaseTest());
             //Index();
             //var c1 = new Channel();
             //var c2 = new Channel();
