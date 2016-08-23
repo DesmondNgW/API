@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Reflection;
 using System.Runtime.Remoting.Messaging;
 using System.Web.Caching;
-using X.Util.Core;
 using X.Util.Core.Kernel;
 using X.Util.Core.Log;
 using X.Util.Entities;
@@ -28,21 +27,28 @@ namespace X.Util.Extend.Cache
         #endregion
 
         #region CacheData Api
-        private static void AddHitLevel(string key)
+        /// <summary>
+        /// 增加命中缓存的等级
+        /// </summary>
+        /// <param name="key"></param>
+        private static void CacheLevelUp(string key)
         {
             var value = CallContext.GetData(key);
-            if (value == null) CallContext.SetData(key, 1);
-            else
-            {
-                CallContext.SetData(key, value.GetHashCode() + 1);
-            }
+            CallContext.SetData(key, value == null ? 1 : value.GetHashCode() + 1);
         }
 
-        public static void LogHitLevel(string key, Dictionary<int, string> dictionary, MethodBase method, LogDomain domain)
+        /// <summary>
+        /// 记录命中缓存的等级
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="dictionary"></param>
+        /// <param name="method"></param>
+        /// <param name="domain"></param>
+        public static void LogCacheLevel(string key, Dictionary<int, string> dictionary, MethodBase method, LogDomain domain)
         {
             var value = CallContext.GetData(key);
             var level = value == null ? 0 : value.GetHashCode();
-            Logger.Client.Debug(method, domain, null, string.Empty, string.Format("{0}.{1} GetCacheData hit {2}, cache key is {3}.", method.GetDeclaringFullName(), method.Name, dictionary.ContainsKey(level) ? dictionary[level] : "level-" + level, key));
+            Logger.Client.Debug(method, domain, null, string.Empty, string.Format("{0}.{1} Get CacheData hit {2}, cache key is {3}.", method.DeclaringType, method.Name, dictionary.ContainsKey(level) ? dictionary[level] : "level-" + level, key));
         }
 
         public static CacheResult<T> GetRuntimeCacheData<T>(string key, string version, DateTime dt, Func<CacheResult<T>> loader)
@@ -54,7 +60,7 @@ namespace X.Util.Extend.Cache
                 setting = RuntimeCache.Get<CacheResult<T>>(key);
                 if (setting != null && setting.Result != null && setting.Succeed && Equals(setting.AppVersion, version)) return setting;
                 var iresult = loader();
-                AddHitLevel(key);
+                CacheLevelUp(key);
                 setting = iresult;
                 if (Equals(setting, null)) return null;
                 setting.AppVersion = version;
@@ -74,8 +80,7 @@ namespace X.Util.Extend.Cache
                 setting = RuntimeCache.Get<CacheResult<T>>(key);
                 if (setting != null && setting.Result != null && setting.Succeed && Equals(setting.AppVersion, version)) return setting;
                 var iresult = loader();
-                AddHitLevel(key);
-                CallContext.SetData(key, 1);
+                CacheLevelUp(key);
                 setting = iresult;
                 if (Equals(setting, null)) return null;
                 setting.AppVersion = version;
@@ -96,8 +101,7 @@ namespace X.Util.Extend.Cache
                 setting = RuntimeCache.Get<CacheResult<T>>(lockKey);
                 if (setting != null && setting.Result != null && setting.Succeed && Equals(setting.AppVersion, version)) return setting;
                 var iresult = loader();
-                AddHitLevel(key);
-                CallContext.SetData(key, 1);
+                CacheLevelUp(key);
                 setting = iresult;
                 if (Equals(setting, null)) return null;
                 setting.AppVersion = version;
@@ -120,7 +124,7 @@ namespace X.Util.Extend.Cache
                 setting = RuntimeCache.Get<CacheResult<T>>(lockKey);
                 if (setting != null && setting.Result != null && setting.Succeed && Equals(setting.AppVersion, version)) return setting;
                 var iresult = loader();
-                AddHitLevel(key);
+                CacheLevelUp(key);
                 setting = iresult;
                 if (Equals(setting, null)) return null;
                 setting.AppVersion = version;
@@ -143,7 +147,7 @@ namespace X.Util.Extend.Cache
                 setting = RuntimeCache.Get<CacheResult<T>>(lockKey);
                 if (setting != null && setting.Result != null && setting.Succeed && Equals(setting.AppVersion, version)) return setting;
                 var iresult = loader();
-                AddHitLevel(key);
+                CacheLevelUp(key);
                 setting = iresult;
                 if (Equals(setting, null)) return null;
                 setting.AppVersion = version;
@@ -166,7 +170,7 @@ namespace X.Util.Extend.Cache
                 setting = RuntimeCache.Get<CacheResult<T>>(lockKey);
                 if (setting != null && setting.Result != null && setting.Succeed && Equals(setting.AppVersion, version)) return setting;
                 var iresult = loader();
-                AddHitLevel(key);
+                CacheLevelUp(key);
                 setting = iresult;
                 if (Equals(setting, null)) return null;
                 setting.AppVersion = version;
