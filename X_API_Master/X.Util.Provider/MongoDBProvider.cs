@@ -19,28 +19,28 @@ namespace X.Util.Provider
         private readonly string _credentialDataBase = string.Empty;
         private MongoServer MongoSever { get; set; }
         private MongoCollection<TDocument> Collection { get; set; }
-        public MongoDbProvider(string credentialDataBase = null)
+        public MongoDbProvider(string credentialDataBase)
         {
             _credentialDataBase = credentialDataBase;
             MongoSever = Init(_servername);
             var db = MongoSever.GetDatabase(Database);
             Collection = db.GetCollection<TDocument>(CollectionName);
         }
-        public MongoDbProvider(string collection, string credentialDataBase = null)
+        public MongoDbProvider(string collection, string credentialDataBase)
         {
             _credentialDataBase = credentialDataBase;
             MongoSever = Init(_servername);
             var db = MongoSever.GetDatabase(Database);
             Collection = db.GetCollection<TDocument>(collection);
         }
-        public MongoDbProvider(string database, string collection, string credentialDataBase = null)
+        public MongoDbProvider(string database, string collection, string credentialDataBase)
         {
             _credentialDataBase = credentialDataBase;
             MongoSever = Init(_servername);
             var db = MongoSever.GetDatabase(database);
             Collection = db.GetCollection<TDocument>(collection);
         }
-        public MongoDbProvider(string database, string collection, string serverName, string credentialDataBase = null)
+        public MongoDbProvider(string database, string collection, string serverName, string credentialDataBase)
         {
             _credentialDataBase = credentialDataBase;
             _servername = serverName;

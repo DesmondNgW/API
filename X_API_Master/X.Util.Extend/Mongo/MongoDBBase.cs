@@ -29,16 +29,18 @@ namespace X.Util.Extend.Mongo
         #endregion
 
         #region 索引操作
+
         /// <summary>
         /// 创建索引
         /// </summary>
         /// <param name="database"></param>
         /// <param name="collection"></param>
+        /// <param name="credentialDataBase"></param>
         /// <param name="index"></param>
         /// <returns></returns>
-        public void CreateIndex(string database, string collection, IndexKeysDocument index)
+        public void CreateIndex(string database, string collection, string credentialDataBase, IndexKeysDocument index)
         {
-            var mc = new MongoDbProvider<T>(database, collection);
+            var mc = new MongoDbProvider<T>(database, collection, credentialDataBase);
             CoreAccess<MongoCollection<T>>.TryCallAsync(mc.Client.CreateIndex, index, mc, null, new LogOptions<WriteConcernResult>(CallSuccess, true, false));
         }
 
@@ -47,11 +49,12 @@ namespace X.Util.Extend.Mongo
         /// </summary>
         /// <param name="database"></param>
         /// <param name="collection"></param>
+        /// <param name="credentialDataBase"></param>
         /// <param name="index"></param>
         /// <returns></returns>
-        public void DropIndex(string database, string collection, IndexKeysDocument index)
+        public void DropIndex(string database, string collection, string credentialDataBase, IndexKeysDocument index)
         {
-            var mc = new MongoDbProvider<T>(database, collection);
+            var mc = new MongoDbProvider<T>(database, collection, credentialDataBase);
             CoreAccess<MongoCollection<T>>.TryCallAsync(mc.Client.DropIndex, index, mc, null, new LogOptions<CommandResult>(CallSuccess, true, false));
         }
 
@@ -60,11 +63,12 @@ namespace X.Util.Extend.Mongo
         /// </summary>
         /// <param name="database"></param>
         /// <param name="collection"></param>
+        /// <param name="credentialDataBase"></param>
         /// <param name="index"></param>
         /// <returns></returns>
-        public bool IndexExists(string database, string collection, IndexKeysDocument index)
+        public bool IndexExists(string database, string collection, string credentialDataBase, IndexKeysDocument index)
         {
-            var mc = new MongoDbProvider<T>(database, collection);
+            var mc = new MongoDbProvider<T>(database, collection, credentialDataBase);
             return CoreAccess<MongoCollection<T>>.TryCall(mc.Client.IndexExists, index, mc, new LogOptions<bool>(CoreBase.CallSuccess, true, false));
         }
 
@@ -73,25 +77,27 @@ namespace X.Util.Extend.Mongo
         /// </summary>
         /// <param name="database"></param>
         /// <param name="collection"></param>
+        /// <param name="credentialDataBase"></param>
         /// <returns></returns>
-        public IndexKeysDocument GetAllIndexes(string database, string collection)
+        public IndexKeysDocument GetAllIndexes(string database, string collection, string credentialDataBase)
         {
-            var mc = new MongoDbProvider<T>(database, collection);
+            var mc = new MongoDbProvider<T>(database, collection, credentialDataBase);
             return CoreAccess<MongoCollection<T>>.TryCall(mc.Client.GetIndexes, mc, new LogOptions<GetIndexesResult>(iresult => iresult != null && iresult.Count > 0 && iresult.RawDocuments != null)).ToBsonDocument() as IndexKeysDocument;
         }
         #endregion
 
         #region 增删改操作
-        public void SaveMongo(T t, string database, string collection)
+        public void SaveMongo(T t, string database, string collection, string credentialDataBase)
         {
             var property = typeof(T).GetProperty("Id");
             if (property != null && Equals(property.GetValue(t, null), null))
             {
                 property.SetValue(t, Guid.NewGuid().ToString("N"), null);
             }
-            var mc = new MongoDbProvider<T>(database, collection);
+            var mc = new MongoDbProvider<T>(database, collection, credentialDataBase);
             CoreAccess<MongoCollection<T>>.TryCallAsync(mc.Client.Save, t, WriteConcern.Acknowledged, mc, null, new LogOptions<WriteConcernResult>(CallSuccess, true, false));
         }
+
         /// <summary>
         /// 插入会失败（若有主键）
         /// </summary>
@@ -99,14 +105,15 @@ namespace X.Util.Extend.Mongo
         /// <param name="t"></param>
         /// <param name="database"></param>
         /// <param name="collection"></param>
-        public void InsertMongo(T t, string database, string collection)
+        /// <param name="credentialDataBase"></param>
+        public void InsertMongo(T t, string database, string collection, string credentialDataBase)
         {
             var property = typeof(T).GetProperty("Id");
             if (property != null && Equals(property.GetValue(t, null), null))
             {
                 property.SetValue(t, Guid.NewGuid().ToString("N"), null);
             }
-            var mc = new MongoDbProvider<T>(database, collection);
+            var mc = new MongoDbProvider<T>(database, collection, credentialDataBase);
             CoreAccess<MongoCollection<T>>.TryCallAsync(mc.Client.Insert, t, WriteConcern.Acknowledged, mc, null, new LogOptions<WriteConcernResult>(CallSuccess, true, false));
         }
 
@@ -117,7 +124,8 @@ namespace X.Util.Extend.Mongo
         /// <param name="list"></param>
         /// <param name="database"></param>
         /// <param name="collection"></param>
-        public void InsertBatchMongo(IEnumerable<T> list, string database, string collection)
+        /// <param name="credentialDataBase"></param>
+        public void InsertBatchMongo(IEnumerable<T> list, string database, string collection, string credentialDataBase)
         {
             var property = typeof(T).GetProperty("Id");
             var enumerable = list as T[] ?? list.ToArray();
@@ -125,13 +133,13 @@ namespace X.Util.Extend.Mongo
             {
                 property.SetValue(t, Guid.NewGuid().ToString("N"), null);
             }
-            var mc = new MongoDbProvider<T>(database, collection);
+            var mc = new MongoDbProvider<T>(database, collection, credentialDataBase);
             CoreAccess<MongoCollection<T>>.TryCallAsync(mc.Client.InsertBatch, enumerable, WriteConcern.Acknowledged, mc, null, new LogOptions<IEnumerable<WriteConcernResult>>(CallSuccess, true, false));
         }
 
-        public void SaveMongo(Func<T> loader, string database, string collection)
+        public void SaveMongo(Func<T> loader, string database, string collection, string credentialDataBase)
         {
-            SaveMongo(loader(), database, collection);
+            SaveMongo(loader(), database, collection, credentialDataBase);
         }
 
         /// <summary>
@@ -139,13 +147,14 @@ namespace X.Util.Extend.Mongo
         /// </summary>
         /// <param name="database"></param>
         /// <param name="collection"></param>
+        /// <param name="credentialDataBase"></param>
         /// <param name="query"></param>
         /// <param name="update"></param>
         /// <param name="flag"></param>
         /// <returns></returns>
-        public void UpdateMongo(string database, string collection, QueryDocument query, UpdateDocument update, UpdateFlags flag = UpdateFlags.Multi)
+        public void UpdateMongo(string database, string collection, string credentialDataBase, QueryDocument query, UpdateDocument update, UpdateFlags flag = UpdateFlags.Multi)
         {
-            var mc = new MongoDbProvider<T>(database, collection);
+            var mc = new MongoDbProvider<T>(database, collection, credentialDataBase);
             CoreAccess<MongoCollection<T>>.TryCallAsync(mc.Client.Update, query, update, flag, WriteConcern.Acknowledged, mc, null, new LogOptions<WriteConcernResult>(CallSuccess, true, false));
         }
 
@@ -154,12 +163,13 @@ namespace X.Util.Extend.Mongo
         /// </summary>
         /// <param name="database"></param>
         /// <param name="collection"></param>
+        /// <param name="credentialDataBase"></param>
         /// <param name="query"></param>
         /// <param name="flag"></param>
         /// <returns></returns>
-        public void RemoveMongo(string database, string collection, QueryDocument query, RemoveFlags flag = RemoveFlags.None)
+        public void RemoveMongo(string database, string collection, string credentialDataBase, QueryDocument query, RemoveFlags flag = RemoveFlags.None)
         {
-            var mc = new MongoDbProvider<T>(database, collection);
+            var mc = new MongoDbProvider<T>(database, collection, credentialDataBase);
             CoreAccess<MongoCollection<T>>.TryCallAsync(mc.Client.Remove, query, flag, WriteConcern.Acknowledged, mc, null, new LogOptions<WriteConcernResult>(CallSuccess, true, false));
         }
 
@@ -168,10 +178,11 @@ namespace X.Util.Extend.Mongo
         /// </summary>
         /// <param name="database"></param>
         /// <param name="collection"></param>
+        /// <param name="credentialDataBase"></param>
         /// <returns></returns>
-        public void RemoveAllMongo(string database, string collection)
+        public void RemoveAllMongo(string database, string collection, string credentialDataBase)
         {
-            var mc = new MongoDbProvider<T>(database, collection);
+            var mc = new MongoDbProvider<T>(database, collection, credentialDataBase);
             CoreAccess<MongoCollection<T>>.TryCallAsync(mc.Client.RemoveAll, WriteConcern.Acknowledged, mc, null, new LogOptions<WriteConcernResult>(CallSuccess, true, false));
         }
 
@@ -180,10 +191,11 @@ namespace X.Util.Extend.Mongo
         /// </summary>
         /// <param name="database"></param>
         /// <param name="collection"></param>
+        /// <param name="credentialDataBase"></param>
         /// <returns></returns>
-        public void DropMongo(string database, string collection)
+        public void DropMongo(string database, string collection, string credentialDataBase)
         {
-            var mc = new MongoDbProvider<T>(database, collection);
+            var mc = new MongoDbProvider<T>(database, collection, credentialDataBase);
             CoreAccess<MongoCollection<T>>.TryCallAsync(mc.Client.Drop, mc, null, new LogOptions<CommandResult>(CallSuccess, true, false));
         }
         #endregion
@@ -212,15 +224,16 @@ namespace X.Util.Extend.Mongo
         /// </summary>
         /// <param name="database"></param>
         /// <param name="collection"></param>
+        /// <param name="credentialDataBase"></param>
         /// <param name="query">查询语句</param>
         /// <param name="field">字段</param>
         /// <param name="sortBy">排序</param>
         /// <param name="limit">选取条数</param>
         /// <param name="skip">从索引值开始选取</param>
         /// <returns></returns>
-        public MongoCursor<T> ReadMongo(string database, string collection, QueryDocument query, FieldsDocument field = null, SortByDocument sortBy = null, int limit = 0, int skip = 0)
+        public MongoCursor<T> ReadMongo(string database, string collection, string credentialDataBase, QueryDocument query, FieldsDocument field = null, SortByDocument sortBy = null, int limit = 0, int skip = 0)
         {
-            var mc = new MongoDbProvider<T>(database, collection);
+            var mc = new MongoDbProvider<T>(database, collection, credentialDataBase);
             return CoreAccess<MongoCollection<T>>.TryCall(Find, mc, query, field, sortBy, limit, skip, mc, new LogOptions<MongoCursor<T>>(iresult => iresult != null && iresult.Any()));
         }
 
@@ -229,11 +242,12 @@ namespace X.Util.Extend.Mongo
         /// </summary>
         /// <param name="database"></param>
         /// <param name="collection"></param>
+        /// <param name="credentialDataBase"></param>
         /// <param name="query">查询语句</param>
         /// <returns></returns>
-        public T FindOne(string database, string collection, IMongoQuery query)
+        public T FindOne(string database, string collection, string credentialDataBase, IMongoQuery query)
         {
-            var mc = new MongoDbProvider<T>(database, collection);
+            var mc = new MongoDbProvider<T>(database, collection, credentialDataBase);
             return CoreAccess<MongoCollection<T>>.TryCall(mc.Client.FindOne, query, mc, new LogOptions<T>(CoreBase.CallSuccess));
         }
 
@@ -242,13 +256,14 @@ namespace X.Util.Extend.Mongo
         /// </summary>
         /// <param name="database"></param>
         /// <param name="collection"></param>
+        /// <param name="credentialDataBase"></param>
         /// <param name="query">查询语句</param>
         /// <param name="limit">选取条数</param>
         /// <param name="skip">从索引值开始选取</param>
         /// <returns></returns>
-        public long ReadMongoCount(string database, string collection, QueryDocument query, int limit = 0, int skip = 0)
+        public long ReadMongoCount(string database, string collection, string credentialDataBase, QueryDocument query, int limit = 0, int skip = 0)
         {
-            var mc = new MongoDbProvider<T>(database, collection);
+            var mc = new MongoDbProvider<T>(database, collection, credentialDataBase);
             return CoreAccess<MongoCollection<T>>.TryCall(Count, mc, query, limit, skip, mc, new LogOptions<long>(CoreBase.CallSuccess));
         }
 
@@ -257,12 +272,13 @@ namespace X.Util.Extend.Mongo
         /// </summary>
         /// <param name="database"></param>
         /// <param name="collection"></param>
+        /// <param name="credentialDataBase"></param>
         /// <param name="query"></param>
         /// <param name="field"></param>
         /// <returns></returns>
-        public IEnumerable<BsonValue> Distinct(string database, string collection, QueryDocument query, string field)
+        public IEnumerable<BsonValue> Distinct(string database, string collection, string credentialDataBase, QueryDocument query, string field)
         {
-            var mc = new MongoDbProvider<T>(database, collection);
+            var mc = new MongoDbProvider<T>(database, collection, credentialDataBase);
             return CoreAccess<MongoCollection<T>>.TryCall(mc.Client.Distinct, field, query, mc, new LogOptions<IEnumerable<BsonValue>>(CoreBase.CallSuccess));
         }
         #endregion
