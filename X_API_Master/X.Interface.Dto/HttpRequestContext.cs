@@ -44,6 +44,7 @@ namespace X.Interface.Dto
 
         /// <summary>
         /// 客户端来源类型(参考EnumClientType)
+        /// Web = 0, Tablet = 1, Mobile = 2, ThirdParty = 3
         /// </summary>
         public int ClientType { get; set; }
 
