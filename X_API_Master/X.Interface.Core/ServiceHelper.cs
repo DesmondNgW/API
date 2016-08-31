@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using X.Interface.Dto;
+using X.Util.Core;
 using X.Util.Core.Common;
 using X.Util.Core.Kernel;
 using X.Util.Entities;
@@ -194,7 +195,7 @@ namespace X.Interface.Core
             var key = Prefix + token + uid;
             var loginState = RuntimeCache.Get<LoginStatus>(key);
             if (loginState != null) return loginState;
-            ExecutionContext<RequestContext>.Update("Zone", statusZone);
+            ExecutionContext<RequestContext>.Current.Update("Zone", statusZone);
             loginState = CouchCache.Default.Get<LoginStatus>(key, DateTime.Now.AddMinutes(Exp));
             if (loginState != null) RuntimeCache.Set(key, loginState, DateTime.Now.AddMinutes(SubExp));
             return loginState;
@@ -224,10 +225,10 @@ namespace X.Interface.Core
                 StatusZone = statusZone,
                 Token = token
             };
-            ExecutionContext<RequestContext>.Update("Zone", statusZone);
+            ExecutionContext<RequestContext>.Current.Update("Zone", statusZone);
             CouchCache.Default.Set(key, result, DateTime.Now.AddMinutes(Exp));
             RuntimeCache.Set(key, result, DateTime.Now.AddMinutes(SubExp));
-            ExecutionContext<RequestContext>.Update("Zone", zone);
+            ExecutionContext<RequestContext>.Current.Update("Zone", zone);
             return result.Uid;
         }
 
@@ -250,7 +251,7 @@ namespace X.Interface.Core
         {
             var token = BaseCryption.SignData(clientId, Guid.NewGuid().ToString("N"), HmacType.Md5);
             var key = Prefix + token + clientId;
-            ExecutionContext<RequestContext>.Update("Zone", GetTokenZone(token));
+            ExecutionContext<RequestContext>.Current.Update("Zone", GetTokenZone(token));
             CouchCache.Default.Set(key, key, DateTime.Now.AddMinutes(Exp));
             return token;
         }
@@ -265,7 +266,7 @@ namespace X.Interface.Core
         {
             if (!BaseCryption.VerifyData(GenerateHmacKey, token, HmacType.Md5)) return false;
             var key = Prefix + token + clientId;
-            ExecutionContext<RequestContext>.Update("Zone", GetTokenZone(token));
+            ExecutionContext<RequestContext>.Current.Update("Zone", GetTokenZone(token));
             var obj = CouchCache.Default.Get<string>(key);
             return key.Equals(obj);
         }

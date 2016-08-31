@@ -132,7 +132,7 @@ namespace X.UI.API.Util
         public static void ApiCallMonitor(ApiRequestContext context)
         {
             MongoDbBase<ApiRequestContext>.Default.SaveMongo(context, "APIMonitor", DateTime.Now.ToString("Call.yyyy.MM.dd.HH"), null);
-            ExecutionContext<ApiRequestContext>.Init(context);
+            context.Update(null);
         }
 
         /// <summary>

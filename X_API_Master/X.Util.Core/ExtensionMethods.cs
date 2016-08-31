@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Reflection;
+using System.Runtime.Remoting.Messaging;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -231,6 +234,59 @@ namespace X.Util.Core
         public static string GetFullName(this Type m)
         {
             return m != null ? m.FullName : "NullType";
+        }
+
+        public static T Save<T>(this T context, string name, object value)
+        {
+            if (string.IsNullOrEmpty(name)) return context;
+            var props = typeof(T).GetProperties();
+            foreach (var p in props.Where(p => string.Equals(p.Name, name, StringComparison.CurrentCultureIgnoreCase)))
+            {
+                p.SetValue(context, value, null);
+            }
+            return context;
+        }
+
+        public static T Save<T>(this T context, Dictionary<string, object> dictionary)
+        {
+            if (dictionary == null) return context;
+            var props = typeof(T).GetProperties();
+            dictionary = new Dictionary<string, object>(dictionary, StringComparer.OrdinalIgnoreCase);
+            foreach (var p in props.Where(p => dictionary.ContainsKey(p.Name)))
+            {
+                p.SetValue(context, dictionary[p.Name], null);
+            }
+            return context;
+        }
+        #endregion
+
+        #region ExecutionContext
+        public static T Update<T>(this T context, string name, object value)
+        {
+            context = context.Save(name, value);
+            CallContext.SetData("CallContext.Data." + typeof(T).FullName, context);
+            return context;
+        }
+
+        public static T LogicalUpdate<T>(this T context, string name, object value)
+        {
+            context = context.Save(name, value);
+            CallContext.LogicalSetData("CallContext.LogicalData." + typeof(T).FullName, context);
+            return context;
+        }
+
+        public static T Update<T>(this T context, Dictionary<string, object> dictionary)
+        {
+            context = context.Save(dictionary);
+            CallContext.SetData("CallContext.Data." + typeof(T).FullName, context);
+            return context;
+        }
+
+        public static T LogicalUpdate<T>(this T context, Dictionary<string, object> dictionary)
+        {
+            context = context.Save(dictionary);
+            CallContext.LogicalSetData("CallContext.LogicalData." + typeof(T).FullName, context);
+            return context;
         }
         #endregion
     }

@@ -30,7 +30,7 @@ namespace X.UI.API.Util
             if (loginState.CustomerNo != AppConfig.CustomerNo && actionContext.Request.RequestUri.AbsolutePath.ToLower().StartsWith("/api/manager/")) throw new UnauthorizedAccessException("404");
             context.UserInfo = new { loginState.CustomerNo, loginState.Zone, loginState.CustomerName }.ToJson();
             ControllerHelper.ApiCallMonitor(context);
-            ExecutionContext<RequestContext>.Init(new RequestContext
+            new RequestContext
             {
                 Uid = uid,
                 Zone = loginState.Zone,
@@ -41,7 +41,7 @@ namespace X.UI.API.Util
                 Token = context.Token,
                 CustomerName = loginState.CustomerName,
                 CustomerNo = loginState.CustomerNo
-            });
+            }.Update(null);
         }
     }
 }

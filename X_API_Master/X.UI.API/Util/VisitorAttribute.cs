@@ -1,5 +1,6 @@
 ﻿using System.Web.Http.Controllers;
 using System.Web.Http.Filters;
+using X.Util.Core;
 using X.Util.Core.Kernel;
 using X.Util.Entities;
 
@@ -28,7 +29,7 @@ namespace X.UI.API.Util
         {
             var context = ControllerHelper.GetApiRequestContext(actionContext);
             ControllerHelper.ApiCallMonitor(context);
-            ExecutionContext<RequestContext>.Init(new RequestContext
+            new RequestContext
             {
                 Uid = Token,
                 Zone = 1,
@@ -37,7 +38,7 @@ namespace X.UI.API.Util
                 Ctoken = Token + context.Cid,
                 Ptoken = Token + context.Tid,
                 Token = context.Token,
-            });
+            }.Update(null);
             ControllerHelper.CacheInit((actionContext.Request.Headers.CacheControl != null && actionContext.Request.Headers.CacheControl.NoCache) || "no-cache".Equals(actionContext.Request.Headers.Pragma.ToString()));
         }
     }
