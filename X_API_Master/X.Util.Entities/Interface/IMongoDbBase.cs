@@ -19,7 +19,7 @@ namespace X.Util.Entities.Interface
 
         void InsertMongo(T t, string database, string collection, string credentialDataBase);
 
-        void InsertBatchMongo(IEnumerable<T> list, string database, string credentialDataBase, string collection);
+        void InsertBatchMongo(IEnumerable<T> list, string database, string collection, string credentialDataBase);
 
         void SaveMongo(Func<T> loader, string database, string collection, string credentialDataBase);
 

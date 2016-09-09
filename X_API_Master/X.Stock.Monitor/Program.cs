@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.ServiceProcess;
-using System.Text;
+﻿using System.ServiceProcess;
 
 namespace X.Stock.Monitor
 {
@@ -13,12 +9,11 @@ namespace X.Stock.Monitor
         /// </summary>
         static void Main()
         {
-            ServiceBase[] ServicesToRun;
-            ServicesToRun = new ServiceBase[] 
+            var servicesToRun = new ServiceBase[] 
             { 
                 new StockService() 
             };
-            ServiceBase.Run(ServicesToRun);
+            ServiceBase.Run(servicesToRun);
         }
     }
 }
