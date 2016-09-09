@@ -10,12 +10,27 @@ namespace X.Stock.Monitor.Utils
 {
     public class StockTradeService
     {
-        public static StockInfo GetStockInfo(string code)
+        public static string GetStockId(string stockCode)
+        {
+            return stockCode + (stockCode.StartsWith("6") ? "1" : "2");
+        }
+
+        public static string[] GetStockId(string[] stockCodes)
+        {
+            if (stockCodes == null || stockCodes.Length <= 0) return null;
+            var result = new string[stockCodes.Length];
+            for (var i = 0; i < stockCodes.Length; i++)
+            {
+                result[i] = GetStockId(stockCodes[i]);
+            }
+            return result;
+        }
+
+        public static StockInfo GetStockInfo(string stockId)
         {
             var result = new StockInfo();
             const string uri = "http://nuff.eastmoney.com/EM_Finance2015TradeInterface/JS.ashx?id={0}&token=beb0a0047196124721f56b0f0ff5a27c";
-            var id = code + (code.StartsWith("6") ? "1" : "2");
-            var iresult = HttpRequestBase.GetHttpInfo(string.Format(uri, id), "utf-8", "application/json", null,
+            var iresult = HttpRequestBase.GetHttpInfo(string.Format(uri, stockId), "utf-8", "application/json", null,
                 string.Empty);
             var reg = new Regex("\\\"(.+?)\\\"");
             var groups = reg.Matches(iresult.Content);
@@ -27,6 +42,30 @@ namespace X.Stock.Monitor.Utils
             result.StockKm2 = int.Parse(groups[31].Groups[1].Value);
             return result;
         }
+
+        public static List<StockInfo> GetStockInfo(string[] stockIds)
+        {
+            var result = new List<StockInfo>();
+            if (stockIds == null) return result;
+            const string uri = "http://nufm.dfcfw.com/EM_Finance2014NumericApplication/JS.aspx?ps=500&token=580f8e855db9d9de7cb332b3990b61a3&type=CT&cmd={0}&sty=CTALL";
+            var iresult = HttpRequestBase.GetHttpInfo(string.Format(uri, string.Join(",", stockIds)), "utf-8", "application/json", null,
+                string.Empty);
+            var reg = new Regex("\\\"(.+?)\\\"");
+            var groups = reg.Matches(iresult.Content);
+            if (groups.Count > 0)
+            {
+                result.AddRange(from Match @group in groups
+                    select @group.Groups[1].ToString().Split(',')
+                    into array
+                    select new StockInfo()
+                    {
+                        StockCode = array[1], StockName = array[2], StockPrice = int.Parse(array[3]), StockKm2 = int.Parse(array[4]), StockKm1 = int.Parse(array[5])
+                    });
+            }
+            return result;
+        }
+
+
 
         public static void AddStockShare(StockInfo stock, CustomerInfo info)
         {
