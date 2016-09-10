@@ -22,5 +22,7 @@ namespace X.Stock.Monitor.Model
         public decimal CurrentStockPrice { get; set; }
 
         public DateTime CreateTime { get; set; }
+
+        public DateTime UpdateTime { get; set; }
     }
 }

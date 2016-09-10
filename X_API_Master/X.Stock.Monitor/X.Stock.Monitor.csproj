@@ -73,6 +73,7 @@
     <Compile Include="Utils\StockPoolService.cs" />
     <Compile Include="Utils\StockService.cs" />
     <Compile Include="Utils\StockTradeService.cs" />
+    <Compile Include="Work.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="ProjectInstaller.resx">

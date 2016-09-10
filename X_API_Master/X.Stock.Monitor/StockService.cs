@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Reflection;
 using System.ServiceProcess;
+using X.Stock.Monitor.Utils;
 using X.Util.Core;
 using X.Util.Core.Log;
 using X.Util.Entities;
@@ -19,7 +20,8 @@ namespace X.Stock.Monitor
         {
             try
             {
-                
+                CustomerService.InitCustomerInfo();
+                Work.CreateThreads();
             }
             catch (Exception e)
             {
@@ -32,7 +34,7 @@ namespace X.Stock.Monitor
         {
             try
             {
-                
+                Work.AbortThreads();
             }
             catch (Exception e)
             {

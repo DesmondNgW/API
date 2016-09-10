@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using X.Stock.Monitor.Model;
@@ -43,6 +44,7 @@ namespace X.Stock.Monitor.Utils
             result.StockPrice = int.Parse(groups[27].Groups[1].Value);
             result.StockKm1 = int.Parse(groups[29].Groups[1].Value);
             result.StockKm2 = int.Parse(groups[31].Groups[1].Value);
+            result.Now = DateTime.Parse(groups[51].Groups[1].Value);
             return result;
         }
 

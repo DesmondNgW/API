@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using MongoDB.Driver;
 using X.Stock.Monitor.Model;
+using X.Util.Core.Log;
+using X.Util.Entities;
 using X.Util.Extend.Mongo;
 
 namespace X.Stock.Monitor.Utils
@@ -20,6 +23,7 @@ namespace X.Stock.Monitor.Utils
         public static void ImportStockPool(string encode)
         {
             if (!File.Exists(StockPoolFile)) return;
+            Logger.Client.Info(MethodBase.GetCurrentMethod(), LogDomain.Core, "Start import stockpool", string.Empty);
             var ed = encode.Contains("utf8") || encode.Contains("utf-8") ? Encoding.UTF8 : encode.Contains("unicode") ? Encoding.Unicode : Encoding.GetEncoding(encode);
             var sr = new StreamReader(StockPoolFile, ed);
             string line;
@@ -35,6 +39,8 @@ namespace X.Stock.Monitor.Utils
                 });
             }
             MongoDbBase<StockPool>.Default.InsertBatchMongo(stockPool, "Stock", "Pool", null);
+            Logger.Client.Info(MethodBase.GetCurrentMethod(), LogDomain.Core, "End import stockpool", string.Empty);
+
         }
 
         /// <summary>
@@ -49,6 +55,18 @@ namespace X.Stock.Monitor.Utils
             if (list.Count <= 0) return result;
             var n = list.First().CreateTime;
             return list.Where(p => p.CreateTime == n).ToList();
+        }
+
+        public static List<StockInfo> GetStockInfoFromPool()
+        {
+            var pool = GetStockPool();
+            if (pool == null || pool.Count <= 0) return null;
+            var stockIds = new string[pool.Count];
+            for (var i = 0; i < pool.Count; i++)
+            {
+                stockIds[i] = StockService.GetStockId(pool[i].StockCode);
+            }
+            return StockService.GetStockInfo(stockIds);
         }
     }
 }

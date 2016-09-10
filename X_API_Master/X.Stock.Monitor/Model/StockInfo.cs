@@ -1,4 +1,6 @@
-﻿namespace X.Stock.Monitor.Model
+﻿using System;
+
+namespace X.Stock.Monitor.Model
 {
     public class StockInfo
     {
@@ -11,5 +13,7 @@
         public decimal StockKm1 { get; set; }
 
         public decimal StockKm2 { get; set; }
+
+        public DateTime Now { get; set; }
     }
 }
