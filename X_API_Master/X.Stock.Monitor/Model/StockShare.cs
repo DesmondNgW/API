@@ -1,8 +1,9 @@
 ﻿using System;
+using X.Util.Entities;
 
 namespace X.Stock.Monitor.Model
 {
-    public class StockShare
+    public class StockShare : MongoBaseModel
     {
         public string CustomerNo { get; set; }
 

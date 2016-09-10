@@ -13,6 +13,10 @@ namespace X.Stock.Monitor.Utils
     {
         public static string StockPoolFile = "stockpool.txt";
 
+        /// <summary>
+        /// 导入
+        /// </summary>
+        /// <param name="encode"></param>
         public static void ImportStockPool(string encode)
         {
             if (!File.Exists(StockPoolFile)) return;
@@ -33,6 +37,10 @@ namespace X.Stock.Monitor.Utils
             MongoDbBase<StockPool>.Default.InsertBatchMongo(stockPool, "Stock", "Pool", null);
         }
 
+        /// <summary>
+        /// 获取
+        /// </summary>
+        /// <returns></returns>
         public static List<StockPool> GetStockPool()
         {
             var result = new List<StockPool>();

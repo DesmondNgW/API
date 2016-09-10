@@ -1,74 +1,51 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
 using X.Stock.Monitor.Model;
-using X.Util.Other;
+using X.Util.Extend.Mongo;
 
 namespace X.Stock.Monitor.Utils
 {
     public class StockTradeService
     {
-        public static string GetStockId(string stockCode)
+        public static void BuyStock(List<StockInfo> stocks, AssetInfo info)
         {
-            return stockCode + (stockCode.StartsWith("6") ? "1" : "2");
-        }
-
-        public static string[] GetStockId(string[] stockCodes)
-        {
-            if (stockCodes == null || stockCodes.Length <= 0) return null;
-            var result = new string[stockCodes.Length];
-            for (var i = 0; i < stockCodes.Length; i++)
+            var count = info.Shares != null ? info.Shares.Count : 0;
+            if (count >= 4) return;
+            var total = info.CoinAsset/(4 - count);
+            var target = stocks.Where(p => p.StockKm2 >= 3.3M && p.StockKm2 <= 8.8M).OrderByDescending(p => p.StockKm2).FirstOrDefault();
+            if (target == null) return;
+            var vol = Math.Floor(total/target.StockPrice/100)*100;
+            var amount = vol*target.StockPrice;
+            MongoDbBase<StockShare>.Default.SaveMongo(new StockShare
             {
-                result[i] = GetStockId(stockCodes[i]);
-            }
-            return result;
+                CustomerNo = info.CustomerNo,
+                CustomerName = info.CustomerName,
+                StockCode = target.StockCode,
+                StockName = target.StockName,
+                CostValue = target.StockPrice,
+                TotalVol = vol,
+                AvailableVol = vol,
+                CreateTime = DateTime.Now.Date
+            }, "Stock", "Share", null);
+            CustomerService.UpdateCustomerInfo(info.CustomerNo, info.CoinAsset - amount);
         }
 
-        public static StockInfo GetStockInfo(string stockId)
+        public static void SellStock(List<StockInfo> stocks, List<StockShare> shares, AssetInfo info)
         {
-            var result = new StockInfo();
-            const string uri = "http://nuff.eastmoney.com/EM_Finance2015TradeInterface/JS.ashx?id={0}&token=beb0a0047196124721f56b0f0ff5a27c";
-            var iresult = HttpRequestBase.GetHttpInfo(string.Format(uri, stockId), "utf-8", "application/json", null,
-                string.Empty);
-            var reg = new Regex("\\\"(.+?)\\\"");
-            var groups = reg.Matches(iresult.Content);
-            if (groups.Count <= 0) return result;
-            result.StockCode = groups[3].Groups[1].Value;
-            result.StockName = groups[4].Groups[1].Value;
-            result.StockPrice = int.Parse(groups[27].Groups[1].Value);
-            result.StockKm1 = int.Parse(groups[29].Groups[1].Value);
-            result.StockKm2 = int.Parse(groups[31].Groups[1].Value);
-            return result;
-        }
-
-        public static List<StockInfo> GetStockInfo(string[] stockIds)
-        {
-            var result = new List<StockInfo>();
-            if (stockIds == null) return result;
-            const string uri = "http://nufm.dfcfw.com/EM_Finance2014NumericApplication/JS.aspx?ps=500&token=580f8e855db9d9de7cb332b3990b61a3&type=CT&cmd={0}&sty=CTALL";
-            var iresult = HttpRequestBase.GetHttpInfo(string.Format(uri, string.Join(",", stockIds)), "utf-8", "application/json", null,
-                string.Empty);
-            var reg = new Regex("\\\"(.+?)\\\"");
-            var groups = reg.Matches(iresult.Content);
-            if (groups.Count > 0)
+            if (shares == null || shares.Count == 0) return;
+            foreach (var share in shares.Where(p => p.CreateTime != DateTime.Now.Date))
             {
-                result.AddRange(from Match @group in groups
-                    select @group.Groups[1].ToString().Split(',')
-                    into array
-                    select new StockInfo()
-                    {
-                        StockCode = array[1], StockName = array[2], StockPrice = int.Parse(array[3]), StockKm2 = int.Parse(array[4]), StockKm1 = int.Parse(array[5])
-                    });
+                var share1 = share;
+                var stock = stocks.FirstOrDefault(p => p.StockCode == share1.StockCode && p.StockKm2 <= -3.3M && StockService.GetBenifit(share1.CostValue, p.StockPrice) > 0.05M);
+                if (stock == null) continue;
+                share1.CurrentStockPrice = stock.StockPrice;
+                share1.TotalVol = 0;
+                share1.AvailableVol = 0;
+                var amount = stock.StockPrice*share1.TotalVol;
+                MongoDbBase<StockShare>.Default.SaveMongo(share1, "Stock", "Share", null);
+                CustomerService.UpdateCustomerInfo(info.CustomerNo, info.CoinAsset + amount);
             }
-            return result;
-        }
-
-
-
-        public static void AddStockShare(StockInfo stock, CustomerInfo info)
-        {
         }
     }
 }
