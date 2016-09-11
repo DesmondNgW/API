@@ -1,4 +1,6 @@
-﻿namespace X.Stock.Monitor
+﻿using System.ServiceProcess;
+
+namespace X.Stock.Monitor
 {
     partial class ProjectInstaller
     {
@@ -33,14 +35,16 @@
             // 
             // serviceProcessInstaller1
             // 
+
+            this.serviceProcessInstaller1.Account = ServiceAccount.LocalSystem;
             this.serviceProcessInstaller1.Password = null;
             this.serviceProcessInstaller1.Username = null;
             // 
             // XStock
             // 
             this.XStock.Description = "X.Stock.Monitor";
-            this.XStock.DisplayName = "X.Stock.Monitor";
-            this.XStock.ServiceName = "X.Stock.Monitor";
+            this.XStock.ServiceName = "XStockMonitor";
+            this.XStock.AfterInstall += new System.Configuration.Install.InstallEventHandler(this.serviceInstaller1_AfterInstall);
             // 
             // ProjectInstaller
             // 

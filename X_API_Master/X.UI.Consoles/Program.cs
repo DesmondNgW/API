@@ -89,6 +89,7 @@ namespace X.UI.Consoles
         static void Main()
         {
             //StockPoolService.ImportStockPool("gb2312");
+            //StockPoolService.GetStockInfoFromPool();
             Console.ReadKey();
         }
 
