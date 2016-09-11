@@ -57,6 +57,7 @@ namespace X.Stock.Monitor
                             {
                                 var stocks = StockPoolService.GetStockInfoFromPool();
                                 StockTradeService.BuyStock(stocks, info);
+                                MonitorService.MonitorBuy(stocks);
                             }
                             if (count > 0)
                             {
