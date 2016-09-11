@@ -112,5 +112,22 @@ namespace X.Stock.Monitor.Utils
                 Shares = shares
             };
         }
+
+        /// <summary>
+        /// 获取持仓行情
+        /// </summary>
+        /// <param name="info"></param>
+        /// <returns></returns>
+        public static List<StockInfo> GetStockInfoFromShares(AssetInfo info)
+        {
+            var list = info.Shares;
+            if (list == null || list.Count <= 0) return null;
+            var stockIds = new string[list.Count];
+            for (var i = 0; i < list.Count; i++)
+            {
+                stockIds[i] = StockService.GetStockId(list[i].StockCode);
+            }
+            return StockService.GetStockInfo(stockIds);
+        }
     }
 }

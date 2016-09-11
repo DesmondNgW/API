@@ -54,10 +54,22 @@ namespace X.Stock.Monitor
                     case 2:
                         if (cantrade)
                         {
-                            var stocks = StockPoolService.GetStockInfoFromPool();
+                            
                             var info = CustomerService.GetAssetInfo(CustomerService.CustomerNo);
-                            StockTradeService.BuyStock(stocks, info);
-                            StockTradeService.SellStock(stocks, info);
+                            var count = info.Shares != null ? info.Shares.Count : 0;
+                            if (count < 4)
+                            {
+                                var stocks = StockPoolService.GetStockInfoFromPool();
+                                StockTradeService.BuyStock(stocks, info);
+                            }
+                            if (count > 0)
+                            {
+                                var stocks = CustomerService.GetStockInfoFromShares(info);
+                                StockTradeService.SellStock(stocks, info);
+                            }
+
+
+                            
                         }
                         Thread.Sleep(3 * 1000);
                         break;
