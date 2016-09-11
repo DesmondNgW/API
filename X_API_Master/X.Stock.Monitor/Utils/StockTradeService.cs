@@ -13,6 +13,11 @@ namespace X.Stock.Monitor.Utils
 {
     public class StockTradeService
     {
+        /// <summary>
+        /// 买
+        /// </summary>
+        /// <param name="stocks"></param>
+        /// <param name="info"></param>
         public static void BuyStock(List<StockInfo> stocks, AssetInfo info)
         {
             var count = info.Shares != null ? info.Shares.Count : 0;
@@ -40,11 +45,16 @@ namespace X.Stock.Monitor.Utils
             Logger.Client.Info(MethodBase.GetCurrentMethod(), LogDomain.Core, "End Buy stock", string.Empty);
         }
 
-        public static void SellStock(List<StockInfo> stocks, AssetInfo info)
+        /// <summary>
+        /// 卖
+        /// </summary>
+        /// <param name="info"></param>
+        public static void SellStock(AssetInfo info)
         {
             var shares = info.Shares;
             if (shares == null || shares.Count(p => p.CreateTime != DateTime.Now.Date) == 0) return;
             Logger.Client.Info(MethodBase.GetCurrentMethod(), LogDomain.Core, "Start Sell stock", string.Empty);
+            var stocks = CustomerService.GetStockInfoFromShares(info);
             foreach (var share in shares.Where(p => p.CreateTime != DateTime.Now.Date))
             {
                 var share1 = share;
@@ -60,7 +70,12 @@ namespace X.Stock.Monitor.Utils
             Logger.Client.Info(MethodBase.GetCurrentMethod(), LogDomain.Core, "End Sell stock", string.Empty);
         }
 
-        public static bool IsCanTrade(DateTime now)
+        /// <summary>
+        /// 是否交易时间
+        /// </summary>
+        /// <param name="now"></param>
+        /// <returns></returns>
+        public static bool CanTrade(DateTime now)
         {
             var amBegin = now.Date + new TimeSpan(9, 30, 0);
             var amEnd = now.Date + new TimeSpan(11, 30, 0);
@@ -73,9 +88,13 @@ namespace X.Stock.Monitor.Utils
             return false;
         }
 
+        /// <summary>
+        /// 是否交易日
+        /// </summary>
+        /// <returns></returns>
         public static bool IsCanTrade()
         {
-            if (!IsCanTrade(DateTime.Now)) return false;
+            if (!CanTrade(DateTime.Now)) return false;
             var result = HttpRuntime.Cache.Get("StockInfo_3000592") as StockInfo;
             if (result != null) return result.Now.Date == DateTime.Now.Date;
             result = StockService.GetStockInfo("3000592");

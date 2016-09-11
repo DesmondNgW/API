@@ -25,7 +25,7 @@ namespace X.Stock.Monitor.Utils
         public static void ImportStockPool(string encode)
         {
             if (!File.Exists(StockPoolFile)) return;
-            //if (DateTime.Now.Hour < 15) return;
+            if (DateTime.Now.Hour < 15) return;
             Logger.Client.Info(MethodBase.GetCurrentMethod(), LogDomain.Core, "Start import stockpool", string.Empty);
             var ed = encode.Contains("utf8") || encode.Contains("utf-8") ? Encoding.UTF8 : encode.Contains("unicode") ? Encoding.Unicode : Encoding.GetEncoding(encode);
             var sr = new StreamReader(StockPoolFile, ed);
@@ -43,7 +43,7 @@ namespace X.Stock.Monitor.Utils
                 });
             }
             MongoDbBase<StockPool>.Default.InsertBatchMongo(stockPool, "Stock", "Pool", null);
-            //File.Delete(StockPoolFile);
+            File.Delete(StockPoolFile);
             Logger.Client.Info(MethodBase.GetCurrentMethod(), LogDomain.Core, "End import stockpool", string.Empty);
         }
 

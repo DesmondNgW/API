@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using X.Stock.Monitor.Utils;
 
@@ -54,7 +51,6 @@ namespace X.Stock.Monitor
                     case 2:
                         if (cantrade)
                         {
-                            
                             var info = CustomerService.GetAssetInfo(CustomerService.CustomerNo);
                             var count = info.Shares != null ? info.Shares.Count : 0;
                             if (count < 4)
@@ -64,12 +60,8 @@ namespace X.Stock.Monitor
                             }
                             if (count > 0)
                             {
-                                var stocks = CustomerService.GetStockInfoFromShares(info);
-                                StockTradeService.SellStock(stocks, info);
+                                StockTradeService.SellStock(info);
                             }
-
-
-                            
                         }
                         Thread.Sleep(3 * 1000);
                         break;
