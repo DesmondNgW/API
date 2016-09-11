@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Web;
+using System.Web.Caching;
 using X.Stock.Monitor.Model;
 using X.Util.Core.Log;
 using X.Util.Entities;
@@ -74,7 +76,10 @@ namespace X.Stock.Monitor.Utils
         public static bool IsCanTrade()
         {
             if (!IsCanTrade(DateTime.Now)) return false;
-            var result = StockService.GetStockInfo("3000592");
+            var result = HttpRuntime.Cache.Get("StockInfo_3000592") as StockInfo;
+            if (result != null) return result.Now.Date == DateTime.Now.Date;
+            result = StockService.GetStockInfo("3000592");
+            HttpRuntime.Cache.Insert("StockInfo_3000592", result, null, DateTime.Now.AddMinutes(30), Cache.NoSlidingExpiration, CacheItemPriority.Normal, null);
             return result != null && result.Now.Date == DateTime.Now.Date;
         }
     }

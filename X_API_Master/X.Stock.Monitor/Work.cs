@@ -40,7 +40,7 @@ namespace X.Stock.Monitor
                     case 0:
                         if (!cantrade)
                         {
-                            StockPoolService.ImportStockPool("utf8");
+                            StockPoolService.ImportStockPool("gb2312");
                         }
                         Thread.Sleep(10 * 1000 * 60);
                         break;

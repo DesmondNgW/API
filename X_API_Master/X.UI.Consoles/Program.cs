@@ -3,6 +3,7 @@ using System.Collections.Concurrent;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading;
+using X.Stock.Monitor.Utils;
 using X.Util.Core;
 using X.Util.Entities;
 using X.Util.Extend.Mongo;
@@ -87,6 +88,7 @@ namespace X.UI.Consoles
     {
         static void Main()
         {
+            StockPoolService.ImportStockPool("gb2312");
             Console.ReadKey();
         }
 

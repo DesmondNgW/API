@@ -141,6 +141,10 @@
       <Project>{4603dd54-fbc3-42ac-ad98-f0dbd0944f00}</Project>
       <Name>X.Interface.Dto</Name>
     </ProjectReference>
+    <ProjectReference Include="..\X.Stock.Monitor\X.Stock.Monitor.csproj">
+      <Project>{CECB2E26-A180-415D-BBCB-FB7BEF8809AF}</Project>
+      <Name>X.Stock.Monitor</Name>
+    </ProjectReference>
     <ProjectReference Include="..\X.UI.API\X.UI.API.csproj">
       <Project>{a118b6c5-18a7-4a69-8483-7560f57feb14}</Project>
       <Name>X.UI.API</Name>

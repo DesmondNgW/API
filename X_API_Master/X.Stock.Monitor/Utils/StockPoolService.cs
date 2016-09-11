@@ -4,6 +4,8 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using System.Web;
+using System.Web.Caching;
 using MongoDB.Driver;
 using X.Stock.Monitor.Model;
 using X.Util.Core.Log;
@@ -23,6 +25,7 @@ namespace X.Stock.Monitor.Utils
         public static void ImportStockPool(string encode)
         {
             if (!File.Exists(StockPoolFile)) return;
+            //if (DateTime.Now.Hour < 15) return;
             Logger.Client.Info(MethodBase.GetCurrentMethod(), LogDomain.Core, "Start import stockpool", string.Empty);
             var ed = encode.Contains("utf8") || encode.Contains("utf-8") ? Encoding.UTF8 : encode.Contains("unicode") ? Encoding.Unicode : Encoding.GetEncoding(encode);
             var sr = new StreamReader(StockPoolFile, ed);
@@ -31,6 +34,7 @@ namespace X.Stock.Monitor.Utils
             while ((line = sr.ReadLine()) != null)
             {
                 var array = line.Split('\t');
+                if (array.Length <= 2 || array[0].Length != 6) continue;
                 stockPool.Add(new StockPool
                 {
                     StockCode = array[0],
@@ -39,8 +43,8 @@ namespace X.Stock.Monitor.Utils
                 });
             }
             MongoDbBase<StockPool>.Default.InsertBatchMongo(stockPool, "Stock", "Pool", null);
+            //File.Delete(StockPoolFile);
             Logger.Client.Info(MethodBase.GetCurrentMethod(), LogDomain.Core, "End import stockpool", string.Empty);
-
         }
 
         /// <summary>
@@ -59,6 +63,9 @@ namespace X.Stock.Monitor.Utils
 
         public static List<StockInfo> GetStockInfoFromPool()
         {
+            var iscantrade = StockTradeService.IsCanTrade();
+            var result = HttpRuntime.Cache.Get("GetStockInfoFromPool") as List<StockInfo>;
+            if (result != null && iscantrade) return result;
             var pool = GetStockPool();
             if (pool == null || pool.Count <= 0) return null;
             var stockIds = new string[pool.Count];
@@ -66,7 +73,9 @@ namespace X.Stock.Monitor.Utils
             {
                 stockIds[i] = StockService.GetStockId(pool[i].StockCode);
             }
-            return StockService.GetStockInfo(stockIds);
+            result = StockService.GetStockInfo(stockIds);
+            HttpRuntime.Cache.Insert("GetStockInfoFromPool", result, null, DateTime.Now.AddMinutes(30), Cache.NoSlidingExpiration, CacheItemPriority.Normal, null);
+            return result;
         }
     }
 }
