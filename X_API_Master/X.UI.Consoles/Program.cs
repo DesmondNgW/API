@@ -3,6 +3,7 @@ using System.Collections.Concurrent;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading;
+using X.Stock.Monitor;
 using X.Stock.Monitor.Utils;
 using X.Util.Core;
 using X.Util.Entities;
@@ -90,6 +91,11 @@ namespace X.UI.Consoles
         {
             //StockPoolService.ImportStockPool("gb2312");
             //StockPoolService.GetStockInfoFromPool();
+            CustomerService.InitCustomerInfo(Work.CustomerNo, Work.CustomerName, Work.CoinAsset);
+            Work.CreateThreads();
+
+
+
             Console.ReadKey();
         }
 

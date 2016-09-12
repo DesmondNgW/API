@@ -42,6 +42,7 @@ namespace X.Stock.Monitor.Utils
                     CreateTime = DateTime.Now.Date
                 });
             }
+            sr.Close();
             MongoDbBase<StockPool>.Default.InsertBatchMongo(stockPool, "Stock", "Pool", null);
             File.Delete(StockPoolFile);
             Logger.Client.Info(MethodBase.GetCurrentMethod(), LogDomain.Core, "End import stockpool", string.Empty);
