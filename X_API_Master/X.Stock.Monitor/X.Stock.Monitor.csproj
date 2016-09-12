@@ -73,6 +73,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utils\CustomerService.cs" />
     <Compile Include="Utils\MonitorService.cs" />
+    <Compile Include="Utils\SmtpMailHelper.cs" />
     <Compile Include="Utils\StockPoolService.cs" />
     <Compile Include="Utils\StockService.cs" />
     <Compile Include="Utils\StockTradeService.cs" />

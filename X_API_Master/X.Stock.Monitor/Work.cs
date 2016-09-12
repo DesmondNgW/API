@@ -6,6 +6,13 @@ namespace X.Stock.Monitor
 {
     public class Work
     {
+        public const string CustomerNo = "test1234567890";
+
+        public const string CustomerName = "testMyProgram";
+
+        public const decimal CoinAsset = 100000;
+
+
         protected static Thread[] Pool { get; set; }
         public static void CreateThreads()
         {
@@ -44,14 +51,14 @@ namespace X.Stock.Monitor
                     case 1:
                         if (!cantrade)
                         {
-                            CustomerService.UpdateStockShares(CustomerService.CustomerNo);
+                            CustomerService.UpdateStockShares(CustomerNo);
                         }
                         Thread.Sleep(10 * 1000 * 60);
                         break;
                     case 2:
                         if (cantrade)
                         {
-                            var info = CustomerService.GetAssetInfo(CustomerService.CustomerNo);
+                            var info = CustomerService.GetAssetInfo(CustomerNo);
                             var count = info.Shares != null ? info.Shares.Count : 0;
                             if (count < 4)
                             {

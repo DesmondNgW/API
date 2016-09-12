@@ -54,7 +54,7 @@ namespace X.Stock.Monitor.Utils
         public static List<StockPool> GetStockPool()
         {
             var result = new List<StockPool>();
-            var query = new QueryDocument();
+            var query = new QueryDocument { { "CreateTime", new QueryDocument { { "$gte", DateTime.Now.AddMonths(-1) } } } };
             var list = MongoDbBase<StockPool>.Default.ReadMongo("Stock", "Pool", null, query).OrderByDescending(p => p.CreateTime).ToList();
             if (list.Count <= 0) return result;
             var n = list.First().CreateTime;

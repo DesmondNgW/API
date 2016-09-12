@@ -12,12 +12,6 @@ namespace X.Stock.Monitor.Utils
 {
     public class CustomerService
     {
-        public const string CustomerNo = "test1234567890";
-
-        public const string CustomerName= "testMyProgram";
-
-        public const decimal CoinAsset = 100000;
-
         /// <summary>
         /// 获取份额
         /// </summary>
@@ -59,15 +53,19 @@ namespace X.Stock.Monitor.Utils
         /// <summary>
         /// 初始化用户
         /// </summary>
-        public static void InitCustomerInfo()
+        public static void InitCustomerInfo(string customerNo, string customerName, decimal coinAsset)
         {
-            MongoDbBase<CustomerInfo>.Default.InsertMongo(new CustomerInfo()
+            var cus = GetCustomerInfo(customerNo);
+            if (cus == null)
             {
-                CustomerName = CustomerName,
-                CustomerNo = CustomerNo,
-                CoinAsset = CoinAsset,
-                Id = CustomerNo
-            }, "Stock", "Customer", null);
+                MongoDbBase<CustomerInfo>.Default.InsertMongo(new CustomerInfo()
+                {
+                    CustomerName = customerName,
+                    CustomerNo = customerNo,
+                    CoinAsset = coinAsset,
+                    Id = customerNo
+                }, "Stock", "Customer", null);
+            }
         }
 
         /// <summary>
@@ -75,13 +73,10 @@ namespace X.Stock.Monitor.Utils
         /// </summary>
         public static void UpdateCustomerInfo(string customerNo, decimal coinAsset)
         {
-            MongoDbBase<CustomerInfo>.Default.SaveMongo(new CustomerInfo
-            {
-                CustomerName = CustomerName,
-                CustomerNo = CustomerNo,
-                CoinAsset = coinAsset,
-                Id = CustomerNo
-            }, "Stock", "Customer", null);
+            var cus = GetCustomerInfo(customerNo);
+            if (cus == null) return;
+            cus.CoinAsset = coinAsset;
+            MongoDbBase<CustomerInfo>.Default.SaveMongo(cus, "Stock", "Customer", null);
         }
 
         /// <summary>

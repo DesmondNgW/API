@@ -20,7 +20,7 @@ namespace X.Stock.Monitor
         {
             try
             {
-                CustomerService.InitCustomerInfo();
+                CustomerService.InitCustomerInfo(Work.CustomerNo, Work.CustomerName, Work.CoinAsset);
                 Work.CreateThreads();
             }
             catch (Exception e)
