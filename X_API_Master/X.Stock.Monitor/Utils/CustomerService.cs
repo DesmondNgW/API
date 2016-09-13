@@ -19,7 +19,7 @@ namespace X.Stock.Monitor.Utils
         /// <returns></returns>
         public static List<StockShare> GetStockShare(string customerNo)
         {
-            var query = new QueryDocument { { "CustomerNo", customerNo }, { "TotalVol", new QueryDocument { { "$gte", 0 } } } };
+            var query = new QueryDocument { { "CustomerNo", customerNo } };
             return MongoDbBase<StockShare>.Default.ReadMongo("Stock", "Share", null, query).Where(p => p.TotalVol > 0).OrderByDescending(p => p.CreateTime).ToList();
         }
 
@@ -99,7 +99,7 @@ namespace X.Stock.Monitor.Utils
         {
             var customer = GetCustomerInfo(customerNo);
             var shares = GetStockShare(customerNo);
-            return new AssetInfo()
+            return new AssetInfo
             {
                 CustomerNo = customer.CustomerNo,
                 CustomerName = customer.CustomerName,

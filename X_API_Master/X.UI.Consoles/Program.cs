@@ -89,12 +89,9 @@ namespace X.UI.Consoles
     {
         static void Main()
         {
-            //StockPoolService.ImportStockPool("gb2312");
-            //StockPoolService.GetStockInfoFromPool();
             CustomerService.InitCustomerInfo(Work.CustomerNo, Work.CustomerName, Work.CoinAsset);
             Work.CreateThreads();
-
-
+            //StockPoolService.ImportStockPool("gb2312");
 
             Console.ReadKey();
         }

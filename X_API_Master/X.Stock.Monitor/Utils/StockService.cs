@@ -41,9 +41,9 @@ namespace X.Stock.Monitor.Utils
             if (groups.Count <= 0) return result;
             result.StockCode = groups[3].Groups[1].Value;
             result.StockName = groups[4].Groups[1].Value;
-            result.StockPrice = int.Parse(groups[27].Groups[1].Value);
-            result.StockKm1 = int.Parse(groups[29].Groups[1].Value);
-            result.StockKm2 = int.Parse(groups[31].Groups[1].Value);
+            result.StockPrice = decimal.Parse(groups[27].Groups[1].Value);
+            result.StockKm1 = decimal.Parse(groups[29].Groups[1].Value);
+            result.StockKm2 = decimal.Parse(groups[31].Groups[1].Value);
             result.Now = DateTime.Parse(groups[51].Groups[1].Value);
             return result;
         }
@@ -71,9 +71,9 @@ namespace X.Stock.Monitor.Utils
                     {
                         StockCode = array[1],
                         StockName = array[2],
-                        StockPrice = int.Parse(array[3]),
-                        StockKm2 = int.Parse(array[4].Replace("%", string.Empty)),
-                        StockKm1 = int.Parse(array[5])
+                        StockPrice = decimal.Parse(array[3]),
+                        StockKm2 = decimal.Parse(array[4].Replace("%", string.Empty)),
+                        StockKm1 = decimal.Parse(array[5])
                     });
             }
             return result;
