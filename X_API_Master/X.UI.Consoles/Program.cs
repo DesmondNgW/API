@@ -1,13 +1,10 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Linq;
-using System.Text.RegularExpressions;
 using System.Threading;
-using X.Stock.Monitor;
-using X.Stock.Monitor.Utils;
-using X.Util.Core;
+using X.Stock.Service;
+using X.Stock.Service.Utils;
 using X.Util.Entities;
-using X.Util.Extend.Mongo;
 using X.Util.Other;
 
 namespace X.UI.Consoles
@@ -91,8 +88,6 @@ namespace X.UI.Consoles
         {
             CustomerService.InitCustomerInfo(Work.CustomerNo, Work.CustomerName, Work.CoinAsset);
             Work.CreateThreads();
-            //StockPoolService.ImportStockPool("gb2312");
-
             Console.ReadKey();
         }
 

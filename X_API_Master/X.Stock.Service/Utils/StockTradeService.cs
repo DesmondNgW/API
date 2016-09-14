@@ -29,28 +29,28 @@ namespace X.Stock.Service.Utils
             {
                 var total = info.CoinAsset/(4 - count);
                 if (stocks == null) return;
-                var target =
-                    stocks.Where(p => p.StockKm2 >= 3.3M && p.StockKm2 <= 8.8M)
-                        .OrderByDescending(p => p.StockKm2)
-                        .FirstOrDefault();
-                if (target == null) return;
+                var targets = stocks.Where(p => p.StockKm2 >= 3.3M && p.StockKm2 <= 8.8M).OrderByDescending(p => p.StockKm2).Take(4 - count);
                 Logger.Client.Info(MethodBase.GetCurrentMethod(), LogDomain.Core, "Start Buy stock", string.Empty);
-                var vol = Math.Floor(total/target.StockPrice/100)*100;
-                var amount = vol*target.StockPrice;
-                MongoDbBase<StockShare>.Default.SaveMongo(new StockShare
+                foreach (var target in targets)
                 {
-                    CustomerNo = info.CustomerNo,
-                    CustomerName = info.CustomerName,
-                    StockCode = target.StockCode,
-                    StockName = target.StockName,
-                    CostValue = target.StockPrice,
-                    TotalVol = vol,
-                    AvailableVol = vol,
-                    CurrentStockPrice = target.StockPrice,
-                    CreateTime = DateTime.Now.Date,
-                    UpdateTime = DateTime.Now
-                }, "Stock", "Share", null);
-                CustomerService.UpdateCustomerInfo(info.CustomerNo, info.CoinAsset - amount);
+                    var vol = Math.Floor(total / target.StockPrice / 100) * 100;
+                    var amount = vol * target.StockPrice;
+                    MongoDbBase<StockShare>.Default.SaveMongo(new StockShare
+                    {
+                        Id = target.StockCode + "_" + DateTime.Now.ToString("yyyyMMdd"),
+                        CustomerNo = info.CustomerNo,
+                        CustomerName = info.CustomerName,
+                        StockCode = target.StockCode,
+                        StockName = target.StockName,
+                        CostValue = target.StockPrice,
+                        TotalVol = vol,
+                        AvailableVol = vol,
+                        CurrentStockPrice = target.StockPrice,
+                        CreateTime = DateTime.Now.Date,
+                        UpdateTime = DateTime.Now
+                    }, "Stock", "Share", null);
+                    CustomerService.UpdateCustomerInfo(info.CustomerNo, info.CoinAsset - amount);
+                }
             }
             Logger.Client.Info(MethodBase.GetCurrentMethod(), LogDomain.Core, "End Buy stock", string.Empty);
         }

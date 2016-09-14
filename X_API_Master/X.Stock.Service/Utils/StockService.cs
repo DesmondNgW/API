@@ -38,13 +38,18 @@ namespace X.Stock.Service.Utils
                 string.Empty);
             var reg = new Regex("\\\"(.+?)\\\"");
             var groups = reg.Matches(iresult.Content);
-            if (groups.Count <= 0) return result;
+            decimal stockPrice, stockKm1, stockKm2;
+            DateTime dt;
+            if (groups.Count < 52 || !decimal.TryParse(groups[27].Groups[1].Value, out stockPrice) ||
+                !decimal.TryParse(groups[29].Groups[1].Value, out stockKm1) ||
+                !decimal.TryParse(groups[31].Groups[1].Value, out stockKm2) ||
+                !DateTime.TryParse(groups[51].Groups[1].Value, out dt)) return result;
             result.StockCode = groups[3].Groups[1].Value;
             result.StockName = groups[4].Groups[1].Value;
-            result.StockPrice = decimal.Parse(groups[27].Groups[1].Value);
-            result.StockKm1 = decimal.Parse(groups[29].Groups[1].Value);
-            result.StockKm2 = decimal.Parse(groups[31].Groups[1].Value);
-            result.Now = DateTime.Parse(groups[51].Groups[1].Value);
+            result.StockPrice = stockPrice;
+            result.StockKm1 = stockKm1;
+            result.StockKm2 = stockKm2;
+            result.Now = dt;
             return result;
         }
 
@@ -62,20 +67,16 @@ namespace X.Stock.Service.Utils
                 string.Empty);
             var reg = new Regex("\\\"(.+?)\\\"");
             var groups = reg.Matches(iresult.Content);
-            if (groups.Count > 0)
-            {
-                result.AddRange(from Match @group in groups
-                    select @group.Groups[1].ToString().Split(',')
-                    into array
-                    select new StockInfo()
-                    {
-                        StockCode = array[1],
-                        StockName = array[2],
-                        StockPrice = decimal.Parse(array[3]),
-                        StockKm2 = decimal.Parse(array[4].Replace("%", string.Empty)),
-                        StockKm1 = decimal.Parse(array[5])
-                    });
-            }
+            if (groups.Count <= 0) return result;
+            decimal stockPrice = 0, stockKm1 = 0, stockKm2 = 0;
+            result.AddRange(from Match @group in groups
+                select @group.Groups[1].ToString().Split(',')
+                into array
+                where array.Length >= 6 && decimal.TryParse(array[3], out stockPrice) && decimal.TryParse(array[4].Replace("%", string.Empty), out stockKm2) && decimal.TryParse(array[5], out stockKm1)
+                select new StockInfo
+                {
+                    StockCode = array[1], StockName = array[2], StockPrice = stockPrice, StockKm2 = stockKm2, StockKm1 = stockKm1
+                });
             return result;
         }
 
