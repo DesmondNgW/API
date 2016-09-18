@@ -4,8 +4,6 @@ using System.Linq;
 using System.Threading;
 using X.Stock.Service;
 using X.Stock.Service.Utils;
-using X.Util.Entities;
-using X.Util.Other;
 
 namespace X.UI.Consoles
 {
@@ -49,45 +47,16 @@ namespace X.UI.Consoles
                     break;
                 }
             }
-            //"http://nuff.eastmoney.com/EM_Finance2015TradeInterface/JS.ashx?id=3000592&token=beb0a0047196124721f56b0f0ff5a27c"
         }
     }
-
-    public class Stock : MongoBaseModel
-    {
-        public string Code { get; set; }
-
-        public string Amount { get; set; }
-
-        public string Rate { get; set; }
-
-        public DateTime Now { get; set; }
-
-        public Stock(string code)
-        {
-            var format = "http://qt.gtimg.cn/q=ff_{0}{1}";
-            var uri = string.Format(format, code.StartsWith("6") ? "sh" : "sz", code);
-            var result = HttpRequestBase.GetHttpInfo(uri, "utf-8", "application/json", null, string.Empty);
-            if (result.Success)
-            {
-                var arr = result.Content.Split('~');
-                if (arr.Length <= 3) return;
-                Id = code + "_" + DateTime.Now.ToString("yyyy-MM-dd");
-                Code = code;
-                Amount = arr[3];
-                Rate = arr[4];
-                Now = DateTime.Now;
-            }
-        }
-    }
-
 
     class Program
     {
         static void Main()
         {
-            CustomerService.InitCustomerInfo(Work.CustomerNo, Work.CustomerName, Work.CoinAsset);
-            Work.CreateThreads();
+            //CustomerService.InitCustomerInfo(Work.CustomerNo, Work.CustomerName, Work.CoinAsset);
+            //Work.CreateThreads();
+            Console.WriteLine(ThirdPartyTest.CouchBaseTest());
             Console.ReadKey();
         }
 

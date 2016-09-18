@@ -209,12 +209,12 @@ namespace X.Util.Core.Configuration
             if (Equals(node, null)) return couchbaseClientConfiguration;
             couchbaseClientConfiguration.Bucket = XmlHelper.GetXmlAttributeValue(node, "bucket", "default");
             couchbaseClientConfiguration.BucketPassword = XmlHelper.GetXmlAttributeValue(node, "password", string.Empty);
-            foreach (XmlNode item in node.ChildNodes)
+            foreach (var item in node.ChildNodes.Cast<XmlNode>().Where(uri => uri.NodeType != XmlNodeType.Comment))
             {
                 switch (item.Name)
                 {
                     case "urls":
-                        foreach (XmlNode uri in item.ChildNodes) couchbaseClientConfiguration.Urls.Add(new Uri(XmlHelper.GetXmlAttributeValue(uri, "uri", string.Empty)));
+                        foreach (var uri in item.ChildNodes.Cast<XmlNode>().Where(uri => uri.NodeType != XmlNodeType.Comment)) couchbaseClientConfiguration.Urls.Add(new Uri(XmlHelper.GetXmlAttributeValue(uri, "uri", string.Empty)));
                         break;
                     case "socketPool":
                         couchbaseClientConfiguration.SocketPool.MinPoolSize = CoreParse.GetInt32((XmlHelper.GetXmlAttributeValue(item, "minPoolSize", string.Empty)), 10);
@@ -277,7 +277,7 @@ namespace X.Util.Core.Configuration
                 var type = (MongoCredentialType)Enum.Parse(typeof(MongoCredentialType), XmlHelper.GetXmlAttributeValue(node, "credential", "MongoCr"), true);
                 configuration.Credentials = GetMongoCredential(userName, password, credentialDataBase ?? XmlHelper.GetXmlAttributeValue(node, "db", "admin"), type);
             }
-            foreach (XmlNode item in node.ChildNodes)
+            foreach (var item in node.ChildNodes.Cast<XmlNode>().Where(uri => uri.NodeType != XmlNodeType.Comment))
             {
                 switch (item.Name)
                 {
