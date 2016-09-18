@@ -86,8 +86,49 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="App_Readme\Elmah.txt" />
+    <Content Include="css\framework\framework.css" />
+    <Content Include="css\page\demo\iconfonts.css" />
+    <Content Include="css\util\animate.css" />
+    <Content Include="css\util\base.css" />
+    <Content Include="css\util\box.css" />
+    <Content Include="css\util\button.css" />
+    <Content Include="css\util\dropdown.css" />
+    <Content Include="css\util\form.css" />
+    <Content Include="css\util\grid.css" />
+    <Content Include="css\util\iconfont.css" />
+    <Content Include="css\util\list.css" />
+    <Content Include="css\util\loading.css" />
+    <Content Include="css\util\nav.css" />
+    <Content Include="css\util\paging.css" />
+    <Content Include="css\util\poptip.css" />
+    <Content Include="css\util\select.css" />
+    <Content Include="css\util\step.css" />
+    <Content Include="css\util\tab.css" />
+    <Content Include="css\util\table.css" />
+    <Content Include="css\util\tipbox.css" />
+    <Content Include="css\util\tiptext.css" />
     <Content Include="Global.asax" />
     <Content Include="default.aspx" />
+    <Content Include="gulpfile.js" />
+    <Content Include="html\iconFonts.html" />
+    <Content Include="images\fonts\iconfont.svg" />
+    <Content Include="images\M9UQl3TuH.gif" />
+    <Content Include="js\util\library\jquery.js" />
+    <Content Include="js\util\library\json.js" />
+    <Content Include="js\util\library\underscore.js" />
+    <Content Include="js\util\plugins.js" />
+    <Content Include="js\util\plugins\base64.js" />
+    <Content Include="js\util\plugins\cookie.js" />
+    <Content Include="js\util\plugins\url.js" />
+    <Content Include="js\util\rsa\Barrett.js" />
+    <Content Include="js\util\rsa\BigInt.js" />
+    <Content Include="js\util\rsa\encrypt.js" />
+    <Content Include="js\util\rsa\RSA.js" />
+    <Content Include="js\util\setting.js" />
+    <Content Include="lib\XCode.js" />
+    <Content Include="seajs\sea-2.3.0.js" />
+    <Content Include="seajs\sea-debug-2.3.0.js" />
+    <Content Include="seajs\seajs-config.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -106,6 +147,12 @@
   <ItemGroup>
     <Content Include="packages.config" />
     <Content Include="elmah.axd" />
+    <Content Include="1.bat" />
+    <Content Include="gulp-build.bat" />
+    <Content Include="images\fonts\iconfont.eot" />
+    <Content Include="images\fonts\iconfont.ttf" />
+    <Content Include="images\fonts\iconfont.woff" />
+    <Content Include="package.json" />
     <None Include="Properties\PublishProfiles\form.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -135,6 +182,9 @@
       <Project>{2d1a395f-0c8c-42ae-a93a-960e0021b944}</Project>
       <Name>X.Web.Util</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="js\page\demo\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
