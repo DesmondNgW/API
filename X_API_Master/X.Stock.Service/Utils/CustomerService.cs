@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using MongoDB.Driver;
+using MongoDB.Driver.Builders;
 using X.Stock.Service.Model;
 using X.Util.Core.Log;
 using X.Util.Entities;
@@ -19,8 +19,9 @@ namespace X.Stock.Service.Utils
         /// <returns></returns>
         public static List<StockShare> GetStockShare(string customerNo)
         {
-            var query = new QueryDocument { { "CustomerNo", customerNo } };
-            return MongoDbBase<StockShare>.Default.ReadMongo("Stock", "Share", null, query).Where(p => p.TotalVol > 0).OrderByDescending(p => p.CreateTime).ToList();
+            var query = Query.And(Query.EQ("CustomerNo", customerNo), Query.GT("TotalVol", 0));
+            var sortBy = SortBy.Descending("CreateTime");
+            return MongoDbBase<StockShare>.Default.ReadMongo("Stock", "Share", null, query, null, sortBy).ToList();
         }
 
         /// <summary>
@@ -86,8 +87,8 @@ namespace X.Stock.Service.Utils
         /// <returns></returns>
         public static CustomerInfo GetCustomerInfo(string customerNo)
         {
-            var query = new QueryDocument {{"CustomerNo", customerNo}};
-            return MongoDbBase<CustomerInfo>.Default.ReadMongo("Stock", "Customer", null, query).FirstOrDefault();
+            var query = Query.And(Query.EQ("CustomerNo", customerNo));
+            return MongoDbBase<CustomerInfo>.Default.FindOne("Stock", "Customer", null, query);
         }
 
         /// <summary>

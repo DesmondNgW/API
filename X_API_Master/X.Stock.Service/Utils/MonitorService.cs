@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using MongoDB.Driver;
+using MongoDB.Driver.Builders;
 using X.Stock.Service.Model;
 using X.Util.Extend.Mongo;
 
@@ -53,7 +54,7 @@ namespace X.Stock.Service.Utils
 
         public static MongoCursor<StockMonitor> GetStockMonitor()
         {
-            var query = new QueryDocument { { "CreateTime", new QueryDocument { { "$gte", DateTime.Now.AddMonths(-1) } } } };
+            var query = Query.GTE("CreateTime", DateTime.Now.AddMonths(-1));
             return MongoDbBase<StockMonitor>.Default.ReadMongo("Stock", "Monitor", null, query);
         }
     }

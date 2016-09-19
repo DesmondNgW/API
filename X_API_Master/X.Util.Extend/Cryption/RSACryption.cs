@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection;
 using System.Security.Cryptography;
 using System.Text;
+using MongoDB.Driver.Builders;
 using X.Util.Core;
 using X.Util.Core.Log;
 using X.Util.Entities;
@@ -16,7 +17,7 @@ namespace X.Util.Extend.Cryption
         private static RsaKey GetRsaKey(string id)
         {
             var rsaKey = default(RsaKey);
-            var query = new QueryDocument { { "_id", id } };
+            var query = Query.EQ("_id", id);
             var list = MongoDbBase<RsaKey>.Default.ReadMongo("RSA", "RSA", null, query).ToList();
             if (list.Count > 0)
             {

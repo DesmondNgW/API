@@ -6,7 +6,7 @@ using System.Reflection;
 using System.Text;
 using System.Web;
 using System.Web.Caching;
-using MongoDB.Driver;
+using MongoDB.Driver.Builders;
 using X.Stock.Service.Model;
 using X.Util.Core.Log;
 using X.Util.Entities;
@@ -54,8 +54,9 @@ namespace X.Stock.Service.Utils
         public static List<StockPool> GetStockPool()
         {
             var result = new List<StockPool>();
-            var query = new QueryDocument { { "CreateTime", new QueryDocument { { "$gte", DateTime.Now.AddMonths(-1) } } } };
-            var list = MongoDbBase<StockPool>.Default.ReadMongo("Stock", "Pool", null, query).OrderByDescending(p => p.CreateTime).ToList();
+            var query = Query.GTE("CreateTime", DateTime.Now.AddMonths(-1));
+            var sortBy = SortBy.Descending("CreateTime");
+            var list = MongoDbBase<StockPool>.Default.ReadMongo("Stock", "Pool", null, query, null, sortBy).ToList();
             if (list.Count <= 0) return result;
             var n = list.First().CreateTime;
             return list.Where(p => p.CreateTime == n).ToList();
