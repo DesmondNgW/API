@@ -54,9 +54,9 @@ namespace X.UI.Consoles
     {
         static void Main()
         {
-            //CustomerService.InitCustomerInfo(Work.CustomerNo, Work.CustomerName, Work.CoinAsset);
-            //Work.CreateThreads();
-            Console.WriteLine(ThirdPartyTest.CouchBaseTest());
+            CustomerService.InitCustomerInfo(Work.CustomerNo, Work.CustomerName, Work.CoinAsset);
+            Work.CreateThreads();
+            //Console.WriteLine(ThirdPartyTest.CouchBaseTest());
             Console.ReadKey();
         }
 

@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading;
+using X.Stock.Service.Model;
 using X.Stock.Service.Utils;
 
 namespace X.Stock.Service
@@ -59,14 +61,18 @@ namespace X.Stock.Service
                         {
                             var info = CustomerService.GetAssetInfo(CustomerNo);
                             var count = info.Shares != null ? info.Shares.Count : 0;
+                            var stocks = default(List<StockInfo>);
                             if (count < 4)
                             {
-                                var stocks = StockPoolService.GetStockInfoFromPool();
+                                stocks = StockPoolService.GetStockInfoFromPool();
                                 if (stocks != null)
                                 {
                                     StockTradeService.BuyStock(stocks, info);
-                                    MonitorService.MonitorBuy(stocks);
                                 }
+                            }
+                            if (stocks != null)
+                            {
+                                MonitorService.MonitorBuy(stocks);
                             }
                             if (count > 0)
                             {

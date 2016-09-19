@@ -19,9 +19,9 @@ namespace X.Stock.Service.Utils
         /// <returns></returns>
         public static List<StockShare> GetStockShare(string customerNo)
         {
-            var query = Query.And(Query.EQ("CustomerNo", customerNo), Query.GT("TotalVol", 0));
+            var query = Query.And(Query.EQ("CustomerNo", customerNo));
             var sortBy = SortBy.Descending("CreateTime");
-            return MongoDbBase<StockShare>.Default.ReadMongo("Stock", "Share", null, query, null, sortBy).ToList();
+            return MongoDbBase<StockShare>.Default.ReadMongo("Stock", "Share", null, query, null, sortBy).Where(p => p.TotalVol > 0).ToList();
         }
 
         /// <summary>
