@@ -10,11 +10,20 @@ namespace X.Stock.Service.Utils
 {
     public class MonitorService
     {
+        private const string Collection = "Monitor";
+        private const string DataBase = "Stock";
+
+        private static string GetId(string stockCode, MonitorState state)
+        {
+            return stockCode + "_" + DateTime.Now.ToString("yyyyMMdd") + "_" + state;
+        }
+
         public static void MonitorBuy(List<StockInfo> stocks)
         {
+            const MonitorState state = MonitorState.Buy;
             var targets = stocks.Where(p => p.StockKm2 >= 3.3M && p.StockKm2 <= 8.8M);
             var list = GetStockMonitor();
-            foreach (var target in targets.Where(target => list.Count(p => p.Id == target.StockCode + "_" + DateTime.Now.ToString("yyyyMMdd") + "_Buy") == 0))
+            foreach (var target in targets.Where(target => list.Count(p => p.Id == GetId(target.StockCode, state)) == 0))
             {
                 var msg = string.Format("Stock Code {0}({1}) has at price {2},inc {3}%", target.StockCode, target.StockName, target.StockPrice, target.StockKm2);
                 SmtpMailHelper.Send("Stock." + target.StockCode, msg);
@@ -24,18 +33,19 @@ namespace X.Stock.Service.Utils
                     StockName = target.StockName,
                     StockPrice = target.StockPrice,
                     StockKm = target.StockKm2,
-                    State = "Buy",
+                    State = state,
                     CreateTime = DateTime.Now,
-                    Id = target.StockCode + "_" + DateTime.Now.ToString("yyyyMMdd") + "_Buy"
-                }, "Stock", "Monitor", null);
+                    Id = GetId(target.StockCode, state)
+                }, DataBase, Collection, null);
             }
         }
 
         public static void MonitorSell(List<StockInfo> stocks)
         {
+            const MonitorState state = MonitorState.Sell;
             var targets = stocks.Where(p => p.StockKm2 <=-3.3M);
             var list = GetStockMonitor();
-            foreach (var target in targets.Where(target => list.Count(p => p.Id == target.StockCode + "_" + DateTime.Now.ToString("yyyyMMdd") + "_Sell") == 0))
+            foreach (var target in targets.Where(target => list.Count(p => p.Id == GetId(target.StockCode, state)) == 0))
             {
                 var msg = string.Format("Stock Code {0}({1}) has at price {2},inc {3}%", target.StockCode, target.StockName, target.StockPrice, target.StockKm2);
                 SmtpMailHelper.Send("Stock." + target.StockCode, msg);
@@ -45,10 +55,10 @@ namespace X.Stock.Service.Utils
                     StockName = target.StockName,
                     StockPrice = target.StockPrice,
                     StockKm = target.StockKm2,
-                    State = "Buy",
+                    State = state,
                     CreateTime = DateTime.Now,
-                    Id = target.StockCode + "_" + DateTime.Now.ToString("yyyyMMdd") + "_Sell"
-                }, "Stock", "Monitor", null);
+                    Id = GetId(target.StockCode, state)
+                }, DataBase, Collection, null);
             }
         }
 

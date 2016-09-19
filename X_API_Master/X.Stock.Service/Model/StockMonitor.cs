@@ -3,6 +3,12 @@ using X.Util.Entities;
 
 namespace X.Stock.Service.Model
 {
+    public enum MonitorState
+    {
+        Buy = 0,
+        Sell = 1
+    }
+
     public class StockMonitor : MongoBaseModel
     {
         public string StockCode { get; set; }
@@ -15,6 +21,6 @@ namespace X.Stock.Service.Model
 
         public DateTime CreateTime { get; set; }
 
-        public string State { get; set; }
+        public MonitorState State { get; set; }
     }
 }
