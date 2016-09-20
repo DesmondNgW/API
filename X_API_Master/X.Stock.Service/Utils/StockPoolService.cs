@@ -70,7 +70,7 @@ namespace X.Stock.Service.Utils
             var result = new List<StockPool>();
             var query = Query.GTE("CreateTime", DateTime.Now.AddMonths(-1));
             var sortBy = SortBy.Descending("CreateTime");
-            var list = MongoDbBase<StockPool>.Default.ReadMongo("Stock", "Pool", null, query, null, sortBy).ToList();
+            var list = MongoDbBase<StockPool>.Default.Find("Stock", "Pool", null, query, null, sortBy).ToList();
             if (list.Count <= 0) return result;
             var n = list.First().CreateTime;
             return list.Where(p => p.CreateTime == n).ToList();

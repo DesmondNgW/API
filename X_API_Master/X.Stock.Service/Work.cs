@@ -14,6 +14,10 @@ namespace X.Stock.Service
 
         public const decimal CoinAsset = 100000;
 
+        public const int T1 = 10*1000*60;
+
+        public const int T2 = 3*1000;
+
         protected static Thread[] Pool { get; set; }
         public static void CreateThreads()
         {
@@ -47,14 +51,14 @@ namespace X.Stock.Service
                         {
                             StockPoolService.ImportStockPool("gb2312");
                         }
-                        Thread.Sleep(10 * 1000 * 60);
+                        Thread.Sleep(T1);
                         break;
                     case 1:
                         if (!cantrade)
                         {
                             CustomerService.UpdateStockShares(CustomerNo);
                         }
-                        Thread.Sleep(10 * 1000 * 60);
+                        Thread.Sleep(T1);
                         break;
                     case 2:
                         if (cantrade)
@@ -79,7 +83,7 @@ namespace X.Stock.Service
                                 StockTradeService.SellStock(info);
                             }
                         }
-                        Thread.Sleep(3 * 1000);
+                        Thread.Sleep(T2);
                         break;
                 }
             }

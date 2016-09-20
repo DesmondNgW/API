@@ -18,7 +18,7 @@ namespace X.Util.Extend.Cryption
         {
             var rsaKey = default(RsaKey);
             var query = Query.EQ("_id", id);
-            var list = MongoDbBase<RsaKey>.Default.ReadMongo("RSA", "RSA", null, query).ToList();
+            var list = MongoDbBase<RsaKey>.Default.Find("RSA", "RSA", null, query).ToList();
             if (list.Count > 0)
             {
                 rsaKey = list[0];

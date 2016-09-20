@@ -201,24 +201,6 @@ namespace X.Util.Extend.Mongo
         #endregion
 
         #region 查询操作
-        private static MongoCursor<T> Find(MongoDbProvider<T> mc, IMongoQuery query, IMongoFields field = null, IMongoSortBy sortBy = null, int limit = 0, int skip = 0)
-        {
-            var docs = mc.Client.Find(query);
-            docs = (field != null) ? docs.SetFields(field) : docs;
-            docs = (sortBy != null) ? docs.SetSortOrder(sortBy) : docs;
-            docs = (limit != 0) ? docs.SetLimit(limit) : docs;
-            docs = (skip != 0) ? docs.SetSkip(skip) : docs;
-            return docs;
-        }
-
-        private static long Count(MongoDbProvider<T> mc, IMongoQuery query, int limit = 0, int skip = 0)
-        {
-            var docs = mc.Client.Find(query);
-            docs = (limit != 0) ? docs.SetLimit(limit) : docs;
-            docs = (skip != 0) ? docs.SetSkip(skip) : docs;
-            return docs.Count();
-        }
-
         /// <summary>
         /// 查询MongoDB
         /// </summary>
@@ -230,11 +212,39 @@ namespace X.Util.Extend.Mongo
         /// <param name="sortBy">排序</param>
         /// <param name="limit">选取条数</param>
         /// <param name="skip">从索引值开始选取</param>
-        /// <returns></returns>
-        public MongoCursor<T> ReadMongo(string database, string collection, string credentialDataBase, IMongoQuery query, IMongoFields field = null, IMongoSortBy sortBy = null, int limit = 0, int skip = 0)
+        public MongoCursor<T> Find(string database, string collection, string credentialDataBase, IMongoQuery query, IMongoFields field = null, IMongoSortBy sortBy = null, int limit = 0, int skip = 0)
         {
             var mc = new MongoDbProvider<T>(database, collection, credentialDataBase);
-            return CoreAccess<MongoCollection<T>>.TryCall(Find, mc, query, field, sortBy, limit, skip, mc, new LogOptions<MongoCursor<T>>(iresult => iresult != null && iresult.Any()));
+            return CoreAccess<MongoCollection<T>>.TryCall((iquery, ifield, isortBy, ilimit, iskip) =>
+            {
+                var docs = mc.Client.Find(iquery);
+                docs = (ifield != null) ? docs.SetFields(ifield) : docs;
+                docs = (isortBy != null) ? docs.SetSortOrder(isortBy) : docs;
+                docs = (ilimit != 0) ? docs.SetLimit(ilimit) : docs;
+                docs = (iskip != 0) ? docs.SetSkip(iskip) : docs;
+                return docs;
+            }, query, field, sortBy, limit, skip, mc, new LogOptions<MongoCursor<T>>(iresult => iresult != null && iresult.Any()));
+        }
+
+        /// <summary>
+        /// 取MongoDB条数
+        /// </summary>
+        /// <param name="database"></param>
+        /// <param name="collection"></param>
+        /// <param name="credentialDataBase"></param>
+        /// <param name="query">查询语句</param>
+        /// <param name="limit">选取条数</param>
+        /// <param name="skip">从索引值开始选取</param>
+        public long Count(string database, string collection, string credentialDataBase, IMongoQuery query, int limit = 0, int skip = 0)
+        {
+            var mc = new MongoDbProvider<T>(database, collection, credentialDataBase);
+            return CoreAccess<MongoCollection<T>>.TryCall((iquery, ilimit, iskip) =>
+            {
+                var docs = mc.Client.Find(iquery);
+                docs = (ilimit != 0) ? docs.SetLimit(ilimit) : docs;
+                docs = (iskip != 0) ? docs.SetSkip(iskip) : docs;
+                return docs.Count();
+            }, query, limit, skip, mc, new LogOptions<long>(CoreBase.CallSuccess));
         }
 
         /// <summary>
@@ -249,22 +259,6 @@ namespace X.Util.Extend.Mongo
         {
             var mc = new MongoDbProvider<T>(database, collection, credentialDataBase);
             return CoreAccess<MongoCollection<T>>.TryCall(mc.Client.FindOne, query, mc, new LogOptions<T>(CoreBase.CallSuccess));
-        }
-
-        /// <summary>
-        /// 取MongoDB条数
-        /// </summary>
-        /// <param name="database"></param>
-        /// <param name="collection"></param>
-        /// <param name="credentialDataBase"></param>
-        /// <param name="query">查询语句</param>
-        /// <param name="limit">选取条数</param>
-        /// <param name="skip">从索引值开始选取</param>
-        /// <returns></returns>
-        public long ReadMongoCount(string database, string collection, string credentialDataBase, IMongoQuery query, int limit = 0, int skip = 0)
-        {
-            var mc = new MongoDbProvider<T>(database, collection, credentialDataBase);
-            return CoreAccess<MongoCollection<T>>.TryCall(Count, mc, query, limit, skip, mc, new LogOptions<long>(CoreBase.CallSuccess));
         }
 
         /// <summary>

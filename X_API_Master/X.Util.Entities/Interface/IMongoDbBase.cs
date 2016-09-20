@@ -27,11 +27,11 @@ namespace X.Util.Entities.Interface
 
         void RemoveMongo(string database, string collection, string credentialDataBase, IMongoQuery query, RemoveFlags flag = RemoveFlags.None);
 
-        MongoCursor<T> ReadMongo(string database, string collection, string credentialDataBase, IMongoQuery query, IMongoFields field = null, IMongoSortBy sortBy = null, int limit = 0, int skip = 0);
+        MongoCursor<T> Find(string database, string collection, string credentialDataBase, IMongoQuery query, IMongoFields field = null, IMongoSortBy sortBy = null, int limit = 0, int skip = 0);
 
         T FindOne(string database, string collection, string credentialDataBase, IMongoQuery query);
 
-        long ReadMongoCount(string database, string collection, string credentialDataBase, IMongoQuery query, int limit = 0, int skip = 0);
+        long Count(string database, string collection, string credentialDataBase, IMongoQuery query, int limit = 0, int skip = 0);
 
         IEnumerable<BsonValue> Distinct(string database, string collection, string credentialDataBase, IMongoQuery query, string field);
     }

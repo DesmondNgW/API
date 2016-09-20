@@ -21,7 +21,7 @@ namespace X.Stock.Service.Utils
         {
             var query = Query.And(Query.EQ("CustomerNo", customerNo));
             var sortBy = SortBy.Descending("CreateTime");
-            return MongoDbBase<StockShare>.Default.ReadMongo("Stock", "Share", null, query, null, sortBy).Where(p => p.TotalVol > 0).ToList();
+            return MongoDbBase<StockShare>.Default.Find("Stock", "Share", null, query, null, sortBy).Where(p => p.TotalVol > 0).ToList();
         }
 
         /// <summary>
