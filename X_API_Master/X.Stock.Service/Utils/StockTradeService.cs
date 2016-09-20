@@ -34,6 +34,7 @@ namespace X.Stock.Service.Utils
                 foreach (var target in targets)
                 {
                     var vol = Math.Floor(total / target.StockPrice / 100) * 100;
+                    if (vol <= 0) continue;
                     var amount = vol * target.StockPrice;
                     Logger.Client.Info(MethodBase.GetCurrentMethod(), LogDomain.Core, "Buy stock " + target.StockCode, string.Empty);
                     MongoDbBase<StockShare>.Default.SaveMongo(new StockShare
