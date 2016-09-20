@@ -90,10 +90,10 @@ namespace X.Stock.Service.Utils
         /// <returns></returns>
         public static bool CanTrade(DateTime now)
         {
-            var amBegin = now.Date + new TimeSpan(9, 30, 0);
-            var amEnd = now.Date + new TimeSpan(11, 30, 0);
-            var pmBegin = now.Date + new TimeSpan(13, 0, 0);
-            var pmEnd = now.Date + new TimeSpan(15, 0, 0);
+            var amBegin = now.Date + new TimeSpan(9, 31, 0);
+            var amEnd = now.Date + new TimeSpan(11, 29, 0);
+            var pmBegin = now.Date + new TimeSpan(13, 1, 0);
+            var pmEnd = now.Date + new TimeSpan(14, 55, 0);
             if (now.DayOfWeek != DayOfWeek.Saturday && now.DayOfWeek != DayOfWeek.Sunday && now >= amBegin && now <= pmEnd)
             {
                 return now <= amEnd || now >= pmBegin;
