@@ -23,7 +23,7 @@ namespace X.Stock.Service.Utils
         /// <param name="info"></param>
         public static void BuyStock(List<StockInfo> stocks, AssetInfo info)
         {
-            var count = info.Shares != null ? info.Shares.Count : 0;
+            var count = info.Shares != null ? info.Shares.Count(p => p.TotalVol > 0) : 0;
             if (count >= 4) return;
             lock (Blocker)
             {
@@ -35,6 +35,7 @@ namespace X.Stock.Service.Utils
                 {
                     var vol = Math.Floor(total / target.StockPrice / 100) * 100;
                     var amount = vol * target.StockPrice;
+                    Logger.Client.Info(MethodBase.GetCurrentMethod(), LogDomain.Core, "Buy stock " + target.StockCode, string.Empty);
                     MongoDbBase<StockShare>.Default.SaveMongo(new StockShare
                     {
                         Id = target.StockCode + "_" + DateTime.Now.ToString("yyyyMMdd"),
@@ -61,8 +62,8 @@ namespace X.Stock.Service.Utils
         /// <param name="info"></param>
         public static void SellStock(AssetInfo info)
         {
-            var shares = info.Shares;
-            if (shares == null || shares.Count(p => p.CreateTime != DateTime.Now.Date) == 0) return;
+            var shares = info.Shares.Where(p => p.TotalVol > 0 && p.CreateTime != DateTime.Now.Date).ToList();
+            if (shares.Count <= 0) return;
             Logger.Client.Info(MethodBase.GetCurrentMethod(), LogDomain.Core, "Start Sell stock", string.Empty);
             var stocks = CustomerService.GetStockInfoFromShares(info);
             foreach (var share in shares.Where(p => p.CreateTime != DateTime.Now.Date && p.TotalVol > 0))
@@ -75,6 +76,7 @@ namespace X.Stock.Service.Utils
                     share1.CurrentStockPrice = stock.StockPrice;
                     share1.TotalVol = 0;
                     share1.AvailableVol = 0;
+                    Logger.Client.Info(MethodBase.GetCurrentMethod(), LogDomain.Core, "Sell stock " + stock.StockCode, string.Empty);
                     var amount = stock.StockPrice*share1.TotalVol;
                     MongoDbBase<StockShare>.Default.SaveMongo(share1, "Stock", "Share", null);
                     CustomerService.UpdateCustomerInfo(info.CustomerNo, amount);
