@@ -8,7 +8,7 @@ namespace X.Stock.Service.Model
 
         public string CustomerName { get; set; }
 
-        public decimal CoinAsset { get; set; }
+        public double CoinAsset { get; set; }
 
         public List<StockShare> Shares { get; set; } 
     }

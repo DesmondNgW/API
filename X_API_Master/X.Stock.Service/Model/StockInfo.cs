@@ -8,11 +8,11 @@ namespace X.Stock.Service.Model
 
         public string StockName { get; set; }
 
-        public decimal StockPrice { get; set; }
+        public double StockPrice { get; set; }
 
-        public decimal StockKm1 { get; set; }
+        public double StockKm1 { get; set; }
 
-        public decimal StockKm2 { get; set; }
+        public double StockKm2 { get; set; }
 
         public DateTime Now { get; set; }
     }

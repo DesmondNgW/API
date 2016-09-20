@@ -15,9 +15,9 @@ namespace X.Stock.Service.Model
 
         public string StockName { get; set; }
 
-        public decimal StockPrice { get; set; }
+        public double StockPrice { get; set; }
 
-        public decimal StockKm { get; set; }
+        public double StockKm { get; set; }
 
         public DateTime CreateTime { get; set; }
 

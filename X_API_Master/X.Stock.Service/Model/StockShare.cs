@@ -13,13 +13,13 @@ namespace X.Stock.Service.Model
 
         public string StockName { get; set; }
 
-        public decimal CostValue { get; set; }
+        public double CostValue { get; set; }
 
-        public decimal TotalVol { get; set; }
+        public double TotalVol { get; set; }
 
-        public decimal AvailableVol { get; set; }
+        public double AvailableVol { get; set; }
 
-        public decimal CurrentStockPrice { get; set; }
+        public double CurrentStockPrice { get; set; }
 
         public DateTime CreateTime { get; set; }
 

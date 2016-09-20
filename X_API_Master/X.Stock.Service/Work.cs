@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using X.Stock.Service.Model;
 using X.Stock.Service.Utils;
@@ -12,7 +13,7 @@ namespace X.Stock.Service
 
         public const string CustomerName = "testMyProgram";
 
-        public const decimal CoinAsset = 100000;
+        public const double CoinAsset = 100000;
 
         public const int T1 = 10*1000*60;
 
@@ -64,7 +65,12 @@ namespace X.Stock.Service
                         if (cantrade)
                         {
                             var info = CustomerService.GetAssetInfo(CustomerNo);
-                            var count = info.Shares != null ? info.Shares.Count : 0;
+                            int count = 0, sellcount = 0;
+                            if (info.Shares != null)
+                            {
+                                count = info.Shares.Count(p => p.TotalVol > 0);
+                                sellcount = info.Shares.Count(p => p.TotalVol > 0 && p.CreateTime.Date != DateTime.Now.Date);
+                            }
                             var stocks = default(List<StockInfo>);
                             if (count < 4)
                             {
@@ -78,7 +84,7 @@ namespace X.Stock.Service
                             {
                                 MonitorService.MonitorBuy(stocks);
                             }
-                            if (count > 0)
+                            if (sellcount > 0)
                             {
                                 StockTradeService.SellStock(info);
                             }

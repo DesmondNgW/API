@@ -29,7 +29,7 @@ namespace X.Stock.Service.Utils
             {
                 var total = info.CoinAsset/(4 - count);
                 if (stocks == null) return;
-                var targets = stocks.Where(p => p.StockKm2 >= 3.3M && p.StockKm2 <= 8.8M).OrderByDescending(p => p.StockKm2).Take(4 - count);
+                var targets = stocks.Where(p => p.StockKm2 >= 3.3 && p.StockKm2 <= 8.8).OrderByDescending(p => p.StockKm2).Take(4 - count);
                 Logger.Client.Info(MethodBase.GetCurrentMethod(), LogDomain.Core, "Start Buy stock", string.Empty);
                 foreach (var target in targets)
                 {
@@ -49,7 +49,7 @@ namespace X.Stock.Service.Utils
                         CreateTime = DateTime.Now.Date,
                         UpdateTime = DateTime.Now
                     }, "Stock", "Share", null);
-                    CustomerService.UpdateCustomerInfo(info.CustomerNo, info.CoinAsset - amount);
+                    CustomerService.UpdateCustomerInfo(info.CustomerNo, 0 - amount);
                 }
             }
             Logger.Client.Info(MethodBase.GetCurrentMethod(), LogDomain.Core, "End Buy stock", string.Empty);
@@ -65,10 +65,10 @@ namespace X.Stock.Service.Utils
             if (shares == null || shares.Count(p => p.CreateTime != DateTime.Now.Date) == 0) return;
             Logger.Client.Info(MethodBase.GetCurrentMethod(), LogDomain.Core, "Start Sell stock", string.Empty);
             var stocks = CustomerService.GetStockInfoFromShares(info);
-            foreach (var share in shares.Where(p => p.CreateTime != DateTime.Now.Date))
+            foreach (var share in shares.Where(p => p.CreateTime != DateTime.Now.Date && p.TotalVol > 0))
             {
                 var share1 = share;
-                var stock = stocks.FirstOrDefault(p => p.StockCode == share1.StockCode && p.StockKm2 <= -3.3M && StockService.GetBenifit(share1.CostValue, p.StockPrice) > 0.05M);
+                var stock = stocks.FirstOrDefault(p => p.StockCode == share1.StockCode && p.StockKm2 <= -3.3 && StockService.GetBenifit(share1.CostValue, p.StockPrice) > 0.05);
                 if (stock == null) continue;
                 lock (Slocker)
                 {
@@ -77,7 +77,7 @@ namespace X.Stock.Service.Utils
                     share1.AvailableVol = 0;
                     var amount = stock.StockPrice*share1.TotalVol;
                     MongoDbBase<StockShare>.Default.SaveMongo(share1, "Stock", "Share", null);
-                    CustomerService.UpdateCustomerInfo(info.CustomerNo, info.CoinAsset + amount);
+                    CustomerService.UpdateCustomerInfo(info.CustomerNo, amount);
                 }
             }
             Logger.Client.Info(MethodBase.GetCurrentMethod(), LogDomain.Core, "End Sell stock", string.Empty);

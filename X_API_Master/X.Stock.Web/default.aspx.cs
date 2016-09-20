@@ -12,21 +12,22 @@ namespace X.Web.Form
         protected void Page_Load(object sender, EventArgs e)
         {
             var list = CustomerService.GetStockShare(Work.CustomerNo);
-            var stockDecimal = 0M;
+            double stockDecimal = 0;
             if (list != null && list.Count > 0)
             {
-                SbTable.Append("<tr>");
                 foreach (var item in list)
                 {
+                    SbTable.Append("<tr>");
                     var stock = StockService.GetStockInfo(StockService.GetStockId(item.StockCode));
-                    stockDecimal += (stock.StockPrice - item.CostValue)*item.AvailableVol;
+                    stockDecimal += (stock.StockPrice)*item.AvailableVol;
                     SbTable.Append("<td>" + item.StockCode + "</td>");
                     SbTable.Append("<td>" + item.StockName + "</td>");
                     SbTable.Append("<td>" + item.CostValue + "</td>");
+                    SbTable.Append("<td>" + item.CurrentStockPrice + "</td>");
                     SbTable.Append("<td>" + stock.StockKm2 + "%</td>");
                     SbTable.Append("<td>" + StockService.GetBenifit(item.CostValue, stock.StockPrice) + "</td>");
+                    SbTable.Append("</tr>");
                 }
-                SbTable.Append("</tr>");
             }
             else
             {

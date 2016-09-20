@@ -21,7 +21,7 @@ namespace X.Stock.Service.Utils
         {
             var query = Query.And(Query.EQ("CustomerNo", customerNo));
             var sortBy = SortBy.Descending("CreateTime");
-            return MongoDbBase<StockShare>.Default.Find("Stock", "Share", null, query, null, sortBy).Where(p => p.TotalVol > 0).ToList();
+            return MongoDbBase<StockShare>.Default.Find("Stock", "Share", null, query, null, sortBy).ToList();
         }
 
         /// <summary>
@@ -54,7 +54,7 @@ namespace X.Stock.Service.Utils
         /// <summary>
         /// 初始化用户
         /// </summary>
-        public static void InitCustomerInfo(string customerNo, string customerName, decimal coinAsset)
+        public static void InitCustomerInfo(string customerNo, string customerName, double coinAsset)
         {
             var cus = GetCustomerInfo(customerNo);
             if (cus == null)
@@ -72,12 +72,11 @@ namespace X.Stock.Service.Utils
         /// <summary>
         /// 更新用户余额
         /// </summary>
-        public static void UpdateCustomerInfo(string customerNo, decimal coinAsset)
+        public static void UpdateCustomerInfo(string customerNo, double coinAsset)
         {
-            var cus = GetCustomerInfo(customerNo);
-            if (cus == null) return;
-            cus.CoinAsset = coinAsset;
-            MongoDbBase<CustomerInfo>.Default.SaveMongo(cus, "Stock", "Customer", null);
+            var query = Query.EQ("CustomerNo", customerNo);
+            var update = Update.Inc("CoinAsset", coinAsset);
+            MongoDbBase<CustomerInfo>.Default.UpdateMongo("Stock", "Customer", null, query, update);
         }
 
         /// <summary>
@@ -87,7 +86,7 @@ namespace X.Stock.Service.Utils
         /// <returns></returns>
         public static CustomerInfo GetCustomerInfo(string customerNo)
         {
-            var query = Query.And(Query.EQ("CustomerNo", customerNo));
+            var query = Query.EQ("CustomerNo", customerNo);
             return MongoDbBase<CustomerInfo>.Default.FindOne("Stock", "Customer", null, query);
         }
 

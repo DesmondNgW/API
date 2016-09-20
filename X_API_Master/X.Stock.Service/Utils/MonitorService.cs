@@ -21,7 +21,7 @@ namespace X.Stock.Service.Utils
         public static void MonitorBuy(List<StockInfo> stocks)
         {
             const MonitorState state = MonitorState.Buy;
-            var targets = stocks.Where(p => p.StockKm2 >= 3.3M && p.StockKm2 <= 8.8M);
+            var targets = stocks.Where(p => p.StockKm2 >= 3.3 && p.StockKm2 <= 8.8);
             var list = GetStockMonitor();
             foreach (var target in targets.Where(target => list.Count(p => p.Id == GetId(target.StockCode, state)) == 0))
             {
@@ -43,7 +43,7 @@ namespace X.Stock.Service.Utils
         public static void MonitorSell(List<StockInfo> stocks)
         {
             const MonitorState state = MonitorState.Sell;
-            var targets = stocks.Where(p => p.StockKm2 <=-3.3M);
+            var targets = stocks.Where(p => p.StockKm2 <=-3.3);
             var list = GetStockMonitor();
             foreach (var target in targets.Where(target => list.Count(p => p.Id == GetId(target.StockCode, state)) == 0))
             {

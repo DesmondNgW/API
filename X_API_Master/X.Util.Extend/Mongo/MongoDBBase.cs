@@ -215,7 +215,7 @@ namespace X.Util.Extend.Mongo
         public MongoCursor<T> Find(string database, string collection, string credentialDataBase, IMongoQuery query, IMongoFields field = null, IMongoSortBy sortBy = null, int limit = 0, int skip = 0)
         {
             var mc = new MongoDbProvider<T>(database, collection, credentialDataBase);
-            return CoreAccess<MongoCollection<T>>.TryCall((iquery, ifield, isortBy, ilimit, iskip) =>
+            var result = CoreAccess<MongoCollection<T>>.TryCall((iquery, ifield, isortBy, ilimit, iskip) =>
             {
                 var docs = mc.Client.Find(iquery);
                 docs = (ifield != null) ? docs.SetFields(ifield) : docs;
@@ -224,6 +224,7 @@ namespace X.Util.Extend.Mongo
                 docs = (iskip != 0) ? docs.SetSkip(iskip) : docs;
                 return docs;
             }, query, field, sortBy, limit, skip, mc, new LogOptions<MongoCursor<T>>(iresult => iresult != null && iresult.Any()));
+            return result;
         }
 
         /// <summary>
