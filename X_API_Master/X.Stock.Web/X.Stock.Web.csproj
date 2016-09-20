@@ -87,6 +87,7 @@
     </Content>
     <Content Include="App_Readme\Elmah.txt" />
     <Content Include="css\framework\framework.css" />
+    <Content Include="css\page\demo\default.css" />
     <Content Include="css\page\demo\iconfonts.css" />
     <Content Include="css\util\animate.css" />
     <Content Include="css\util\base.css" />
@@ -113,6 +114,7 @@
     <Content Include="html\iconFonts.html" />
     <Content Include="images\fonts\iconfont.svg" />
     <Content Include="images\M9UQl3TuH.gif" />
+    <Content Include="js\page\demo\default.js" />
     <Content Include="js\util\library\jquery.js" />
     <Content Include="js\util\library\json.js" />
     <Content Include="js\util\library\underscore.js" />
@@ -183,9 +185,7 @@
       <Name>X.Web.Util</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="js\page\demo\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
