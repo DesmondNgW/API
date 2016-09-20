@@ -16,18 +16,14 @@ namespace X.Stock.Service.Utils
 {
     public class StockPoolService
     {
-        public static string StockPoolFile = "stockpool.txt";
+        public static string StockPoolDir = "stockpool";
 
-        /// <summary>
-        /// 导入
-        /// </summary>
-        /// <param name="encode"></param>
-        public static void ImportStockPool(string encode)
+        public static void ImportStockPool(string encode, string path)
         {
-            if (!File.Exists(StockPoolFile)) return;
+            if (!File.Exists(path)) return;
             Logger.Client.Info(MethodBase.GetCurrentMethod(), LogDomain.Core, "Start import stockpool", string.Empty);
             var ed = encode.Contains("utf8") || encode.Contains("utf-8") ? Encoding.UTF8 : encode.Contains("unicode") ? Encoding.Unicode : Encoding.GetEncoding(encode);
-            var sr = new StreamReader(StockPoolFile, ed);
+            var sr = new StreamReader(path, ed);
             string line;
             var stockPool = new List<StockPool>();
             while ((line = sr.ReadLine()) != null)
@@ -43,8 +39,26 @@ namespace X.Stock.Service.Utils
             }
             sr.Close();
             MongoDbBase<StockPool>.Default.InsertBatchMongo(stockPool, "Stock", "Pool", null);
-            File.Delete(StockPoolFile);
+            File.Delete(path);
             Logger.Client.Info(MethodBase.GetCurrentMethod(), LogDomain.Core, "End import stockpool", string.Empty);
+        }
+
+
+
+        /// <summary>
+        /// 导入
+        /// </summary>
+        /// <param name="encode"></param>
+        public static void ImportStockPool(string encode)
+        {
+            if (!Directory.Exists(StockPoolDir)) Directory.CreateDirectory(StockPoolDir);
+            var dir = new DirectoryInfo(StockPoolDir);
+            var files = dir.GetFiles();
+            if (files.Length <= 0) return;
+            foreach (var file in files)
+            {
+                ImportStockPool(encode, file.FullName);
+            }
         }
 
         /// <summary>
