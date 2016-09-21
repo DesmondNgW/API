@@ -23,7 +23,7 @@ namespace X.Web.Form
                     SbTable.Append("<td>" + item.StockCode + "</td>");
                     SbTable.Append("<td>" + item.StockName + "</td>");
                     SbTable.Append("<td>" + item.CostValue + "</td>");
-                    SbTable.Append("<td>" + item.CurrentStockPrice + "</td>");
+                    SbTable.Append("<td>" + stock.StockPrice + "</td>");
                     SbTable.Append("<td>" + stock.StockKm2 + "%</td>");
                     SbTable.Append("<td>" + StockService.GetBenifit(item.CostValue, stock.StockPrice) + "</td>");
                     SbTable.Append("</tr>");
