@@ -1,7 +1,7 @@
 ﻿using System.Net.Mail;
 using System.Text;
 
-namespace X.Stock.Service.Utils
+namespace X.Stock.Service
 {
     public class SmtpMailHelper
     {
@@ -37,6 +37,7 @@ namespace X.Stock.Service.Utils
             }
             catch
             {
+                // ignored
             }
         }
     }

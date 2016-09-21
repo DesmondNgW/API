@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text;
+using X.Stock.DB;
 using X.Stock.Service;
-using X.Stock.Service.Utils;
 
 namespace X.Web.Form
 {
@@ -11,7 +11,7 @@ namespace X.Web.Form
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            var list = CustomerService.GetStockShare(Work.CustomerNo);
+            var list = ShareTable.GetStockShare(Work.CustomerNo);
             double stockDecimal = 0;
             if (list != null && list.Count > 0)
             {

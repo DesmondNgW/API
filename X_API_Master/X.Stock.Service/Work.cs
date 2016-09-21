@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
-using X.Stock.Service.Model;
-using X.Stock.Service.Utils;
+using X.Stock.Model;
 
 namespace X.Stock.Service
 {

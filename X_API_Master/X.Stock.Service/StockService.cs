@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
-using X.Stock.Service.Model;
+using X.Stock.Model;
 using X.Util.Other;
 
-namespace X.Stock.Service.Utils
+namespace X.Stock.Service
 {
     public class StockService
     {
@@ -71,8 +71,7 @@ namespace X.Stock.Service.Utils
             double stockPrice = 0, stockKm1 = 0, stockKm2 = 0;
             result.AddRange(from Match @group in groups
                 select @group.Groups[1].ToString().Split(',')
-                into array
-                                where array.Length >= 6 && double.TryParse(array[3], out stockPrice) && double.TryParse(array[4].Replace("%", string.Empty), out stockKm2) && double.TryParse(array[5], out stockKm1)
+                into array where array.Length >= 6 && double.TryParse(array[3], out stockPrice) && double.TryParse(array[4].Replace("%", string.Empty), out stockKm2) && double.TryParse(array[5], out stockKm1)
                 select new StockInfo
                 {
                     StockCode = array[1], StockName = array[2], StockPrice = stockPrice, StockKm2 = stockKm2, StockKm1 = stockKm1

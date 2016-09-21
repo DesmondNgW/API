@@ -1,18 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Web;
 using System.Web.Caching;
-using MongoDB.Driver.Builders;
-using X.Stock.Service.Model;
+using X.Stock.DB;
+using X.Stock.Model;
 using X.Util.Core.Log;
 using X.Util.Entities;
-using X.Util.Extend.Mongo;
 
-namespace X.Stock.Service.Utils
+namespace X.Stock.Service
 {
     public class StockPoolService
     {
@@ -38,12 +36,10 @@ namespace X.Stock.Service.Utils
                 });
             }
             sr.Close();
-            MongoDbBase<StockPool>.Default.InsertBatchMongo(stockPool, "Stock", "Pool", null);
+            PoolTable.ImportStockPool(stockPool);
             File.Delete(path);
             Logger.Client.Info(MethodBase.GetCurrentMethod(), LogDomain.Core, "End import stockpool", string.Empty);
         }
-
-
 
         /// <summary>
         /// 导入
@@ -61,27 +57,12 @@ namespace X.Stock.Service.Utils
             }
         }
 
-        /// <summary>
-        /// 获取
-        /// </summary>
-        /// <returns></returns>
-        public static List<StockPool> GetStockPool()
-        {
-            var result = new List<StockPool>();
-            var query = Query.GTE("CreateTime", DateTime.Now.AddMonths(-1));
-            var sortBy = SortBy.Descending("CreateTime");
-            var list = MongoDbBase<StockPool>.Default.Find("Stock", "Pool", null, query, null, sortBy).ToList();
-            if (list.Count <= 0) return result;
-            var n = list.First().CreateTime;
-            return list.Where(p => p.CreateTime == n).ToList();
-        }
-
         public static List<StockInfo> GetStockInfoFromPool()
         {
             var iscantrade = StockTradeService.IsCanTrade();
             var result = HttpRuntime.Cache.Get("GetStockInfoFromPool") as List<StockInfo>;
             if (result != null && iscantrade) return result;
-            var pool = GetStockPool();
+            var pool = PoolTable.GetStockPool();
             if (pool == null || pool.Count <= 0) return null;
             var stockIds = new string[pool.Count];
             for (var i = 0; i < pool.Count; i++)

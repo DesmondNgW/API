@@ -164,6 +164,14 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\X.Stock.DB\X.Stock.DB.csproj">
+      <Project>{7011E939-A8CC-4DEC-8EA6-B70CD36E9C77}</Project>
+      <Name>X.Stock.DB</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\X.Stock.Model\X.Stock.Model.csproj">
+      <Project>{A93239AB-92A4-4744-B9B7-5E85A819C059}</Project>
+      <Name>X.Stock.Model</Name>
+    </ProjectReference>
     <ProjectReference Include="..\X.Stock.Service\X.Stock.Service.csproj">
       <Project>{0A2E2DFD-91B0-4E36-A13F-1E6069AE3C55}</Project>
       <Name>X.Stock.Service</Name>

@@ -4,12 +4,12 @@ using System.Linq;
 using System.Reflection;
 using System.Web;
 using System.Web.Caching;
-using X.Stock.Service.Model;
+using X.Stock.DB;
+using X.Stock.Model;
 using X.Util.Core.Log;
 using X.Util.Entities;
-using X.Util.Extend.Mongo;
 
-namespace X.Stock.Service.Utils
+namespace X.Stock.Service
 {
     public class StockTradeService
     {
@@ -23,7 +23,7 @@ namespace X.Stock.Service.Utils
         /// <param name="info"></param>
         public static void BuyStock(List<StockInfo> stocks, AssetInfo info)
         {
-            var count = info.Shares != null ? info.Shares.Count(p => p.TotalVol > 0) : 0;
+            var count = info.Shares != null ? info.Shares.Count : 0;
             if (count >= 4) return;
             lock (Blocker)
             {
@@ -33,25 +33,17 @@ namespace X.Stock.Service.Utils
                 Logger.Client.Info(MethodBase.GetCurrentMethod(), LogDomain.Core, "Start Buy stock", string.Empty);
                 foreach (var target in targets)
                 {
-                    var vol = Math.Floor(total / target.StockPrice / 100) * 100;
-                    if (vol <= 0) continue;
-                    var amount = vol * target.StockPrice;
-                    Logger.Client.Info(MethodBase.GetCurrentMethod(), LogDomain.Core, "Buy stock " + target.StockCode, string.Empty);
-                    MongoDbBase<StockShare>.Default.InsertMongo(new StockShare
+                    if (info.Shares != null && info.Shares.Count > 0)
                     {
-                        Id = target.StockCode + "_" + DateTime.Now.ToString("yyyyMMdd"),
-                        CustomerNo = info.CustomerNo,
-                        CustomerName = info.CustomerName,
-                        StockCode = target.StockCode,
-                        StockName = target.StockName,
-                        CostValue = target.StockPrice,
-                        TotalVol = vol,
-                        AvailableVol = vol,
-                        CurrentStockPrice = target.StockPrice,
-                        CreateTime = DateTime.Now.Date,
-                        UpdateTime = DateTime.Now
-                    }, "Stock", "Share", null);
-                    CustomerService.UpdateCustomerInfo(info.CustomerNo, 0 - amount);
+                        if (info.Shares.Count(p => p.StockCode == target.StockCode) <= 0)
+                        {
+                            ShareTable.StockBuy(target, total, info.CustomerNo, info.CustomerName);
+                        }
+                    }
+                    else
+                    {
+                        ShareTable.StockBuy(target, total, info.CustomerNo, info.CustomerName);
+                    }
                 }
             }
             Logger.Client.Info(MethodBase.GetCurrentMethod(), LogDomain.Core, "End Buy stock", string.Empty);
@@ -63,24 +55,18 @@ namespace X.Stock.Service.Utils
         /// <param name="info"></param>
         public static void SellStock(AssetInfo info)
         {
-            var shares = info.Shares.Where(p => p.TotalVol > 0 && p.CreateTime != DateTime.Now.Date).ToList();
+            var shares = info.Shares.Where(p => p.CreateTime != DateTime.Now.Date).ToList();
             if (shares.Count <= 0) return;
             Logger.Client.Info(MethodBase.GetCurrentMethod(), LogDomain.Core, "Start Sell stock", string.Empty);
             var stocks = CustomerService.GetStockInfoFromShares(info);
-            foreach (var share in shares.Where(p => p.CreateTime != DateTime.Now.Date && p.TotalVol > 0))
+            foreach (var share in shares)
             {
                 var share1 = share;
                 var stock = stocks.FirstOrDefault(p => p.StockCode == share1.StockCode && p.StockKm2 <= -3.3 && StockService.GetBenifit(share1.CostValue, p.StockPrice) > 0.05);
                 if (stock == null) continue;
                 lock (Slocker)
                 {
-                    share1.CurrentStockPrice = stock.StockPrice;
-                    share1.TotalVol = 0;
-                    share1.AvailableVol = 0;
-                    Logger.Client.Info(MethodBase.GetCurrentMethod(), LogDomain.Core, "Sell stock " + stock.StockCode, string.Empty);
-                    var amount = stock.StockPrice*share1.TotalVol;
-                    MongoDbBase<StockShare>.Default.SaveMongo(share1, "Stock", "Share", null);
-                    CustomerService.UpdateCustomerInfo(info.CustomerNo, amount);
+                    ShareTable.StockSell(stock, share1);
                 }
             }
             Logger.Client.Info(MethodBase.GetCurrentMethod(), LogDomain.Core, "End Sell stock", string.Empty);

@@ -2,8 +2,8 @@
 using System.Collections.Concurrent;
 using System.Linq;
 using System.Threading;
+using X.Stock.DB;
 using X.Stock.Service;
-using X.Stock.Service.Utils;
 
 namespace X.UI.Consoles
 {
@@ -54,7 +54,7 @@ namespace X.UI.Consoles
     {
         static void Main()
         {
-            CustomerService.InitCustomerInfo(Work.CustomerNo, Work.CustomerName, Work.CoinAsset);
+            CustomerTable.InitCustomerInfo(Work.CustomerNo, Work.CustomerName, Work.CoinAsset);
             Work.CreateThreads();
             //Console.WriteLine(ThirdPartyTest.CouchBaseTest());
             Console.ReadKey();

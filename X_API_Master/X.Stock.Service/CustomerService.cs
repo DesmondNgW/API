@@ -2,35 +2,23 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using MongoDB.Driver.Builders;
-using X.Stock.Service.Model;
+using X.Stock.DB;
+using X.Stock.Model;
 using X.Util.Core.Log;
 using X.Util.Entities;
 using X.Util.Extend.Mongo;
 
-namespace X.Stock.Service.Utils
+namespace X.Stock.Service
 {
     public class CustomerService
     {
-        /// <summary>
-        /// 获取份额
-        /// </summary>
-        /// <param name="customerNo"></param>
-        /// <returns></returns>
-        public static List<StockShare> GetStockShare(string customerNo)
-        {
-            var query = Query.And(Query.EQ("CustomerNo", customerNo));
-            var sortBy = SortBy.Descending("CreateTime");
-            return MongoDbBase<StockShare>.Default.Find("Stock", "Share", null, query, null, sortBy).ToList();
-        }
-
         /// <summary>
         /// 更新份额
         /// </summary>
         /// <param name="customerNo"></param>
         public static void UpdateStockShares(string customerNo)
         {
-            var list = GetStockShare(customerNo);
+            var list = ShareTable.GetStockShare(customerNo);
             if (list == null || list.Count <= 0) return;
             Logger.Client.Info(MethodBase.GetCurrentMethod(), LogDomain.Core, "Start compute stockshare", string.Empty);
             var stockIds = new string[list.Count];
@@ -52,53 +40,14 @@ namespace X.Stock.Service.Utils
         }
 
         /// <summary>
-        /// 初始化用户
-        /// </summary>
-        public static void InitCustomerInfo(string customerNo, string customerName, double coinAsset)
-        {
-            var cus = GetCustomerInfo(customerNo);
-            if (cus == null)
-            {
-                MongoDbBase<CustomerInfo>.Default.InsertMongo(new CustomerInfo()
-                {
-                    CustomerName = customerName,
-                    CustomerNo = customerNo,
-                    CoinAsset = coinAsset,
-                    Id = customerNo
-                }, "Stock", "Customer", null);
-            }
-        }
-
-        /// <summary>
-        /// 更新用户余额
-        /// </summary>
-        public static void UpdateCustomerInfo(string customerNo, double coinAsset)
-        {
-            var query = Query.EQ("CustomerNo", customerNo);
-            var update = Update.Inc("CoinAsset", coinAsset);
-            MongoDbBase<CustomerInfo>.Default.UpdateMongo("Stock", "Customer", null, query, update);
-        }
-
-        /// <summary>
-        /// 获取用户信息
-        /// </summary>
-        /// <param name="customerNo"></param>
-        /// <returns></returns>
-        public static CustomerInfo GetCustomerInfo(string customerNo)
-        {
-            var query = Query.EQ("CustomerNo", customerNo);
-            return MongoDbBase<CustomerInfo>.Default.FindOne("Stock", "Customer", null, query);
-        }
-
-        /// <summary>
         /// 获取用户资产
         /// </summary>
         /// <param name="customerNo"></param>
         /// <returns></returns>
         public static AssetInfo GetAssetInfo(string customerNo)
         {
-            var customer = GetCustomerInfo(customerNo);
-            var shares = GetStockShare(customerNo);
+            var customer = CustomerTable.GetCustomerInfo(customerNo);
+            var shares = ShareTable.GetStockShare(customerNo);
             return new AssetInfo
             {
                 CustomerNo = customer.CustomerNo,

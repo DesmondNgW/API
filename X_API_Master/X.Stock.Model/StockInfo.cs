@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace X.Stock.Service.Model
+namespace X.Stock.Model
 {
     public class StockInfo
     {
