@@ -37,7 +37,7 @@ namespace X.Stock.Service.Utils
                     if (vol <= 0) continue;
                     var amount = vol * target.StockPrice;
                     Logger.Client.Info(MethodBase.GetCurrentMethod(), LogDomain.Core, "Buy stock " + target.StockCode, string.Empty);
-                    MongoDbBase<StockShare>.Default.SaveMongo(new StockShare
+                    MongoDbBase<StockShare>.Default.InsertMongo(new StockShare
                     {
                         Id = target.StockCode + "_" + DateTime.Now.ToString("yyyyMMdd"),
                         CustomerNo = info.CustomerNo,
