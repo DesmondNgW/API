@@ -59,14 +59,17 @@ namespace X.Stock.Service
             if (shares.Count <= 0) return;
             Logger.Client.Info(MethodBase.GetCurrentMethod(), LogDomain.Core, "Start Sell stock", string.Empty);
             var stocks = CustomerService.GetStockInfoFromShares(info);
-            foreach (var share in shares)
+            if (stocks != null)
             {
-                var share1 = share;
-                var stock = stocks.FirstOrDefault(p => p.StockCode == share1.StockCode && p.StockKm2 <= -3.3 && StockService.GetBenifit(share1.CostValue, p.StockPrice) > 0.05);
-                if (stock == null) continue;
-                lock (Slocker)
+                foreach (var share in shares)
                 {
-                    ShareTable.StockSell(stock, share1);
+                    var share1 = share;
+                    var stock = stocks.FirstOrDefault(p => p.StockCode == share1.StockCode && p.StockKm2 <= -3.3 && StockService.GetBenifit(share1.CostValue, p.StockPrice) > 0.05);
+                    if (stock == null) continue;
+                    lock (Slocker)
+                    {
+                        ShareTable.StockSell(stock, share1);
+                    }
                 }
             }
             Logger.Client.Info(MethodBase.GetCurrentMethod(), LogDomain.Core, "End Sell stock", string.Empty);
@@ -100,7 +103,7 @@ namespace X.Stock.Service
             var result = HttpRuntime.Cache.Get("StockInfo_3000592") as StockInfo;
             if (result != null) return result.Now.Date == DateTime.Now.Date;
             result = StockService.GetStockInfo("3000592");
-            HttpRuntime.Cache.Insert("StockInfo_3000592", result, null, DateTime.Now.AddMinutes(30), Cache.NoSlidingExpiration, CacheItemPriority.Normal, null);
+            if (result != null) HttpRuntime.Cache.Insert("StockInfo_3000592", result, null, DateTime.Now.AddMinutes(30), Cache.NoSlidingExpiration, CacheItemPriority.Normal, null);
             return result != null && result.Now.Date == DateTime.Now.Date;
         }
     }

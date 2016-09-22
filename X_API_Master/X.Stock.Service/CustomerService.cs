@@ -27,14 +27,17 @@ namespace X.Stock.Service
                 stockIds[i] = StockService.GetStockId(list[i].StockCode);
             }
             var stocks = StockService.GetStockInfo(stockIds);
-            foreach (var item in list)
+            if (stocks != null)
             {
-                if (item.UpdateTime.Hour < 15) continue;
-                if (item.UpdateTime.Date == DateTime.Now.Date && item.UpdateTime.Hour >= 17) continue;
-                var stock = stocks.First(p => p.StockCode == item.StockCode);
-                item.CurrentStockPrice = stock.StockPrice;
-                item.UpdateTime = DateTime.Now;
-                MongoDbBase<StockShare>.Default.SaveMongo(item, "Stock", "Share", null);
+                foreach (var item in list)
+                {
+                    if (item.UpdateTime.Hour < 15) continue;
+                    if (item.UpdateTime.Date == DateTime.Now.Date && item.UpdateTime.Hour >= 17) continue;
+                    var stock = stocks.First(p => p.StockCode == item.StockCode);
+                    item.CurrentStockPrice = stock.StockPrice;
+                    item.UpdateTime = DateTime.Now;
+                    MongoDbBase<StockShare>.Default.SaveMongo(item, "Stock", "Share", null);
+                }
             }
             Logger.Client.Info(MethodBase.GetCurrentMethod(), LogDomain.Core, "End compute stockshare", string.Empty);
         }

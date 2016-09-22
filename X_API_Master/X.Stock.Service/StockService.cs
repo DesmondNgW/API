@@ -34,16 +34,15 @@ namespace X.Stock.Service
         {
             var result = new StockInfo();
             const string uri = "http://nuff.eastmoney.com/EM_Finance2015TradeInterface/JS.ashx?id={0}&token=beb0a0047196124721f56b0f0ff5a27c";
-            var iresult = HttpRequestBase.GetHttpInfo(string.Format(uri, stockId), "utf-8", "application/json", null,
-                string.Empty);
+            var iresult = HttpRequestBase.GetHttpInfo(string.Format(uri, stockId), "utf-8", "application/json", null, string.Empty);
             var reg = new Regex("\\\"(.+?)\\\"");
-            var groups = reg.Matches(iresult.Content);
+            var groups = reg.Matches(iresult.Content ?? "");
             double stockPrice, stockKm1, stockKm2;
             DateTime dt;
             if (groups.Count < 52 || !double.TryParse(groups[27].Groups[1].Value, out stockPrice) ||
                 !double.TryParse(groups[29].Groups[1].Value, out stockKm1) ||
                 !double.TryParse(groups[31].Groups[1].Value, out stockKm2) ||
-                !DateTime.TryParse(groups[51].Groups[1].Value, out dt)) return result;
+                !DateTime.TryParse(groups[51].Groups[1].Value, out dt)) return null;
             result.StockCode = groups[3].Groups[1].Value;
             result.StockName = groups[4].Groups[1].Value;
             result.StockPrice = stockPrice;
@@ -63,11 +62,10 @@ namespace X.Stock.Service
             var result = new List<StockInfo>();
             if (stockIds == null) return result;
             const string uri = "http://nufm.dfcfw.com/EM_Finance2014NumericApplication/JS.aspx?ps=500&token=580f8e855db9d9de7cb332b3990b61a3&type=CT&cmd={0}&sty=CTALL";
-            var iresult = HttpRequestBase.GetHttpInfo(string.Format(uri, string.Join(",", stockIds)), "utf-8", "application/json", null,
-                string.Empty);
+            var iresult = HttpRequestBase.GetHttpInfo(string.Format(uri, string.Join(",", stockIds)), "utf-8", "application/json", null, string.Empty);
             var reg = new Regex("\\\"(.+?)\\\"");
-            var groups = reg.Matches(iresult.Content);
-            if (groups.Count <= 0) return result;
+            var groups = reg.Matches(iresult.Content ?? "");
+            if (groups.Count <= 0) return null;
             double stockPrice = 0, stockKm1 = 0, stockKm2 = 0;
             result.AddRange(from Match @group in groups
                 select @group.Groups[1].ToString().Split(',')
