@@ -34,11 +34,11 @@ namespace X.UI.Consoles
             do
             {
                 Console.WriteLine("CouchBase测试:");
-                Console.WriteLine(ThirdPartyTest.CouchBaseTest());
+                Console.WriteLine(ThirdPartyTest.CouchBaseTest("test", "CouchBaseWriteTest"));
                 Console.WriteLine("MongoDB测试:");
                 ThirdPartyTest.MongoTest();
                 Console.WriteLine("Redis测试:");
-                Console.WriteLine(ThirdPartyTest.RedisTest());
+                Console.WriteLine(ThirdPartyTest.RedisTest("test", "RedisWriteTest"));
             }
             while (!string.IsNullOrEmpty(Console.ReadLine()));
         }

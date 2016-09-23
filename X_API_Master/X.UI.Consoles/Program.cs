@@ -56,7 +56,8 @@ namespace X.UI.Consoles
         {
             CustomerTable.InitCustomerInfo(Work.CustomerNo, Work.CustomerName, Work.CoinAsset);
             Work.CreateThreads();
-            //Console.WriteLine(ThirdPartyTest.CouchBaseTest());
+
+            //ThirdPartyTest.HighFrequencyTest(100, ThirdPartyTest.CouchBaseTest);
             Console.ReadKey();
         }
 
