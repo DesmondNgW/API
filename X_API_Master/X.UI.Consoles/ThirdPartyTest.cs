@@ -13,10 +13,38 @@ namespace X.UI.Consoles
             return CouchCache.Default.Get<string>("test");
         }
 
+        public static int CouchBaseTestSuccessCount(uint total)
+        {
+            var r = 0;
+            for (var i = 0; i < total; i++)
+            {
+                var d = CouchBaseTest();
+                if (d == "CouchBaseTest")
+                {
+                    r++;
+                }
+            }
+            return r;
+        }
+
         public static string RedisTest()
         {
             RedisCache.Default.Set("test", "RedisTest", DateTime.Now.AddMinutes(1));
             return RedisCache.Default.Get<string>("test");
+        }
+
+        public static int RedisTestSuccessCount(uint total)
+        {
+            var r = 0;
+            for (var i = 0; i < total; i++)
+            {
+                var d = RedisTest();
+                if (d == "RedisTest")
+                {
+                    r++;
+                }
+            }
+            return r;
         }
 
         public static void MongoTest()
