@@ -43,6 +43,12 @@ namespace X.Util.Other
             return iresult.Success && !string.IsNullOrEmpty(iresult.Content) ? iresult.Content.FromJson<T>() : default(T);
         }
 
+        public static string GetContent(string uri, Dictionary<string, string> arguments, string contentType, Dictionary<string, string> extendHeaders)
+        {
+            var iresult = HttpRequestBase.GetHttpInfo(GetUri(uri, arguments), "utf-8", contentType, extendHeaders, string.Empty);
+            return iresult.Success && !string.IsNullOrEmpty(iresult.Content) ? iresult.Content : string.Empty;
+        }
+
         /// <summary>
         /// Post data
         /// </summary>
@@ -55,6 +61,12 @@ namespace X.Util.Other
         {
             var iresult = HttpRequestBase.PostHttpInfo(uri, "utf-8", postdata.ToJson(), "application/json", extendHeaders, string.Empty);
             return iresult.Success && !string.IsNullOrEmpty(iresult.Content) ? iresult.Content.FromJson<T>() : default(T);
+        }
+
+        public static string PostContent(string uri, object postdata, Dictionary<string, string> arguments, string contentType, Dictionary<string, string> extendHeaders)
+        {
+            var iresult = HttpRequestBase.PostHttpInfo(uri, "utf-8", postdata.ToJson(), contentType, extendHeaders, string.Empty);
+            return iresult.Success && !string.IsNullOrEmpty(iresult.Content) ? iresult.Content : string.Empty;
         }
 
         /// <summary>
