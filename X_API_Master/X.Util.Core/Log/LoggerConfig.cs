@@ -35,12 +35,12 @@ namespace X.Util.Core.Log
             Filters["DEBUG"] = DebugFilter;
         }
 
-        public ILog GetLogger(LogDomain domain)
+        public ILog GetLogger(LogDomain domain, string name = "default")
         {
             var repository = domain.ToString();
             try
             {
-                return LogManager.GetLogger(repository, "default");
+                return LogManager.GetLogger(repository, name);
             }
             catch
             {
@@ -48,7 +48,7 @@ namespace X.Util.Core.Log
                 {
                     try
                     {
-                        return LogManager.GetLogger(repository, "default");
+                        return LogManager.GetLogger(repository, name);
                     }
                     catch
                     {
@@ -77,7 +77,7 @@ namespace X.Util.Core.Log
                                 fileAppender.ActivateOptions();
                                 BasicConfigurator.Configure(loggerRepository, fileAppender);
                             }
-                            return LogManager.GetLogger(repository, "default");
+                            return LogManager.GetLogger(repository, name);
                         }
                         catch
                         {
