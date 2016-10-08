@@ -53,7 +53,8 @@ namespace X.Util.Other
 
         public static string ReadFile(string filePath, string encode)
         {
-            var sr = new StreamReader(filePath, Encoding.GetEncoding(encode));
+            var ed = encode.Contains("utf8") || encode.Contains("utf-8") ? Encoding.UTF8 : encode.Contains("unicode") ? Encoding.Unicode : Encoding.GetEncoding(encode);
+            var sr = new StreamReader(filePath, ed);
             var content = sr.ReadToEnd();
             sr.Close();
             return content;
@@ -64,13 +65,29 @@ namespace X.Util.Other
             return ReadFile(filePath, encode).FromJson<T>();
         }
 
-        public static bool Delete(string filePath)
+        public static bool DeleteDirectory(string filePath)
         {
             var state = false;
             try
             {
                 var dir = new DirectoryInfo(filePath);
                 if (dir.Exists) dir.Delete(true);
+                state = true;
+            }
+            catch (Exception ex)
+            {
+                Logger.Client.Error(MethodBase.GetCurrentMethod(), LogDomain.Util, null, string.Empty, "Directory error:" + ex);
+            }
+            return state;
+        }
+
+        public static bool DeleteFile(string filePath)
+        {
+            var state = false;
+            try
+            {
+                var dir = new FileInfo(filePath);
+                if (dir.Exists) dir.Delete();
                 state = true;
             }
             catch (Exception ex)

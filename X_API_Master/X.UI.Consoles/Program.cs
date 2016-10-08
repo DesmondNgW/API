@@ -2,8 +2,9 @@
 using System.Collections.Concurrent;
 using System.Linq;
 using System.Threading;
-using X.Stock.DB;
-using X.Stock.Service;
+//using X.Stock.DB;
+//using X.Stock.Service;
+//using X.Util.Core;
 
 namespace X.UI.Consoles
 {
@@ -54,10 +55,17 @@ namespace X.UI.Consoles
     {
         static void Main()
         {
-            CustomerTable.InitCustomerInfo(Work.CustomerNo, Work.CustomerName, Work.CoinAsset);
-            Work.CreateThreads();
+            //CustomerTable.InitCustomerInfo(Work.CustomerNo, Work.CustomerName, Work.CoinAsset);
+            //Work.CreateThreads();
 
-            //ThirdPartyTest.HighFrequencyTest(100, ThirdPartyTest.CouchBaseTest);
+            //for (var i = 0; i < 10; i++)
+            //{
+            //    var th = new Thread(() => { ThirdPartyTest.HighFrequencyTest(100, ThirdPartyTest.CouchBaseTest); })
+            //    {
+            //        IsBackground = true
+            //    };
+            //    th.Start();
+            //}
             Console.ReadKey();
         }
 
