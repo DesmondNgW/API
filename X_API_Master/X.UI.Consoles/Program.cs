@@ -66,6 +66,9 @@ namespace X.UI.Consoles
             //    };
             //    th.Start();
             //}
+
+            Area.AreaTest();
+
             Console.ReadKey();
         }
 
