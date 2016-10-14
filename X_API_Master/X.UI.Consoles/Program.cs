@@ -67,7 +67,7 @@ namespace X.UI.Consoles
             //    th.Start();
             //}
 
-            Area.AreaTest();
+            //StatisticsHelper.StrategyTest();
 
             Console.ReadKey();
         }
