@@ -583,16 +583,14 @@ namespace X.Util.Other
         private const int LastChCode = -2050;
         // GB2312-80 标准规范中最后一个一级汉字的机内码.即"座"的机内码
         private const int LastOfOneLevelChCode = -10247;
-        // 配置中文字符
-        //static Regex regex = new Regex("[\u4e00-\u9fa5]$");
         #endregion
         #endregion
 
         /// <summary>
         /// 取拼音第一个字段
-        /// </summary>        
-        /// <param name="ch"></param>        
-        /// <returns></returns>        
+        /// </summary>
+        /// <param name="ch"></param>
+        /// <returns></returns>
         public static string GetFirst(char ch)
         {
             var rs = Get(ch);
@@ -624,49 +622,46 @@ namespace X.Util.Other
         /// <returns></returns>
         public static string Get(char ch)
         {
-            // 拉丁字符            
+            // 拉丁字符
             if (ch <= '\x00FF') return ch.ToString();
 
-            // 标点符号、分隔符            
+            // 标点符号、分隔符
             if (char.IsPunctuation(ch) || char.IsSeparator(ch)) return ch.ToString();
-            // 非中文字符            
-            if (ch < '\x4E00' || ch > '\x9FA5') return ch.ToString();
-            var arr = Encoding.GetEncoding("gb2312").GetBytes(ch.ToString());
-            //Encoding.Default默认在中文环境里虽是GB2312，但在多变的环境可能是其它
-            //var arr = Encoding.Default.GetBytes(ch.ToString()); 
-            var chr = arr[0] * 256 + arr[1] - 65536;
-            //***// 单字符--英文或半角字符  
-            if (chr > 0 && chr < 160) return ch.ToString();
-            #region 中文字符处理
 
+            // 非中文字符
+            if (ch < '\x4E00' || ch > '\x9FA5') return ch.ToString();
+
+            var arr = Encoding.GetEncoding("gb2312").GetBytes(ch.ToString()); 
+            var chr = arr[0] * 256 + arr[1] - 65536;
+
+            // 单字符--英文或半角字符  
+            if (chr > 0 && chr < 160) return ch.ToString();
+
+            #region 中文字符处理
             // 判断是否超过GB2312-80标准中的汉字范围
-            if (chr > LastChCode || chr < FirstChCode)
-            {
-                return ch.ToString();
-            }
+            if (chr > LastChCode || chr < FirstChCode) return ch.ToString();
+
             // 如果是在一级汉字中
-            else if (chr <= LastOfOneLevelChCode)
+            if (chr <= LastOfOneLevelChCode)
             {
                 // 将一级汉字分为12块,每块33个汉字.
                 for (var aPos = 11; aPos >= 0; aPos--)
                 {
                     var aboutPos = aPos * 33;
                     // 从最后的块开始扫描,如果机内码大于块的第一个机内码,说明在此块中
-                    if (chr >= PyValue[aboutPos])
+                    if (chr < PyValue[aboutPos]) continue;
+                    // Console.WriteLine("存在于第 " + aPos.ToString() + " 块,此块的第一个机内码是: " + pyValue[aPos * 33].ToString());
+                    // 遍历块中的每个音节机内码,从最后的音节机内码开始扫描,
+                    // 如果音节内码小于机内码,则取此音节
+                    for (var i = aboutPos + 32; i >= aboutPos; i--)
                     {
-                        // Console.WriteLine("存在于第 " + aPos.ToString() + " 块,此块的第一个机内码是: " + pyValue[aPos * 33].ToString());
-                        // 遍历块中的每个音节机内码,从最后的音节机内码开始扫描,
-                        // 如果音节内码小于机内码,则取此音节
-                        for (var i = aboutPos + 32; i >= aboutPos; i--)
+                        if (PyValue[i] <= chr)
                         {
-                            if (PyValue[i] <= chr)
-                            {
-                                // Console.WriteLine("找到第一个小于要查找机内码的机内码: " + pyValue[i].ToString());
-                                return PyName[i];
-                            }
+                            // Console.WriteLine("找到第一个小于要查找机内码的机内码: " + pyValue[i].ToString());
+                            return PyName[i];
                         }
-                        break;
                     }
+                    break;
                 }
             }
             // 如果是在二级汉字中
@@ -678,6 +673,7 @@ namespace X.Util.Other
                     return OtherPinYin[pos];
                 }
             }
+
             #endregion 中文字符处理
 
             //if (chr < -20319 || chr > -10247) { // 不知道的字符  
@@ -685,7 +681,7 @@ namespace X.Util.Other
 
             //for (var i = pyValue.Length - 1; i >= 0; i--)
             //{                
-            //    if (pyValue[i] <= chr) return pyName[i];//这只能对应数组已经定义的           
+            //    if (pyValue[i] <= chr) return pyName[i];//这只能对应数组已经定义的
             //}             
 
             return string.Empty;
