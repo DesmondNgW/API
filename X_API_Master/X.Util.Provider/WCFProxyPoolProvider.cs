@@ -26,6 +26,7 @@ namespace X.Util.Provider
                 EndpointAddress = EndpointAddress,
                 CreateChannel = CoreChannelFactory.CreateChannel,
                 InitChannel = InitChannel,
+                CloseChannel = CloseChannel,
                 ChannelLifeCycle = new TimeSpan(0, 3, 0),
                 ChannelIsVail = Core<TChannel>.IsValid4CommunicationObject
             });
@@ -54,6 +55,12 @@ namespace X.Util.Provider
                 Core<TChannel>.Dispose(obj, EDomain);
                 releaseClient(obj);
             });
+        }
+
+        private bool CloseChannel(TChannel channel)
+        {
+            Core<TChannel>.Dispose(channel, EDomain);
+            return true;
         }
 
         /// <summary>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Concurrent;
+using System.Linq;
 using System.Reflection;
 using System.Threading;
 using X.Util.Core.Kernel;
@@ -20,9 +21,26 @@ namespace X.Util.Provider
             if (request.PoolSize <= 0) throw new Exception("PoolSize must big than 0.");
             if (string.IsNullOrEmpty(request.EndpointAddress)) throw new Exception("EndpointAddress is uri.");
             if (request.CreateChannel == null) throw new Exception("CreateChannel is method.");
+            if (request.CloseChannel == null) request.CloseChannel = channel => true;
             if (request.ChannelIsVail == null) request.ChannelIsVail = channel => true;
             Request = request;
             CacheKey = string.Format("{0}_{1}", Request.EndpointAddress, Request.PoolSize);
+            var th = new Thread(() =>
+            {
+                while (true)
+                {
+                    if (CoreFactoryPool.ContextQueue != null && CoreFactoryPool.ContextQueue.Count > 0)
+                    {
+                        foreach (var contextChannel in from contextChannel in CoreFactoryPool.ContextQueue where contextChannel != null let channelIsVail = contextChannel.ChannelClosedTime > DateTime.Now && Request.ChannelIsVail(contextChannel.Channel) where !channelIsVail select contextChannel)
+                        {
+                            Request.CloseChannel(contextChannel.Channel);
+                        }
+                    }
+                    Thread.Sleep(60000);
+                }
+                // ReSharper disable once FunctionNeverReturns
+            }) {IsBackground = true};
+            th.Start();
         }
 
         /// <summary>
