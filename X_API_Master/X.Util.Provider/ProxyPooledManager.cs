@@ -21,7 +21,7 @@ namespace X.Util.Provider
             if (request.PoolSize <= 0) throw new Exception("PoolSize must big than 0.");
             if (string.IsNullOrEmpty(request.EndpointAddress)) throw new Exception("EndpointAddress is uri.");
             if (request.CreateChannel == null) throw new Exception("CreateChannel is method.");
-            if (request.CloseChannel == null) request.CloseChannel = channel => true;
+            if (request.CloseChannel == null) request.CloseChannel = chnanel => { };
             if (request.ChannelIsVail == null) request.ChannelIsVail = channel => true;
             Request = request;
             CacheKey = string.Format("{0}_{1}", Request.EndpointAddress, Request.PoolSize);
@@ -93,7 +93,7 @@ namespace X.Util.Provider
                     }
                     CoreFactoryPool.EventWait.Reset();
                     CoreFactoryPool.EventWait.WaitOne();
-                    if (!((DateTime.Now - now).TotalSeconds > 60)) continue;
+                    if (!((DateTime.Now - now).TotalSeconds > 3)) continue;
                     if (CoreFactoryPool.ContextQueue.Count < 2 * Request.PoolSize) ReleaseClient(channel);
                     return channel;
                 }

@@ -57,10 +57,9 @@ namespace X.Util.Provider
             });
         }
 
-        private bool CloseChannel(TChannel channel)
+        private void CloseChannel(TChannel channel)
         {
             Core<TChannel>.Dispose(channel, EDomain);
-            return true;
         }
 
         /// <summary>

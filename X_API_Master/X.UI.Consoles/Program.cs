@@ -1,7 +1,12 @@
 ﻿using System;
 using System.Collections.Concurrent;
+using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Text;
 using System.Threading;
+using X.Util.Other;
+
 //using X.Stock.DB;
 //using X.Stock.Service;
 //using X.Util.Core;
@@ -55,6 +60,19 @@ namespace X.UI.Consoles
     {
         static void Main()
         {
+            var list1 = string.Empty;
+            var list2 = string.Empty;
+            var sr = new StreamReader("1.txt", Encoding.UTF8);
+            string s = null;
+            while ((s = sr.ReadLine()) != null)
+            {
+                var arr = s.Split('\t');
+                list1 += "\"" + arr[1] + "\",";
+                list2 += "\"" + arr[3] + "\",";
+            }
+            Console.WriteLine("s");
+
+
             //CustomerTable.InitCustomerInfo(Work.CustomerNo, Work.CustomerName, Work.CoinAsset);
             //Work.CreateThreads();
 

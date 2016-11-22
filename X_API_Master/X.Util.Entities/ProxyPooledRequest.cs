@@ -10,7 +10,7 @@ namespace X.Util.Entities
 
         public Func<TChannel> CreateChannel { get; set; }
 
-        public Func<TChannel, bool> CloseChannel { get; set; }
+        public Action<TChannel> CloseChannel { get; set; }
 
         public Action<TChannel, Action<TChannel>> InitChannel { get; set; }
 
