@@ -16,7 +16,7 @@
             <param name="size">秘钥长度</param>
             <returns>指定对象序列化</returns>
         </member>
-        <member name="M:X.UI.API.Controllers.KmsController.GetToken">
+        <member name="M:X.UI.API.Controllers.KmsController.GetToken(System.String)">
             <summary>
             获取token
             </summary>
