@@ -78,7 +78,7 @@ namespace X.Util.Provider
             MongoServer mongoServer = null;
             try
             {
-                mongoServer = string.IsNullOrEmpty(_credentialDataBase) ? Core<MongoClient>.Instance(GetMongoClient, serverName, null, ConfigurationHelper.EndpointFile + serverName).GetServer() : Core<MongoClient>.Instance(GetMongoClient, serverName, _credentialDataBase, ConfigurationHelper.EndpointFile + serverName + _credentialDataBase).GetServer();
+                mongoServer = string.IsNullOrEmpty(_credentialDataBase) ? Core<MongoClient>.Instance(GetMongoClient, serverName, null, Math.Max(ExecutionContext<RequestContext>.Current.Zone, 1) + serverName).GetServer() : Core<MongoClient>.Instance(GetMongoClient, serverName, _credentialDataBase, Math.Max(ExecutionContext<RequestContext>.Current.Zone, 1) + serverName + _credentialDataBase).GetServer();
             }
             catch (Exception ex)
             {

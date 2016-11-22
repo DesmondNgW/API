@@ -180,20 +180,8 @@
   <ItemGroup>
     <Content Include="App_Data\app.xml" />
     <Content Include="App_Data\CacheDependency.xml" />
-    <Content Include="App_Data\endpoint_1.xml">
-      <SubType>Designer</SubType>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="App_Data\endpoint_2.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="App_Data\endpoint_3.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="App_Data\endpoint_4.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="App_Data\Config.xml" />
+    <Content Include="App_Data\endpoint.xml" />
     <Content Include="App_Readme\index.html" />
     <Content Include="App_Readme\Elmah.txt" />
     <Content Include="favicon.ico" />

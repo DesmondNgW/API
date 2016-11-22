@@ -127,10 +127,8 @@
     <Content Include="App.config" />
     <Content Include="App_Data\app.xml" />
     <Content Include="App_Data\CacheDependency.xml" />
-    <Content Include="App_Data\Configs_1.xml" />
-    <Content Include="App_Data\Configs_2.xml" />
-    <Content Include="App_Data\Configs_3.xml" />
-    <Content Include="App_Data\Configs_4.xml" />
+    <Content Include="App_Data\Config.xml" />
+    <Content Include="App_Data\endpoint.xml" />
     <Content Include="App_Readme\Elmah.txt" />
   </ItemGroup>
   <ItemGroup>

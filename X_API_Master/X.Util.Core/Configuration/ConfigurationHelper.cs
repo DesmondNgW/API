@@ -30,7 +30,7 @@ namespace X.Util.Core.Configuration
         public const string CouchDefaultServername = "XCouch";
         public static string EndpointFile
         {
-            get { return Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "App_Data\\endpoint_" + Math.Max(ExecutionContext<RequestContext>.Current.Zone, 1) + ".xml"); }
+            get { return Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "App_Data\\endpoint.xml"); }
         }
         public static string ConfigFile
         {
@@ -128,11 +128,12 @@ namespace X.Util.Core.Configuration
         #region Get WCF EndpointAddress Configuration
         public static XmlServiceModel GetEndpointAddressesByName(string name)
         {
-            var key = CacheConfigurationPrefix + EndpointFile + name + "GetEndpointAddressesByName";
+            var zone = Math.Max(ExecutionContext<RequestContext>.Current.Zone, 1);
+            var key = CacheConfigurationPrefix + zone + name + "GetEndpointAddressesByName";
             var result = LocalCache.Get<XmlServiceModel>(key);
             if (result != null) return result;
             var doc = XmlHelper.GetXmlDocCache(EndpointFile);
-            var node = doc != null ? doc.SelectSingleNode("/configuration/client/endpoint[@name='" + name + "']") : null;
+            var node = doc != null ? doc.SelectSingleNode("/configuration/client/endpoint[@name='" + name + "' and @zone='" + zone + "']") : null;
             if (Equals(node, null) || node.ChildNodes.Count <= 0) return null;
             result = new XmlServiceModel
             {
@@ -202,10 +203,11 @@ namespace X.Util.Core.Configuration
         #region CouchBase,Redis And MongoDB Configuration
         public static CouchbaseClientConfiguration CouchbaseConfiguration(string serverName)
         {
+            var zone = Math.Max(ExecutionContext<RequestContext>.Current.Zone, 1);
             var couchbaseClientConfiguration = new CouchbaseClientConfiguration();
             var doc = XmlHelper.GetXmlDocCache(EndpointFile);
             if (Equals(doc, null)) return couchbaseClientConfiguration;
-            var node = doc.SelectSingleNode("/configuration/couchbase/server[@name='" + serverName + "']");
+            var node = doc.SelectSingleNode("/configuration/couchbase[@zone='" + zone + "']/server[@name='" + serverName + "']");
             if (Equals(node, null)) return couchbaseClientConfiguration;
             couchbaseClientConfiguration.Bucket = XmlHelper.GetXmlAttributeValue(node, "bucket", "default");
             couchbaseClientConfiguration.BucketPassword = XmlHelper.GetXmlAttributeValue(node, "password", string.Empty);
@@ -264,10 +266,11 @@ namespace X.Util.Core.Configuration
         /// </summary>
         public static MongoClientSettings MongoClientConfiguration(string serverName, string credentialDataBase = null)
         {
+            var zone = Math.Max(ExecutionContext<RequestContext>.Current.Zone, 1);
             var configuration = new MongoClientSettings();
             var doc = XmlHelper.GetXmlDocCache(EndpointFile);
             if (Equals(doc, null)) return configuration;
-            var node = doc.SelectSingleNode("/configuration/mongodb/server[@name='" + serverName + "']");
+            var node = doc.SelectSingleNode("/configuration/mongodb[@zone='" + zone + "']/server[@name='" + serverName + "']");
             if (Equals(node, null)) return configuration;
             var servers = new List<MongoServerAddress>();
             var userName = XmlHelper.GetXmlAttributeValue(node, "username", string.Empty);
@@ -323,8 +326,9 @@ namespace X.Util.Core.Configuration
         /// </summary>
         public static PooledRedisClientManager GetRedisClientManager(string serverName)
         {
+            var zone = Math.Max(ExecutionContext<RequestContext>.Current.Zone, 1);
             var doc = XmlHelper.GetXmlDocCache(EndpointFile);
-            var node = doc != null ? doc.SelectSingleNode("/configuration/redis/server[@name='" + serverName + "']") : null;
+            var node = doc != null ? doc.SelectSingleNode("/configuration/redis[@zone='" + zone + "']/server[@name='" + serverName + "']") : null;
             if (Equals(node, null)) return null;
             var config = new RedisClientManagerConfig();
             var readWriteHosts = new List<string>();

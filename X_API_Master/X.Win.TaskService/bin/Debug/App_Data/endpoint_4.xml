@@ -2,7 +2,7 @@
 <configuration>
   <!--自定义MongoDb配置节点-->
   <mongodb>
-    <server name="XMongo" username="" password="" db="admin" credential="MongoCr">
+    <server name="XMongo" username="" password="">
       <add uri="mongodb://127.0.0.1:27017" />
       <socketPool maxConnectionPoolSize="10" minConnectionPoolSize="1" waitQueueSize="10000" connectTimeout="00:00:30" maxConnectionLifeTime="00:30:00" />
     </server>
@@ -13,7 +13,7 @@
       <urls>
         <add uri="http://172.16.87.109:8091/pools/" />
       </urls>
-      <socketPool minPoolSize="1" maxPoolSize="10" connectionTimeout="00:00:02" deadTimeout="00:00:10" />
+      <socketPool minPoolSize="20" maxPoolSize="1000" connectionTimeout="00:00:02" deadTimeout="00:00:10" />
     </server>
   </couchbase>
   <!--自定义Redis配置节点-->

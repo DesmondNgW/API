@@ -1,4 +1,5 @@
-﻿using Couchbase;
+﻿using System;
+using Couchbase;
 using X.Util.Core.Configuration;
 using X.Util.Core.Kernel;
 using X.Util.Entities;
@@ -44,7 +45,7 @@ namespace X.Util.Provider
         {
             get
             {
-                return Core<CouchbaseClient>.Instance(Init, ServerName, ConfigurationHelper.EndpointFile + ServerName);
+                return Core<CouchbaseClient>.Instance(Init, ServerName, Math.Max(ExecutionContext<RequestContext>.Current.Zone, 1) + ServerName);
             }
         }
         #endregion
