@@ -24,7 +24,7 @@ namespace X.Util.Provider
         /// </summary>
         private static PooledRedisClientManager PooledClientManager(string serverName)
         {
-            return Core<PooledRedisClientManager>.Instance(ConfigurationHelper.GetRedisClientManager, serverName, Math.Max(ExecutionContext<RequestContext>.Current.Zone, 1) + serverName);
+            return Core<PooledRedisClientManager>.Instance(ConfigurationHelper.GetRedisClientManager, serverName, Math.Max(ExecutionContext<RequestContext>.Current.Zone, 1) + serverName + ConfigurationHelper.EndpointFileModified);
         }
         #endregion
 

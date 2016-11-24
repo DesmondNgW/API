@@ -45,7 +45,7 @@ namespace X.Util.Provider
         {
             get
             {
-                return Core<CouchbaseClient>.Instance(Init, ServerName, Math.Max(ExecutionContext<RequestContext>.Current.Zone, 1) + ServerName);
+                return Core<CouchbaseClient>.Instance(Init, ServerName, Math.Max(ExecutionContext<RequestContext>.Current.Zone, 1) + ServerName + ConfigurationHelper.EndpointFileModified);
             }
         }
         #endregion

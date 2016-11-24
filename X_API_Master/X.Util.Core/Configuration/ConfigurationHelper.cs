@@ -37,6 +37,16 @@ namespace X.Util.Core.Configuration
             get { return Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "App_Data\\Config.xml"); }
         }
 
+        public static string EndpointFileModified
+        {
+            get { return new FileInfo(EndpointFile).LastWriteTime.Ticks.ToString(); }
+        }
+
+        public static string ConfigFileModified
+        {
+            get { return new FileInfo(EndpointFile).LastWriteTime.Ticks.ToString(); }
+        }
+
         #region GetAppSetting From web.config
         public static string GetAppSetting(string name)
         {
