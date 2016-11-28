@@ -383,6 +383,21 @@ namespace X.Util.Extend.Core
             Cache.CacheData.LogCacheLevel(cacheKey.FullCacheKeyName, new Dictionary<int, string> { { 0, "RuntimeCache" }, { 1, "XmlFile" } }, method, LogDomain.Cache);
             return result;
         }
+        /// <summary>
+        /// 临时数据（用于数据库未更新前）
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="delay"></param>
+        /// <param name="loader"></param>
+        /// <param name="method"></param>
+        /// <param name="paramsList"></param>
+        /// <param name="cacheType"></param>
+        /// <param name="cacheAppVersion"></param>
+        public void SetTmpCacheData<T>(TimeSpan delay, Func<CacheResult<T>> loader, MethodBase method, ICollection<object> paramsList, EnumCacheType cacheType, string cacheAppVersion)
+        {
+            var cacheKey = GetCacheKey(method, paramsList, cacheAppVersion, false);
+            CacheData.SetTmpCacheData(cacheKey.FullCacheKeyName, cacheAppVersion, delay, loader, cacheType);
+        }
         #endregion
     }
 }

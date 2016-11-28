@@ -185,10 +185,11 @@ namespace X.Util.Extend.Cache
         #endregion
 
         #region Tmp CacheData
-        public void SetTmpCacheData<T>(string key, TimeSpan delay, Func<CacheResult<T>> loader, EnumCacheType cacheType)
+        public void SetTmpCacheData<T>(string key, string version, TimeSpan delay, Func<CacheResult<T>> loader, EnumCacheType cacheType)
         {
             var setting = loader();
             if (Equals(setting, null)) return;
+            setting.AppVersion = version;
             setting.CacheTime = DateTime.Now;
             setting.Succeed = setting.Result != null && setting.Succeed;
             switch (cacheType)
