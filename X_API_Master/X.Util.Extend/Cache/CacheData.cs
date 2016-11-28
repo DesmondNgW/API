@@ -183,5 +183,37 @@ namespace X.Util.Extend.Cache
             return setting;
         }
         #endregion
+
+        #region Tmp CacheData
+        public void SetTmpCacheData<T>(string key, TimeSpan delay, Func<CacheResult<T>> loader, EnumCacheType cacheType)
+        {
+            var setting = loader();
+            if (Equals(setting, null)) return;
+            setting.CacheTime = DateTime.Now;
+            setting.Succeed = setting.Result != null && setting.Succeed;
+            switch (cacheType)
+            {
+                case EnumCacheType.Runtime:
+                    RuntimeCache.Set(key, setting, DateTime.Now.Add(delay), new CacheDependency(Path));
+                    break;
+                case EnumCacheType.MemCache:
+                    _couch.Set(key, setting, DateTime.Now.Add(delay));
+                    break;
+                case EnumCacheType.Redis:
+                    _redis.Set(key, setting, DateTime.Now.Add(delay));
+                    break;
+                case EnumCacheType.MemBoth:
+                    RuntimeCache.Set(key, setting, DateTime.Now.Add(delay), new CacheDependency(Path));
+                    _couch.Set(key, setting, DateTime.Now.Add(delay));
+                    break;
+                case EnumCacheType.RedisBoth:
+                    RuntimeCache.Set(key, setting, DateTime.Now.Add(delay), new CacheDependency(Path));
+                    _redis.Set(key, setting, DateTime.Now.Add(delay));
+                    break;
+                case EnumCacheType.None:
+                    break;
+            }
+        }
+        #endregion
     }
 }
