@@ -57,6 +57,6 @@ namespace X.Util.Entities.Interface
         /// <param name="delay"></param>
         /// <param name="loader"></param>
         /// <param name="cacheType"></param>
-        void SetTmpCacheData<T>(string key, string version, TimeSpan delay, Func<CacheResult<T>> loader, EnumCacheType cacheType);
+        void SetTmpCacheData<T>(string key, string version, TimeSpan delay, Func<CacheResult<T>, CacheResult<T>> loader, EnumCacheType cacheType);
     }
 }

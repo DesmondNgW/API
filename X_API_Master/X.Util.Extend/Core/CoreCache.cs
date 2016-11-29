@@ -393,7 +393,7 @@ namespace X.Util.Extend.Core
         /// <param name="paramsList"></param>
         /// <param name="cacheType"></param>
         /// <param name="cacheAppVersion"></param>
-        public void SetTmpCacheData<T>(TimeSpan delay, Func<CacheResult<T>> loader, MethodBase method, ICollection<object> paramsList, EnumCacheType cacheType, string cacheAppVersion)
+        public void SetTmpCacheData<T>(TimeSpan delay, Func<CacheResult<T>, CacheResult<T>> loader, MethodBase method, ICollection<object> paramsList, EnumCacheType cacheType, string cacheAppVersion)
         {
             var cacheKey = GetCacheKey(method, paramsList, cacheAppVersion, false);
             CacheData.SetTmpCacheData(cacheKey.FullCacheKeyName, cacheAppVersion, delay, loader, cacheType);

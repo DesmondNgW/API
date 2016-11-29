@@ -185,31 +185,85 @@ namespace X.Util.Extend.Cache
         #endregion
 
         #region Tmp CacheData
-        public void SetTmpCacheData<T>(string key, string version, TimeSpan delay, Func<CacheResult<T>> loader, EnumCacheType cacheType)
+        private static CacheResult<T> GetTmpCacheData<T>(Func<CacheResult<T>, CacheResult<T>> loader, CacheResult<T> obj, string version)
         {
-            var setting = loader();
-            if (Equals(setting, null)) return;
+            var setting = loader(obj);
+            if (Equals(setting, null)) return obj;
             setting.AppVersion = version;
             setting.CacheTime = DateTime.Now;
             setting.Succeed = setting.Result != null && setting.Succeed;
+            return setting;
+        }
+
+        public void SetTmpCacheData<T>(string key, string version, TimeSpan delay, Func<CacheResult<T>, CacheResult<T>> loader, EnumCacheType cacheType)
+        {
+            CacheResult<T> obj;
+            CacheResult<T> setting;
             switch (cacheType)
             {
                 case EnumCacheType.Runtime:
-                    RuntimeCache.Set(key, setting, DateTime.Now.Add(delay), new CacheDependency(Path));
+                    obj = RuntimeCache.Get<CacheResult<T>>(key);
+                    setting = GetTmpCacheData(loader, obj, version);
+                    if (setting != null)
+                    {
+                        RuntimeCache.Set(key, setting, DateTime.Now.Add(delay), new CacheDependency(Path));
+                    }
+                    else
+                    {
+                        RuntimeCache.Remove(key);
+                    }
                     break;
                 case EnumCacheType.MemCache:
-                    _couch.Set(key, setting, DateTime.Now.Add(delay));
+                    obj = _couch.Get<CacheResult<T>>(key);
+                    setting = GetTmpCacheData(loader, obj, version);
+                    if (setting != null)
+                    {
+                        _couch.Set(key, setting, DateTime.Now.Add(delay));
+                    }
+                    else
+                    {
+                        _couch.Remove(key);
+                    }
                     break;
                 case EnumCacheType.Redis:
-                    _redis.Set(key, setting, DateTime.Now.Add(delay));
+                    obj = _redis.Get<CacheResult<T>>(key);
+                    setting = GetTmpCacheData(loader, obj, version);
+                    if (setting != null)
+                    {
+                        _redis.Set(key, setting, DateTime.Now.Add(delay));
+                    }
+                    else
+                    {
+                        _redis.Remove(key);
+                    }
                     break;
                 case EnumCacheType.MemBoth:
-                    RuntimeCache.Set(key, setting, DateTime.Now.Add(delay), new CacheDependency(Path));
-                    _couch.Set(key, setting, DateTime.Now.Add(delay));
+                    obj = RuntimeCache.Get<CacheResult<T>>(key) ?? _couch.Get<CacheResult<T>>(key);
+                    setting = GetTmpCacheData(loader, obj, version);
+                    if (setting != null)
+                    {
+                        RuntimeCache.Set(key, setting, DateTime.Now.Add(delay), new CacheDependency(Path));
+                        _couch.Set(key, setting, DateTime.Now.Add(delay));
+                    }
+                    else
+                    {
+                        RuntimeCache.Remove(key);
+                        _couch.Remove(key);
+                    }
                     break;
                 case EnumCacheType.RedisBoth:
-                    RuntimeCache.Set(key, setting, DateTime.Now.Add(delay), new CacheDependency(Path));
-                    _redis.Set(key, setting, DateTime.Now.Add(delay));
+                    obj = RuntimeCache.Get<CacheResult<T>>(key) ?? _redis.Get<CacheResult<T>>(key);
+                    setting = GetTmpCacheData(loader, obj, version);
+                    if (setting != null)
+                    {
+                        RuntimeCache.Set(key, setting, DateTime.Now.Add(delay), new CacheDependency(Path));
+                        _redis.Set(key, setting, DateTime.Now.Add(delay));
+                    }
+                    else
+                    {
+                        RuntimeCache.Remove(key);
+                        _redis.Remove(key);
+                    }
                     break;
                 case EnumCacheType.None:
                     break;
