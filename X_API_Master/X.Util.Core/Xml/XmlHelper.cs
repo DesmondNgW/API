@@ -10,6 +10,7 @@ using X.Util.Core.Common;
 using X.Util.Core.Kernel;
 using X.Util.Core.Log;
 using X.Util.Entities;
+using X.Util.Entities.Enums;
 
 namespace X.Util.Core.Xml
 {

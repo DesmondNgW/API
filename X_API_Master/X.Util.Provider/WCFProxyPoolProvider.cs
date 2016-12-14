@@ -4,6 +4,7 @@ using System.ServiceModel.Channels;
 using X.Util.Core.Configuration;
 using X.Util.Core.Kernel;
 using X.Util.Entities;
+using X.Util.Entities.Enums;
 using X.Util.Entities.Interface;
 
 namespace X.Util.Provider

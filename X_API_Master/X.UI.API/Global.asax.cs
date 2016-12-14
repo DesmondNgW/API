@@ -5,6 +5,7 @@ using System.Web.Optimization;
 using System.Web.Routing;
 using X.Util.Core.Log;
 using X.Util.Entities;
+using X.Util.Entities.Enums;
 
 namespace X.UI.API
 {

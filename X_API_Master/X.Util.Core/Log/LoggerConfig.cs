@@ -10,6 +10,7 @@ using log4net.Layout;
 using X.Util.Core.Configuration;
 using X.Util.Core.Kernel;
 using X.Util.Entities;
+using X.Util.Entities.Enums;
 
 namespace X.Util.Core.Log
 {

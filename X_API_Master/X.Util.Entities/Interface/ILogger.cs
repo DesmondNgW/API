@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Reflection;
+using X.Util.Entities.Enums;
 
 namespace X.Util.Entities.Interface
 {

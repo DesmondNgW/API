@@ -53,7 +53,10 @@
     <Compile Include="ActionResponse.cs" />
     <Compile Include="CacheKey.cs" />
     <Compile Include="CacheResult.cs" />
-    <Compile Include="EnumInfo.cs" />
+    <Compile Include="Enums\AuthorityEnum.cs" />
+    <Compile Include="Enums\CacheEnum.cs" />
+    <Compile Include="Enums\CommonEnum.cs" />
+    <Compile Include="Enums\LogEnum.cs" />
     <Compile Include="HttpRequestResult.cs" />
     <Compile Include="Interface\ICacheData.cs" />
     <Compile Include="Interface\IContext.cs" />

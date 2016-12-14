@@ -6,6 +6,7 @@ using System.Reflection;
 using System.Text;
 using X.Util.Core.Kernel;
 using X.Util.Entities;
+using X.Util.Entities.Enums;
 using X.Util.Entities.Interface;
 
 namespace X.Util.Core.Log

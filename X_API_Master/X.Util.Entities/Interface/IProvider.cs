@@ -1,4 +1,6 @@
-﻿namespace X.Util.Entities.Interface
+﻿using X.Util.Entities.Enums;
+
+namespace X.Util.Entities.Interface
 {
     public interface IProvider<out T>
     {

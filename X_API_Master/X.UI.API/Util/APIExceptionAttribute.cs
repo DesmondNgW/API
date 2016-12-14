@@ -5,6 +5,7 @@ using System.Web.Http.Filters;
 using X.Interface.Dto;
 using X.Util.Core.Log;
 using X.Util.Entities;
+using X.Util.Entities.Enums;
 
 namespace X.UI.API.Util
 {

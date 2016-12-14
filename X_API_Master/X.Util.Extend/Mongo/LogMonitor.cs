@@ -1,5 +1,6 @@
 ﻿using System;
 using X.Util.Entities;
+using X.Util.Entities.Enums;
 
 namespace X.Util.Extend.Mongo
 {

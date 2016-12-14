@@ -6,6 +6,7 @@ using System.Reflection;
 using System.Text;
 using X.Util.Core.Log;
 using X.Util.Entities;
+using X.Util.Entities.Enums;
 
 namespace X.DataBase.Helper
 {

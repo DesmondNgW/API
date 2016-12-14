@@ -1,4 +1,5 @@
 ﻿using System;
+using X.Util.Entities.Enums;
 
 namespace X.Util.Entities.Interface
 {

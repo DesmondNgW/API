@@ -18,6 +18,7 @@ using X.Util.Core.Common;
 using X.Util.Core.Kernel;
 using X.Util.Core.Xml;
 using X.Util.Entities;
+using X.Util.Entities.Enums;
 
 namespace X.Util.Core.Configuration
 {

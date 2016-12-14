@@ -4,6 +4,7 @@ using System.Reflection;
 using System.ServiceModel;
 using X.Util.Core.Log;
 using X.Util.Entities;
+using X.Util.Entities.Enums;
 
 namespace X.Util.Core.Kernel
 {

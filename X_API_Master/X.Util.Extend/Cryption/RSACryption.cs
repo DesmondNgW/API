@@ -8,6 +8,7 @@ using MongoDB.Driver.Builders;
 using X.Util.Core;
 using X.Util.Core.Log;
 using X.Util.Entities;
+using X.Util.Entities.Enums;
 using X.Util.Extend.Mongo;
 
 namespace X.Util.Extend.Cryption
