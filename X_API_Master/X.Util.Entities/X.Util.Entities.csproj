@@ -51,6 +51,7 @@
     <Compile Include="ActionContext.cs" />
     <Compile Include="ActionRequest.cs" />
     <Compile Include="ActionResponse.cs" />
+    <Compile Include="AuthorityRequest.cs" />
     <Compile Include="CacheKey.cs" />
     <Compile Include="CacheResult.cs" />
     <Compile Include="Enums\AuthorityEnum.cs" />
@@ -58,6 +59,7 @@
     <Compile Include="Enums\CommonEnum.cs" />
     <Compile Include="Enums\LogEnum.cs" />
     <Compile Include="HttpRequestResult.cs" />
+    <Compile Include="Interface\IAuthority.cs" />
     <Compile Include="Interface\ICacheData.cs" />
     <Compile Include="Interface\IContext.cs" />
     <Compile Include="Interface\ICoreCache.cs" />

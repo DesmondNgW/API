@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using X.Util.Entities.Enums;
+using X.Util.Entities;
 
 namespace X.Util.Other
 {
@@ -11,9 +9,6 @@ namespace X.Util.Other
     /// </summary>
     public class AuthorityHelper
     {
-        public static bool HasAuthority(AuthorityLevel level, AuthorityType type)
-        {
-            throw new NotImplementedException();
-        }
+        public const string SystemModuleId = "system";
     }
 }

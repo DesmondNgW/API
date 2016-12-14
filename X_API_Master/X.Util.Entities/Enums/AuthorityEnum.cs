@@ -1,27 +1,23 @@
 ﻿namespace X.Util.Entities.Enums
 {
-    /// <summary>
-    /// 权限级别，高级别权限包含低级别所有权限
-    /// </summary>
-    public enum AuthorityLevel
+    public enum OperateTargetCode
     {
-        BelowLow = 1,
-        Low = 2,
-        BelowNormal = 3,
-        Normal = 4,
-        Default = 4,
-        AboveNormal = 5,
-        High = 6,
-        AboveHigh = 7
+        Default = 0
     }
 
     /// <summary>
-    /// 权限类型，同级别权限根据权限类型区分
+    /// 操作代码
     /// </summary>
-    public enum AuthorityType
+    public enum OperateCode
     {
-        Query = 1,
-        Operate = 2,
-        Audit = 3,
+        None = 0,
+        Create = 1,
+        Update = 2,
+        Retrieve = 3,
+        Delete = 4,
+        ConfirmCreate = 101,
+        ConfirmUpdate = 102,
+        ConfirmRetrieve = 103,
+        ConfirmDelete = 104,
     }
 }
