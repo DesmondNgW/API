@@ -65,11 +65,13 @@
     <Compile Include="Interface\ICoreCache.cs" />
     <Compile Include="Interface\ICouchCache.cs" />
     <Compile Include="Interface\ILogger.cs" />
+    <Compile Include="Interface\IModule.cs" />
     <Compile Include="Interface\IMongoDbBase.cs" />
     <Compile Include="Interface\IProvider.cs" />
     <Compile Include="Interface\IProxyPooled.cs" />
     <Compile Include="Interface\IRedisCache.cs" />
     <Compile Include="LogOptions.cs" />
+    <Compile Include="Module.cs" />
     <Compile Include="ProxyPooledRequest.cs" />
     <Compile Include="QueueContext.cs" />
     <Compile Include="StatusCacheResult.cs" />

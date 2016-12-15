@@ -9,6 +9,6 @@ namespace X.Util.Other
     /// </summary>
     public class AuthorityHelper
     {
-        public const string SystemModuleId = "system";
+        
     }
 }
