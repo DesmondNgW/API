@@ -1,16 +1,10 @@
 ﻿namespace X.Util.Entities.Enums
 {
-    public enum OperateTargetCode
-    {
-        Default = 0
-    }
-
     /// <summary>
-    /// 操作代码
+    /// 模块操作代码
     /// </summary>
-    public enum OperateCode
+    public enum ModuleOperateCode
     {
-        None = 0,
         Create = 1,
         Update = 2,
         Retrieve = 3,
@@ -18,6 +12,15 @@
         ConfirmCreate = 101,
         ConfirmUpdate = 102,
         ConfirmRetrieve = 103,
-        ConfirmDelete = 104,
+        ConfirmDelete = 104
+    }
+
+    /// <summary>
+    /// 作用域操作代码
+    /// </summary>
+    public enum ScopeOperateCode
+    {
+        None = 0,
+        Access = 1
     }
 }

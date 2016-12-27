@@ -59,13 +59,11 @@
     <Compile Include="Enums\CommonEnum.cs" />
     <Compile Include="Enums\LogEnum.cs" />
     <Compile Include="HttpRequestResult.cs" />
-    <Compile Include="Interface\IAuthority.cs" />
     <Compile Include="Interface\ICacheData.cs" />
     <Compile Include="Interface\IContext.cs" />
     <Compile Include="Interface\ICoreCache.cs" />
     <Compile Include="Interface\ICouchCache.cs" />
     <Compile Include="Interface\ILogger.cs" />
-    <Compile Include="Interface\IModule.cs" />
     <Compile Include="Interface\IMongoDbBase.cs" />
     <Compile Include="Interface\IProvider.cs" />
     <Compile Include="Interface\IProxyPooled.cs" />

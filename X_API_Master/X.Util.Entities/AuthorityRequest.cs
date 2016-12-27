@@ -3,7 +3,8 @@
 namespace X.Util.Entities
 {
     /// <summary>
-    /// {UserId} {OperateCode} {TargetCode} at {ModuleId}
+    /// {UserId} {ModuleOperateCode} {Module}
+    /// {UserId} {ScopeOperateCode} {Scope}
     /// </summary>
     public class AuthorityRequest
     {
@@ -18,13 +19,8 @@ namespace X.Util.Entities
         public Module Module { get; set; }
 
         /// <summary>
-        /// 模块下操作对像
-        /// </summary>
-        public OperateTargetCode TargetCode { get; set; }
-
-        /// <summary>
         /// 操作代码
         /// </summary>
-        public OperateCode OperateCode { get; set; }
+        public ModuleOperateCode ModuleOperateCode { get; set; }
     }
 }

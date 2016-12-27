@@ -19,24 +19,45 @@ namespace X.Util.Entities
         public string NickName { get; set; }
 
         /// <summary>
-        /// Module NameSpace
+        /// 注册作用域
         /// </summary>
-        public string NameSpace { get; set; }
-
-        /// <summary>
-        /// Module NameSpaces
-        /// </summary>
-        public List<string> NameSpaces
-        {
-            get { return string.IsNullOrEmpty(NameSpace) ? new List<string>() : NameSpace.Split('/').ToList(); }
-        }
+        public Scope Scope { get; set; }
 
         /// <summary>
         /// Module FullName
         /// </summary>
         public string FullName
         {
-            get { return string.Format("{0}.{1}", NameSpace, Id); }
+            get { return string.Format("{0}.{1}", Scope.Path, Id); }
         }
+    }
+
+    /// <summary>
+    /// 定义作用域(命名空间方式以‘/’间隔)
+    /// </summary>
+    public class Scope
+    {
+        public Scope(string path)
+        {
+            if (path.StartsWith("/"))
+            {
+                Path = path;
+            }
+            else
+            {
+                Path = "/" + path;
+            }
+            NameSpaces = Path.Substring(1).Split('/').ToList();
+        }
+
+        /// <summary>
+        /// Scope Path
+        /// </summary>
+        public string Path { get; set; }
+
+        /// <summary>
+        /// Scope NameSpaces
+        /// </summary>
+        public List<string> NameSpaces { get; set; }
     }
 }
