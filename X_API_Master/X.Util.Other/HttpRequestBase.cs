@@ -62,7 +62,7 @@ namespace X.Util.Other
             }
             catch (Exception e)
             {
-                Logger.Client.Error(MethodBase.GetCurrentMethod(), LogDomain.Util, null, string.Empty, e.ToString());
+                Logger.Client.Error(Logger.Client.GetMethodInfo(MethodBase.GetCurrentMethod(), new object[] { uri, charset, data, method, contentType, extendHeaders, cookie }), e, LogDomain.Util);
             }
             return result;
         }
@@ -105,12 +105,12 @@ namespace X.Util.Other
                 var response = ex.Response as HttpWebResponse;
                 if (Equals(response, null) || (HttpStatusCode.NotModified.Equals(response.StatusCode) || response.StatusCode.GetHashCode() < 300)) return cache;
                 cache = new HttpCacheResult<T> { Result = default(T) };
-                Logger.Client.Error(MethodBase.GetCurrentMethod(), LogDomain.Util, null, string.Empty, "NetWork error:" + ex);
+                Logger.Client.Error(Logger.Client.GetMethodInfo(MethodBase.GetCurrentMethod(), new object[] { uri }), ex, LogDomain.Util);
             }
             catch (Exception ex)
             {
                 cache = new HttpCacheResult<T> { Result = default(T) };
-                Logger.Client.Error(MethodBase.GetCurrentMethod(), LogDomain.Util, null, string.Empty, "NetWork error:" + ex);
+                Logger.Client.Error(Logger.Client.GetMethodInfo(MethodBase.GetCurrentMethod(), new object[] { uri }), ex, LogDomain.Util);
             }
             return cache;
         }

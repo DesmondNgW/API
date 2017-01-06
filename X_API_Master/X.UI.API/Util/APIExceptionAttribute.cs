@@ -1,10 +1,10 @@
 ﻿using System.Net;
 using System.Net.Http;
 using System.Net.Http.Formatting;
+using System.Reflection;
 using System.Web.Http.Filters;
 using X.Interface.Dto;
 using X.Util.Core.Log;
-using X.Util.Entities;
 using X.Util.Entities.Enums;
 
 namespace X.UI.API.Util
@@ -27,8 +27,7 @@ namespace X.UI.API.Util
             }
             else
             {
-                string errorInfo = string.Format("请求URI: {0} 发生异常, 异常信息: {1}.", actionExecutedContext.Request.RequestUri, actionExecutedContext.Exception);
-                Logger.Client.Error(System.Reflection.MethodBase.GetCurrentMethod(), LogDomain.Ui, null, string.Empty, errorInfo);
+                Logger.Client.Error(Logger.Client.GetMethodInfo(MethodBase.GetCurrentMethod(), new object[] { }, actionExecutedContext.Request.RequestUri.ToString()), actionExecutedContext.Exception, LogDomain.Ui);
             }
             var newContent = new ApiResult<string>
             {

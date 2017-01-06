@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using X.Util.Entities;
+using X.Util.Entities.Enums;
 using X.Util.Entities.Interface;
 
 namespace X.Util.Core.Log
@@ -27,34 +29,40 @@ namespace X.Util.Core.Log
             var crm = context.Request.Method;
             var method = Logger.Client.GetMethodInfo(crm, context.Request.ActionArguments, Channel.EndpointAddress);
             context.ContextArguments["CoreMethodInfo"] = method;
-            if (Options.NeedLogInfo) Logger.Client.Info(method, Channel.Domain, null, string.Format("{0}.{1} BeginInvoke.", method.ClassName.FullName, method.MethodName));
-            if (!Options.NeedElapsed) return;
-            var stopElapsed = Logger.Client.GetStopElapsed(crm, Channel.Domain, Channel.EndpointAddress);
+            if (Options.NeedLogInfo) Logger.Client.Request(method, Channel.Domain);
+            var sw = new Stopwatch();
+            sw.Start();
+            Func<long> stopElapsed = () =>
+            {
+                sw.Stop();
+                return sw.ElapsedMilliseconds;
+            };
             context.ContextArguments["StopElapsed"] = stopElapsed;
         }
 
         public void Called(ActionContext<TResult> context)
         {
-            var stopElapsed = Options.NeedElapsed && context.ContextArguments != null ? context.ContextArguments["StopElapsed"] as Action : null;
-            var method = context.ContextArguments != null ? context.ContextArguments["CoreMethodInfo"] as CoreMethodInfo : null;
+            var stopElapsed = Options.NeedLogInfo && context.ContextArguments != null ? context.ContextArguments["StopElapsed"] as Func<long> : null;
+            var method = context.ContextArguments != null ? context.ContextArguments["CoreMethodInfo"] as RequestMethodInfo : null;
             var iresult = context.Response.Result;
-            if (stopElapsed != null) stopElapsed();
             if (method == null) return;
-            if (Options.CallSuccess != null)
+            var response = new ResponseResult
             {
-                if (Options.CallSuccess(iresult))
-                {
-                    if (Options.NeedLogInfo) Logger.Client.Info(method, Channel.Domain, iresult);
-                }
-                else Logger.Client.Error(method, Channel.Domain, iresult);
+                Elapsed = stopElapsed != null ? stopElapsed() : 0,
+                Return = iresult
+            };
+            if (Options.CallSuccess == null) return;
+            if (Options.CallSuccess(iresult))
+            {
+                if (Options.NeedLogInfo) Logger.Client.Response(method, response, Channel.Domain, LogType.Info);
             }
-            if (Options.NeedLogInfo) Logger.Client.Info(method, Channel.Domain, null, string.Format("{0}.{1} EndInvoke.", method.ClassName.FullName, method.MethodName));
+            else Logger.Client.Response(method, response, Channel.Domain, LogType.Error);
         }
 
         public void OnException(ActionContext<TResult> context)
         {
             var method = Logger.Client.GetMethodInfo(context.Request.Method, context.Request.ActionArguments, Channel.EndpointAddress);
-            Logger.Client.Error(method, Channel.Domain, null, context.Response.Exception.ToString());
+            Logger.Client.Error(method, context.Response.Exception, Channel.Domain);
         }
 
         public int Priority { get { return int.MaxValue; } }
@@ -87,25 +95,33 @@ namespace X.Util.Core.Log
             var crm = context.Request.Method;
             var method = Logger.Client.GetMethodInfo(crm, context.Request.ActionArguments, Channel.EndpointAddress);
             context.ContextArguments["CoreMethodInfo"] = method;
-            if (Options.NeedLogInfo) Logger.Client.Info(method, Channel.Domain, null, string.Format("{0}.{1} BeginInvoke.", method.ClassName.FullName, method.MethodName));
-            if (!Options.NeedElapsed) return;
-            var stopElapsed = Logger.Client.GetStopElapsed(crm, Channel.Domain, Channel.EndpointAddress);
+            if (Options.NeedLogInfo) Logger.Client.Request(method, Channel.Domain);
+            var sw = new Stopwatch();
+            sw.Start();
+            Func<long> stopElapsed = () =>
+            {
+                sw.Stop();
+                return sw.ElapsedMilliseconds;
+            };
             context.ContextArguments["StopElapsed"] = stopElapsed;
         }
 
         public void Called(ActionContext context)
         {
-            var stopElapsed = Options.NeedElapsed && context.ContextArguments != null ? context.ContextArguments["StopElapsed"] as Action : null;
-            var method = context.ContextArguments != null ? context.ContextArguments["CoreMethodInfo"] as CoreMethodInfo : null;
-            if (stopElapsed != null) stopElapsed();
+            var stopElapsed = Options.NeedLogInfo && context.ContextArguments != null ? context.ContextArguments["StopElapsed"] as Func<long> : null;
+            var method = context.ContextArguments != null ? context.ContextArguments["CoreMethodInfo"] as RequestMethodInfo : null;
             if (method == null) return;
-            if (Options.NeedLogInfo) Logger.Client.Info(method, Channel.Domain, null, string.Format("{0}.{1} EndInvoke.", method.ClassName.FullName, method.MethodName));
+            if (Options.NeedLogInfo)
+                Logger.Client.Response(method, new ResponseResult
+                {
+                    Elapsed = stopElapsed != null ? stopElapsed() : 0,
+                }, Channel.Domain, LogType.Info);
         }
 
         public void OnException(ActionContext context)
         {
             var method = Logger.Client.GetMethodInfo(context.Request.Method, context.Request.ActionArguments, Channel.EndpointAddress);
-            Logger.Client.Error(method, Channel.Domain, null, context.Response.Exception.ToString());
+            Logger.Client.Error(method,context.Response.Exception, Channel.Domain);
         }
 
         public int Priority { get { return int.MaxValue; } }

@@ -5,7 +5,6 @@ using System.Text;
 using MySql.Data.MySqlClient;
 using System.Reflection;
 using X.Util.Core.Log;
-using X.Util.Entities;
 using X.Util.Entities.Enums;
 
 namespace X.DataBase.Helper
@@ -133,7 +132,7 @@ namespace X.DataBase.Helper
             catch (Exception e)
             {
                 conn.Close();
-                Logger.Client.Error(MethodBase.GetCurrentMethod(), LogDomain.Db, null, string.Empty, e.ToString());
+                Logger.Client.Error(Logger.Client.GetMethodInfo(MethodBase.GetCurrentMethod(), new object[] { connectionString, cmdType, cmdText, cmdParms }), e, LogDomain.Db);
                 throw;
             }
         }

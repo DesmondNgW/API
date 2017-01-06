@@ -140,7 +140,7 @@ namespace X.Util.Extend.Cryption
                 if (rsaKey.TmpKey) RemoveRsaKey(rsaKey.Id);
                 return Encoding.UTF8.GetString(cipherbytes);
             }
-            Logger.Client.Error(MethodBase.GetCurrentMethod(), LogDomain.Util, null, string.Empty, "RSA Private Key Missing.");
+            Logger.Client.Error(Logger.Client.GetMethodInfo(MethodBase.GetCurrentMethod(), new object[] { key, content, nonce, size }), new Exception("RSA Private Key Missing."), LogDomain.Util);
             return string.Empty;
         }
 
@@ -164,7 +164,7 @@ namespace X.Util.Extend.Cryption
                 if (rsaKey.TmpKey) RemoveRsaKey(rsaKey.Id);
                 return Encoding.UTF8.GetString(cipherbytes);
             }
-            Logger.Client.Error(MethodBase.GetCurrentMethod(), LogDomain.Util, null, string.Empty, "RSA Private Key Missing.");
+            Logger.Client.Error(Logger.Client.GetMethodInfo(MethodBase.GetCurrentMethod(), new object[] { key, content, nonce, size }), new Exception("RSA Private Key Missing."), LogDomain.Util);
             return string.Empty;
         }
     }

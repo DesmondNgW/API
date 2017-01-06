@@ -9,14 +9,13 @@ using log4net.Filter;
 using log4net.Layout;
 using X.Util.Core.Configuration;
 using X.Util.Core.Kernel;
-using X.Util.Entities;
 using X.Util.Entities.Enums;
 
 namespace X.Util.Core.Log
 {
     public sealed class LoggerConfig
     {
-        private static readonly PatternLayout Layout = new PatternLayout(Environment.NewLine + "时间：%date 线程ID：[%thread] 级别：%-5level " + Environment.NewLine + "%logger property:[%property{NDC}] - %message%newline");
+        private static readonly PatternLayout Layout = new PatternLayout("时间：%date 线程ID：[%thread] 级别：%-5level %logger property:[%property{NDC}]" + Environment.NewLine + "%message%newline");
         private static readonly IDictionary<string, LevelRangeFilter> Filters = new Dictionary<string, LevelRangeFilter>();
         private static readonly LevelRangeFilter ErrorFilter = new LevelRangeFilter { LevelMax = Level.Error, LevelMin = Level.Error };
         private static readonly LevelRangeFilter InfoFilter = new LevelRangeFilter { LevelMax = Level.Info, LevelMin = Level.Info };

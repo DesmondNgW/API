@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Reflection;
 using X.Util.Entities.Enums;
 
@@ -11,83 +12,66 @@ namespace X.Util.Entities.Interface
         /// </summary>
         /// <param name="declaringType"></param>
         /// <param name="values"></param>
+        /// <returns></returns>
+        RequestMethodInfo GetMethodInfo(MethodBase declaringType, object[] values);
+
+        /// <summary>
+        /// MethodInfo
+        /// </summary>
+        /// <param name="declaringType"></param>
+        /// <param name="values"></param>
+        /// <param name="extendInfo"></param>
+        /// <returns></returns>
+        RequestMethodInfo GetMethodInfo(MethodBase declaringType, object[] values, Dictionary<string, object> extendInfo);
+
+        /// <summary>
+        /// MethodInfo
+        /// </summary>
+        /// <param name="declaringType"></param>
+        /// <param name="values"></param>
         /// <param name="address"></param>
         /// <returns></returns>
-        CoreMethodInfo GetMethodInfo(MethodBase declaringType, object[] values, string address);
+        RequestMethodInfo GetMethodInfo(MethodBase declaringType, object[] values, string address);
 
         /// <summary>
-        /// Log Info
-        /// </summary>
-        /// <param name="methodInfo"></param>
-        /// <param name="domain"></param>
-        /// <param name="returnValue"></param>
-        /// <param name="messages"></param>
-        void Info(CoreMethodInfo methodInfo, LogDomain domain, object returnValue, params string[] messages);
-
-        /// <summary>
-        /// Log Debug
-        /// </summary>
-        /// <param name="methodInfo"></param>
-        /// <param name="domain"></param>
-        /// <param name="returnValue"></param>
-        /// <param name="messages"></param>
-        void Debug(CoreMethodInfo methodInfo, LogDomain domain, object returnValue, params string[] messages);
-
-        /// <summary>
-        /// Log Error
-        /// </summary>
-        /// <param name="methodInfo"></param>
-        /// <param name="domain"></param>
-        /// <param name="returnValue"></param>
-        /// <param name="messages"></param>
-        void Error(CoreMethodInfo methodInfo, LogDomain domain, object returnValue, params string[] messages);
-
-        /// <summary>
-        /// Log Debug
+        /// MethodInfo
         /// </summary>
         /// <param name="declaringType"></param>
-        /// <param name="domain"></param>
-        /// <param name="returnValue"></param>
+        /// <param name="values"></param>
         /// <param name="address"></param>
-        /// <param name="messages"></param>
-        void Debug(MethodBase declaringType, LogDomain domain, object returnValue, string address, params string[] messages);
-
-        /// <summary>
-        /// Log Error
-        /// </summary>
-        /// <param name="declaringType"></param>
-        /// <param name="domain"></param>
-        /// <param name="returnValue"></param>
-        /// <param name="address"></param>
-        /// <param name="messages"></param>
-        void Error(MethodBase declaringType, LogDomain domain, object returnValue, string address, params string[] messages);
-
-        /// <summary>
-        /// Log Info
-        /// </summary>
-        /// <param name="declaringType"></param>
-        /// <param name="domain"></param>
-        /// <param name="returnValue"></param>
-        /// <param name="address"></param>
-        /// <param name="messages"></param>
-        void Info(MethodBase declaringType, LogDomain domain, object returnValue, string address, params string[] messages);
-
-        /// <summary>
-        /// 记录方法调用耗时
-        /// </summary>
-        /// <param name="method"></param>
-        /// <param name="elapsedMilliseconds"></param>
-        /// <param name="edomain"></param>
-        /// <param name="address"></param>
-        void Elapsed(MethodBase method, long elapsedMilliseconds, LogDomain edomain, string address = null);
-
-        /// <summary>
-        /// 获取记录耗时的action
-        /// </summary>
-        /// <param name="method"></param>
-        /// <param name="edomain"></param>
-        /// <param name="address"></param>
+        /// <param name="extendInfo"></param>
         /// <returns></returns>
-        Action GetStopElapsed(MethodBase method, LogDomain edomain, string address = null);
+        RequestMethodInfo GetMethodInfo(MethodBase declaringType, object[] values, string address, Dictionary<string, object> extendInfo);
+
+        /// <summary>
+        /// LogRequest
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="domain"></param>
+        void Request(RequestMethodInfo request, LogDomain domain);
+
+        /// <summary>
+        /// LogResponse
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="response"></param>
+        /// <param name="domain"></param>
+        /// <param name="logtype"></param>
+        void Response(RequestMethodInfo request, ResponseResult response, LogDomain domain, LogType logtype);
+
+        /// <summary>
+        /// LogError
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="exception"></param>
+        /// <param name="domain"></param>
+        void Error(RequestMethodInfo request, Exception exception, LogDomain domain);
+
+        /// <summary>
+        /// Debug
+        /// </summary>
+        /// <param name="message"></param>
+        /// <param name="domain"></param>
+        void Debug(string message, LogDomain domain);
     }
 }

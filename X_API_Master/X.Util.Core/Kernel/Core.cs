@@ -106,7 +106,7 @@ namespace X.Util.Core.Kernel
             }
             catch (Exception ex)
             {
-                Logger.Client.Error(MethodBase.GetCurrentMethod(), edomain, null, string.Empty, ex.ToString());
+                Logger.Client.Error(Logger.Client.GetMethodInfo(MethodBase.GetCurrentMethod(), new object[] { }), ex, edomain);
                 communicate.Abort();
             }
         }

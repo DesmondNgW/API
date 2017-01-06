@@ -1,11 +1,7 @@
 ﻿using System;
 using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading;
-using X.Util.Other;
 
 //using X.Stock.DB;
 //using X.Stock.Service;
@@ -60,10 +56,10 @@ namespace X.UI.Consoles
     {
         static void Main()
         {
-
-
-
-
+            //for (var i = 0; i < 10; i++)
+            //{
+            //    ThirdPartyTest.CouchBaseTest("test", "test");
+            //}
             //var list1 = string.Empty;
             //var list2 = string.Empty;
             //var sr = new StreamReader("1.txt", Encoding.UTF8);

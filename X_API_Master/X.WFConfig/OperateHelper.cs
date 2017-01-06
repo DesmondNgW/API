@@ -9,7 +9,6 @@ using System.Xml;
 using X.Util.Core.Common;
 using X.Util.Core.Log;
 using X.Util.Core.Xml;
-using X.Util.Entities;
 using X.Util.Entities.Enums;
 
 namespace X.WFConfig
@@ -40,7 +39,7 @@ namespace X.WFConfig
             }
             catch (Exception ex)
             {
-                Logger.Client.Error(MethodBase.GetCurrentMethod(), LogDomain.Util, null, string.Empty, "Directory error:" + ex);
+                Logger.Client.Error(Logger.Client.GetMethodInfo(MethodBase.GetCurrentMethod(), new object[] { path }), ex, LogDomain.Util);
             }
         }
 
@@ -61,7 +60,7 @@ namespace X.WFConfig
             }
             catch (Exception ex)
             {
-                Logger.Client.Error(MethodBase.GetCurrentMethod(), LogDomain.Util, null, string.Empty, "Directory error:" + ex);
+                Logger.Client.Error(Logger.Client.GetMethodInfo(MethodBase.GetCurrentMethod(), new object[] { src, dest, overWrite }), ex, LogDomain.Util);
             }
         }
 

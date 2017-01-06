@@ -41,7 +41,7 @@ namespace X.Util.Extend.Mongo
         public void CreateIndex(string database, string collection, string credentialDataBase, IMongoIndexKeys index)
         {
             var mc = new MongoDbProvider<T>(database, collection, credentialDataBase);
-            CoreAccess<MongoCollection<T>>.TryCallAsync(mc.Client.CreateIndex, index, mc, null, new LogOptions<WriteConcernResult>(CallSuccess, true, false));
+            CoreAccess<MongoCollection<T>>.TryCallAsync(mc.Client.CreateIndex, index, mc, null, new LogOptions<WriteConcernResult>(CallSuccess, true));
         }
 
         /// <summary>
@@ -55,7 +55,7 @@ namespace X.Util.Extend.Mongo
         public void DropIndex(string database, string collection, string credentialDataBase, IMongoIndexKeys index)
         {
             var mc = new MongoDbProvider<T>(database, collection, credentialDataBase);
-            CoreAccess<MongoCollection<T>>.TryCallAsync(mc.Client.DropIndex, index, mc, null, new LogOptions<CommandResult>(CallSuccess, true, false));
+            CoreAccess<MongoCollection<T>>.TryCallAsync(mc.Client.DropIndex, index, mc, null, new LogOptions<CommandResult>(CallSuccess, true));
         }
 
         /// <summary>
@@ -69,7 +69,7 @@ namespace X.Util.Extend.Mongo
         public bool IndexExists(string database, string collection, string credentialDataBase, IMongoIndexKeys index)
         {
             var mc = new MongoDbProvider<T>(database, collection, credentialDataBase);
-            return CoreAccess<MongoCollection<T>>.TryCall(mc.Client.IndexExists, index, mc, new LogOptions<bool>(CoreBase.CallSuccess, true, false));
+            return CoreAccess<MongoCollection<T>>.TryCall(mc.Client.IndexExists, index, mc, new LogOptions<bool>(CoreBase.CallSuccess, true));
         }
 
         /// <summary>
@@ -95,7 +95,7 @@ namespace X.Util.Extend.Mongo
                 property.SetValue(t, Guid.NewGuid().ToString("N"), null);
             }
             var mc = new MongoDbProvider<T>(database, collection, credentialDataBase);
-            CoreAccess<MongoCollection<T>>.TryCallAsync(mc.Client.Save, t, WriteConcern.Acknowledged, mc, null, new LogOptions<WriteConcernResult>(CallSuccess, true, false));
+            CoreAccess<MongoCollection<T>>.TryCallAsync(mc.Client.Save, t, WriteConcern.Acknowledged, mc, null, new LogOptions<WriteConcernResult>(CallSuccess, true));
         }
 
         /// <summary>
@@ -114,7 +114,7 @@ namespace X.Util.Extend.Mongo
                 property.SetValue(t, Guid.NewGuid().ToString("N"), null);
             }
             var mc = new MongoDbProvider<T>(database, collection, credentialDataBase);
-            CoreAccess<MongoCollection<T>>.TryCallAsync(mc.Client.Insert, t, WriteConcern.Acknowledged, mc, null, new LogOptions<WriteConcernResult>(CallSuccess, true, false));
+            CoreAccess<MongoCollection<T>>.TryCallAsync(mc.Client.Insert, t, WriteConcern.Acknowledged, mc, null, new LogOptions<WriteConcernResult>(CallSuccess, true));
         }
 
         /// <summary>
@@ -134,7 +134,7 @@ namespace X.Util.Extend.Mongo
                 property.SetValue(t, Guid.NewGuid().ToString("N"), null);
             }
             var mc = new MongoDbProvider<T>(database, collection, credentialDataBase);
-            CoreAccess<MongoCollection<T>>.TryCallAsync(mc.Client.InsertBatch, enumerable, WriteConcern.Acknowledged, mc, null, new LogOptions<IEnumerable<WriteConcernResult>>(CallSuccess, true, false));
+            CoreAccess<MongoCollection<T>>.TryCallAsync(mc.Client.InsertBatch, enumerable, WriteConcern.Acknowledged, mc, null, new LogOptions<IEnumerable<WriteConcernResult>>(CallSuccess, true));
         }
 
         public void SaveMongo(Func<T> loader, string database, string collection, string credentialDataBase)
@@ -155,7 +155,7 @@ namespace X.Util.Extend.Mongo
         public void UpdateMongo(string database, string collection, string credentialDataBase, IMongoQuery query, IMongoUpdate update, UpdateFlags flag = UpdateFlags.Multi)
         {
             var mc = new MongoDbProvider<T>(database, collection, credentialDataBase);
-            CoreAccess<MongoCollection<T>>.TryCallAsync(mc.Client.Update, query, update, flag, WriteConcern.Acknowledged, mc, null, new LogOptions<WriteConcernResult>(CallSuccess, true, false));
+            CoreAccess<MongoCollection<T>>.TryCallAsync(mc.Client.Update, query, update, flag, WriteConcern.Acknowledged, mc, null, new LogOptions<WriteConcernResult>(CallSuccess, true));
         }
 
         /// <summary>
@@ -170,7 +170,7 @@ namespace X.Util.Extend.Mongo
         public void RemoveMongo(string database, string collection, string credentialDataBase, IMongoQuery query, RemoveFlags flag = RemoveFlags.None)
         {
             var mc = new MongoDbProvider<T>(database, collection, credentialDataBase);
-            CoreAccess<MongoCollection<T>>.TryCallAsync(mc.Client.Remove, query, flag, WriteConcern.Acknowledged, mc, null, new LogOptions<WriteConcernResult>(CallSuccess, true, false));
+            CoreAccess<MongoCollection<T>>.TryCallAsync(mc.Client.Remove, query, flag, WriteConcern.Acknowledged, mc, null, new LogOptions<WriteConcernResult>(CallSuccess, true));
         }
 
         /// <summary>
@@ -183,7 +183,7 @@ namespace X.Util.Extend.Mongo
         public void RemoveAllMongo(string database, string collection, string credentialDataBase)
         {
             var mc = new MongoDbProvider<T>(database, collection, credentialDataBase);
-            CoreAccess<MongoCollection<T>>.TryCallAsync(mc.Client.RemoveAll, WriteConcern.Acknowledged, mc, null, new LogOptions<WriteConcernResult>(CallSuccess, true, false));
+            CoreAccess<MongoCollection<T>>.TryCallAsync(mc.Client.RemoveAll, WriteConcern.Acknowledged, mc, null, new LogOptions<WriteConcernResult>(CallSuccess, true));
         }
 
         /// <summary>
@@ -196,7 +196,7 @@ namespace X.Util.Extend.Mongo
         public void DropMongo(string database, string collection, string credentialDataBase)
         {
             var mc = new MongoDbProvider<T>(database, collection, credentialDataBase);
-            CoreAccess<MongoCollection<T>>.TryCallAsync(mc.Client.Drop, mc, null, new LogOptions<CommandResult>(CallSuccess, true, false));
+            CoreAccess<MongoCollection<T>>.TryCallAsync(mc.Client.Drop, mc, null, new LogOptions<CommandResult>(CallSuccess, true));
         }
         #endregion
 

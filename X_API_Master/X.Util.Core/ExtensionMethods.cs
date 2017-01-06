@@ -9,7 +9,6 @@ using System.Text;
 using System.Text.RegularExpressions;
 using Newtonsoft.Json;
 using X.Util.Core.Log;
-using X.Util.Entities;
 using X.Util.Entities.Enums;
 
 namespace X.Util.Core
@@ -35,7 +34,7 @@ namespace X.Util.Core
             }
             catch (Exception e)
             {
-                Logger.Client.Error(MethodBase.GetCurrentMethod(), LogDomain.Util, null, string.Empty, e.ToString());
+                Logger.Client.Error(Logger.Client.GetMethodInfo(MethodBase.GetCurrentMethod(), new object[] { json }), e, LogDomain.Util);
             }
             return default(T);
         }
@@ -49,7 +48,7 @@ namespace X.Util.Core
             }
             catch (Exception e)
             {
-                Logger.Client.Error(MethodBase.GetCurrentMethod(), LogDomain.Util, null, string.Empty, e.ToString());
+                Logger.Client.Error(Logger.Client.GetMethodInfo(MethodBase.GetCurrentMethod(), new object[] { json, T }), e, LogDomain.Util);
             }
             return null;
         }

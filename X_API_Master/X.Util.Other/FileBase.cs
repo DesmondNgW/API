@@ -5,7 +5,6 @@ using System.Text;
 using X.Util.Core;
 using X.Util.Core.Kernel;
 using X.Util.Core.Log;
-using X.Util.Entities;
 using X.Util.Entities.Enums;
 
 namespace X.Util.Other
@@ -22,7 +21,7 @@ namespace X.Util.Other
             }
             catch (Exception ex)
             {
-                Logger.Client.Error(MethodBase.GetCurrentMethod(), LogDomain.Util, null, string.Empty, "Directory error:" + ex);
+                Logger.Client.Error(Logger.Client.GetMethodInfo(MethodBase.GetCurrentMethod(), new object[] { filePath, fileName, content, encode, mode }), ex, LogDomain.Util);
             }
             var fm = FileBaseMode.Append.Equals(mode) ? FileMode.OpenOrCreate : FileMode.Create;
             FileStream fs = null;
@@ -42,7 +41,7 @@ namespace X.Util.Other
                 }
                 catch (Exception ex)
                 {
-                    Logger.Client.Error(MethodBase.GetCurrentMethod(), LogDomain.Util, null, string.Empty, "save err：" + ex);
+                    Logger.Client.Error(Logger.Client.GetMethodInfo(MethodBase.GetCurrentMethod(), new object[] { filePath, fileName, content, encode, mode }), ex, LogDomain.Util);
                 }
                 finally
                 {
@@ -77,7 +76,7 @@ namespace X.Util.Other
             }
             catch (Exception ex)
             {
-                Logger.Client.Error(MethodBase.GetCurrentMethod(), LogDomain.Util, null, string.Empty, "Directory error:" + ex);
+                Logger.Client.Error(Logger.Client.GetMethodInfo(MethodBase.GetCurrentMethod(), new object[] { filePath }), ex, LogDomain.Util);
             }
             return state;
         }
@@ -93,7 +92,7 @@ namespace X.Util.Other
             }
             catch (Exception ex)
             {
-                Logger.Client.Error(MethodBase.GetCurrentMethod(), LogDomain.Util, null, string.Empty, "Directory error:" + ex);
+                Logger.Client.Error(Logger.Client.GetMethodInfo(MethodBase.GetCurrentMethod(), new object[] { filePath }), ex, LogDomain.Util);
             }
             return state;
         }

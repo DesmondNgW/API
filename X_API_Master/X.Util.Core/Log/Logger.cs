@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -13,19 +12,9 @@ namespace X.Util.Core.Log
 {
     public sealed class Logger : ILogger
     {
-        private static readonly Action<string, CoreMethodInfo, LogDomain, LogType, object, string[]> NAction = Log;
-        private static readonly Action<string, MethodBase, LogDomain, LogType, object, string, string[]> MAction = Log;
-
         private Logger() { }
         public static ILogger Client = new Logger();
-
-        /// <summary>
-        /// GetMethodInfo
-        /// </summary>
-        public CoreMethodInfo GetMethodInfo(MethodBase declaringType, object[] values, string address)
-        {
-            return new CoreMethodInfo { ClassName = declaringType.DeclaringType, MethodName = declaringType.Name, Method = declaringType, ParamList = GetParamList(declaringType, values), Address = address };
-        }
+        
         /// <summary>
         /// GetMethodParamList
         /// </summary>
@@ -38,85 +27,117 @@ namespace X.Util.Core.Log
             return result;
         }
 
-        #region WriteFiles
-
-        private static void Log(string ip, CoreMethodInfo methodInfo, LogDomain domain, LogType logtype, object returnValue, params string[] messages)
+        /// <summary>
+        /// GetMethodInfo
+        /// </summary>
+        public RequestMethodInfo GetMethodInfo(MethodBase declaringType, object[] values)
         {
-            CoreUtil.CoderLocker("X.Util.Core.Log." + domain + logtype, () =>
+            return new RequestMethodInfo { Id = Guid.NewGuid().ToString("N"), ClassName = declaringType.DeclaringType, MethodName = declaringType.Name, Method = declaringType, ParamList = GetParamList(declaringType, values), ClientIp = CoreUtil.GetIp(), ServerIp = CoreUtil.GetLocalIp() };
+        }
+
+        /// <summary>
+        /// GetMethodInfo
+        /// </summary>
+        /// <param name="declaringType"></param>
+        /// <param name="values"></param>
+        /// <param name="extendInfo"></param>
+        /// <returns></returns>
+        public RequestMethodInfo GetMethodInfo(MethodBase declaringType, object[] values, Dictionary<string, object> extendInfo)
+        {
+            return new RequestMethodInfo { Id = Guid.NewGuid().ToString("N"), ClassName = declaringType.DeclaringType, MethodName = declaringType.Name, Method = declaringType, ParamList = GetParamList(declaringType, values), ExtendInfo = extendInfo, ClientIp = CoreUtil.GetIp(), ServerIp = CoreUtil.GetLocalIp() };
+        }
+
+        /// <summary>
+        /// GetMethodInfo
+        /// </summary>
+        public RequestMethodInfo GetMethodInfo(MethodBase declaringType, object[] values, string address)
+        {
+            return new RequestMethodInfo { Id = Guid.NewGuid().ToString("N"), ClassName = declaringType.DeclaringType, MethodName = declaringType.Name, Method = declaringType, ParamList = GetParamList(declaringType, values), Address = address, ClientIp = CoreUtil.GetIp(), ServerIp = CoreUtil.GetLocalIp() };
+        }
+
+        /// <summary>
+        /// GetMethodInfo
+        /// </summary>
+        public RequestMethodInfo GetMethodInfo(MethodBase declaringType, object[] values, string address, Dictionary<string, object> extendInfo)
+        {
+            return new RequestMethodInfo { Id = Guid.NewGuid().ToString("N"), ClassName = declaringType.DeclaringType, MethodName = declaringType.Name, Method = declaringType, ParamList = GetParamList(declaringType, values), Address = address, ExtendInfo = extendInfo, ClientIp = CoreUtil.GetIp(), ServerIp = CoreUtil.GetLocalIp() };
+        }
+
+        /// <summary>
+        /// LogRequest
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="domain"></param>
+        private static void LogRequest(RequestMethodInfo request, LogDomain domain)
+        {
+            CoreUtil.CoderLocker("X.Util.Core.Log." + domain + LogType.Info, () =>
             {
                 var log = LoggerConfig.Instance.GetLogger(domain);
-                try
+                var message = new StringBuilder();
+                message.AppendLine(string.Format("{0} Request Id: {1}, From: {2}, To: {3}, Path:{4}.", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff"), request.Id, request.ClientIp, request.ServerIp, string.Format("{0}.{1}", request.ClassName.FullName, request.MethodName)));
+                if (request.ParamList != null && request.ParamList.Count > 0)
                 {
-                    var message = new StringBuilder();
-                    message.Append("[" + ip + "][" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff") + "]");
-                    message.Append("\t\n");
-                    if (methodInfo.ParamList != null && methodInfo.ParamList.Count > 0)
-                    {
-                        message.Append("param：");
-                        message.Append(methodInfo.ParamList.ToJson());
-                        message.Append("\t\n");
-                    }
-                    if (!string.IsNullOrEmpty(methodInfo.Address))
-                    {
-                        message.Append("address：");
-                        message.Append(methodInfo.Address);
-                        message.Append("\t\n");
-                    }
-                    if (returnValue != null)
-                    {
-                        message.Append("Result：");
-                        message.Append(returnValue.ToJson());
-                        message.Append("\t\n");
-                    }
-                    if (messages.Length > 0) message.Append(string.Join("\t\n", messages) + "\t\n");
-                    switch (logtype)
-                    {
-                        case LogType.Error:
-                            log.Error(message);
-                            break;
-                        case LogType.Debug:
-                            log.Debug(message);
-                            break;
-                        case LogType.Info:
-                            log.Info(message);
-                            break;
-                    }
+                    message.AppendLine(string.Format("param: {0}", request.ParamList.ToJson()));
                 }
-                catch (Exception ex)
+                if (!string.IsNullOrEmpty(request.Address))
                 {
-                    Client.Error(MethodBase.GetCurrentMethod(), domain, logtype, null, string.Empty, ex.ToString());
+                    message.AppendLine(string.Format("address: {0}", request.Address));
                 }
+                if (request.ExtendInfo != null && request.ExtendInfo.Count > 0)
+                {
+                    message.AppendLine(string.Format("extend: {0}", request.ExtendInfo.ToJson()));
+                }
+                log.Info(message);
             });
         }
 
-        private static void Log(string ip, MethodBase declaringType, LogDomain domain, LogType logtype, object returnValue, string address, params string[] messages)
+        /// <summary>
+        /// LogResponse
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="response"></param>
+        /// <param name="domain"></param>
+        /// <param name="logtype"></param>
+        private static void LogResponse(RequestMethodInfo request, ResponseResult response, LogDomain domain, LogType logtype)
         {
+            logtype = response.Exception != null ? LogType.Error : logtype;
             CoreUtil.CoderLocker("X.Util.Core.Log." + domain + logtype, () =>
             {
                 var log = LoggerConfig.Instance.GetLogger(domain);
                 var message = new StringBuilder();
-                message.Append("[" + ip + "][" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff") + "]");
-                message.Append("\t\n");
-                if (!string.IsNullOrEmpty(address))
+                message.AppendLine(string.Format("{0} Response Id: {1}, From: {2}, To: {3}, Path:{4}.", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff"), request.Id, request.ClientIp, request.ServerIp, string.Format("{0}.{1}", request.ClassName.FullName, request.MethodName)));
+                if (request.ParamList != null && request.ParamList.Count > 0)
                 {
-                    message.Append("address：");
-                    message.Append(address);
-                    message.Append("\t\n");
+                    message.AppendLine(string.Format("param: {0}", request.ParamList.ToJson()));
                 }
-                if (returnValue != null)
+                if (!string.IsNullOrEmpty(request.Address))
                 {
-                    message.Append("Result：");
-                    message.Append(returnValue.ToJson());
-                    message.Append("\t\n");
+                    message.AppendLine(string.Format("address: {0}", request.Address));
                 }
-                if (messages.Length > 0) message.Append(string.Join("\t\n", messages) + "\t\n");
+                if (request.ExtendInfo != null && request.ExtendInfo.Count > 0)
+                {
+                    message.AppendLine(string.Format("request Extend: {0}", request.ExtendInfo.ToJson()));
+                }
+                if (response.Exception != null)
+                {
+                    message.AppendLine(string.Format("Exception: {0}", response.Exception));
+                }
+                else
+                {
+                    if (response.Return != null)
+                    {
+                        message.AppendLine(string.Format("Return: {0}", response.Return.ToJson()));
+                    }
+                    if (response.ExtendMessages != null)
+                    {
+                        message.AppendLine(string.Format("Response Extend: {0}", response.ExtendMessages.ToJson()));
+                    }
+                    message.AppendLine(string.Format("Response Elapsed: {0} ms.", response.Elapsed));
+                }
                 switch (logtype)
                 {
                     case LogType.Error:
                         log.Error(message);
-                        break;
-                    case LogType.Debug:
-                        log.Debug(message);
                         break;
                     case LogType.Info:
                         log.Info(message);
@@ -125,52 +146,51 @@ namespace X.Util.Core.Log
             });
         }
 
-        public void Elapsed(MethodBase method, long elapsedMilliseconds, LogDomain edomain, string address = null)
+        /// <summary>
+        /// 记录请求
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="domain"></param>
+        public void Request(RequestMethodInfo request, LogDomain domain)
         {
-            Client.Debug(method, edomain, null, address, string.Format(@"{0}.{1} finished, used {2} ms.", method.GetDeclaringFullName(), method.Name, elapsedMilliseconds));
+            ((Action<RequestMethodInfo, LogDomain>)LogRequest).BeginInvoke(request, domain, null, null);
         }
 
-        public Action GetStopElapsed(MethodBase method, LogDomain edomain, string address = null)
+        /// <summary>
+        /// 记录响应
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="response"></param>
+        /// <param name="domain"></param>
+        /// <param name="logtype"></param>
+        public void Response(RequestMethodInfo request, ResponseResult response, LogDomain domain, LogType logtype)
         {
-            var sw = new Stopwatch();
-            sw.Start();
-            return () =>
+            ((Action<RequestMethodInfo, ResponseResult, LogDomain, LogType>)LogResponse).BeginInvoke(request, response, domain, logtype, null, null);
+        }
+
+        /// <summary>
+        /// 记录异常
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="exception"></param>
+        /// <param name="domain"></param>
+        public void Error(RequestMethodInfo request, Exception exception, LogDomain domain)
+        {
+            ((Action<RequestMethodInfo, ResponseResult, LogDomain, LogType>)LogResponse).BeginInvoke(request, new ResponseResult { Exception = exception }, domain, LogType.Error, null, null);
+        }
+
+        /// <summary>
+        /// LogDebug
+        /// </summary>
+        /// <param name="message"></param>
+        /// <param name="domain"></param>
+        public void Debug(string message, LogDomain domain)
+        {
+            CoreUtil.CoderLocker("X.Util.Core.Log." + domain + LogType.Debug, () =>
             {
-                sw.Stop();
-                Elapsed(method, sw.ElapsedMilliseconds, edomain, address);
-                sw.Reset();
-            };
+                var log = LoggerConfig.Instance.GetLogger(domain);
+                log.Debug(message);
+            });
         }
-
-        public void Info(CoreMethodInfo methodInfo, LogDomain domain, object returnValue, params string[] messages)
-        {
-            NAction.BeginInvoke(CoreUtil.GetIp(), methodInfo, domain, LogType.Info, returnValue, messages, null, null);
-        }
-
-        public void Debug(CoreMethodInfo methodInfo, LogDomain domain, object returnValue, params string[] messages)
-        {
-            NAction.BeginInvoke(CoreUtil.GetIp(), methodInfo, domain, LogType.Debug, returnValue, messages, null, null);
-        }
-
-        public void Error(CoreMethodInfo methodInfo, LogDomain domain, object returnValue, params string[] messages)
-        {
-            NAction.BeginInvoke(CoreUtil.GetIp(), methodInfo, domain, LogType.Error, returnValue, messages, null, null);
-        }
-
-        public void Debug(MethodBase declaringType, LogDomain domain, object returnValue, string address, params string[] messages)
-        {
-            MAction.BeginInvoke(CoreUtil.GetIp(), declaringType, domain, LogType.Debug, returnValue, address, messages, null, null);
-        }
-
-        public void Error(MethodBase declaringType, LogDomain domain, object returnValue, string address, params string[] messages)
-        {
-            MAction.BeginInvoke(CoreUtil.GetIp(), declaringType, domain, LogType.Error, returnValue, address, messages, null, null);
-        }
-
-        public void Info(MethodBase declaringType, LogDomain domain, object returnValue, string address, params string[] messages)
-        {
-            MAction.BeginInvoke(CoreUtil.GetIp(), declaringType, domain, LogType.Info, returnValue, address, messages, null, null);
-        }
-        #endregion
     }
 }

@@ -69,6 +69,7 @@
     <Compile Include="Interface\IProxyPooled.cs" />
     <Compile Include="Interface\IRedisCache.cs" />
     <Compile Include="LogOptions.cs" />
+    <Compile Include="ResponseResult.cs" />
     <Compile Include="Module.cs" />
     <Compile Include="ProxyPooledRequest.cs" />
     <Compile Include="QueueContext.cs" />
@@ -77,7 +78,7 @@
     <Compile Include="MongoBaseModel.cs" />
     <Compile Include="ContextChannel.cs" />
     <Compile Include="CoreChannelFactoryPool.cs" />
-    <Compile Include="CoreMethodInfo.cs" />
+    <Compile Include="RequestMethodInfo.cs" />
     <Compile Include="CoreServiceModel.cs" />
     <Compile Include="EnumText.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

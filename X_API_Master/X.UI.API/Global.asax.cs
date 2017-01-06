@@ -1,10 +1,10 @@
 ﻿using System;
+using System.Reflection;
 using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 using X.Util.Core.Log;
-using X.Util.Entities;
 using X.Util.Entities.Enums;
 
 namespace X.UI.API
@@ -26,7 +26,7 @@ namespace X.UI.API
         protected void Application_Error(object sender, EventArgs e)
 		{
 			Exception ex = Server.GetLastError();
-            Logger.Client.Error(System.Reflection.MethodBase.GetCurrentMethod(), LogDomain.Ui, null, string.Empty, ex.ToString());
+            Logger.Client.Error(Logger.Client.GetMethodInfo(MethodBase.GetCurrentMethod(), new object[] { }), ex, LogDomain.Ui);
 			throw ex;
 		}
 	}

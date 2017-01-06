@@ -6,19 +6,17 @@ namespace X.Util.Entities
     {
         public LogOptions(Func<TResult, bool> callSuccess)
         {
-            NeedElapsed = true;
+            if (callSuccess == null) callSuccess = result => true;
             NeedLogInfo = true;
             CallSuccess = callSuccess;
         }
 
-        public LogOptions(Func<TResult, bool> callSuccess, bool needElapsed, bool needLogInfo)
+        public LogOptions(Func<TResult, bool> callSuccess, bool needLogInfo)
         {
-            NeedElapsed = needElapsed;
+            if (callSuccess == null) callSuccess = result => true;
             NeedLogInfo = needLogInfo;
             CallSuccess = callSuccess;
         }
-
-        public bool NeedElapsed { get; set; }
         
         public bool NeedLogInfo { get; set; }
 
@@ -29,17 +27,13 @@ namespace X.Util.Entities
     {
         public LogOptions()
         {
-            NeedElapsed = true;
             NeedLogInfo = true;
         }
 
-        public LogOptions(bool needElapsed, bool needLogInfo)
+        public LogOptions(bool needLogInfo)
         {
-            NeedElapsed = needElapsed;
             NeedLogInfo = needLogInfo;
         }
-
-        public bool NeedElapsed { get; set; }
 
         public bool NeedLogInfo { get; set; }
     }

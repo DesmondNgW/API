@@ -83,7 +83,7 @@ namespace X.Util.Provider
             }
             catch (Exception ex)
             {
-                Logger.Client.Error(MethodBase.GetCurrentMethod(), LogDomain.Util, null, string.Empty, ex.ToString());
+                Logger.Client.Error(Logger.Client.GetMethodInfo(MethodBase.GetCurrentMethod(), new object[] { serverName }), ex, LogDomain.Util);
             }
             return mongoServer;
         }

@@ -62,7 +62,7 @@ namespace X.Util.Provider
             }
             catch (Exception ex)
             {
-                Logger.Client.Error(MethodBase.GetCurrentMethod(), LogDomain.Util, null, string.Empty, ex.ToString());
+                Logger.Client.Error(Logger.Client.GetMethodInfo(MethodBase.GetCurrentMethod(), new object[] { }), ex, LogDomain.Util);
             }
             return result;
         }
@@ -101,7 +101,7 @@ namespace X.Util.Provider
                 catch (Exception ex)
                 {
                     CoreFactoryPool.EventWait.Set();
-                    Logger.Client.Error(MethodBase.GetCurrentMethod(), LogDomain.Util, null, string.Empty, ex.ToString());
+                    Logger.Client.Error(Logger.Client.GetMethodInfo(MethodBase.GetCurrentMethod(), new object[] { }), ex, LogDomain.Util);
                     return channel;
                 }
             }
@@ -118,7 +118,7 @@ namespace X.Util.Provider
             catch (Exception ex)
             {
                 CoreFactoryPool.EventWait.Set();
-                Logger.Client.Error(MethodBase.GetCurrentMethod(), LogDomain.Util, null, string.Empty, ex.ToString());
+                Logger.Client.Error(Logger.Client.GetMethodInfo(MethodBase.GetCurrentMethod(), new object[] { }), ex, LogDomain.Util);
             }
         }
     }

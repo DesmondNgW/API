@@ -106,43 +106,43 @@ namespace X.Util.Extend.Cache
         public void Set(string key, object obj)
         {
             var couchBaseProvider = new CouchBaseProvider(ServerName);
-            CoreAccess<ICouchbaseClient>.TryCallAsync(couchBaseProvider.Client.Cas, StoreMode.Set, key, obj, (ulong)0, couchBaseProvider, null, new LogOptions<CasResult<bool>>(CallSuccess, true, false));
+            CoreAccess<ICouchbaseClient>.TryCallAsync(couchBaseProvider.Client.Cas, StoreMode.Set, key, obj, (ulong)0, couchBaseProvider, null, new LogOptions<CasResult<bool>>(CallSuccess, true));
         }
 
         public void SetJson(string key, object obj)
         {
             var couchBaseProvider = new CouchBaseProvider(ServerName);
-            CoreAccess<ICouchbaseClient>.TryCallAsync(couchBaseProvider.Client.Cas, StoreMode.Set, key, obj.ToJson(), (ulong)0, couchBaseProvider, null, new LogOptions<CasResult<bool>>(CallSuccess, true, false));
+            CoreAccess<ICouchbaseClient>.TryCallAsync(couchBaseProvider.Client.Cas, StoreMode.Set, key, obj.ToJson(), (ulong)0, couchBaseProvider, null, new LogOptions<CasResult<bool>>(CallSuccess, true));
         }
 
         public void Set(string key, object obj, DateTime dt)
         {
             var couchBaseProvider = new CouchBaseProvider(ServerName);
-            CoreAccess<ICouchbaseClient>.TryCallAsync(couchBaseProvider.Client.Cas, StoreMode.Set, key, obj, dt, (ulong)0, couchBaseProvider, null, new LogOptions<CasResult<bool>>(CallSuccess, true, false));
+            CoreAccess<ICouchbaseClient>.TryCallAsync(couchBaseProvider.Client.Cas, StoreMode.Set, key, obj, dt, (ulong)0, couchBaseProvider, null, new LogOptions<CasResult<bool>>(CallSuccess, true));
         }
 
         public void SetJson(string key, object obj, DateTime dt)
         {
             var couchBaseProvider = new CouchBaseProvider(ServerName);
-            CoreAccess<ICouchbaseClient>.TryCallAsync(couchBaseProvider.Client.Cas, StoreMode.Set, key, obj.ToJson(), dt, (ulong)0, couchBaseProvider, null, new LogOptions<CasResult<bool>>(CallSuccess, true, false));
+            CoreAccess<ICouchbaseClient>.TryCallAsync(couchBaseProvider.Client.Cas, StoreMode.Set, key, obj.ToJson(), dt, (ulong)0, couchBaseProvider, null, new LogOptions<CasResult<bool>>(CallSuccess, true));
         }
 
         public void Set(string key, object obj, TimeSpan ts)
         {
             var couchBaseProvider = new CouchBaseProvider(ServerName);
-            CoreAccess<ICouchbaseClient>.TryCallAsync(couchBaseProvider.Client.Cas, StoreMode.Set, key, obj, ts, (ulong)0, couchBaseProvider, null, new LogOptions<CasResult<bool>>(CallSuccess, true, false));
+            CoreAccess<ICouchbaseClient>.TryCallAsync(couchBaseProvider.Client.Cas, StoreMode.Set, key, obj, ts, (ulong)0, couchBaseProvider, null, new LogOptions<CasResult<bool>>(CallSuccess, true));
         }
 
         public void SetJson(string key, object obj, TimeSpan ts)
         {
             var couchBaseProvider = new CouchBaseProvider(ServerName);
-            CoreAccess<ICouchbaseClient>.TryCallAsync(couchBaseProvider.Client.Cas, StoreMode.Set, key, obj.ToJson(), ts, (ulong)0, couchBaseProvider, null, new LogOptions<CasResult<bool>>(CallSuccess, true, false));
+            CoreAccess<ICouchbaseClient>.TryCallAsync(couchBaseProvider.Client.Cas, StoreMode.Set, key, obj.ToJson(), ts, (ulong)0, couchBaseProvider, null, new LogOptions<CasResult<bool>>(CallSuccess, true));
         }
 
         public void Remove(string key)
         {
             var couchBaseProvider = new CouchBaseProvider(ServerName);
-            CoreAccess<ICouchbaseClient>.TryCallAsync(couchBaseProvider.Client.Remove, key, couchBaseProvider, null, new LogOptions<bool>(CoreBase.CallSuccess, true, false));
+            CoreAccess<ICouchbaseClient>.TryCallAsync(couchBaseProvider.Client.Remove, key, couchBaseProvider, null, new LogOptions<bool>(CoreBase.CallSuccess, true));
         }
         #endregion
     }

@@ -9,7 +9,6 @@ using X.Util.Core.Cache;
 using X.Util.Core.Common;
 using X.Util.Core.Kernel;
 using X.Util.Core.Log;
-using X.Util.Entities;
 using X.Util.Entities.Enums;
 
 namespace X.Util.Core.Xml
@@ -28,7 +27,7 @@ namespace X.Util.Core.Xml
             }
             catch (Exception ex)
             {
-                Logger.Client.Error(MethodBase.GetCurrentMethod(), LogDomain.Util, null, string.Empty, "Xml error:" + ex);
+                Logger.Client.Error(Logger.Client.GetMethodInfo(MethodBase.GetCurrentMethod(), new object[] { filePath }), ex, LogDomain.Util);
             }
             return doc;
         }
@@ -61,7 +60,7 @@ namespace X.Util.Core.Xml
                 }
                 catch (Exception ex)
                 {
-                    Logger.Client.Error(MethodBase.GetCurrentMethod(), LogDomain.Util, null, string.Empty, "WriteXml error:" + ex);
+                    Logger.Client.Error(Logger.Client.GetMethodInfo(MethodBase.GetCurrentMethod(), new object[] { item, path }), ex, LogDomain.Util);
                 }
             });
         }
