@@ -32,7 +32,7 @@ namespace X.Util.Core.Log
         /// </summary>
         public RequestMethodInfo GetMethodInfo(MethodBase declaringType, object[] values)
         {
-            return new RequestMethodInfo { Id = Guid.NewGuid().ToString("N"), ClassName = declaringType.DeclaringType, MethodName = declaringType.Name, Method = declaringType, ParamList = GetParamList(declaringType, values), ClientIp = CoreUtil.GetIp(), ServerIp = CoreUtil.GetLocalIp() };
+            return new RequestMethodInfo { Id = Guid.NewGuid().ToString("N"), ClassName = declaringType.DeclaringType, MethodName = declaringType.Name, Method = declaringType, ParamList = GetParamList(declaringType, values), ClientIp = IpBase.GetIp(), ServerIp = IpBase.GetLocalIp() };
         }
 
         /// <summary>
@@ -44,7 +44,7 @@ namespace X.Util.Core.Log
         /// <returns></returns>
         public RequestMethodInfo GetMethodInfo(MethodBase declaringType, object[] values, Dictionary<string, object> extendInfo)
         {
-            return new RequestMethodInfo { Id = Guid.NewGuid().ToString("N"), ClassName = declaringType.DeclaringType, MethodName = declaringType.Name, Method = declaringType, ParamList = GetParamList(declaringType, values), ExtendInfo = extendInfo, ClientIp = CoreUtil.GetIp(), ServerIp = CoreUtil.GetLocalIp() };
+            return new RequestMethodInfo { Id = Guid.NewGuid().ToString("N"), ClassName = declaringType.DeclaringType, MethodName = declaringType.Name, Method = declaringType, ParamList = GetParamList(declaringType, values), ExtendInfo = extendInfo, ClientIp = IpBase.GetIp(), ServerIp = IpBase.GetLocalIp() };
         }
 
         /// <summary>
@@ -52,7 +52,7 @@ namespace X.Util.Core.Log
         /// </summary>
         public RequestMethodInfo GetMethodInfo(MethodBase declaringType, object[] values, string address)
         {
-            return new RequestMethodInfo { Id = Guid.NewGuid().ToString("N"), ClassName = declaringType.DeclaringType, MethodName = declaringType.Name, Method = declaringType, ParamList = GetParamList(declaringType, values), Address = address, ClientIp = CoreUtil.GetIp(), ServerIp = CoreUtil.GetLocalIp() };
+            return new RequestMethodInfo { Id = Guid.NewGuid().ToString("N"), ClassName = declaringType.DeclaringType, MethodName = declaringType.Name, Method = declaringType, ParamList = GetParamList(declaringType, values), Address = address, ClientIp = IpBase.GetIp(), ServerIp = IpBase.GetLocalIp() };
         }
 
         /// <summary>
@@ -60,7 +60,7 @@ namespace X.Util.Core.Log
         /// </summary>
         public RequestMethodInfo GetMethodInfo(MethodBase declaringType, object[] values, string address, Dictionary<string, object> extendInfo)
         {
-            return new RequestMethodInfo { Id = Guid.NewGuid().ToString("N"), ClassName = declaringType.DeclaringType, MethodName = declaringType.Name, Method = declaringType, ParamList = GetParamList(declaringType, values), Address = address, ExtendInfo = extendInfo, ClientIp = CoreUtil.GetIp(), ServerIp = CoreUtil.GetLocalIp() };
+            return new RequestMethodInfo { Id = Guid.NewGuid().ToString("N"), ClassName = declaringType.DeclaringType, MethodName = declaringType.Name, Method = declaringType, ParamList = GetParamList(declaringType, values), Address = address, ExtendInfo = extendInfo, ClientIp = IpBase.GetIp(), ServerIp = IpBase.GetLocalIp() };
         }
 
         /// <summary>

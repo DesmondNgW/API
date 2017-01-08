@@ -90,6 +90,7 @@
     <Compile Include="Kernel\ExecutionContext.cs" />
     <Compile Include="ExtensionMethods.cs" />
     <Compile Include="Cache\LocalCache.cs" />
+    <Compile Include="Kernel\IPBase.cs" />
     <Compile Include="Log\Logger.cs" />
     <Compile Include="Log\LoggerConfig.cs" />
     <Compile Include="Log\LoggerContext.cs" />

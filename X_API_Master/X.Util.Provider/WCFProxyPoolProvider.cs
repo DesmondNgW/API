@@ -89,7 +89,7 @@ namespace X.Util.Provider
             {
                 _instance = ProxyPooledManager.GetClient();
                 _scope = new OperationContextScope((IClientChannel)_instance);
-                var header = MessageHeader.CreateHeader("clientip", "http://tempuri.org", CoreUtil.GetIp());
+                var header = MessageHeader.CreateHeader("clientip", "http://tempuri.org", IpBase.GetIp());
                 OperationContext.Current.OutgoingMessageHeaders.Add(header);
                 return _instance;
             }
