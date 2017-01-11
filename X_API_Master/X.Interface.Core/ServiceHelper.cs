@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using X.Interface.Dto;
 using X.Util.Core;
-using X.Util.Core.Common;
 using X.Util.Core.Kernel;
 using X.Util.Entities;
 using X.Util.Extend.Cache;
@@ -170,7 +169,7 @@ namespace X.Interface.Core
         /// <returns></returns>
         public static int GetStatusZone(string token, string uid)
         {
-            return CoreParse.GetInt32(CoreUtil.GetConsistentHash(Zones, Prefix + token + uid), 1);
+            return CoreUtil.GetConsistentHash(Zones, Prefix + token + uid).GetInt32(1);
         }
 
         /// <summary>
@@ -180,7 +179,7 @@ namespace X.Interface.Core
         /// <returns></returns>
         public static int GetTokenZone(string token)
         {
-            return CoreParse.GetInt32(CoreUtil.GetConsistentHash(Zones, Prefix + token), 1);
+            return CoreUtil.GetConsistentHash(Zones, Prefix + token).GetInt32(1);
         }
 
         /// <summary>

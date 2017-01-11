@@ -6,7 +6,7 @@ using System.Linq;
 using System.Reflection;
 using System.ServiceModel.Configuration;
 using System.Xml;
-using X.Util.Core.Common;
+using X.Util.Core;
 using X.Util.Core.Log;
 using X.Util.Core.Xml;
 using X.Util.Entities.Enums;
@@ -395,8 +395,8 @@ namespace X.WFConfig
                             foreach (XmlNode uri in item.ChildNodes) couchbase.Uris.Add(new Uri(XmlHelper.GetXmlAttributeValue(uri, "uri", string.Empty)));
                             break;
                         case "socketPool":
-                            couchbase.MinPoolSize = CoreParse.GetInt32((XmlHelper.GetXmlAttributeValue(item, "minPoolSize", string.Empty)), 20);
-                            couchbase.MaxPoolSize = CoreParse.GetInt32((XmlHelper.GetXmlAttributeValue(item, "maxPoolSize", string.Empty)), 1000);
+                            couchbase.MinPoolSize = XmlHelper.GetXmlAttributeValue(item, "minPoolSize", string.Empty).GetInt32(20);
+                            couchbase.MaxPoolSize = XmlHelper.GetXmlAttributeValue(item, "maxPoolSize", string.Empty).GetInt32(1000);
                             couchbase.ConnectionTimeout = TimeSpan.Parse(XmlHelper.GetXmlAttributeValue(item, "connectionTimeout", "00:00:02"));
                             couchbase.DeadTimeout = TimeSpan.Parse(XmlHelper.GetXmlAttributeValue(item, "deadTimeout", "00:00:10"));
                             couchbase.ReceiveTimeout = TimeSpan.Parse(XmlHelper.GetXmlAttributeValue(item, "receiveTimeout", "00:00:10"));

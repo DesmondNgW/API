@@ -14,7 +14,6 @@ using Couchbase.Configuration;
 using MongoDB.Driver;
 using ServiceStack.Redis;
 using X.Util.Core.Cache;
-using X.Util.Core.Common;
 using X.Util.Core.Kernel;
 using X.Util.Core.Xml;
 using X.Util.Entities;
@@ -92,47 +91,47 @@ namespace X.Util.Core.Configuration
 
         public static byte GetAppSettingByName(string name, byte defaultValue)
         {
-            return CoreParse.GetByte(GetAppSettingByName(name, string.Empty), defaultValue);
+            return GetAppSettingByName(name, string.Empty).GetByte(defaultValue);
         }
 
         public static bool GetAppSettingByName(string name, bool defaultValue)
         {
-            return CoreParse.GetBoolean(GetAppSettingByName(name, string.Empty), defaultValue);
+            return GetAppSettingByName(name, string.Empty).GetBoolean(defaultValue);
         }
 
         public static short GetAppSettingByName(string name, short defaultValue)
         {
-            return CoreParse.GetInt16(GetAppSettingByName(name, string.Empty), defaultValue);
+            return GetAppSettingByName(name, string.Empty).GetInt16(defaultValue);
         }
 
         public static int GetAppSettingByName(string name, int defaultValue)
         {
-            return CoreParse.GetInt32(GetAppSettingByName(name, string.Empty), defaultValue);
+            return GetAppSettingByName(name, string.Empty).GetInt32(defaultValue);
         }
 
         public static long GetAppSettingByName(string name, long defaultValue)
         {
-            return CoreParse.GetInt64(GetAppSettingByName(name, string.Empty), defaultValue);
+            return GetAppSettingByName(name, string.Empty).GetInt64(defaultValue);
         }
 
         public static float GetAppSettingByName(string name, float defaultValue)
         {
-            return CoreParse.GetSingle(GetAppSettingByName(name, string.Empty), defaultValue);
+            return GetAppSettingByName(name, string.Empty).GetSingle(defaultValue);
         }
 
         public static double GetAppSettingByName(string name, double defaultValue)
         {
-            return CoreParse.GetDouble(GetAppSettingByName(name, string.Empty), defaultValue);
+            return GetAppSettingByName(name, string.Empty).GetDouble(defaultValue);
         }
 
         public static decimal GetAppSettingByName(string name, decimal defaultValue)
         {
-            return CoreParse.GetDecimal(GetAppSettingByName(name, string.Empty), defaultValue);
+            return GetAppSettingByName(name, string.Empty).GetDecimal(defaultValue);
         }
 
         public static DateTime GetAppSettingByName(string name, DateTime defaultValue)
         {
-            return CoreParse.GetDateTime(GetAppSettingByName(name, string.Empty), defaultValue);
+            return GetAppSettingByName(name, string.Empty).GetDateTime(defaultValue);
         }
         #endregion
 
@@ -230,8 +229,8 @@ namespace X.Util.Core.Configuration
                         foreach (var uri in item.ChildNodes.Cast<XmlNode>().Where(uri => uri.NodeType != XmlNodeType.Comment)) couchbaseClientConfiguration.Urls.Add(new Uri(XmlHelper.GetXmlAttributeValue(uri, "uri", string.Empty)));
                         break;
                     case "socketPool":
-                        couchbaseClientConfiguration.SocketPool.MinPoolSize = CoreParse.GetInt32((XmlHelper.GetXmlAttributeValue(item, "minPoolSize", string.Empty)), 10);
-                        couchbaseClientConfiguration.SocketPool.MaxPoolSize = CoreParse.GetInt32((XmlHelper.GetXmlAttributeValue(item, "maxPoolSize", string.Empty)), 20);
+                        couchbaseClientConfiguration.SocketPool.MinPoolSize = XmlHelper.GetXmlAttributeValue(item, "minPoolSize", string.Empty).GetInt32(10);
+                        couchbaseClientConfiguration.SocketPool.MaxPoolSize = XmlHelper.GetXmlAttributeValue(item, "maxPoolSize", string.Empty).GetInt32(20);
                         couchbaseClientConfiguration.SocketPool.ConnectionTimeout = TimeSpan.Parse(XmlHelper.GetXmlAttributeValue(item, "connectionTimeout", "00:00:02"));
                         couchbaseClientConfiguration.SocketPool.DeadTimeout = TimeSpan.Parse(XmlHelper.GetXmlAttributeValue(item, "deadTimeout", "00:00:10"));
                         couchbaseClientConfiguration.SocketPool.ReceiveTimeout = TimeSpan.Parse(XmlHelper.GetXmlAttributeValue(item, "receiveTimeout", "00:00:10"));

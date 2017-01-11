@@ -1,6 +1,6 @@
 ﻿using MongoDB.Bson;
 using System;
-using X.Util.Core.Common;
+using X.Util.Core;
 
 namespace X.Util.Extend.Mongo
 {
@@ -61,179 +61,179 @@ namespace X.Util.Extend.Mongo
         #region Boolean
         public static bool GetBoolean(BsonValue value)
         {
-            return CoreParse.GetBoolean(GetString(value));
+            return GetString(value).GetBoolean();
         }
         public static bool GetBoolean(BsonValue value, bool defaultValue)
         {
-            return CoreParse.GetBoolean(GetString(value), defaultValue);
+            return GetString(value).GetBoolean(defaultValue);
         }
         public static bool? GetBoolean(BsonValue value, bool? defaultValue)
         {
-            return CoreParse.GetBoolean(GetString(value), defaultValue);
+            return GetString(value).GetBoolean(defaultValue);
         }
         public static bool GetBoolean(BsonDocument document, string name)
         {
-            return CoreParse.GetBoolean(GetString(document, name));
+            return GetString(document, name).GetBoolean();
         }
         public static bool GetBoolean(BsonDocument document, string name, bool defaultValue)
         {
-            return CoreParse.GetBoolean(GetString(document, name, string.Empty), defaultValue);
+            return GetString(document, name, string.Empty).GetBoolean(defaultValue);
         }
         public static bool? GetBoolean(BsonDocument document, string name, bool? defaultValue)
         {
-            return CoreParse.GetBoolean(GetString(document, name, string.Empty), defaultValue);
+            return GetString(document, name, string.Empty).GetBoolean(defaultValue);
         }
         #endregion
 
         #region Byte
         public static byte GetByte(BsonValue value, byte defaultValue)
         {
-            return CoreParse.GetByte(GetString(value), defaultValue);
+            return GetString(value).GetByte(defaultValue);
         }
         public static byte? GetByte(BsonValue value, byte? defaultValue)
         {
-            return CoreParse.GetByte(GetString(value), defaultValue);
+            return GetString(value).GetByte(defaultValue);
         }
         public static byte GetByte(BsonDocument document, string name, byte defaultValue)
         {
-            return CoreParse.GetByte(GetString(document, name, string.Empty), defaultValue);
+            return GetString(document, name, string.Empty).GetByte(defaultValue);
         }
         public static byte? GetByte(BsonDocument document, string name, byte? defaultValue)
         {
-            return CoreParse.GetByte(GetString(document, name, string.Empty), defaultValue);
+            return GetString(document, name, string.Empty).GetByte(defaultValue);
         }
         #endregion
 
         #region Int16/Short
         public static short GetInt16(BsonValue value, short defaultValue)
         {
-            return CoreParse.GetInt16(GetString(value), defaultValue);
+            return GetString(value).GetInt16(defaultValue);
         }
         public static short? GetInt16(BsonValue value, short? defaultValue)
         {
-            return CoreParse.GetInt16(GetString(value), defaultValue);
+            return GetString(value).GetInt16(defaultValue);
         }
         public static short GetInt16(BsonDocument document, string name, short defaultValue)
         {
-            return CoreParse.GetInt16(GetString(document, name, string.Empty), defaultValue);
+            return GetString(document, name, string.Empty).GetInt16(defaultValue);
         }
         public static short? GetInt16(BsonDocument document, string name, short? defaultValue)
         {
-            return CoreParse.GetInt16(GetString(document, name, string.Empty), defaultValue);
+            return GetString(document, name, string.Empty).GetInt16(defaultValue);
         }
         #endregion
 
         #region Int32
         public static int GetInt32(BsonValue value, int defaultValue)
         {
-            return CoreParse.GetInt32(GetString(value), defaultValue);
+            return GetString(value).GetInt32(defaultValue);
         }
         public static int? GetInt32(BsonValue value, int? defaultValue)
         {
-            return CoreParse.GetInt32(GetString(value), defaultValue);
+            return GetString(value).GetInt32(defaultValue);
         }
         public static int GetInt32(BsonDocument document, string name, int defaultValue)
         {
-            return CoreParse.GetInt32(GetString(document, name, string.Empty), defaultValue);
+            return GetString(document, name, string.Empty).GetInt32(defaultValue);
         }
         public static int? GetInt32(BsonDocument document, string name, int? defaultValue)
         {
-            return CoreParse.GetInt32(GetString(document, name, string.Empty), defaultValue);
+            return GetString(document, name, string.Empty).GetInt32(defaultValue);
         }
         #endregion
 
         #region Int64
         public static long GetInt64(BsonValue value, long defaultValue)
         {
-            return CoreParse.GetInt64(GetString(value), defaultValue);
+            return GetString(value).GetInt64(defaultValue);
         }
         public static long? GetInt64(BsonValue value, long? defaultValue)
         {
-            return CoreParse.GetInt64(GetString(value), defaultValue);
+            return GetString(value).GetInt64(defaultValue);
         }
         public static long GetInt64(BsonDocument document, string name, long defaultValue)
         {
-            return CoreParse.GetInt64(GetString(document, name, string.Empty), defaultValue);
+            return GetString(document, name, string.Empty).GetInt64(defaultValue);
         }
         public static long? GetInt64(BsonDocument document, string name, long? defaultValue)
         {
-            return CoreParse.GetInt64(GetString(document, name, string.Empty), defaultValue);
+            return GetString(document, name, string.Empty).GetInt64(defaultValue);
         }
         #endregion
 
         #region Single
         public static float GetSingle(BsonValue value, float defaultValue)
         {
-            return CoreParse.GetSingle(GetString(value), defaultValue);
+            return GetString(value).GetSingle(defaultValue);
         }
         public static float? GetSingle(BsonValue value, float? defaultValue)
         {
-            return CoreParse.GetSingle(GetString(value), defaultValue);
+            return GetString(value).GetSingle(defaultValue);
         }
         public static float GetSingle(BsonDocument document, string name, float defaultValue)
         {
-            return CoreParse.GetSingle(GetString(document, name, string.Empty), defaultValue);
+            return GetString(document, name, string.Empty).GetSingle(defaultValue);
         }
         public static float? GetSingle(BsonDocument document, string name, float? defaultValue)
         {
-            return CoreParse.GetSingle(GetString(document, name, string.Empty), defaultValue);
+            return GetString(document, name, string.Empty).GetSingle(defaultValue);
         }
         #endregion
 
         #region Double
         public static double GetDouble(BsonValue value, double defaultValue)
         {
-            return CoreParse.GetDouble(GetString(value), defaultValue);
+            return GetString(value).GetDouble(defaultValue);
         }
         public static double? GetDouble(BsonValue value, double? defaultValue)
         {
-            return CoreParse.GetDouble(GetString(value), defaultValue);
+            return GetString(value).GetDouble(defaultValue);
         }
         public static double GetDouble(BsonDocument document, string name, double defaultValue)
         {
-            return CoreParse.GetDouble(GetString(document, name, string.Empty), defaultValue);
+            return GetString(document, name, string.Empty).GetDouble(defaultValue);
         }
         public static double? GetDouble(BsonDocument document, string name, double? defaultValue)
         {
-            return CoreParse.GetDouble(GetString(document, name, string.Empty), defaultValue);
+            return GetString(document, name, string.Empty).GetDouble(defaultValue);
         }
         #endregion
 
         #region Decimal
         public static decimal GetDecimal(BsonValue value, decimal defaultValue)
         {
-            return CoreParse.GetDecimal(GetString(value), defaultValue);
+            return GetString(value).GetDecimal(defaultValue);
         }
         public static decimal? GetDecimal(BsonValue value, decimal? defaultValue)
         {
-            return CoreParse.GetDecimal(GetString(value), defaultValue);
+            return GetString(value).GetDecimal(defaultValue);
         }
         public static decimal GetDecimal(BsonDocument document, string name, decimal defaultValue)
         {
-            return CoreParse.GetDecimal(GetString(document, name, string.Empty), defaultValue);
+            return GetString(document, name, string.Empty).GetDecimal(defaultValue);
         }
         public static decimal? GetDecimal(BsonDocument document, string name, decimal? defaultValue)
         {
-            return CoreParse.GetDecimal(GetString(document, name, string.Empty), defaultValue);
+            return GetString(document, name, string.Empty).GetDecimal(defaultValue);
         }
         #endregion
 
         #region DateTime
         public static DateTime GetDateTime(BsonValue value, DateTime defaultValue)
         {
-            return CoreParse.GetDateTime(GetString(value), defaultValue);
+            return GetString(value).GetDateTime(defaultValue);
         }
         public static DateTime? GetDateTime(BsonValue value, DateTime? defaultValue)
         {
-            return CoreParse.GetDateTime(GetString(value), defaultValue);
+            return GetString(value).GetDateTime(defaultValue);
         }
         public static DateTime GetDateTime(BsonDocument document, string name, DateTime defaultValue)
         {
-            return CoreParse.GetDateTime(GetString(document, name, string.Empty), defaultValue);
+            return GetString(document, name, string.Empty).GetDateTime(defaultValue);
         }
         public static DateTime? GetDateTime(BsonDocument document, string name, DateTime? defaultValue)
         {
-            return CoreParse.GetDateTime(GetString(document, name, string.Empty), defaultValue);
+            return GetString(document, name, string.Empty).GetDateTime(defaultValue);
         }
         #endregion
 

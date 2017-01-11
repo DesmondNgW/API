@@ -6,7 +6,6 @@ using System.Web.Caching;
 using System.Xml;
 using System.Xml.Serialization;
 using X.Util.Core.Cache;
-using X.Util.Core.Common;
 using X.Util.Core.Kernel;
 using X.Util.Core.Log;
 using X.Util.Entities.Enums;
@@ -123,108 +122,108 @@ namespace X.Util.Core.Xml
         #region Boolean
         public static bool GetXmlNodeValue(XmlNode node, bool defaultValue)
         {
-            return CoreParse.GetBoolean(GetXmlNodeValue(node, string.Empty), defaultValue);
+            return GetXmlNodeValue(node, string.Empty).GetBoolean(defaultValue);
         }
 
         public static bool GetXmlAttributeValue(XmlNode node, string attributeName, bool defaultValue)
         {
-            return CoreParse.GetBoolean(GetXmlAttributeValue(node, attributeName, string.Empty), defaultValue);
+            return GetXmlAttributeValue(node, attributeName, string.Empty).GetBoolean(defaultValue);
         }
         #endregion
 
         #region Byte
         public static byte GetXmlNodeValue(XmlNode node, byte defaultValue)
         {
-            return CoreParse.GetByte(GetXmlNodeValue(node, string.Empty), defaultValue);
+            return GetXmlNodeValue(node, string.Empty).GetByte(defaultValue);
         }
 
         public static byte GetXmlAttributeValue(XmlNode node, string attributeName, byte defaultValue)
         {
-            return CoreParse.GetByte(GetXmlAttributeValue(node, attributeName, string.Empty), defaultValue);
+            return GetXmlAttributeValue(node, attributeName, string.Empty).GetByte(defaultValue);
         }
         #endregion
 
         #region Int16
         public static short GetXmlNodeValue(XmlNode node, short defaultValue)
         {
-            return CoreParse.GetInt16(GetXmlNodeValue(node, string.Empty), defaultValue);
+            return GetXmlNodeValue(node, string.Empty).GetInt16(defaultValue);
         }
 
         public static short GetXmlAttributeValue(XmlNode node, string attributeName, short defaultValue)
         {
-            return CoreParse.GetInt16(GetXmlAttributeValue(node, attributeName, string.Empty), defaultValue);
+            return GetXmlAttributeValue(node, attributeName, string.Empty).GetInt16(defaultValue);
         }
         #endregion
 
         #region Int32
         public static int GetXmlNodeValue(XmlNode node, int defaultValue)
         {
-            return CoreParse.GetInt32(GetXmlNodeValue(node, string.Empty), defaultValue);
+            return GetXmlNodeValue(node, string.Empty).GetInt32(defaultValue);
         }
 
         public static int GetXmlAttributeValue(XmlNode node, string attributeName, int defaultValue)
         {
-            return CoreParse.GetInt32(GetXmlAttributeValue(node, attributeName, string.Empty), defaultValue);
+            return GetXmlAttributeValue(node, attributeName, string.Empty).GetInt32(defaultValue);
         }
         #endregion
 
         #region Int64
         public static long GetXmlNodeValue(XmlNode node, long defaultValue)
         {
-            return CoreParse.GetInt64(GetXmlNodeValue(node, string.Empty), defaultValue);
+            return GetXmlNodeValue(node, string.Empty).GetInt64(defaultValue);
         }
 
         public static long GetXmlAttributeValue(XmlNode node, string attributeName, long defaultValue)
         {
-            return CoreParse.GetInt64(GetXmlAttributeValue(node, attributeName, string.Empty), defaultValue);
+            return GetXmlAttributeValue(node, attributeName, string.Empty).GetInt64(defaultValue);
         }
         #endregion
 
         #region Single
         public static float GetXmlNodeValue(XmlNode node, float defaultValue)
         {
-            return CoreParse.GetSingle(GetXmlNodeValue(node, string.Empty), defaultValue);
+            return GetXmlNodeValue(node, string.Empty).GetSingle(defaultValue);
         }
 
         public static float GetXmlAttributeValue(XmlNode node, string attributeName, float defaultValue)
         {
-            return CoreParse.GetSingle(GetXmlAttributeValue(node, attributeName, string.Empty), defaultValue);
+            return GetXmlAttributeValue(node, attributeName, string.Empty).GetSingle(defaultValue);
         }
         #endregion
 
         #region Double
         public static double GetXmlNodeValue(XmlNode node, double defaultValue)
         {
-            return CoreParse.GetDouble(GetXmlNodeValue(node, string.Empty), defaultValue);
+            return GetXmlNodeValue(node, string.Empty).GetDouble(defaultValue);
         }
 
         public static double GetXmlAttributeValue(XmlNode node, string attributeName, double defaultValue)
         {
-            return CoreParse.GetDouble(GetXmlAttributeValue(node, attributeName, string.Empty), defaultValue);
+            return GetXmlAttributeValue(node, attributeName, string.Empty).GetDouble(defaultValue);
         }
         #endregion
 
         #region Decimal
         public static decimal GetXmlNodeValue(XmlNode node, decimal defaultValue)
         {
-            return CoreParse.GetDecimal(GetXmlNodeValue(node, string.Empty), defaultValue);
+            return GetXmlNodeValue(node, string.Empty).GetDecimal(defaultValue);
         }
 
         public static decimal GetXmlAttributeValue(XmlNode node, string attributeName, decimal defaultValue)
         {
-            return CoreParse.GetDecimal(GetXmlAttributeValue(node, attributeName, string.Empty), defaultValue);
+            return GetXmlAttributeValue(node, attributeName, string.Empty).GetDecimal(defaultValue);
         }
         #endregion
 
         #region DateTime
         public static DateTime GetXmlNodeValue(XmlNode node, DateTime defaultValue, string format)
         {
-            return CoreParse.GetDateTime(GetXmlNodeValue(node,string.Empty), format, defaultValue);
+            return GetXmlNodeValue(node,string.Empty).GetDateTime(format, defaultValue);
         }
 
         public static DateTime GetXmlAttributeValue(XmlNode node, string attributeName, DateTime defaultValue, string format)
         {
-            return CoreParse.GetDateTime(GetXmlAttributeValue(node, attributeName, string.Empty), format, defaultValue);
+            return GetXmlAttributeValue(node, attributeName, string.Empty).GetDateTime(format, defaultValue);
         }
         #endregion
     }

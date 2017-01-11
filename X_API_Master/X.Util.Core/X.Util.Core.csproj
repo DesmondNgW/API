@@ -84,7 +84,6 @@
     <Compile Include="Kernel\CoreAccess.cs" />
     <Compile Include="Kernel\CoreAspect.cs" />
     <Compile Include="Kernel\CoreChannel.cs" />
-    <Compile Include="Common\CoreParse.cs" />
     <Compile Include="Kernel\CoreQueue.cs" />
     <Compile Include="Kernel\CoreUtil.cs" />
     <Compile Include="Kernel\ExecutionContext.cs" />

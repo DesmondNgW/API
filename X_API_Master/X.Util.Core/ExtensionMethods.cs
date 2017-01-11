@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -8,6 +9,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Text.RegularExpressions;
 using Newtonsoft.Json;
+using X.Util.Core.Kernel;
 using X.Util.Core.Log;
 using X.Util.Entities.Enums;
 
@@ -287,6 +289,113 @@ namespace X.Util.Core
             context = context.Save(dictionary);
             CallContext.LogicalSetData("CallContext.LogicalData." + typeof(T).FullName, context);
             return context;
+        }
+        #endregion
+
+        #region 类型转换
+        public static bool GetBoolean(this string value)
+        {
+            return CoreUtil.GetType(value, bool.TryParse, false);
+        }
+
+        public static bool GetBoolean(this string value, bool defaultValue)
+        {
+            return CoreUtil.GetType(value, bool.TryParse, defaultValue);
+        }
+
+        public static bool? GetBoolean(this string value, bool? defaultValue)
+        {
+            return CoreUtil.GetType(value, bool.TryParse, defaultValue);
+        }
+
+        public static byte GetByte(this string value, byte defaultValue, NumberStyles style = NumberStyles.Integer)
+        {
+            return CoreUtil.GetType(value, byte.TryParse, style, CultureInfo.InvariantCulture, defaultValue);
+        }
+
+        public static byte? GetByte(this string value, byte? defaultValue, NumberStyles style = NumberStyles.Integer)
+        {
+            return CoreUtil.GetType(value, byte.TryParse, style, CultureInfo.InvariantCulture, defaultValue);
+        }
+
+        public static short GetInt16(this string value, short defaultValue, NumberStyles style = NumberStyles.Integer)
+        {
+            return CoreUtil.GetType(value, short.TryParse, style, CultureInfo.InvariantCulture, defaultValue);
+        }
+
+        public static short? GetInt16(this string value, short? defaultValue, NumberStyles style = NumberStyles.Integer)
+        {
+            return CoreUtil.GetType(value, short.TryParse, style, CultureInfo.InvariantCulture, defaultValue);
+        }
+
+        public static int GetInt32(this string value, int defaultValue, NumberStyles style = NumberStyles.Integer)
+        {
+            return CoreUtil.GetType(value, int.TryParse, style, CultureInfo.InvariantCulture, defaultValue);
+        }
+
+        public static int? GetInt32(this string value, int? defaultValue, NumberStyles style = NumberStyles.Integer)
+        {
+            return CoreUtil.GetType(value, int.TryParse, style, CultureInfo.InvariantCulture, defaultValue);
+        }
+
+        public static long GetInt64(this string value, long defaultValue, NumberStyles style = NumberStyles.Integer)
+        {
+            return CoreUtil.GetType(value, long.TryParse, style, CultureInfo.InvariantCulture, defaultValue);
+        }
+
+        public static long? GetInt64(this string value, long? defaultValue, NumberStyles style = NumberStyles.Integer)
+        {
+            return CoreUtil.GetType(value, long.TryParse, style, CultureInfo.InvariantCulture, defaultValue);
+        }
+
+        public static double GetDouble(this string value, double defaultValue, NumberStyles style = NumberStyles.Float)
+        {
+            return CoreUtil.GetType(value, double.TryParse, style, CultureInfo.InvariantCulture, defaultValue);
+        }
+
+        public static double? GetDouble(this string value, double? defaultValue, NumberStyles style = NumberStyles.Float)
+        {
+            return CoreUtil.GetType(value, double.TryParse, style, CultureInfo.InvariantCulture, defaultValue);
+        }
+
+        public static float GetSingle(this string value, float defaultValue, NumberStyles style = NumberStyles.Float)
+        {
+            return CoreUtil.GetType(value, float.TryParse, style, CultureInfo.InvariantCulture, defaultValue);
+        }
+
+        public static float? GetSingle(this string value, float? defaultValue, NumberStyles style = NumberStyles.Float)
+        {
+            return CoreUtil.GetType(value, float.TryParse, style, CultureInfo.InvariantCulture, defaultValue);
+        }
+
+        public static decimal GetDecimal(this string value, decimal defaultValue, NumberStyles style = NumberStyles.Float)
+        {
+            return CoreUtil.GetType(value, decimal.TryParse, style, CultureInfo.InvariantCulture, defaultValue);
+        }
+
+        public static decimal? GetDecimal(this string value, decimal? defaultValue, NumberStyles style = NumberStyles.Float)
+        {
+            return CoreUtil.GetType(value, decimal.TryParse, style, CultureInfo.InvariantCulture, defaultValue);
+        }
+
+        public static DateTime GetDateTime(this string value, DateTime defaultValue)
+        {
+            return CoreUtil.GetType(value, DateTime.TryParse, defaultValue);
+        }
+
+        public static DateTime? GetDateTime(this string value, DateTime? defaultValue)
+        {
+            return CoreUtil.GetType(value, DateTime.TryParse, defaultValue);
+        }
+
+        public static DateTime GetDateTime(this string value, string format, DateTime defaultValue, DateTimeStyles style = DateTimeStyles.None)
+        {
+            return CoreUtil.GetType(value, DateTime.TryParseExact, format, style, CultureInfo.InvariantCulture, defaultValue);
+        }
+
+        public static DateTime? GetDateTime(this string value, string format, DateTime? defaultValue, DateTimeStyles style = DateTimeStyles.None)
+        {
+            return CoreUtil.GetType(value, DateTime.TryParseExact, format, style, CultureInfo.InvariantCulture, defaultValue);
         }
         #endregion
     }
