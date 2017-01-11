@@ -16,7 +16,7 @@ namespace X.Util.Core.Configuration
         /// </summary>
         public static string CustomerNo
         {
-            get { return ConfigurationHelper.GetAppSetting("CustomerNo"); }
+            get { return ConfigurationHelper.GetAppSettingByName("CustomerNo", string.Empty); }
         }
         /// <summary>
         /// 缓存key的版本号
