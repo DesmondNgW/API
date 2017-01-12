@@ -37,47 +37,47 @@ namespace X.Util.Other
 
         public static bool GetQueryBoolean(HttpContextWrapper httpContext, string strName, bool defValue)
         {
-            return GetQueryString(httpContext, strName, string.Empty).GetBoolean(defValue);
+            return GetQueryString(httpContext, strName, string.Empty).Convert2Boolean(defValue);
         }
 
         public static byte GetQueryByte(HttpContextWrapper httpContext, string strName, byte defValue)
         {
-            return GetQueryString(httpContext, strName, string.Empty).GetByte(defValue);
+            return GetQueryString(httpContext, strName, string.Empty).Convert2Byte(defValue);
         }
 
         public static short GetQueryShort(HttpContextWrapper httpContext, string strName, short defValue)
         {
-            return GetQueryString(httpContext, strName, string.Empty).GetInt16(defValue);
+            return GetQueryString(httpContext, strName, string.Empty).Convert2Int16(defValue);
         }
 
         public static int GetQueryInt(HttpContextWrapper httpContext, string strName, int defValue)
         {
-            return GetQueryString(httpContext, strName, string.Empty).GetInt32(defValue);
+            return GetQueryString(httpContext, strName, string.Empty).Convert2Int32(defValue);
         }
 
         public static long GetQueryLong(HttpContextWrapper httpContext, string strName, long defValue)
         {
-            return GetQueryString(httpContext, strName, string.Empty).GetInt64(defValue);
+            return GetQueryString(httpContext, strName, string.Empty).Convert2Int64(defValue);
         }
 
         public static decimal GetQueryDecimal(HttpContextWrapper httpContext, string strName, decimal defValue)
         {
-            return GetQueryString(httpContext, strName, string.Empty).GetDecimal(defValue);
+            return GetQueryString(httpContext, strName, string.Empty).Convert2Decimal(defValue);
         }
 
         public static double GetQueryDouble(HttpContextWrapper httpContext, string strName, double defValue)
         {
-            return GetQueryString(httpContext, strName, string.Empty).GetDouble(defValue);
+            return GetQueryString(httpContext, strName, string.Empty).Convert2Double(defValue);
         }
 
         public static float GetQuerySingle(HttpContextWrapper httpContext, string strName, float defValue)
         {
-            return GetQueryString(httpContext, strName, string.Empty).GetSingle(defValue);
+            return GetQueryString(httpContext, strName, string.Empty).Convert2Single(defValue);
         }
 
         public static DateTime GetQueryDateTime(HttpContextWrapper httpContext, string strName, string format, DateTime defValue)
         {
-            return GetQueryString(httpContext, strName, string.Empty).GetDateTime(format, defValue);
+            return GetQueryString(httpContext, strName, string.Empty).Convert2DateTime(format, defValue);
         }
         #endregion
 
@@ -108,47 +108,47 @@ namespace X.Util.Other
 
         public static bool PostQueryBoolean(HttpContextWrapper httpContext, string strName, bool defValue)
         {
-            return PostQueryString(httpContext, strName, string.Empty).GetBoolean(defValue);
+            return PostQueryString(httpContext, strName, string.Empty).Convert2Boolean(defValue);
         }
 
         public static byte PostQueryByte(HttpContextWrapper httpContext, string strName, byte defValue)
         {
-            return PostQueryString(httpContext, strName, string.Empty).GetByte(defValue);
+            return PostQueryString(httpContext, strName, string.Empty).Convert2Byte(defValue);
         }
 
         public static short PostQueryShort(HttpContextWrapper httpContext, string strName, short defValue)
         {
-            return PostQueryString(httpContext, strName, string.Empty).GetInt16(defValue);
+            return PostQueryString(httpContext, strName, string.Empty).Convert2Int16(defValue);
         }
 
         public static int PostQueryInt(HttpContextWrapper httpContext, string strName, int defValue)
         {
-            return PostQueryString(httpContext, strName, string.Empty).GetInt32(defValue);
+            return PostQueryString(httpContext, strName, string.Empty).Convert2Int32(defValue);
         }
 
         public static long PostQueryLong(HttpContextWrapper httpContext, string strName, long defValue)
         {
-            return PostQueryString(httpContext, strName, string.Empty).GetInt64(defValue);
+            return PostQueryString(httpContext, strName, string.Empty).Convert2Int64(defValue);
         }
 
         public static decimal PostQueryDecimal(HttpContextWrapper httpContext, string strName, decimal defValue)
         {
-            return PostQueryString(httpContext, strName, string.Empty).GetDecimal(defValue);
+            return PostQueryString(httpContext, strName, string.Empty).Convert2Decimal(defValue);
         }
 
         public static double PostQueryDouble(HttpContextWrapper httpContext, string strName, double defValue)
         {
-            return PostQueryString(httpContext, strName, string.Empty).GetDouble(defValue);
+            return PostQueryString(httpContext, strName, string.Empty).Convert2Double(defValue);
         }
 
         public static float PostQuerySingle(HttpContextWrapper httpContext, string strName, float defValue)
         {
-            return PostQueryString(httpContext, strName, string.Empty).GetSingle(defValue);
+            return PostQueryString(httpContext, strName, string.Empty).Convert2Single(defValue);
         }
 
         public static DateTime PostQueryDateTime(HttpContextWrapper httpContext, string strName, string format, DateTime defValue)
         {
-            return PostQueryString(httpContext, strName, string.Empty).GetDateTime(format, defValue);
+            return PostQueryString(httpContext, strName, string.Empty).Convert2DateTime(format, defValue);
         }
         #endregion
     }

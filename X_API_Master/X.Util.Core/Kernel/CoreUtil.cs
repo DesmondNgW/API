@@ -83,37 +83,37 @@ namespace X.Util.Core.Kernel
             return order.FirstOrDefault().Value;
         }
 
-        public static T GetType<T>(string value, ParseFunc<T> parse, T defaultValue)
+        public static T Convert2Type<T>(string value, ParseFunc<T> parse, T defaultValue)
         {
             T result;
             return parse(value, out result) ? result : defaultValue;
         }
 
-        public static T? GetType<T>(string value, ParseFunc<T> parse, T? defaultValue) where T : struct
+        public static T? Convert2Type<T>(string value, ParseFunc<T> parse, T? defaultValue) where T : struct
         {
             T result;
             return parse(value, out result) ? result : defaultValue;
         }
 
-        public static T GetType<T>(string value, ParseFunc2<T> parse, NumberStyles style, IFormatProvider provider, T defaultValue)
+        public static T Convert2Type<T>(string value, ParseFunc2<T> parse, NumberStyles style, IFormatProvider provider, T defaultValue)
         {
             T result;
             return parse(value, style, provider, out result) ? result : defaultValue;
         }
 
-        public static T? GetType<T>(string value, ParseFunc2<T> parse, NumberStyles style, IFormatProvider provider, T? defaultValue) where T : struct
+        public static T? Convert2Type<T>(string value, ParseFunc2<T> parse, NumberStyles style, IFormatProvider provider, T? defaultValue) where T : struct
         {
             T result;
             return parse(value, style, provider, out result) ? result : defaultValue;
         }
 
-        public static T GetType<T>(string value, ParseFunc3<T> parse, string format, DateTimeStyles style, IFormatProvider provider, T defaultValue)
+        public static T Convert2Type<T>(string value, ParseFunc3<T> parse, string format, DateTimeStyles style, IFormatProvider provider, T defaultValue)
         {
             T result;
             return parse(value, format, provider, style, out result) ? result : defaultValue;
         }
 
-        public static T? GetType<T>(string value, ParseFunc3<T> parse, string format, DateTimeStyles style, IFormatProvider provider, T? defaultValue) where T : struct
+        public static T? Convert2Type<T>(string value, ParseFunc3<T> parse, string format, DateTimeStyles style, IFormatProvider provider, T? defaultValue) where T : struct
         {
             T result;
             return parse(value, format, provider, style, out result) ? result : defaultValue;

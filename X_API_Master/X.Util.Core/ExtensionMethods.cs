@@ -293,109 +293,109 @@ namespace X.Util.Core
         #endregion
 
         #region 类型转换
-        public static bool GetBoolean(this string value)
+        public static bool Convert2Boolean(this string value)
         {
-            return CoreUtil.GetType(value, bool.TryParse, false);
+            return CoreUtil.Convert2Type(value, bool.TryParse, false);
         }
 
-        public static bool GetBoolean(this string value, bool defaultValue)
+        public static bool Convert2Boolean(this string value, bool defaultValue)
         {
-            return CoreUtil.GetType(value, bool.TryParse, defaultValue);
+            return CoreUtil.Convert2Type(value, bool.TryParse, defaultValue);
         }
 
-        public static bool? GetBoolean(this string value, bool? defaultValue)
+        public static bool? Convert2Boolean(this string value, bool? defaultValue)
         {
-            return CoreUtil.GetType(value, bool.TryParse, defaultValue);
+            return CoreUtil.Convert2Type(value, bool.TryParse, defaultValue);
         }
 
-        public static byte GetByte(this string value, byte defaultValue, NumberStyles style = NumberStyles.Integer)
+        public static byte Convert2Byte(this string value, byte defaultValue, NumberStyles style = NumberStyles.Integer)
         {
-            return CoreUtil.GetType(value, byte.TryParse, style, CultureInfo.InvariantCulture, defaultValue);
+            return CoreUtil.Convert2Type(value, byte.TryParse, style, CultureInfo.InvariantCulture, defaultValue);
         }
 
-        public static byte? GetByte(this string value, byte? defaultValue, NumberStyles style = NumberStyles.Integer)
+        public static byte? Convert2Byte(this string value, byte? defaultValue, NumberStyles style = NumberStyles.Integer)
         {
-            return CoreUtil.GetType(value, byte.TryParse, style, CultureInfo.InvariantCulture, defaultValue);
+            return CoreUtil.Convert2Type(value, byte.TryParse, style, CultureInfo.InvariantCulture, defaultValue);
         }
 
-        public static short GetInt16(this string value, short defaultValue, NumberStyles style = NumberStyles.Integer)
+        public static short Convert2Int16(this string value, short defaultValue, NumberStyles style = NumberStyles.Integer)
         {
-            return CoreUtil.GetType(value, short.TryParse, style, CultureInfo.InvariantCulture, defaultValue);
+            return CoreUtil.Convert2Type(value, short.TryParse, style, CultureInfo.InvariantCulture, defaultValue);
         }
 
-        public static short? GetInt16(this string value, short? defaultValue, NumberStyles style = NumberStyles.Integer)
+        public static short? Convert2Int16(this string value, short? defaultValue, NumberStyles style = NumberStyles.Integer)
         {
-            return CoreUtil.GetType(value, short.TryParse, style, CultureInfo.InvariantCulture, defaultValue);
+            return CoreUtil.Convert2Type(value, short.TryParse, style, CultureInfo.InvariantCulture, defaultValue);
         }
 
-        public static int GetInt32(this string value, int defaultValue, NumberStyles style = NumberStyles.Integer)
+        public static int Convert2Int32(this string value, int defaultValue, NumberStyles style = NumberStyles.Integer)
         {
-            return CoreUtil.GetType(value, int.TryParse, style, CultureInfo.InvariantCulture, defaultValue);
+            return CoreUtil.Convert2Type(value, int.TryParse, style, CultureInfo.InvariantCulture, defaultValue);
         }
 
-        public static int? GetInt32(this string value, int? defaultValue, NumberStyles style = NumberStyles.Integer)
+        public static int? Convert2Int32(this string value, int? defaultValue, NumberStyles style = NumberStyles.Integer)
         {
-            return CoreUtil.GetType(value, int.TryParse, style, CultureInfo.InvariantCulture, defaultValue);
+            return CoreUtil.Convert2Type(value, int.TryParse, style, CultureInfo.InvariantCulture, defaultValue);
         }
 
-        public static long GetInt64(this string value, long defaultValue, NumberStyles style = NumberStyles.Integer)
+        public static long Convert2Int64(this string value, long defaultValue, NumberStyles style = NumberStyles.Integer)
         {
-            return CoreUtil.GetType(value, long.TryParse, style, CultureInfo.InvariantCulture, defaultValue);
+            return CoreUtil.Convert2Type(value, long.TryParse, style, CultureInfo.InvariantCulture, defaultValue);
         }
 
-        public static long? GetInt64(this string value, long? defaultValue, NumberStyles style = NumberStyles.Integer)
+        public static long? Convert2Int64(this string value, long? defaultValue, NumberStyles style = NumberStyles.Integer)
         {
-            return CoreUtil.GetType(value, long.TryParse, style, CultureInfo.InvariantCulture, defaultValue);
+            return CoreUtil.Convert2Type(value, long.TryParse, style, CultureInfo.InvariantCulture, defaultValue);
         }
 
-        public static double GetDouble(this string value, double defaultValue, NumberStyles style = NumberStyles.Float)
+        public static double Convert2Double(this string value, double defaultValue, NumberStyles style = NumberStyles.Float)
         {
-            return CoreUtil.GetType(value, double.TryParse, style, CultureInfo.InvariantCulture, defaultValue);
+            return CoreUtil.Convert2Type(value, double.TryParse, style, CultureInfo.InvariantCulture, defaultValue);
         }
 
-        public static double? GetDouble(this string value, double? defaultValue, NumberStyles style = NumberStyles.Float)
+        public static double? Convert2Double(this string value, double? defaultValue, NumberStyles style = NumberStyles.Float)
         {
-            return CoreUtil.GetType(value, double.TryParse, style, CultureInfo.InvariantCulture, defaultValue);
+            return CoreUtil.Convert2Type(value, double.TryParse, style, CultureInfo.InvariantCulture, defaultValue);
         }
 
-        public static float GetSingle(this string value, float defaultValue, NumberStyles style = NumberStyles.Float)
+        public static float Convert2Single(this string value, float defaultValue, NumberStyles style = NumberStyles.Float)
         {
-            return CoreUtil.GetType(value, float.TryParse, style, CultureInfo.InvariantCulture, defaultValue);
+            return CoreUtil.Convert2Type(value, float.TryParse, style, CultureInfo.InvariantCulture, defaultValue);
         }
 
-        public static float? GetSingle(this string value, float? defaultValue, NumberStyles style = NumberStyles.Float)
+        public static float? Convert2Single(this string value, float? defaultValue, NumberStyles style = NumberStyles.Float)
         {
-            return CoreUtil.GetType(value, float.TryParse, style, CultureInfo.InvariantCulture, defaultValue);
+            return CoreUtil.Convert2Type(value, float.TryParse, style, CultureInfo.InvariantCulture, defaultValue);
         }
 
-        public static decimal GetDecimal(this string value, decimal defaultValue, NumberStyles style = NumberStyles.Float)
+        public static decimal Convert2Decimal(this string value, decimal defaultValue, NumberStyles style = NumberStyles.Float)
         {
-            return CoreUtil.GetType(value, decimal.TryParse, style, CultureInfo.InvariantCulture, defaultValue);
+            return CoreUtil.Convert2Type(value, decimal.TryParse, style, CultureInfo.InvariantCulture, defaultValue);
         }
 
-        public static decimal? GetDecimal(this string value, decimal? defaultValue, NumberStyles style = NumberStyles.Float)
+        public static decimal? Convert2Decimal(this string value, decimal? defaultValue, NumberStyles style = NumberStyles.Float)
         {
-            return CoreUtil.GetType(value, decimal.TryParse, style, CultureInfo.InvariantCulture, defaultValue);
+            return CoreUtil.Convert2Type(value, decimal.TryParse, style, CultureInfo.InvariantCulture, defaultValue);
         }
 
-        public static DateTime GetDateTime(this string value, DateTime defaultValue)
+        public static DateTime Convert2DateTime(this string value, DateTime defaultValue)
         {
-            return CoreUtil.GetType(value, DateTime.TryParse, defaultValue);
+            return CoreUtil.Convert2Type(value, DateTime.TryParse, defaultValue);
         }
 
-        public static DateTime? GetDateTime(this string value, DateTime? defaultValue)
+        public static DateTime? Convert2DateTime(this string value, DateTime? defaultValue)
         {
-            return CoreUtil.GetType(value, DateTime.TryParse, defaultValue);
+            return CoreUtil.Convert2Type(value, DateTime.TryParse, defaultValue);
         }
 
-        public static DateTime GetDateTime(this string value, string format, DateTime defaultValue, DateTimeStyles style = DateTimeStyles.None)
+        public static DateTime Convert2DateTime(this string value, string format, DateTime defaultValue, DateTimeStyles style = DateTimeStyles.None)
         {
-            return CoreUtil.GetType(value, DateTime.TryParseExact, format, style, CultureInfo.InvariantCulture, defaultValue);
+            return CoreUtil.Convert2Type(value, DateTime.TryParseExact, format, style, CultureInfo.InvariantCulture, defaultValue);
         }
 
-        public static DateTime? GetDateTime(this string value, string format, DateTime? defaultValue, DateTimeStyles style = DateTimeStyles.None)
+        public static DateTime? Convert2DateTime(this string value, string format, DateTime? defaultValue, DateTimeStyles style = DateTimeStyles.None)
         {
-            return CoreUtil.GetType(value, DateTime.TryParseExact, format, style, CultureInfo.InvariantCulture, defaultValue);
+            return CoreUtil.Convert2Type(value, DateTime.TryParseExact, format, style, CultureInfo.InvariantCulture, defaultValue);
         }
         #endregion
     }

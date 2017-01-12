@@ -169,7 +169,7 @@ namespace X.Interface.Core
         /// <returns></returns>
         public static int GetStatusZone(string token, string uid)
         {
-            return CoreUtil.GetConsistentHash(Zones, Prefix + token + uid).GetInt32(1);
+            return CoreUtil.GetConsistentHash(Zones, Prefix + token + uid).Convert2Int32(1);
         }
 
         /// <summary>
@@ -179,7 +179,7 @@ namespace X.Interface.Core
         /// <returns></returns>
         public static int GetTokenZone(string token)
         {
-            return CoreUtil.GetConsistentHash(Zones, Prefix + token).GetInt32(1);
+            return CoreUtil.GetConsistentHash(Zones, Prefix + token).Convert2Int32(1);
         }
 
         /// <summary>

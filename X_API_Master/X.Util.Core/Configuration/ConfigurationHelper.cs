@@ -91,47 +91,47 @@ namespace X.Util.Core.Configuration
 
         public static byte GetAppSettingByName(string name, byte defaultValue)
         {
-            return GetAppSettingByName(name, string.Empty).GetByte(defaultValue);
+            return GetAppSettingByName(name, string.Empty).Convert2Byte(defaultValue);
         }
 
         public static bool GetAppSettingByName(string name, bool defaultValue)
         {
-            return GetAppSettingByName(name, string.Empty).GetBoolean(defaultValue);
+            return GetAppSettingByName(name, string.Empty).Convert2Boolean(defaultValue);
         }
 
         public static short GetAppSettingByName(string name, short defaultValue)
         {
-            return GetAppSettingByName(name, string.Empty).GetInt16(defaultValue);
+            return GetAppSettingByName(name, string.Empty).Convert2Int16(defaultValue);
         }
 
         public static int GetAppSettingByName(string name, int defaultValue)
         {
-            return GetAppSettingByName(name, string.Empty).GetInt32(defaultValue);
+            return GetAppSettingByName(name, string.Empty).Convert2Int32(defaultValue);
         }
 
         public static long GetAppSettingByName(string name, long defaultValue)
         {
-            return GetAppSettingByName(name, string.Empty).GetInt64(defaultValue);
+            return GetAppSettingByName(name, string.Empty).Convert2Int64(defaultValue);
         }
 
         public static float GetAppSettingByName(string name, float defaultValue)
         {
-            return GetAppSettingByName(name, string.Empty).GetSingle(defaultValue);
+            return GetAppSettingByName(name, string.Empty).Convert2Single(defaultValue);
         }
 
         public static double GetAppSettingByName(string name, double defaultValue)
         {
-            return GetAppSettingByName(name, string.Empty).GetDouble(defaultValue);
+            return GetAppSettingByName(name, string.Empty).Convert2Double(defaultValue);
         }
 
         public static decimal GetAppSettingByName(string name, decimal defaultValue)
         {
-            return GetAppSettingByName(name, string.Empty).GetDecimal(defaultValue);
+            return GetAppSettingByName(name, string.Empty).Convert2Decimal(defaultValue);
         }
 
         public static DateTime GetAppSettingByName(string name, DateTime defaultValue)
         {
-            return GetAppSettingByName(name, string.Empty).GetDateTime(defaultValue);
+            return GetAppSettingByName(name, string.Empty).Convert2DateTime(defaultValue);
         }
         #endregion
 
@@ -229,8 +229,8 @@ namespace X.Util.Core.Configuration
                         foreach (var uri in item.ChildNodes.Cast<XmlNode>().Where(uri => uri.NodeType != XmlNodeType.Comment)) couchbaseClientConfiguration.Urls.Add(new Uri(XmlHelper.GetXmlAttributeValue(uri, "uri", string.Empty)));
                         break;
                     case "socketPool":
-                        couchbaseClientConfiguration.SocketPool.MinPoolSize = XmlHelper.GetXmlAttributeValue(item, "minPoolSize", string.Empty).GetInt32(10);
-                        couchbaseClientConfiguration.SocketPool.MaxPoolSize = XmlHelper.GetXmlAttributeValue(item, "maxPoolSize", string.Empty).GetInt32(20);
+                        couchbaseClientConfiguration.SocketPool.MinPoolSize = XmlHelper.GetXmlAttributeValue(item, "minPoolSize", string.Empty).Convert2Int32(10);
+                        couchbaseClientConfiguration.SocketPool.MaxPoolSize = XmlHelper.GetXmlAttributeValue(item, "maxPoolSize", string.Empty).Convert2Int32(20);
                         couchbaseClientConfiguration.SocketPool.ConnectionTimeout = TimeSpan.Parse(XmlHelper.GetXmlAttributeValue(item, "connectionTimeout", "00:00:02"));
                         couchbaseClientConfiguration.SocketPool.DeadTimeout = TimeSpan.Parse(XmlHelper.GetXmlAttributeValue(item, "deadTimeout", "00:00:10"));
                         couchbaseClientConfiguration.SocketPool.ReceiveTimeout = TimeSpan.Parse(XmlHelper.GetXmlAttributeValue(item, "receiveTimeout", "00:00:10"));
