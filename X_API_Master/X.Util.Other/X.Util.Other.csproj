@@ -30,11 +30,28 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ICSharpCode.SharpZipLib">
+      <HintPath>..\X.Ref\NPOI\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI">
+      <HintPath>..\X.Ref\NPOI\NPOI.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OOXML">
+      <HintPath>..\X.Ref\NPOI\NPOI.OOXML.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OpenXml4Net">
+      <HintPath>..\X.Ref\NPOI\NPOI.OpenXml4Net.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OpenXmlFormats">
+      <HintPath>..\X.Ref\NPOI\NPOI.OpenXmlFormats.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.ServiceModel.Web" />
     <Reference Include="System.Web" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -44,12 +61,19 @@
   <ItemGroup>
     <Compile Include="ApiData.cs" />
     <Compile Include="AuthorityHelper.cs" />
-    <Compile Include="ConvertHelper.cs" />
+    <Compile Include="ChineseConvert.cs" />
     <Compile Include="CookieHelper.cs" />
+    <Compile Include="ExportFile.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="FileBase.cs" />
     <Compile Include="HttpRequestBase.cs" />
+    <Compile Include="MouseHelper.cs" />
+    <Compile Include="KeyboardHelper.cs" />
+    <Compile Include="FtpHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QueryInfo.cs" />
+    <Compile Include="ValidateHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\X.Util.Core\X.Util.Core.csproj">

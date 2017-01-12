@@ -6,7 +6,7 @@ namespace X.Util.Other
     /// <summary>
     /// 常用转换类
     /// </summary>
-    public class ConvertHelper
+    public class ChineseConvert
     {
         #region 数组信息
 
