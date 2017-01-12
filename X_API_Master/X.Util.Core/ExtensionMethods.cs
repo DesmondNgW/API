@@ -210,6 +210,18 @@ namespace X.Util.Core
 
         #endregion
 
+        #region DateTime
+        /// <summary>
+        /// 1970年1月1日以来毫秒数
+        /// </summary>
+        /// <param name="dt"></param>
+        /// <returns></returns>
+        public static long GetMilliseconds (this DateTime dt)
+        {
+            return (dt.Ticks - new DateTime(1970, 1, 1).Ticks) / 10000;
+        }
+        #endregion
+
         #region object
         public static bool IsNull(this object o)
         {

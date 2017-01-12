@@ -24,7 +24,7 @@ namespace X.Util.Other
                 Logger.Client.Error(Logger.Client.GetMethodInfo(MethodBase.GetCurrentMethod(), new object[] { filePath, fileName, content, encode, mode }), ex, LogDomain.Util);
             }
             var fm = FileBaseMode.Append.Equals(mode) ? FileMode.OpenOrCreate : FileMode.Create;
-            FileStream fs = null;
+            FileStream fs = default(FileStream);
             var realFilePath = Path.Combine(filePath, fileName);
             var ed = encode.Contains("utf8") || encode.Contains("utf-8") ? Encoding.UTF8 : encode.Contains("unicode") ? Encoding.Unicode : Encoding.GetEncoding(encode);
             CoreUtil.CoderLocker(realFilePath, () =>
@@ -63,6 +63,48 @@ namespace X.Util.Other
         public static T ReadJson<T>(string filePath, string encode)
         {
             return ReadFile(filePath, encode).FromJson<T>();
+        }
+
+        public static byte[] GetFileBytes(string path)
+        {
+            var result = default(byte[]);
+            try
+            {
+                var fi = new FileInfo(path);
+                if (fi.Exists)
+                {
+                    var len = fi.Length;
+                    var fs = new FileStream(path, FileMode.Open);
+                    var buffer = new byte[len];
+                    fs.Read(buffer, 0, (int)len);
+                    fs.Close();
+                    result = buffer;
+                }
+            }
+            catch (Exception e)
+            {
+                Logger.Client.Error(Logger.Client.GetMethodInfo(MethodBase.GetCurrentMethod(), new object[] { path }), e, LogDomain.Util);
+            }
+            return result;
+        }
+
+        public static byte[] GetStreamBytes(Stream stream)
+        {
+            var result = default(byte[]);
+            try
+            {
+                var len = stream.Length;
+                var bytes = new byte[len];
+                stream.Read(bytes, 0, (int)len);
+                stream.Seek(0, SeekOrigin.Begin);
+                stream.Close();
+                result = bytes;
+            }
+            catch (Exception e)
+            {
+                Logger.Client.Error(Logger.Client.GetMethodInfo(MethodBase.GetCurrentMethod(), new object[] { }), e, LogDomain.Util);
+            }
+            return result;
         }
 
         public static bool DeleteDirectory(string filePath)
