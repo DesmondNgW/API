@@ -78,7 +78,8 @@ namespace X.Util.Other
                 var dr = dt.NewRow();
                 foreach (var field2 in fields)
                 {
-                    dr[field2] = propertyInfos.First(propertyInfo => field2 == propertyInfo.Name).GetValue(t, null);
+                    var p = propertyInfos.FirstOrDefault(propertyInfo => field2 == propertyInfo.Name);
+                    if (p != null) dr[field2] = p.GetValue(t, null);
                 }
                 dt.Rows.Add(dr);
             }
