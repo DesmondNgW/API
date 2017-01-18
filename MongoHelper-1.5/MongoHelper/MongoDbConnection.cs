@@ -52,8 +52,9 @@ namespace MongoDbHelper
         /// GetMongoClientSettings
         /// </summary>
         /// <param name="configure"></param>
+        /// <param name="database"></param>
         /// <returns></returns>
-        private static MongoClientSettings GetMongoClientSettings(MongoDbConfigure configure)
+        private static MongoClientSettings GetMongoClientSettings(MongoDbConfigure configure, string database)
         {
             var setting = new MongoClientSettings
             {
@@ -63,7 +64,7 @@ namespace MongoDbHelper
             };
             if (!string.IsNullOrEmpty(configure.UserName) && !string.IsNullOrEmpty(configure.Password))
             {
-                setting.Credentials = GetMongoCredential(configure.UserName, configure.Password, configure.CredentialDataBase, configure.Credential);
+                setting.Credentials = GetMongoCredential(configure.UserName, configure.Password, database, configure.Credential);
             }
             return setting;
         }
@@ -75,10 +76,9 @@ namespace MongoDbHelper
         /// <param name="connectName"></param>
         /// <param name="userName"></param>
         /// <param name="password"></param>
-        /// <param name="credentialDataBase"></param>
         /// <param name="maxConnectionPoolSize"></param>
         /// <param name="credential"></param>
-        public static void Configure(IEnumerable<Uri> servers, string connectName, string userName, string password, string credentialDataBase, int maxConnectionPoolSize = MaxConnectionPoolSize, MongoDbCredential credential = MongoDbCredential.ScramSha1)
+        public static void Configure(IEnumerable<Uri> servers, string connectName, string userName, string password, int maxConnectionPoolSize = MaxConnectionPoolSize, MongoDbCredential credential = MongoDbCredential.ScramSha1)
         {
             if (_configures == null) _configures = new ConcurrentDictionary<string, MongoDbConfigure>();
             if (!_configures.ContainsKey(connectName))
@@ -89,7 +89,6 @@ namespace MongoDbHelper
                     ConnectionName = connectName,
                     UserName = userName,
                     Password = password,
-                    CredentialDataBase = credentialDataBase,
                     Credential = credential,
                     MaxConnectionPoolSize = maxConnectionPoolSize
                 };
@@ -104,17 +103,6 @@ namespace MongoDbHelper
             foreach (var t in encryptedBytes) sb.AppendFormat("{0:x2}", t);
             return sb.ToString().ToLower();
         }
-
-        /// <summary>
-        /// 连接数据库(兼容旧版本)
-        /// </summary>
-        /// <param name="conn"></param>
-        /// <returns></returns>
-        public static MongoClient Connection(string conn = DefaultConnectName)
-        {
-            return Connection(string.Empty, string.Empty, string.Empty, conn, null);
-        }
-
 
         /// <summary>
         /// 连接数据库
@@ -144,7 +132,7 @@ namespace MongoDbHelper
             lock (ClientLockObj)
             {
                 if (MongoClientPools.ContainsKey(key) && reloadConfigure == null) return MongoClientPools[key];
-                var setting = GetMongoClientSettings(_configures[connectName]);
+                var setting = GetMongoClientSettings(_configures[connectName], database);
                 MongoClientPools[key] = new MongoClient(setting);
             }
             return MongoClientPools[key];
@@ -187,11 +175,6 @@ namespace MongoDbHelper
         /// 密码
         /// </summary>
         public string Password { get; set; }
-
-        /// <summary>
-        /// 验证Db
-        /// </summary>
-        public string CredentialDataBase { get; set; }
 
         /// <summary>
         /// 最大连接池大小
