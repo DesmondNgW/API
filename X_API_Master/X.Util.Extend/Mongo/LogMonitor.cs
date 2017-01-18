@@ -11,17 +11,17 @@ namespace X.Util.Extend.Mongo
     {
         public static void Info<T>(T t, LogMonitorDomain domain) where T : MongoBaseModel
         {
-            MongoDbBase<T>.Default.SaveMongo(t, "LogMonitor-Info", string.Format("{0}.{1}", domain, DateTime.Now.ToString("yyyy.MM")), null);
+            MongoDbBase<T>.Default.SaveMongo(t, "LogMonitor-Info", string.Format("{0}.{1}", domain, DateTime.Now.ToString("yyyy.MM")));
         }
 
         public static void Error<T>(T t, LogMonitorDomain domain) where T : MongoBaseModel
         {
-            MongoDbBase<T>.Default.SaveMongo(t, "LogMonitor-Error", string.Format("{0}.{1}", domain, DateTime.Now.ToString("yyyy.MM")), null);
+            MongoDbBase<T>.Default.SaveMongo(t, "LogMonitor-Error", string.Format("{0}.{1}", domain, DateTime.Now.ToString("yyyy.MM")));
         }
 
         public static void Debug<T>(T t, LogMonitorDomain domain) where T : MongoBaseModel
         {
-            MongoDbBase<T>.Default.SaveMongo(t, "LogMonitor-Debug", string.Format("{0}.{1}", domain, DateTime.Now.ToString("yyyy.MM")), null);
+            MongoDbBase<T>.Default.SaveMongo(t, "LogMonitor-Debug", string.Format("{0}.{1}", domain, DateTime.Now.ToString("yyyy.MM")));
         }
     }
 }

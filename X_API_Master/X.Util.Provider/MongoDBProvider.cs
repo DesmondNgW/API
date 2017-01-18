@@ -17,41 +17,36 @@ namespace X.Util.Provider
         private readonly string _servername = ConfigurationHelper.MongoDefaultServername;
         private const string Database = "admin";
         private const string CollectionName = "Test";
-        private readonly string _credentialDataBase = string.Empty;
         private MongoServer MongoSever { get; set; }
         private MongoCollection<TDocument> Collection { get; set; }
-        public MongoDbProvider(string credentialDataBase)
+        public MongoDbProvider()
         {
-            _credentialDataBase = credentialDataBase;
-            MongoSever = Init(_servername);
+            MongoSever = Init(_servername, Database);
             var db = MongoSever.GetDatabase(Database);
             Collection = db.GetCollection<TDocument>(CollectionName);
         }
-        public MongoDbProvider(string collection, string credentialDataBase)
+        public MongoDbProvider(string collection)
         {
-            _credentialDataBase = credentialDataBase;
-            MongoSever = Init(_servername);
+            MongoSever = Init(_servername, Database);
             var db = MongoSever.GetDatabase(Database);
             Collection = db.GetCollection<TDocument>(collection);
         }
-        public MongoDbProvider(string database, string collection, string credentialDataBase)
+        public MongoDbProvider(string database, string collection)
         {
-            _credentialDataBase = credentialDataBase;
-            MongoSever = Init(_servername);
+            MongoSever = Init(_servername, database);
             var db = MongoSever.GetDatabase(database);
             Collection = db.GetCollection<TDocument>(collection);
         }
-        public MongoDbProvider(string database, string collection, string serverName, string credentialDataBase)
+        public MongoDbProvider(string database, string collection, string serverName)
         {
-            _credentialDataBase = credentialDataBase;
             _servername = serverName;
-            MongoSever = Init(serverName);
+            MongoSever = Init(serverName, database);
             var db = MongoSever.GetDatabase(database);
             Collection = db.GetCollection<TDocument>(collection);
         }
-        public MongoDbProvider(string database, string collection, IEnumerable<Uri> servers, string userName, string password, MongoCredentialType type, string credentialDataBase = "admin")
+        public MongoDbProvider(string database, string collection, IEnumerable<Uri> servers, string userName, string password, MongoCredentialType type)
         {
-            MongoSever = ConfigurationHelper.MongoClientConfiguration(servers, userName, password, credentialDataBase, type).GetServer();
+            MongoSever = ConfigurationHelper.MongoClientConfiguration(servers, userName, password, database, type).GetServer();
             var db = MongoSever.GetDatabase(database);
             Collection = db.GetCollection<TDocument>(collection);
         }
@@ -69,17 +64,19 @@ namespace X.Util.Provider
         {
             return new MongoClient(ConfigurationHelper.MongoClientConfiguration(serverName, credentialDataBase));
         }
+
         /// <summary>
         /// 初始化MongoDBServer的连接
         /// </summary>
         /// <param name="serverName"></param>
+        /// <param name="database"></param>
         /// <returns></returns>
-        private MongoServer Init(string serverName)
+        private static MongoServer Init(string serverName, string database)
         {
-            MongoServer mongoServer = null;
+            var mongoServer = default(MongoServer);
             try
             {
-                mongoServer = string.IsNullOrEmpty(_credentialDataBase) ? Core<MongoClient>.Instance(GetMongoClient, serverName, null, Math.Max(ExecutionContext<RequestContext>.Current.Zone, 1) + serverName + ConfigurationHelper.EndpointFileModified).GetServer() : Core<MongoClient>.Instance(GetMongoClient, serverName, _credentialDataBase, Math.Max(ExecutionContext<RequestContext>.Current.Zone, 1) + serverName + _credentialDataBase + ConfigurationHelper.EndpointFileModified).GetServer();
+                mongoServer = Core<MongoClient>.Instance(GetMongoClient, serverName, database, Math.Max(ExecutionContext<RequestContext>.Current.Zone, 1) + serverName + database + ConfigurationHelper.EndpointFileModified).GetServer();
             }
             catch (Exception ex)
             {

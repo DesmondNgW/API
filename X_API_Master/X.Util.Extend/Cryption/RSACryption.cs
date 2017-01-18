@@ -19,7 +19,7 @@ namespace X.Util.Extend.Cryption
         {
             var rsaKey = default(RsaKey);
             var query = Query.EQ("_id", id);
-            var list = MongoDbBase<RsaKey>.Default.Find("RSA", "RSA", null, query).ToList();
+            var list = MongoDbBase<RsaKey>.Default.Find("RSA", "RSA", query).ToList();
             if (list.Count > 0)
             {
                 rsaKey = list[0];
@@ -30,7 +30,7 @@ namespace X.Util.Extend.Cryption
         private static void RemoveRsaKey(string id)
         {
             var query = new QueryDocument { { "_id", id } };
-            MongoDbBase<RsaKey>.Default.RemoveMongo("RSA", "RSA", null, query, RemoveFlags.Single);
+            MongoDbBase<RsaKey>.Default.RemoveMongo("RSA", "RSA", query, RemoveFlags.Single);
         }
 
         private static RSAParameters GetPublicKey(string id, bool tmpKey, Func<RSAParameters> loader)
@@ -56,7 +56,7 @@ namespace X.Util.Extend.Cryption
                 P = privateKey.P.Bytes2Hex(),
                 Q = privateKey.Q.Bytes2Hex()
             };
-            MongoDbBase<RsaKey>.Default.SaveMongo(rsaKey, "RSA", "RSA", null);
+            MongoDbBase<RsaKey>.Default.SaveMongo(rsaKey, "RSA", "RSA");
             return new RSAParameters
             {
                 Modulus = rsaKey.Modulus.Hex2Bytes(),
