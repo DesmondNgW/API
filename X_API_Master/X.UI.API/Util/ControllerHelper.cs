@@ -86,6 +86,8 @@ namespace X.UI.API.Util
             apiContext.ActionArgument = actionContext.ActionArguments.ToJson();
             apiContext.Now = DateTime.Now;
             apiContext.Cid = Thread.CurrentThread.ManagedThreadId.ToString();
+            var t = apiContext.Now.GetMilliseconds() - apiContext.Timestamp;
+            if (t < 0 || t >= 60000) throw new TimeoutException();
             if (string.IsNullOrEmpty((apiContext.Token))) throw new ArgumentNullException(TokenName);
             if (!ServiceHelper.VerifyToken(apiContext.ClientId, apiContext.Token)) throw new InvalidOperationException("token错误或过期");
             return apiContext;

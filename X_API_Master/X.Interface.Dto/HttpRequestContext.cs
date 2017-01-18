@@ -52,5 +52,10 @@ namespace X.Interface.Dto
         /// Last Request Thread id
         /// </summary>
         public string Tid { get; set; }
+
+        /// <summary>
+        /// Timestamp
+        /// </summary>
+        public long Timestamp { get; set; }
     }
 }
