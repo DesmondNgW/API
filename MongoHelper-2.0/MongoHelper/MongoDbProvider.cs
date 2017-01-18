@@ -27,10 +27,9 @@ namespace MongoDbHelper
         /// <param name="database">数据库名</param>
         /// <param name="collection">Collection</param>
         /// <param name="reloadConfigure">重新加载配置文件（用于初次加载失败后重新加载）</param>
-        /// <param name="credentialDataBase"></param>
-        public MongoDbProvider(string database, string collection, Action reloadConfigure = null, string credentialDataBase = null)
+        public MongoDbProvider(string database, string collection, Action reloadConfigure = null)
         {
-            var mongoSever = MongoDbConnection.Connection(string.Empty, string.Empty, credentialDataBase, MongoDbConnection.DefaultConnectName, reloadConfigure);
+            var mongoSever = MongoDbConnection.Connection(string.Empty, string.Empty, database, MongoDbConnection.DefaultConnectName, reloadConfigure);
             var idataBase = mongoSever.GetDatabase(database);
             ICollection = idataBase.GetCollection<TDocument>(collection);
             var dataBase = mongoSever.GetServer().GetDatabase(database);
@@ -47,9 +46,9 @@ namespace MongoDbHelper
         /// <param name="password"></param>
         /// <param name="credentialDataBase"></param>
         /// <param name="reloadConfigure">重新加载配置文件（用于初次加载失败后重新加载）</param>
-        public MongoDbProvider(string database, string collection, string userName, string password, string credentialDataBase = null, Action reloadConfigure = null)
+        public MongoDbProvider(string database, string collection, string userName, string password, Action reloadConfigure = null)
         {
-            var mongoSever = MongoDbConnection.Connection(userName, password, credentialDataBase, MongoDbConnection.DefaultConnectName, reloadConfigure);
+            var mongoSever = MongoDbConnection.Connection(userName, password, database, MongoDbConnection.DefaultConnectName, reloadConfigure);
             var idataBase = mongoSever.GetDatabase(database);
             ICollection = idataBase.GetCollection<TDocument>(collection);
             var dataBase = mongoSever.GetServer().GetDatabase(database);
@@ -65,9 +64,9 @@ namespace MongoDbHelper
         /// <param name="collection"></param>
         /// <param name="reloadConfigure">重新加载配置文件（用于初次加载失败后重新加载）</param>
         /// <param name="credentialDataBase"></param>
-        public MongoDbProvider(string connectName, string database, string collection, Action reloadConfigure = null, string credentialDataBase = null)
+        public MongoDbProvider(string connectName, string database, string collection, Action reloadConfigure = null)
         {
-            var mongoSever = MongoDbConnection.Connection(string.Empty, string.Empty, credentialDataBase, connectName, reloadConfigure);
+            var mongoSever = MongoDbConnection.Connection(string.Empty, string.Empty, database, connectName, reloadConfigure);
             var idataBase = mongoSever.GetDatabase(database);
             ICollection = idataBase.GetCollection<TDocument>(collection);
             var dataBase = mongoSever.GetServer().GetDatabase(database);
@@ -85,9 +84,9 @@ namespace MongoDbHelper
         /// <param name="password"></param>
         /// <param name="reloadConfigure">重新加载配置文件（用于初次加载失败后重新加载）</param>
         /// <param name="credentialDataBase"></param>
-        public MongoDbProvider(string connectName, string database, string collection, string userName, string password, Action reloadConfigure = null, string credentialDataBase = null)
+        public MongoDbProvider(string connectName, string database, string collection, string userName, string password, Action reloadConfigure = null)
         {
-            var mongoSever = MongoDbConnection.Connection(userName, password, credentialDataBase, connectName, reloadConfigure);
+            var mongoSever = MongoDbConnection.Connection(userName, password, database, connectName, reloadConfigure);
             var idataBase = mongoSever.GetDatabase(database);
             ICollection = idataBase.GetCollection<TDocument>(collection);
             var dataBase = mongoSever.GetServer().GetDatabase(database);
