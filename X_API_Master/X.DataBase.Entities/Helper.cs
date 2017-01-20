@@ -1,6 +1,6 @@
 ﻿namespace X.DataBase.Entities
 {
-    public class Class1
+    public class Helper
     {
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace X.Interface.Extend
 {
-    public class Class1
+    public class Helper
     {
     }
 }

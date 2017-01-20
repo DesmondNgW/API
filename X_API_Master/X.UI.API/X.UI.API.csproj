@@ -199,6 +199,14 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\X.Business.Entities\X.Business.Entities.csproj">
+      <Project>{3A4E1B51-BDE8-4E07-BAFC-35C0965313B9}</Project>
+      <Name>X.Business.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\X.Business.Helper\X.Business.Helper.csproj">
+      <Project>{C8DBF11D-7B1B-4C43-B2FE-4592E8B558F2}</Project>
+      <Name>X.Business.Helper</Name>
+    </ProjectReference>
     <ProjectReference Include="..\X.Interface.Core\X.Interface.Core.csproj">
       <Project>{e35e3dd5-8733-4d14-aa8f-0df560c7ce5e}</Project>
       <Name>X.Interface.Core</Name>

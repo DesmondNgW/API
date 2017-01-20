@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Web.Http;
 using System.Web.Http.Controllers;
-using X.Interface.Core;
+using X.Business.Helper;
 using X.Util.Core;
 using X.Util.Core.Configuration;
-using X.Util.Core.Kernel;
 using X.Util.Entities;
 
 namespace X.UI.API.Util
@@ -23,9 +22,10 @@ namespace X.UI.API.Util
         {
             var context = ControllerHelper.GetApiRequestContext(actionContext);
             var uid = ControllerHelper.GetUid(actionContext);
-            if (!ServiceHelper.VerifyToken(context.ClientId, uid)) throw new InvalidOperationException("uid错误或过期");
-            var statusZone = ServiceHelper.GetStatusZone(context.Token, uid);
-            var loginState = ServiceHelper.GetLoginStatus(context.Token, uid, statusZone);
+            var exp = TokenHelper.VerifyToken(uid, context.ClientId);
+            if (exp != null) throw exp;
+            var statusZone = EnumZoneHelper.GetStatusZone(context.Token, uid);
+            var loginState = LoginStatusHelper.GetLoginStatus(context.Token, uid, statusZone);
             if (Equals(loginState, null) || loginState.StatusZone != statusZone || loginState.Token != context.Token || loginState.Uid != uid) throw new InvalidOperationException("token过期或与uid不匹配");
             if (loginState.CustomerNo != AppConfig.CustomerNo && actionContext.Request.RequestUri.AbsolutePath.ToLower().StartsWith("/api/manager/")) throw new UnauthorizedAccessException("404");
             context.UserInfo = new { loginState.CustomerNo, loginState.Zone, loginState.CustomerName }.ToJson();

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using X.Business.Helper;
 using X.Interface.Dto;
 using X.Interface.Dto.HttpResponse;
 using X.Interface.Dto.Interface;
@@ -29,7 +30,7 @@ namespace X.Interface.Core
 
         public ApiResult<string> GetToken(string clientId)
         {
-            return new ApiResult<string> { Success = true, Data = ServiceHelper.GenerateToken(clientId) };
+            return new ApiResult<string> { Success = true, Data = TokenHelper.GenerateToken(clientId) };
         }
     }
 }

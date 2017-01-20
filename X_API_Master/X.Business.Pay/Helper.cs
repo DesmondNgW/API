@@ -1,6 +1,6 @@
 ﻿namespace X.Business.Pay
 {
-    public class Class1
+    public class Helper
     {
     }
 }
