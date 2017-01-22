@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace X.Business.Entities
+﻿namespace X.Business.Entities
 {
     /// <summary>
     /// Token
@@ -21,20 +19,5 @@ namespace X.Business.Entities
         /// TokenId
         /// </summary>
         public string TokenId { get; set; }
-
-        /// <summary>
-        /// LastRequesTime
-        /// </summary>
-        public DateTime LastRequesTime { get; set; }
-
-        /// <summary>
-        /// RequesTime
-        /// </summary>
-        public DateTime RequesTime { get; set; }
-
-        /// <summary>
-        /// AllowAccess
-        /// </summary>
-        public bool AllowAccess { get; set; }
     }
 }

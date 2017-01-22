@@ -1,9 +1,7 @@
-﻿using System;
-using System.Web.Http;
+﻿using System.Web.Http;
 using System.Web.Http.Controllers;
-using X.Business.Helper;
+using X.Interface.Core;
 using X.Util.Core;
-using X.Util.Core.Configuration;
 using X.Util.Entities;
 
 namespace X.UI.API.Util
@@ -22,12 +20,7 @@ namespace X.UI.API.Util
         {
             var context = ControllerHelper.GetApiRequestContext(actionContext);
             var uid = ControllerHelper.GetUid(actionContext);
-            var exp = TokenHelper.VerifyToken(uid, context.ClientId);
-            if (exp != null) throw exp;
-            var statusZone = EnumZoneHelper.GetStatusZone(context.Token, uid);
-            var loginState = LoginStatusHelper.GetLoginStatus(context.Token, uid, statusZone);
-            if (Equals(loginState, null) || loginState.StatusZone != statusZone || loginState.Token != context.Token || loginState.Uid != uid) throw new InvalidOperationException("token过期或与uid不匹配");
-            if (loginState.CustomerNo != AppConfig.CustomerNo && actionContext.Request.RequestUri.AbsolutePath.ToLower().StartsWith("/api/manager/")) throw new UnauthorizedAccessException("404");
+            var loginState = LoginServiceHelper.UserIdentity(context.Token, uid, context.ClientId, actionContext.Request.RequestUri);
             context.UserInfo = new { loginState.CustomerNo, loginState.Zone, loginState.CustomerName }.ToJson();
             ControllerHelper.ApiCallMonitor(context);
             new RequestContext

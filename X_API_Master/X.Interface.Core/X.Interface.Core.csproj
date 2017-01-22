@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="Extensionmethods.cs" />
     <Compile Include="KeyManagerService.cs" />
+    <Compile Include="LoginServiceHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

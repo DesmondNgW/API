@@ -1,4 +1,6 @@
-﻿namespace X.Business.Helper
+﻿using System;
+
+namespace X.Business.Helper
 {
     /// <summary>
     /// 定义业务常量
@@ -24,5 +26,15 @@
         /// SubLoginExpireMinutes
         /// </summary>
         public const int SubLoginExpireMinutes = 10;
+
+        /// <summary>
+        /// RequestExpireMinutes
+        /// </summary>
+        public const int RequestExpireMinutes = 3;
+
+        /// <summary>
+        /// RequestInterval
+        /// </summary>
+        public const int RequestInterval = 500;
     }
 }

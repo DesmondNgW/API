@@ -1,9 +1,11 @@
 ﻿using System;
 using X.Business.Entities;
 using X.Util.Core;
+using X.Util.Core.Configuration;
 using X.Util.Core.Kernel;
 using X.Util.Entities;
 using X.Util.Extend.Cache;
+using X.Util.Extend.Cryption;
 
 namespace X.Business.Helper
 {
@@ -67,6 +69,24 @@ namespace X.Business.Helper
             var key = ConstHelper.LoginKeyPrefix + uid;
             RuntimeCache.Remove(key);
             CouchCache.Default.Remove(key);
+        }
+
+        /// <summary>
+        /// 用户验证
+        /// </summary>
+        /// <param name="token"></param>
+        /// <param name="uid"></param>
+        /// <param name="clientId"></param>
+        /// <param name="uri"></param>
+        /// <returns></returns>
+        public static LoginStatus UserIdentity(string token, string uid, string clientId, Uri uri)
+        {
+            if (!BaseCryption.VerifyData(ConstHelper.GenerateHmacKey, uid, HmacType.Md5)) throw new InvalidOperationException("uid错误或过期");
+            var statusZone = EnumZoneHelper.GetStatusZone(token, uid);
+            var loginState = GetLoginStatus(token, uid, statusZone);
+            if (Equals(loginState, null) || loginState.StatusZone != statusZone || loginState.Token != token || loginState.Uid != uid) throw new InvalidOperationException("token过期或与uid不匹配");
+            if (loginState.CustomerNo != AppConfig.CustomerNo && uri.AbsolutePath.ToLower().StartsWith("/api/manager/")) throw new UnauthorizedAccessException("404");
+            return loginState;
         }
     }
 }

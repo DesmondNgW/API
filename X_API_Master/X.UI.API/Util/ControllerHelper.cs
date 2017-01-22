@@ -5,7 +5,7 @@ using System.Threading;
 using System.Web;
 using System.Web.Http.Controllers;
 using System.Web.Http.Filters;
-using X.Business.Helper;
+using X.Interface.Core;
 using X.Interface.Dto;
 using X.UI.API.Model;
 using X.Util.Core;
@@ -22,7 +22,7 @@ namespace X.UI.API.Util
         private const string ArgumentName = "Uid";
         private const string TokenName = "Token";
         private const int TimeoutSecond = 60;
-        public const LogDomain EDomain = LogDomain.Interface;
+        public const LogDomain EDomain = LogDomain.Ui;
 
         #region 解析ApiController上下文
         /// <summary>
@@ -90,8 +90,7 @@ namespace X.UI.API.Util
             var t = apiContext.Now.GetMilliseconds() - apiContext.Timestamp;
             if (t < 0 || t >= TimeoutSecond * 1000) throw new TimeoutException();
             if (string.IsNullOrEmpty((apiContext.Token))) throw new ArgumentNullException(TokenName);
-            var exp = TokenHelper.VerifyToken(apiContext.Token, apiContext.ClientId);
-            if (exp != null) throw exp;
+            LoginServiceHelper.VerifyToken(apiContext.Token, apiContext.ClientId, actionContext.Request.RequestUri);
             return apiContext;
         } 
         #endregion
