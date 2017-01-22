@@ -27,7 +27,7 @@ namespace X.UI.API
 		{
 			var ex = Server.GetLastError();
             Logger.Client.Error(Logger.Client.GetMethodInfo(MethodBase.GetCurrentMethod(), new object[] { }), ex, LogDomain.Ui);
-			throw ex;
+            throw ex;
 		}
 	}
 }

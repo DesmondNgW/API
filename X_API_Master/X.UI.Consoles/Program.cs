@@ -3,8 +3,6 @@ using System.Collections.Concurrent;
 using System.Linq;
 using System.Threading;
 
-//using X.Stock.DB;
-//using X.Stock.Service;
 //using X.Util.Core;
 
 namespace X.UI.Consoles

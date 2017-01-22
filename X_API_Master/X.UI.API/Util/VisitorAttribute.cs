@@ -1,7 +1,6 @@
 ﻿using System.Web.Http.Controllers;
 using System.Web.Http.Filters;
 using X.Util.Core;
-using X.Util.Core.Kernel;
 using X.Util.Entities;
 
 namespace X.UI.API.Util
@@ -11,7 +10,7 @@ namespace X.UI.API.Util
     /// </summary>
     public class VisitorAttribute : ActionFilterAttribute
     {
-        private const string Token = "X.UI.API.Util.UnLoginActionRuleAttribute.UnLoginActionToken";
+        private const string UnLoginActionId = "X.UI.API.Util.UnLoginActionRuleAttribute.UnLoginActionId";
         /// <summary>
         /// 在调用操作方法之后发生
         /// </summary>
@@ -31,12 +30,12 @@ namespace X.UI.API.Util
             ControllerHelper.ApiCallMonitor(context);
             new RequestContext
             {
-                Uid = Token,
+                Uid = UnLoginActionId,
                 Zone = 1,
                 Version = context.Version,
                 ClientType = (EnumClientType)context.ClientType,
-                Ctoken = Token + context.Cid,
-                Ptoken = Token + context.Tid,
+                Ctoken = UnLoginActionId + context.Cid,
+                Ptoken = UnLoginActionId + context.Tid,
                 Token = context.Token,
             }.Update(null);
             ControllerHelper.CacheInit((actionContext.Request.Headers.CacheControl != null && actionContext.Request.Headers.CacheControl.NoCache) || "no-cache".Equals(actionContext.Request.Headers.Pragma.ToString()));

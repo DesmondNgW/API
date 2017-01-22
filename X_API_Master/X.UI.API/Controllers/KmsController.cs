@@ -32,6 +32,7 @@ namespace X.UI.API.Controllers
         /// <summary>
         /// 获取token
         /// </summary>
+        /// <param name="clientId">clientId</param>
         /// <returns>指定对象序列化</returns>
         [HttpGet]
         public ApiResult<string> GetToken(string clientId)
@@ -40,6 +41,10 @@ namespace X.UI.API.Controllers
             return CoreAccess<IKeyManager>.Call(provider.Client.GetToken, clientId, provider, new LogOptions<ApiResult<string>>(ControllerHelper.CallSuccess));
         }
 
+        /// <summary>
+        /// 获取当前时间
+        /// </summary>
+        /// <returns>指定对象序列化</returns>
         [HttpGet]
         public ApiResult<DateTime> Now()
         {
