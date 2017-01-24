@@ -25,7 +25,7 @@ namespace X.Business.Helper
             token.TokenId = BaseCryption.SignData(token.ClientId + token.ClientIp, Guid.NewGuid().ToString("N"), HmacType.Md5);
             var key = ConstHelper.LoginKeyPrefix + token.TokenId;
             ExecutionContext<RequestContext>.Current.Update("Zone", EnumZoneHelper.GetTokenZone(token.TokenId));
-            CouchCache.Default.Set(key, token, new TimeSpan(0, ConstHelper.LoginExpireMinutes, 0));
+            CouchCache.Default.Set(key, token, TimeSpan.FromMinutes(ConstHelper.LoginExpireMinutes));
             return token.TokenId;
         }
 
@@ -63,7 +63,7 @@ namespace X.Business.Helper
                     TokenId = token,
                     RequesTime = DateTime.Now
                 };
-                CouchCache.Default.Set(requestKey, requestStatus, new TimeSpan(0, ConstHelper.RequestExpireMinutes, 0));
+                CouchCache.Default.Set(requestKey, requestStatus, DateTime.Now.AddMinutes(ConstHelper.RequestExpireMinutes));
             }
             else
             {
@@ -73,7 +73,7 @@ namespace X.Business.Helper
                     Thread.Sleep(ConstHelper.RequestInterval);
                 }
                 requestStatus.RequesTime = DateTime.Now;
-                CouchCache.Default.Set(requestKey, requestStatus, new TimeSpan(0, ConstHelper.RequestExpireMinutes, 0));
+                CouchCache.Default.Set(requestKey, requestStatus, DateTime.Now.AddMinutes(ConstHelper.RequestExpireMinutes));
             }
         }
     }

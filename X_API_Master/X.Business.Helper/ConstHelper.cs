@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace X.Business.Helper
+﻿namespace X.Business.Helper
 {
     /// <summary>
     /// 定义业务常量
@@ -30,7 +28,7 @@ namespace X.Business.Helper
         /// <summary>
         /// RequestExpireMinutes
         /// </summary>
-        public const int RequestExpireMinutes = 3;
+        public const int RequestExpireMinutes = 30;
 
         /// <summary>
         /// RequestInterval
