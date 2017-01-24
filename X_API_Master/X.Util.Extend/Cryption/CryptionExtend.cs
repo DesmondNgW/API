@@ -23,6 +23,8 @@ namespace X.Util.Extend.Cryption
             cStream.FlushFinalBlock();
             var encrypt = mStream.ToArray().Bytes2Hex();
             cStream.Close();
+            mStream.Close();
+            mStream.Dispose();
             return encrypt;
         }
 
@@ -42,6 +44,8 @@ namespace X.Util.Extend.Cryption
             cStream.FlushFinalBlock();
             var encrypt = mStream.ToArray().Bytes2Base64();
             cStream.Close();
+            mStream.Close();
+            mStream.Dispose();
             return encrypt;
         }
 
@@ -61,6 +65,8 @@ namespace X.Util.Extend.Cryption
             cStream.FlushFinalBlock();
             var decrypt = Encoding.UTF8.GetString(mStream.ToArray());
             cStream.Close();
+            mStream.Close();
+            mStream.Dispose();
             return decrypt;
         }
 
@@ -80,6 +86,8 @@ namespace X.Util.Extend.Cryption
             cStream.FlushFinalBlock();
             var decrypt = Encoding.UTF8.GetString(mStream.ToArray());
             cStream.Close();
+            mStream.Close();
+            mStream.Dispose();
             return decrypt;
         }
     }

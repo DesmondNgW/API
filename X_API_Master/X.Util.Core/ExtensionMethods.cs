@@ -69,7 +69,10 @@ namespace X.Util.Core
         {
             var mStream = new MemoryStream();
             BinaryFormatter.Serialize(mStream, t);
-            return mStream.GetBuffer();
+            var result = mStream.GetBuffer();
+            mStream.Close();
+            mStream.Dispose();
+            return result;
         }
 
         public static T Deserialize<T>(this byte[] b)

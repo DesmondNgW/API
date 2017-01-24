@@ -2,7 +2,6 @@
 using System.Data;
 using System.IO;
 using System.Linq;
-using System.Web;
 using NPOI.HSSF.UserModel;
 
 namespace X.Util.Other
@@ -12,14 +11,13 @@ namespace X.Util.Other
         /// <summary>
         /// 导出Excel文件
         /// </summary>
-        /// <param name="context"></param>
         /// <param name="dataList">数据集合</param>
         /// <param name="fields"></param>
         /// <param name="headTexts">标题数组</param>
         /// <param name="fileName">文件名称</param>
-        public static void ExportExcelFile(HttpContext context, IList dataList, string[] fields, string[] headTexts, string fileName)
+        public static byte[] ExportExcelFile(IList dataList, string[] fields, string[] headTexts, string fileName)
         {
-            if (dataList == null || dataList.Count == 0 || headTexts == null || headTexts.Length == 0 || string.IsNullOrEmpty(fileName)) return;
+            if (dataList == null || dataList.Count == 0 || headTexts == null || headTexts.Length == 0 || string.IsNullOrEmpty(fileName)) return null;
             var result = List2DataTable(dataList, fields);
             var totalCount = dataList.Count;
             const int pageSize = 50000;
@@ -53,10 +51,10 @@ namespace X.Util.Other
             }
             var ms = new MemoryStream();
             book.Write(ms);
-            context.Response.AddHeader("Content-Disposition", string.Format("attachment; filename={0}.xls", HttpUtility.UrlEncode(fileName)));
-            context.Response.BinaryWrite(ms.ToArray());
+            var bytes = ms.ToArray();
             ms.Close();
             ms.Dispose();
+            return bytes;
         }
 
         /// <summary>

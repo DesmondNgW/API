@@ -57,10 +57,14 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="ThoughtWorks.QRCode">
+      <HintPath>..\X.Ref\ThoughtWorks.QRCode.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApiData.cs" />
     <Compile Include="AuthorityHelper.cs" />
+    <Compile Include="CaptchaHelper.cs" />
     <Compile Include="ChineseConvert.cs" />
     <Compile Include="CookieHelper.cs" />
     <Compile Include="ExportFile.cs">
@@ -72,6 +76,7 @@
     <Compile Include="KeyboardHelper.cs" />
     <Compile Include="FtpHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QrCodeHelper.cs" />
     <Compile Include="QueryInfo.cs" />
     <Compile Include="ValidateHelper.cs" />
   </ItemGroup>
