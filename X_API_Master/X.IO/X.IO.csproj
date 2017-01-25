@@ -1,0 +1,292 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{06A52428-E95F-4FE0-A8F0-0E912A986B66}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>X.IO</RootNamespace>
+    <AssemblyName>X.IO</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Publish\Debug\App_Data\app.xml" />
+    <Content Include="Publish\Debug\App_Data\CacheDependency.xml" />
+    <Content Include="Publish\Debug\App_Data\Config.xml" />
+    <Content Include="Publish\Debug\App_Data\endpoint.xml" />
+    <Content Include="Publish\Debug\App_Readme\index.html" />
+    <Content Include="Publish\Debug\bin\Antlr3.Runtime.dll" />
+    <Content Include="Publish\Debug\bin\App_global.asax.dll" />
+    <Content Include="Publish\Debug\bin\App_global.asax.pdb" />
+    <Content Include="Publish\Debug\bin\Couchbase.dll" />
+    <Content Include="Publish\Debug\bin\de\Microsoft.Data.Edm.resources.dll" />
+    <Content Include="Publish\Debug\bin\de\Microsoft.Data.OData.resources.dll" />
+    <Content Include="Publish\Debug\bin\de\System.Spatial.resources.dll" />
+    <Content Include="Publish\Debug\bin\EntityFramework.dll" />
+    <Content Include="Publish\Debug\bin\Enyim.Caching.dll" />
+    <Content Include="Publish\Debug\bin\es\Microsoft.Data.Edm.resources.dll" />
+    <Content Include="Publish\Debug\bin\es\Microsoft.Data.OData.resources.dll" />
+    <Content Include="Publish\Debug\bin\es\System.Spatial.resources.dll" />
+    <Content Include="Publish\Debug\bin\fr\Microsoft.Data.Edm.resources.dll" />
+    <Content Include="Publish\Debug\bin\fr\Microsoft.Data.OData.resources.dll" />
+    <Content Include="Publish\Debug\bin\fr\System.Spatial.resources.dll" />
+    <Content Include="Publish\Debug\bin\ICSharpCode.SharpZipLib.dll" />
+    <Content Include="Publish\Debug\bin\it\Microsoft.Data.Edm.resources.dll" />
+    <Content Include="Publish\Debug\bin\it\Microsoft.Data.OData.resources.dll" />
+    <Content Include="Publish\Debug\bin\it\System.Spatial.resources.dll" />
+    <Content Include="Publish\Debug\bin\ja\Microsoft.Data.Edm.resources.dll" />
+    <Content Include="Publish\Debug\bin\ja\Microsoft.Data.OData.resources.dll" />
+    <Content Include="Publish\Debug\bin\ja\System.Spatial.resources.dll" />
+    <Content Include="Publish\Debug\bin\ko\Microsoft.Data.Edm.resources.dll" />
+    <Content Include="Publish\Debug\bin\ko\Microsoft.Data.OData.resources.dll" />
+    <Content Include="Publish\Debug\bin\ko\System.Spatial.resources.dll" />
+    <Content Include="Publish\Debug\bin\log4net.dll" />
+    <Content Include="Publish\Debug\bin\Microsoft.Data.Edm.dll" />
+    <Content Include="Publish\Debug\bin\Microsoft.Data.OData.dll" />
+    <Content Include="Publish\Debug\bin\Microsoft.Web.Infrastructure.dll" />
+    <Content Include="Publish\Debug\bin\Microsoft.Web.Mvc.FixedDisplayModes.dll" />
+    <Content Include="Publish\Debug\bin\MongoDB.Bson.dll" />
+    <Content Include="Publish\Debug\bin\MongoDB.Driver.dll" />
+    <Content Include="Publish\Debug\bin\Newtonsoft.Json.dll" />
+    <Content Include="Publish\Debug\bin\NPOI.dll" />
+    <Content Include="Publish\Debug\bin\ru\Microsoft.Data.Edm.resources.dll" />
+    <Content Include="Publish\Debug\bin\ru\Microsoft.Data.OData.resources.dll" />
+    <Content Include="Publish\Debug\bin\ru\System.Spatial.resources.dll" />
+    <Content Include="Publish\Debug\bin\ServiceStack.Common.dll" />
+    <Content Include="Publish\Debug\bin\ServiceStack.Interfaces.dll" />
+    <Content Include="Publish\Debug\bin\ServiceStack.Redis.dll" />
+    <Content Include="Publish\Debug\bin\ServiceStack.Text.dll" />
+    <Content Include="Publish\Debug\bin\System.Net.Http.dll" />
+    <Content Include="Publish\Debug\bin\System.Net.Http.WebRequest.dll" />
+    <Content Include="Publish\Debug\bin\System.Spatial.dll" />
+    <Content Include="Publish\Debug\bin\System.Web.Helpers.dll" />
+    <Content Include="Publish\Debug\bin\System.Web.Http.OData.dll" />
+    <Content Include="Publish\Debug\bin\System.Web.Http.Tracing.dll" />
+    <Content Include="Publish\Debug\bin\System.Web.Mvc.dll" />
+    <Content Include="Publish\Debug\bin\System.Web.Optimization.dll" />
+    <Content Include="Publish\Debug\bin\System.Web.Providers.dll" />
+    <Content Include="Publish\Debug\bin\System.Web.Razor.dll" />
+    <Content Include="Publish\Debug\bin\System.Web.WebPages.Deployment.dll" />
+    <Content Include="Publish\Debug\bin\System.Web.WebPages.dll" />
+    <Content Include="Publish\Debug\bin\System.Web.WebPages.Razor.dll" />
+    <Content Include="Publish\Debug\bin\ThoughtWorks.QRCode.dll" />
+    <Content Include="Publish\Debug\bin\WebGrease.dll" />
+    <Content Include="Publish\Debug\bin\X.Business.Entities.dll" />
+    <Content Include="Publish\Debug\bin\X.Business.Entities.pdb" />
+    <Content Include="Publish\Debug\bin\X.Business.Helper.dll" />
+    <Content Include="Publish\Debug\bin\X.Business.Helper.pdb" />
+    <Content Include="Publish\Debug\bin\X.Interface.Core.dll" />
+    <Content Include="Publish\Debug\bin\X.Interface.Core.pdb" />
+    <Content Include="Publish\Debug\bin\X.Interface.Dto.dll" />
+    <Content Include="Publish\Debug\bin\X.Interface.Dto.pdb" />
+    <Content Include="Publish\Debug\bin\X.Interface.Extend.dll" />
+    <Content Include="Publish\Debug\bin\X.Interface.Extend.pdb" />
+    <Content Include="Publish\Debug\bin\X.Interface.Other.dll" />
+    <Content Include="Publish\Debug\bin\X.Interface.Other.pdb" />
+    <Content Include="Publish\Debug\bin\X.UI.API.dll" />
+    <Content Include="Publish\Debug\bin\X.UI.API.pdb" />
+    <Content Include="Publish\Debug\bin\X.UI.API.XML" />
+    <Content Include="Publish\Debug\bin\X.Util.Core.dll" />
+    <Content Include="Publish\Debug\bin\X.Util.Core.pdb" />
+    <Content Include="Publish\Debug\bin\X.Util.Entities.dll" />
+    <Content Include="Publish\Debug\bin\X.Util.Entities.pdb" />
+    <Content Include="Publish\Debug\bin\X.Util.Extend.dll" />
+    <Content Include="Publish\Debug\bin\X.Util.Extend.pdb" />
+    <Content Include="Publish\Debug\bin\X.Util.Other.dll" />
+    <Content Include="Publish\Debug\bin\X.Util.Other.pdb" />
+    <Content Include="Publish\Debug\bin\X.Util.Provider.dll" />
+    <Content Include="Publish\Debug\bin\X.Util.Provider.pdb" />
+    <Content Include="Publish\Debug\bin\zh-Hans\EntityFramework.resources.dll" />
+    <Content Include="Publish\Debug\bin\zh-Hans\Microsoft.Data.Edm.resources.dll" />
+    <Content Include="Publish\Debug\bin\zh-Hans\Microsoft.Data.OData.resources.dll" />
+    <Content Include="Publish\Debug\bin\zh-Hans\System.Net.Http.resources.dll" />
+    <Content Include="Publish\Debug\bin\zh-Hans\System.Net.Http.WebRequest.resources.dll" />
+    <Content Include="Publish\Debug\bin\zh-Hans\System.Spatial.resources.dll" />
+    <Content Include="Publish\Debug\bin\zh-Hans\System.Web.Helpers.resources.dll" />
+    <Content Include="Publish\Debug\bin\zh-Hans\System.Web.Http.OData.resources.dll" />
+    <Content Include="Publish\Debug\bin\zh-Hans\System.Web.Http.Tracing.resources.dll" />
+    <Content Include="Publish\Debug\bin\zh-Hans\System.Web.Mvc.resources.dll" />
+    <Content Include="Publish\Debug\bin\zh-Hans\System.Web.Optimization.resources.dll" />
+    <Content Include="Publish\Debug\bin\zh-Hans\System.Web.Providers.resources.dll" />
+    <Content Include="Publish\Debug\bin\zh-Hans\System.Web.Razor.resources.dll" />
+    <Content Include="Publish\Debug\bin\zh-Hans\System.Web.WebPages.Deployment.resources.dll" />
+    <Content Include="Publish\Debug\bin\zh-Hans\System.Web.WebPages.Razor.resources.dll" />
+    <Content Include="Publish\Debug\bin\zh-Hans\System.Web.WebPages.resources.dll" />
+    <Content Include="Publish\Debug\bin\zh-Hant\Microsoft.Data.Edm.resources.dll" />
+    <Content Include="Publish\Debug\bin\zh-Hant\Microsoft.Data.OData.resources.dll" />
+    <Content Include="Publish\Debug\bin\zh-Hant\System.Spatial.resources.dll" />
+    <Content Include="Publish\Debug\favicon.ico" />
+    <Content Include="Publish\Realese\App_Data\app.xml" />
+    <Content Include="Publish\Realese\App_Data\CacheDependency.xml" />
+    <Content Include="Publish\Realese\App_Data\Config.xml" />
+    <Content Include="Publish\Realese\App_Data\endpoint.xml" />
+    <Content Include="Publish\Realese\App_Readme\index.html" />
+    <Content Include="Publish\Realese\bin\Antlr3.Runtime.dll" />
+    <Content Include="Publish\Realese\bin\App_global.asax.dll" />
+    <Content Include="Publish\Realese\bin\Couchbase.dll" />
+    <Content Include="Publish\Realese\bin\de\Microsoft.Data.Edm.resources.dll" />
+    <Content Include="Publish\Realese\bin\de\Microsoft.Data.OData.resources.dll" />
+    <Content Include="Publish\Realese\bin\de\System.Spatial.resources.dll" />
+    <Content Include="Publish\Realese\bin\EntityFramework.dll" />
+    <Content Include="Publish\Realese\bin\Enyim.Caching.dll" />
+    <Content Include="Publish\Realese\bin\es\Microsoft.Data.Edm.resources.dll" />
+    <Content Include="Publish\Realese\bin\es\Microsoft.Data.OData.resources.dll" />
+    <Content Include="Publish\Realese\bin\es\System.Spatial.resources.dll" />
+    <Content Include="Publish\Realese\bin\fr\Microsoft.Data.Edm.resources.dll" />
+    <Content Include="Publish\Realese\bin\fr\Microsoft.Data.OData.resources.dll" />
+    <Content Include="Publish\Realese\bin\fr\System.Spatial.resources.dll" />
+    <Content Include="Publish\Realese\bin\ICSharpCode.SharpZipLib.dll" />
+    <Content Include="Publish\Realese\bin\it\Microsoft.Data.Edm.resources.dll" />
+    <Content Include="Publish\Realese\bin\it\Microsoft.Data.OData.resources.dll" />
+    <Content Include="Publish\Realese\bin\it\System.Spatial.resources.dll" />
+    <Content Include="Publish\Realese\bin\ja\Microsoft.Data.Edm.resources.dll" />
+    <Content Include="Publish\Realese\bin\ja\Microsoft.Data.OData.resources.dll" />
+    <Content Include="Publish\Realese\bin\ja\System.Spatial.resources.dll" />
+    <Content Include="Publish\Realese\bin\ko\Microsoft.Data.Edm.resources.dll" />
+    <Content Include="Publish\Realese\bin\ko\Microsoft.Data.OData.resources.dll" />
+    <Content Include="Publish\Realese\bin\ko\System.Spatial.resources.dll" />
+    <Content Include="Publish\Realese\bin\log4net.dll" />
+    <Content Include="Publish\Realese\bin\Microsoft.Data.Edm.dll" />
+    <Content Include="Publish\Realese\bin\Microsoft.Data.OData.dll" />
+    <Content Include="Publish\Realese\bin\Microsoft.Web.Infrastructure.dll" />
+    <Content Include="Publish\Realese\bin\Microsoft.Web.Mvc.FixedDisplayModes.dll" />
+    <Content Include="Publish\Realese\bin\MongoDB.Bson.dll" />
+    <Content Include="Publish\Realese\bin\MongoDB.Driver.dll" />
+    <Content Include="Publish\Realese\bin\Newtonsoft.Json.dll" />
+    <Content Include="Publish\Realese\bin\NPOI.dll" />
+    <Content Include="Publish\Realese\bin\ru\Microsoft.Data.Edm.resources.dll" />
+    <Content Include="Publish\Realese\bin\ru\Microsoft.Data.OData.resources.dll" />
+    <Content Include="Publish\Realese\bin\ru\System.Spatial.resources.dll" />
+    <Content Include="Publish\Realese\bin\ServiceStack.Common.dll" />
+    <Content Include="Publish\Realese\bin\ServiceStack.Interfaces.dll" />
+    <Content Include="Publish\Realese\bin\ServiceStack.Redis.dll" />
+    <Content Include="Publish\Realese\bin\ServiceStack.Text.dll" />
+    <Content Include="Publish\Realese\bin\System.Net.Http.dll" />
+    <Content Include="Publish\Realese\bin\System.Net.Http.WebRequest.dll" />
+    <Content Include="Publish\Realese\bin\System.Spatial.dll" />
+    <Content Include="Publish\Realese\bin\System.Web.Helpers.dll" />
+    <Content Include="Publish\Realese\bin\System.Web.Http.OData.dll" />
+    <Content Include="Publish\Realese\bin\System.Web.Http.Tracing.dll" />
+    <Content Include="Publish\Realese\bin\System.Web.Mvc.dll" />
+    <Content Include="Publish\Realese\bin\System.Web.Optimization.dll" />
+    <Content Include="Publish\Realese\bin\System.Web.Providers.dll" />
+    <Content Include="Publish\Realese\bin\System.Web.Razor.dll" />
+    <Content Include="Publish\Realese\bin\System.Web.WebPages.Deployment.dll" />
+    <Content Include="Publish\Realese\bin\System.Web.WebPages.dll" />
+    <Content Include="Publish\Realese\bin\System.Web.WebPages.Razor.dll" />
+    <Content Include="Publish\Realese\bin\ThoughtWorks.QRCode.dll" />
+    <Content Include="Publish\Realese\bin\WebGrease.dll" />
+    <Content Include="Publish\Realese\bin\X.Business.Entities.dll" />
+    <Content Include="Publish\Realese\bin\X.Business.Helper.dll" />
+    <Content Include="Publish\Realese\bin\X.Interface.Core.dll" />
+    <Content Include="Publish\Realese\bin\X.Interface.Dto.dll" />
+    <Content Include="Publish\Realese\bin\X.Interface.Extend.dll" />
+    <Content Include="Publish\Realese\bin\X.Interface.Other.dll" />
+    <Content Include="Publish\Realese\bin\X.UI.API.dll" />
+    <Content Include="Publish\Realese\bin\X.Util.Core.dll" />
+    <Content Include="Publish\Realese\bin\X.Util.Entities.dll" />
+    <Content Include="Publish\Realese\bin\X.Util.Extend.dll" />
+    <Content Include="Publish\Realese\bin\X.Util.Other.dll" />
+    <Content Include="Publish\Realese\bin\X.Util.Provider.dll" />
+    <Content Include="Publish\Realese\bin\zh-Hans\EntityFramework.resources.dll" />
+    <Content Include="Publish\Realese\bin\zh-Hans\Microsoft.Data.Edm.resources.dll" />
+    <Content Include="Publish\Realese\bin\zh-Hans\Microsoft.Data.OData.resources.dll" />
+    <Content Include="Publish\Realese\bin\zh-Hans\System.Net.Http.resources.dll" />
+    <Content Include="Publish\Realese\bin\zh-Hans\System.Net.Http.WebRequest.resources.dll" />
+    <Content Include="Publish\Realese\bin\zh-Hans\System.Spatial.resources.dll" />
+    <Content Include="Publish\Realese\bin\zh-Hans\System.Web.Helpers.resources.dll" />
+    <Content Include="Publish\Realese\bin\zh-Hans\System.Web.Http.OData.resources.dll" />
+    <Content Include="Publish\Realese\bin\zh-Hans\System.Web.Http.Tracing.resources.dll" />
+    <Content Include="Publish\Realese\bin\zh-Hans\System.Web.Mvc.resources.dll" />
+    <Content Include="Publish\Realese\bin\zh-Hans\System.Web.Optimization.resources.dll" />
+    <Content Include="Publish\Realese\bin\zh-Hans\System.Web.Providers.resources.dll" />
+    <Content Include="Publish\Realese\bin\zh-Hans\System.Web.Razor.resources.dll" />
+    <Content Include="Publish\Realese\bin\zh-Hans\System.Web.WebPages.Deployment.resources.dll" />
+    <Content Include="Publish\Realese\bin\zh-Hans\System.Web.WebPages.Razor.resources.dll" />
+    <Content Include="Publish\Realese\bin\zh-Hans\System.Web.WebPages.resources.dll" />
+    <Content Include="Publish\Realese\bin\zh-Hant\Microsoft.Data.Edm.resources.dll" />
+    <Content Include="Publish\Realese\bin\zh-Hant\Microsoft.Data.OData.resources.dll" />
+    <Content Include="Publish\Realese\bin\zh-Hant\System.Spatial.resources.dll" />
+    <Content Include="Publish\Realese\favicon.ico" />
+    <Content Include="Readme.txt" />
+    <Content Include="Ref\Apache.NMS.ActiveMQ.dll" />
+    <Content Include="Ref\Apache.NMS.dll" />
+    <Content Include="Ref\Couchbase.dll" />
+    <Content Include="Ref\Enyim.Caching.dll" />
+    <Content Include="Ref\log4net.dll" />
+    <Content Include="Ref\MongoDB.Bson.dll" />
+    <Content Include="Ref\MongoDB.Driver.dll" />
+    <Content Include="Ref\MySql.Data.dll" />
+    <Content Include="Ref\Newtonsoft.Json.dll" />
+    <Content Include="Ref\NPOI\ICSharpCode.SharpZipLib.dll" />
+    <Content Include="Ref\NPOI\NPOI.dll" />
+    <Content Include="Ref\NPOI\NPOI.OOXML.dll" />
+    <Content Include="Ref\NPOI\NPOI.OpenXml4Net.dll" />
+    <Content Include="Ref\NPOI\NPOI.OpenXmlFormats.dll" />
+    <Content Include="Ref\NPOI\NPOI.XML" />
+    <Content Include="Ref\Oracle.DataAccess.dll" />
+    <Content Include="Ref\ServiceStack.Common.dll" />
+    <Content Include="Ref\ServiceStack.Interfaces.dll" />
+    <Content Include="Ref\ServiceStack.Redis.dll" />
+    <Content Include="Ref\ServiceStack.Text.dll" />
+    <Content Include="Ref\System.Data.SQLite.dll" />
+    <Content Include="Ref\ThoughtWorks.QRCode.dll" />
+    <Content Include="Ref\upgrade\MongoDB.Bson.dll" />
+    <Content Include="Ref\upgrade\MongoDB.Bson.XML" />
+    <Content Include="Ref\upgrade\MongoDB.Driver.Core.dll" />
+    <Content Include="Ref\upgrade\MongoDB.Driver.dll" />
+    <Content Include="Ref\upgrade\MongoDB.Driver.Legacy.dll" />
+    <Content Include="Ref\upgrade\MongoDB.Driver.Legacy.XML" />
+    <Content Include="Ref\upgrade\MongoDB.Driver.XML" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Publish\Debug\bin\App_global.asax.compiled" />
+    <None Include="Publish\Debug\packages.config" />
+    <None Include="Publish\Debug\PrecompiledApp.config" />
+    <None Include="Publish\Debug\Web.config" />
+    <None Include="Publish\Realese\bin\App_global.asax.compiled" />
+    <None Include="Publish\Realese\packages.config" />
+    <None Include="Publish\Realese\PrecompiledApp.config" />
+    <None Include="Publish\Realese\Web.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

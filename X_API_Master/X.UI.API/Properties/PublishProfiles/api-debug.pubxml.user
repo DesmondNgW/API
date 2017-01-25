@@ -5,7 +5,7 @@
 -->
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <_PublishTargetUrl>D:\Project\git\API\X_API_Master\X.Publish\Debug</_PublishTargetUrl>
+    <_PublishTargetUrl>D:\Project\git\API\X_API_Master\X.IO\Publish\Debug</_PublishTargetUrl>
   </PropertyGroup>
   <ItemGroup>
     <File Include="App_Data/app.xml">
@@ -72,13 +72,13 @@
       <publishTime>06/05/2016 19:24:49</publishTime>
     </File>
     <File Include="bin/App_global.asax.compiled">
-      <publishTime>01/25/2017 14:04:37</publishTime>
+      <publishTime>01/25/2017 15:25:09</publishTime>
     </File>
     <File Include="bin/App_global.asax.dll">
-      <publishTime>01/25/2017 14:04:37</publishTime>
+      <publishTime>01/25/2017 15:25:09</publishTime>
     </File>
     <File Include="bin/App_global.asax.pdb">
-      <publishTime>01/25/2017 14:04:37</publishTime>
+      <publishTime>01/25/2017 15:25:09</publishTime>
     </File>
     <File Include="bin/Couchbase.dll">
       <publishTime>11/22/2016 11:59:16</publishTime>
@@ -273,16 +273,16 @@
       <publishTime>02/04/2016 17:02:37</publishTime>
     </File>
     <File Include="bin/X.Business.Entities.dll">
-      <publishTime>01/25/2017 13:30:23</publishTime>
+      <publishTime>01/25/2017 15:23:18</publishTime>
     </File>
     <File Include="bin/X.Business.Entities.pdb">
-      <publishTime>01/25/2017 13:30:23</publishTime>
+      <publishTime>01/25/2017 15:23:18</publishTime>
     </File>
     <File Include="bin/X.Business.Helper.dll">
-      <publishTime>01/25/2017 13:30:31</publishTime>
+      <publishTime>01/25/2017 15:23:21</publishTime>
     </File>
     <File Include="bin/X.Business.Helper.pdb">
-      <publishTime>01/25/2017 13:30:31</publishTime>
+      <publishTime>01/25/2017 15:23:21</publishTime>
     </File>
     <File Include="bin/X.Data.Core.CoreCache.dll">
       <publishTime>09/22/2015 21:07:20</publishTime>
@@ -303,28 +303,28 @@
       <publishTime>09/22/2015 21:07:19</publishTime>
     </File>
     <File Include="bin/X.Interface.Core.dll">
-      <publishTime>01/25/2017 13:53:40</publishTime>
+      <publishTime>01/25/2017 15:25:03</publishTime>
     </File>
     <File Include="bin/X.Interface.Core.pdb">
-      <publishTime>01/25/2017 13:53:40</publishTime>
+      <publishTime>01/25/2017 15:25:03</publishTime>
     </File>
     <File Include="bin/X.Interface.Dto.dll">
-      <publishTime>01/25/2017 13:30:26</publishTime>
+      <publishTime>01/25/2017 15:25:01</publishTime>
     </File>
     <File Include="bin/X.Interface.Dto.pdb">
-      <publishTime>01/25/2017 13:30:26</publishTime>
+      <publishTime>01/25/2017 15:25:01</publishTime>
     </File>
     <File Include="bin/X.Interface.Extend.dll">
-      <publishTime>01/25/2017 13:30:23</publishTime>
+      <publishTime>01/25/2017 15:23:18</publishTime>
     </File>
     <File Include="bin/X.Interface.Extend.pdb">
-      <publishTime>01/25/2017 13:30:23</publishTime>
+      <publishTime>01/25/2017 15:23:18</publishTime>
     </File>
     <File Include="bin/X.Interface.Other.dll">
-      <publishTime>01/25/2017 13:53:38</publishTime>
+      <publishTime>01/25/2017 15:25:02</publishTime>
     </File>
     <File Include="bin/X.Interface.Other.pdb">
-      <publishTime>01/25/2017 13:53:38</publishTime>
+      <publishTime>01/25/2017 15:25:02</publishTime>
     </File>
     <File Include="bin/X.UI.API.Compiled.dll">
       <publishTime>07/22/2015 19:58:50</publishTime>
@@ -333,43 +333,43 @@
       <publishTime>07/22/2015 19:58:50</publishTime>
     </File>
     <File Include="bin/X.UI.API.dll">
-      <publishTime>01/25/2017 14:02:27</publishTime>
+      <publishTime>01/25/2017 15:25:04</publishTime>
     </File>
     <File Include="bin/X.UI.API.pdb">
-      <publishTime>01/25/2017 14:02:27</publishTime>
+      <publishTime>01/25/2017 15:25:04</publishTime>
     </File>
     <File Include="bin/X.UI.API.XML">
-      <publishTime>01/25/2017 14:02:27</publishTime>
+      <publishTime>01/25/2017 15:25:04</publishTime>
     </File>
     <File Include="bin/X.Util.Core.dll">
-      <publishTime>01/25/2017 13:30:28</publishTime>
+      <publishTime>01/25/2017 15:23:19</publishTime>
     </File>
     <File Include="bin/X.Util.Core.pdb">
-      <publishTime>01/25/2017 13:30:28</publishTime>
+      <publishTime>01/25/2017 15:23:19</publishTime>
     </File>
     <File Include="bin/X.Util.Entities.dll">
-      <publishTime>01/25/2017 13:30:23</publishTime>
+      <publishTime>01/25/2017 15:23:18</publishTime>
     </File>
     <File Include="bin/X.Util.Entities.pdb">
-      <publishTime>01/25/2017 13:30:23</publishTime>
+      <publishTime>01/25/2017 15:23:17</publishTime>
     </File>
     <File Include="bin/X.Util.Extend.dll">
-      <publishTime>01/25/2017 13:30:30</publishTime>
+      <publishTime>01/25/2017 15:23:21</publishTime>
     </File>
     <File Include="bin/X.Util.Extend.pdb">
-      <publishTime>01/25/2017 13:30:30</publishTime>
+      <publishTime>01/25/2017 15:23:21</publishTime>
     </File>
     <File Include="bin/X.Util.Other.dll">
-      <publishTime>01/25/2017 13:53:37</publishTime>
+      <publishTime>01/25/2017 15:23:21</publishTime>
     </File>
     <File Include="bin/X.Util.Other.pdb">
-      <publishTime>01/25/2017 13:53:37</publishTime>
+      <publishTime>01/25/2017 15:23:21</publishTime>
     </File>
     <File Include="bin/X.Util.Provider.dll">
-      <publishTime>01/25/2017 13:30:29</publishTime>
+      <publishTime>01/25/2017 15:23:19</publishTime>
     </File>
     <File Include="bin/X.Util.Provider.pdb">
-      <publishTime>01/25/2017 13:30:29</publishTime>
+      <publishTime>01/25/2017 15:23:19</publishTime>
     </File>
     <File Include="bin/zh-CHS/System.Data.SqlServerCe.resources.dll">
       <publishTime>06/04/2012 13:29:58</publishTime>
@@ -450,10 +450,10 @@
       <publishTime>01/11/2017 15:03:21</publishTime>
     </File>
     <File Include="PrecompiledApp.config">
-      <publishTime>01/25/2017 14:04:31</publishTime>
+      <publishTime>01/25/2017 15:25:05</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>01/25/2017 14:04:29</publishTime>
+      <publishTime>01/25/2017 15:25:04</publishTime>
     </File>
   </ItemGroup>
 </Project>

@@ -148,7 +148,7 @@
     </Reference>
     <Reference Include="ThoughtWorks.QRCode, Version=1.0.4778.30637, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\X.Ref\ThoughtWorks.QRCode.dll</HintPath>
+      <HintPath>..\X.IO\Ref\ThoughtWorks.QRCode.dll</HintPath>
     </Reference>
     <Reference Include="WebGrease">
       <Private>True</Private>

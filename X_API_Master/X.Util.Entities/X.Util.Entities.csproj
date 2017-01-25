@@ -31,10 +31,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="MongoDB.Bson">
-      <HintPath>..\X.Ref\MongoDB.Bson.dll</HintPath>
+      <HintPath>..\X.IO\Ref\MongoDB.Bson.dll</HintPath>
     </Reference>
     <Reference Include="MongoDB.Driver">
-      <HintPath>..\X.Ref\MongoDB.Driver.dll</HintPath>
+      <HintPath>..\X.IO\Ref\MongoDB.Driver.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />

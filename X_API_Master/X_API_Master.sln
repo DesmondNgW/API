@@ -5,32 +5,6 @@ VisualStudioVersion = 12.0.40629.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "X.UI", "X.UI", "{7419F28B-842C-4C80-B933-0370273F4029}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "X.Ref", "X.Ref", "{3685770C-1EB5-4D81-9DD0-A0FB6BD70316}"
-	ProjectSection(SolutionItems) = preProject
-		X.Ref\Apache.NMS.ActiveMQ.dll = X.Ref\Apache.NMS.ActiveMQ.dll
-		X.Ref\Apache.NMS.dll = X.Ref\Apache.NMS.dll
-		X.Ref\Couchbase.dll = X.Ref\Couchbase.dll
-		X.Ref\Enyim.Caching.dll = X.Ref\Enyim.Caching.dll
-		X.Ref\NPOI\ICSharpCode.SharpZipLib.dll = X.Ref\NPOI\ICSharpCode.SharpZipLib.dll
-		X.Ref\log4net.dll = X.Ref\log4net.dll
-		X.Ref\MongoDB.Bson.dll = X.Ref\MongoDB.Bson.dll
-		X.Ref\MongoDB.Driver.dll = X.Ref\MongoDB.Driver.dll
-		X.Ref\MySql.Data.dll = X.Ref\MySql.Data.dll
-		X.Ref\Newtonsoft.Json.dll = X.Ref\Newtonsoft.Json.dll
-		X.Ref\NPOI\NPOI.dll = X.Ref\NPOI\NPOI.dll
-		X.Ref\NPOI\NPOI.OOXML.dll = X.Ref\NPOI\NPOI.OOXML.dll
-		X.Ref\NPOI\NPOI.OpenXml4Net.dll = X.Ref\NPOI\NPOI.OpenXml4Net.dll
-		X.Ref\NPOI\NPOI.OpenXmlFormats.dll = X.Ref\NPOI\NPOI.OpenXmlFormats.dll
-		X.Ref\NPOI\NPOI.XML = X.Ref\NPOI\NPOI.XML
-		X.Ref\Oracle.DataAccess.dll = X.Ref\Oracle.DataAccess.dll
-		X.Ref\ServiceStack.Common.dll = X.Ref\ServiceStack.Common.dll
-		X.Ref\ServiceStack.Interfaces.dll = X.Ref\ServiceStack.Interfaces.dll
-		X.Ref\ServiceStack.Redis.dll = X.Ref\ServiceStack.Redis.dll
-		X.Ref\ServiceStack.Text.dll = X.Ref\ServiceStack.Text.dll
-		X.Ref\System.Data.SQLite.dll = X.Ref\System.Data.SQLite.dll
-		X.Ref\ThoughtWorks.QRCode.dll = X.Ref\ThoughtWorks.QRCode.dll
-	EndProjectSection
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "X.Util", "X.Util", "{DC5ED93A-860F-4E46-A84D-EB0E03ECB627}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "X.Data.Core", "X.Data.Core", "{DF07EFEF-5977-4BAC-9DE5-10EEE73D773C}"
@@ -42,11 +16,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "X.Interface", "X.Interface", "{3AE43C58-A0E4-446C-9277-9B662869906F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "X.DataBase", "X.DataBase", "{18F9B71B-ABC3-451C-90E8-24FA5806FF05}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{0DA84354-1277-4402-A730-F3D3A636663E}"
-	ProjectSection(SolutionItems) = preProject
-		Readme.txt = Readme.txt
-	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "X.UI.API", "X.UI.API\X.UI.API.csproj", "{A118B6C5-18A7-4A69-8483-7560F57FEB14}"
 EndProject
@@ -105,6 +74,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "X.WFConfig", "X.WFConfig\X.WFConfig.csproj", "{DA55E9CB-47D7-40C9-8992-986405A5C8C5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "X.UI.Update", "X.UI.Update\X.UI.Update.csproj", "{095199D1-9182-40FC-ADAB-3B85AE7B2848}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "X.IO", "X.IO", "{D1176017-6E9B-4948-839A-3851C7B2E86C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "X.IO", "X.IO\X.IO.csproj", "{06A52428-E95F-4FE0-A8F0-0E912A986B66}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -224,6 +197,10 @@ Global
 		{095199D1-9182-40FC-ADAB-3B85AE7B2848}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{095199D1-9182-40FC-ADAB-3B85AE7B2848}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{095199D1-9182-40FC-ADAB-3B85AE7B2848}.Release|Any CPU.Build.0 = Release|Any CPU
+		{06A52428-E95F-4FE0-A8F0-0E912A986B66}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{06A52428-E95F-4FE0-A8F0-0E912A986B66}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{06A52428-E95F-4FE0-A8F0-0E912A986B66}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{06A52428-E95F-4FE0-A8F0-0E912A986B66}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -257,5 +234,6 @@ Global
 		{57D78797-EFCA-44B6-A812-A3F6500F6E95} = {3F16AE64-9457-4F71-8C8B-258B82D36AF5}
 		{DA55E9CB-47D7-40C9-8992-986405A5C8C5} = {7419F28B-842C-4C80-B933-0370273F4029}
 		{095199D1-9182-40FC-ADAB-3B85AE7B2848} = {7419F28B-842C-4C80-B933-0370273F4029}
+		{06A52428-E95F-4FE0-A8F0-0E912A986B66} = {D1176017-6E9B-4948-839A-3851C7B2E86C}
 	EndGlobalSection
 EndGlobal

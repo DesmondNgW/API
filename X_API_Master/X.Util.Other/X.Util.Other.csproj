@@ -31,19 +31,19 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="ICSharpCode.SharpZipLib">
-      <HintPath>..\X.Ref\NPOI\ICSharpCode.SharpZipLib.dll</HintPath>
+      <HintPath>..\X.IO\Ref\NPOI\ICSharpCode.SharpZipLib.dll</HintPath>
     </Reference>
     <Reference Include="NPOI">
-      <HintPath>..\X.Ref\NPOI\NPOI.dll</HintPath>
+      <HintPath>..\X.IO\Ref\NPOI\NPOI.dll</HintPath>
     </Reference>
     <Reference Include="NPOI.OOXML">
-      <HintPath>..\X.Ref\NPOI\NPOI.OOXML.dll</HintPath>
+      <HintPath>..\X.IO\Ref\NPOI\NPOI.OOXML.dll</HintPath>
     </Reference>
     <Reference Include="NPOI.OpenXml4Net">
-      <HintPath>..\X.Ref\NPOI\NPOI.OpenXml4Net.dll</HintPath>
+      <HintPath>..\X.IO\Ref\NPOI\NPOI.OpenXml4Net.dll</HintPath>
     </Reference>
     <Reference Include="NPOI.OpenXmlFormats">
-      <HintPath>..\X.Ref\NPOI\NPOI.OpenXmlFormats.dll</HintPath>
+      <HintPath>..\X.IO\Ref\NPOI\NPOI.OpenXmlFormats.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -58,7 +58,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="ThoughtWorks.QRCode">
-      <HintPath>..\X.Ref\ThoughtWorks.QRCode.dll</HintPath>
+      <HintPath>..\X.IO\Ref\ThoughtWorks.QRCode.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

@@ -31,31 +31,31 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Couchbase">
-      <HintPath>..\X.Ref\Couchbase.dll</HintPath>
+      <HintPath>..\X.IO\Ref\Couchbase.dll</HintPath>
     </Reference>
     <Reference Include="Enyim.Caching">
-      <HintPath>..\X.Ref\Enyim.Caching.dll</HintPath>
+      <HintPath>..\X.IO\Ref\Enyim.Caching.dll</HintPath>
     </Reference>
     <Reference Include="log4net">
-      <HintPath>..\X.Ref\log4net.dll</HintPath>
+      <HintPath>..\X.IO\Ref\log4net.dll</HintPath>
     </Reference>
     <Reference Include="MongoDB.Bson">
-      <HintPath>..\X.Ref\MongoDB.Bson.dll</HintPath>
+      <HintPath>..\X.IO\Ref\MongoDB.Bson.dll</HintPath>
     </Reference>
     <Reference Include="MongoDB.Driver">
-      <HintPath>..\X.Ref\MongoDB.Driver.dll</HintPath>
+      <HintPath>..\X.IO\Ref\MongoDB.Driver.dll</HintPath>
     </Reference>
     <Reference Include="ServiceStack.Common">
-      <HintPath>..\X.Ref\ServiceStack.Common.dll</HintPath>
+      <HintPath>..\X.IO\Ref\ServiceStack.Common.dll</HintPath>
     </Reference>
     <Reference Include="ServiceStack.Interfaces">
-      <HintPath>..\X.Ref\ServiceStack.Interfaces.dll</HintPath>
+      <HintPath>..\X.IO\Ref\ServiceStack.Interfaces.dll</HintPath>
     </Reference>
     <Reference Include="ServiceStack.Redis">
-      <HintPath>..\X.Ref\ServiceStack.Redis.dll</HintPath>
+      <HintPath>..\X.IO\Ref\ServiceStack.Redis.dll</HintPath>
     </Reference>
     <Reference Include="ServiceStack.Text">
-      <HintPath>..\X.Ref\ServiceStack.Text.dll</HintPath>
+      <HintPath>..\X.IO\Ref\ServiceStack.Text.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
