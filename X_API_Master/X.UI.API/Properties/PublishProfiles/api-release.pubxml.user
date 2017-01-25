@@ -72,10 +72,10 @@
       <publishTime>06/05/2016 19:24:49</publishTime>
     </File>
     <File Include="bin/App_global.asax.compiled">
-      <publishTime>01/22/2017 11:11:34</publishTime>
+      <publishTime>01/25/2017 14:05:41</publishTime>
     </File>
     <File Include="bin/App_global.asax.dll">
-      <publishTime>01/22/2017 11:11:33</publishTime>
+      <publishTime>01/25/2017 14:05:41</publishTime>
     </File>
     <File Include="bin/Couchbase.dll">
       <publishTime>11/22/2016 11:59:16</publishTime>
@@ -257,6 +257,9 @@
     <File Include="bin/System.Web.WebPages.Razor.dll">
       <publishTime>11/22/2016 11:59:17</publishTime>
     </File>
+    <File Include="bin/ThoughtWorks.QRCode.dll">
+      <publishTime>01/24/2017 13:32:42</publishTime>
+    </File>
     <File Include="bin/WebGrease.dll">
       <publishTime>11/22/2016 11:59:18</publishTime>
     </File>
@@ -264,10 +267,10 @@
       <publishTime>02/04/2016 17:02:00</publishTime>
     </File>
     <File Include="bin/X.Business.Entities.dll">
-      <publishTime>01/22/2017 11:11:15</publishTime>
+      <publishTime>01/25/2017 14:05:27</publishTime>
     </File>
     <File Include="bin/X.Business.Helper.dll">
-      <publishTime>01/22/2017 11:11:19</publishTime>
+      <publishTime>01/25/2017 14:05:30</publishTime>
     </File>
     <File Include="bin/X.Data.Core.CoreCache.dll">
       <publishTime>09/22/2015 19:51:38</publishTime>
@@ -279,37 +282,37 @@
       <publishTime>09/22/2015 19:51:38</publishTime>
     </File>
     <File Include="bin/X.Interface.Core.dll">
-      <publishTime>01/22/2017 11:11:21</publishTime>
+      <publishTime>01/25/2017 14:05:32</publishTime>
     </File>
     <File Include="bin/X.Interface.Dto.dll">
-      <publishTime>01/22/2017 11:11:17</publishTime>
+      <publishTime>01/25/2017 14:05:28</publishTime>
     </File>
     <File Include="bin/X.Interface.Extend.dll">
       <publishTime>01/22/2017 11:11:15</publishTime>
     </File>
     <File Include="bin/X.Interface.Other.dll">
-      <publishTime>01/22/2017 11:11:19</publishTime>
+      <publishTime>01/25/2017 14:05:31</publishTime>
     </File>
     <File Include="bin/X.UI.API.Compiled.dll">
       <publishTime>07/22/2015 19:59:52</publishTime>
     </File>
     <File Include="bin/X.UI.API.dll">
-      <publishTime>01/22/2017 11:11:21</publishTime>
+      <publishTime>01/25/2017 14:05:33</publishTime>
     </File>
     <File Include="bin/X.Util.Core.dll">
-      <publishTime>01/22/2017 11:11:17</publishTime>
+      <publishTime>01/25/2017 14:05:27</publishTime>
     </File>
     <File Include="bin/X.Util.Entities.dll">
-      <publishTime>01/22/2017 11:11:15</publishTime>
+      <publishTime>01/25/2017 14:05:26</publishTime>
     </File>
     <File Include="bin/X.Util.Extend.dll">
-      <publishTime>01/22/2017 11:11:18</publishTime>
+      <publishTime>01/25/2017 14:05:29</publishTime>
     </File>
     <File Include="bin/X.Util.Other.dll">
-      <publishTime>01/22/2017 11:11:19</publishTime>
+      <publishTime>01/25/2017 14:05:29</publishTime>
     </File>
     <File Include="bin/X.Util.Provider.dll">
-      <publishTime>01/22/2017 11:11:18</publishTime>
+      <publishTime>01/25/2017 14:05:28</publishTime>
     </File>
     <File Include="bin/zh-CHS/System.Data.SqlServerCe.resources.dll">
       <publishTime>06/04/2012 13:29:58</publishTime>
@@ -390,7 +393,7 @@
       <publishTime>01/11/2017 15:03:21</publishTime>
     </File>
     <File Include="PrecompiledApp.config">
-      <publishTime>01/22/2017 11:11:25</publishTime>
+      <publishTime>01/25/2017 14:05:35</publishTime>
     </File>
     <File Include="Web.config">
       <publishTime>01/11/2017 15:08:45</publishTime>

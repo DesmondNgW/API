@@ -10,7 +10,7 @@ namespace X.Util.Other
 {
     public class CaptchaHelper
     {
-        private static CaptchaModel CaptchaOptions()
+        public static CaptchaModel CaptchaOptions()
         {
             var options = new CaptchaModel
             {
@@ -29,7 +29,7 @@ namespace X.Util.Other
             return options;
         }
 
-        private static TextImage TextImageOptions()
+        public static TextImage TextImageOptions()
         {
             return new TextImage
             {
@@ -46,7 +46,7 @@ namespace X.Util.Other
         /// <summary>
         /// 1*1 像素图片
         /// </summary>
-        public static byte[] BitMap()
+        public static byte[] GetBitMapByte()
         {
             var bmp = new Bitmap(1, 1);
             byte[] result;
@@ -69,7 +69,7 @@ namespace X.Util.Other
         /// 简单画图
         /// </summary>
         /// <param name="options"></param>
-        public static byte[] TextImage(TextImage options)
+        public static byte[] GetTextImageByte(TextImage options)
         {
             if (options == null) options = TextImageOptions();
             var bmp = new Bitmap(options.Width, options.Height);
@@ -98,7 +98,7 @@ namespace X.Util.Other
         /// 验证码图片
         /// </summary>
         /// <param name="options"></param>
-        public static byte[] Captcha(CaptchaModel options)
+        public static byte[] GetCaptchaByte(CaptchaModel options)
         {
             if (Equals(options, null)) options = CaptchaOptions();
             int width = options.Width, height = options.Height;
@@ -150,15 +150,25 @@ namespace X.Util.Other
         }
 
         /// <summary>
-        /// 验证验证码是否正确
+        /// 验证码字符串
         /// </summary>
-        /// <param name="options"></param>
+        /// <param name="key"></param>
         /// <param name="value"></param>
         /// <returns></returns>
-        //public static bool VerifyCaptcha(CaptchaModel options, string value)
-        //{
-        //    if (Equals(options, null)) options = CaptchaOptions();
-        //    return BaseCryption.VerifyData(options.CookieName, CookieHelper.GetCookie(context, options.CookieName), HmacType.Sha1);
-        //}
+        public static string GetCaptchaCode(string key, string value)
+        {
+            return BaseCryption.SignData(key, value, HmacType.Sha1);
+        }
+
+        /// <summary>
+        /// 验证码验证
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static bool VerifyCaptcha(string key, string value)
+        {
+            return BaseCryption.VerifyData(key, value, HmacType.Sha1);
+        }
     }
 }

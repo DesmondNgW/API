@@ -20,7 +20,38 @@
             <summary>
             获取token
             </summary>
+            <param name="clientId">clientId</param>
             <returns>指定对象序列化</returns>
+        </member>
+        <member name="M:X.UI.API.Controllers.KmsController.Now">
+            <summary>
+            获取当前时间
+            </summary>
+            <returns>指定对象序列化</returns>
+        </member>
+        <member name="M:X.UI.API.Controllers.KmsController.VerifyCode">
+            <summary>
+            验证码图片
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:X.UI.API.Controllers.KmsController.BitMap">
+            <summary>
+            1*1像素位图
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:X.UI.API.Controllers.KmsController.TextImage">
+            <summary>
+            文本转图像
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:X.UI.API.Controllers.KmsController.QrCode">
+            <summary>
+            二维码
+            </summary>
+            <returns></returns>
         </member>
         <member name="P:X.UI.API.Model.ApiRequestContext.UserAgent">
             <summary>
