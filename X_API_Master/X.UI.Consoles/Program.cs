@@ -54,6 +54,10 @@ namespace X.UI.Consoles
     {
         static void Main()
         {
+            //var map = new ExeConfigurationFileMap { ExeConfigFilename = "web.config" };
+            //var config = ConfigurationManager.OpenMappedExeConfiguration(map, ConfigurationUserLevel.None);
+
+
             //for (var i = 0; i < 10; i++)
             //{
             //    ThirdPartyTest.CouchBaseTest("test", "test");
