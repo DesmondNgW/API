@@ -26,7 +26,7 @@ namespace X.UI.Consoles
                 var p2 = start*((StringConvert.SysRandom.NextDouble()*(stepMax + stepMin) - stepMin) + 1);
                 var p3 = start*((StringConvert.SysRandom.NextDouble()*(stepMax + stepMin) - stepMin) + 1);
                 var p4 = start*((StringConvert.SysRandom.NextDouble()*(stepMax + stepMin) - stepMin) + 1);
-                var price = new Price()
+                var price = new Price
                 {
                     Open = p1,
                     Close = p2,
@@ -34,6 +34,34 @@ namespace X.UI.Consoles
                     Low = Math.Min(Math.Min(Math.Min(p1, p2), p3), p4)
                 };
                 result.Add(price);
+            }
+            return result;
+        }
+
+        /// <summary>
+        /// 转换样本
+        /// </summary>
+        /// <param name="datas"></param>
+        /// <param name="count"></param>
+        /// <returns></returns>
+        public static List<SPrice> Convert(List<Price> datas, int count)
+        {
+            var result = new List<SPrice>();
+            int c = datas.Count/count;
+            for (var i = 0; i < c; i++)
+            {
+                var sPrice = new SPrice
+                {
+                    Count = count,
+                    Close = datas[i*count + count - 1].Close,
+                    Open = datas[i * count].Open,
+                };
+                for (var j = 0; j < count; j++)
+                {
+                    sPrice.High = Math.Max(datas[i * count + j].High, sPrice.High);
+                    sPrice.Low = Math.Max(datas[i * count + j].Low, sPrice.Low);
+                }
+                result.Add(sPrice);
             }
             return result;
         }
