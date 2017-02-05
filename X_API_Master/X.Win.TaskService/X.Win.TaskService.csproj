@@ -106,8 +106,6 @@
     <None Include="install.bat">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="X.Win.TaskService_1_TemporaryKey.pfx" />
-    <None Include="X.Win.TaskService_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\X.Util.Core\X.Util.Core.csproj">
