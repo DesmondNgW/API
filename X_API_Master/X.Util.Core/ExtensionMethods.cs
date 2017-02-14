@@ -82,9 +82,9 @@ namespace X.Util.Core
         #endregion
 
         #region decimal
-        public static string FloorString(this decimal d, int length)
+        public static string FloorString(this decimal d, int length, string format)
         {
-            return (Math.Floor(d * (long)Math.Pow(10, length)) / (long)Math.Pow(10, length)).ToString("N" + length);
+            return d.FloorDecimal(length).ToString(format);
         }
 
         public static decimal FloorDecimal(this decimal d, int length)
@@ -92,9 +92,9 @@ namespace X.Util.Core
             return Math.Floor(d * (long)Math.Pow(10, length)) / (long)Math.Pow(10, length);
         }
 
-        public static string CeilingString(this decimal d, int length)
+        public static string CeilingString(this decimal d, int length, string format)
         {
-            return (Math.Ceiling(d * (long)Math.Pow(10, length)) / (long)Math.Pow(10, length)).ToString("N" + length);
+            return d.CeilingDecimal(length).ToString(format);
         }
 
         public static decimal CeilingDecimal(this decimal d, int length)
