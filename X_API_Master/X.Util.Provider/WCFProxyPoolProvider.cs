@@ -110,7 +110,7 @@ namespace X.Util.Provider
 
         public void Dispose()
         {
-            if (_scope != null) _scope.Dispose();
+            Dispose(EDomain);
         }
         #endregion
     }
