@@ -170,7 +170,6 @@ namespace X.Util.Extend.Mongo
         /// </summary>
         /// <param name="database"></param>
         /// <param name="collection"></param>
-        /// <param name="credentialDataBase"></param>
         /// <returns></returns>
         public void RemoveAllMongo(string database, string collection)
         {
