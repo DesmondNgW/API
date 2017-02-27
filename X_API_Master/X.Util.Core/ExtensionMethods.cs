@@ -57,7 +57,15 @@ namespace X.Util.Core
 
         public static string ToJson(this object t)
         {
-            return t == null ? string.Empty : JsonConvert.SerializeObject(t, new JsonSerializerSettings { MaxDepth = int.MaxValue, DateTimeZoneHandling = DateTimeZoneHandling.Local });
+            try
+            {
+                return t == null ? string.Empty : JsonConvert.SerializeObject(t, new JsonSerializerSettings { MaxDepth = int.MaxValue, DateTimeZoneHandling = DateTimeZoneHandling.Local });
+            }
+            catch (Exception e)
+            {
+                Logger.Client.Error(Logger.Client.GetMethodInfo(MethodBase.GetCurrentMethod(), new object[] { }), e, LogDomain.Util);
+                return string.Empty;
+            }
         }
 
         public static TDest AutoMapper<TDest>(this object src)

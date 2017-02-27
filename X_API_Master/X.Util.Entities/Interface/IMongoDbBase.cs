@@ -29,6 +29,8 @@ namespace X.Util.Entities.Interface
 
         MongoCursor<T> Find(string database, string collection, IMongoQuery query, IMongoFields field = null, IMongoSortBy sortBy = null, int limit = 0, int skip = 0);
 
+        MongoCursor<BsonDocument> FindBsonDocument(string database, string collection, IMongoQuery query, IMongoFields field = null, IMongoSortBy sortBy = null, int limit = 0, int skip = 0);
+
         T FindOne(string database, string collection, IMongoQuery query);
 
         long Count(string database, string collection, IMongoQuery query, int limit = 0, int skip = 0);

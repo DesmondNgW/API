@@ -217,6 +217,32 @@ namespace X.Util.Extend.Mongo
         }
 
         /// <summary>
+        /// 查询MongoDB 返回BsonDocument
+        /// </summary>
+        /// <param name="database"></param>
+        /// <param name="collection"></param>
+        /// <param name="query"></param>
+        /// <param name="field"></param>
+        /// <param name="sortBy"></param>
+        /// <param name="limit"></param>
+        /// <param name="skip"></param>
+        /// <returns></returns>
+        public MongoCursor<BsonDocument> FindBsonDocument(string database, string collection, IMongoQuery query, IMongoFields field = null, IMongoSortBy sortBy = null, int limit = 0, int skip = 0)
+        {
+            var mc = new MongoDbProvider<BsonDocument>(database, collection);
+            var result = CoreAccess<MongoCollection<BsonDocument>>.TryCall((iquery, ifield, isortBy, ilimit, iskip) =>
+            {
+                var docs = mc.Client.Find(iquery);
+                docs = (ifield != null) ? docs.SetFields(ifield) : docs;
+                docs = (isortBy != null) ? docs.SetSortOrder(isortBy) : docs;
+                docs = (ilimit != 0) ? docs.SetLimit(ilimit) : docs;
+                docs = (iskip != 0) ? docs.SetSkip(iskip) : docs;
+                return docs;
+            }, query, field, sortBy, limit, skip, mc, new LogOptions<MongoCursor<BsonDocument>>(iresult => iresult != null && iresult.Any()));
+            return result;
+        }
+
+        /// <summary>
         /// 取MongoDB条数
         /// </summary>
         /// <param name="database"></param>

@@ -53,4 +53,18 @@ namespace X.UI.Consoles
         public object Value { get; set; }
         public string Key { get; set; }
     }
+
+    public class MongoTest1 : MongoBaseModel
+    {
+        public DateTime Dt { get; set; }
+        public int Value { get; set; }
+        public string Key { get; set; }
+    }
+
+    public class MongoTest2 : MongoBaseModel
+    {
+        public DateTime Dt { get; set; }
+        public string Value { get; set; }
+        public string Key { get; set; }
+    }
 }
