@@ -70,9 +70,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Price.cs" />
-    <Compile Include="StatisticsHelper.cs" />
-    <Compile Include="Strategy.cs" />
     <Compile Include="ThirdPartyTest.cs" />
     <Compile Include="APITestMethods.cs" />
     <Compile Include="Program.cs" />

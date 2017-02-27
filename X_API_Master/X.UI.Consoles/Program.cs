@@ -54,39 +54,7 @@ namespace X.UI.Consoles
     {
         static void Main()
         {
-            //var map = new ExeConfigurationFileMap { ExeConfigFilename = "web.config" };
-            //var config = ConfigurationManager.OpenMappedExeConfiguration(map, ConfigurationUserLevel.None);
-            ThirdPartyTest.MongoTest();
-
-            //for (var i = 0; i < 10; i++)
-            //{
-            //    ThirdPartyTest.CouchBaseTest("test", "test");
-            //}
-            //var list1 = string.Empty;
-            //var list2 = string.Empty;
-            //var sr = new StreamReader("1.txt", Encoding.UTF8);
-            //string s = null;
-            //while ((s = sr.ReadLine()) != null)
-            //{
-            //    var arr = s.Split('\t');
-            //    list1 += "\"" + arr[1] + "\",";
-            //    list2 += "\"" + arr[3] + "\",";
-            //}
-            //Console.WriteLine("s");
-            //CustomerTable.InitCustomerInfo(Work.CustomerNo, Work.CustomerName, Work.CoinAsset);
-            //Work.CreateThreads();
-
-            //for (var i = 0; i < 10; i++)
-            //{
-            //    var th = new Thread(() => { ThirdPartyTest.HighFrequencyTest(100, ThirdPartyTest.CouchBaseTest); })
-            //    {
-            //        IsBackground = true
-            //    };
-            //    th.Start();
-            //}
-
-            //StatisticsHelper.StrategyTest();
-
+            
             Console.ReadKey();
         }
 
