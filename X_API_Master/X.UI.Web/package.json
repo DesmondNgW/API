@@ -1,0 +1,26 @@
+{
+  "author": {
+    "name": "Wuxd",
+    "email": "wuxd711722@126.com"
+  },
+  "description": "MyGulpBuild Configuration",
+  "devDependencies": {
+    "del": "^1.2.1",
+    "gulp": "^3.9.0",
+    "gulp-cmd-nice": "^0.3.22",
+    "gulp-cmd-transport": "^0.1.2",
+    "gulp-filter": "^3.0.1",
+    "gulp-imagemin": "^2.3.0",
+    "gulp-import-css": "^0.1.2",
+    "gulp-minify-css": "^1.2.0",
+    "gulp-rev-all": "^0.8.21",
+    "gulp-uglify": "^1.2.0"
+  },
+  "name": "MyGulpBuild",
+  "readme": "ERROR: No README data found!",
+  "repository": {
+    "type": "svn",
+    "url": "svn://svn.jundie.net/Wuxd"
+  },
+  "version": "0.1.0"
+}
