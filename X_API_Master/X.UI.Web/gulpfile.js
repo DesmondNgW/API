@@ -17,7 +17,7 @@
         destTasks = ["filter"],
         options = {
             build: "./__build/",
-            dest: "../X.Publish/Javascript/",
+            dest: "../X.IO/Publish/Javascript/",
             filter: { js: filter("js/**/*.js", { restore: true }), config: filter("seajs/seajs-config.js", { restore: true }) }
         };
     ["*.config", "./css/**/*.css", "./html/**", "./images/**", "./js/**/*.js", "./lib/**", "./seajs/**"].forEach(function(src) {

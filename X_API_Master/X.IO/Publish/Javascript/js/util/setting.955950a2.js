@@ -1,0 +1,1 @@
+define("/js/util/setting.955950a2",[],function(){return{api:"http://172.16.73.48:8000/api/"}});
