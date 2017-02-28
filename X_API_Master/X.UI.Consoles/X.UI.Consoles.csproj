@@ -78,6 +78,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Stock.cs" />
     <Compile Include="ThirdPartyTest.cs" />
     <Compile Include="APITestMethods.cs" />
     <Compile Include="Program.cs" />
