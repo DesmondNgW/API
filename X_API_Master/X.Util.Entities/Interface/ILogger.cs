@@ -68,10 +68,33 @@ namespace X.Util.Entities.Interface
         void Error(RequestMethodInfo request, Exception exception, LogDomain domain);
 
         /// <summary>
+        /// LogFatal
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="exception"></param>
+        /// <param name="domain"></param>
+        void Fatal(RequestMethodInfo request, Exception exception, LogDomain domain);
+
+        /// <summary>
+        /// LogWarn
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="exception"></param>
+        /// <param name="domain"></param>
+        void Warn(RequestMethodInfo request, Exception exception, LogDomain domain);
+
+        /// <summary>
         /// Debug
         /// </summary>
         /// <param name="message"></param>
         /// <param name="domain"></param>
         void Debug(string message, LogDomain domain);
+
+        /// <summary>
+        /// Warn
+        /// </summary>
+        /// <param name="message"></param>
+        /// <param name="domain"></param>
+        void Warn(string message, LogDomain domain);
     }
 }

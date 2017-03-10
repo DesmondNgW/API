@@ -26,7 +26,9 @@
     }
     public enum LogType
     {
+        Fatal,
         Error,
+        Warn,
         Info,
         Debug
     }

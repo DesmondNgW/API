@@ -27,12 +27,29 @@ namespace X.Util.Core.Log
             return result;
         }
 
+        private static void Log(string message, LogDomain domain, LogType logType)
+        {
+            CoreUtil.CoderLocker("X.Util.Core.Log." + domain + logType, () =>
+            {
+                var log = LoggerConfig.Instance.GetLogger(domain);
+                switch (logType)
+                {
+                    case LogType.Warn:
+                        log.Warn(message);
+                        return;
+                    case LogType.Debug:
+                        log.Debug(message);
+                        return;
+                }
+            });
+        }
+
         /// <summary>
         /// GetMethodInfo
         /// </summary>
         public RequestMethodInfo GetMethodInfo(MethodBase declaringType, object[] values)
         {
-            return new RequestMethodInfo { Id = Guid.NewGuid().ToString("N"), ClassName = declaringType.DeclaringType, MethodName = declaringType.Name, Method = declaringType, ParamList = GetParamList(declaringType, values), ClientIp = IpBase.GetIp(), ServerIp = IpBase.GetLocalIp() };
+            return new RequestMethodInfo {Id = Guid.NewGuid().ToString("N"), ClassName = declaringType.DeclaringType, MethodName = declaringType.Name, Method = declaringType, ParamList = GetParamList(declaringType, values), ClientIp = IpBase.GetIp(), ServerIp = IpBase.GetLocalIp()};
         }
 
         /// <summary>
@@ -44,7 +61,7 @@ namespace X.Util.Core.Log
         /// <returns></returns>
         public RequestMethodInfo GetMethodInfo(MethodBase declaringType, object[] values, Dictionary<string, object> extendInfo)
         {
-            return new RequestMethodInfo { Id = Guid.NewGuid().ToString("N"), ClassName = declaringType.DeclaringType, MethodName = declaringType.Name, Method = declaringType, ParamList = GetParamList(declaringType, values), ExtendInfo = extendInfo, ClientIp = IpBase.GetIp(), ServerIp = IpBase.GetLocalIp() };
+            return new RequestMethodInfo {Id = Guid.NewGuid().ToString("N"), ClassName = declaringType.DeclaringType, MethodName = declaringType.Name, Method = declaringType, ParamList = GetParamList(declaringType, values), ExtendInfo = extendInfo, ClientIp = IpBase.GetIp(), ServerIp = IpBase.GetLocalIp()};
         }
 
         /// <summary>
@@ -52,7 +69,7 @@ namespace X.Util.Core.Log
         /// </summary>
         public RequestMethodInfo GetMethodInfo(MethodBase declaringType, object[] values, string address)
         {
-            return new RequestMethodInfo { Id = Guid.NewGuid().ToString("N"), ClassName = declaringType.DeclaringType, MethodName = declaringType.Name, Method = declaringType, ParamList = GetParamList(declaringType, values), Address = address, ClientIp = IpBase.GetIp(), ServerIp = IpBase.GetLocalIp() };
+            return new RequestMethodInfo {Id = Guid.NewGuid().ToString("N"), ClassName = declaringType.DeclaringType, MethodName = declaringType.Name, Method = declaringType, ParamList = GetParamList(declaringType, values), Address = address, ClientIp = IpBase.GetIp(), ServerIp = IpBase.GetLocalIp()};
         }
 
         /// <summary>
@@ -60,7 +77,7 @@ namespace X.Util.Core.Log
         /// </summary>
         public RequestMethodInfo GetMethodInfo(MethodBase declaringType, object[] values, string address, Dictionary<string, object> extendInfo)
         {
-            return new RequestMethodInfo { Id = Guid.NewGuid().ToString("N"), ClassName = declaringType.DeclaringType, MethodName = declaringType.Name, Method = declaringType, ParamList = GetParamList(declaringType, values), Address = address, ExtendInfo = extendInfo, ClientIp = IpBase.GetIp(), ServerIp = IpBase.GetLocalIp() };
+            return new RequestMethodInfo {Id = Guid.NewGuid().ToString("N"), ClassName = declaringType.DeclaringType, MethodName = declaringType.Name, Method = declaringType, ParamList = GetParamList(declaringType, values), Address = address, ExtendInfo = extendInfo, ClientIp = IpBase.GetIp(), ServerIp = IpBase.GetLocalIp()};
         }
 
         /// <summary>
@@ -100,7 +117,7 @@ namespace X.Util.Core.Log
         /// <param name="logtype"></param>
         private static void LogResponse(RequestMethodInfo request, ResponseResult response, LogDomain domain, LogType logtype)
         {
-            logtype = response.Exception != null ? LogType.Error : logtype;
+            if (response.Exception != null && (logtype == LogType.Debug || logtype == LogType.Info)) logtype = LogType.Warn;
             CoreUtil.CoderLocker("X.Util.Core.Log." + domain + logtype, () =>
             {
                 var log = LoggerConfig.Instance.GetLogger(domain);
@@ -136,8 +153,14 @@ namespace X.Util.Core.Log
                 }
                 switch (logtype)
                 {
+                    case LogType.Fatal:
+                        log.Fatal(message);
+                        break;
                     case LogType.Error:
                         log.Error(message);
+                        break;
+                    case LogType.Warn:
+                        log.Warn(message);
                         break;
                     case LogType.Info:
                         log.Info(message);
@@ -153,7 +176,7 @@ namespace X.Util.Core.Log
         /// <param name="domain"></param>
         public void Request(RequestMethodInfo request, LogDomain domain)
         {
-            ((Action<RequestMethodInfo, LogDomain>)LogRequest).BeginInvoke(request, domain, null, null);
+            ((Action<RequestMethodInfo, LogDomain>) LogRequest).BeginInvoke(request, domain, null, null);
         }
 
         /// <summary>
@@ -165,7 +188,7 @@ namespace X.Util.Core.Log
         /// <param name="logtype"></param>
         public void Response(RequestMethodInfo request, ResponseResult response, LogDomain domain, LogType logtype)
         {
-            ((Action<RequestMethodInfo, ResponseResult, LogDomain, LogType>)LogResponse).BeginInvoke(request, response, domain, logtype, null, null);
+            ((Action<RequestMethodInfo, ResponseResult, LogDomain, LogType>) LogResponse).BeginInvoke(request, response, domain, logtype, null, null);
         }
 
         /// <summary>
@@ -176,7 +199,29 @@ namespace X.Util.Core.Log
         /// <param name="domain"></param>
         public void Error(RequestMethodInfo request, Exception exception, LogDomain domain)
         {
-            ((Action<RequestMethodInfo, ResponseResult, LogDomain, LogType>)LogResponse).BeginInvoke(request, new ResponseResult { Exception = exception }, domain, LogType.Error, null, null);
+            ((Action<RequestMethodInfo, ResponseResult, LogDomain, LogType>) LogResponse).BeginInvoke(request, new ResponseResult {Exception = exception}, domain, LogType.Error, null, null);
+        }
+
+        /// <summary>
+        /// 记录Fatal
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="exception"></param>
+        /// <param name="domain"></param>
+        public void Fatal(RequestMethodInfo request, Exception exception, LogDomain domain)
+        {
+            ((Action<RequestMethodInfo, ResponseResult, LogDomain, LogType>)LogResponse).BeginInvoke(request, new ResponseResult { Exception = exception }, domain, LogType.Fatal, null, null);
+        }
+
+        /// <summary>
+        /// 记录Warn
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="exception"></param>
+        /// <param name="domain"></param>
+        public void Warn(RequestMethodInfo request, Exception exception, LogDomain domain)
+        {
+            ((Action<RequestMethodInfo, ResponseResult, LogDomain, LogType>)LogResponse).BeginInvoke(request, new ResponseResult { Exception = exception }, domain, LogType.Warn, null, null);
         }
 
         /// <summary>
@@ -186,11 +231,17 @@ namespace X.Util.Core.Log
         /// <param name="domain"></param>
         public void Debug(string message, LogDomain domain)
         {
-            CoreUtil.CoderLocker("X.Util.Core.Log." + domain + LogType.Debug, () =>
-            {
-                var log = LoggerConfig.Instance.GetLogger(domain);
-                log.Debug(message);
-            });
+            Log(message, domain, LogType.Debug);
+        }
+
+        /// <summary>
+        /// LogWarn
+        /// </summary>
+        /// <param name="message"></param>
+        /// <param name="domain"></param>
+        public void Warn(string message, LogDomain domain)
+        {
+            Log(message, domain, LogType.Warn);
         }
     }
 }

@@ -17,9 +17,11 @@ namespace X.Util.Core.Log
     {
         private static readonly PatternLayout Layout = new PatternLayout("时间：%date 线程ID：[%thread] 级别：%-5level %logger property:[%property{NDC}]" + Environment.NewLine + "%message%newline");
         private static readonly IDictionary<string, LevelRangeFilter> Filters = new Dictionary<string, LevelRangeFilter>();
+        private static readonly LevelRangeFilter FatalFilter = new LevelRangeFilter { LevelMax = Level.Fatal, LevelMin = Level.Fatal };
         private static readonly LevelRangeFilter ErrorFilter = new LevelRangeFilter { LevelMax = Level.Error, LevelMin = Level.Error };
         private static readonly LevelRangeFilter InfoFilter = new LevelRangeFilter { LevelMax = Level.Info, LevelMin = Level.Info };
         private static readonly LevelRangeFilter DebugFilter = new LevelRangeFilter { LevelMax = Level.Debug, LevelMin = Level.Debug };
+        private static readonly LevelRangeFilter WarnFilter = new LevelRangeFilter { LevelMax = Level.Warn, LevelMin = Level.Warn };
         private static LoggerConfig _instance;
         public static LoggerConfig Instance
         {
@@ -27,8 +29,12 @@ namespace X.Util.Core.Log
         }
         private LoggerConfig()
         {
+            FatalFilter.ActivateOptions();
+            Filters["FATAL"] = FatalFilter;
             ErrorFilter.ActivateOptions();
             Filters["ERROR"] = ErrorFilter;
+            WarnFilter.ActivateOptions();
+            Filters["WARN"] = WarnFilter;
             InfoFilter.ActivateOptions();
             Filters["INFO"] = InfoFilter;
             DebugFilter.ActivateOptions();
