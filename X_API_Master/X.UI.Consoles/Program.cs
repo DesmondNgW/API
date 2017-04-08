@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection;
 using System.Threading;
 using X.Util.Core;
+using X.Util.Core.Cache;
 using X.Util.Core.Log;
 using X.Util.Entities.Enums;
 //using MongoDB.Bson;
@@ -69,7 +70,20 @@ namespace X.UI.Consoles
             //var s = MongoDbBase<MongoTest>.Default.FindBsonDocument("Test", "test", Query.Null);
 
             //var f = MongoDbBase<MongoTest>.ToEntity(s);
-
+            //var dt = DateTime.Now;
+            //Console.WriteLine(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff") + LocalCache.Get("1234567890"));
+            //LocalCache.Set("1234567890", "1234567890", DateTime.Now.AddMinutes(10));
+            //Console.WriteLine(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff") + LocalCache.Get("1234567890"));
+            //CacheDependencyHelper.UpdateCacheDependencyFile("1234567890", "1234567890");
+            //while (true)
+            //{
+            //    if (LocalCache.Get("1234567890") == null)
+            //    {
+            //        break;
+            //    }
+            //    Console.WriteLine(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff") + LocalCache.Get("1234567890"));
+            //}
+            //Console.WriteLine((DateTime.Now - dt).TotalMilliseconds);
             Console.ReadKey();
         }
 

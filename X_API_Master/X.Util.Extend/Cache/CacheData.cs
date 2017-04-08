@@ -17,7 +17,7 @@ namespace X.Util.Extend.Cache
         private readonly ICouchCache _couch = CouchCache.Default;
         private readonly IRedisCache _redis = RedisCache.Default;
         private const string Prefix = "X.Util.Extend.Cache.CacheData";
-        private static readonly string Path = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "App_Data\\CacheDependency.xml");//缓存依赖文件--用于删除本地缓存
+        
         private CacheData() { }
         public static readonly ICacheData Default = new CacheData();
         public CacheData(string couchName, string redisName)
@@ -67,7 +67,7 @@ namespace X.Util.Extend.Cache
                 setting.AppVersion = version;
                 setting.CacheTime = DateTime.Now;
                 setting.Succeed = iresult != null && iresult.Result != null && iresult.Succeed;
-                if (setting.Succeed) RuntimeCache.Set(key, setting, dt, new CacheDependency(Path));
+                if (setting.Succeed) RuntimeCache.Set(key, setting, dt);
             }
             return setting;
         }
@@ -87,7 +87,7 @@ namespace X.Util.Extend.Cache
                 setting.AppVersion = version;
                 setting.CacheTime = DateTime.Now;
                 setting.Succeed = iresult != null && iresult.Result != null && iresult.Succeed;
-                if (setting.Succeed) RuntimeCache.Set(key, setting, ts, new CacheDependency(string.IsNullOrEmpty(filepath) ? Path : filepath));
+                if (setting.Succeed) RuntimeCache.Set(key, setting, ts, string.IsNullOrEmpty(filepath) ? null : new CacheDependency(filepath));
             }
             return setting;
         }
@@ -109,7 +109,7 @@ namespace X.Util.Extend.Cache
                 setting.CacheTime = DateTime.Now;
                 setting.Succeed = iresult != null && iresult.Result != null && iresult.Succeed;
                 if (!setting.Succeed) return setting;
-                RuntimeCache.Set(lockKey, setting, DateTime.Now.AddSeconds(15), new CacheDependency(Path));
+                RuntimeCache.Set(lockKey, setting, DateTime.Now.AddSeconds(15));
                 _couch.Set(key, setting, dt);
             }
             return setting;
@@ -132,7 +132,7 @@ namespace X.Util.Extend.Cache
                 setting.CacheTime = DateTime.Now;
                 setting.Succeed = iresult != null && iresult.Result != null && iresult.Succeed;
                 if (!setting.Succeed) return setting;
-                RuntimeCache.Set(lockKey, setting, DateTime.Now.AddSeconds(15), new CacheDependency(Path));
+                RuntimeCache.Set(lockKey, setting, DateTime.Now.AddSeconds(15));
                 _couch.Set(key, setting, ts);
             }
             return setting;
@@ -155,7 +155,7 @@ namespace X.Util.Extend.Cache
                 setting.CacheTime = DateTime.Now;
                 setting.Succeed = iresult != null && iresult.Result != null && iresult.Succeed;
                 if (!setting.Succeed) return setting;
-                RuntimeCache.Set(lockKey, setting, DateTime.Now.AddSeconds(15), new CacheDependency(Path));
+                RuntimeCache.Set(lockKey, setting, DateTime.Now.AddSeconds(15));
                 _redis.Set(key, setting, dt);
             }
             return setting;
@@ -178,7 +178,7 @@ namespace X.Util.Extend.Cache
                 setting.CacheTime = DateTime.Now;
                 setting.Succeed = iresult != null && iresult.Result != null && iresult.Succeed;
                 if (!setting.Succeed) return setting;
-                RuntimeCache.Set(lockKey, setting, DateTime.Now.AddSeconds(15), new CacheDependency(Path));
+                RuntimeCache.Set(lockKey, setting, DateTime.Now.AddSeconds(15));
                 _redis.Set(key, setting, ts);
             }
             return setting;
@@ -207,7 +207,7 @@ namespace X.Util.Extend.Cache
                     setting = GetTmpCacheData(loader, obj, version);
                     if (setting != null)
                     {
-                        RuntimeCache.Set(key, setting, DateTime.Now.Add(delay), new CacheDependency(Path));
+                        RuntimeCache.Set(key, setting, DateTime.Now.Add(delay));
                     }
                     else
                     {
@@ -243,7 +243,7 @@ namespace X.Util.Extend.Cache
                     setting = GetTmpCacheData(loader, obj, version);
                     if (setting != null)
                     {
-                        RuntimeCache.Set(key, setting, DateTime.Now.Add(delay), new CacheDependency(Path));
+                        RuntimeCache.Set(key, setting, DateTime.Now.Add(delay));
                         _couch.Set(key, setting, DateTime.Now.Add(delay));
                     }
                     else
@@ -257,7 +257,7 @@ namespace X.Util.Extend.Cache
                     setting = GetTmpCacheData(loader, obj, version);
                     if (setting != null)
                     {
-                        RuntimeCache.Set(key, setting, DateTime.Now.Add(delay), new CacheDependency(Path));
+                        RuntimeCache.Set(key, setting, DateTime.Now.Add(delay));
                         _redis.Set(key, setting, DateTime.Now.Add(delay));
                     }
                     else

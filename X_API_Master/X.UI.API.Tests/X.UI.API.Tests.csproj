@@ -123,7 +123,6 @@
   <ItemGroup>
     <Content Include="App.config" />
     <Content Include="App_Data\app.xml" />
-    <Content Include="App_Data\CacheDependency.xml" />
     <Content Include="App_Data\Config.xml" />
     <Content Include="App_Data\endpoint.xml" />
   </ItemGroup>

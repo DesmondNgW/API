@@ -12,6 +12,14 @@ namespace X.Util.Core.Configuration
         }
 
         /// <summary>
+        /// 本地缓存依赖文件目录
+        /// </summary>
+        public static string CacheDependencyBaseDirectory
+        {
+            get { return ConfigurationHelper.GetAppSettingByName("CacheDependencyBaseDirectory", string.Empty); }
+        }
+
+        /// <summary>
         /// 配置用户编号用户Debug模式
         /// </summary>
         public static string CustomerNo

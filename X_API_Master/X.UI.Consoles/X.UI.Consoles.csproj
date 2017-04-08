@@ -94,9 +94,6 @@
     <Content Include="App_Data\app.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="App_Data\CacheDependency.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="App_Data\Config.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

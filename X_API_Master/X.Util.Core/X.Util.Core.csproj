@@ -70,6 +70,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Cache\CacheDependencyHelper.cs" />
     <Compile Include="Configuration\AppConfig.cs" />
     <Compile Include="Kernel\ChannelContext.cs" />
     <Compile Include="Configuration\ConfigurationHelper.cs" />

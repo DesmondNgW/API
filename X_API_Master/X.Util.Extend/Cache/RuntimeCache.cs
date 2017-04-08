@@ -46,9 +46,19 @@ namespace X.Util.Extend.Cache
             return LocalCache.Get<T>(key);
         }
 
+        public static T GetFromFile<T>(string key)
+        {
+            return LocalCache.GetFromFile<T>(key);
+        }
+
         public static T GetJson<T>(string key)
         {
             return LocalCache.GetJson<T>(key);
+        }
+
+        public static T GetJsonFromFile<T>(string key)
+        {
+            return LocalCache.GetJsonFromFile<T>(key);
         }
 
         public static void Set(string key, object value, DateTime dt)

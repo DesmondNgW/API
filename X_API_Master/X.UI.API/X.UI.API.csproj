@@ -180,7 +180,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\app.xml" />
-    <Content Include="App_Data\CacheDependency.xml" />
     <Content Include="App_Data\Config.xml" />
     <Content Include="App_Data\endpoint.xml" />
     <Content Include="App_Readme\index.html" />
