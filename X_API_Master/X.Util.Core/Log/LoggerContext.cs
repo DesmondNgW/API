@@ -23,7 +23,7 @@ namespace X.Util.Core.Log
             get { return _channel; } 
         }
 
-        public void Calling(ActionContext<TResult> context)
+        public Func<TResult> Calling(ActionContext<TResult> context, Func<TResult> caller)
         {
             if (context.ContextArguments == null) context.ContextArguments = new Dictionary<string, object>();
             var crm = context.Request.Method;
@@ -38,6 +38,7 @@ namespace X.Util.Core.Log
                 return sw.ElapsedMilliseconds;
             };
             context.ContextArguments["StopElapsed"] = stopElapsed;
+            return caller;
         }
 
         public void Called(ActionContext<TResult> context)
@@ -89,7 +90,7 @@ namespace X.Util.Core.Log
             get { return _channel; }
         }
 
-        public void Calling(ActionContext context)
+        public Action Calling(ActionContext context, Action caller)
         {
             if (context.ContextArguments == null) context.ContextArguments = new Dictionary<string, object>();
             var crm = context.Request.Method;
@@ -104,6 +105,7 @@ namespace X.Util.Core.Log
                 return sw.ElapsedMilliseconds;
             };
             context.ContextArguments["StopElapsed"] = stopElapsed;
+            return caller;
         }
 
         public void Called(ActionContext context)

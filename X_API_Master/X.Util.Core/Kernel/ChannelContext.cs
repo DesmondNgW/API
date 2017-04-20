@@ -1,4 +1,5 @@
-﻿using X.Util.Entities;
+﻿using System;
+using X.Util.Entities;
 using X.Util.Entities.Interface;
 
 namespace X.Util.Core.Kernel
@@ -17,7 +18,10 @@ namespace X.Util.Core.Kernel
             get { return _channel; }
         }
 
-        public void Calling(ActionContext<TResult> context) { }
+        public Func<TResult> Calling(ActionContext<TResult> context, Func<TResult> caller)
+        {
+            return caller;
+        }
 
         public void Called(ActionContext<TResult> context)
         {
@@ -49,7 +53,10 @@ namespace X.Util.Core.Kernel
             get { return _channel; }
         }
 
-        public void Calling(ActionContext context) { }
+        public Action Calling(ActionContext context, Action caller)
+        {
+            return caller;
+        }
 
         public void Called(ActionContext context)
         {

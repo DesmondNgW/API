@@ -1,10 +1,12 @@
-﻿namespace X.Util.Entities.Interface
+﻿using System;
+
+namespace X.Util.Entities.Interface
 {
     public interface IContext<TResult, out TChannel>
     {
         IProvider<TChannel> Channel { get; }
 
-        void Calling(ActionContext<TResult> context);
+        Func<TResult> Calling(ActionContext<TResult> context, Func<TResult> caller);
 
         void Called(ActionContext<TResult> context);
 
@@ -17,7 +19,7 @@
     {
         IProvider<TChannel> Channel { get; }
 
-        void Calling(ActionContext context);
+        Action Calling(ActionContext context, Action caller);
 
         void Called(ActionContext context);
 

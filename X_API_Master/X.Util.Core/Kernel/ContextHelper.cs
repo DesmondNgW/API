@@ -22,6 +22,16 @@ namespace X.Util.Core.Kernel
             }.Concat(attr.OrderByDescending(p=>p.Priority)).ToList();
         }
 
+        public static Func<TResult> GetCaller<TResult, TChannel>(List<IContext<TResult, TChannel>> list, ActionContext<TResult> context, Func<TResult> caller)
+        {
+            return list.Aggregate(caller, (current, item) => item.Calling(context, current));
+        }
+
+        public static Action GetCaller<TChannel>(List<IContext<TChannel>> list, ActionContext context, Action caller)
+        {
+            return list.Aggregate(caller, (current, item) => item.Calling(context, current));
+        }
+
         public static List<IContext<TChannel>> GetContext<TChannel>(IProvider<TChannel> channel, MethodBase method, LogOptions options)
         {
             var attr = new List<IContext<TChannel>>();
