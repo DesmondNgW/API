@@ -60,7 +60,7 @@ namespace X.Util.Provider
 
         private void CloseChannel(TChannel channel)
         {
-            Core<TChannel>.Dispose(channel, EDomain);
+            Core<TChannel>.Dispose(channel, EDomain, true);
         }
 
         /// <summary>
@@ -104,7 +104,7 @@ namespace X.Util.Provider
         public void Dispose(LogDomain eDomain)
         {
             if (_scope != null) _scope.Dispose();
-            Core<TChannel>.Dispose(_instance, eDomain);
+            Core<TChannel>.Dispose(_instance, eDomain, true);
             ProxyPooledManager.ReleaseClient(_instance);
         }
 

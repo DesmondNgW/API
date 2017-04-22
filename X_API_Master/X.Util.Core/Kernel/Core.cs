@@ -95,19 +95,23 @@ namespace X.Util.Core.Kernel
         {
             return IsValid4CommunicationObject(channel) ? channel : CreateNetTcpChannel(uri);
         }
-        
-        public static void Dispose(T channel, LogDomain edomain)
+
+        public static void Dispose(T channel, LogDomain edomain, bool forceDispose = false)
         {
             var communicate = (ICommunicationObject)channel;
             if (Equals(communicate, null)) return;
-            try
+            if (forceDispose) communicate.Abort();
+            else
             {
-                communicate.Close();
-            }
-            catch (Exception ex)
-            {
-                Logger.Client.Error(Logger.Client.GetMethodInfo(MethodBase.GetCurrentMethod(), new object[] { }), ex, edomain);
-                communicate.Abort();
+                try
+                {
+                    communicate.Close();
+                }
+                catch (Exception ex)
+                {
+                    Logger.Client.Error(Logger.Client.GetMethodInfo(MethodBase.GetCurrentMethod(), new object[] {}), ex, edomain);
+                    communicate.Abort();
+                }
             }
         }
         #endregion
