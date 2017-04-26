@@ -74,6 +74,7 @@
     <Compile Include="Configuration\AppConfig.cs" />
     <Compile Include="Kernel\ChannelContext.cs" />
     <Compile Include="Configuration\ConfigurationHelper.cs" />
+    <Compile Include="Kernel\ContextAttribute.cs" />
     <Compile Include="Kernel\ContextHelper.cs" />
     <Compile Include="Kernel\Core.cs" />
     <Compile Include="Kernel\CoreAccess.cs" />
