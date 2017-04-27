@@ -10,8 +10,6 @@ namespace X.Util.Entities
         public ActionResponse<TResult> Response { get; set; }
 
         public Dictionary<string, object> ContextArguments { get; set; }
-
-        public Func<TResult> CallerChain { get; set; }
     }
 
     public class ActionContext

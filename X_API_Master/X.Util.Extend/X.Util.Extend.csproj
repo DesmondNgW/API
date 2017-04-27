@@ -71,6 +71,7 @@
     <Compile Include="Cache\CouchCache.cs" />
     <Compile Include="Cache\RedisCache.cs" />
     <Compile Include="Cache\RuntimeCache.cs" />
+    <Compile Include="Core\CacheContext.cs" />
     <Compile Include="Core\CoreBase.cs" />
     <Compile Include="Core\CoreCache.cs" />
     <Compile Include="Cryption\BaseCryption.cs" />

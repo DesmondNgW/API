@@ -1,6 +1,15 @@
 ﻿namespace X.Util.Entities.Enums
 {
     /// <summary>
+    /// 缓存过期类型
+    /// </summary>
+    public enum EnumCacheExpireType
+    {
+        Sliding,
+        Absolute
+    }
+
+    /// <summary>
     /// 缓存类型
     /// </summary>
     public enum EnumCacheType

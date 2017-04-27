@@ -54,6 +54,7 @@
     <Compile Include="ActionResponse.cs" />
     <Compile Include="AuthorityRequest.cs" />
     <Compile Include="CacheKey.cs" />
+    <Compile Include="CacheOptions.cs" />
     <Compile Include="CacheResult.cs" />
     <Compile Include="CaptchaModel.cs" />
     <Compile Include="Enums\AuthorityEnum.cs" />
