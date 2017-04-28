@@ -8,7 +8,7 @@ namespace X.Util.Core.Kernel
     /// </summary>
     public abstract class ContextResultAttribute : Attribute
     {
-        public abstract IContext<TResult, TChannel> GetContext<TResult, TChannel>(IProvider<TChannel> channel);
+        public abstract IContext<TResult, TChannel> GetContext<TResult, TChannel>(IProvider<TChannel> channel, Func<TResult, bool> callSuccess);
     }
 
     /// <summary>

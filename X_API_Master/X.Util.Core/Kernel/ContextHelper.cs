@@ -14,7 +14,7 @@ namespace X.Util.Core.Kernel
         {
             var attr = new List<IContext<TResult, TChannel>>();
             var cas = method.GetCustomAttributes(typeof(ContextResultAttribute), true) as ContextResultAttribute[];
-            if (cas != null && cas.Any()) attr.AddRange(cas.Select(ca => ca.GetContext<TResult, TChannel>(channel)));
+            if (cas != null && cas.Any()) attr.AddRange(cas.Select(ca => ca.GetContext(channel, options.CallSuccess)));
             if (method.DeclaringType == null)
                 return new List<IContext<TResult, TChannel>>
                 {
@@ -22,7 +22,7 @@ namespace X.Util.Core.Kernel
                     new LoggerContext<TResult, TChannel>(channel, options)
                 }.Concat(attr.OrderByDescending(p => p.Priority)).ToList();
             cas = method.DeclaringType.GetCustomAttributes(typeof(ContextResultAttribute), true) as ContextResultAttribute[];
-            if (cas != null && cas.Any()) attr.AddRange(cas.Select(ca => ca.GetContext<TResult, TChannel>(channel)));
+            if (cas != null && cas.Any()) attr.AddRange(cas.Select(ca => ca.GetContext(channel, options.CallSuccess)));
             return new List<IContext<TResult, TChannel>>
             {
                 new ChannelContext<TResult, TChannel>(channel),
