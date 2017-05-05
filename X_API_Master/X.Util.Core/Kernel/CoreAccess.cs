@@ -146,7 +146,7 @@ namespace X.Util.Core.Kernel
             var list = ContextHelper.GetContext(channel,func.Method, options);
             ContextHelper.GetCaller(list, context, () => func(t1)).BeginInvoke(result =>
             {
-                ((Action<T1>)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
+                ((Action)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
                 foreach (var item in list) item.Called(context);
                 if (callBack != null) callBack.Invoke();
             }, null);
@@ -952,7 +952,7 @@ namespace X.Util.Core.Kernel
             {
                 try
                 {
-                    ((Action<T1, T2, T3, T4, T5, T6, T7, T8, T9>)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
+                    ((Action)(((AsyncResult)result).AsyncDelegate)).EndInvoke(result);
                     foreach (var item in list) item.Called(context);
                     if (callBack != null) callBack.Invoke();
                 }
