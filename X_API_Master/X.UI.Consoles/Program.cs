@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Threading;
@@ -66,26 +67,9 @@ namespace X.UI.Consoles
         static void Main()
         {
             //MongoDbBase<MongoTest1>.Default.SaveMongo(new MongoTest1 { Dt = DateTime.Now, Value = 1, Key = "test" }, "Test", "test");
-
             //MongoDbBase<MongoTest2>.Default.SaveMongo(new MongoTest2 { Dt = DateTime.Now, Value = "15", Key = "test" }, "Test", "test");
-
             //var s = MongoDbBase<MongoTest>.Default.FindBsonDocument("Test", "test", Query.Null);
-
             //var f = MongoDbBase<MongoTest>.ToEntity(s);
-            //var dt = DateTime.Now;
-            //Console.WriteLine(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff") + LocalCache.Get("1234567890"));
-            //LocalCache.Set("1234567890", "1234567890", DateTime.Now.AddMinutes(10));
-            //Console.WriteLine(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff") + LocalCache.Get("1234567890"));
-            //CacheDependencyHelper.UpdateCacheDependencyFile("1234567890", "1234567890");
-            //while (true)
-            //{
-            //    if (LocalCache.Get("1234567890") == null)
-            //    {
-            //        break;
-            //    }
-            //    Console.WriteLine(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff") + LocalCache.Get("1234567890"));
-            //}
-            //Console.WriteLine((DateTime.Now - dt).TotalMilliseconds);
             Console.ReadKey();
         }
 
