@@ -98,7 +98,8 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="App_Data\endpoint.xml">
-      <SubType>Designer</SubType>
+      <SubType>
+      </SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

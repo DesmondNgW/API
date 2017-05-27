@@ -70,6 +70,7 @@ namespace X.UI.Consoles
             //MongoDbBase<MongoTest2>.Default.SaveMongo(new MongoTest2 { Dt = DateTime.Now, Value = "15", Key = "test" }, "Test", "test");
             //var s = MongoDbBase<MongoTest>.Default.FindBsonDocument("Test", "test", Query.Null);
             //var f = MongoDbBase<MongoTest>.ToEntity(s);
+            //Console.WriteLine(ThirdPartyTest.CouchBaseTest("1234567890", "1234567890"));
             Console.ReadKey();
         }
 
