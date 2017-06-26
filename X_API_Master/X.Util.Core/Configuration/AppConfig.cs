@@ -41,5 +41,29 @@ namespace X.Util.Core.Configuration
         {
             get { return ConfigurationHelper.GetAppSetting("CookieDomain"); }
         }
+
+        /// <summary>
+        /// CouchCacheEnable
+        /// </summary>
+        public static bool CouchCacheEnable
+        {
+            get { return ConfigurationHelper.GetAppSettingByName("CouchCacheEnable", true); }
+        }
+
+        /// <summary>
+        /// RedisCacheEnable
+        /// </summary>
+        public static bool RedisCacheEnable
+        {
+            get { return ConfigurationHelper.GetAppSettingByName("RedisCacheEnable", true); }
+        }
+
+        /// <summary>
+        /// MongoDbEnable
+        /// </summary>
+        public static bool MongoDbEnable
+        {
+            get { return ConfigurationHelper.GetAppSettingByName("MongoDbEnable", true); }
+        }
     }
 }

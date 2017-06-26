@@ -39,6 +39,7 @@ namespace X.Util.Extend.Mongo
         /// <returns></returns>
         public void CreateIndex(string database, string collection, IMongoIndexKeys index)
         {
+            if (!AppConfig.MongoDbEnable) return;
             var mc = new MongoDbProvider<T>(database, collection);
             CoreAccess<MongoCollection<T>>.TryCallAsync(mc.Client.CreateIndex, index, mc, null, new LogOptions<WriteConcernResult>(CallSuccess, true));
         }
@@ -52,6 +53,7 @@ namespace X.Util.Extend.Mongo
         /// <returns></returns>
         public void DropIndex(string database, string collection, IMongoIndexKeys index)
         {
+            if (!AppConfig.MongoDbEnable) return;
             var mc = new MongoDbProvider<T>(database, collection);
             CoreAccess<MongoCollection<T>>.TryCallAsync(mc.Client.DropIndex, index, mc, null, new LogOptions<CommandResult>(CallSuccess, true));
         }
@@ -65,6 +67,7 @@ namespace X.Util.Extend.Mongo
         /// <returns></returns>
         public bool IndexExists(string database, string collection, IMongoIndexKeys index)
         {
+            if (!AppConfig.MongoDbEnable) return false;
             var mc = new MongoDbProvider<T>(database, collection);
             return CoreAccess<MongoCollection<T>>.TryCall(mc.Client.IndexExists, index, mc, new LogOptions<bool>(CoreBase.CallSuccess, true));
         }
@@ -77,6 +80,7 @@ namespace X.Util.Extend.Mongo
         /// <returns></returns>
         public IndexKeysDocument GetAllIndexes(string database, string collection)
         {
+            if (!AppConfig.MongoDbEnable) return null;
             var mc = new MongoDbProvider<T>(database, collection);
             return CoreAccess<MongoCollection<T>>.TryCall(mc.Client.GetIndexes, mc, new LogOptions<GetIndexesResult>(iresult => iresult != null && iresult.Count > 0 && iresult.RawDocuments != null)).ToBsonDocument() as IndexKeysDocument;
         }
@@ -85,6 +89,7 @@ namespace X.Util.Extend.Mongo
         #region 增删改操作
         public void SaveMongo(T t, string database, string collection)
         {
+            if (!AppConfig.MongoDbEnable) return;
             var property = typeof(T).GetProperty("Id");
             if (property != null && Equals(property.GetValue(t, null), null))
             {
@@ -103,6 +108,7 @@ namespace X.Util.Extend.Mongo
         /// <param name="collection"></param>
         public void InsertMongo(T t, string database, string collection)
         {
+            if (!AppConfig.MongoDbEnable) return;
             var property = typeof(T).GetProperty("Id");
             if (property != null && Equals(property.GetValue(t, null), null))
             {
@@ -121,6 +127,7 @@ namespace X.Util.Extend.Mongo
         /// <param name="collection"></param>
         public void InsertBatchMongo(IEnumerable<T> list, string database, string collection)
         {
+            if (!AppConfig.MongoDbEnable) return;
             var property = typeof(T).GetProperty("Id");
             var enumerable = list as T[] ?? list.ToArray();
             foreach (var t in enumerable.Where(t => property != null && Equals(property.GetValue(t, null), null)))
@@ -133,6 +140,7 @@ namespace X.Util.Extend.Mongo
 
         public void SaveMongo(Func<T> loader, string database, string collection)
         {
+            if (!AppConfig.MongoDbEnable) return;
             SaveMongo(loader(), database, collection);
         }
 
@@ -147,6 +155,7 @@ namespace X.Util.Extend.Mongo
         /// <returns></returns>
         public void UpdateMongo(string database, string collection, IMongoQuery query, IMongoUpdate update, UpdateFlags flag = UpdateFlags.Multi)
         {
+            if (!AppConfig.MongoDbEnable) return;
             var mc = new MongoDbProvider<T>(database, collection);
             CoreAccess<MongoCollection<T>>.TryCallAsync(mc.Client.Update, query, update, flag, WriteConcern.Acknowledged, mc, null, new LogOptions<WriteConcernResult>(CallSuccess, true));
         }
@@ -161,6 +170,7 @@ namespace X.Util.Extend.Mongo
         /// <returns></returns>
         public void RemoveMongo(string database, string collection, IMongoQuery query, RemoveFlags flag = RemoveFlags.None)
         {
+            if (!AppConfig.MongoDbEnable) return;
             var mc = new MongoDbProvider<T>(database, collection);
             CoreAccess<MongoCollection<T>>.TryCallAsync(mc.Client.Remove, query, flag, WriteConcern.Acknowledged, mc, null, new LogOptions<WriteConcernResult>(CallSuccess, true));
         }
@@ -173,6 +183,7 @@ namespace X.Util.Extend.Mongo
         /// <returns></returns>
         public void RemoveAllMongo(string database, string collection)
         {
+            if (!AppConfig.MongoDbEnable) return;
             var mc = new MongoDbProvider<T>(database, collection);
             CoreAccess<MongoCollection<T>>.TryCallAsync(mc.Client.RemoveAll, WriteConcern.Acknowledged, mc, null, new LogOptions<WriteConcernResult>(CallSuccess, true));
         }
@@ -185,6 +196,7 @@ namespace X.Util.Extend.Mongo
         /// <returns></returns>
         public void DropMongo(string database, string collection)
         {
+            if (!AppConfig.MongoDbEnable) return;
             var mc = new MongoDbProvider<T>(database, collection);
             CoreAccess<MongoCollection<T>>.TryCallAsync(mc.Client.Drop, mc, null, new LogOptions<CommandResult>(CallSuccess, true));
         }
@@ -203,6 +215,7 @@ namespace X.Util.Extend.Mongo
         /// <param name="skip">从索引值开始选取</param>
         public MongoCursor<T> Find(string database, string collection, IMongoQuery query, IMongoFields field = null, IMongoSortBy sortBy = null, int limit = 0, int skip = 0)
         {
+            if (!AppConfig.MongoDbEnable) return default(MongoCursor<T>);
             var mc = new MongoDbProvider<T>(database, collection);
             var result = CoreAccess<MongoCollection<T>>.TryCall((iquery, ifield, isortBy, ilimit, iskip) =>
             {
@@ -229,6 +242,7 @@ namespace X.Util.Extend.Mongo
         /// <returns></returns>
         public MongoCursor<BsonDocument> FindBsonDocument(string database, string collection, IMongoQuery query, IMongoFields field = null, IMongoSortBy sortBy = null, int limit = 0, int skip = 0)
         {
+            if (!AppConfig.MongoDbEnable) return null;
             var mc = new MongoDbProvider<BsonDocument>(database, collection);
             var result = CoreAccess<MongoCollection<BsonDocument>>.TryCall((iquery, ifield, isortBy, ilimit, iskip) =>
             {
@@ -252,6 +266,7 @@ namespace X.Util.Extend.Mongo
         /// <param name="skip">从索引值开始选取</param>
         public long Count(string database, string collection, IMongoQuery query, int limit = 0, int skip = 0)
         {
+            if (!AppConfig.MongoDbEnable) return 0;
             var mc = new MongoDbProvider<T>(database, collection);
             return CoreAccess<MongoCollection<T>>.TryCall((iquery, ilimit, iskip) =>
             {
@@ -271,6 +286,7 @@ namespace X.Util.Extend.Mongo
         /// <returns></returns>
         public T FindOne(string database, string collection, IMongoQuery query)
         {
+            if (!AppConfig.MongoDbEnable) return null;
             var mc = new MongoDbProvider<T>(database, collection);
             return CoreAccess<MongoCollection<T>>.TryCall(mc.Client.FindOne, query, mc, new LogOptions<T>(CoreBase.CallSuccess));
         }
@@ -285,6 +301,7 @@ namespace X.Util.Extend.Mongo
         /// <returns></returns>
         public IEnumerable<BsonValue> Distinct(string database, string collection, IMongoQuery query, string field)
         {
+            if (!AppConfig.MongoDbEnable) return null;
             var mc = new MongoDbProvider<T>(database, collection);
             return CoreAccess<MongoCollection<T>>.TryCall(mc.Client.Distinct, field, query, mc, new LogOptions<IEnumerable<BsonValue>>(CoreBase.CallSuccess));
         }
