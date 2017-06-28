@@ -107,8 +107,7 @@ namespace X.UI.API.Util
             if (Equals(list, null)) return;
             foreach (var key in list)
             {
-                RuntimeCache.Remove(key);
-                CouchCache.Default.Remove(key);
+                CacheData.Default.Remove(key, EnumCacheType.MemBoth);
             }
             RuntimeCache.Remove(guid);
         }

@@ -4,6 +4,7 @@ using X.Business.Entities;
 using X.Util.Core;
 using X.Util.Core.Kernel;
 using X.Util.Entities;
+using X.Util.Entities.Enums;
 using X.Util.Extend.Cache;
 using X.Util.Extend.Cryption;
 
@@ -11,6 +12,8 @@ namespace X.Business.Helper
 {
     public class TokenHelper
     {
+        public const EnumCacheType CacheType = EnumCacheType.MemBoth;
+
         /// <summary>
         /// 生成token
         /// </summary>
@@ -25,7 +28,7 @@ namespace X.Business.Helper
             token.TokenId = BaseCryption.SignData(token.ClientId + token.ClientIp, Guid.NewGuid().ToString("N"), HmacType.Md5);
             var key = ConstHelper.LoginKeyPrefix + token.TokenId;
             ExecutionContext<RequestContext>.Current.Update("Zone", EnumZoneHelper.GetTokenZone(token.TokenId));
-            CouchCache.Default.Set(key, token, TimeSpan.FromMinutes(ConstHelper.LoginExpireMinutes));
+            CacheData.Default.SetCacheDbData(key, token, TimeSpan.FromMinutes(ConstHelper.LoginExpireMinutes), CacheType);
             return token.TokenId;
         }
 
@@ -41,20 +44,20 @@ namespace X.Business.Helper
             if (!BaseCryption.VerifyData(ConstHelper.GenerateHmacKey, token, HmacType.Md5)) throw new InvalidOperationException("token错误或过期");
             var key = ConstHelper.LoginKeyPrefix + token;
             ExecutionContext<RequestContext>.Current.Update("Zone", EnumZoneHelper.GetTokenZone(token));
-            var obj = CouchCache.Default.Get<Token>(key);
+            var obj = CacheData.Default.GetCacheDbData<Token>(key, CacheType);
             if (obj == null) throw new InvalidOperationException("token错误或过期");
             if (obj.ClientId != clientId)
             {
-                CouchCache.Default.Remove(key);
+                CacheData.Default.Remove(key, CacheType);
                 throw new InvalidOperationException("token错误或过期");
             }
             if (obj.ClientIp != IpBase.GetIp())
             {
-                CouchCache.Default.Remove(key);
+                CacheData.Default.Remove(key, CacheType);
                 throw new Exception("请求IP非同一IP");
             }
             var requestKey = ConstHelper.LoginKeyPrefix + token + uri;
-            var requestStatus = CouchCache.Default.Get<RequestStatus>(requestKey);
+            var requestStatus = CacheData.Default.GetCacheDbData<RequestStatus>(requestKey, CacheType);
             if (requestStatus == null)
             {
                 requestStatus = new RequestStatus
@@ -63,7 +66,7 @@ namespace X.Business.Helper
                     TokenId = token,
                     RequesTime = DateTime.Now
                 };
-                CouchCache.Default.Set(requestKey, requestStatus, DateTime.Now.AddMinutes(ConstHelper.RequestExpireMinutes));
+                CacheData.Default.SetCacheDbData(requestKey, requestStatus, DateTime.Now.AddMinutes(ConstHelper.RequestExpireMinutes), CacheType);
             }
             else
             {
@@ -73,7 +76,7 @@ namespace X.Business.Helper
                     Thread.Sleep(ConstHelper.RequestInterval);
                 }
                 requestStatus.RequesTime = DateTime.Now;
-                CouchCache.Default.Set(requestKey, requestStatus, DateTime.Now.AddMinutes(ConstHelper.RequestExpireMinutes));
+                CacheData.Default.SetCacheDbData(requestKey, requestStatus, DateTime.Now.AddMinutes(ConstHelper.RequestExpireMinutes), CacheType);
             }
         }
     }

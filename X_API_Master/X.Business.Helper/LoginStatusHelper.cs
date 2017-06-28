@@ -4,6 +4,7 @@ using X.Util.Core;
 using X.Util.Core.Configuration;
 using X.Util.Core.Kernel;
 using X.Util.Entities;
+using X.Util.Entities.Enums;
 using X.Util.Extend.Cache;
 using X.Util.Extend.Cryption;
 
@@ -11,6 +12,7 @@ namespace X.Business.Helper
 {
     public class LoginStatusHelper
     {
+        public const EnumCacheType CacheType = EnumCacheType.MemBoth;
         /// <summary>
         /// 获取登录状态
         /// </summary>
@@ -24,8 +26,7 @@ namespace X.Business.Helper
             var loginState = RuntimeCache.Get<LoginStatus>(key);
             if (loginState != null) return loginState;
             ExecutionContext<RequestContext>.Current.Update("Zone", statusZone);
-            loginState = CouchCache.Default.Get<LoginStatus>(key, DateTime.Now.AddMinutes(ConstHelper.LoginExpireMinutes));
-            if (loginState != null) RuntimeCache.Set(key, loginState, DateTime.Now.AddMinutes(ConstHelper.SubLoginExpireMinutes));
+            loginState = CacheData.Default.GetCacheDbData<LoginStatus>(key, CacheType, DateTime.Now.AddMinutes(ConstHelper.SubLoginExpireMinutes));
             return loginState;
         }
 
@@ -54,8 +55,7 @@ namespace X.Business.Helper
                 Token = token
             };
             ExecutionContext<RequestContext>.Current.Update("Zone", statusZone);
-            CouchCache.Default.Set(key, result, DateTime.Now.AddMinutes(ConstHelper.LoginExpireMinutes));
-            RuntimeCache.Set(key, result, DateTime.Now.AddMinutes(ConstHelper.SubLoginExpireMinutes));
+            CacheData.Default.SetCacheDbData(key, result, DateTime.Now.AddMinutes(ConstHelper.LoginExpireMinutes), CacheType);
             ExecutionContext<RequestContext>.Current.Update("Zone", zone);
             return result.Uid;
         }
@@ -67,8 +67,7 @@ namespace X.Business.Helper
         public static void Clear(string uid)
         {
             var key = ConstHelper.LoginKeyPrefix + uid;
-            RuntimeCache.Remove(key);
-            CouchCache.Default.Remove(key);
+            CacheData.Default.Remove(key, CacheType);
         }
 
         /// <summary>

@@ -271,5 +271,110 @@ namespace X.Util.Extend.Cache
             }
         }
         #endregion
+
+        #region Data Store in Cache as Db
+        public T GetCacheDbData<T>(string key, EnumCacheType cacheType, DateTime? expire = null)
+        {
+            switch (cacheType)
+            {
+                case EnumCacheType.Runtime:
+                    return RuntimeCache.Get<T>(key);
+                case EnumCacheType.MemCache:
+                    return _couch.Get<T>(key);
+                case EnumCacheType.Redis:
+                    return _redis.Get<T>(key);
+                case EnumCacheType.MemBoth:
+                    var mem = RuntimeCache.Get<T>(key);
+                    if (mem.Equals(default(T)))
+                    {
+                        mem = _couch.Get<T>(key);
+                        if (mem != null && expire != null) RuntimeCache.Set(key, mem, expire.Value);
+                    }
+                    return mem;
+                case EnumCacheType.RedisBoth:
+                    var redis = RuntimeCache.Get<T>(key);
+                    if (redis.Equals(default(T)))
+                    {
+                        redis = _redis.Get<T>(key);
+                        if (redis != null && expire != null) RuntimeCache.Set(key, redis, expire.Value);
+                    }
+                    return redis;
+            }
+            return default(T);
+        }
+
+        public void SetCacheDbData<T>(string key, T obj, DateTime expire, EnumCacheType cacheType)
+        {
+            switch (cacheType)
+            {
+                case EnumCacheType.Runtime:
+                    RuntimeCache.Set(key, obj, expire);
+                    return;
+                case EnumCacheType.MemCache:
+                    _couch.Set(key, obj, expire);
+                    return;
+                case EnumCacheType.Redis:
+                    _redis.Set(key, obj, expire);
+                    return;
+                case EnumCacheType.MemBoth:
+                    RuntimeCache.Set(key, obj, expire);
+                    _couch.Set(key, obj, expire);
+                    return;
+                case EnumCacheType.RedisBoth:
+                    RuntimeCache.Set(key, obj, expire);
+                    _redis.Set(key, obj, expire);
+                    return;
+            }
+        }
+
+        public void SetCacheDbData<T>(string key, T obj, TimeSpan ts, EnumCacheType cacheType)
+        {
+            switch (cacheType)
+            {
+                case EnumCacheType.Runtime:
+                    RuntimeCache.Set(key, obj, ts);
+                    return;
+                case EnumCacheType.MemCache:
+                    _couch.Set(key, obj, ts);
+                    return;
+                case EnumCacheType.Redis:
+                    _redis.Set(key, obj, ts);
+                    return;
+                case EnumCacheType.MemBoth:
+                    RuntimeCache.Set(key, obj, ts);
+                    _couch.Set(key, obj, ts);
+                    return;
+                case EnumCacheType.RedisBoth:
+                    RuntimeCache.Set(key, obj, ts);
+                    _redis.Set(key, obj, ts);
+                    return;
+            }
+        }
+
+        public void Remove(string key, EnumCacheType cacheType)
+        {
+            switch (cacheType)
+            {
+                case EnumCacheType.Runtime:
+                    RuntimeCache.Remove(key);
+                    break;
+                case EnumCacheType.MemCache:
+                    _couch.Remove(key);
+                    break;
+                case EnumCacheType.Redis:
+                    _redis.Remove(key);
+                    break;
+                case EnumCacheType.MemBoth:
+                    _couch.Remove(key);
+                    RuntimeCache.Remove(key);
+                    break;
+                case EnumCacheType.RedisBoth:
+                    _redis.Remove(key);
+                    RuntimeCache.Remove(key);
+                    break;
+            }
+        }
+
+        #endregion
     }
 }
