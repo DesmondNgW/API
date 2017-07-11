@@ -7,7 +7,9 @@ using System.Threading;
 using X.Util.Core;
 using X.Util.Core.Cache;
 using X.Util.Core.Configuration;
+using X.Util.Core.Kernel;
 using X.Util.Core.Log;
+using X.Util.Entities;
 using X.Util.Entities.Enums;
 using X.Util.Extend.Core;
 //using MongoDB.Bson;
@@ -66,6 +68,37 @@ namespace X.UI.Consoles
     {
         static void Main()
         {
+            var q = new CoreQueue<string>("1234567890");
+            q.Enqueue(new QueueItem<string>()
+            {
+                Timer = 1,
+                Context = "1234567890",
+                Method = (t) =>
+                {
+                    Console.WriteLine(DateTime.Now + "|" + t + "|" + Thread.CurrentThread.ManagedThreadId);
+                }
+            });
+            q.Enqueue(new QueueItem<string>()
+            {
+                Timer = 2,
+                Context = "987654321",
+                Method = (t) =>
+                {
+                    Console.WriteLine(DateTime.Now + "|" + t + "|" + Thread.CurrentThread.ManagedThreadId);
+                }
+            });
+
+            q.Enqueue(new QueueItem<string>()
+            {
+                Timer = 3,
+                Context = "9876543217",
+                Method = (t) =>
+                {
+                    Console.WriteLine(DateTime.Now + "|" + t + "|" + Thread.CurrentThread.ManagedThreadId);
+                }
+            });
+
+
             //MongoDbBase<MongoTest1>.Default.SaveMongo(new MongoTest1 { Dt = DateTime.Now, Value = 1, Key = "test" }, "Test", "test");
             //MongoDbBase<MongoTest2>.Default.SaveMongo(new MongoTest2 { Dt = DateTime.Now, Value = "15", Key = "test" }, "Test", "test");
             //var s = MongoDbBase<MongoTest>.Default.FindBsonDocument("Test", "test", Query.Null);

@@ -21,7 +21,7 @@ namespace X.Util.Entities
         public T Context { get; set; }
 
         /// <summary>
-        /// 队列间隔周期（单位：分钟）,0表示执行一次
+        /// 队列间隔周期（单位：秒）,0表示执行一次
         /// </summary>
         public int Timer { get; set; }
     }
@@ -35,14 +35,19 @@ namespace X.Util.Entities
         public string QueueId { get; set; }
 
         /// <summary>
-        /// 队列
+        /// 队列索引
+        /// </summary>
+        public int Index { get; set; }
+
+        /// <summary>
+        /// 普通队列
         /// </summary>
         public ConcurrentQueue<QueueItem<T>> Queue { get; set; }
 
         /// <summary>
-        /// 队列中的定时器
+        /// 定时队列
         /// </summary>
-        public ConcurrentDictionary<string, string> Timer { get; set; }
+        public ConcurrentQueue<QueueItem<T>> Timer { get; set; }
 
         /// <summary>
         /// 同步事件
