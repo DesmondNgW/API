@@ -1,4 +1,5 @@
-﻿using System.Collections.Concurrent;
+﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Threading;
 using X.Util.Entities;
@@ -27,7 +28,8 @@ namespace X.Util.Core.Kernel
                 {
                     QueueId = queueId,
                     EventWait = new ManualResetEvent(false),
-                    Queue = new ConcurrentQueue<QueueItem<T>>()
+                    Queue = new ConcurrentQueue<QueueItem<T>>(),
+                    Timer = new ConcurrentDictionary<string, string>()
                 };
                 var thread = new Thread(() =>
                 {
@@ -36,7 +38,25 @@ namespace X.Util.Core.Kernel
                         QueueItem<T> item;
                         if (Queue[queueId].Queue.TryDequeue(out item) && item != null)
                         {
-                            item.Method.BeginInvoke(item.Context, null, null);
+                            if (string.IsNullOrEmpty(item.Id) && item.Timer >= 0) continue;
+                            if (item.Timer == 0)
+                            {
+                                item.Method.BeginInvoke(item.Context, null, null);
+                            }
+                            else if (item.Timer > 0)
+                            {
+                                if (Queue[queueId].Timer.ContainsKey(item.Id)) continue;
+                                Queue[queueId].Timer[item.Id] = item.Id;
+                                Action<T> target = T =>
+                                {
+                                    while (true)
+                                    {
+                                        item.Method.Invoke(T);
+                                        Thread.Sleep(1000*item.Timer);
+                                    }
+                                };
+                                target.BeginInvoke(item.Context, null, null);
+                            }
                         }
                         else
                         {
@@ -54,6 +74,7 @@ namespace X.Util.Core.Kernel
             if (Equals(item, null)) return;
             lock (CoreUtil.Getlocker(LockerPrefix + typeof(T).FullName))
             {
+                if (Queue[QueueId].Timer.ContainsKey(item.Id)) return;
                 Queue[QueueId].Queue.Enqueue(item);
                 Queue[QueueId].EventWait.Set();
             }
