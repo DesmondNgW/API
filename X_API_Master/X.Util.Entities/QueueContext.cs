@@ -1,31 +1,37 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Threading;
+using X.Util.Entities.Enums;
 
 namespace X.Util.Entities
 {
-    public class QueueItem<T>
+    public class RequestItem<T>
     {
         /// <summary>
-        /// Id
+        /// 请求Id
         /// </summary>
-        public string Id { get; set; }
+        public string RequestId { get; set; }
+
         /// <summary>
-        /// 队列处理方法
+        /// 处理方法
         /// </summary>
         public Action<T> Method { get; set; }
 
         /// <summary>
-        /// 队列处理的参数
+        /// 处理参数
         /// </summary>
         public T Context { get; set; }
 
         /// <summary>
-        /// 队列间隔周期（单位：秒）,0表示执行一次
+        /// 处理模式
         /// </summary>
-        public int Timer { get; set; }
-    }
+        public ProcessingMode Mode { get; set; }
 
+        /// <summary>
+        /// 定时处理的时间间隔
+        /// </summary>
+        public int Period { get; set; }
+    }
 
     public class QueueContext<T>
     {
@@ -35,19 +41,14 @@ namespace X.Util.Entities
         public string QueueId { get; set; }
 
         /// <summary>
-        /// 队列索引
+        /// 请求队列
         /// </summary>
-        public int Index { get; set; }
+        public ConcurrentQueue<RequestItem<T>> RequestQueue { get; set; }
 
         /// <summary>
-        /// 普通队列
+        /// 定时器集合
         /// </summary>
-        public ConcurrentQueue<QueueItem<T>> Queue { get; set; }
-
-        /// <summary>
-        /// 定时队列
-        /// </summary>
-        public ConcurrentQueue<QueueItem<T>> Timer { get; set; }
+        public ConcurrentDictionary<string, Timer> Timer { get; set; }
 
         /// <summary>
         /// 同步事件

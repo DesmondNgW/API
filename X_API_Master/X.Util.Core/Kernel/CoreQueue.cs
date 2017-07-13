@@ -3,7 +3,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Threading;
 using X.Util.Entities;
-using System.Linq;
+using X.Util.Entities.Enums;
 
 namespace X.Util.Core.Kernel
 {
@@ -15,7 +15,6 @@ namespace X.Util.Core.Kernel
     {
         private static readonly IDictionary<string, QueueContext<T>> Queue = new Dictionary<string, QueueContext<T>>();
         private const string LockerPrefix = "X.Util.Core.Kernel.CoreQueue.Prefix";
-        private Timer _timer = default(Timer);
         public string QueueId { get; set; }
 
         public CoreQueue(string queueId)
@@ -30,20 +29,29 @@ namespace X.Util.Core.Kernel
                 {
                     QueueId = queueId,
                     EventWait = new ManualResetEvent(false),
-                    Queue = new ConcurrentQueue<QueueItem<T>>(),
-                    Timer = new ConcurrentQueue<QueueItem<T>>(),
-                    Index = 0
+                    RequestQueue = new ConcurrentQueue<RequestItem<T>>(),
+                    Timer = new ConcurrentDictionary<string, Timer>()
                 };
 
-                //独立线程处理普通队列
+                //独立线程处理
                 var thread = new Thread(() =>
                 {
                     while (true)
                     {
-                        QueueItem<T> item;
-                        if (Queue[queueId].Queue.TryDequeue(out item) && item != null)
+                        RequestItem<T> item;
+                        if (Queue[queueId].RequestQueue.TryDequeue(out item) && item != null)
                         {
-                            item.Method.BeginInvoke(item.Context, null, null);
+                            if (item.Mode == ProcessingMode.Common)
+                            {
+                                item.Method.BeginInvoke(item.Context, null, null);
+                            }
+                            else
+                            {
+                                if (!string.IsNullOrEmpty(item.RequestId) && !Queue[QueueId].Timer.ContainsKey(item.RequestId))
+                                {
+                                    Queue[QueueId].Timer[item.RequestId] = new Timer(Convert(item.Method), item.Context, 0, item.Period);
+                                }
+                            }
                         }
                         else
                         {
@@ -53,28 +61,6 @@ namespace X.Util.Core.Kernel
                     }
                 }) {IsBackground = true};
                 thread.Start();
-
-                //独立线程处理定时队列
-                var thread2 = new Thread(() =>
-                {
-                    while (true)
-                    {
-                        if (Queue[queueId].Timer != null && Queue[queueId].Index < Queue[queueId].Timer.Count)
-                        {
-                            foreach (var item in Queue[queueId].Timer.Skip(Queue[queueId].Index))
-                            {
-                                _timer = new Timer(Convert(item.Method), item.Context, 0, item.Timer);
-                                Queue[queueId].Index++;
-                            }
-                        }
-                        else
-                        {
-                            Queue[queueId].EventWait.Reset();
-                            Queue[queueId].EventWait.WaitOne();
-                        }
-                    }
-                }) { IsBackground = true };
-                thread2.Start();
             }
         }
 
@@ -83,19 +69,19 @@ namespace X.Util.Core.Kernel
             return o => { action((T)o); };
         }
 
-        public void Enqueue(QueueItem<T> item)
+        public void Enqueue(RequestItem<T> item)
         {
-            if (Equals(item, null)) return;
+            if (Equals(item, null) || string.IsNullOrEmpty(item.RequestId)) return;
             lock (CoreUtil.Getlocker(LockerPrefix + typeof(T).FullName))
             {
-                if (!string.IsNullOrEmpty(item.Id) && item.Timer > 0 && Queue[QueueId].Timer.Count(p => p.Id == item.Id) == 0)
+                if (!string.IsNullOrEmpty(item.RequestId))
                 {
-                    Queue[QueueId].Timer.Enqueue(item);
+                    if ((item.Mode != ProcessingMode.Timer || Queue[QueueId].Timer.ContainsKey(item.RequestId)) && item.Mode != ProcessingMode.Common) return;
+                    Queue[QueueId].RequestQueue.Enqueue(item);
                     Queue[QueueId].EventWait.Set();
                 }
                 else
                 {
-                    Queue[QueueId].Queue.Enqueue(item);
                     Queue[QueueId].EventWait.Set();
                 }
             }
