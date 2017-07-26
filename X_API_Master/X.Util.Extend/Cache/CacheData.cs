@@ -235,7 +235,7 @@ namespace X.Util.Extend.Cache
                     }
                     else
                     {
-                        _redis.Remove(key);
+                        _redis.KeyDelete(key);
                     }
                     break;
                 case EnumCacheType.MemBoth:
@@ -257,13 +257,13 @@ namespace X.Util.Extend.Cache
                     setting = GetTmpCacheData(loader, obj, version);
                     if (setting != null)
                     {
-                        RuntimeCache.Set(key, setting, DateTime.Now.Add(delay));
+                        RuntimeCache.Set(key, setting, delay);
                         _redis.Set(key, setting, DateTime.Now.Add(delay));
                     }
                     else
                     {
                         RuntimeCache.Remove(key);
-                        _redis.Remove(key);
+                        _redis.KeyDelete(key);
                     }
                     break;
                 case EnumCacheType.None:
@@ -362,14 +362,14 @@ namespace X.Util.Extend.Cache
                     _couch.Remove(key);
                     break;
                 case EnumCacheType.Redis:
-                    _redis.Remove(key);
+                    _redis.KeyDelete(key);
                     break;
                 case EnumCacheType.MemBoth:
                     _couch.Remove(key);
                     RuntimeCache.Remove(key);
                     break;
                 case EnumCacheType.RedisBoth:
-                    _redis.Remove(key);
+                    _redis.KeyDelete(key);
                     RuntimeCache.Remove(key);
                     break;
             }

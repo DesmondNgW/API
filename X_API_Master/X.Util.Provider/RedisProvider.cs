@@ -1,38 +1,91 @@
 ﻿using System;
-using ServiceStack.Redis;
+using System.Linq;
+using System.Reflection;
+using StackExchange.Redis;
 using X.Util.Core.Configuration;
 using X.Util.Core.Kernel;
-using X.Util.Entities;
+using X.Util.Core.Log;
 using X.Util.Entities.Enums;
 using X.Util.Entities.Interface;
 
 namespace X.Util.Provider
 {
-    public sealed class RedisProvider : IProvider<IRedisClient>
+    public sealed class RedisProvider : IProvider<IDatabase>
     {
         #region 构造函数
-        public readonly string ServerName = ConfigurationHelper.RedisDefaultServername;
-        public RedisProvider() { }
-        public RedisProvider(string serverName)
+        public readonly string ServerName;
+        public readonly int DbNum;
+
+        public RedisProvider(int dbNum = -1) : this(dbNum, ConfigurationHelper.RedisDefaultServername) { }
+        public RedisProvider(string serverName) : this(-1, serverName) { }
+        public RedisProvider(int dbNum, string serverName)
         {
+            DbNum = dbNum;
             ServerName = serverName;
         }
         #endregion
 
         #region 内部实现
         /// <summary>
-        /// 缓冲池管理
+        /// redis连接池管理
         /// </summary>
-        private static PooledRedisClientManager PooledClientManager(string serverName)
+        private static ConnectionMultiplexer PooledClientManager(string serverName)
         {
-            return Core<PooledRedisClientManager>.Instance(ConfigurationHelper.GetRedisClientManager, serverName, Math.Max(ExecutionContext<RequestContext>.Current.Zone, 1) + serverName + ConfigurationHelper.EndpointFileModified);
+            var connectionString = ConfigurationHelper.GetRedisConnectString(serverName);
+            return Core<ConnectionMultiplexer>.Instance(GetRedisClientManager, connectionString, connectionString);
+        }
+    
+        /// <summary>
+        /// GetRedisClientManager
+        /// </summary>
+        /// <param name="connectionString"></param>
+        /// <returns></returns>
+        private static ConnectionMultiplexer GetRedisClientManager(string connectionString)
+        {
+            if (string.IsNullOrEmpty(connectionString)) throw new ArgumentException(connectionString);
+            var connect = ConnectionMultiplexer.Connect(connectionString);
+            
+            connect.ConnectionFailed += (s, e) =>
+            {
+                Logger.Client.Error(Logger.Client.GetMethodInfo(MethodBase.GetCurrentMethod(), new object[] { e.EndPoint, e.FailureType }), e.Exception, LogDomain.Util);
+            };
+
+            connect.ConnectionRestored += (s, e) =>
+            {
+                Logger.Client.Warn(string.Format("ConnectionRestored: {0}.", e.EndPoint), LogDomain.Util);
+            };
+
+            connect.ErrorMessage += (s, e) =>
+            {
+                Logger.Client.Error(Logger.Client.GetMethodInfo(MethodBase.GetCurrentMethod(), new object[] { e.EndPoint }), new Exception(e.Message), LogDomain.Util);
+            };
+
+            connect.ConfigurationChanged += (s, e) =>
+            {
+                Logger.Client.Warn(string.Format("Configuration changed: {0}", e.EndPoint), LogDomain.Util);
+            };
+
+            connect.HashSlotMoved += (s, e) =>
+            {
+                Logger.Client.Warn(string.Format("HashSlotMoved: NewEndPoint: {0}, OldEndPoint: {1}.", e.NewEndPoint, e.OldEndPoint), LogDomain.Util);
+            };
+
+            connect.InternalError += (s, e) =>
+            {
+                Logger.Client.Error(Logger.Client.GetMethodInfo(MethodBase.GetCurrentMethod(), new object[] { e.EndPoint, e.ConnectionType }), e.Exception, LogDomain.Util);
+            };
+            return connect;
         }
         #endregion
 
         #region 对外公开属性和方法
         public string EndpointAddress
         {
-            get { return ServerName; }
+            get
+            {
+                var redis = PooledClientManager(ServerName);
+                return string.Join(",", redis.GetEndPoints().Select(p => p.ToString()).ToArray());
+            }
         }
 
         public LogDomain Domain
@@ -40,20 +93,17 @@ namespace X.Util.Provider
             get { return LogDomain.ThirdParty; }
         }
 
-        public IRedisClient Client
+        public IDatabase Client
         {
             get
             {
-                return PooledClientManager(ServerName).GetClient();
+                return PooledClientManager(ServerName).GetDatabase(DbNum);
             }
         }
 
-        public IRedisClient ReadOnlyClient
+        public ConnectionMultiplexer ConnectionMultiplexer
         {
-            get
-            {
-                return PooledClientManager(ServerName).GetReadOnlyClient();
-            }
+            get { return PooledClientManager(ServerName); }
         }
         #endregion
     }

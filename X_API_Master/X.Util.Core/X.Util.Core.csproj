@@ -49,11 +49,8 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\X.Ref\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="ServiceStack.Interfaces">
-      <HintPath>..\X.IO\Ref\ServiceStack.Interfaces.dll</HintPath>
-    </Reference>
-    <Reference Include="ServiceStack.Redis">
-      <HintPath>..\X.IO\Ref\ServiceStack.Redis.dll</HintPath>
+    <Reference Include="StackExchange.Redis">
+      <HintPath>..\X.IO\Ref\StackExchange.Redis.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />

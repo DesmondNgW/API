@@ -183,7 +183,9 @@
     <Content Include="App_Data\Config.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="App_Data\endpoint.xml" />
+    <Content Include="App_Data\endpoint.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="App_Readme\index.html" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />

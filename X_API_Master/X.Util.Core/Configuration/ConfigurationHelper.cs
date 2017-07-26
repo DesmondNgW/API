@@ -12,7 +12,6 @@ using System.Xml;
 using Couchbase;
 using Couchbase.Configuration;
 using MongoDB.Driver;
-using ServiceStack.Redis;
 using X.Util.Core.Cache;
 using X.Util.Core.Kernel;
 using X.Util.Core.Xml;
@@ -210,7 +209,7 @@ namespace X.Util.Core.Configuration
         }
         #endregion
 
-        #region CouchBase,Redis And MongoDB Configuration
+        #region CouchBase And MongoDB Configuration
         public static CouchbaseClientConfiguration CouchbaseConfiguration(string serverName)
         {
             var zone = Math.Max(ExecutionContext<RequestContext>.Current.Zone, 1);
@@ -332,36 +331,18 @@ namespace X.Util.Core.Configuration
         }
 
         /// <summary>
-        /// Redis Configuration
+        /// Redis 链接字符串配置
         /// </summary>
-        public static PooledRedisClientManager GetRedisClientManager(string serverName)
+        /// <param name="connectName"></param>
+        /// <returns></returns>
+        public static string GetRedisConnectString(string connectName)
         {
-            var zone = Math.Max(ExecutionContext<RequestContext>.Current.Zone, 1);
             var doc = XmlHelper.GetXmlDocCache(EndpointFile);
-            var node = doc != null ? doc.SelectSingleNode("/configuration/redis[@zone='" + zone + "']/server[@name='" + serverName + "']") : null;
-            if (Equals(node, null)) return null;
-            var config = new RedisClientManagerConfig();
-            var readWriteHosts = new List<string>();
-            var readOnlyHosts = new List<string>();
-            foreach (XmlNode item in node.ChildNodes)
-            {
-                switch (item.Name)
-                {
-                    case "read":
-                        readOnlyHosts.AddRange(from XmlNode rcnode in item.ChildNodes select XmlHelper.GetXmlAttributeValue(rcnode, "uri", string.Empty));
-                        break;
-                    case "write":
-                        readWriteHosts.AddRange(from XmlNode rcnode in item.ChildNodes select XmlHelper.GetXmlAttributeValue(rcnode, "uri", string.Empty));
-                        break;
-                    case "socketPool":
-                        config.AutoStart = XmlHelper.GetXmlAttributeValue(item, "autoStart", true);
-                        config.MaxReadPoolSize = XmlHelper.GetXmlAttributeValue(item, "maxReadPoolSize", 5);
-                        config.MaxWritePoolSize = XmlHelper.GetXmlAttributeValue(item, "maxWritePoolSize", 5);
-                        break;
-                }
-            }
-            return new PooledRedisClientManager(readWriteHosts, readOnlyHosts, config);
+            if (Equals(doc, null)) return string.Empty;
+            var node = doc.SelectSingleNode("/configuration/redis/server[@name='" + connectName + "']");
+            return Equals(node, null) ? string.Empty : XmlHelper.GetXmlNodeValue(node, string.Empty);
         }
+
         #endregion
     }
 }

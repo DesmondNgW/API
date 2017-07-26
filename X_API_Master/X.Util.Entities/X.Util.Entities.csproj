@@ -36,6 +36,9 @@
     <Reference Include="MongoDB.Driver">
       <HintPath>..\X.IO\Ref\MongoDB.Driver.dll</HintPath>
     </Reference>
+    <Reference Include="StackExchange.Redis">
+      <HintPath>..\X.IO\Ref\StackExchange.Redis.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
@@ -70,6 +73,9 @@
     <Compile Include="Interface\IMongoDbBase.cs" />
     <Compile Include="Interface\IProvider.cs" />
     <Compile Include="Interface\IProxyPooled.cs" />
+    <Compile Include="Interface\IRedisBase.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Interface\IRedisCache.cs" />
     <Compile Include="LogOptions.cs" />
     <Compile Include="ResponseResult.cs" />

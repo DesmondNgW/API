@@ -257,11 +257,11 @@
     <Content Include="Ref\NPOI\NPOI.OpenXmlFormats.dll" />
     <Content Include="Ref\NPOI\NPOI.XML" />
     <Content Include="Ref\Oracle.DataAccess.dll" />
-    <Content Include="Ref\ServiceStack.Common.dll" />
-    <Content Include="Ref\ServiceStack.Interfaces.dll" />
-    <Content Include="Ref\ServiceStack.Redis.dll" />
-    <Content Include="Ref\ServiceStack.Text.dll" />
+    <Content Include="Ref\StackExchange.Redis.dll" />
+    <Content Include="Ref\StackExchange.Redis.xml" />
     <Content Include="Ref\System.Data.SQLite.dll" />
+    <Content Include="Ref\System.Runtime.dll" />
+    <Content Include="Ref\System.Threading.Tasks.dll" />
     <Content Include="Ref\ThoughtWorks.QRCode.dll" />
     <Content Include="Ref\upgrade\MongoDB.Bson.dll" />
     <Content Include="Ref\upgrade\MongoDB.Bson.XML" />

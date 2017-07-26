@@ -17,16 +17,8 @@
     </server>
   </couchbase>
   <!--自定义Redis配置节点-->
-  <redis zone="1">
-    <server name="XRedis">
-      <read>
-        <add uri="127.0.0.1:6379" />
-      </read>
-      <write>
-        <add uri="127.0.0.1:6379" />
-      </write>
-      <socketPool maxReadPoolSize="5" maxWritePoolSize="5" autoStart="true"></socketPool>
-    </server>
+  <redis>
+    <server name="XRedis">10.0.11.113:6379,10.0.13.137:6379,10.0.13.152:6379,allowAdmin=true</server>
   </redis>
   <!--自定义WCF客户端配置节点-->
   <client>
