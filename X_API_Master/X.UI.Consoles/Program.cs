@@ -73,6 +73,16 @@ namespace X.UI.Consoles
             //var s = MongoDbBase<MongoTest>.Default.FindBsonDocument("Test", "test", Query.Null);
             //var f = MongoDbBase<MongoTest>.ToEntity(s);
             //Console.WriteLine(ThirdPartyTest.CouchBaseTest("1234567890", "1234567890"));
+
+
+            for (var i = 0; i < 10000; i++)
+            {
+                Console.WriteLine(ThirdPartyTest.RedisTest(i.ToString(), i.ToString()));
+            }
+
+            
+            
+            
             Console.ReadKey();
         }
 
