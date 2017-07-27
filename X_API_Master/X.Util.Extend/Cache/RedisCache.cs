@@ -38,11 +38,13 @@ namespace X.Util.Extend.Cache
         public void Set<T>(string key, T value, DateTime expire)
         {
             RedisBase.Default.StringSet(key, value, expire - DateTime.Now);
+            RedisBase.Default.KeyExpire(key, expire);
         }
 
         public void Set<T>(string key, T value, TimeSpan expire)
         {
             RedisBase.Default.StringSet(key, value, expire);
+            RedisBase.Default.KeyExpire(key, expire);
         }
 
         public bool KeyDelete(string key)

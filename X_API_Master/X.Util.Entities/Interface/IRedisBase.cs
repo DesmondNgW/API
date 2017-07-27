@@ -11,9 +11,9 @@ namespace X.Util.Entities.Interface
     {
         bool KeyExists(string key, CommandFlags flags = CommandFlags.None);
 
-        bool KeyExpire<T>(string key, T value, DateTime? expire, CommandFlags flags = CommandFlags.None);
+        bool KeyExpire(string key, DateTime? expire, CommandFlags flags = CommandFlags.None);
 
-        bool KeyExpire<T>(string key, T value, TimeSpan? expire, CommandFlags flags = CommandFlags.None);
+        bool KeyExpire(string key, TimeSpan? expire, CommandFlags flags = CommandFlags.None);
 
         bool KeyDelete(string key, CommandFlags flags = CommandFlags.None);
 

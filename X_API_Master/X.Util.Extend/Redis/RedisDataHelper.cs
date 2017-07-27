@@ -5,33 +5,37 @@ using X.Util.Core;
 
 namespace X.Util.Extend.Redis
 {
+    /// <summary>
+    /// RedisValue 作为存储结果，以json格式存在 
+    /// </summary>
     public class RedisDataHelper
     {
-        public static RedisKey ConvertKey(string key)
+
+        public static RedisKey String2Key(string key)
         {
             return key;
         }
 
-        public static RedisKey[] ConvertKey(List<string> keys)
+        public static RedisKey[] String2Key(List<string> keys)
         {
             if (keys != null && keys.Any())
             {
                 return keys.Select(p => (RedisKey)p).ToArray();
             }
             return default(RedisKey[]);
-        }
+        } 
 
-        public static RedisValue ConvertValue<T>(T obj)
+        public static RedisValue Type2Value<T>(T obj)
         {
             return obj.ToJson();
         }
 
-        public static RedisValue ConvertValue(string value)
+        public static RedisValue String2Value(string value)
         {
             return value;
         }
 
-        public static RedisValue[] ConvertValue(List<string> values)
+        public static RedisValue[] String2Value(List<string> values)
         {
             if (values != null && values.Any())
             {
@@ -40,18 +44,18 @@ namespace X.Util.Extend.Redis
             return default(RedisValue[]);
         }
 
-        public static T ConvertValue<T>(RedisValue value)
+        public static T Value2Type<T>(RedisValue value)
         {
             return ((string)value).FromJson<T>();
         }
 
-        public static List<string> ConvertValue(RedisValue[] values)
+        public static List<string> Value2String(RedisValue[] values)
         {
             if (values != null && values.Any())
             {
                 return values.Select(p => (string)p).ToList();
             }
             return default(List<string>);
-        }
+        } 
     }
 }
