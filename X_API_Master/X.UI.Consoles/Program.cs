@@ -77,7 +77,7 @@ namespace X.UI.Consoles
 
             for (var i = 0; i < 10000; i++)
             {
-                Console.WriteLine(ThirdPartyTest.RedisTest(i.ToString(), i.ToString()));
+                Console.WriteLine(ThirdPartyTest.RedisTest("1234567890", "1234567890"));
             }
 
             
