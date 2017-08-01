@@ -6,5 +6,5 @@
     cause the file to be unrecognizable by the program.
 -->
 <GenericObjectDataSource DisplayName="ResultInfoOfArrayOfFundSpecialExtendYJ36K23J" Version="1.0" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
-   <TypeInfo>X.WFConfig.CoreBusiness.ResultInfoOfArrayOfFundSpecialExtendYJ36K23J, Service References.CoreBusiness.Reference.cs, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</TypeInfo>
+   <TypeInfo>X.WFConfig.CoreBusiness.ResultInfoOfArrayOfFundSpecialExtendYJ36K23J</TypeInfo>
 </GenericObjectDataSource>
