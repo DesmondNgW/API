@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Threading;
+using System.Threading.Tasks;
 using StackExchange.Redis;
 using X.Util.Core;
 using X.Util.Core.Cache;
@@ -78,6 +79,7 @@ namespace X.UI.Consoles
             {
                 Console.WriteLine(ThirdPartyTest.RedisTest("1234567890", "1234567890"));
             }
+            Task<int> task = new Task<int>(() => 1);
             Console.ReadKey();
         }
 
