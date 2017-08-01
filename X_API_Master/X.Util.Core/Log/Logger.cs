@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using StackExchange.Redis;
 using X.Util.Core.Kernel;
 using X.Util.Entities;
 using X.Util.Entities.Enums;
@@ -23,7 +24,18 @@ namespace X.Util.Core.Log
             var arguments = declaringType.GetParameters().OrderBy(p => p.Position).ToList();
             if (arguments.Count.Equals(0) || arguments.Count != values.Count) return null;
             var result = new Dictionary<string, object>();
-            for (var i = 0; i < arguments.Count; i++) result[arguments[i].Name] = values[i];
+            for (var i = 0; i < arguments.Count; i++)
+            {
+                //fix RedisKey ToJson is nullObj
+                if (values[i] is RedisKey)
+                {
+                    result[arguments[i].Name] = ((RedisKey) values[i]).ToString();
+                }
+                else
+                {
+                    result[arguments[i].Name] = values[i];
+                }
+            }
             return result;
         }
 

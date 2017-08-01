@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Threading;
+using StackExchange.Redis;
 using X.Util.Core;
 using X.Util.Core.Cache;
 using X.Util.Core.Configuration;
@@ -73,16 +74,10 @@ namespace X.UI.Consoles
             //var s = MongoDbBase<MongoTest>.Default.FindBsonDocument("Test", "test", Query.Null);
             //var f = MongoDbBase<MongoTest>.ToEntity(s);
             //Console.WriteLine(ThirdPartyTest.CouchBaseTest("1234567890", "1234567890"));
-
-
             for (var i = 0; i < 10000; i++)
             {
                 Console.WriteLine(ThirdPartyTest.RedisTest("1234567890", "1234567890"));
             }
-
-            
-            
-            
             Console.ReadKey();
         }
 

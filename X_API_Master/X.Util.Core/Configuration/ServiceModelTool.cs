@@ -75,7 +75,8 @@ namespace X.Util.Core.Configuration
                 || (configurationElement is BasicHttpBindingElement && (binding = GetBinding<BasicHttpBinding>(configurationElement)) != null)
                 || (configurationElement is NetMsmqBindingElement && (binding = GetBinding<NetMsmqBinding>(configurationElement)) != null)
                 || (configurationElement is NetNamedPipeBindingElement && (binding = GetBinding<NetNamedPipeBinding>(configurationElement)) != null)
-                || (configurationElement is NetPeerTcpBindingElement && (binding = GetBinding<NetPeerTcpBinding>(configurationElement)) != null)
+                // "PeerChannel feature is obsolete and will be removed in the future."
+                // || (configurationElement is NetPeerTcpBindingElement && (binding = GetBinding<NetPeerTcpBinding>(configurationElement)) != null)
                 || (configurationElement is NetTcpBindingElement && (binding = GetBinding<NetTcpBinding>(configurationElement)) != null)
                 || (configurationElement is WSDualHttpBindingElement && (binding = GetBinding<WSDualHttpBinding>(configurationElement)) != null)
                 || (configurationElement is WSHttpBindingElement && (binding = GetBinding<WSHttpBinding>(configurationElement)) != null)
