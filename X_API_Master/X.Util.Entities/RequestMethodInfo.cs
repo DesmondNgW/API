@@ -40,6 +40,11 @@ namespace X.Util.Entities
         public MethodBase Method { get; set; }
 
         /// <summary>
+        /// 客户端唯一标识(没有则随机生成)
+        /// </summary>
+        public string ClientId { get; set; }
+
+        /// <summary>
         /// 客户端Ip
         /// </summary>
         public string ClientIp { get; set; }

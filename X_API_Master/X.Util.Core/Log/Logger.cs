@@ -73,7 +73,9 @@ namespace X.Util.Core.Log
         /// <returns></returns>
         public RequestMethodInfo GetMethodInfo(MethodBase declaringType, object[] values, Dictionary<string, object> extendInfo)
         {
-            return new RequestMethodInfo {Id = Guid.NewGuid().ToString("N"), ClassName = declaringType.DeclaringType, MethodName = declaringType.Name, Method = declaringType, ParamList = GetParamList(declaringType, values), ExtendInfo = extendInfo, ClientIp = IpBase.GetIp(), ServerIp = IpBase.GetLocalIp()};
+            var id = Guid.NewGuid().ToString("N");
+            var customerNo = ExecutionContext<RequestContext>.Current.CustomerNo ?? id;
+            return new RequestMethodInfo { Id = id, ClientId = customerNo, ClassName = declaringType.DeclaringType, MethodName = declaringType.Name, Method = declaringType, ParamList = GetParamList(declaringType, values), ExtendInfo = extendInfo, ClientIp = IpBase.GetIp(), ServerIp = IpBase.GetLocalIp() };
         }
 
         /// <summary>
@@ -81,7 +83,9 @@ namespace X.Util.Core.Log
         /// </summary>
         public RequestMethodInfo GetMethodInfo(MethodBase declaringType, object[] values, string address)
         {
-            return new RequestMethodInfo {Id = Guid.NewGuid().ToString("N"), ClassName = declaringType.DeclaringType, MethodName = declaringType.Name, Method = declaringType, ParamList = GetParamList(declaringType, values), Address = address, ClientIp = IpBase.GetIp(), ServerIp = IpBase.GetLocalIp()};
+            var id = Guid.NewGuid().ToString("N");
+            var customerNo = ExecutionContext<RequestContext>.Current.CustomerNo ?? id;
+            return new RequestMethodInfo { Id = id, ClientId = customerNo, ClassName = declaringType.DeclaringType, MethodName = declaringType.Name, Method = declaringType, ParamList = GetParamList(declaringType, values), Address = address, ClientIp = IpBase.GetIp(), ServerIp = IpBase.GetLocalIp() };
         }
 
         /// <summary>
@@ -89,7 +93,9 @@ namespace X.Util.Core.Log
         /// </summary>
         public RequestMethodInfo GetMethodInfo(MethodBase declaringType, object[] values, string address, Dictionary<string, object> extendInfo)
         {
-            return new RequestMethodInfo {Id = Guid.NewGuid().ToString("N"), ClassName = declaringType.DeclaringType, MethodName = declaringType.Name, Method = declaringType, ParamList = GetParamList(declaringType, values), Address = address, ExtendInfo = extendInfo, ClientIp = IpBase.GetIp(), ServerIp = IpBase.GetLocalIp()};
+            var id = Guid.NewGuid().ToString("N");
+            var customerNo = ExecutionContext<RequestContext>.Current.CustomerNo ?? id;
+            return new RequestMethodInfo { Id = id, ClientId = customerNo, ClassName = declaringType.DeclaringType, MethodName = declaringType.Name, Method = declaringType, ParamList = GetParamList(declaringType, values), Address = address, ExtendInfo = extendInfo, ClientIp = IpBase.GetIp(), ServerIp = IpBase.GetLocalIp() };
         }
 
         /// <summary>
@@ -103,7 +109,7 @@ namespace X.Util.Core.Log
             {
                 var log = LoggerConfig.Instance.GetLogger(domain);
                 var message = new StringBuilder();
-                message.AppendLine(string.Format("{0} Request Id: {1}, From: {2}, To: {3}, Path:{4}.", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff"), request.Id, request.ClientIp, request.ServerIp, string.Format("{0}.{1}", request.ClassName.FullName, request.MethodName)));
+                message.AppendLine(string.Format("{0} ClientId: {1} Request Id: {2}, From: {3}, To: {4}, Path:{5}.", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff"), request.ClientId, request.Id, request.ClientIp, request.ServerIp, string.Format("{0}.{1}", request.ClassName.FullName, request.MethodName)));
                 if (request.ParamList != null && request.ParamList.Count > 0)
                 {
                     message.AppendLine(string.Format("param: {0}", request.ParamList.ToJson()));
@@ -134,7 +140,7 @@ namespace X.Util.Core.Log
             {
                 var log = LoggerConfig.Instance.GetLogger(domain);
                 var message = new StringBuilder();
-                message.AppendLine(string.Format("{0} Response Id: {1}, From: {2}, To: {3}, Path:{4}.", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff"), request.Id, request.ClientIp, request.ServerIp, string.Format("{0}.{1}", request.ClassName.FullName, request.MethodName)));
+                message.AppendLine(string.Format("{0} ClientId: {1} Response Id: {2}, From: {3}, To: {4}, Path:{5}.", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff"), request.ClientId, request.Id, request.ClientIp, request.ServerIp, string.Format("{0}.{1}", request.ClassName.FullName, request.MethodName)));
                 if (request.ParamList != null && request.ParamList.Count > 0)
                 {
                     message.AppendLine(string.Format("param: {0}", request.ParamList.ToJson()));

@@ -13,6 +13,7 @@ using X.Interface.Dto.Interface;
 using X.UI.API.Util;
 using X.Util.Core.Kernel;
 using X.Util.Entities;
+using X.Util.Extend.Core;
 using X.Util.Other;
 using X.Util.Provider;
 
@@ -131,7 +132,8 @@ namespace X.UI.API.Controllers
         [HttpGet]
         public EncryptResult MobileEncrypt(string mobile)
         {
-            return EncryptHelper.Instance.MobileEncrypt(mobile);
+            var provider = new InstanceProvider<EncryptHelper>(typeof(EncryptHelper), ControllerHelper.EDomain);
+            return CoreAccess<EncryptHelper>.Call(EncryptHelper.Instance.MobileEncrypt, mobile, provider, new LogOptions<EncryptResult>(CoreBase.CallSuccess));
         }
     }
 }
