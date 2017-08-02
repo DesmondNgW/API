@@ -4,6 +4,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Web.Http;
+using Em.FundTrade.EncryptHelper;
 using ThoughtWorks.QRCode.Codec;
 using X.Interface.Core;
 using X.Interface.Dto;
@@ -120,6 +121,17 @@ namespace X.UI.API.Controllers
             };
             result.Content.Headers.ContentType = new MediaTypeHeaderValue("image/png");
             return result;
+        }
+
+        /// <summary>
+        /// 手机号加密
+        /// </summary>
+        /// <param name="mobile"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public EncryptResult MobileEncrypt(string mobile)
+        {
+            return EncryptHelper.Instance.MobileEncrypt(mobile);
         }
     }
 }

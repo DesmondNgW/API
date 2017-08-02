@@ -14,6 +14,7 @@ using X.Util.Core.Log;
 using X.Util.Entities;
 using X.Util.Entities.Enums;
 using X.Util.Extend.Core;
+using X.Util.Extend.Cryption;
 //using MongoDB.Bson;
 //using MongoDB.Driver.Builders;
 //using X.Util.Entities;
@@ -75,11 +76,6 @@ namespace X.UI.Consoles
             //var s = MongoDbBase<MongoTest>.Default.FindBsonDocument("Test", "test", Query.Null);
             //var f = MongoDbBase<MongoTest>.ToEntity(s);
             //Console.WriteLine(ThirdPartyTest.CouchBaseTest("1234567890", "1234567890"));
-            for (var i = 0; i < 10000; i++)
-            {
-                Console.WriteLine(ThirdPartyTest.RedisTest("1234567890", "1234567890"));
-            }
-            Task<int> task = new Task<int>(() => 1);
             Console.ReadKey();
         }
 
