@@ -61,7 +61,7 @@ namespace X.UI.API.Controllers
         /// <summary>
         /// 验证码图片
         /// </summary>
-        /// <returns></returns>
+        /// <returns>二进制字节</returns>
         [HttpGet]
         public HttpResponseMessage VerifyCode()
         {
@@ -78,7 +78,7 @@ namespace X.UI.API.Controllers
         /// <summary>
         /// 1*1像素位图
         /// </summary>
-        /// <returns></returns>
+        /// <returns>二进制字节</returns>
         [HttpGet]
         public HttpResponseMessage BitMap()
         {
@@ -93,7 +93,7 @@ namespace X.UI.API.Controllers
         /// <summary>
         /// 文本转图像
         /// </summary>
-        /// <returns></returns>
+        /// <returns>二进制字节</returns>
         [HttpGet]
         public HttpResponseMessage TextImage()
         {
@@ -110,7 +110,7 @@ namespace X.UI.API.Controllers
         /// <summary>
         /// 二维码
         /// </summary>
-        /// <returns></returns>
+        /// <returns>二进制字节</returns>
         [HttpGet]
         public HttpResponseMessage QrCode()
         {
@@ -126,8 +126,8 @@ namespace X.UI.API.Controllers
         /// <summary>
         /// 手机号加密
         /// </summary>
-        /// <param name="mobile"></param>
-        /// <returns></returns>
+        /// <param name="mobile">手机号码</param>
+        /// <returns>手机号加密结果</returns>
         [HttpGet]
         public EncryptResult MobileEncrypt(string mobile)
         {

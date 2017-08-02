@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<shfbBuild product="Sandcastle Help File Builder" version="2015.1.12.0" projectFile="D:\Project\git\API\X_API_Master_Help.shfbproj" started="2017-08-02 14:53:08">
+<shfbBuild product="Sandcastle Help File Builder" version="2015.1.12.0" projectFile="D:\Project\git\API\X_API_Master_Help\X_API_Master_Help.shfbproj" started="2017-08-02 15:23:58">
 <buildStep step="Initializing">
 Finding tools...
 The Sandcastle tools are located in &#39;C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\&#39;
 Searching for HTML Help 1 compiler...
 Found HTML Help 1 compiler in &#39;C:\Program Files (x86)\HTML Help Workshop\&#39;
 Locating components in the following folder(s):
-   D:\Project\git\API
+   D:\Project\git\API\X_API_Master_Help
 Using presentation style &#39;VS2013&#39; located in &#39;C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013&#39;
 Loading and initializing plug-ins...
 Lightweight Website Style Version 2015.1.12.0
@@ -17,25 +17,26 @@ Portions Copyright &#169; 2014, Sam Harwell, All Rights Reserved
 Validating and copying documentation source information
 Source: D:\Project\git\API\X_API_Master\X.UI.API\bin\X.UI.API.dll
     Found assembly &#39;D:\Project\git\API\X_API_Master\X.UI.API\bin\X.UI.API.dll&#39;
-Source: D:\Project\git\API\X_API_Master\X.UI.API\bin\X.UI.API.XML
+Source: D:\Project\git\API\X_API_Master\X.UI.API\bin\X.UI.API.xml
 
 Copying XML comments files
-    D:\Project\git\API\X_API_Master\X.UI.API\bin\X.UI.API.XML -&gt; D:\Project\git\API\Help\Working\X.UI.API.XML
+    D:\Project\git\API\X_API_Master\X.UI.API\bin\X.UI.API.XML -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\X.UI.API.XML
 </buildStep>
 <buildStep step="GenerateSharedContent">
-Generating shared content files (en-US, 英语(美国))...
+Generating shared content files (zh-CN, 中文(简体，中国))...
+SHFB: Warning BE0003: Sandcastle shared content for the &#39;zh-CN, 中文(简体，中国)&#39; language could not be found.  Using &#39;en-US, English (US)&#39; defaults.
 <plugIn name="Lightweight Website Style" behavior="After" priority="1000">
-</plugIn>    Last step completed in 00:00:00.2490
+</plugIn>    Last step completed in 00:00:00.1580
 </buildStep>
 <buildStep step="GenerateApiFilter">
 Generating API filter for MRefBuilder...
-    Last step completed in 00:00:00.0360
+    Last step completed in 00:00:00.0190
 </buildStep>
 <buildStep step="GenerateReflectionInfo">
 Generating reflection information...
 [C:\windows\Microsoft.NET\Framework64\v4.0.30319\MSBuild.exe]
-生成启动时间为 2017-08-02 14:53:21。
-节点 1 上的项目“D:\Project\git\API\Help\Working\GenerateRefInfo.proj”(默认目标)。
+生成启动时间为 2017-08-02 15:24:00。
+节点 1 上的项目“D:\Project\git\API\X_API_Master_Help\Help\Working\GenerateRefInfo.proj”(默认目标)。
 PrepareForBuild:
   正在创建目录“obj\Debug\”。
 GenerateRefInfo:
@@ -49,18 +50,18 @@ GenerateRefInfo:
   Copyright ? 2006-2015, Microsoft Corporation, All Rights Reserved.
   Portions Copyright ? 2006-2014, Eric Woodruff, All Rights Reserved.
   Applying XSL transformation &#39;C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\ProductionTransforms\MergeDuplicates.xsl&#39;.
-已完成生成项目“D:\Project\git\API\Help\Working\GenerateRefInfo.proj”(默认目标)的操作。
+已完成生成项目“D:\Project\git\API\X_API_Master_Help\Help\Working\GenerateRefInfo.proj”(默认目标)的操作。
 
 已成功生成。
 
-已用时间 00:00:13.79
-    Last step completed in 00:00:15.2069
+已用时间 00:00:04.55
+    Last step completed in 00:00:05.0863
 </buildStep>
 <buildStep step="TransformReflectionInfo">
 Transforming reflection output...
 [C:\windows\Microsoft.NET\Framework64\v4.0.30319\MSBuild.exe]
-生成启动时间为 2017-08-02 14:53:35。
-节点 1 上的项目“D:\Project\git\API\Help\Working\TransformManifest.proj”(默认目标)。
+生成启动时间为 2017-08-02 15:24:05。
+节点 1 上的项目“D:\Project\git\API\X_API_Master_Help\Help\Working\TransformManifest.proj”(默认目标)。
 TransformManifest:
   XslTransform (v2015.1.12.0)
   Copyright ? 2006-2015, Microsoft Corporation, All Rights Reserved.
@@ -75,234 +76,226 @@ TransformManifest:
   Copyright ? 2006-2015, Microsoft Corporation, All Rights Reserved.
   Portions Copyright ? 2006-2014, Eric Woodruff, All Rights Reserved.
   Applying XSL transformation &#39;C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\ProductionTransforms\ReflectionToManifest.xsl&#39;.
-已完成生成项目“D:\Project\git\API\Help\Working\TransformManifest.proj”(默认目标)的操作。
+已完成生成项目“D:\Project\git\API\X_API_Master_Help\Help\Working\TransformManifest.proj”(默认目标)的操作。
 
 已成功生成。
 
-已用时间 00:00:03.48
-    Last step completed in 00:00:04.0862
+已用时间 00:00:01.16
+    Last step completed in 00:00:01.5221
 </buildStep>
 <buildStep step="GenerateNamespaceSummaries">
 Generating namespace summary information...
-    Last step completed in 00:00:00.1510
+    Last step completed in 00:00:00.0560
 </buildStep>
 <buildStep step="CopyAdditionalContent">
 Copying additional content files...
 No additional content to copy
-    Last step completed in 00:00:00.0260
+    Last step completed in 00:00:00.0140
 </buildStep>
 <buildStep step="MergeTablesOfContents">
 Merging conceptual and additional tables of contents...
-    Last step completed in 00:00:00.0150
+    Last step completed in 00:00:00.0020
 </buildStep>
 <buildStep step="GenerateIntermediateTableOfContents">
 Generating intermediate table of contents file...
 [C:\windows\Microsoft.NET\Framework64\v4.0.30319\MSBuild.exe]
-生成启动时间为 2017-08-02 14:53:40。
-节点 1 上的项目“D:\Project\git\API\Help\Working\GenerateIntermediateTOC.proj”(默认目标)。
+生成启动时间为 2017-08-02 15:24:06。
+节点 1 上的项目“D:\Project\git\API\X_API_Master_Help\Help\Working\GenerateIntermediateTOC.proj”(默认目标)。
 GenerateIntermediateTOC:
   XslTransform (v2015.1.12.0)
   Copyright ? 2006-2015, Microsoft Corporation, All Rights Reserved.
   Portions Copyright ? 2006-2014, Eric Woodruff, All Rights Reserved.
   Applying XSL transformation &#39;C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\ProductionTransforms\CreateVSToc.xsl&#39;.
-已完成生成项目“D:\Project\git\API\Help\Working\GenerateIntermediateTOC.proj”(默认目标)的操作。
+已完成生成项目“D:\Project\git\API\X_API_Master_Help\Help\Working\GenerateIntermediateTOC.proj”(默认目标)的操作。
 
 已成功生成。
 
-已用时间 00:00:00.40
+已用时间 00:00:00.27
 Generating conceptual content intermediate TOC file...
-    Last step completed in 00:00:00.9501
+    Last step completed in 00:00:00.6530
 </buildStep>
 <buildStep step="CreateBuildAssemblerConfigs">
 Creating Sandcastle configuration files...
     sandcastle.config
-    Last step completed in 00:00:02.1561
+    Last step completed in 00:00:00.1630
 </buildStep>
 <buildStep step="MergeCustomConfigs">
 Merging custom build component configurations
-D:\Project\git\API\Help\Working\sandcastle.config
-    Last step completed in 00:00:00.0850
+D:\Project\git\API\X_API_Master_Help\Help\Working\sandcastle.config
+    Last step completed in 00:00:00.0620
 </buildStep>
 <buildStep step="BuildReferenceTopics">
 Building reference help topics...
 [C:\windows\Microsoft.NET\Framework64\v4.0.30319\MSBuild.exe]
-生成启动时间为 2017-08-02 14:53:43。
-节点 1 上的项目“D:\Project\git\API\Help\Working\BuildReferenceTopics.proj”(默认目标)。
+生成启动时间为 2017-08-02 15:24:07。
+节点 1 上的项目“D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj”(默认目标)。
 BuildReferenceTopics:
   BuildAssembler (v2015.1.12.0)
   Copyright ? 2006-2015, Microsoft Corporation, All Rights Reserved.
   Portions Copyright ? 2006-2014, Eric Woodruff, All Rights Reserved.
   Loading configuration...
-  ResolveReferenceLinksComponent: The MSDN content ID cache &#39;C:\Users\Administrator\AppData\Local\EWSoftware\Sandcastle Help File Builder\Cache\MsdnContentId.cache&#39; does not exist yet.  All IDs will be looked up in this build which will slow it down.
   Processing topics...
-BuildAssembler : warning : ShowMissingComponent: [N:X.UI.API] Missing &lt;summary&gt; documentation [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ShowMissingComponent: [T:X.UI.API.BundleConfig] Missing &lt;summary&gt; documentation [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ShowMissingComponent: [M:X.UI.API.BundleConfig.RegisterBundles(System.Web.Optimization.BundleCollection)] Missing &lt;summary&gt; documentation [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ShowMissingComponent: [M:X.UI.API.BundleConfig.RegisterBundles(System.Web.Optimization.BundleCollection)] Missing &lt;param name=&quot;bundles&quot;/&gt; documentation [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ShowMissingComponent: [T:X.UI.API.FilterConfig] Missing &lt;summary&gt; documentation [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ShowMissingComponent: [M:X.UI.API.FilterConfig.RegisterGlobalFilters(System.Web.Mvc.GlobalFilterCollection)] Missing &lt;summary&gt; documentation [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ShowMissingComponent: [M:X.UI.API.FilterConfig.RegisterGlobalFilters(System.Web.Mvc.GlobalFilterCollection)] Missing &lt;param name=&quot;filters&quot;/&gt; documentation [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ShowMissingComponent: [T:X.UI.API.RouteConfig] Missing &lt;summary&gt; documentation [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ShowMissingComponent: [M:X.UI.API.RouteConfig.RegisterRoutes(System.Web.Routing.RouteCollection)] Missing &lt;summary&gt; documentation [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ShowMissingComponent: [M:X.UI.API.RouteConfig.RegisterRoutes(System.Web.Routing.RouteCollection)] Missing &lt;param name=&quot;routes&quot;/&gt; documentation [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ShowMissingComponent: [T:X.UI.API.WebApiApplication] Missing &lt;summary&gt; documentation [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ShowMissingComponent: [M:X.UI.API.WebApiApplication.Application_Error(System.Object,System.EventArgs)] Missing &lt;summary&gt; documentation [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ShowMissingComponent: [M:X.UI.API.WebApiApplication.Application_Error(System.Object,System.EventArgs)] Missing &lt;param name=&quot;sender&quot;/&gt; documentation [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ShowMissingComponent: [M:X.UI.API.WebApiApplication.Application_Error(System.Object,System.EventArgs)] Missing &lt;param name=&quot;e&quot;/&gt; documentation [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ShowMissingComponent: [M:X.UI.API.WebApiApplication.Application_Start] Missing &lt;summary&gt; documentation [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ShowMissingComponent: [T:X.UI.API.WebApiConfig] Missing &lt;summary&gt; documentation [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ShowMissingComponent: [M:X.UI.API.WebApiConfig.Register(System.Web.Http.HttpConfiguration)] Missing &lt;summary&gt; documentation [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ShowMissingComponent: [M:X.UI.API.WebApiConfig.Register(System.Web.Http.HttpConfiguration)] Missing &lt;param name=&quot;config&quot;/&gt; documentation [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ShowMissingComponent: [N:X.UI.API.Controllers] Missing &lt;summary&gt; documentation [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ShowMissingComponent: [M:X.UI.API.Controllers.KmsController.BitMap] Missing &lt;returns&gt; documentation [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [M:X.UI.API.Controllers.KmsController.GetPublicKey(System.Int32)] Unknown reference link target &#39;T:X.Interface.Dto.ApiResult`1&#39;. [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [M:X.UI.API.Controllers.KmsController.GetPublicKey(System.Int32)] Unknown reference link target &#39;T:X.Interface.Dto.HttpResponse.PublicKeyDto&#39;. [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [M:X.UI.API.Controllers.KmsController.GetPublicKey(System.Int32)] Unknown reference link target &#39;T:X.Interface.Dto.ApiResult`1&#39;. [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [M:X.UI.API.Controllers.KmsController.GetPublicKey(System.Int32)] Unknown reference link target &#39;T:X.Interface.Dto.HttpResponse.PublicKeyDto&#39;. [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [M:X.UI.API.Controllers.KmsController.GetToken(System.String)] Unknown reference link target &#39;T:X.Interface.Dto.ApiResult`1&#39;. [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [M:X.UI.API.Controllers.KmsController.GetToken(System.String)] Unknown reference link target &#39;T:X.Interface.Dto.ApiResult`1&#39;. [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ShowMissingComponent: [M:X.UI.API.Controllers.KmsController.MobileEncrypt(System.String)] Missing &lt;returns&gt; documentation [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ShowMissingComponent: [M:X.UI.API.Controllers.KmsController.MobileEncrypt(System.String)] Missing &lt;param name=&quot;mobile&quot;/&gt; documentation [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [M:X.UI.API.Controllers.KmsController.MobileEncrypt(System.String)] Unknown reference link target &#39;T:Em.FundTrade.EncryptHelper.EncryptResult&#39;. [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [M:X.UI.API.Controllers.KmsController.MobileEncrypt(System.String)] Unknown reference link target &#39;T:Em.FundTrade.EncryptHelper.EncryptResult&#39;. [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [M:X.UI.API.Controllers.KmsController.Now] Unknown reference link target &#39;T:X.Interface.Dto.ApiResult`1&#39;. [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [M:X.UI.API.Controllers.KmsController.Now] Unknown reference link target &#39;T:X.Interface.Dto.ApiResult`1&#39;. [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ShowMissingComponent: [M:X.UI.API.Controllers.KmsController.QrCode] Missing &lt;returns&gt; documentation [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ShowMissingComponent: [M:X.UI.API.Controllers.KmsController.TextImage] Missing &lt;returns&gt; documentation [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ShowMissingComponent: [M:X.UI.API.Controllers.KmsController.VerifyCode] Missing &lt;returns&gt; documentation [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ShowMissingComponent: [N:X.UI.API.Model] Missing &lt;summary&gt; documentation [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ShowMissingComponent: [T:X.UI.API.Model.ApiRequestContext] Missing &lt;summary&gt; documentation [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;T:X.Util.Entities.MongoBaseModel&#39;. [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;T:X.Interface.Dto.HttpRequestContext&#39;. [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;P:X.Interface.Dto.HttpRequestContext.ClientId&#39;. [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;T:X.Interface.Dto.HttpRequestContext&#39;. [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;P:X.Interface.Dto.HttpRequestContext.ClientName&#39;. [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;T:X.Interface.Dto.HttpRequestContext&#39;. [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;P:X.Interface.Dto.HttpRequestContext.ClientType&#39;. [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;T:X.Interface.Dto.HttpRequestContext&#39;. [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;P:X.Interface.Dto.HttpRequestContext.ClientVersion&#39;. [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;T:X.Interface.Dto.HttpRequestContext&#39;. [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;P:X.Util.Entities.MongoBaseModel.Id&#39;. [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;T:X.Util.Entities.MongoBaseModel&#39;. [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;P:X.Interface.Dto.HttpRequestContext.PlatForm&#39;. [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;T:X.Interface.Dto.HttpRequestContext&#39;. [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;P:X.Interface.Dto.HttpRequestContext.Screen&#39;. [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;T:X.Interface.Dto.HttpRequestContext&#39;. [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;P:X.Interface.Dto.HttpRequestContext.Tid&#39;. [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;T:X.Interface.Dto.HttpRequestContext&#39;. [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;P:X.Interface.Dto.HttpRequestContext.Timestamp&#39;. [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;T:X.Interface.Dto.HttpRequestContext&#39;. [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;P:X.Interface.Dto.HttpRequestContext.Token&#39;. [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;T:X.Interface.Dto.HttpRequestContext&#39;. [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;P:X.Interface.Dto.HttpRequestContext.Version&#39;. [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;T:X.Interface.Dto.HttpRequestContext&#39;. [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;T:X.Util.Entities.MongoBaseModel&#39;. [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;T:X.Interface.Dto.HttpRequestContext&#39;. [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;P:X.Interface.Dto.HttpRequestContext.ClientId&#39;. [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;T:X.Interface.Dto.HttpRequestContext&#39;. [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;P:X.Interface.Dto.HttpRequestContext.ClientName&#39;. [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;T:X.Interface.Dto.HttpRequestContext&#39;. [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;P:X.Interface.Dto.HttpRequestContext.ClientType&#39;. [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;T:X.Interface.Dto.HttpRequestContext&#39;. [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;P:X.Interface.Dto.HttpRequestContext.ClientVersion&#39;. [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;T:X.Interface.Dto.HttpRequestContext&#39;. [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;P:X.Util.Entities.MongoBaseModel.Id&#39;. [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;T:X.Util.Entities.MongoBaseModel&#39;. [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;P:X.Interface.Dto.HttpRequestContext.PlatForm&#39;. [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;T:X.Interface.Dto.HttpRequestContext&#39;. [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;P:X.Interface.Dto.HttpRequestContext.Screen&#39;. [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;T:X.Interface.Dto.HttpRequestContext&#39;. [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;P:X.Interface.Dto.HttpRequestContext.Tid&#39;. [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;T:X.Interface.Dto.HttpRequestContext&#39;. [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;P:X.Interface.Dto.HttpRequestContext.Timestamp&#39;. [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;T:X.Interface.Dto.HttpRequestContext&#39;. [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;P:X.Interface.Dto.HttpRequestContext.Token&#39;. [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;T:X.Interface.Dto.HttpRequestContext&#39;. [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;P:X.Interface.Dto.HttpRequestContext.Version&#39;. [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;T:X.Interface.Dto.HttpRequestContext&#39;. [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [Properties.T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;P:X.Interface.Dto.HttpRequestContext.ClientId&#39;. [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [Properties.T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;T:X.Interface.Dto.HttpRequestContext&#39;. [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [Properties.T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;P:X.Interface.Dto.HttpRequestContext.ClientName&#39;. [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [Properties.T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;T:X.Interface.Dto.HttpRequestContext&#39;. [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [Properties.T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;P:X.Interface.Dto.HttpRequestContext.ClientType&#39;. [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [Properties.T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;T:X.Interface.Dto.HttpRequestContext&#39;. [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [Properties.T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;P:X.Interface.Dto.HttpRequestContext.ClientVersion&#39;. [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [Properties.T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;T:X.Interface.Dto.HttpRequestContext&#39;. [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [Properties.T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;P:X.Util.Entities.MongoBaseModel.Id&#39;. [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [Properties.T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;T:X.Util.Entities.MongoBaseModel&#39;. [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [Properties.T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;P:X.Interface.Dto.HttpRequestContext.PlatForm&#39;. [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [Properties.T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;T:X.Interface.Dto.HttpRequestContext&#39;. [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [Properties.T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;P:X.Interface.Dto.HttpRequestContext.Screen&#39;. [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [Properties.T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;T:X.Interface.Dto.HttpRequestContext&#39;. [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [Properties.T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;P:X.Interface.Dto.HttpRequestContext.Tid&#39;. [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [Properties.T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;T:X.Interface.Dto.HttpRequestContext&#39;. [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [Properties.T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;P:X.Interface.Dto.HttpRequestContext.Timestamp&#39;. [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [Properties.T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;T:X.Interface.Dto.HttpRequestContext&#39;. [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [Properties.T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;P:X.Interface.Dto.HttpRequestContext.Token&#39;. [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [Properties.T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;T:X.Interface.Dto.HttpRequestContext&#39;. [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [Properties.T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;P:X.Interface.Dto.HttpRequestContext.Version&#39;. [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [Properties.T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;T:X.Interface.Dto.HttpRequestContext&#39;. [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [Properties.T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;P:X.Interface.Dto.HttpRequestContext.ClientId&#39;. [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [Properties.T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;T:X.Interface.Dto.HttpRequestContext&#39;. [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [Properties.T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;P:X.Interface.Dto.HttpRequestContext.ClientName&#39;. [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [Properties.T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;T:X.Interface.Dto.HttpRequestContext&#39;. [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [Properties.T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;P:X.Interface.Dto.HttpRequestContext.ClientType&#39;. [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [Properties.T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;T:X.Interface.Dto.HttpRequestContext&#39;. [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [Properties.T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;P:X.Interface.Dto.HttpRequestContext.ClientVersion&#39;. [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [Properties.T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;T:X.Interface.Dto.HttpRequestContext&#39;. [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [Properties.T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;P:X.Util.Entities.MongoBaseModel.Id&#39;. [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [Properties.T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;T:X.Util.Entities.MongoBaseModel&#39;. [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [Properties.T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;P:X.Interface.Dto.HttpRequestContext.PlatForm&#39;. [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [Properties.T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;T:X.Interface.Dto.HttpRequestContext&#39;. [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [Properties.T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;P:X.Interface.Dto.HttpRequestContext.Screen&#39;. [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [Properties.T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;T:X.Interface.Dto.HttpRequestContext&#39;. [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [Properties.T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;P:X.Interface.Dto.HttpRequestContext.Tid&#39;. [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [Properties.T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;T:X.Interface.Dto.HttpRequestContext&#39;. [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [Properties.T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;P:X.Interface.Dto.HttpRequestContext.Timestamp&#39;. [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [Properties.T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;T:X.Interface.Dto.HttpRequestContext&#39;. [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [Properties.T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;P:X.Interface.Dto.HttpRequestContext.Token&#39;. [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [Properties.T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;T:X.Interface.Dto.HttpRequestContext&#39;. [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [Properties.T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;P:X.Interface.Dto.HttpRequestContext.Version&#39;. [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [Properties.T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;T:X.Interface.Dto.HttpRequestContext&#39;. [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ShowMissingComponent: [N:X.UI.API.Util] Missing &lt;summary&gt; documentation [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ShowMissingComponent: [T:X.UI.API.Util.ApiExceptionAttribute] Missing &lt;summary&gt; documentation [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ShowMissingComponent: [T:X.UI.API.Util.ControllerHelper] Missing &lt;summary&gt; documentation [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ShowMissingComponent: [M:X.UI.API.Util.ControllerHelper.ApiCallMonitor(X.UI.API.Model.ApiRequestContext)] Missing &lt;param name=&quot;context&quot;/&gt; documentation [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ShowMissingComponent: [M:X.UI.API.Util.ControllerHelper.CacheInit(System.Boolean)] Missing &lt;param name=&quot;noCache&quot;/&gt; documentation [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ShowMissingComponent: [M:X.UI.API.Util.ControllerHelper.CallSuccess``1(X.Interface.Dto.ApiResult{``0})] Missing &lt;typeparam name=&quot;TResult&quot;/&gt; documentation [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ShowMissingComponent: [M:X.UI.API.Util.ControllerHelper.CallSuccess``1(X.Interface.Dto.ApiResult{``0})] Missing &lt;returns&gt; documentation [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ShowMissingComponent: [M:X.UI.API.Util.ControllerHelper.CallSuccess``1(X.Interface.Dto.ApiResult{``0})] Missing &lt;param name=&quot;iresult&quot;/&gt; documentation [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [M:X.UI.API.Util.ControllerHelper.CallSuccess``1(X.Interface.Dto.ApiResult{``0})] Unknown reference link target &#39;T:X.Interface.Dto.ApiResult`1&#39;. [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [M:X.UI.API.Util.ControllerHelper.CallSuccess``1(X.Interface.Dto.ApiResult{``0})] Unknown reference link target &#39;T:X.Interface.Dto.ApiResult`1&#39;. [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ShowMissingComponent: [F:X.UI.API.Util.ControllerHelper.EDomain] Missing &lt;summary&gt; documentation [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [F:X.UI.API.Util.ControllerHelper.EDomain] Unknown reference link target &#39;T:X.Util.Entities.Enums.LogDomain&#39;. [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [F:X.UI.API.Util.ControllerHelper.EDomain] Unknown reference link target &#39;T:X.Util.Entities.Enums.LogDomain&#39;. [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ShowMissingComponent: [M:X.UI.API.Util.ControllerHelper.GetApiRequestContext(System.Web.Http.Controllers.HttpActionContext)] Missing &lt;returns&gt; documentation [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ShowMissingComponent: [M:X.UI.API.Util.ControllerHelper.GetApiRequestContext(System.Web.Http.Controllers.HttpActionContext)] Missing &lt;param name=&quot;actionContext&quot;/&gt; documentation [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ShowMissingComponent: [M:X.UI.API.Util.ControllerHelper.GetHttpContextWrapper(System.Web.Http.Controllers.HttpActionContext)] Missing &lt;returns&gt; documentation [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ShowMissingComponent: [M:X.UI.API.Util.ControllerHelper.GetHttpContextWrapper(System.Web.Http.Controllers.HttpActionContext)] Missing &lt;param name=&quot;actionContext&quot;/&gt; documentation [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ShowMissingComponent: [M:X.UI.API.Util.ControllerHelper.GetUid(System.Web.Http.Controllers.HttpActionContext)] Missing &lt;returns&gt; documentation [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ShowMissingComponent: [M:X.UI.API.Util.ControllerHelper.GetUid(System.Web.Http.Controllers.HttpActionContext)] Missing &lt;param name=&quot;actionContext&quot;/&gt; documentation [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ShowMissingComponent: [M:X.UI.API.Util.ControllerHelper.OnActionExecuted(System.Web.Http.Filters.HttpActionExecutedContext)] Missing &lt;param name=&quot;actionExecutedContext&quot;/&gt; documentation [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ShowMissingComponent: [P:X.UI.API.Util.OutputCacheAttribute.Duration] Missing &lt;summary&gt; documentation [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ShowMissingComponent: [M:X.UI.API.Util.UserBaseController.UserIdentity(System.Web.Http.Controllers.HttpActionContext)] Missing &lt;param name=&quot;actionContext&quot;/&gt; documentation [D:\Project\git\API\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ShowMissingComponent: [N:X.UI.API] Missing &lt;summary&gt; documentation [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ShowMissingComponent: [T:X.UI.API.BundleConfig] Missing &lt;summary&gt; documentation [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ShowMissingComponent: [M:X.UI.API.BundleConfig.RegisterBundles(System.Web.Optimization.BundleCollection)] Missing &lt;summary&gt; documentation [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ShowMissingComponent: [M:X.UI.API.BundleConfig.RegisterBundles(System.Web.Optimization.BundleCollection)] Missing &lt;param name=&quot;bundles&quot;/&gt; documentation [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ShowMissingComponent: [T:X.UI.API.FilterConfig] Missing &lt;summary&gt; documentation [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ShowMissingComponent: [M:X.UI.API.FilterConfig.RegisterGlobalFilters(System.Web.Mvc.GlobalFilterCollection)] Missing &lt;summary&gt; documentation [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ShowMissingComponent: [M:X.UI.API.FilterConfig.RegisterGlobalFilters(System.Web.Mvc.GlobalFilterCollection)] Missing &lt;param name=&quot;filters&quot;/&gt; documentation [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ShowMissingComponent: [T:X.UI.API.RouteConfig] Missing &lt;summary&gt; documentation [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ShowMissingComponent: [M:X.UI.API.RouteConfig.RegisterRoutes(System.Web.Routing.RouteCollection)] Missing &lt;summary&gt; documentation [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ShowMissingComponent: [M:X.UI.API.RouteConfig.RegisterRoutes(System.Web.Routing.RouteCollection)] Missing &lt;param name=&quot;routes&quot;/&gt; documentation [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ShowMissingComponent: [T:X.UI.API.WebApiApplication] Missing &lt;summary&gt; documentation [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ShowMissingComponent: [M:X.UI.API.WebApiApplication.Application_Error(System.Object,System.EventArgs)] Missing &lt;summary&gt; documentation [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ShowMissingComponent: [M:X.UI.API.WebApiApplication.Application_Error(System.Object,System.EventArgs)] Missing &lt;param name=&quot;sender&quot;/&gt; documentation [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ShowMissingComponent: [M:X.UI.API.WebApiApplication.Application_Error(System.Object,System.EventArgs)] Missing &lt;param name=&quot;e&quot;/&gt; documentation [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ShowMissingComponent: [M:X.UI.API.WebApiApplication.Application_Start] Missing &lt;summary&gt; documentation [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ShowMissingComponent: [T:X.UI.API.WebApiConfig] Missing &lt;summary&gt; documentation [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ShowMissingComponent: [M:X.UI.API.WebApiConfig.Register(System.Web.Http.HttpConfiguration)] Missing &lt;summary&gt; documentation [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ShowMissingComponent: [M:X.UI.API.WebApiConfig.Register(System.Web.Http.HttpConfiguration)] Missing &lt;param name=&quot;config&quot;/&gt; documentation [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ShowMissingComponent: [N:X.UI.API.Controllers] Missing &lt;summary&gt; documentation [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:X.UI.API.Controllers.KmsController.GetPublicKey(System.Int32)] Unknown reference link target &#39;T:X.Interface.Dto.ApiResult`1&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:X.UI.API.Controllers.KmsController.GetPublicKey(System.Int32)] Unknown reference link target &#39;T:X.Interface.Dto.HttpResponse.PublicKeyDto&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:X.UI.API.Controllers.KmsController.GetPublicKey(System.Int32)] Unknown reference link target &#39;T:X.Interface.Dto.ApiResult`1&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:X.UI.API.Controllers.KmsController.GetPublicKey(System.Int32)] Unknown reference link target &#39;T:X.Interface.Dto.HttpResponse.PublicKeyDto&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:X.UI.API.Controllers.KmsController.GetToken(System.String)] Unknown reference link target &#39;T:X.Interface.Dto.ApiResult`1&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:X.UI.API.Controllers.KmsController.GetToken(System.String)] Unknown reference link target &#39;T:X.Interface.Dto.ApiResult`1&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:X.UI.API.Controllers.KmsController.MobileEncrypt(System.String)] Unknown reference link target &#39;T:Em.FundTrade.EncryptHelper.EncryptResult&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:X.UI.API.Controllers.KmsController.MobileEncrypt(System.String)] Unknown reference link target &#39;T:Em.FundTrade.EncryptHelper.EncryptResult&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:X.UI.API.Controllers.KmsController.Now] Unknown reference link target &#39;T:X.Interface.Dto.ApiResult`1&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:X.UI.API.Controllers.KmsController.Now] Unknown reference link target &#39;T:X.Interface.Dto.ApiResult`1&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ShowMissingComponent: [N:X.UI.API.Model] Missing &lt;summary&gt; documentation [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ShowMissingComponent: [T:X.UI.API.Model.ApiRequestContext] Missing &lt;summary&gt; documentation [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;T:X.Util.Entities.MongoBaseModel&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;T:X.Interface.Dto.HttpRequestContext&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;P:X.Interface.Dto.HttpRequestContext.ClientId&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;T:X.Interface.Dto.HttpRequestContext&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;P:X.Interface.Dto.HttpRequestContext.ClientName&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;T:X.Interface.Dto.HttpRequestContext&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;P:X.Interface.Dto.HttpRequestContext.ClientType&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;T:X.Interface.Dto.HttpRequestContext&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;P:X.Interface.Dto.HttpRequestContext.ClientVersion&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;T:X.Interface.Dto.HttpRequestContext&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;P:X.Util.Entities.MongoBaseModel.Id&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;T:X.Util.Entities.MongoBaseModel&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;P:X.Interface.Dto.HttpRequestContext.PlatForm&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;T:X.Interface.Dto.HttpRequestContext&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;P:X.Interface.Dto.HttpRequestContext.Screen&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;T:X.Interface.Dto.HttpRequestContext&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;P:X.Interface.Dto.HttpRequestContext.Tid&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;T:X.Interface.Dto.HttpRequestContext&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;P:X.Interface.Dto.HttpRequestContext.Timestamp&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;T:X.Interface.Dto.HttpRequestContext&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;P:X.Interface.Dto.HttpRequestContext.Token&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;T:X.Interface.Dto.HttpRequestContext&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;P:X.Interface.Dto.HttpRequestContext.Version&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;T:X.Interface.Dto.HttpRequestContext&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;T:X.Util.Entities.MongoBaseModel&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;T:X.Interface.Dto.HttpRequestContext&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;P:X.Interface.Dto.HttpRequestContext.ClientId&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;T:X.Interface.Dto.HttpRequestContext&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;P:X.Interface.Dto.HttpRequestContext.ClientName&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;T:X.Interface.Dto.HttpRequestContext&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;P:X.Interface.Dto.HttpRequestContext.ClientType&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;T:X.Interface.Dto.HttpRequestContext&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;P:X.Interface.Dto.HttpRequestContext.ClientVersion&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;T:X.Interface.Dto.HttpRequestContext&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;P:X.Util.Entities.MongoBaseModel.Id&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;T:X.Util.Entities.MongoBaseModel&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;P:X.Interface.Dto.HttpRequestContext.PlatForm&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;T:X.Interface.Dto.HttpRequestContext&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;P:X.Interface.Dto.HttpRequestContext.Screen&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;T:X.Interface.Dto.HttpRequestContext&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;P:X.Interface.Dto.HttpRequestContext.Tid&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;T:X.Interface.Dto.HttpRequestContext&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;P:X.Interface.Dto.HttpRequestContext.Timestamp&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;T:X.Interface.Dto.HttpRequestContext&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;P:X.Interface.Dto.HttpRequestContext.Token&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;T:X.Interface.Dto.HttpRequestContext&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;P:X.Interface.Dto.HttpRequestContext.Version&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;T:X.Interface.Dto.HttpRequestContext&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [Properties.T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;P:X.Interface.Dto.HttpRequestContext.ClientId&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [Properties.T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;T:X.Interface.Dto.HttpRequestContext&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [Properties.T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;P:X.Interface.Dto.HttpRequestContext.ClientName&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [Properties.T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;T:X.Interface.Dto.HttpRequestContext&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [Properties.T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;P:X.Interface.Dto.HttpRequestContext.ClientType&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [Properties.T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;T:X.Interface.Dto.HttpRequestContext&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [Properties.T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;P:X.Interface.Dto.HttpRequestContext.ClientVersion&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [Properties.T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;T:X.Interface.Dto.HttpRequestContext&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [Properties.T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;P:X.Util.Entities.MongoBaseModel.Id&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [Properties.T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;T:X.Util.Entities.MongoBaseModel&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [Properties.T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;P:X.Interface.Dto.HttpRequestContext.PlatForm&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [Properties.T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;T:X.Interface.Dto.HttpRequestContext&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [Properties.T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;P:X.Interface.Dto.HttpRequestContext.Screen&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [Properties.T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;T:X.Interface.Dto.HttpRequestContext&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [Properties.T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;P:X.Interface.Dto.HttpRequestContext.Tid&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [Properties.T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;T:X.Interface.Dto.HttpRequestContext&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [Properties.T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;P:X.Interface.Dto.HttpRequestContext.Timestamp&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [Properties.T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;T:X.Interface.Dto.HttpRequestContext&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [Properties.T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;P:X.Interface.Dto.HttpRequestContext.Token&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [Properties.T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;T:X.Interface.Dto.HttpRequestContext&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [Properties.T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;P:X.Interface.Dto.HttpRequestContext.Version&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [Properties.T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;T:X.Interface.Dto.HttpRequestContext&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [Properties.T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;P:X.Interface.Dto.HttpRequestContext.ClientId&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [Properties.T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;T:X.Interface.Dto.HttpRequestContext&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [Properties.T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;P:X.Interface.Dto.HttpRequestContext.ClientName&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [Properties.T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;T:X.Interface.Dto.HttpRequestContext&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [Properties.T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;P:X.Interface.Dto.HttpRequestContext.ClientType&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [Properties.T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;T:X.Interface.Dto.HttpRequestContext&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [Properties.T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;P:X.Interface.Dto.HttpRequestContext.ClientVersion&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [Properties.T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;T:X.Interface.Dto.HttpRequestContext&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [Properties.T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;P:X.Util.Entities.MongoBaseModel.Id&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [Properties.T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;T:X.Util.Entities.MongoBaseModel&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [Properties.T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;P:X.Interface.Dto.HttpRequestContext.PlatForm&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [Properties.T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;T:X.Interface.Dto.HttpRequestContext&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [Properties.T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;P:X.Interface.Dto.HttpRequestContext.Screen&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [Properties.T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;T:X.Interface.Dto.HttpRequestContext&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [Properties.T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;P:X.Interface.Dto.HttpRequestContext.Tid&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [Properties.T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;T:X.Interface.Dto.HttpRequestContext&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [Properties.T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;P:X.Interface.Dto.HttpRequestContext.Timestamp&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [Properties.T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;T:X.Interface.Dto.HttpRequestContext&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [Properties.T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;P:X.Interface.Dto.HttpRequestContext.Token&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [Properties.T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;T:X.Interface.Dto.HttpRequestContext&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [Properties.T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;P:X.Interface.Dto.HttpRequestContext.Version&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [Properties.T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;T:X.Interface.Dto.HttpRequestContext&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ShowMissingComponent: [N:X.UI.API.Util] Missing &lt;summary&gt; documentation [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ShowMissingComponent: [T:X.UI.API.Util.ApiExceptionAttribute] Missing &lt;summary&gt; documentation [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ShowMissingComponent: [T:X.UI.API.Util.ControllerHelper] Missing &lt;summary&gt; documentation [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ShowMissingComponent: [M:X.UI.API.Util.ControllerHelper.ApiCallMonitor(X.UI.API.Model.ApiRequestContext)] Missing &lt;param name=&quot;context&quot;/&gt; documentation [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ShowMissingComponent: [M:X.UI.API.Util.ControllerHelper.CacheInit(System.Boolean)] Missing &lt;param name=&quot;noCache&quot;/&gt; documentation [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ShowMissingComponent: [M:X.UI.API.Util.ControllerHelper.CallSuccess``1(X.Interface.Dto.ApiResult{``0})] Missing &lt;typeparam name=&quot;TResult&quot;/&gt; documentation [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ShowMissingComponent: [M:X.UI.API.Util.ControllerHelper.CallSuccess``1(X.Interface.Dto.ApiResult{``0})] Missing &lt;returns&gt; documentation [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ShowMissingComponent: [M:X.UI.API.Util.ControllerHelper.CallSuccess``1(X.Interface.Dto.ApiResult{``0})] Missing &lt;param name=&quot;iresult&quot;/&gt; documentation [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:X.UI.API.Util.ControllerHelper.CallSuccess``1(X.Interface.Dto.ApiResult{``0})] Unknown reference link target &#39;T:X.Interface.Dto.ApiResult`1&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:X.UI.API.Util.ControllerHelper.CallSuccess``1(X.Interface.Dto.ApiResult{``0})] Unknown reference link target &#39;T:X.Interface.Dto.ApiResult`1&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ShowMissingComponent: [F:X.UI.API.Util.ControllerHelper.EDomain] Missing &lt;summary&gt; documentation [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [F:X.UI.API.Util.ControllerHelper.EDomain] Unknown reference link target &#39;T:X.Util.Entities.Enums.LogDomain&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [F:X.UI.API.Util.ControllerHelper.EDomain] Unknown reference link target &#39;T:X.Util.Entities.Enums.LogDomain&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ShowMissingComponent: [M:X.UI.API.Util.ControllerHelper.GetApiRequestContext(System.Web.Http.Controllers.HttpActionContext)] Missing &lt;returns&gt; documentation [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ShowMissingComponent: [M:X.UI.API.Util.ControllerHelper.GetApiRequestContext(System.Web.Http.Controllers.HttpActionContext)] Missing &lt;param name=&quot;actionContext&quot;/&gt; documentation [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ShowMissingComponent: [M:X.UI.API.Util.ControllerHelper.GetHttpContextWrapper(System.Web.Http.Controllers.HttpActionContext)] Missing &lt;returns&gt; documentation [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ShowMissingComponent: [M:X.UI.API.Util.ControllerHelper.GetHttpContextWrapper(System.Web.Http.Controllers.HttpActionContext)] Missing &lt;param name=&quot;actionContext&quot;/&gt; documentation [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ShowMissingComponent: [M:X.UI.API.Util.ControllerHelper.GetUid(System.Web.Http.Controllers.HttpActionContext)] Missing &lt;returns&gt; documentation [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ShowMissingComponent: [M:X.UI.API.Util.ControllerHelper.GetUid(System.Web.Http.Controllers.HttpActionContext)] Missing &lt;param name=&quot;actionContext&quot;/&gt; documentation [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ShowMissingComponent: [M:X.UI.API.Util.ControllerHelper.OnActionExecuted(System.Web.Http.Filters.HttpActionExecutedContext)] Missing &lt;param name=&quot;actionExecutedContext&quot;/&gt; documentation [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ShowMissingComponent: [P:X.UI.API.Util.OutputCacheAttribute.Duration] Missing &lt;summary&gt; documentation [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ShowMissingComponent: [M:X.UI.API.Util.UserBaseController.UserIdentity(System.Web.Http.Controllers.HttpActionContext)] Missing &lt;param name=&quot;actionContext&quot;/&gt; documentation [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
   Processed 94 topic(s)
-  151 warning(s)
+  145 warning(s)
   CopyFromIndexComponent: &quot;reflection&quot; in-memory cache entries used: 5 of 15.
   CopyFromIndexComponent: &quot;comments&quot; in-memory cache entries used: 2 of 30.
-  ResolveReferenceLinksComponent: New MSDN content ID cache size: 126 entries
-已完成生成项目“D:\Project\git\API\Help\Working\BuildReferenceTopics.proj”(默认目标)的操作。
+已完成生成项目“D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj”(默认目标)的操作。
 
 已成功生成。
 
-已用时间 00:01:46.46
-    Last step completed in 00:01:47.1481
+已用时间 00:00:05.80
+    Last step completed in 00:00:06.1234
 </buildStep>
 <buildStep step="CombiningIntermediateTocFiles">
 Combining conceptual and API intermediate TOC files...
 
 Clearing any prior web output
-    Last step completed in 00:00:00.0100
+    Last step completed in 00:00:00.1950
 </buildStep>
 <buildStep step="ExtractingHtmlInfo">
 Extracting HTML info for HTML Help 1 and/or website...
@@ -311,175 +304,175 @@ Sandcastle Help File Builder, version 2015.1.12.0
 Copyright ? 2006-2015, Eric Woodruff, All Rights Reserved
 E-Mail: Eric@EWoodruff.us
 
-Using LCID &#39;1033&#39;, code page &#39;65001&#39;, encoding charset &#39;UTF-8&#39;.
+Using LCID &#39;2052&#39;, code page &#39;936&#39;, encoding charset &#39;gb2312&#39;.
 
-Processing Help 1 files in D:\Project\git\API\Help\Working\Output\HtmlHelp1
+Processing Help 1 files in D:\Project\git\API\X_API_Master_Help\Help\Working\Output\HtmlHelp1
 Processed 94 HTML files
 Sorting keywords and generating See Also indices
-Saving HTML Help 1 keyword index to D:\Project\git\API\Help\Working\Documentation.hhk
-Saving HTML Help 1 table of contents to D:\Project\git\API\Help\Working\Documentation.hhc
+Saving HTML Help 1 keyword index to D:\Project\git\API\X_API_Master_Help\Help\Working\Documentation.hhk
+Saving HTML Help 1 table of contents to D:\Project\git\API\X_API_Master_Help\Help\Working\Documentation.hhc
 
-Processing website files in D:\Project\git\API\Help\Working\Output\Website
+Processing website files in D:\Project\git\API\X_API_Master_Help\Help\Working\Output\Website
 Processed 94 HTML files
 Sorting keywords and generating See Also indices
-Saving website keyword index to D:\Project\git\API\Help\Working\WebKI.xml
-Saving website table of contents to D:\Project\git\API\Help\Working\WebTOC.xml
-    Last step completed in 00:00:01.5501
+Saving website keyword index to D:\Project\git\API\X_API_Master_Help\Help\Working\WebKI.xml
+Saving website table of contents to D:\Project\git\API\X_API_Master_Help\Help\Working\WebTOC.xml
+    Last step completed in 00:00:00.6080
 </buildStep>
 <buildStep step="CopyStandardHelpContent">
 Copying standard help content...
-C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\AlertCaution.png -&gt; D:\Project\git\API\Help\Working\Output\HtmlHelp1\icons\AlertCaution.png
-C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\AlertNote.png -&gt; D:\Project\git\API\Help\Working\Output\HtmlHelp1\icons\AlertNote.png
-C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\AlertSecurity.png -&gt; D:\Project\git\API\Help\Working\Output\HtmlHelp1\icons\AlertSecurity.png
-C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\CFW.gif -&gt; D:\Project\git\API\Help\Working\Output\HtmlHelp1\icons\CFW.gif
-C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\CodeExample.png -&gt; D:\Project\git\API\Help\Working\Output\HtmlHelp1\icons\CodeExample.png
-C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\favicon.ico -&gt; D:\Project\git\API\Help\Working\Output\HtmlHelp1\icons\favicon.ico
-C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\privclass.gif -&gt; D:\Project\git\API\Help\Working\Output\HtmlHelp1\icons\privclass.gif
-C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\privdelegate.gif -&gt; D:\Project\git\API\Help\Working\Output\HtmlHelp1\icons\privdelegate.gif
-C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\privenumeration.gif -&gt; D:\Project\git\API\Help\Working\Output\HtmlHelp1\icons\privenumeration.gif
-C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\privevent.gif -&gt; D:\Project\git\API\Help\Working\Output\HtmlHelp1\icons\privevent.gif
-C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\privextension.gif -&gt; D:\Project\git\API\Help\Working\Output\HtmlHelp1\icons\privextension.gif
-C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\privfield.gif -&gt; D:\Project\git\API\Help\Working\Output\HtmlHelp1\icons\privfield.gif
-C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\privinterface.gif -&gt; D:\Project\git\API\Help\Working\Output\HtmlHelp1\icons\privinterface.gif
-C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\privmethod.gif -&gt; D:\Project\git\API\Help\Working\Output\HtmlHelp1\icons\privmethod.gif
-C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\privproperty.gif -&gt; D:\Project\git\API\Help\Working\Output\HtmlHelp1\icons\privproperty.gif
-C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\privstructure.gif -&gt; D:\Project\git\API\Help\Working\Output\HtmlHelp1\icons\privstructure.gif
-C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\protclass.gif -&gt; D:\Project\git\API\Help\Working\Output\HtmlHelp1\icons\protclass.gif
-C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\protdelegate.gif -&gt; D:\Project\git\API\Help\Working\Output\HtmlHelp1\icons\protdelegate.gif
-C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\protenumeration.gif -&gt; D:\Project\git\API\Help\Working\Output\HtmlHelp1\icons\protenumeration.gif
-C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\protevent.gif -&gt; D:\Project\git\API\Help\Working\Output\HtmlHelp1\icons\protevent.gif
-C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\protextension.gif -&gt; D:\Project\git\API\Help\Working\Output\HtmlHelp1\icons\protextension.gif
-C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\protfield.gif -&gt; D:\Project\git\API\Help\Working\Output\HtmlHelp1\icons\protfield.gif
-C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\protinterface.gif -&gt; D:\Project\git\API\Help\Working\Output\HtmlHelp1\icons\protinterface.gif
-C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\protmethod.gif -&gt; D:\Project\git\API\Help\Working\Output\HtmlHelp1\icons\protmethod.gif
-C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\protoperator.gif -&gt; D:\Project\git\API\Help\Working\Output\HtmlHelp1\icons\protoperator.gif
-C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\protproperty.gif -&gt; D:\Project\git\API\Help\Working\Output\HtmlHelp1\icons\protproperty.gif
-C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\protstructure.gif -&gt; D:\Project\git\API\Help\Working\Output\HtmlHelp1\icons\protstructure.gif
-C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\pubclass.gif -&gt; D:\Project\git\API\Help\Working\Output\HtmlHelp1\icons\pubclass.gif
-C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\pubdelegate.gif -&gt; D:\Project\git\API\Help\Working\Output\HtmlHelp1\icons\pubdelegate.gif
-C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\pubenumeration.gif -&gt; D:\Project\git\API\Help\Working\Output\HtmlHelp1\icons\pubenumeration.gif
-C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\pubevent.gif -&gt; D:\Project\git\API\Help\Working\Output\HtmlHelp1\icons\pubevent.gif
-C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\pubextension.gif -&gt; D:\Project\git\API\Help\Working\Output\HtmlHelp1\icons\pubextension.gif
-C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\pubfield.gif -&gt; D:\Project\git\API\Help\Working\Output\HtmlHelp1\icons\pubfield.gif
-C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\pubinterface.gif -&gt; D:\Project\git\API\Help\Working\Output\HtmlHelp1\icons\pubinterface.gif
-C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\pubmethod.gif -&gt; D:\Project\git\API\Help\Working\Output\HtmlHelp1\icons\pubmethod.gif
-C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\puboperator.gif -&gt; D:\Project\git\API\Help\Working\Output\HtmlHelp1\icons\puboperator.gif
-C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\pubproperty.gif -&gt; D:\Project\git\API\Help\Working\Output\HtmlHelp1\icons\pubproperty.gif
-C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\pubstructure.gif -&gt; D:\Project\git\API\Help\Working\Output\HtmlHelp1\icons\pubstructure.gif
-C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\SectionCollapsed.png -&gt; D:\Project\git\API\Help\Working\Output\HtmlHelp1\icons\SectionCollapsed.png
-C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\SectionExpanded.png -&gt; D:\Project\git\API\Help\Working\Output\HtmlHelp1\icons\SectionExpanded.png
-C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\slMobile.gif -&gt; D:\Project\git\API\Help\Working\Output\HtmlHelp1\icons\slMobile.gif
-C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\static.gif -&gt; D:\Project\git\API\Help\Working\Output\HtmlHelp1\icons\static.gif
-C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\xna.gif -&gt; D:\Project\git\API\Help\Working\Output\HtmlHelp1\icons\xna.gif
-C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\scripts\branding.js -&gt; D:\Project\git\API\Help\Working\Output\HtmlHelp1\scripts\branding.js
-C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\styles\branding-cs-CZ.css -&gt; D:\Project\git\API\Help\Working\Output\HtmlHelp1\styles\branding-cs-CZ.css
-C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\styles\branding-de-DE.css -&gt; D:\Project\git\API\Help\Working\Output\HtmlHelp1\styles\branding-de-DE.css
-C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\styles\branding-en-US.css -&gt; D:\Project\git\API\Help\Working\Output\HtmlHelp1\styles\branding-en-US.css
-C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\styles\branding-es-ES.css -&gt; D:\Project\git\API\Help\Working\Output\HtmlHelp1\styles\branding-es-ES.css
-C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\styles\branding-fr-FR.css -&gt; D:\Project\git\API\Help\Working\Output\HtmlHelp1\styles\branding-fr-FR.css
-C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\styles\branding-Help1.css -&gt; D:\Project\git\API\Help\Working\Output\HtmlHelp1\styles\branding-Help1.css
-C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\styles\branding-Help2.css -&gt; D:\Project\git\API\Help\Working\Output\HtmlHelp1\styles\branding-Help2.css
-C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\styles\branding-HelpViewer.css -&gt; D:\Project\git\API\Help\Working\Output\HtmlHelp1\styles\branding-HelpViewer.css
-C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\styles\branding-it-IT.css -&gt; D:\Project\git\API\Help\Working\Output\HtmlHelp1\styles\branding-it-IT.css
-C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\styles\branding-ja-JP.css -&gt; D:\Project\git\API\Help\Working\Output\HtmlHelp1\styles\branding-ja-JP.css
-C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\styles\branding-ko-KR.css -&gt; D:\Project\git\API\Help\Working\Output\HtmlHelp1\styles\branding-ko-KR.css
-C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\styles\branding-pl-PL.css -&gt; D:\Project\git\API\Help\Working\Output\HtmlHelp1\styles\branding-pl-PL.css
-C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\styles\branding-pt-BR.css -&gt; D:\Project\git\API\Help\Working\Output\HtmlHelp1\styles\branding-pt-BR.css
-C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\styles\branding-ru-RU.css -&gt; D:\Project\git\API\Help\Working\Output\HtmlHelp1\styles\branding-ru-RU.css
-C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\styles\branding-tr-TR.css -&gt; D:\Project\git\API\Help\Working\Output\HtmlHelp1\styles\branding-tr-TR.css
-C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\styles\branding-Website.css -&gt; D:\Project\git\API\Help\Working\Output\HtmlHelp1\styles\branding-Website.css
-C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\styles\branding-zh-CN.css -&gt; D:\Project\git\API\Help\Working\Output\HtmlHelp1\styles\branding-zh-CN.css
-C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\styles\branding-zh-TW.css -&gt; D:\Project\git\API\Help\Working\Output\HtmlHelp1\styles\branding-zh-TW.css
-C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\styles\branding.css -&gt; D:\Project\git\API\Help\Working\Output\HtmlHelp1\styles\branding.css
-C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\AlertCaution.png -&gt; D:\Project\git\API\Help\Working\Output\Website\icons\AlertCaution.png
-C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\AlertNote.png -&gt; D:\Project\git\API\Help\Working\Output\Website\icons\AlertNote.png
-C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\AlertSecurity.png -&gt; D:\Project\git\API\Help\Working\Output\Website\icons\AlertSecurity.png
-C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\CFW.gif -&gt; D:\Project\git\API\Help\Working\Output\Website\icons\CFW.gif
-C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\CodeExample.png -&gt; D:\Project\git\API\Help\Working\Output\Website\icons\CodeExample.png
-C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\favicon.ico -&gt; D:\Project\git\API\Help\Working\Output\Website\icons\favicon.ico
-C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\privclass.gif -&gt; D:\Project\git\API\Help\Working\Output\Website\icons\privclass.gif
-C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\privdelegate.gif -&gt; D:\Project\git\API\Help\Working\Output\Website\icons\privdelegate.gif
-C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\privenumeration.gif -&gt; D:\Project\git\API\Help\Working\Output\Website\icons\privenumeration.gif
-C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\privevent.gif -&gt; D:\Project\git\API\Help\Working\Output\Website\icons\privevent.gif
-C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\privextension.gif -&gt; D:\Project\git\API\Help\Working\Output\Website\icons\privextension.gif
-C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\privfield.gif -&gt; D:\Project\git\API\Help\Working\Output\Website\icons\privfield.gif
-C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\privinterface.gif -&gt; D:\Project\git\API\Help\Working\Output\Website\icons\privinterface.gif
-C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\privmethod.gif -&gt; D:\Project\git\API\Help\Working\Output\Website\icons\privmethod.gif
-C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\privproperty.gif -&gt; D:\Project\git\API\Help\Working\Output\Website\icons\privproperty.gif
-C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\privstructure.gif -&gt; D:\Project\git\API\Help\Working\Output\Website\icons\privstructure.gif
-C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\protclass.gif -&gt; D:\Project\git\API\Help\Working\Output\Website\icons\protclass.gif
-C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\protdelegate.gif -&gt; D:\Project\git\API\Help\Working\Output\Website\icons\protdelegate.gif
-C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\protenumeration.gif -&gt; D:\Project\git\API\Help\Working\Output\Website\icons\protenumeration.gif
-C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\protevent.gif -&gt; D:\Project\git\API\Help\Working\Output\Website\icons\protevent.gif
-C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\protextension.gif -&gt; D:\Project\git\API\Help\Working\Output\Website\icons\protextension.gif
-C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\protfield.gif -&gt; D:\Project\git\API\Help\Working\Output\Website\icons\protfield.gif
-C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\protinterface.gif -&gt; D:\Project\git\API\Help\Working\Output\Website\icons\protinterface.gif
-C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\protmethod.gif -&gt; D:\Project\git\API\Help\Working\Output\Website\icons\protmethod.gif
-C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\protoperator.gif -&gt; D:\Project\git\API\Help\Working\Output\Website\icons\protoperator.gif
-C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\protproperty.gif -&gt; D:\Project\git\API\Help\Working\Output\Website\icons\protproperty.gif
-C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\protstructure.gif -&gt; D:\Project\git\API\Help\Working\Output\Website\icons\protstructure.gif
-C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\pubclass.gif -&gt; D:\Project\git\API\Help\Working\Output\Website\icons\pubclass.gif
-C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\pubdelegate.gif -&gt; D:\Project\git\API\Help\Working\Output\Website\icons\pubdelegate.gif
-C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\pubenumeration.gif -&gt; D:\Project\git\API\Help\Working\Output\Website\icons\pubenumeration.gif
-C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\pubevent.gif -&gt; D:\Project\git\API\Help\Working\Output\Website\icons\pubevent.gif
-C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\pubextension.gif -&gt; D:\Project\git\API\Help\Working\Output\Website\icons\pubextension.gif
-C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\pubfield.gif -&gt; D:\Project\git\API\Help\Working\Output\Website\icons\pubfield.gif
-C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\pubinterface.gif -&gt; D:\Project\git\API\Help\Working\Output\Website\icons\pubinterface.gif
-C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\pubmethod.gif -&gt; D:\Project\git\API\Help\Working\Output\Website\icons\pubmethod.gif
-C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\puboperator.gif -&gt; D:\Project\git\API\Help\Working\Output\Website\icons\puboperator.gif
-C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\pubproperty.gif -&gt; D:\Project\git\API\Help\Working\Output\Website\icons\pubproperty.gif
-C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\pubstructure.gif -&gt; D:\Project\git\API\Help\Working\Output\Website\icons\pubstructure.gif
-C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\SectionCollapsed.png -&gt; D:\Project\git\API\Help\Working\Output\Website\icons\SectionCollapsed.png
-C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\SectionExpanded.png -&gt; D:\Project\git\API\Help\Working\Output\Website\icons\SectionExpanded.png
-C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\slMobile.gif -&gt; D:\Project\git\API\Help\Working\Output\Website\icons\slMobile.gif
-C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\static.gif -&gt; D:\Project\git\API\Help\Working\Output\Website\icons\static.gif
-C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\xna.gif -&gt; D:\Project\git\API\Help\Working\Output\Website\icons\xna.gif
-C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\scripts\branding.js -&gt; D:\Project\git\API\Help\Working\Output\Website\scripts\branding.js
-C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\styles\branding-cs-CZ.css -&gt; D:\Project\git\API\Help\Working\Output\Website\styles\branding-cs-CZ.css
-C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\styles\branding-de-DE.css -&gt; D:\Project\git\API\Help\Working\Output\Website\styles\branding-de-DE.css
-C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\styles\branding-en-US.css -&gt; D:\Project\git\API\Help\Working\Output\Website\styles\branding-en-US.css
-C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\styles\branding-es-ES.css -&gt; D:\Project\git\API\Help\Working\Output\Website\styles\branding-es-ES.css
-C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\styles\branding-fr-FR.css -&gt; D:\Project\git\API\Help\Working\Output\Website\styles\branding-fr-FR.css
-C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\styles\branding-Help1.css -&gt; D:\Project\git\API\Help\Working\Output\Website\styles\branding-Help1.css
-C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\styles\branding-Help2.css -&gt; D:\Project\git\API\Help\Working\Output\Website\styles\branding-Help2.css
-C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\styles\branding-HelpViewer.css -&gt; D:\Project\git\API\Help\Working\Output\Website\styles\branding-HelpViewer.css
-C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\styles\branding-it-IT.css -&gt; D:\Project\git\API\Help\Working\Output\Website\styles\branding-it-IT.css
-C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\styles\branding-ja-JP.css -&gt; D:\Project\git\API\Help\Working\Output\Website\styles\branding-ja-JP.css
-C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\styles\branding-ko-KR.css -&gt; D:\Project\git\API\Help\Working\Output\Website\styles\branding-ko-KR.css
-C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\styles\branding-pl-PL.css -&gt; D:\Project\git\API\Help\Working\Output\Website\styles\branding-pl-PL.css
-C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\styles\branding-pt-BR.css -&gt; D:\Project\git\API\Help\Working\Output\Website\styles\branding-pt-BR.css
-C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\styles\branding-ru-RU.css -&gt; D:\Project\git\API\Help\Working\Output\Website\styles\branding-ru-RU.css
-C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\styles\branding-tr-TR.css -&gt; D:\Project\git\API\Help\Working\Output\Website\styles\branding-tr-TR.css
-C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\styles\branding-Website.css -&gt; D:\Project\git\API\Help\Working\Output\Website\styles\branding-Website.css
-C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\styles\branding-zh-CN.css -&gt; D:\Project\git\API\Help\Working\Output\Website\styles\branding-zh-CN.css
-C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\styles\branding-zh-TW.css -&gt; D:\Project\git\API\Help\Working\Output\Website\styles\branding-zh-TW.css
-C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\styles\branding.css -&gt; D:\Project\git\API\Help\Working\Output\Website\styles\branding.css
-C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\Web\index.html -&gt; D:\Project\git\API\Help\Working\Output\Website\index.html
-C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\Web\search.html -&gt; D:\Project\git\API\Help\Working\Output\Website\search.html
-C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\Web\SearchHelp.aspx -&gt; D:\Project\git\API\Help\Working\Output\Website\SearchHelp.aspx
-C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\Web\SearchHelp.inc.php -&gt; D:\Project\git\API\Help\Working\Output\Website\SearchHelp.inc.php
-C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\Web\SearchHelp.php -&gt; D:\Project\git\API\Help\Working\Output\Website\SearchHelp.php
-C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\Web\Web.Config -&gt; D:\Project\git\API\Help\Working\Output\Website\Web.Config
-C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\Web\icons\Search.png -&gt; D:\Project\git\API\Help\Working\Output\Website\icons\Search.png
-C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\Web\icons\TocClose.gif -&gt; D:\Project\git\API\Help\Working\Output\Website\icons\TocClose.gif
-C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\Web\icons\TocCollapsed.gif -&gt; D:\Project\git\API\Help\Working\Output\Website\icons\TocCollapsed.gif
-C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\Web\icons\TocExpanded.gif -&gt; D:\Project\git\API\Help\Working\Output\Website\icons\TocExpanded.gif
-C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\Web\icons\TocOpen.gif -&gt; D:\Project\git\API\Help\Working\Output\Website\icons\TocOpen.gif
-C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\Web\scripts\branding-Website.js -&gt; D:\Project\git\API\Help\Working\Output\Website\scripts\branding-Website.js
-C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\Web\scripts\jquery-1.11.0.min.js -&gt; D:\Project\git\API\Help\Working\Output\Website\scripts\jquery-1.11.0.min.js
-    Last step completed in 00:00:00.9641
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\AlertCaution.png -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\Output\HtmlHelp1\icons\AlertCaution.png
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\AlertNote.png -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\Output\HtmlHelp1\icons\AlertNote.png
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\AlertSecurity.png -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\Output\HtmlHelp1\icons\AlertSecurity.png
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\CFW.gif -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\Output\HtmlHelp1\icons\CFW.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\CodeExample.png -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\Output\HtmlHelp1\icons\CodeExample.png
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\favicon.ico -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\Output\HtmlHelp1\icons\favicon.ico
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\privclass.gif -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\Output\HtmlHelp1\icons\privclass.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\privdelegate.gif -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\Output\HtmlHelp1\icons\privdelegate.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\privenumeration.gif -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\Output\HtmlHelp1\icons\privenumeration.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\privevent.gif -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\Output\HtmlHelp1\icons\privevent.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\privextension.gif -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\Output\HtmlHelp1\icons\privextension.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\privfield.gif -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\Output\HtmlHelp1\icons\privfield.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\privinterface.gif -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\Output\HtmlHelp1\icons\privinterface.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\privmethod.gif -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\Output\HtmlHelp1\icons\privmethod.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\privproperty.gif -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\Output\HtmlHelp1\icons\privproperty.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\privstructure.gif -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\Output\HtmlHelp1\icons\privstructure.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\protclass.gif -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\Output\HtmlHelp1\icons\protclass.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\protdelegate.gif -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\Output\HtmlHelp1\icons\protdelegate.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\protenumeration.gif -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\Output\HtmlHelp1\icons\protenumeration.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\protevent.gif -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\Output\HtmlHelp1\icons\protevent.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\protextension.gif -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\Output\HtmlHelp1\icons\protextension.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\protfield.gif -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\Output\HtmlHelp1\icons\protfield.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\protinterface.gif -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\Output\HtmlHelp1\icons\protinterface.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\protmethod.gif -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\Output\HtmlHelp1\icons\protmethod.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\protoperator.gif -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\Output\HtmlHelp1\icons\protoperator.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\protproperty.gif -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\Output\HtmlHelp1\icons\protproperty.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\protstructure.gif -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\Output\HtmlHelp1\icons\protstructure.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\pubclass.gif -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\Output\HtmlHelp1\icons\pubclass.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\pubdelegate.gif -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\Output\HtmlHelp1\icons\pubdelegate.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\pubenumeration.gif -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\Output\HtmlHelp1\icons\pubenumeration.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\pubevent.gif -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\Output\HtmlHelp1\icons\pubevent.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\pubextension.gif -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\Output\HtmlHelp1\icons\pubextension.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\pubfield.gif -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\Output\HtmlHelp1\icons\pubfield.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\pubinterface.gif -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\Output\HtmlHelp1\icons\pubinterface.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\pubmethod.gif -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\Output\HtmlHelp1\icons\pubmethod.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\puboperator.gif -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\Output\HtmlHelp1\icons\puboperator.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\pubproperty.gif -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\Output\HtmlHelp1\icons\pubproperty.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\pubstructure.gif -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\Output\HtmlHelp1\icons\pubstructure.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\SectionCollapsed.png -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\Output\HtmlHelp1\icons\SectionCollapsed.png
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\SectionExpanded.png -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\Output\HtmlHelp1\icons\SectionExpanded.png
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\slMobile.gif -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\Output\HtmlHelp1\icons\slMobile.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\static.gif -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\Output\HtmlHelp1\icons\static.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\xna.gif -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\Output\HtmlHelp1\icons\xna.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\scripts\branding.js -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\Output\HtmlHelp1\scripts\branding.js
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\styles\branding-cs-CZ.css -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\Output\HtmlHelp1\styles\branding-cs-CZ.css
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\styles\branding-de-DE.css -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\Output\HtmlHelp1\styles\branding-de-DE.css
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\styles\branding-en-US.css -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\Output\HtmlHelp1\styles\branding-en-US.css
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\styles\branding-es-ES.css -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\Output\HtmlHelp1\styles\branding-es-ES.css
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\styles\branding-fr-FR.css -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\Output\HtmlHelp1\styles\branding-fr-FR.css
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\styles\branding-Help1.css -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\Output\HtmlHelp1\styles\branding-Help1.css
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\styles\branding-Help2.css -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\Output\HtmlHelp1\styles\branding-Help2.css
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\styles\branding-HelpViewer.css -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\Output\HtmlHelp1\styles\branding-HelpViewer.css
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\styles\branding-it-IT.css -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\Output\HtmlHelp1\styles\branding-it-IT.css
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\styles\branding-ja-JP.css -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\Output\HtmlHelp1\styles\branding-ja-JP.css
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\styles\branding-ko-KR.css -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\Output\HtmlHelp1\styles\branding-ko-KR.css
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\styles\branding-pl-PL.css -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\Output\HtmlHelp1\styles\branding-pl-PL.css
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\styles\branding-pt-BR.css -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\Output\HtmlHelp1\styles\branding-pt-BR.css
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\styles\branding-ru-RU.css -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\Output\HtmlHelp1\styles\branding-ru-RU.css
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\styles\branding-tr-TR.css -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\Output\HtmlHelp1\styles\branding-tr-TR.css
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\styles\branding-Website.css -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\Output\HtmlHelp1\styles\branding-Website.css
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\styles\branding-zh-CN.css -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\Output\HtmlHelp1\styles\branding-zh-CN.css
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\styles\branding-zh-TW.css -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\Output\HtmlHelp1\styles\branding-zh-TW.css
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\styles\branding.css -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\Output\HtmlHelp1\styles\branding.css
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\AlertCaution.png -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\Output\Website\icons\AlertCaution.png
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\AlertNote.png -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\Output\Website\icons\AlertNote.png
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\AlertSecurity.png -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\Output\Website\icons\AlertSecurity.png
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\CFW.gif -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\Output\Website\icons\CFW.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\CodeExample.png -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\Output\Website\icons\CodeExample.png
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\favicon.ico -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\Output\Website\icons\favicon.ico
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\privclass.gif -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\Output\Website\icons\privclass.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\privdelegate.gif -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\Output\Website\icons\privdelegate.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\privenumeration.gif -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\Output\Website\icons\privenumeration.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\privevent.gif -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\Output\Website\icons\privevent.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\privextension.gif -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\Output\Website\icons\privextension.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\privfield.gif -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\Output\Website\icons\privfield.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\privinterface.gif -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\Output\Website\icons\privinterface.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\privmethod.gif -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\Output\Website\icons\privmethod.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\privproperty.gif -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\Output\Website\icons\privproperty.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\privstructure.gif -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\Output\Website\icons\privstructure.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\protclass.gif -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\Output\Website\icons\protclass.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\protdelegate.gif -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\Output\Website\icons\protdelegate.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\protenumeration.gif -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\Output\Website\icons\protenumeration.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\protevent.gif -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\Output\Website\icons\protevent.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\protextension.gif -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\Output\Website\icons\protextension.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\protfield.gif -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\Output\Website\icons\protfield.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\protinterface.gif -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\Output\Website\icons\protinterface.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\protmethod.gif -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\Output\Website\icons\protmethod.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\protoperator.gif -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\Output\Website\icons\protoperator.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\protproperty.gif -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\Output\Website\icons\protproperty.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\protstructure.gif -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\Output\Website\icons\protstructure.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\pubclass.gif -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\Output\Website\icons\pubclass.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\pubdelegate.gif -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\Output\Website\icons\pubdelegate.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\pubenumeration.gif -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\Output\Website\icons\pubenumeration.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\pubevent.gif -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\Output\Website\icons\pubevent.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\pubextension.gif -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\Output\Website\icons\pubextension.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\pubfield.gif -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\Output\Website\icons\pubfield.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\pubinterface.gif -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\Output\Website\icons\pubinterface.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\pubmethod.gif -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\Output\Website\icons\pubmethod.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\puboperator.gif -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\Output\Website\icons\puboperator.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\pubproperty.gif -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\Output\Website\icons\pubproperty.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\pubstructure.gif -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\Output\Website\icons\pubstructure.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\SectionCollapsed.png -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\Output\Website\icons\SectionCollapsed.png
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\SectionExpanded.png -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\Output\Website\icons\SectionExpanded.png
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\slMobile.gif -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\Output\Website\icons\slMobile.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\static.gif -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\Output\Website\icons\static.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\xna.gif -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\Output\Website\icons\xna.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\scripts\branding.js -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\Output\Website\scripts\branding.js
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\styles\branding-cs-CZ.css -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\Output\Website\styles\branding-cs-CZ.css
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\styles\branding-de-DE.css -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\Output\Website\styles\branding-de-DE.css
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\styles\branding-en-US.css -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\Output\Website\styles\branding-en-US.css
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\styles\branding-es-ES.css -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\Output\Website\styles\branding-es-ES.css
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\styles\branding-fr-FR.css -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\Output\Website\styles\branding-fr-FR.css
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\styles\branding-Help1.css -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\Output\Website\styles\branding-Help1.css
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\styles\branding-Help2.css -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\Output\Website\styles\branding-Help2.css
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\styles\branding-HelpViewer.css -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\Output\Website\styles\branding-HelpViewer.css
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\styles\branding-it-IT.css -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\Output\Website\styles\branding-it-IT.css
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\styles\branding-ja-JP.css -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\Output\Website\styles\branding-ja-JP.css
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\styles\branding-ko-KR.css -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\Output\Website\styles\branding-ko-KR.css
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\styles\branding-pl-PL.css -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\Output\Website\styles\branding-pl-PL.css
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\styles\branding-pt-BR.css -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\Output\Website\styles\branding-pt-BR.css
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\styles\branding-ru-RU.css -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\Output\Website\styles\branding-ru-RU.css
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\styles\branding-tr-TR.css -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\Output\Website\styles\branding-tr-TR.css
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\styles\branding-Website.css -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\Output\Website\styles\branding-Website.css
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\styles\branding-zh-CN.css -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\Output\Website\styles\branding-zh-CN.css
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\styles\branding-zh-TW.css -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\Output\Website\styles\branding-zh-TW.css
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\styles\branding.css -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\Output\Website\styles\branding.css
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\Web\index.html -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\Output\Website\index.html
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\Web\search.html -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\Output\Website\search.html
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\Web\SearchHelp.aspx -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\Output\Website\SearchHelp.aspx
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\Web\SearchHelp.inc.php -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\Output\Website\SearchHelp.inc.php
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\Web\SearchHelp.php -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\Output\Website\SearchHelp.php
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\Web\Web.Config -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\Output\Website\Web.Config
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\Web\icons\Search.png -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\Output\Website\icons\Search.png
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\Web\icons\TocClose.gif -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\Output\Website\icons\TocClose.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\Web\icons\TocCollapsed.gif -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\Output\Website\icons\TocCollapsed.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\Web\icons\TocExpanded.gif -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\Output\Website\icons\TocExpanded.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\Web\icons\TocOpen.gif -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\Output\Website\icons\TocOpen.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\Web\scripts\branding-Website.js -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\Output\Website\scripts\branding-Website.js
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\Web\scripts\jquery-1.11.0.min.js -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\Output\Website\scripts\jquery-1.11.0.min.js
+    Last step completed in 00:00:00.6070
 </buildStep>
 <buildStep step="GenerateHelpFormatTableOfContents">
 Generating HTML Help 1 table of contents file...
-    Last step completed in 00:00:00.0020
+    Last step completed in 00:00:00.0030
 </buildStep>
 <buildStep step="GenerateHelpFileIndex">
 Generating HTML Help 1 index file...
-    Last step completed in 00:00:00.0010
+    Last step completed in 00:00:00.0020
 </buildStep>
 <buildStep step="GenerateHelpProject">
 Generating HTML Help 1 project file...
-    Last step completed in 00:00:00.0210
+    Last step completed in 00:00:00.0100
 </buildStep>
 <buildStep step="CompilingHelpFile">
 Compiling HTML Help 1 file...
@@ -488,13 +481,13 @@ Compiling HTML Help 1 file...
   
   
   
-  Compiling d:\Project\git\API\Help\Working\Output\HtmlHelp1\Documentation.chm
+  Compiling d:\Project\git\API\X_API_Master_Help\Help\Working\Output\HtmlHelp1\Documentation.chm
   
   
   
   
   
-  Compile time: 0 minutes, 5 seconds
+  Compile time: 0 minutes, 3 seconds
   
   96	Topics
   
@@ -508,22 +501,22 @@ Compiling HTML Help 1 file...
   
   
   
-  Created d:\Project\git\API\Help\Working\Output\HtmlHelp1\Documentation.chm, 148,199 bytes
+  Created d:\Project\git\API\X_API_Master_Help\Help\Working\Output\HtmlHelp1\Documentation.chm, 151,203 bytes
   
-  Compression decreased file by 736,984 bytes.
+  Compression decreased file by 733,055 bytes.
   
-    Last step completed in 00:00:08.5825
+    Last step completed in 00:00:05.2223
 </buildStep>
 <buildStep step="GenerateHelpFormatTableOfContents">
 Generating website table of contents file...
-    Last step completed in 00:00:00.0130
+    Last step completed in 00:00:00.0090
 </buildStep>
 <buildStep step="GenerateFullTextIndex">
 Generating full-text index for the website...
 
 <plugIn name="Lightweight Website Style" behavior="After" priority="1000">
 Adding lightweight search and TOC elements to each topic...
-</plugIn>    Last step completed in 00:00:01.2591
+</plugIn>    Last step completed in 00:00:00.8300
 </buildStep>
 <buildStep step="CopyingWebsiteFiles">
 Copying website files to output folder...
@@ -531,15 +524,15 @@ Copying website files to output folder...
 Copied 100 files
 Copied 200 files
 Copied 250 files for the website content
-    Last step completed in 00:00:00.6240
+    Last step completed in 00:00:00.6070
 </buildStep>
 <buildStep step="CleanIntermediates">
 Removing intermediate files...
-    Last step completed in 00:00:28.7896
+    Last step completed in 00:00:00.3450
 </buildStep>
 <buildStep step="Completed">
 
-Build completed successfully at 2017-08-02 14:56:12.  Total time: 00:03:04.5286
+Build completed successfully at 2017-08-02 15:24:22.  Total time: 00:00:24.0974
 
 </buildStep>
 </shfbBuild>
