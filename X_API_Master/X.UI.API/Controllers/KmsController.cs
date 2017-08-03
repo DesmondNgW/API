@@ -132,7 +132,7 @@ namespace X.UI.API.Controllers
         [HttpGet]
         public EncryptResult MobileEncrypt(string mobile)
         {
-            var provider = new InstanceProvider<EncryptHelper>(typeof(EncryptHelper), ControllerHelper.EDomain);
+            var provider = new InstanceProvider<EncryptHelper>(ControllerHelper.EDomain);
             return CoreAccess<EncryptHelper>.Call(EncryptHelper.Instance.MobileEncrypt, mobile, provider, new LogOptions<EncryptResult>(CoreBase.CallSuccess));
         }
     }
