@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -134,6 +135,28 @@ namespace X.UI.API.Controllers
         {
             var provider = new InstanceProvider<EncryptHelper>(ControllerHelper.EDomain);
             return CoreAccess<EncryptHelper>.Call(EncryptHelper.Instance.MobileEncrypt, mobile, provider, new LogOptions<EncryptResult>(CoreBase.CallSuccess));
+        }
+
+        /// <summary>
+        /// WeekOfYear
+        /// </summary>
+        /// <returns>WeekOfYear</returns>
+        [HttpGet]
+        public ApiResult<int> WeekOfYear()
+        {
+            var gc = new GregorianCalendar();
+            var weekOfYear = gc.GetWeekOfYear(DateTime.Now, CalendarWeekRule.FirstDay, DayOfWeek.Sunday);
+            return new ApiResult<int> {Success = true, Data = weekOfYear};
+        }
+
+        /// <summary>
+        /// DayOfYear
+        /// </summary>
+        /// <returns>DayOfYear</returns>
+        [HttpGet]
+        public ApiResult<int> DayOfYear()
+        {
+            return new ApiResult<int> { Success = true, Data = DateTime.Now.DayOfYear };
         }
     }
 }
