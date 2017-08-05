@@ -25,9 +25,10 @@
     <CppCommentsFixup>False</CppCommentsFixup>
     <CleanIntermediates>True</CleanIntermediates>
     <DocumentationSources>
-      <DocumentationSource sourceFile="..\X_API_Master\X.UI.API\bin\X.UI.API.dll" />
-      <DocumentationSource sourceFile="..\X_API_Master\X.UI.API\bin\X.UI.API.xml" />
-    </DocumentationSources>
+      <DocumentationSource sourceFile="..\X_API_Master\X.UI.API\bin\X.Interface.Dto.dll" />
+<DocumentationSource sourceFile="..\X_API_Master\X.UI.API\bin\X.Interface.Dto.xml" />
+<DocumentationSource sourceFile="..\X_API_Master\X.UI.API\bin\X.UI.API.dll" />
+<DocumentationSource sourceFile="..\X_API_Master\X.UI.API\bin\X.UI.API.xml" /></DocumentationSources>
     <MaximumGroupParts>2</MaximumGroupParts>
     <NamespaceGrouping>False</NamespaceGrouping>
     <SyntaxFilters>Standard</SyntaxFilters>

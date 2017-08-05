@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<shfbBuild product="Sandcastle Help File Builder" version="2015.1.12.0" projectFile="D:\Project\git\API\X_API_Master_Help\X_API_Master_Help.shfbproj" started="2017-08-04 11:20:00">
+<shfbBuild product="Sandcastle Help File Builder" version="2015.1.12.0" projectFile="D:\Project\git\API\X_API_Master_Help\X_API_Master_Help.shfbproj" started="2017/8/5 22:12:53">
 <buildStep step="Initializing">
 Finding tools...
 The Sandcastle tools are located in &#39;C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\&#39;
@@ -15,27 +15,35 @@ Portions Copyright &#169; 2014, Sam Harwell, All Rights Reserved
 </buildStep>
 <buildStep step="ValidatingDocumentationSources">
 Validating and copying documentation source information
+Source: D:\Project\git\API\X_API_Master\X.UI.API\bin\X.Interface.Dto.dll
+    Found assembly &#39;D:\Project\git\API\X_API_Master\X.UI.API\bin\X.Interface.Dto.dll&#39;
+Source: D:\Project\git\API\X_API_Master\X.UI.API\bin\X.Interface.Dto.xml
 Source: D:\Project\git\API\X_API_Master\X.UI.API\bin\X.UI.API.dll
     Found assembly &#39;D:\Project\git\API\X_API_Master\X.UI.API\bin\X.UI.API.dll&#39;
 Source: D:\Project\git\API\X_API_Master\X.UI.API\bin\X.UI.API.xml
 
 Copying XML comments files
+    D:\Project\git\API\X_API_Master\X.UI.API\bin\X.Interface.Dto.xml -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\X.Interface.Dto.xml
     D:\Project\git\API\X_API_Master\X.UI.API\bin\X.UI.API.XML -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\X.UI.API.XML
 </buildStep>
 <buildStep step="GenerateSharedContent">
 Generating shared content files (zh-CN, 中文(简体，中国))...
 SHFB: Warning BE0003: Sandcastle shared content for the &#39;zh-CN, 中文(简体，中国)&#39; language could not be found.  Using &#39;en-US, English (US)&#39; defaults.
 <plugIn name="Lightweight Website Style" behavior="After" priority="1000">
-</plugIn>    Last step completed in 00:00:01.4151
+</plugIn>    Last step completed in 00:00:00.0965
 </buildStep>
 <buildStep step="GenerateApiFilter">
 Generating API filter for MRefBuilder...
-    Last step completed in 00:00:00.1500
+    Last step completed in 00:00:00.0065
 </buildStep>
 <buildStep step="GenerateReflectionInfo">
 Generating reflection information...
-[C:\windows\Microsoft.NET\Framework64\v4.0.30319\MSBuild.exe]
-生成启动时间为 2017-08-04 11:20:13。
+[C:\Windows\Microsoft.NET\Framework64\v4.0.30319\MSBuild.exe]
+生成启动时间为 2017/8/5 22:12:54。
+项目中不存在 BeforeTargets 特性中的“C:\Program Files (x86)\MSBuild\4.0\Microsoft.Common.targets\ImportAfter\Xamarin.Common.targets (34,37)”位置列出的目标“_ConvertPdbFiles”，将忽略该目标。
+项目中不存在 AfterTargets 特性中的“C:\Program Files (x86)\MSBuild\4.0\Microsoft.Common.targets\ImportAfter\Xamarin.Common.targets (34,70)”位置列出的目标“_CollectPdbFiles”，将忽略该目标。
+项目中不存在 BeforeTargets 特性中的“C:\Program Files (x86)\MSBuild\4.0\Microsoft.Common.targets\ImportAfter\Xamarin.Common.targets (40,38)”位置列出的目标“_CollectMdbFiles”，将忽略该目标。
+项目中不存在 AfterTargets 特性中的“C:\Program Files (x86)\MSBuild\4.0\Microsoft.Common.targets\ImportAfter\Xamarin.Common.targets (40,71)”位置列出的目标“_CopyMdbFiles”，将忽略该目标。
 节点 1 上的项目“D:\Project\git\API\X_API_Master_Help\Help\Working\GenerateRefInfo.proj”(默认目标)。
 PrepareForBuild:
   正在创建目录“obj\Debug\”。
@@ -43,8 +51,8 @@ GenerateRefInfo:
   MRefBuilder (v2015.1.12.0)
   Copyright ? 2006-2015, Microsoft Corporation, All Rights Reserved.
   Portions Copyright ? 2006-2014, Eric Woodruff, All Rights Reserved.
-  Loaded 1 assemblies for reflection and 1 dependency assemblies.
-  Wrote information on 4 namespaces, 14 types, and 53 members
+  Loaded 2 assemblies for reflection and 1 dependency assemblies.
+  Wrote information on 7 namespaces, 19 types, and 80 members
   正在将文件从“reflection.org”复制到“reflection.all”。
   XslTransform (v2015.1.12.0)
   Copyright ? 2006-2015, Microsoft Corporation, All Rights Reserved.
@@ -54,13 +62,13 @@ GenerateRefInfo:
 
 已成功生成。
 
-已用时间 00:00:45.45
-    Last step completed in 00:00:50.2689
+已用时间 00:00:00.76
+    Last step completed in 00:00:00.9885
 </buildStep>
 <buildStep step="TransformReflectionInfo">
 Transforming reflection output...
-[C:\windows\Microsoft.NET\Framework64\v4.0.30319\MSBuild.exe]
-生成启动时间为 2017-08-04 11:21:00。
+[C:\Windows\Microsoft.NET\Framework64\v4.0.30319\MSBuild.exe]
+生成启动时间为 2017/8/5 22:12:55。
 节点 1 上的项目“D:\Project\git\API\X_API_Master_Help\Help\Working\TransformManifest.proj”(默认目标)。
 TransformManifest:
   XslTransform (v2015.1.12.0)
@@ -80,26 +88,26 @@ TransformManifest:
 
 已成功生成。
 
-已用时间 00:00:02.62
-    Last step completed in 00:00:04.4323
+已用时间 00:00:00.66
+    Last step completed in 00:00:00.7989
 </buildStep>
 <buildStep step="GenerateNamespaceSummaries">
 Generating namespace summary information...
-    Last step completed in 00:00:00.0840
+    Last step completed in 00:00:00.0474
 </buildStep>
 <buildStep step="CopyAdditionalContent">
 Copying additional content files...
 No additional content to copy
-    Last step completed in 00:00:00.0440
+    Last step completed in 00:00:00.0170
 </buildStep>
 <buildStep step="MergeTablesOfContents">
 Merging conceptual and additional tables of contents...
-    Last step completed in 00:00:00.0030
+    Last step completed in 00:00:00.0095
 </buildStep>
 <buildStep step="GenerateIntermediateTableOfContents">
 Generating intermediate table of contents file...
-[C:\windows\Microsoft.NET\Framework64\v4.0.30319\MSBuild.exe]
-生成启动时间为 2017-08-04 11:21:04。
+[C:\Windows\Microsoft.NET\Framework64\v4.0.30319\MSBuild.exe]
+生成启动时间为 2017/8/5 22:12:56。
 节点 1 上的项目“D:\Project\git\API\X_API_Master_Help\Help\Working\GenerateIntermediateTOC.proj”(默认目标)。
 GenerateIntermediateTOC:
   XslTransform (v2015.1.12.0)
@@ -110,31 +118,46 @@ GenerateIntermediateTOC:
 
 已成功生成。
 
-已用时间 00:00:00.28
+已用时间 00:00:00.14
 Generating conceptual content intermediate TOC file...
-    Last step completed in 00:00:00.7120
+    Last step completed in 00:00:00.3157
 </buildStep>
 <buildStep step="CreateBuildAssemblerConfigs">
 Creating Sandcastle configuration files...
     sandcastle.config
-    Last step completed in 00:00:02.3351
+    Last step completed in 00:00:00.1823
 </buildStep>
 <buildStep step="MergeCustomConfigs">
 Merging custom build component configurations
 D:\Project\git\API\X_API_Master_Help\Help\Working\sandcastle.config
-    Last step completed in 00:00:00.1340
+    Last step completed in 00:00:00.0396
 </buildStep>
 <buildStep step="BuildReferenceTopics">
 Building reference help topics...
-[C:\windows\Microsoft.NET\Framework64\v4.0.30319\MSBuild.exe]
-生成启动时间为 2017-08-04 11:21:07。
+[C:\Windows\Microsoft.NET\Framework64\v4.0.30319\MSBuild.exe]
+生成启动时间为 2017/8/5 22:12:56。
 节点 1 上的项目“D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj”(默认目标)。
 BuildReferenceTopics:
   BuildAssembler (v2015.1.12.0)
   Copyright ? 2006-2015, Microsoft Corporation, All Rights Reserved.
   Portions Copyright ? 2006-2014, Eric Woodruff, All Rights Reserved.
   Loading configuration...
+  ResolveReferenceLinksComponent: The MSDN content ID cache &#39;C:\Users\Administrator\AppData\Local\EWSoftware\Sandcastle Help File Builder\Cache\MsdnContentId.cache&#39; does not exist yet.  All IDs will be looked up in this build which will slow it down.
   Processing topics...
+BuildAssembler : warning : ShowMissingComponent: [N:X.Interface.Dto] Missing &lt;summary&gt; documentation [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ShowMissingComponent: [T:X.Interface.Dto.ApiResult`1] Missing &lt;typeparam name=&quot;T&quot;/&gt; documentation [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.Interface.Dto.HttpRequestContext] Unknown reference link target &#39;T:X.Util.Entities.MongoBaseModel&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.Interface.Dto.HttpRequestContext] Unknown reference link target &#39;P:X.Util.Entities.MongoBaseModel.Id&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.Interface.Dto.HttpRequestContext] Unknown reference link target &#39;T:X.Util.Entities.MongoBaseModel&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.Interface.Dto.HttpRequestContext] Unknown reference link target &#39;T:X.Util.Entities.MongoBaseModel&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.Interface.Dto.HttpRequestContext] Unknown reference link target &#39;P:X.Util.Entities.MongoBaseModel.Id&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.Interface.Dto.HttpRequestContext] Unknown reference link target &#39;T:X.Util.Entities.MongoBaseModel&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [Properties.T:X.Interface.Dto.HttpRequestContext] Unknown reference link target &#39;P:X.Util.Entities.MongoBaseModel.Id&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [Properties.T:X.Interface.Dto.HttpRequestContext] Unknown reference link target &#39;T:X.Util.Entities.MongoBaseModel&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [Properties.T:X.Interface.Dto.HttpRequestContext] Unknown reference link target &#39;P:X.Util.Entities.MongoBaseModel.Id&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [Properties.T:X.Interface.Dto.HttpRequestContext] Unknown reference link target &#39;T:X.Util.Entities.MongoBaseModel&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ShowMissingComponent: [N:X.Interface.Dto.HttpResponse] Missing &lt;summary&gt; documentation [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ShowMissingComponent: [N:X.Interface.Dto.Interface] Missing &lt;summary&gt; documentation [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
 BuildAssembler : warning : ShowMissingComponent: [N:X.UI.API] Missing &lt;summary&gt; documentation [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
 BuildAssembler : warning : ShowMissingComponent: [T:X.UI.API.BundleConfig] Missing &lt;summary&gt; documentation [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
 BuildAssembler : warning : ShowMissingComponent: [M:X.UI.API.BundleConfig.RegisterBundles(System.Web.Optimization.BundleCollection)] Missing &lt;summary&gt; documentation [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
@@ -154,114 +177,20 @@ BuildAssembler : warning : ShowMissingComponent: [T:X.UI.API.WebApiConfig] Missi
 BuildAssembler : warning : ShowMissingComponent: [M:X.UI.API.WebApiConfig.Register(System.Web.Http.HttpConfiguration)] Missing &lt;summary&gt; documentation [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
 BuildAssembler : warning : ShowMissingComponent: [M:X.UI.API.WebApiConfig.Register(System.Web.Http.HttpConfiguration)] Missing &lt;param name=&quot;config&quot;/&gt; documentation [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
 BuildAssembler : warning : ShowMissingComponent: [N:X.UI.API.Controllers] Missing &lt;summary&gt; documentation [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [M:X.UI.API.Controllers.KmsController.DayOfYear] Unknown reference link target &#39;T:X.Interface.Dto.ApiResult`1&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [M:X.UI.API.Controllers.KmsController.DayOfYear] Unknown reference link target &#39;T:X.Interface.Dto.ApiResult`1&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [M:X.UI.API.Controllers.KmsController.GetPublicKey(System.Int32)] Unknown reference link target &#39;T:X.Interface.Dto.ApiResult`1&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [M:X.UI.API.Controllers.KmsController.GetPublicKey(System.Int32)] Unknown reference link target &#39;T:X.Interface.Dto.HttpResponse.PublicKeyDto&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [M:X.UI.API.Controllers.KmsController.GetPublicKey(System.Int32)] Unknown reference link target &#39;T:X.Interface.Dto.ApiResult`1&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [M:X.UI.API.Controllers.KmsController.GetPublicKey(System.Int32)] Unknown reference link target &#39;T:X.Interface.Dto.HttpResponse.PublicKeyDto&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [M:X.UI.API.Controllers.KmsController.GetToken(System.String)] Unknown reference link target &#39;T:X.Interface.Dto.ApiResult`1&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [M:X.UI.API.Controllers.KmsController.GetToken(System.String)] Unknown reference link target &#39;T:X.Interface.Dto.ApiResult`1&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
 BuildAssembler : warning : ResolveReferenceLinksComponent: [M:X.UI.API.Controllers.KmsController.MobileEncrypt(System.String)] Unknown reference link target &#39;T:Em.FundTrade.EncryptHelper.EncryptResult&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
 BuildAssembler : warning : ResolveReferenceLinksComponent: [M:X.UI.API.Controllers.KmsController.MobileEncrypt(System.String)] Unknown reference link target &#39;T:Em.FundTrade.EncryptHelper.EncryptResult&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [M:X.UI.API.Controllers.KmsController.Now] Unknown reference link target &#39;T:X.Interface.Dto.ApiResult`1&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [M:X.UI.API.Controllers.KmsController.Now] Unknown reference link target &#39;T:X.Interface.Dto.ApiResult`1&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [M:X.UI.API.Controllers.KmsController.WeekOfYear] Unknown reference link target &#39;T:X.Interface.Dto.ApiResult`1&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [M:X.UI.API.Controllers.KmsController.WeekOfYear] Unknown reference link target &#39;T:X.Interface.Dto.ApiResult`1&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
 BuildAssembler : warning : ShowMissingComponent: [N:X.UI.API.Model] Missing &lt;summary&gt; documentation [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
 BuildAssembler : warning : ShowMissingComponent: [T:X.UI.API.Model.ApiRequestContext] Missing &lt;summary&gt; documentation [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
 BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;T:X.Util.Entities.MongoBaseModel&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;T:X.Interface.Dto.HttpRequestContext&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;P:X.Interface.Dto.HttpRequestContext.ClientId&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;T:X.Interface.Dto.HttpRequestContext&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;P:X.Interface.Dto.HttpRequestContext.ClientName&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;T:X.Interface.Dto.HttpRequestContext&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;P:X.Interface.Dto.HttpRequestContext.ClientType&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;T:X.Interface.Dto.HttpRequestContext&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;P:X.Interface.Dto.HttpRequestContext.ClientVersion&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;T:X.Interface.Dto.HttpRequestContext&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
 BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;P:X.Util.Entities.MongoBaseModel.Id&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
 BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;T:X.Util.Entities.MongoBaseModel&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;P:X.Interface.Dto.HttpRequestContext.PlatForm&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;T:X.Interface.Dto.HttpRequestContext&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;P:X.Interface.Dto.HttpRequestContext.Screen&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;T:X.Interface.Dto.HttpRequestContext&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;P:X.Interface.Dto.HttpRequestContext.Tid&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;T:X.Interface.Dto.HttpRequestContext&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;P:X.Interface.Dto.HttpRequestContext.Timestamp&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;T:X.Interface.Dto.HttpRequestContext&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;P:X.Interface.Dto.HttpRequestContext.Token&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;T:X.Interface.Dto.HttpRequestContext&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;P:X.Interface.Dto.HttpRequestContext.Version&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;T:X.Interface.Dto.HttpRequestContext&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
 BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;T:X.Util.Entities.MongoBaseModel&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;T:X.Interface.Dto.HttpRequestContext&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;P:X.Interface.Dto.HttpRequestContext.ClientId&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;T:X.Interface.Dto.HttpRequestContext&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;P:X.Interface.Dto.HttpRequestContext.ClientName&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;T:X.Interface.Dto.HttpRequestContext&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;P:X.Interface.Dto.HttpRequestContext.ClientType&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;T:X.Interface.Dto.HttpRequestContext&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;P:X.Interface.Dto.HttpRequestContext.ClientVersion&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;T:X.Interface.Dto.HttpRequestContext&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
 BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;P:X.Util.Entities.MongoBaseModel.Id&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
 BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;T:X.Util.Entities.MongoBaseModel&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;P:X.Interface.Dto.HttpRequestContext.PlatForm&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;T:X.Interface.Dto.HttpRequestContext&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;P:X.Interface.Dto.HttpRequestContext.Screen&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;T:X.Interface.Dto.HttpRequestContext&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;P:X.Interface.Dto.HttpRequestContext.Tid&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;T:X.Interface.Dto.HttpRequestContext&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;P:X.Interface.Dto.HttpRequestContext.Timestamp&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;T:X.Interface.Dto.HttpRequestContext&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;P:X.Interface.Dto.HttpRequestContext.Token&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;T:X.Interface.Dto.HttpRequestContext&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;P:X.Interface.Dto.HttpRequestContext.Version&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;T:X.Interface.Dto.HttpRequestContext&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [Properties.T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;P:X.Interface.Dto.HttpRequestContext.ClientId&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [Properties.T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;T:X.Interface.Dto.HttpRequestContext&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [Properties.T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;P:X.Interface.Dto.HttpRequestContext.ClientName&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [Properties.T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;T:X.Interface.Dto.HttpRequestContext&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [Properties.T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;P:X.Interface.Dto.HttpRequestContext.ClientType&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [Properties.T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;T:X.Interface.Dto.HttpRequestContext&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [Properties.T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;P:X.Interface.Dto.HttpRequestContext.ClientVersion&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [Properties.T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;T:X.Interface.Dto.HttpRequestContext&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
 BuildAssembler : warning : ResolveReferenceLinksComponent: [Properties.T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;P:X.Util.Entities.MongoBaseModel.Id&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
 BuildAssembler : warning : ResolveReferenceLinksComponent: [Properties.T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;T:X.Util.Entities.MongoBaseModel&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [Properties.T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;P:X.Interface.Dto.HttpRequestContext.PlatForm&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [Properties.T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;T:X.Interface.Dto.HttpRequestContext&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [Properties.T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;P:X.Interface.Dto.HttpRequestContext.Screen&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [Properties.T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;T:X.Interface.Dto.HttpRequestContext&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [Properties.T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;P:X.Interface.Dto.HttpRequestContext.Tid&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [Properties.T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;T:X.Interface.Dto.HttpRequestContext&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [Properties.T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;P:X.Interface.Dto.HttpRequestContext.Timestamp&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [Properties.T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;T:X.Interface.Dto.HttpRequestContext&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [Properties.T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;P:X.Interface.Dto.HttpRequestContext.Token&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [Properties.T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;T:X.Interface.Dto.HttpRequestContext&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [Properties.T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;P:X.Interface.Dto.HttpRequestContext.Version&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [Properties.T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;T:X.Interface.Dto.HttpRequestContext&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [Properties.T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;P:X.Interface.Dto.HttpRequestContext.ClientId&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [Properties.T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;T:X.Interface.Dto.HttpRequestContext&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [Properties.T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;P:X.Interface.Dto.HttpRequestContext.ClientName&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [Properties.T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;T:X.Interface.Dto.HttpRequestContext&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [Properties.T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;P:X.Interface.Dto.HttpRequestContext.ClientType&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [Properties.T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;T:X.Interface.Dto.HttpRequestContext&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [Properties.T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;P:X.Interface.Dto.HttpRequestContext.ClientVersion&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [Properties.T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;T:X.Interface.Dto.HttpRequestContext&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
 BuildAssembler : warning : ResolveReferenceLinksComponent: [Properties.T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;P:X.Util.Entities.MongoBaseModel.Id&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
 BuildAssembler : warning : ResolveReferenceLinksComponent: [Properties.T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;T:X.Util.Entities.MongoBaseModel&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [Properties.T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;P:X.Interface.Dto.HttpRequestContext.PlatForm&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [Properties.T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;T:X.Interface.Dto.HttpRequestContext&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [Properties.T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;P:X.Interface.Dto.HttpRequestContext.Screen&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [Properties.T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;T:X.Interface.Dto.HttpRequestContext&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [Properties.T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;P:X.Interface.Dto.HttpRequestContext.Tid&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [Properties.T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;T:X.Interface.Dto.HttpRequestContext&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [Properties.T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;P:X.Interface.Dto.HttpRequestContext.Timestamp&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [Properties.T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;T:X.Interface.Dto.HttpRequestContext&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [Properties.T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;P:X.Interface.Dto.HttpRequestContext.Token&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [Properties.T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;T:X.Interface.Dto.HttpRequestContext&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [Properties.T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;P:X.Interface.Dto.HttpRequestContext.Version&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [Properties.T:X.UI.API.Model.ApiRequestContext] Unknown reference link target &#39;T:X.Interface.Dto.HttpRequestContext&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
 BuildAssembler : warning : ShowMissingComponent: [N:X.UI.API.Util] Missing &lt;summary&gt; documentation [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
 BuildAssembler : warning : ShowMissingComponent: [T:X.UI.API.Util.ApiExceptionAttribute] Missing &lt;summary&gt; documentation [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
 BuildAssembler : warning : ShowMissingComponent: [T:X.UI.API.Util.ControllerHelper] Missing &lt;summary&gt; documentation [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
@@ -270,8 +199,6 @@ BuildAssembler : warning : ShowMissingComponent: [M:X.UI.API.Util.ControllerHelp
 BuildAssembler : warning : ShowMissingComponent: [M:X.UI.API.Util.ControllerHelper.CallSuccess``1(X.Interface.Dto.ApiResult{``0})] Missing &lt;typeparam name=&quot;TResult&quot;/&gt; documentation [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
 BuildAssembler : warning : ShowMissingComponent: [M:X.UI.API.Util.ControllerHelper.CallSuccess``1(X.Interface.Dto.ApiResult{``0})] Missing &lt;returns&gt; documentation [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
 BuildAssembler : warning : ShowMissingComponent: [M:X.UI.API.Util.ControllerHelper.CallSuccess``1(X.Interface.Dto.ApiResult{``0})] Missing &lt;param name=&quot;iresult&quot;/&gt; documentation [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [M:X.UI.API.Util.ControllerHelper.CallSuccess``1(X.Interface.Dto.ApiResult{``0})] Unknown reference link target &#39;T:X.Interface.Dto.ApiResult`1&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [M:X.UI.API.Util.ControllerHelper.CallSuccess``1(X.Interface.Dto.ApiResult{``0})] Unknown reference link target &#39;T:X.Interface.Dto.ApiResult`1&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
 BuildAssembler : warning : ShowMissingComponent: [F:X.UI.API.Util.ControllerHelper.EDomain] Missing &lt;summary&gt; documentation [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
 BuildAssembler : warning : ResolveReferenceLinksComponent: [F:X.UI.API.Util.ControllerHelper.EDomain] Unknown reference link target &#39;T:X.Util.Entities.Enums.LogDomain&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
 BuildAssembler : warning : ResolveReferenceLinksComponent: [F:X.UI.API.Util.ControllerHelper.EDomain] Unknown reference link target &#39;T:X.Util.Entities.Enums.LogDomain&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
@@ -284,26 +211,27 @@ BuildAssembler : warning : ShowMissingComponent: [M:X.UI.API.Util.ControllerHelp
 BuildAssembler : warning : ShowMissingComponent: [M:X.UI.API.Util.ControllerHelper.OnActionExecuted(System.Web.Http.Filters.HttpActionExecutedContext)] Missing &lt;param name=&quot;actionExecutedContext&quot;/&gt; documentation [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
 BuildAssembler : warning : ShowMissingComponent: [P:X.UI.API.Util.OutputCacheAttribute.Duration] Missing &lt;summary&gt; documentation [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
 BuildAssembler : warning : ShowMissingComponent: [M:X.UI.API.Util.UserBaseController.UserIdentity(System.Web.Http.Controllers.HttpActionContext)] Missing &lt;param name=&quot;actionContext&quot;/&gt; documentation [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
-  Processed 96 topic(s)
-  149 warning(s)
+  Processed 140 topic(s)
+  67 warning(s)
   CopyFromIndexComponent: &quot;reflection&quot; in-memory cache entries used: 5 of 15.
-  CopyFromIndexComponent: &quot;comments&quot; in-memory cache entries used: 2 of 30.
+  CopyFromIndexComponent: &quot;comments&quot; in-memory cache entries used: 3 of 30.
+  ResolveReferenceLinksComponent: New MSDN content ID cache size: 127 entries
 已完成生成项目“D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj”(默认目标)的操作。
 
 已成功生成。
 
-已用时间 00:00:14.07
-    Last step completed in 00:00:15.1889
+已用时间 00:02:07.49
+    Last step completed in 00:02:07.6595
 </buildStep>
 <buildStep step="CombiningIntermediateTocFiles">
 Combining conceptual and API intermediate TOC files...
 
 Clearing any prior web output
-    Last step completed in 00:00:16.4819
+    Last step completed in 00:00:01.3192
 </buildStep>
 <buildStep step="ExtractingHtmlInfo">
 Extracting HTML info for HTML Help 1 and/or website...
-[C:\windows\Microsoft.NET\Framework64\v4.0.30319\MSBuild.exe]
+[C:\Windows\Microsoft.NET\Framework64\v4.0.30319\MSBuild.exe]
 Sandcastle Help File Builder, version 2015.1.12.0
 Copyright ? 2006-2015, Eric Woodruff, All Rights Reserved
 E-Mail: Eric@EWoodruff.us
@@ -311,17 +239,17 @@ E-Mail: Eric@EWoodruff.us
 Using LCID &#39;2052&#39;, code page &#39;936&#39;, encoding charset &#39;gb2312&#39;.
 
 Processing Help 1 files in D:\Project\git\API\X_API_Master_Help\Help\Working\Output\HtmlHelp1
-Processed 96 HTML files
+Processed 140 HTML files
 Sorting keywords and generating See Also indices
 Saving HTML Help 1 keyword index to D:\Project\git\API\X_API_Master_Help\Help\Working\Documentation.hhk
 Saving HTML Help 1 table of contents to D:\Project\git\API\X_API_Master_Help\Help\Working\Documentation.hhc
 
 Processing website files in D:\Project\git\API\X_API_Master_Help\Help\Working\Output\Website
-Processed 96 HTML files
+Processed 140 HTML files
 Sorting keywords and generating See Also indices
 Saving website keyword index to D:\Project\git\API\X_API_Master_Help\Help\Working\WebKI.xml
 Saving website table of contents to D:\Project\git\API\X_API_Master_Help\Help\Working\WebTOC.xml
-    Last step completed in 00:00:05.7683
+    Last step completed in 00:00:00.3704
 </buildStep>
 <buildStep step="CopyStandardHelpContent">
 Copying standard help content...
@@ -464,23 +392,23 @@ C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyle
 C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\Web\icons\TocOpen.gif -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\Output\Website\icons\TocOpen.gif
 C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\Web\scripts\branding-Website.js -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\Output\Website\scripts\branding-Website.js
 C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\Web\scripts\jquery-1.11.0.min.js -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\Output\Website\scripts\jquery-1.11.0.min.js
-    Last step completed in 00:00:02.9822
+    Last step completed in 00:00:00.8028
 </buildStep>
 <buildStep step="GenerateHelpFormatTableOfContents">
 Generating HTML Help 1 table of contents file...
-    Last step completed in 00:00:00.0070
+    Last step completed in 00:00:00.0055
 </buildStep>
 <buildStep step="GenerateHelpFileIndex">
 Generating HTML Help 1 index file...
-    Last step completed in 00:00:00.0090
+    Last step completed in 00:00:00.0040
 </buildStep>
 <buildStep step="GenerateHelpProject">
 Generating HTML Help 1 project file...
-    Last step completed in 00:00:00.0240
+    Last step completed in 00:00:00.0105
 </buildStep>
 <buildStep step="CompilingHelpFile">
 Compiling HTML Help 1 file...
-[C:\windows\Microsoft.NET\Framework64\v4.0.30319\MSBuild.exe]
+[C:\Windows\Microsoft.NET\Framework64\v4.0.30319\MSBuild.exe]
   Microsoft HTML Help Compiler 4.74.8702
   
   
@@ -491,13 +419,13 @@ Compiling HTML Help 1 file...
   
   
   
-  Compile time: 0 minutes, 7 seconds
+  Compile time: 0 minutes, 1 second
   
-  98	Topics
+  142	Topics
   
-  934	Local links
+  1,438	Local links
   
-  903	Internet links
+  1,026	Internet links
   
   0	Graphics
   
@@ -505,38 +433,39 @@ Compiling HTML Help 1 file...
   
   
   
-  Created d:\Project\git\API\X_API_Master_Help\Help\Working\Output\HtmlHelp1\Documentation.chm, 152,903 bytes
+  Created d:\Project\git\API\X_API_Master_Help\Help\Working\Output\HtmlHelp1\Documentation.chm, 205,147 bytes
   
-  Compression decreased file by 746,814 bytes.
+  Compression decreased file by 1,030,614 bytes.
   
-    Last step completed in 00:00:15.6469
+    Last step completed in 00:00:02.1505
 </buildStep>
 <buildStep step="GenerateHelpFormatTableOfContents">
 Generating website table of contents file...
-    Last step completed in 00:00:00.0150
+    Last step completed in 00:00:00.0060
 </buildStep>
 <buildStep step="GenerateFullTextIndex">
 Generating full-text index for the website...
 
 <plugIn name="Lightweight Website Style" behavior="After" priority="1000">
 Adding lightweight search and TOC elements to each topic...
-</plugIn>    Last step completed in 00:00:02.4471
+</plugIn>    Last step completed in 00:00:00.4191
 </buildStep>
 <buildStep step="CopyingWebsiteFiles">
 Copying website files to output folder...
 
 Copied 100 files
 Copied 200 files
-Copied 252 files for the website content
-    Last step completed in 00:00:03.4592
+Copied 300 files
+Copied 321 files for the website content
+    Last step completed in 00:00:00.4024
 </buildStep>
 <buildStep step="CleanIntermediates">
 Removing intermediate files...
-    Last step completed in 00:00:46.8347
+    Last step completed in 00:00:01.7974
 </buildStep>
 <buildStep step="Completed">
 
-Build completed successfully at 2017-08-04 11:22:56.  Total time: 00:02:55.3740
+Build completed successfully at 2017/8/5 22:15:11.  Total time: 00:02:18.2786
 
 </buildStep>
 </shfbBuild>
