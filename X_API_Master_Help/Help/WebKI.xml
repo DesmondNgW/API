@@ -55,7 +55,10 @@
   <HelpKINode Title="ApiResult&lt;T&gt;.Success property" Url="html/89bddea5-ff71-6a3c-35e9-c5d30ed5f74a.htm" />
   <HelpKINode Title="Application_Error method" Url="html/535f9a91-ccf4-0f2c-b2ff-709619fc3d11.htm" />
   <HelpKINode Title="Application_Start method" Url="html/ce66a521-290b-97b2-36d5-630952221ad6.htm" />
-  <HelpKINode Title="BitMap method" Url="html/c0fb902f-8394-4365-3508-b0b8141183c5.htm" />
+  <HelpKINode Title="BitMap method">
+    <HelpKINode Title="IImageManager.BitMap Method " Url="html/71e1eeb2-3515-6284-e549-2df9b7f1a792.htm" />
+    <HelpKINode Title="ImageController.BitMap Method " Url="html/09551bc3-f2a8-35c4-55d9-a1256903d942.htm" />
+  </HelpKINode>
   <HelpKINode Title="BundleConfig class">
     <HelpKINode Title="BundleConfig Class" Url="html/633d0bb3-8ea3-835d-aa86-da0367945663.htm" />
     <HelpKINode Title="about BundleConfig class" Url="html/633d0bb3-8ea3-835d-aa86-da0367945663.htm" />
@@ -65,8 +68,7 @@
   <HelpKINode Title="BundleConfig.BundleConfig constructor" Url="html/22257542-b1dd-df37-7fd7-4500880f38d5.htm" />
   <HelpKINode Title="BundleConfig.RegisterBundles method" Url="html/36f4653a-f0a9-4043-0e68-8b7cbeb3ac8b.htm" />
   <HelpKINode Title="CacheInit method" Url="html/824908ef-99f0-5382-e862-63f52f15420f.htm" />
-  <HelpKINode Title="CallSuccess(Of TResult) method" Url="html/d5891cae-b043-ebd0-961d-bcdde37d7177.htm" />
-  <HelpKINode Title="CallSuccess&lt;TResult&gt; method" Url="html/d5891cae-b043-ebd0-961d-bcdde37d7177.htm" />
+  <HelpKINode Title="CallSuccess method" Url="html/9f95b1b7-16c6-7643-2c47-e362e4380132.htm" />
   <HelpKINode Title="Cid property" Url="html/4bbe6dbd-043b-d746-c6d1-1b2adaea4d7c.htm" />
   <HelpKINode Title="ClientId property" Url="html/33af5b99-2b83-02e8-bee2-03d94960382d.htm" />
   <HelpKINode Title="ClientIp property" Url="html/5752a366-add4-ef87-9fe2-38f8983e3371.htm" />
@@ -83,8 +85,7 @@
   </HelpKINode>
   <HelpKINode Title="ControllerHelper.ApiCallMonitor method" Url="html/b41371e8-b96b-f158-596e-0a26ecfb2e3e.htm" />
   <HelpKINode Title="ControllerHelper.CacheInit method" Url="html/824908ef-99f0-5382-e862-63f52f15420f.htm" />
-  <HelpKINode Title="ControllerHelper.CallSuccess(Of TResult) method" Url="html/d5891cae-b043-ebd0-961d-bcdde37d7177.htm" />
-  <HelpKINode Title="ControllerHelper.CallSuccess&lt;TResult&gt; method" Url="html/d5891cae-b043-ebd0-961d-bcdde37d7177.htm" />
+  <HelpKINode Title="ControllerHelper.CallSuccess method" Url="html/9f95b1b7-16c6-7643-2c47-e362e4380132.htm" />
   <HelpKINode Title="ControllerHelper.ControllerHelper constructor" Url="html/4685be44-45cc-2ad5-4830-65984bc5416b.htm" />
   <HelpKINode Title="ControllerHelper.EDomain field" Url="html/b5850efa-c4d8-58fa-080e-e9644abbd9c5.htm" />
   <HelpKINode Title="ControllerHelper.GetApiRequestContext method" Url="html/3866edf2-f989-fc43-eac3-c4cb354f3865.htm" />
@@ -92,7 +93,19 @@
   <HelpKINode Title="ControllerHelper.GetUid method" Url="html/61a521bb-d913-a2df-fa76-c71074997ec2.htm" />
   <HelpKINode Title="ControllerHelper.OnActionExecuted method" Url="html/82e4f889-6dca-0164-3571-984e78fa62f2.htm" />
   <HelpKINode Title="Data property" Url="html/eabc8d76-f168-e2aa-6b38-e489424137d8.htm" />
-  <HelpKINode Title="DayOfYear method" Url="html/9928b44a-d196-c889-f32a-e6cb5a1ee2e0.htm" />
+  <HelpKINode Title="DateTime property" Url="html/dc561a7a-9304-f535-b6b4-33e7b5580ee1.htm" />
+  <HelpKINode Title="DateTimeDto class">
+    <HelpKINode Title="DateTimeDto Class" Url="html/b88671cb-46d1-d67e-aa16-e86c60c31898.htm" />
+    <HelpKINode Title="about DateTimeDto class" Url="html/b88671cb-46d1-d67e-aa16-e86c60c31898.htm" />
+    <HelpKINode Title="constructor" Url="html/e21c421a-22c2-c06c-519a-6ab53d09900a.htm" />
+    <HelpKINode Title="methods" Url="html/353338eb-532b-99b5-38d6-1c700655987e.htm" />
+    <HelpKINode Title="properties" Url="html/ff1f3a18-3ab4-78f1-875b-7872481cb898.htm" />
+  </HelpKINode>
+  <HelpKINode Title="DateTimeDto.DateTime property" Url="html/dc561a7a-9304-f535-b6b4-33e7b5580ee1.htm" />
+  <HelpKINode Title="DateTimeDto.DateTimeDto constructor" Url="html/e21c421a-22c2-c06c-519a-6ab53d09900a.htm" />
+  <HelpKINode Title="DateTimeDto.DayOfYear property" Url="html/eae4e91b-2735-7c68-1f8e-5cd36b1370f7.htm" />
+  <HelpKINode Title="DateTimeDto.WeekOfYear property" Url="html/3a857c4d-0d2f-983e-b678-648e28e740d9.htm" />
+  <HelpKINode Title="DayOfYear property" Url="html/eae4e91b-2735-7c68-1f8e-5cd36b1370f7.htm" />
   <HelpKINode Title="DebugError property" Url="html/8b97dc0b-7ce8-0f90-a9e7-0c1f365f0f30.htm" />
   <HelpKINode Title="Duration property" Url="html/d464a54d-de37-6605-49cd-0922bfdce769.htm" />
   <HelpKINode Title="EDomain field" Url="html/b5850efa-c4d8-58fa-080e-e9644abbd9c5.htm" />
@@ -110,11 +123,11 @@
   <HelpKINode Title="GetHttpContextWrapper method" Url="html/1cf5736b-458e-5213-66da-cfd6b8cc9743.htm" />
   <HelpKINode Title="GetPublicKey method">
     <HelpKINode Title="IKeyManager.GetPublicKey Method " Url="html/ecdf2afc-f6d5-f438-c787-24d92ed30d94.htm" />
-    <HelpKINode Title="KmsController.GetPublicKey Method " Url="html/b4f0f2b0-4572-cd1b-0b56-bb6b22067872.htm" />
+    <HelpKINode Title="KeyController.GetPublicKey Method " Url="html/c27dc3db-66fc-c6fd-8955-127fccff35da.htm" />
   </HelpKINode>
   <HelpKINode Title="GetToken method">
     <HelpKINode Title="IKeyManager.GetToken Method " Url="html/f9e6ffb6-b661-99e9-ac9d-c69346c7469e.htm" />
-    <HelpKINode Title="KmsController.GetToken Method " Url="html/8a90c60d-4b74-d01a-b54f-b982cf7ec9a7.htm" />
+    <HelpKINode Title="KeyController.GetToken Method " Url="html/82569f5b-ee02-6ce3-142f-21de8a4905e5.htm" />
   </HelpKINode>
   <HelpKINode Title="GetUid method" Url="html/61a521bb-d913-a2df-fa76-c71074997ec2.htm" />
   <HelpKINode Title="HttpRequestContext class">
@@ -135,6 +148,15 @@
   <HelpKINode Title="HttpRequestContext.Timestamp property" Url="html/ac6adbe7-1033-37b8-2169-e5d6396c9d7b.htm" />
   <HelpKINode Title="HttpRequestContext.Token property" Url="html/04b718d0-4270-c1dc-152d-3fda7d9c3506.htm" />
   <HelpKINode Title="HttpRequestContext.Version property" Url="html/1be6abb6-8305-3acb-cad7-66be10d9132d.htm" />
+  <HelpKINode Title="IImageManager interface">
+    <HelpKINode Title="IImageManager Interface" Url="html/53e5570a-79de-8be0-25fb-434e67bc1a7b.htm" />
+    <HelpKINode Title="about IImageManager interface" Url="html/53e5570a-79de-8be0-25fb-434e67bc1a7b.htm" />
+    <HelpKINode Title="methods" Url="html/af5aeca4-18b0-6622-0e36-2a1641352719.htm" />
+  </HelpKINode>
+  <HelpKINode Title="IImageManager.BitMap method" Url="html/71e1eeb2-3515-6284-e549-2df9b7f1a792.htm" />
+  <HelpKINode Title="IImageManager.QrCode method" Url="html/b1ee0420-aa66-602c-267e-1146c042361c.htm" />
+  <HelpKINode Title="IImageManager.TextImage method" Url="html/b4ab9fb9-5a19-37d1-45a2-f06b13ba4fa0.htm" />
+  <HelpKINode Title="IImageManager.VerifyCode method" Url="html/b3ed40f3-d4e4-08fb-d6a4-4844829ccc37.htm" />
   <HelpKINode Title="IKeyManager interface">
     <HelpKINode Title="IKeyManager Interface" Url="html/5286fec4-2a18-3676-f08d-fdb70c007e75.htm" />
     <HelpKINode Title="about IKeyManager interface" Url="html/5286fec4-2a18-3676-f08d-fdb70c007e75.htm" />
@@ -142,7 +164,36 @@
   </HelpKINode>
   <HelpKINode Title="IKeyManager.GetPublicKey method" Url="html/ecdf2afc-f6d5-f438-c787-24d92ed30d94.htm" />
   <HelpKINode Title="IKeyManager.GetToken method" Url="html/f9e6ffb6-b661-99e9-ac9d-c69346c7469e.htm" />
+  <HelpKINode Title="IKms interface">
+    <HelpKINode Title="IKms Interface" Url="html/3be63f8a-af04-df0f-3656-6359b615508f.htm" />
+    <HelpKINode Title="about IKms interface" Url="html/3be63f8a-af04-df0f-3656-6359b615508f.htm" />
+    <HelpKINode Title="methods" Url="html/ff0018bb-b44d-33be-3f44-d09ca5e450ca.htm" />
+  </HelpKINode>
+  <HelpKINode Title="IKms.MobileEncrypt method" Url="html/20dfeb1e-f97c-b849-8fa7-b608fc233cc9.htm" />
+  <HelpKINode Title="IKms.Now method" Url="html/9619cf81-2c14-95e8-8bc0-b2c35b3418c4.htm" />
+  <HelpKINode Title="ImageController class">
+    <HelpKINode Title="ImageController Class" Url="html/c47c1ba1-ad1b-b520-7fa3-f77456f57daf.htm" />
+    <HelpKINode Title="about ImageController class" Url="html/c47c1ba1-ad1b-b520-7fa3-f77456f57daf.htm" />
+    <HelpKINode Title="constructor" Url="html/34306d9c-c7f3-b97e-a071-07363c679471.htm" />
+    <HelpKINode Title="methods" Url="html/60d94073-58b3-584c-1afe-00677e617abd.htm" />
+    <HelpKINode Title="properties" Url="html/4e3a030b-180b-2607-a04f-b6a87e038b42.htm" />
+  </HelpKINode>
+  <HelpKINode Title="ImageController.BitMap method" Url="html/09551bc3-f2a8-35c4-55d9-a1256903d942.htm" />
+  <HelpKINode Title="ImageController.ImageController constructor" Url="html/34306d9c-c7f3-b97e-a071-07363c679471.htm" />
+  <HelpKINode Title="ImageController.QrCode method" Url="html/0c5ad80f-9e69-1741-1060-b6b77def1728.htm" />
+  <HelpKINode Title="ImageController.TextImage method" Url="html/3440e4a8-27bc-4774-498e-90409c3435e8.htm" />
+  <HelpKINode Title="ImageController.VerifyCode method" Url="html/d98244ce-385f-6e05-c865-cb51179d2891.htm" />
   <HelpKINode Title="Interface property" Url="html/dc061015-2f3a-196b-e078-5dd95038f9ca.htm" />
+  <HelpKINode Title="KeyController class">
+    <HelpKINode Title="KeyController Class" Url="html/6da1b61e-eafc-05b7-7b45-4af5f3113bd5.htm" />
+    <HelpKINode Title="about KeyController class" Url="html/6da1b61e-eafc-05b7-7b45-4af5f3113bd5.htm" />
+    <HelpKINode Title="constructor" Url="html/8a7ea8d1-2f6f-7d6f-2d5e-1868ff199160.htm" />
+    <HelpKINode Title="methods" Url="html/9f092b04-cc54-969a-dc05-20399896da2d.htm" />
+    <HelpKINode Title="properties" Url="html/acba1f59-2366-8684-3c8f-48a4aaa7b8da.htm" />
+  </HelpKINode>
+  <HelpKINode Title="KeyController.GetPublicKey method" Url="html/c27dc3db-66fc-c6fd-8955-127fccff35da.htm" />
+  <HelpKINode Title="KeyController.GetToken method" Url="html/82569f5b-ee02-6ce3-142f-21de8a4905e5.htm" />
+  <HelpKINode Title="KeyController.KeyController constructor" Url="html/8a7ea8d1-2f6f-7d6f-2d5e-1868ff199160.htm" />
   <HelpKINode Title="KmsController class">
     <HelpKINode Title="KmsController Class" Url="html/9029befc-992d-10f3-c208-fac50fe0c087.htm" />
     <HelpKINode Title="about KmsController class" Url="html/9029befc-992d-10f3-c208-fac50fe0c087.htm" />
@@ -150,21 +201,19 @@
     <HelpKINode Title="methods" Url="html/57cc5b21-531f-7d50-e1af-da0fadefa33d.htm" />
     <HelpKINode Title="properties" Url="html/8cb039af-9415-a16d-3cb9-0538cefe668f.htm" />
   </HelpKINode>
-  <HelpKINode Title="KmsController.BitMap method" Url="html/c0fb902f-8394-4365-3508-b0b8141183c5.htm" />
-  <HelpKINode Title="KmsController.DayOfYear method" Url="html/9928b44a-d196-c889-f32a-e6cb5a1ee2e0.htm" />
-  <HelpKINode Title="KmsController.GetPublicKey method" Url="html/b4f0f2b0-4572-cd1b-0b56-bb6b22067872.htm" />
-  <HelpKINode Title="KmsController.GetToken method" Url="html/8a90c60d-4b74-d01a-b54f-b982cf7ec9a7.htm" />
   <HelpKINode Title="KmsController.KmsController constructor" Url="html/055d1d9d-ab69-54f4-ca5e-c0ee8aeaa59c.htm" />
   <HelpKINode Title="KmsController.MobileEncrypt method" Url="html/b726bf09-26c2-4241-e0b6-0f3c3a5f65a6.htm" />
   <HelpKINode Title="KmsController.Now method" Url="html/ca4f4f66-6b88-c7f9-d4cc-ef22397efdf5.htm" />
-  <HelpKINode Title="KmsController.QrCode method" Url="html/b70d4783-e681-52b8-f6a4-5d47286823cb.htm" />
-  <HelpKINode Title="KmsController.TextImage method" Url="html/f3154a62-493f-dbfb-e5f4-fc243194a1f9.htm" />
-  <HelpKINode Title="KmsController.VerifyCode method" Url="html/a6c6975f-f32f-54f3-43ef-9aa796f59379.htm" />
-  <HelpKINode Title="KmsController.WeekOfYear method" Url="html/050ef46c-e73b-f4c1-579a-c47a3350748d.htm" />
-  <HelpKINode Title="MobileEncrypt method" Url="html/b726bf09-26c2-4241-e0b6-0f3c3a5f65a6.htm" />
+  <HelpKINode Title="MobileEncrypt method">
+    <HelpKINode Title="IKms.MobileEncrypt Method " Url="html/20dfeb1e-f97c-b849-8fa7-b608fc233cc9.htm" />
+    <HelpKINode Title="KmsController.MobileEncrypt Method " Url="html/b726bf09-26c2-4241-e0b6-0f3c3a5f65a6.htm" />
+  </HelpKINode>
   <HelpKINode Title="Modulus property" Url="html/10ed609b-24da-bf0a-b9e3-14f7162b4740.htm" />
   <HelpKINode Title="Nonce property" Url="html/7b61fd6e-19f4-62fe-d139-9039825a0036.htm" />
-  <HelpKINode Title="Now method" Url="html/ca4f4f66-6b88-c7f9-d4cc-ef22397efdf5.htm" />
+  <HelpKINode Title="Now method">
+    <HelpKINode Title="IKms.Now Method " Url="html/9619cf81-2c14-95e8-8bc0-b2c35b3418c4.htm" />
+    <HelpKINode Title="KmsController.Now Method " Url="html/ca4f4f66-6b88-c7f9-d4cc-ef22397efdf5.htm" />
+  </HelpKINode>
   <HelpKINode Title="Now property" Url="html/fa83a501-bfad-bf83-4af5-df4d64c690c7.htm" />
   <HelpKINode Title="OnActionExecuted method">
     <HelpKINode Title="ControllerHelper.OnActionExecuted Method " Url="html/82e4f889-6dca-0164-3571-984e78fa62f2.htm" />
@@ -201,7 +250,10 @@
   <HelpKINode Title="PublicKeyDto.PublicKeyDto constructor" Url="html/b92a4ffe-db4b-c152-0e09-c3307d5dcca6.htm" />
   <HelpKINode Title="PublicKeyDto.RsaKey property" Url="html/04fcfaa4-4806-ea0e-6d0d-49964c56a303.htm" />
   <HelpKINode Title="PublicKeyDto.Size property" Url="html/94afbcc1-e1d4-044d-e2d4-453bf2953098.htm" />
-  <HelpKINode Title="QrCode method" Url="html/b70d4783-e681-52b8-f6a4-5d47286823cb.htm" />
+  <HelpKINode Title="QrCode method">
+    <HelpKINode Title="IImageManager.QrCode Method " Url="html/b1ee0420-aa66-602c-267e-1146c042361c.htm" />
+    <HelpKINode Title="ImageController.QrCode Method " Url="html/0c5ad80f-9e69-1741-1060-b6b77def1728.htm" />
+  </HelpKINode>
   <HelpKINode Title="Register method" Url="html/54c48716-a3c6-6d95-da35-2a88e305ed80.htm" />
   <HelpKINode Title="RegisterBundles method" Url="html/36f4653a-f0a9-4043-0e68-8b7cbeb3ac8b.htm" />
   <HelpKINode Title="RegisterGlobalFilters method" Url="html/99c1867e-5781-0055-3b95-ea7fce530dc5.htm" />
@@ -219,7 +271,10 @@
   <HelpKINode Title="ServerIp property" Url="html/8d69a26d-32d5-9c89-d1dd-20a91da6fd4c.htm" />
   <HelpKINode Title="Size property" Url="html/94afbcc1-e1d4-044d-e2d4-453bf2953098.htm" />
   <HelpKINode Title="Success property" Url="html/89bddea5-ff71-6a3c-35e9-c5d30ed5f74a.htm" />
-  <HelpKINode Title="TextImage method" Url="html/f3154a62-493f-dbfb-e5f4-fc243194a1f9.htm" />
+  <HelpKINode Title="TextImage method">
+    <HelpKINode Title="IImageManager.TextImage Method " Url="html/b4ab9fb9-5a19-37d1-45a2-f06b13ba4fa0.htm" />
+    <HelpKINode Title="ImageController.TextImage Method " Url="html/3440e4a8-27bc-4774-498e-90409c3435e8.htm" />
+  </HelpKINode>
   <HelpKINode Title="Tid property" Url="html/14d44d40-bb1c-386e-6ace-c0315dccde0e.htm" />
   <HelpKINode Title="Timestamp property" Url="html/ac6adbe7-1033-37b8-2169-e5d6396c9d7b.htm" />
   <HelpKINode Title="Token property" Url="html/04b718d0-4270-c1dc-152d-3fda7d9c3506.htm" />
@@ -255,7 +310,10 @@
   </HelpKINode>
   <HelpKINode Title="UserRequestDtoBase.Uid property" Url="html/dacbaa26-c083-1f57-267c-f571d3cb5481.htm" />
   <HelpKINode Title="UserRequestDtoBase.UserRequestDtoBase constructor" Url="html/859dc1b1-3bdb-a582-a51c-3541b84694f8.htm" />
-  <HelpKINode Title="VerifyCode method" Url="html/a6c6975f-f32f-54f3-43ef-9aa796f59379.htm" />
+  <HelpKINode Title="VerifyCode method">
+    <HelpKINode Title="IImageManager.VerifyCode Method " Url="html/b3ed40f3-d4e4-08fb-d6a4-4844829ccc37.htm" />
+    <HelpKINode Title="ImageController.VerifyCode Method " Url="html/d98244ce-385f-6e05-c865-cb51179d2891.htm" />
+  </HelpKINode>
   <HelpKINode Title="Version property" Url="html/1be6abb6-8305-3acb-cad7-66be10d9132d.htm" />
   <HelpKINode Title="VisitorAttribute class">
     <HelpKINode Title="VisitorAttribute Class" Url="html/4d3a6382-1858-84b3-786d-4d520293bf75.htm" />
@@ -292,19 +350,24 @@
     <HelpKINode Title="methods" Url="html/abaa391a-47ab-7202-7799-da08782103c0.htm" />
   </HelpKINode>
   <HelpKINode Title="WebApiConfig.Register method" Url="html/54c48716-a3c6-6d95-da35-2a88e305ed80.htm" />
-  <HelpKINode Title="WeekOfYear method" Url="html/050ef46c-e73b-f4c1-579a-c47a3350748d.htm" />
+  <HelpKINode Title="WeekOfYear property" Url="html/3a857c4d-0d2f-983e-b678-648e28e740d9.htm" />
   <HelpKINode Title="X.Interface.Dto namespace" Url="html/a0476287-7f1b-b622-7535-efa5d7ddfcf0.htm" />
   <HelpKINode Title="X.Interface.Dto.ApiResult(Of T) class" Url="html/34be8766-67e3-27db-ecd6-286581c59fe9.htm" />
   <HelpKINode Title="X.Interface.Dto.ApiResult&lt;T&gt; class" Url="html/34be8766-67e3-27db-ecd6-286581c59fe9.htm" />
   <HelpKINode Title="X.Interface.Dto.HttpRequestContext class" Url="html/2a1f663a-5eeb-f6be-6c8d-68474e4d9b57.htm" />
   <HelpKINode Title="X.Interface.Dto.HttpResponse namespace" Url="html/8887a4d8-69a3-fb38-9cd1-90fe87c97eba.htm" />
+  <HelpKINode Title="X.Interface.Dto.HttpResponse.DateTimeDto class" Url="html/b88671cb-46d1-d67e-aa16-e86c60c31898.htm" />
   <HelpKINode Title="X.Interface.Dto.HttpResponse.PublicKeyDto class" Url="html/7e226236-5939-b652-efe8-5e22a5fc8b5a.htm" />
   <HelpKINode Title="X.Interface.Dto.Interface namespace" Url="html/2d5d612b-372f-78df-607e-11a5ed61802b.htm" />
+  <HelpKINode Title="X.Interface.Dto.Interface.IImageManager interface" Url="html/53e5570a-79de-8be0-25fb-434e67bc1a7b.htm" />
   <HelpKINode Title="X.Interface.Dto.Interface.IKeyManager interface" Url="html/5286fec4-2a18-3676-f08d-fdb70c007e75.htm" />
+  <HelpKINode Title="X.Interface.Dto.Interface.IKms interface" Url="html/3be63f8a-af04-df0f-3656-6359b615508f.htm" />
   <HelpKINode Title="X.Interface.Dto.UserRequestDtoBase class" Url="html/035f1de5-8515-7cfa-b9cb-86323b11c975.htm" />
   <HelpKINode Title="X.UI.API namespace" Url="html/0f99501b-348f-b019-e058-47d4751c7889.htm" />
   <HelpKINode Title="X.UI.API.BundleConfig class" Url="html/633d0bb3-8ea3-835d-aa86-da0367945663.htm" />
   <HelpKINode Title="X.UI.API.Controllers namespace" Url="html/189add1b-1077-7016-785a-b42b96cb2e9c.htm" />
+  <HelpKINode Title="X.UI.API.Controllers.ImageController class" Url="html/c47c1ba1-ad1b-b520-7fa3-f77456f57daf.htm" />
+  <HelpKINode Title="X.UI.API.Controllers.KeyController class" Url="html/6da1b61e-eafc-05b7-7b45-4af5f3113bd5.htm" />
   <HelpKINode Title="X.UI.API.Controllers.KmsController class" Url="html/9029befc-992d-10f3-c208-fac50fe0c087.htm" />
   <HelpKINode Title="X.UI.API.FilterConfig class" Url="html/e469d822-f9af-9d21-737e-a7a06f5d2853.htm" />
   <HelpKINode Title="X.UI.API.Model namespace" Url="html/ac38220f-d258-7357-22ae-db4d3b585feb.htm" />

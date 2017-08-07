@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<shfbBuild product="Sandcastle Help File Builder" version="2015.1.12.0" projectFile="D:\Project\git\API\X_API_Master_Help\X_API_Master_Help.shfbproj" started="2017/8/5 22:12:53">
+<shfbBuild product="Sandcastle Help File Builder" version="2015.1.12.0" projectFile="D:\Project\git\API\X_API_Master_Help\X_API_Master_Help.shfbproj" started="2017-08-07 11:54:44">
 <buildStep step="Initializing">
 Finding tools...
 The Sandcastle tools are located in &#39;C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\&#39;
@@ -30,20 +30,16 @@ Copying XML comments files
 Generating shared content files (zh-CN, 中文(简体，中国))...
 SHFB: Warning BE0003: Sandcastle shared content for the &#39;zh-CN, 中文(简体，中国)&#39; language could not be found.  Using &#39;en-US, English (US)&#39; defaults.
 <plugIn name="Lightweight Website Style" behavior="After" priority="1000">
-</plugIn>    Last step completed in 00:00:00.0965
+</plugIn>    Last step completed in 00:00:00.5460
 </buildStep>
 <buildStep step="GenerateApiFilter">
 Generating API filter for MRefBuilder...
-    Last step completed in 00:00:00.0065
+    Last step completed in 00:00:00.0500
 </buildStep>
 <buildStep step="GenerateReflectionInfo">
 Generating reflection information...
-[C:\Windows\Microsoft.NET\Framework64\v4.0.30319\MSBuild.exe]
-生成启动时间为 2017/8/5 22:12:54。
-项目中不存在 BeforeTargets 特性中的“C:\Program Files (x86)\MSBuild\4.0\Microsoft.Common.targets\ImportAfter\Xamarin.Common.targets (34,37)”位置列出的目标“_ConvertPdbFiles”，将忽略该目标。
-项目中不存在 AfterTargets 特性中的“C:\Program Files (x86)\MSBuild\4.0\Microsoft.Common.targets\ImportAfter\Xamarin.Common.targets (34,70)”位置列出的目标“_CollectPdbFiles”，将忽略该目标。
-项目中不存在 BeforeTargets 特性中的“C:\Program Files (x86)\MSBuild\4.0\Microsoft.Common.targets\ImportAfter\Xamarin.Common.targets (40,38)”位置列出的目标“_CollectMdbFiles”，将忽略该目标。
-项目中不存在 AfterTargets 特性中的“C:\Program Files (x86)\MSBuild\4.0\Microsoft.Common.targets\ImportAfter\Xamarin.Common.targets (40,71)”位置列出的目标“_CopyMdbFiles”，将忽略该目标。
+[C:\windows\Microsoft.NET\Framework64\v4.0.30319\MSBuild.exe]
+生成启动时间为 2017-08-07 11:54:51。
 节点 1 上的项目“D:\Project\git\API\X_API_Master_Help\Help\Working\GenerateRefInfo.proj”(默认目标)。
 PrepareForBuild:
   正在创建目录“obj\Debug\”。
@@ -52,7 +48,7 @@ GenerateRefInfo:
   Copyright ? 2006-2015, Microsoft Corporation, All Rights Reserved.
   Portions Copyright ? 2006-2014, Eric Woodruff, All Rights Reserved.
   Loaded 2 assemblies for reflection and 1 dependency assemblies.
-  Wrote information on 7 namespaces, 19 types, and 80 members
+  Wrote information on 7 namespaces, 24 types, and 91 members
   正在将文件从“reflection.org”复制到“reflection.all”。
   XslTransform (v2015.1.12.0)
   Copyright ? 2006-2015, Microsoft Corporation, All Rights Reserved.
@@ -62,13 +58,13 @@ GenerateRefInfo:
 
 已成功生成。
 
-已用时间 00:00:00.76
-    Last step completed in 00:00:00.9885
+已用时间 00:00:28.53
+    Last step completed in 00:00:31.7008
 </buildStep>
 <buildStep step="TransformReflectionInfo">
 Transforming reflection output...
-[C:\Windows\Microsoft.NET\Framework64\v4.0.30319\MSBuild.exe]
-生成启动时间为 2017/8/5 22:12:55。
+[C:\windows\Microsoft.NET\Framework64\v4.0.30319\MSBuild.exe]
+生成启动时间为 2017-08-07 11:55:21。
 节点 1 上的项目“D:\Project\git\API\X_API_Master_Help\Help\Working\TransformManifest.proj”(默认目标)。
 TransformManifest:
   XslTransform (v2015.1.12.0)
@@ -88,26 +84,26 @@ TransformManifest:
 
 已成功生成。
 
-已用时间 00:00:00.66
-    Last step completed in 00:00:00.7989
+已用时间 00:00:04.06
+    Last step completed in 00:00:05.1933
 </buildStep>
 <buildStep step="GenerateNamespaceSummaries">
 Generating namespace summary information...
-    Last step completed in 00:00:00.0474
+    Last step completed in 00:00:00.0930
 </buildStep>
 <buildStep step="CopyAdditionalContent">
 Copying additional content files...
 No additional content to copy
-    Last step completed in 00:00:00.0170
+    Last step completed in 00:00:00.0100
 </buildStep>
 <buildStep step="MergeTablesOfContents">
 Merging conceptual and additional tables of contents...
-    Last step completed in 00:00:00.0095
+    Last step completed in 00:00:00.0020
 </buildStep>
 <buildStep step="GenerateIntermediateTableOfContents">
 Generating intermediate table of contents file...
-[C:\Windows\Microsoft.NET\Framework64\v4.0.30319\MSBuild.exe]
-生成启动时间为 2017/8/5 22:12:56。
+[C:\windows\Microsoft.NET\Framework64\v4.0.30319\MSBuild.exe]
+生成启动时间为 2017-08-07 11:55:26。
 节点 1 上的项目“D:\Project\git\API\X_API_Master_Help\Help\Working\GenerateIntermediateTOC.proj”(默认目标)。
 GenerateIntermediateTOC:
   XslTransform (v2015.1.12.0)
@@ -118,31 +114,30 @@ GenerateIntermediateTOC:
 
 已成功生成。
 
-已用时间 00:00:00.14
+已用时间 00:00:00.39
 Generating conceptual content intermediate TOC file...
-    Last step completed in 00:00:00.3157
+    Last step completed in 00:00:00.9921
 </buildStep>
 <buildStep step="CreateBuildAssemblerConfigs">
 Creating Sandcastle configuration files...
     sandcastle.config
-    Last step completed in 00:00:00.1823
+    Last step completed in 00:00:03.4522
 </buildStep>
 <buildStep step="MergeCustomConfigs">
 Merging custom build component configurations
 D:\Project\git\API\X_API_Master_Help\Help\Working\sandcastle.config
-    Last step completed in 00:00:00.0396
+    Last step completed in 00:00:00.0850
 </buildStep>
 <buildStep step="BuildReferenceTopics">
 Building reference help topics...
-[C:\Windows\Microsoft.NET\Framework64\v4.0.30319\MSBuild.exe]
-生成启动时间为 2017/8/5 22:12:56。
+[C:\windows\Microsoft.NET\Framework64\v4.0.30319\MSBuild.exe]
+生成启动时间为 2017-08-07 11:55:31。
 节点 1 上的项目“D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj”(默认目标)。
 BuildReferenceTopics:
   BuildAssembler (v2015.1.12.0)
   Copyright ? 2006-2015, Microsoft Corporation, All Rights Reserved.
   Portions Copyright ? 2006-2014, Eric Woodruff, All Rights Reserved.
   Loading configuration...
-  ResolveReferenceLinksComponent: The MSDN content ID cache &#39;C:\Users\Administrator\AppData\Local\EWSoftware\Sandcastle Help File Builder\Cache\MsdnContentId.cache&#39; does not exist yet.  All IDs will be looked up in this build which will slow it down.
   Processing topics...
 BuildAssembler : warning : ShowMissingComponent: [N:X.Interface.Dto] Missing &lt;summary&gt; documentation [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
 BuildAssembler : warning : ShowMissingComponent: [T:X.Interface.Dto.ApiResult`1] Missing &lt;typeparam name=&quot;T&quot;/&gt; documentation [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
@@ -158,6 +153,16 @@ BuildAssembler : warning : ResolveReferenceLinksComponent: [Properties.T:X.Inter
 BuildAssembler : warning : ResolveReferenceLinksComponent: [Properties.T:X.Interface.Dto.HttpRequestContext] Unknown reference link target &#39;T:X.Util.Entities.MongoBaseModel&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
 BuildAssembler : warning : ShowMissingComponent: [N:X.Interface.Dto.HttpResponse] Missing &lt;summary&gt; documentation [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
 BuildAssembler : warning : ShowMissingComponent: [N:X.Interface.Dto.Interface] Missing &lt;summary&gt; documentation [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ShowMissingComponent: [M:X.Interface.Dto.Interface.IImageManager.BitMap] Missing &lt;returns&gt; documentation [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ShowMissingComponent: [M:X.Interface.Dto.Interface.IImageManager.QrCode(System.String)] Missing &lt;returns&gt; documentation [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ShowMissingComponent: [M:X.Interface.Dto.Interface.IImageManager.QrCode(System.String)] Missing &lt;param name=&quot;value&quot;/&gt; documentation [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ShowMissingComponent: [M:X.Interface.Dto.Interface.IImageManager.TextImage(System.String)] Missing &lt;returns&gt; documentation [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ShowMissingComponent: [M:X.Interface.Dto.Interface.IImageManager.VerifyCode] Missing &lt;returns&gt; documentation [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ShowMissingComponent: [M:X.Interface.Dto.Interface.IKms.MobileEncrypt(System.String)] Missing &lt;returns&gt; documentation [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ShowMissingComponent: [M:X.Interface.Dto.Interface.IKms.MobileEncrypt(System.String)] Missing &lt;param name=&quot;mobile&quot;/&gt; documentation [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:X.Interface.Dto.Interface.IKms.MobileEncrypt(System.String)] Unknown reference link target &#39;T:Em.FundTrade.EncryptHelper.EncryptResult&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:X.Interface.Dto.Interface.IKms.MobileEncrypt(System.String)] Unknown reference link target &#39;T:Em.FundTrade.EncryptHelper.EncryptResult&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ShowMissingComponent: [M:X.Interface.Dto.Interface.IKms.Now] Missing &lt;returns&gt; documentation [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
 BuildAssembler : warning : ShowMissingComponent: [N:X.UI.API] Missing &lt;summary&gt; documentation [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
 BuildAssembler : warning : ShowMissingComponent: [T:X.UI.API.BundleConfig] Missing &lt;summary&gt; documentation [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
 BuildAssembler : warning : ShowMissingComponent: [M:X.UI.API.BundleConfig.RegisterBundles(System.Web.Optimization.BundleCollection)] Missing &lt;summary&gt; documentation [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
@@ -177,6 +182,8 @@ BuildAssembler : warning : ShowMissingComponent: [T:X.UI.API.WebApiConfig] Missi
 BuildAssembler : warning : ShowMissingComponent: [M:X.UI.API.WebApiConfig.Register(System.Web.Http.HttpConfiguration)] Missing &lt;summary&gt; documentation [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
 BuildAssembler : warning : ShowMissingComponent: [M:X.UI.API.WebApiConfig.Register(System.Web.Http.HttpConfiguration)] Missing &lt;param name=&quot;config&quot;/&gt; documentation [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
 BuildAssembler : warning : ShowMissingComponent: [N:X.UI.API.Controllers] Missing &lt;summary&gt; documentation [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ShowMissingComponent: [M:X.UI.API.Controllers.ImageController.QrCode(System.String)] Missing &lt;param name=&quot;value&quot;/&gt; documentation [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ShowMissingComponent: [M:X.UI.API.Controllers.ImageController.TextImage(System.String)] Missing &lt;param name=&quot;value&quot;/&gt; documentation [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
 BuildAssembler : warning : ResolveReferenceLinksComponent: [M:X.UI.API.Controllers.KmsController.MobileEncrypt(System.String)] Unknown reference link target &#39;T:Em.FundTrade.EncryptHelper.EncryptResult&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
 BuildAssembler : warning : ResolveReferenceLinksComponent: [M:X.UI.API.Controllers.KmsController.MobileEncrypt(System.String)] Unknown reference link target &#39;T:Em.FundTrade.EncryptHelper.EncryptResult&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
 BuildAssembler : warning : ShowMissingComponent: [N:X.UI.API.Model] Missing &lt;summary&gt; documentation [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
@@ -196,6 +203,10 @@ BuildAssembler : warning : ShowMissingComponent: [T:X.UI.API.Util.ApiExceptionAt
 BuildAssembler : warning : ShowMissingComponent: [T:X.UI.API.Util.ControllerHelper] Missing &lt;summary&gt; documentation [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
 BuildAssembler : warning : ShowMissingComponent: [M:X.UI.API.Util.ControllerHelper.ApiCallMonitor(X.UI.API.Model.ApiRequestContext)] Missing &lt;param name=&quot;context&quot;/&gt; documentation [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
 BuildAssembler : warning : ShowMissingComponent: [M:X.UI.API.Util.ControllerHelper.CacheInit(System.Boolean)] Missing &lt;param name=&quot;noCache&quot;/&gt; documentation [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ShowMissingComponent: [M:X.UI.API.Util.ControllerHelper.CallSuccess``1(``0)] Missing &lt;summary&gt; documentation [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ShowMissingComponent: [M:X.UI.API.Util.ControllerHelper.CallSuccess``1(``0)] Missing &lt;typeparam name=&quot;TResult&quot;/&gt; documentation [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ShowMissingComponent: [M:X.UI.API.Util.ControllerHelper.CallSuccess``1(``0)] Missing &lt;returns&gt; documentation [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ShowMissingComponent: [M:X.UI.API.Util.ControllerHelper.CallSuccess``1(``0)] Missing &lt;param name=&quot;iresult&quot;/&gt; documentation [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
 BuildAssembler : warning : ShowMissingComponent: [M:X.UI.API.Util.ControllerHelper.CallSuccess``1(X.Interface.Dto.ApiResult{``0})] Missing &lt;typeparam name=&quot;TResult&quot;/&gt; documentation [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
 BuildAssembler : warning : ShowMissingComponent: [M:X.UI.API.Util.ControllerHelper.CallSuccess``1(X.Interface.Dto.ApiResult{``0})] Missing &lt;returns&gt; documentation [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
 BuildAssembler : warning : ShowMissingComponent: [M:X.UI.API.Util.ControllerHelper.CallSuccess``1(X.Interface.Dto.ApiResult{``0})] Missing &lt;param name=&quot;iresult&quot;/&gt; documentation [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
@@ -211,8 +222,8 @@ BuildAssembler : warning : ShowMissingComponent: [M:X.UI.API.Util.ControllerHelp
 BuildAssembler : warning : ShowMissingComponent: [M:X.UI.API.Util.ControllerHelper.OnActionExecuted(System.Web.Http.Filters.HttpActionExecutedContext)] Missing &lt;param name=&quot;actionExecutedContext&quot;/&gt; documentation [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
 BuildAssembler : warning : ShowMissingComponent: [P:X.UI.API.Util.OutputCacheAttribute.Duration] Missing &lt;summary&gt; documentation [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
 BuildAssembler : warning : ShowMissingComponent: [M:X.UI.API.Util.UserBaseController.UserIdentity(System.Web.Http.Controllers.HttpActionContext)] Missing &lt;param name=&quot;actionContext&quot;/&gt; documentation [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
-  Processed 140 topic(s)
-  67 warning(s)
+  Processed 165 topic(s)
+  83 warning(s)
   CopyFromIndexComponent: &quot;reflection&quot; in-memory cache entries used: 5 of 15.
   CopyFromIndexComponent: &quot;comments&quot; in-memory cache entries used: 3 of 30.
   ResolveReferenceLinksComponent: New MSDN content ID cache size: 127 entries
@@ -220,18 +231,18 @@ BuildAssembler : warning : ShowMissingComponent: [M:X.UI.API.Util.UserBaseContro
 
 已成功生成。
 
-已用时间 00:02:07.49
-    Last step completed in 00:02:07.6595
+已用时间 00:00:13.24
+    Last step completed in 00:00:14.3148
 </buildStep>
 <buildStep step="CombiningIntermediateTocFiles">
 Combining conceptual and API intermediate TOC files...
 
 Clearing any prior web output
-    Last step completed in 00:00:01.3192
+    Last step completed in 00:00:14.1628
 </buildStep>
 <buildStep step="ExtractingHtmlInfo">
 Extracting HTML info for HTML Help 1 and/or website...
-[C:\Windows\Microsoft.NET\Framework64\v4.0.30319\MSBuild.exe]
+[C:\windows\Microsoft.NET\Framework64\v4.0.30319\MSBuild.exe]
 Sandcastle Help File Builder, version 2015.1.12.0
 Copyright ? 2006-2015, Eric Woodruff, All Rights Reserved
 E-Mail: Eric@EWoodruff.us
@@ -239,17 +250,17 @@ E-Mail: Eric@EWoodruff.us
 Using LCID &#39;2052&#39;, code page &#39;936&#39;, encoding charset &#39;gb2312&#39;.
 
 Processing Help 1 files in D:\Project\git\API\X_API_Master_Help\Help\Working\Output\HtmlHelp1
-Processed 140 HTML files
+Processed 165 HTML files
 Sorting keywords and generating See Also indices
 Saving HTML Help 1 keyword index to D:\Project\git\API\X_API_Master_Help\Help\Working\Documentation.hhk
 Saving HTML Help 1 table of contents to D:\Project\git\API\X_API_Master_Help\Help\Working\Documentation.hhc
 
 Processing website files in D:\Project\git\API\X_API_Master_Help\Help\Working\Output\Website
-Processed 140 HTML files
+Processed 165 HTML files
 Sorting keywords and generating See Also indices
 Saving website keyword index to D:\Project\git\API\X_API_Master_Help\Help\Working\WebKI.xml
 Saving website table of contents to D:\Project\git\API\X_API_Master_Help\Help\Working\WebTOC.xml
-    Last step completed in 00:00:00.3704
+    Last step completed in 00:00:02.4131
 </buildStep>
 <buildStep step="CopyStandardHelpContent">
 Copying standard help content...
@@ -392,23 +403,23 @@ C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyle
 C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\Web\icons\TocOpen.gif -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\Output\Website\icons\TocOpen.gif
 C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\Web\scripts\branding-Website.js -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\Output\Website\scripts\branding-Website.js
 C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\Web\scripts\jquery-1.11.0.min.js -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\Output\Website\scripts\jquery-1.11.0.min.js
-    Last step completed in 00:00:00.8028
+    Last step completed in 00:00:01.5991
 </buildStep>
 <buildStep step="GenerateHelpFormatTableOfContents">
 Generating HTML Help 1 table of contents file...
-    Last step completed in 00:00:00.0055
+    Last step completed in 00:00:00.0060
 </buildStep>
 <buildStep step="GenerateHelpFileIndex">
 Generating HTML Help 1 index file...
-    Last step completed in 00:00:00.0040
+    Last step completed in 00:00:00.0050
 </buildStep>
 <buildStep step="GenerateHelpProject">
 Generating HTML Help 1 project file...
-    Last step completed in 00:00:00.0105
+    Last step completed in 00:00:00.0150
 </buildStep>
 <buildStep step="CompilingHelpFile">
 Compiling HTML Help 1 file...
-[C:\Windows\Microsoft.NET\Framework64\v4.0.30319\MSBuild.exe]
+[C:\windows\Microsoft.NET\Framework64\v4.0.30319\MSBuild.exe]
   Microsoft HTML Help Compiler 4.74.8702
   
   
@@ -419,13 +430,13 @@ Compiling HTML Help 1 file...
   
   
   
-  Compile time: 0 minutes, 1 second
+  Compile time: 0 minutes, 6 seconds
   
-  142	Topics
+  167	Topics
   
-  1,438	Local links
+  1,671	Local links
   
-  1,026	Internet links
+  1,193	Internet links
   
   0	Graphics
   
@@ -433,22 +444,22 @@ Compiling HTML Help 1 file...
   
   
   
-  Created d:\Project\git\API\X_API_Master_Help\Help\Working\Output\HtmlHelp1\Documentation.chm, 205,147 bytes
+  Created d:\Project\git\API\X_API_Master_Help\Help\Working\Output\HtmlHelp1\Documentation.chm, 225,907 bytes
   
-  Compression decreased file by 1,030,614 bytes.
+  Compression decreased file by 1,205,282 bytes.
   
-    Last step completed in 00:00:02.1505
+    Last step completed in 00:00:09.6426
 </buildStep>
 <buildStep step="GenerateHelpFormatTableOfContents">
 Generating website table of contents file...
-    Last step completed in 00:00:00.0060
+    Last step completed in 00:00:00.0120
 </buildStep>
 <buildStep step="GenerateFullTextIndex">
 Generating full-text index for the website...
 
 <plugIn name="Lightweight Website Style" behavior="After" priority="1000">
 Adding lightweight search and TOC elements to each topic...
-</plugIn>    Last step completed in 00:00:00.4191
+</plugIn>    Last step completed in 00:00:02.4481
 </buildStep>
 <buildStep step="CopyingWebsiteFiles">
 Copying website files to output folder...
@@ -456,16 +467,16 @@ Copying website files to output folder...
 Copied 100 files
 Copied 200 files
 Copied 300 files
-Copied 321 files for the website content
-    Last step completed in 00:00:00.4024
+Copied 358 files for the website content
+    Last step completed in 00:00:01.6121
 </buildStep>
 <buildStep step="CleanIntermediates">
 Removing intermediate files...
-    Last step completed in 00:00:01.7974
+    Last step completed in 00:00:39.1662
 </buildStep>
 <buildStep step="Completed">
 
-Build completed successfully at 2017/8/5 22:15:11.  Total time: 00:02:18.2786
+Build completed successfully at 2017-08-07 11:56:55.  Total time: 00:02:11.5545
 
 </buildStep>
 </shfbBuild>

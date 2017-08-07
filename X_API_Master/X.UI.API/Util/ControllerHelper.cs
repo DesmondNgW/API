@@ -159,6 +159,10 @@ namespace X.UI.API.Util
             return iresult != null && iresult.Data != null && iresult.Success;
         }
 
+        public static bool CallSuccess<TResult>(TResult iresult)
+        {
+            return !Equals(iresult, default(TResult));
+        }
         #endregion
     }
 }
