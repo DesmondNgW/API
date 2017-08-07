@@ -12,7 +12,7 @@ using X.Util.Provider;
 namespace X.UI.API.Controllers
 {
     [ApiException]
-    public class KmsController : ApiController
+    public class KmsController : ApiController, IKms
     {
         /// <summary>
         /// 获取当前时间

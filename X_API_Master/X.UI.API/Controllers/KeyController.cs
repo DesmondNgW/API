@@ -14,7 +14,7 @@ namespace X.UI.API.Controllers
     /// 秘钥管理
     /// </summary>
     [ApiException]
-    public class KeyController : ApiController
+    public class KeyController : ApiController, IKeyManager
     {
         /// <summary>
         /// 获取指定长度的RSA公钥(一般1024)

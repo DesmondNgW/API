@@ -13,7 +13,7 @@ namespace X.UI.API.Controllers
     /// 图片管理
     /// </summary>
     [ApiException]
-    public class ImageController : ApiController
+    public class ImageController : ApiController, IImageManager
     {
         /// <summary>
         /// 验证码图片
