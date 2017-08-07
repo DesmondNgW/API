@@ -10,7 +10,7 @@ using X.Util.Provider;
 namespace X.UI.API.Controllers
 {
     /// <summary>
-    /// 秘钥管理
+    /// 图片管理
     /// </summary>
     [ApiException]
     public class ImageController : ApiController

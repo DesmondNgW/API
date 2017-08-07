@@ -4,19 +4,48 @@
         <name>X.UI.API</name>
     </assembly>
     <members>
-        <member name="T:X.UI.API.Controllers.KmsController">
+        <member name="T:X.UI.API.Controllers.ImageController">
+            <summary>
+            图片管理
+            </summary>
+        </member>
+        <member name="M:X.UI.API.Controllers.ImageController.VerifyCode">
+            <summary>
+            验证码图片
+            </summary>
+            <returns>二进制字节</returns>
+        </member>
+        <member name="M:X.UI.API.Controllers.ImageController.BitMap">
+            <summary>
+            1*1像素位图
+            </summary>
+            <returns>二进制字节</returns>
+        </member>
+        <member name="M:X.UI.API.Controllers.ImageController.TextImage(System.String)">
+            <summary>
+            文本转图像
+            </summary>
+            <returns>二进制字节</returns>
+        </member>
+        <member name="M:X.UI.API.Controllers.ImageController.QrCode(System.String)">
+            <summary>
+            二维码
+            </summary>
+            <returns>二进制字节</returns>
+        </member>
+        <member name="T:X.UI.API.Controllers.KeyController">
             <summary>
             秘钥管理
             </summary>
         </member>
-        <member name="M:X.UI.API.Controllers.KmsController.GetPublicKey(System.Int32)">
+        <member name="M:X.UI.API.Controllers.KeyController.GetPublicKey(System.Int32)">
             <summary>
             获取指定长度的RSA公钥(一般1024)
             </summary>
             <param name="size">秘钥长度</param>
             <returns>指定对象序列化</returns>
         </member>
-        <member name="M:X.UI.API.Controllers.KmsController.GetToken(System.String)">
+        <member name="M:X.UI.API.Controllers.KeyController.GetToken(System.String)">
             <summary>
             获取token
             </summary>
@@ -29,29 +58,12 @@
             </summary>
             <returns>指定对象序列化</returns>
         </member>
-        <member name="M:X.UI.API.Controllers.KmsController.VerifyCode">
+        <member name="M:X.UI.API.Controllers.KmsController.MobileEncrypt(System.String)">
             <summary>
-            验证码图片
+            手机号加密
             </summary>
-            <returns></returns>
-        </member>
-        <member name="M:X.UI.API.Controllers.KmsController.BitMap">
-            <summary>
-            1*1像素位图
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:X.UI.API.Controllers.KmsController.TextImage">
-            <summary>
-            文本转图像
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:X.UI.API.Controllers.KmsController.QrCode">
-            <summary>
-            二维码
-            </summary>
-            <returns></returns>
+            <param name="mobile">手机号码</param>
+            <returns>手机号加密结果</returns>
         </member>
         <member name="P:X.UI.API.Model.ApiRequestContext.UserAgent">
             <summary>
