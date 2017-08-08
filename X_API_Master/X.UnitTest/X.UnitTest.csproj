@@ -40,6 +40,10 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Em.FundTrade.EncryptHelper, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\X.IO\Ref\Em.FundTrade.EncryptHelper.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.4.5.11\lib\net40\Newtonsoft.Json.dll</HintPath>
@@ -97,6 +101,10 @@
     <ProjectReference Include="..\X.Interface.Dto\X.Interface.Dto.csproj">
       <Project>{4603DD54-FBC3-42AC-AD98-F0DBD0944F00}</Project>
       <Name>X.Interface.Dto</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\X.Interface.Other\X.Interface.Other.csproj">
+      <Project>{1D4D1D51-F564-4681-B971-A473F3ACACD6}</Project>
+      <Name>X.Interface.Other</Name>
     </ProjectReference>
     <ProjectReference Include="..\X.UI.API\X.UI.API.csproj">
       <Project>{A118B6C5-18A7-4A69-8483-7560F57FEB14}</Project>
