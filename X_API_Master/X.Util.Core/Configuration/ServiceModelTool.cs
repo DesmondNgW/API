@@ -130,7 +130,7 @@ namespace X.Util.Core.Configuration
         public static string GetConfigurationName<T>()
         {
             var contract = (ServiceContractAttribute) typeof (T).GetCustomAttributes(false)[0];
-            return contract != null && !string.IsNullOrEmpty(contract.ConfigurationName) ? contract.ConfigurationName : typeof(T).Name;
+            return contract != null && !string.IsNullOrEmpty(contract.ConfigurationName) ? contract.ConfigurationName : typeof(T).FullName;
         }
 
         public static CoreServiceModel GetServiceModel<T>()
