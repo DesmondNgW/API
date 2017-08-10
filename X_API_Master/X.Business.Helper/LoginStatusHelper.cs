@@ -1,7 +1,6 @@
 ﻿using System;
 using X.Business.Entities;
 using X.Util.Core;
-using X.Util.Core.Configuration;
 using X.Util.Core.Kernel;
 using X.Util.Entities;
 using X.Util.Entities.Enums;
@@ -84,7 +83,6 @@ namespace X.Business.Helper
             var statusZone = EnumZoneHelper.GetStatusZone(token, uid);
             var loginState = GetLoginStatus(token, uid, statusZone);
             if (Equals(loginState, null) || loginState.StatusZone != statusZone || loginState.Token != token || loginState.Uid != uid) throw new InvalidOperationException("token过期或与uid不匹配");
-            if (loginState.CustomerNo != AppConfig.CustomerNo && uri.AbsolutePath.ToLower().StartsWith("/api/manager/")) throw new UnauthorizedAccessException("404");
             return loginState;
         }
     }

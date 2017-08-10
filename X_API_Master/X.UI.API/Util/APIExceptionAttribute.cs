@@ -19,16 +19,8 @@ namespace X.UI.API.Util
         {
             base.OnException(actionExecutedContext);
             var message = actionExecutedContext.Exception.Message;
-            var statusCode = HttpStatusCode.OK;
-            if ("404".Equals(message))
-            {
-                message = string.Format("未找到与请求 URI“{0}”匹配的 HTTP 资源。", actionExecutedContext.Request.RequestUri);
-                statusCode = HttpStatusCode.NotFound;
-            }
-            else
-            {
-                Logger.Client.Error(Logger.Client.GetMethodInfo(MethodBase.GetCurrentMethod(), new object[] { }, actionExecutedContext.Request.RequestUri.ToString()), actionExecutedContext.Exception, LogDomain.Ui);
-            }
+            const HttpStatusCode statusCode = HttpStatusCode.OK;
+            Logger.Client.Error(Logger.Client.GetMethodInfo(MethodBase.GetCurrentMethod(), new object[] { }, actionExecutedContext.Request.RequestUri.ToString()), actionExecutedContext.Exception, LogDomain.Ui);
             var newContent = new ApiResult<string>
             {
                 Success = false,
