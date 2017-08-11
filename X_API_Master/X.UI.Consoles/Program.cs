@@ -19,6 +19,7 @@ using X.Util.Extend.Cryption;
 //using MongoDB.Driver.Builders;
 //using X.Util.Entities;
 using X.Util.Extend.Mongo;
+using X.Util.Other;
 
 //using X.Util.Core;
 

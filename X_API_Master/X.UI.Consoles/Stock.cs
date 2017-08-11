@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.Remoting.Lifetime;
-using System.Text;
 using X.Util.Core.Common;
 
 namespace X.UI.Consoles
@@ -22,23 +20,93 @@ namespace X.UI.Consoles
         public Dictionary<int, double> Y { get; set; }
     }
 
-    public class Boll
+    public class Score
     {
-        public double U { get; set; }
+        public Score()
+        {
+            Item1 = 1;
+            Item2 = 1;
+            Item3 = 1;
+            Item4 = 1;
+            Item5 = 1;
+            Item6 = 1;
+            Item7 = 1;
+            Item8 = 1;
+            Item9 = 1;
+            Item10 = 1;
+        }
+        public double Item1 { get; set; }
 
-        public double L { get; set; }
+        public double Item2 { get; set; }
 
-        public double B { get; set; }
+        public double Item3 { get; set; }
 
-        public double V { get; set; }
+        public double Item4 { get; set; }
 
-        public int N { get; set; }
+        public double Item5 { get; set; }
 
-        public int C { get; set; }
+        public double Item6 { get; set; }
+
+        public double Item7 { get; set; }
+
+        public double Item8 { get; set; }
+
+        public double Item9 { get; set; }
+
+        public double Item10 { get; set; }
+
+        public double Value
+        {
+            get { return Item1*Item2*Item3*Item4*Item5*Item6*Item7*Item8*Item9*Item10; }
+        }
 
         public Stock Stock { get; set; }
     }
 
+    public class ScoreExtend
+    {
+        public double Score { get; set; }
+
+        public double Score2 { get; set; }
+
+        public double Score3 { get; set; }
+
+        public double Score4 { get; set; }
+
+        public double Score5 { get; set; }
+
+        public double Score6 { get; set; }
+
+        public double Score7 { get; set; }
+
+        public double Score8 { get; set; }
+
+        public double Score9 { get; set; }
+
+        public double Score10 { get; set; }
+
+        public double Score11 { get; set; }
+
+        public double Score12 { get; set; }
+
+        public double Score13 { get; set; }
+
+        public double Score14 { get; set; }
+
+        public double Score15 { get; set; }
+
+        public double Score16 { get; set; }
+
+        public double Score17 { get; set; }
+
+        public double Score18 { get; set; }
+
+        public double Score19 { get; set; }
+
+        public double Score20 { get; set; }
+
+        public Stock Stock { get; set; }
+    }
 
     public class StockHelper
     {
@@ -90,48 +158,46 @@ namespace X.UI.Consoles
         }
     }
 
-    public class BollHelper
+    public class ScoreHelper
     {
-        /// <summary>
-        /// 标准差计算
-        /// </summary>
-        /// <param name="data"></param>
-        /// <param name="c"></param>
-        /// <returns></returns>
-        public static Boll GetBoll(List<Stock> data, int c)
+        public static Score GetScore(Stock current, Stock previous)
         {
-            var b = new Boll
+            return new Score
             {
-                N = data.Count,
-                C = c,
-                B = data.Average(p => p.Close),
-                Stock = data.Last()
+                Item1 = current.High/previous.High,
+                Item2 = current.Open/previous.Close,
+                Item3 = current.Close/previous.Close,
+                Item4 = current.Close/previous.Close,
+                Item5 = 2*current.Close/(current.High + current.Low),
+                Item6 = current.Low/previous.Low,
+                Item7 = current.Close/previous.High,
+                Stock = current
             };
-            var sd = Math.Sqrt(data.Sum(p => Math.Pow(p.Close - data.Average(q => q.Close), 2))/data.Count);
-            b.U = b.B + c*sd;
-            b.L = b.B - c*sd;
-            b.V = (b.U - b.B)/b.B;
-            return b;
         }
 
-        public static List<Boll> GetBoll(List<Stock> data, int n, int c)
+        public static List<Score> GetScore(List<Stock> list)
         {
-            var ret = new List<Boll>();
-            for (var i = 0; i <= data.Count - n; i++)
+            var ret = new List<Score>();
+            for (var i = 1; i < list.Count; i++)
             {
-                ret.Add(GetBoll(data.Skip(i).Take(n).ToList(), c));
+                ret.Add(GetScore(list[i], list[i - 1]));
             }
             return ret;
         }
 
+        private static double Mul(IEnumerable<Score> list, int num, int index)
+        {
+            var ret = index + 1 > num ? list.Skip(index + 1 - num).Take(num) : list.Take(index + 1);
+            return ret.Aggregate<Score, double>(1, (current, t) => current*t.Value);
+        }
 
-        /*
-         * 
-         * 
-         * 
-         * 
-         * 
-         */
-
+        public static List<ScoreExtend> GetScoreExtend(List<Score> list)
+        {
+            return list.Select((t, i) => new ScoreExtend
+            {
+                Stock = t.Stock, Score = t.Value, Score2 = Mul(list, 2, i), Score3 = Mul(list, 3, i), Score4 = Mul(list, 4, i), Score5 = Mul(list, 5, i), Score6 = Mul(list, 6, i), Score7 = Mul(list, 7, i), Score8 = Mul(list, 8, i), Score9 = Mul(list, 9, i), Score10 = Mul(list, 10, i), Score11 = Mul(list, 11, i), Score12 = Mul(list, 12, i), Score13 = Mul(list, 13, i), Score14 = Mul(list, 14, i), Score15 = Mul(list, 15, i), Score16 = Mul(list, 16, i), Score17 = Mul(list, 17, i), Score18 = Mul(list, 18, i), Score19 = Mul(list, 19, i)
+            }).ToList();
+        }
     }
+
 }
