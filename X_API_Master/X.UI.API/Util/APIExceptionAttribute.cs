@@ -30,6 +30,7 @@ namespace X.UI.API.Util
             var contentType = actionExecutedContext.Request.Headers.Accept.ToString();
             ObjectContent content = contentType.ToLower().Contains("application/json") ? new ObjectContent<ApiResult<string>>(newContent, new JsonMediaTypeFormatter()) : new ObjectContent<ApiResult<string>>(newContent, new XmlMediaTypeFormatter());
             actionExecutedContext.Response = new HttpResponseMessage { Content = content, StatusCode = statusCode };
+            ControllerHelper.OnActionExecuted(actionExecutedContext);
         }
     }
 }

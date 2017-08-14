@@ -143,9 +143,9 @@ namespace X.UI.API.Util
         /// <param name="actionExecutedContext"></param>
         public static void OnActionExecuted(HttpActionExecutedContext actionExecutedContext)
         {
-            actionExecutedContext.Response.Headers.Add("Tid", Thread.CurrentThread.ManagedThreadId.ToString());
-            actionExecutedContext.Response.Headers.Add("Via", IpBase.GetLocalIp());
-            actionExecutedContext.Response.Headers.Add("Timestamp", DateTime.Now.GetMilliseconds().ToString());
+            actionExecutedContext.Response.Headers.Add("X-Tid", Thread.CurrentThread.ManagedThreadId.ToString());
+            actionExecutedContext.Response.Headers.Add("X-Via", IpBase.GetLocalIp());
+            actionExecutedContext.Response.Headers.Add("X-Timestamp", DateTime.Now.GetMilliseconds().ToString());
             actionExecutedContext.Response.Headers.Add("Access-Control-Allow-Origin", "*");
         }
 
