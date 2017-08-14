@@ -13,7 +13,7 @@ namespace X.UI.API.Controllers
     /// 秘钥管理
     /// </summary>
     [ApiException]
-    public class RequestController : ApiController, IRequestManager
+    public class RequestController : RequestBaseController, IRequestManager
     {
         /// <summary>
         /// 获取token

@@ -11,8 +11,7 @@ using X.Util.Provider;
 
 namespace X.UI.API.Controllers
 {
-    [ApiException]
-    public class KmsController : ApiController, IKms
+    public class KmsController : RequestBaseController, IKms
     {
         /// <summary>
         /// 获取当前时间
@@ -35,6 +34,12 @@ namespace X.UI.API.Controllers
         {
             var provider = new InstanceProvider<IKms>(typeof(KmsManagerService), ControllerHelper.EDomain);
             return CoreAccess<IKms>.Call(provider.Client.MobileEncrypt, mobile, provider, new LogOptions<EncryptResult>(ControllerHelper.CallSuccess));
+        }
+
+        [HttpPost]
+        public ApiResult<object> TestPost([FromBody]object post)
+        {
+            return new ApiResult<object>() {Data = post, Success = true};
         }
     }
 }

@@ -195,7 +195,9 @@
     <Compile Include="Util\UserAttribute.cs" />
     <Compile Include="Util\OutputCacheAttribute.cs" />
     <Compile Include="Util\UserBaseController.cs" />
+    <Compile Include="Util\RequestAttribute.cs" />
     <Compile Include="Util\VisitorAttribute.cs" />
+    <Compile Include="Util\RequestBaseController.cs" />
     <Compile Include="Util\VisitorBaseController.cs" />
   </ItemGroup>
   <ItemGroup>
