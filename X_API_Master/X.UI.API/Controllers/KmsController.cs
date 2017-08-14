@@ -44,7 +44,7 @@ namespace X.UI.API.Controllers
         [HttpPost]
         public ApiResult<object> TestPost([FromBody]object post)
         {
-            return new ApiResult<object>() {Data = post, Success = true};
+            return new ApiResult<object> {Data = post, Success = true};
         }
     }
 }
