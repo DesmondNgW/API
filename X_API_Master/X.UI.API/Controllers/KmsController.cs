@@ -36,6 +36,11 @@ namespace X.UI.API.Controllers
             return CoreAccess<IKms>.Call(provider.Client.MobileEncrypt, mobile, provider, new LogOptions<EncryptResult>(ControllerHelper.CallSuccess));
         }
 
+        /// <summary>
+        /// TestPost
+        /// </summary>
+        /// <param name="post"></param>
+        /// <returns></returns>
         [HttpPost]
         public ApiResult<object> TestPost([FromBody]object post)
         {
