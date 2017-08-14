@@ -59,6 +59,7 @@
     <Compile Include="HttpRequestContext.cs" />
     <Compile Include="HttpResponse\DateTimeDto.cs" />
     <Compile Include="Interface\IImageManager.cs" />
+    <Compile Include="Interface\IRequestManager.cs" />
     <Compile Include="Interface\IKms.cs" />
     <Compile Include="UserRequestDtoBase.cs" />
     <Compile Include="HttpResponse\PublicKeyDto.cs" />

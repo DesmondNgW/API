@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<shfbBuild product="Sandcastle Help File Builder" version="2015.1.12.0" projectFile="D:\Project\git\API\X_API_Master_Help\X_API_Master_Help.shfbproj" started="2017-08-08 9:58:23">
+<shfbBuild product="Sandcastle Help File Builder" version="2015.1.12.0" projectFile="D:\Project\git\API\X_API_Master_Help\X_API_Master_Help.shfbproj" started="2017-08-14 10:26:26">
 <buildStep step="Initializing">
 Finding tools...
 The Sandcastle tools are located in &#39;C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\&#39;
@@ -30,16 +30,16 @@ Copying XML comments files
 Generating shared content files (zh-CN, 中文(简体，中国))...
 SHFB: Warning BE0003: Sandcastle shared content for the &#39;zh-CN, 中文(简体，中国)&#39; language could not be found.  Using &#39;en-US, English (US)&#39; defaults.
 <plugIn name="Lightweight Website Style" behavior="After" priority="1000">
-</plugIn>    Last step completed in 00:00:00.9091
+</plugIn>    Last step completed in 00:00:00.3210
 </buildStep>
 <buildStep step="GenerateApiFilter">
 Generating API filter for MRefBuilder...
-    Last step completed in 00:00:00.2570
+    Last step completed in 00:00:00.0400
 </buildStep>
 <buildStep step="GenerateReflectionInfo">
 Generating reflection information...
 [C:\windows\Microsoft.NET\Framework64\v4.0.30319\MSBuild.exe]
-生成启动时间为 2017-08-08 9:58:36。
+生成启动时间为 2017-08-14 10:26:32。
 节点 1 上的项目“D:\Project\git\API\X_API_Master_Help\Help\Working\GenerateRefInfo.proj”(默认目标)。
 PrepareForBuild:
   正在创建目录“obj\Debug\”。
@@ -48,7 +48,7 @@ GenerateRefInfo:
   Copyright ? 2006-2015, Microsoft Corporation, All Rights Reserved.
   Portions Copyright ? 2006-2014, Eric Woodruff, All Rights Reserved.
   Loaded 2 assemblies for reflection and 1 dependency assemblies.
-  Wrote information on 7 namespaces, 24 types, and 91 members
+  Wrote information on 7 namespaces, 26 types, and 94 members
   正在将文件从“reflection.org”复制到“reflection.all”。
   XslTransform (v2015.1.12.0)
   Copyright ? 2006-2015, Microsoft Corporation, All Rights Reserved.
@@ -58,13 +58,13 @@ GenerateRefInfo:
 
 已成功生成。
 
-已用时间 00:00:36.78
-    Last step completed in 00:00:40.4703
+已用时间 00:01:07.36
+    Last step completed in 00:01:08.5279
 </buildStep>
 <buildStep step="TransformReflectionInfo">
 Transforming reflection output...
 [C:\windows\Microsoft.NET\Framework64\v4.0.30319\MSBuild.exe]
-生成启动时间为 2017-08-08 9:59:14。
+生成启动时间为 2017-08-14 10:27:40。
 节点 1 上的项目“D:\Project\git\API\X_API_Master_Help\Help\Working\TransformManifest.proj”(默认目标)。
 TransformManifest:
   XslTransform (v2015.1.12.0)
@@ -84,26 +84,26 @@ TransformManifest:
 
 已成功生成。
 
-已用时间 00:00:06.55
-    Last step completed in 00:00:08.3005
+已用时间 00:00:03.36
+    Last step completed in 00:00:04.5383
 </buildStep>
 <buildStep step="GenerateNamespaceSummaries">
 Generating namespace summary information...
-    Last step completed in 00:00:00.2860
+    Last step completed in 00:00:00.1490
 </buildStep>
 <buildStep step="CopyAdditionalContent">
 Copying additional content files...
 No additional content to copy
-    Last step completed in 00:00:00.0680
+    Last step completed in 00:00:00.0150
 </buildStep>
 <buildStep step="MergeTablesOfContents">
 Merging conceptual and additional tables of contents...
-    Last step completed in 00:00:00.0060
+    Last step completed in 00:00:00.0040
 </buildStep>
 <buildStep step="GenerateIntermediateTableOfContents">
 Generating intermediate table of contents file...
 [C:\windows\Microsoft.NET\Framework64\v4.0.30319\MSBuild.exe]
-生成启动时间为 2017-08-08 9:59:23。
+生成启动时间为 2017-08-14 10:27:44。
 节点 1 上的项目“D:\Project\git\API\X_API_Master_Help\Help\Working\GenerateIntermediateTOC.proj”(默认目标)。
 GenerateIntermediateTOC:
   XslTransform (v2015.1.12.0)
@@ -114,24 +114,24 @@ GenerateIntermediateTOC:
 
 已成功生成。
 
-已用时间 00:00:00.50
+已用时间 00:00:00.32
 Generating conceptual content intermediate TOC file...
-    Last step completed in 00:00:02.0661
+    Last step completed in 00:00:00.7020
 </buildStep>
 <buildStep step="CreateBuildAssemblerConfigs">
 Creating Sandcastle configuration files...
     sandcastle.config
-    Last step completed in 00:00:03.4502
+    Last step completed in 00:00:02.1071
 </buildStep>
 <buildStep step="MergeCustomConfigs">
 Merging custom build component configurations
 D:\Project\git\API\X_API_Master_Help\Help\Working\sandcastle.config
-    Last step completed in 00:00:00.1690
+    Last step completed in 00:00:00.1490
 </buildStep>
 <buildStep step="BuildReferenceTopics">
 Building reference help topics...
 [C:\windows\Microsoft.NET\Framework64\v4.0.30319\MSBuild.exe]
-生成启动时间为 2017-08-08 9:59:29。
+生成启动时间为 2017-08-14 10:27:47。
 节点 1 上的项目“D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj”(默认目标)。
 BuildReferenceTopics:
   BuildAssembler (v2015.1.12.0)
@@ -163,6 +163,7 @@ BuildAssembler : warning : ShowMissingComponent: [M:X.Interface.Dto.Interface.IK
 BuildAssembler : warning : ResolveReferenceLinksComponent: [M:X.Interface.Dto.Interface.IKms.MobileEncrypt(System.String)] Unknown reference link target &#39;T:Em.FundTrade.EncryptHelper.EncryptResult&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
 BuildAssembler : warning : ResolveReferenceLinksComponent: [M:X.Interface.Dto.Interface.IKms.MobileEncrypt(System.String)] Unknown reference link target &#39;T:Em.FundTrade.EncryptHelper.EncryptResult&#39;. [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
 BuildAssembler : warning : ShowMissingComponent: [M:X.Interface.Dto.Interface.IKms.Now] Missing &lt;returns&gt; documentation [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ShowMissingComponent: [M:X.Interface.Dto.Interface.IRequestManager.GetTimestamp] Missing &lt;returns&gt; documentation [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
 BuildAssembler : warning : ShowMissingComponent: [N:X.UI.API] Missing &lt;summary&gt; documentation [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
 BuildAssembler : warning : ShowMissingComponent: [T:X.UI.API.BundleConfig] Missing &lt;summary&gt; documentation [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
 BuildAssembler : warning : ShowMissingComponent: [M:X.UI.API.BundleConfig.RegisterBundles(System.Web.Optimization.BundleCollection)] Missing &lt;summary&gt; documentation [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
@@ -223,22 +224,22 @@ BuildAssembler : warning : ShowMissingComponent: [M:X.UI.API.Util.ControllerHelp
 BuildAssembler : warning : ShowMissingComponent: [M:X.UI.API.Util.ControllerHelper.OnActionExecuted(System.Web.Http.Filters.HttpActionExecutedContext)] Missing &lt;param name=&quot;actionExecutedContext&quot;/&gt; documentation [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
 BuildAssembler : warning : ShowMissingComponent: [P:X.UI.API.Util.OutputCacheAttribute.Duration] Missing &lt;summary&gt; documentation [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
 BuildAssembler : warning : ShowMissingComponent: [M:X.UI.API.Util.UserBaseController.UserIdentity(System.Web.Http.Controllers.HttpActionContext)] Missing &lt;param name=&quot;actionContext&quot;/&gt; documentation [D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj]
-  Processed 165 topic(s)
-  84 warning(s)
+  Processed 173 topic(s)
+  85 warning(s)
   CopyFromIndexComponent: &quot;reflection&quot; in-memory cache entries used: 5 of 15.
   CopyFromIndexComponent: &quot;comments&quot; in-memory cache entries used: 3 of 30.
 已完成生成项目“D:\Project\git\API\X_API_Master_Help\Help\Working\BuildReferenceTopics.proj”(默认目标)的操作。
 
 已成功生成。
 
-已用时间 00:00:18.44
-    Last step completed in 00:00:20.3542
+已用时间 00:00:14.51
+    Last step completed in 00:00:15.2749
 </buildStep>
 <buildStep step="CombiningIntermediateTocFiles">
 Combining conceptual and API intermediate TOC files...
 
 Clearing any prior web output
-    Last step completed in 00:00:22.9023
+    Last step completed in 00:00:18.3390
 </buildStep>
 <buildStep step="ExtractingHtmlInfo">
 Extracting HTML info for HTML Help 1 and/or website...
@@ -250,17 +251,17 @@ E-Mail: Eric@EWoodruff.us
 Using LCID &#39;2052&#39;, code page &#39;936&#39;, encoding charset &#39;gb2312&#39;.
 
 Processing Help 1 files in D:\Project\git\API\X_API_Master_Help\Help\Working\Output\HtmlHelp1
-Processed 165 HTML files
+Processed 173 HTML files
 Sorting keywords and generating See Also indices
 Saving HTML Help 1 keyword index to D:\Project\git\API\X_API_Master_Help\Help\Working\Documentation.hhk
 Saving HTML Help 1 table of contents to D:\Project\git\API\X_API_Master_Help\Help\Working\Documentation.hhc
 
 Processing website files in D:\Project\git\API\X_API_Master_Help\Help\Working\Output\Website
-Processed 165 HTML files
+Processed 173 HTML files
 Sorting keywords and generating See Also indices
 Saving website keyword index to D:\Project\git\API\X_API_Master_Help\Help\Working\WebKI.xml
 Saving website table of contents to D:\Project\git\API\X_API_Master_Help\Help\Working\WebTOC.xml
-    Last step completed in 00:00:04.3112
+    Last step completed in 00:00:02.1561
 </buildStep>
 <buildStep step="CopyStandardHelpContent">
 Copying standard help content...
@@ -403,19 +404,19 @@ C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyle
 C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\Web\icons\TocOpen.gif -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\Output\Website\icons\TocOpen.gif
 C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\Web\scripts\branding-Website.js -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\Output\Website\scripts\branding-Website.js
 C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\Web\scripts\jquery-1.11.0.min.js -&gt; D:\Project\git\API\X_API_Master_Help\Help\Working\Output\Website\scripts\jquery-1.11.0.min.js
-    Last step completed in 00:00:02.6722
+    Last step completed in 00:00:01.9081
 </buildStep>
 <buildStep step="GenerateHelpFormatTableOfContents">
 Generating HTML Help 1 table of contents file...
-    Last step completed in 00:00:00.0080
+    Last step completed in 00:00:00.0050
 </buildStep>
 <buildStep step="GenerateHelpFileIndex">
 Generating HTML Help 1 index file...
-    Last step completed in 00:00:00.0230
+    Last step completed in 00:00:00.0060
 </buildStep>
 <buildStep step="GenerateHelpProject">
 Generating HTML Help 1 project file...
-    Last step completed in 00:00:00.0260
+    Last step completed in 00:00:00.0120
 </buildStep>
 <buildStep step="CompilingHelpFile">
 Compiling HTML Help 1 file...
@@ -430,13 +431,13 @@ Compiling HTML Help 1 file...
   
   
   
-  Compile time: 0 minutes, 11 seconds
+  Compile time: 0 minutes, 6 seconds
   
-  167	Topics
+  175	Topics
   
-  1,679	Local links
+  1,762	Local links
   
-  1,193	Internet links
+  1,261	Internet links
   
   0	Graphics
   
@@ -444,22 +445,22 @@ Compiling HTML Help 1 file...
   
   
   
-  Created d:\Project\git\API\X_API_Master_Help\Help\Working\Output\HtmlHelp1\Documentation.chm, 227,021 bytes
+  Created d:\Project\git\API\X_API_Master_Help\Help\Working\Output\HtmlHelp1\Documentation.chm, 234,535 bytes
   
-  Compression decreased file by 1,210,202 bytes.
+  Compression decreased file by 1,268,784 bytes.
   
-    Last step completed in 00:00:14.8809
+    Last step completed in 00:00:10.6146
 </buildStep>
 <buildStep step="GenerateHelpFormatTableOfContents">
 Generating website table of contents file...
-    Last step completed in 00:00:00.0110
+    Last step completed in 00:00:00.0120
 </buildStep>
 <buildStep step="GenerateFullTextIndex">
 Generating full-text index for the website...
 
 <plugIn name="Lightweight Website Style" behavior="After" priority="1000">
 Adding lightweight search and TOC elements to each topic...
-</plugIn>    Last step completed in 00:00:05.3193
+</plugIn>    Last step completed in 00:00:02.9822
 </buildStep>
 <buildStep step="CopyingWebsiteFiles">
 Copying website files to output folder...
@@ -467,16 +468,16 @@ Copying website files to output folder...
 Copied 100 files
 Copied 200 files
 Copied 300 files
-Copied 358 files for the website content
-    Last step completed in 00:00:03.9122
+Copied 370 files for the website content
+    Last step completed in 00:00:01.9641
 </buildStep>
 <buildStep step="CleanIntermediates">
 Removing intermediate files...
-    Last step completed in 00:00:29.0627
+    Last step completed in 00:00:31.7228
 </buildStep>
 <buildStep step="Completed">
 
-Build completed successfully at 2017-08-08 10:01:11.  Total time: 00:02:47.9316
+Build completed successfully at 2017-08-14 10:29:12.  Total time: 00:02:45.6875
 
 </buildStep>
 </shfbBuild>

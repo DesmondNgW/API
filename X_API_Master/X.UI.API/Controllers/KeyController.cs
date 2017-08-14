@@ -13,8 +13,7 @@ namespace X.UI.API.Controllers
     /// <summary>
     /// 秘钥管理
     /// </summary>
-    [ApiException]
-    public class KeyController : ApiController, IKeyManager
+    public class KeyController : VisitorBaseController, IKeyManager
     {
         /// <summary>
         /// 获取指定长度的RSA公钥(一般1024)
@@ -26,18 +25,6 @@ namespace X.UI.API.Controllers
         {
             var provider = new InstanceProvider<IKeyManager>(typeof(KeyManagerService), ControllerHelper.EDomain);
             return CoreAccess<IKeyManager>.Call(provider.Client.GetPublicKey, size, provider, new LogOptions<ApiResult<PublicKeyDto>>(ControllerHelper.CallSuccess));
-        }
-
-        /// <summary>
-        /// 获取token
-        /// </summary>
-        /// <param name="clientId">clientId</param>
-        /// <returns>指定对象序列化</returns>
-        [HttpGet]
-        public ApiResult<string> GetToken(string clientId)
-        {
-            var provider = new InstanceProvider<IKeyManager>(typeof(KeyManagerService), ControllerHelper.EDomain);
-            return CoreAccess<IKeyManager>.Call(provider.Client.GetToken, clientId, provider, new LogOptions<ApiResult<string>>(ControllerHelper.CallSuccess));
         }
     }
 }

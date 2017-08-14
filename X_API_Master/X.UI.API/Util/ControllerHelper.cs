@@ -145,6 +145,7 @@ namespace X.UI.API.Util
         {
             actionExecutedContext.Response.Headers.Add("Tid", Thread.CurrentThread.ManagedThreadId.ToString());
             actionExecutedContext.Response.Headers.Add("Via", IpBase.GetLocalIp());
+            actionExecutedContext.Response.Headers.Add("Timestamp", DateTime.Now.GetMilliseconds().ToString());
             actionExecutedContext.Response.Headers.Add("Access-Control-Allow-Origin", "*");
         }
 

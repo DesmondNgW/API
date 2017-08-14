@@ -182,6 +182,7 @@
     <Compile Include="Controllers\ImageController.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Controllers\RequestController.cs" />
     <Compile Include="Controllers\KeyController.cs" />
     <Compile Include="Controllers\KmsController.cs" />
     <Compile Include="Global.asax.cs">
