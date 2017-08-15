@@ -10,9 +10,8 @@
         /// </summary>
         /// <param name="clientId">秘钥长度</param>
         /// <param name="ip"></param>
-        /// <param name="userAgent"></param>
         /// <returns>指定对象序列化</returns>
-        ApiResult<string> GetToken(string clientId, string ip, string userAgent);
+        ApiResult<string> GetToken(string clientId, string ip);
 
         /// <summary>
         /// GetTimestamp

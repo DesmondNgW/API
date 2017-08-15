@@ -6,6 +6,11 @@ namespace X.UI.API.Model
     public class ApiRequestContext : HttpRequestContext
     {
         /// <summary>
+        /// UserAgent
+        /// </summary>     
+        public string UserAgent { get; set; }
+
+        /// <summary>
         /// API-IP
         /// </summary>
         public string ServerIp { get; set; }

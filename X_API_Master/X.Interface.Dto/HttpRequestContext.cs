@@ -33,11 +33,6 @@ namespace X.Interface.Dto
         public string ClientId { get; set; }
 
         /// <summary>
-        /// UserAgent
-        /// </summary>     
-        public string UserAgent { get; set; }
-
-        /// <summary>
         /// ClientIP
         /// </summary>
         public string ClientIp { get; set; }

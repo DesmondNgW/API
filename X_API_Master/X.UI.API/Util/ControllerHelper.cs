@@ -90,7 +90,7 @@ namespace X.UI.API.Util
             var collection = contextWrapper.Request.Headers;
             foreach (var p in apiProps) p.SetValue(apiContext, collection[p.Name], null);
             if (string.IsNullOrEmpty(apiContext.Version)) apiContext.Version = "0.0.0";
-            if (string.IsNullOrEmpty(apiContext.UserAgent)) apiContext.UserAgent = actionContext.Request.Headers.UserAgent.ToString();
+            apiContext.UserAgent = actionContext.Request.Headers.UserAgent.ToString();
             if (string.IsNullOrEmpty(apiContext.ClientIp)) apiContext.ClientIp = IpBase.GetIp(contextWrapper);
             apiContext.ServerIp = IpBase.GetLocalIp();
             apiContext.Interface = actionContext.Request.RequestUri.AbsolutePath;

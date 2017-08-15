@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Web;
 using X.Business.Helper;
 using X.Interface.Dto;
 using X.Interface.Dto.Interface;
@@ -8,8 +9,9 @@ namespace X.Interface.Core
 {
     public class RequestManagerService : IRequestManager
     {
-        public ApiResult<string> GetToken(string clientId, string ip, string userAgent)
+        public ApiResult<string> GetToken(string clientId, string ip)
         {
+            var userAgent = new HttpContextWrapper(HttpContext.Current).Request.UserAgent;
             return new ApiResult<string> { Success = true, Data = TokenHelper.GenerateToken(clientId, ip, userAgent) };
         }
 
