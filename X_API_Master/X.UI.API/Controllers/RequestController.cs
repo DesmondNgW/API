@@ -20,7 +20,6 @@ namespace X.UI.API.Controllers
         /// </summary>
         /// <param name="clientId">clientId</param>
         /// <param name="ip"></param>
-        /// <param name="userAgent"></param>
         /// <returns>指定对象序列化</returns>
         [HttpGet]
         public ApiResult<string> GetToken(string clientId, string ip)
