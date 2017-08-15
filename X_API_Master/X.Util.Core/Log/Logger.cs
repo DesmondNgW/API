@@ -75,7 +75,9 @@ namespace X.Util.Core.Log
         /// <returns></returns>
         public RequestMethodInfo GetMethodInfo(MethodBase declaringType, object[] values, Dictionary<string, object> extendInfo)
         {
-            var id = ExecutionContext<RequestContext>.Current.ApiRequestContext.RequestId;
+            var id = ExecutionContext<RequestContext>.Current.ApiRequestContext != null
+                ? ExecutionContext<RequestContext>.Current.ApiRequestContext.RequestId
+                : Guid.NewGuid().ToString();
             var token = ExecutionContext<RequestContext>.Current.Token ?? id;
             return new RequestMethodInfo { Id = id, ClientId = token, ClassName = declaringType.DeclaringType, MethodName = declaringType.Name, Method = declaringType, ParamList = GetParamList(declaringType, values), ExtendInfo = extendInfo, ClientIp = IpBase.GetIp(), ServerIp = IpBase.GetLocalIp() };
         }
@@ -85,9 +87,11 @@ namespace X.Util.Core.Log
         /// </summary>
         public RequestMethodInfo GetMethodInfo(MethodBase declaringType, object[] values, string address)
         {
-            var id = Guid.NewGuid().ToString("N");
-            var customerNo = ExecutionContext<RequestContext>.Current.CustomerNo ?? id;
-            return new RequestMethodInfo { Id = id, ClientId = customerNo, ClassName = declaringType.DeclaringType, MethodName = declaringType.Name, Method = declaringType, ParamList = GetParamList(declaringType, values), Address = address, ClientIp = IpBase.GetIp(), ServerIp = IpBase.GetLocalIp() };
+            var id = ExecutionContext<RequestContext>.Current.ApiRequestContext != null
+                ? ExecutionContext<RequestContext>.Current.ApiRequestContext.RequestId
+                : Guid.NewGuid().ToString();
+            var token = ExecutionContext<RequestContext>.Current.Token ?? id;
+            return new RequestMethodInfo { Id = id, ClientId = token, ClassName = declaringType.DeclaringType, MethodName = declaringType.Name, Method = declaringType, ParamList = GetParamList(declaringType, values), Address = address, ClientIp = IpBase.GetIp(), ServerIp = IpBase.GetLocalIp() };
         }
 
         /// <summary>
@@ -95,9 +99,11 @@ namespace X.Util.Core.Log
         /// </summary>
         public RequestMethodInfo GetMethodInfo(MethodBase declaringType, object[] values, string address, Dictionary<string, object> extendInfo)
         {
-            var id = Guid.NewGuid().ToString("N");
-            var customerNo = ExecutionContext<RequestContext>.Current.CustomerNo ?? id;
-            return new RequestMethodInfo { Id = id, ClientId = customerNo, ClassName = declaringType.DeclaringType, MethodName = declaringType.Name, Method = declaringType, ParamList = GetParamList(declaringType, values), Address = address, ExtendInfo = extendInfo, ClientIp = IpBase.GetIp(), ServerIp = IpBase.GetLocalIp() };
+            var id = ExecutionContext<RequestContext>.Current.ApiRequestContext != null
+                ? ExecutionContext<RequestContext>.Current.ApiRequestContext.RequestId
+                : Guid.NewGuid().ToString();
+            var token = ExecutionContext<RequestContext>.Current.Token ?? id;
+            return new RequestMethodInfo { Id = id, ClientId = token, ClassName = declaringType.DeclaringType, MethodName = declaringType.Name, Method = declaringType, ParamList = GetParamList(declaringType, values), Address = address, ExtendInfo = extendInfo, ClientIp = IpBase.GetIp(), ServerIp = IpBase.GetLocalIp() };
         }
 
         /// <summary>
