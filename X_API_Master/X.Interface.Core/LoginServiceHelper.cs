@@ -32,10 +32,12 @@ namespace X.Interface.Core
         /// </summary>
         /// <param name="token"></param>
         /// <param name="clientId"></param>
+        /// <param name="userAgent"></param>
         /// <param name="uri"></param>
-        public static void VerifyToken(string token, string clientId, Uri uri)
+        /// <param name="clientIp"></param>
+        public static void VerifyToken(string token, string clientId, string clientIp, string userAgent, Uri uri)
         {
-            TokenHelper.VerifyToken(token, clientId, uri);
+            TokenHelper.VerifyToken(token, clientId, clientIp, userAgent, uri);
         }
 
         /// <summary>
@@ -45,10 +47,12 @@ namespace X.Interface.Core
         /// <param name="customerName"></param>
         /// <param name="zone"></param>
         /// <param name="clientId"></param>
+        /// <param name="ip"></param>
+        /// <param name="userAgent"></param>
         /// <returns></returns>
-        public static string SetLoginStatus(string customerNo, string customerName, int zone, string clientId)
+        public static string SetLoginStatus(string customerNo, string customerName, int zone, string clientId, string ip, string userAgent)
         {
-            return LoginStatusHelper.SetLoginStatus(customerNo, customerName, zone, clientId);
+            return LoginStatusHelper.SetLoginStatus(customerNo, customerName, zone, clientId, ip, userAgent);
         }
 
         /// <summary>

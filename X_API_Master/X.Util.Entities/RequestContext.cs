@@ -61,5 +61,10 @@
         /// </summary>
         public EnumClientType ClientType { get; set; } 
         #endregion
+
+        /// <summary>
+        /// 请求Id
+        /// </summary>
+        public string RequestId { get; set; }
     }
 }

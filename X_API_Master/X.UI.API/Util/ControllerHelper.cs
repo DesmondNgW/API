@@ -36,6 +36,16 @@ namespace X.UI.API.Util
         }
 
         /// <summary>
+        /// 获取RequestId
+        /// </summary>
+        /// <param name="actionContext"></param>
+        /// <returns></returns>
+        public static string GetRequestId(HttpActionContext actionContext)
+        {
+            return (string)actionContext.Request.Properties["MS_RequestId"] ?? Guid.NewGuid().ToString();
+        }
+
+        /// <summary>
         /// 获取Uid参数
         /// </summary>
         /// <param name="actionContext"></param>
@@ -80,8 +90,8 @@ namespace X.UI.API.Util
             var collection = contextWrapper.Request.Headers;
             foreach (var p in apiProps) p.SetValue(apiContext, collection[p.Name], null);
             if (string.IsNullOrEmpty(apiContext.Version)) apiContext.Version = "0.0.0";
-            apiContext.UserAgent = actionContext.Request.Headers.UserAgent.ToString();
-            apiContext.ClientIp = IpBase.GetIp(contextWrapper);
+            if (string.IsNullOrEmpty(apiContext.UserAgent)) apiContext.UserAgent = actionContext.Request.Headers.UserAgent.ToString();
+            if (string.IsNullOrEmpty(apiContext.ClientIp)) apiContext.ClientIp = IpBase.GetIp(contextWrapper);
             apiContext.ServerIp = IpBase.GetLocalIp();
             apiContext.Interface = actionContext.Request.RequestUri.AbsolutePath;
             apiContext.ActionArgument = actionContext.ActionArguments.ToJson();
@@ -90,7 +100,7 @@ namespace X.UI.API.Util
             var t = apiContext.Now.GetMilliseconds() - apiContext.Timestamp;
             if (t < 0 || t >= TimeoutSecond * 1000) throw new TimeoutException();
             if (string.IsNullOrEmpty((apiContext.Token))) throw new ArgumentNullException(TokenName);
-            LoginServiceHelper.VerifyToken(apiContext.Token, apiContext.ClientId, actionContext.Request.RequestUri);
+            LoginServiceHelper.VerifyToken(apiContext.Token, apiContext.ClientId, apiContext.ClientIp, apiContext.UserAgent, actionContext.Request.RequestUri);
             return apiContext;
         } 
         #endregion

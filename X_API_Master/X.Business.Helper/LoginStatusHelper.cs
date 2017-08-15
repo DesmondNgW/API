@@ -36,11 +36,13 @@ namespace X.Business.Helper
         /// <param name="customerName"></param>
         /// <param name="zone"></param>
         /// <param name="clientId"></param>
+        /// <param name="ip"></param>
+        /// <param name="userAgent"></param>
         /// <returns></returns>
-        public static string SetLoginStatus(string customerNo, string customerName, int zone, string clientId)
+        public static string SetLoginStatus(string customerNo, string customerName, int zone, string clientId, string ip, string userAgent)
         {
             if (string.IsNullOrEmpty(customerNo) || zone.Equals(0)) return string.Empty;
-            var uid = TokenHelper.GenerateToken(clientId);
+            var uid = TokenHelper.GenerateToken(clientId, ip, userAgent);
             var token = ExecutionContext<RequestContext>.Current.Token;
             var key = ConstHelper.LoginKeyPrefix + token + uid;
             var statusZone = EnumZoneHelper.GetStatusZone(token, uid);

@@ -8,9 +8,9 @@ namespace X.Interface.Core
 {
     public class RequestManagerService : IRequestManager
     {
-        public ApiResult<string> GetToken(string clientId)
+        public ApiResult<string> GetToken(string clientId, string ip, string userAgent)
         {
-            return new ApiResult<string> { Success = true, Data = TokenHelper.GenerateToken(clientId) };
+            return new ApiResult<string> { Success = true, Data = TokenHelper.GenerateToken(clientId, ip, userAgent) };
         }
 
         public ApiResult<string> GetTimestamp()

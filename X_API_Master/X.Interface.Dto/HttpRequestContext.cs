@@ -33,6 +33,16 @@ namespace X.Interface.Dto
         public string ClientId { get; set; }
 
         /// <summary>
+        /// UserAgent
+        /// </summary>     
+        public string UserAgent { get; set; }
+
+        /// <summary>
+        /// ClientIP
+        /// </summary>
+        public string ClientIp { get; set; }
+
+        /// <summary>
         /// 客户端版本(Web情况是web服务器站点版本，其余为App版本)
         /// </summary>
         public string ClientVersion { get; set; }

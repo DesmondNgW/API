@@ -33,6 +33,6 @@
         /// <summary>
         /// RequestInterval
         /// </summary>
-        public const int RequestInterval = 500;
+        public const int RequestInterval = 100;
     }
 }

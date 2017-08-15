@@ -23,7 +23,7 @@ namespace X.UI.API.Util
         /// <param name="actionContext">操作上下文</param>
         public override void OnActionExecuting(HttpActionContext actionContext)
         {
-            
+
         }
     }
 }

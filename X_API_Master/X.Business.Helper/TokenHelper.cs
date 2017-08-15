@@ -3,6 +3,7 @@ using System.Threading;
 using X.Business.Entities;
 using X.Util.Core;
 using X.Util.Core.Kernel;
+using X.Util.Core.Log;
 using X.Util.Entities;
 using X.Util.Entities.Enums;
 using X.Util.Extend.Cache;
@@ -18,14 +19,16 @@ namespace X.Business.Helper
         /// 生成token
         /// </summary>
         /// <returns></returns>
-        public static string GenerateToken(string clientId)
+        public static string GenerateToken(string clientId, string ip, string userAgent)
         {
+            if (string.IsNullOrEmpty(clientId) || string.IsNullOrEmpty(ip) || string.IsNullOrEmpty(userAgent)) throw new ArgumentException("clientId|ip|userAgent");
             var token = new Token
             {
                 ClientId = clientId,
-                ClientIp = IpBase.GetIp(),
+                ClientIp = ip,
+                UserAgent = userAgent
             };
-            token.TokenId = BaseCryption.SignData(token.ClientId + token.ClientIp, Guid.NewGuid().ToString("N"), HmacType.Md5);
+            token.TokenId = BaseCryption.SignData(token.ClientId + token.ClientIp + token.UserAgent, Guid.NewGuid().ToString("N"), HmacType.Md5);
             var key = ConstHelper.LoginKeyPrefix + token.TokenId;
             ExecutionContext<RequestContext>.Current.Update("Zone", EnumZoneHelper.GetTokenZone(token.TokenId));
             CacheData.Default.SetCacheDbData(key, token, TimeSpan.FromMinutes(ConstHelper.LoginExpireMinutes), CacheType);
@@ -37,9 +40,11 @@ namespace X.Business.Helper
         /// </summary>
         /// <param name="token"></param>
         /// /// <param name="clientId"></param>
+        /// <param name="clientIp"></param>
+        /// <param name="userAgent"></param>
         /// <param name="uri"></param>
         /// <returns></returns>
-        public static void VerifyToken(string token, string clientId, Uri uri)
+        public static void VerifyToken(string token, string clientId, string clientIp, string userAgent, Uri uri)
         {
             if (!BaseCryption.VerifyData(ConstHelper.GenerateHmacKey, token, HmacType.Md5)) throw new InvalidOperationException("token错误或过期");
             var key = ConstHelper.LoginKeyPrefix + token;
@@ -49,12 +54,20 @@ namespace X.Business.Helper
             if (obj.ClientId != clientId)
             {
                 CacheData.Default.Remove(key, CacheType);
+                Logger.Client.Warn(string.Format("token: {0}, clientId: {1}|{2}不一致", token, obj.ClientId, clientId), LogDomain.Ui);
                 throw new InvalidOperationException("token错误或过期");
             }
-            if (obj.ClientIp != IpBase.GetIp())
+            if (obj.UserAgent != userAgent)
             {
                 CacheData.Default.Remove(key, CacheType);
-                throw new Exception("请求IP非同一IP");
+                Logger.Client.Warn(string.Format("token: {0}, userAgent: {1}|{2}不一致", token, obj.UserAgent, userAgent), LogDomain.Ui); 
+                throw new InvalidOperationException("token错误或过期");
+            }
+            if (obj.ClientIp != clientIp)
+            {
+                CacheData.Default.Remove(key, CacheType);
+                Logger.Client.Warn(string.Format("token: {0}, clientIp: {1}|{2}不一致", token, obj.ClientIp, clientIp), LogDomain.Ui); 
+                throw new InvalidOperationException("token错误或过期");
             }
             var requestKey = ConstHelper.LoginKeyPrefix + token + uri;
             var requestStatus = CacheData.Default.GetCacheDbData<RequestStatus>(requestKey, CacheType);

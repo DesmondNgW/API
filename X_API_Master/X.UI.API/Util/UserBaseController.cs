@@ -33,7 +33,8 @@ namespace X.UI.API.Util
                 Ptoken = uid + context.Tid,
                 Token = context.Token,
                 CustomerName = loginState.CustomerName,
-                CustomerNo = loginState.CustomerNo
+                CustomerNo = loginState.CustomerNo,
+                RequestId = ControllerHelper.GetRequestId(actionContext)
             }.Update(null);
         }
     }

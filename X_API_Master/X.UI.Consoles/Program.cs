@@ -6,6 +6,7 @@ using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 using StackExchange.Redis;
+using X.UI.API;
 using X.UI.API.Controllers;
 using X.Util.Core;
 using X.Util.Core.Cache;
