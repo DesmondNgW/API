@@ -62,9 +62,11 @@
         public EnumClientType ClientType { get; set; } 
         #endregion
 
+        #region Request
         /// <summary>
-        /// 请求Id
+        /// ApiRequestContext
         /// </summary>
-        public string RequestId { get; set; }
+        public ApiRequestContext ApiRequestContext { get; set; }
+        #endregion
     }
 }

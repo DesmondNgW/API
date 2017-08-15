@@ -23,6 +23,8 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+	<DocumentationFile>bin\X.Util.Entities.XML</DocumentationFile>
+	<NoWarn>1591</NoWarn>
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -63,6 +65,7 @@
     <Compile Include="ActionContext.cs" />
     <Compile Include="ActionRequest.cs" />
     <Compile Include="ActionResponse.cs" />
+    <Compile Include="ApiRequestContext.cs" />
     <Compile Include="AuthorityRequest.cs" />
     <Compile Include="CacheKey.cs" />
     <Compile Include="CacheOptions.cs" />
@@ -72,6 +75,7 @@
     <Compile Include="Enums\CacheEnum.cs" />
     <Compile Include="Enums\CommonEnum.cs" />
     <Compile Include="Enums\LogEnum.cs" />
+    <Compile Include="HttpRequestContext.cs" />
     <Compile Include="HttpRequestResult.cs" />
     <Compile Include="Interface\ICacheData.cs" />
     <Compile Include="Interface\IContext.cs" />

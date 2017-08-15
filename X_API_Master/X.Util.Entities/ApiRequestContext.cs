@@ -1,13 +1,17 @@
 ﻿using System;
-using X.Interface.Dto;
 
-namespace X.UI.API.Model
+namespace X.Util.Entities
 {
     public class ApiRequestContext : HttpRequestContext
     {
         /// <summary>
+        /// RequestId
+        /// </summary>
+        public string RequestId { get; set; }
+
+        /// <summary>
         /// UserAgent
-        /// </summary>     
+        /// </summary>
         public string UserAgent { get; set; }
 
         /// <summary>

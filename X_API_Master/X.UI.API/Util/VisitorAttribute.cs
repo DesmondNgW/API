@@ -37,7 +37,7 @@ namespace X.UI.API.Util
                 Ctoken = UnLoginActionId + context.Cid,
                 Ptoken = UnLoginActionId + context.Tid,
                 Token = context.Token,
-                RequestId = ControllerHelper.GetRequestId(actionContext)
+                ApiRequestContext = context
             }.Update(null);
             ControllerHelper.CacheInit((actionContext.Request.Headers.CacheControl != null && actionContext.Request.Headers.CacheControl.NoCache) || "no-cache".Equals(actionContext.Request.Headers.Pragma.ToString()));
         }

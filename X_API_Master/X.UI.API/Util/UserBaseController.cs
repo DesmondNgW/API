@@ -34,7 +34,7 @@ namespace X.UI.API.Util
                 Token = context.Token,
                 CustomerName = loginState.CustomerName,
                 CustomerNo = loginState.CustomerNo,
-                RequestId = ControllerHelper.GetRequestId(actionContext)
+                ApiRequestContext = context
             }.Update(null);
         }
     }

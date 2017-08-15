@@ -61,7 +61,7 @@ namespace X.Util.Core.Log
         /// </summary>
         public RequestMethodInfo GetMethodInfo(MethodBase declaringType, object[] values)
         {
-            var id = ExecutionContext<RequestContext>.Current.RequestId;
+            var id = ExecutionContext<RequestContext>.Current.ApiRequestContext.RequestId;
             var token = ExecutionContext<RequestContext>.Current.Token ?? id;
             return new RequestMethodInfo { Id = id, ClientId = token, ClassName = declaringType.DeclaringType, MethodName = declaringType.Name, Method = declaringType, ParamList = GetParamList(declaringType, values), ClientIp = IpBase.GetIp(), ServerIp = IpBase.GetLocalIp() };
         }
@@ -75,7 +75,7 @@ namespace X.Util.Core.Log
         /// <returns></returns>
         public RequestMethodInfo GetMethodInfo(MethodBase declaringType, object[] values, Dictionary<string, object> extendInfo)
         {
-            var id = ExecutionContext<RequestContext>.Current.RequestId;
+            var id = ExecutionContext<RequestContext>.Current.ApiRequestContext.RequestId;
             var token = ExecutionContext<RequestContext>.Current.Token ?? id;
             return new RequestMethodInfo { Id = id, ClientId = token, ClassName = declaringType.DeclaringType, MethodName = declaringType.Name, Method = declaringType, ParamList = GetParamList(declaringType, values), ExtendInfo = extendInfo, ClientIp = IpBase.GetIp(), ServerIp = IpBase.GetLocalIp() };
         }

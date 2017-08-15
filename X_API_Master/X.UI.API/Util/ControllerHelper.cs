@@ -7,7 +7,6 @@ using System.Web.Http.Controllers;
 using System.Web.Http.Filters;
 using X.Interface.Core;
 using X.Interface.Dto;
-using X.UI.API.Model;
 using X.Util.Core;
 using X.Util.Core.Kernel;
 using X.Util.Entities;
@@ -97,6 +96,7 @@ namespace X.UI.API.Util
             apiContext.ActionArgument = actionContext.ActionArguments.ToJson();
             apiContext.Now = DateTime.Now;
             apiContext.Cid = Thread.CurrentThread.ManagedThreadId.ToString();
+            apiContext.RequestId = GetRequestId(actionContext);
             var t = apiContext.Now.GetMilliseconds() - apiContext.Timestamp;
             if (t < 0 || t >= TimeoutSecond * 1000) throw new TimeoutException();
             if (string.IsNullOrEmpty((apiContext.Token))) throw new ArgumentNullException(TokenName);
