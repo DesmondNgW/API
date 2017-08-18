@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using X.Util.Core.Common;
+using X.Util.Entities.Enums;
+using X.Util.Other;
 
 namespace X.UI.Consoles
 {
@@ -197,6 +199,115 @@ namespace X.UI.Consoles
             {
                 Stock = t.Stock, Score = t.Value, Score2 = Mul(list, 2, i), Score3 = Mul(list, 3, i), Score4 = Mul(list, 4, i), Score5 = Mul(list, 5, i), Score6 = Mul(list, 6, i), Score7 = Mul(list, 7, i), Score8 = Mul(list, 8, i), Score9 = Mul(list, 9, i), Score10 = Mul(list, 10, i), Score11 = Mul(list, 11, i), Score12 = Mul(list, 12, i), Score13 = Mul(list, 13, i), Score14 = Mul(list, 14, i), Score15 = Mul(list, 15, i), Score16 = Mul(list, 16, i), Score17 = Mul(list, 17, i), Score18 = Mul(list, 18, i), Score19 = Mul(list, 19, i)
             }).ToList();
+        }
+    }
+
+    public enum Operate
+    {
+        Buy,
+        Sell,
+        None,
+    }
+
+    public class StockPerformance
+    {
+        public string StockCode { get; set; }
+
+        public DateTime CurrentDate { get; set; }
+
+        public Operate Operate { get; set; }
+
+        public double Profit { get; set; }
+
+        public int Count { get; set; }
+    }
+
+    public class StockPerformanceHelper
+    {
+        public static List<StockPerformance> Init()
+        {
+            var ret = new List<StockPerformance>();
+            ret.Add(new StockPerformance
+            {
+                StockCode = "002600",
+                CurrentDate = new DateTime(2017, 8, 14),
+                Operate = Operate.Buy,
+                Profit = 3.5
+            });
+
+            ret.Add(new StockPerformance
+            {
+                StockCode = "002600",
+                CurrentDate = new DateTime(2017, 8, 15),
+                Operate = Operate.None,
+                Profit = 10
+            });
+
+            ret.Add(new StockPerformance
+            {
+                StockCode = "002600",
+                CurrentDate = new DateTime(2017, 8, 16),
+                Operate = Operate.Sell,
+                Profit = 3
+            });
+
+            ret.Add(new StockPerformance
+            {
+                StockCode = "300686",
+                CurrentDate = new DateTime(2017, 8, 16),
+                Operate = Operate.Buy,
+                Profit = 4
+            });
+
+            ret.Add(new StockPerformance
+            {
+                StockCode = "300686",
+                CurrentDate = new DateTime(2017, 8, 17),
+                Operate = Operate.Sell,
+                Profit = 5
+            });
+
+            ret.Add(new StockPerformance
+            {
+                StockCode = "600198",
+                CurrentDate = new DateTime(2017, 8, 17),
+                Operate = Operate.Buy,
+                Profit = -2.5
+            });
+
+
+            ret.Add(new StockPerformance
+            {
+                StockCode = "600198",
+                CurrentDate = new DateTime(2017, 8, 18),
+                Operate = Operate.Sell,
+                Profit = -2
+            });
+
+            ret.Add(new StockPerformance
+            {
+                StockCode = "002128",
+                CurrentDate = new DateTime(2017, 8, 18),
+                Operate = Operate.Buy,
+                Profit = -3.5
+            });
+            return ret;
+        }
+
+        public static void Compute(List<StockPerformance> list)
+        {
+            var ret = list.Sum(it => it.Profit);
+
+            var min = list.Min(it => it.CurrentDate);
+
+            var max = list.Max(it => it.CurrentDate);
+
+            FileBase.WriteFile(AppDomain.CurrentDomain.BaseDirectory,
+                min.ToString("yyyy-MM-dd") + "_" + max.ToString("yyyy-MM-dd"), string.Format("{0}--{1}:收益{2},目标{3}",
+                    min.ToString("yyyy-MM-dd"),
+                    max.ToString("yyyy-MM-dd"),
+                    ret,
+                    20), "utf8", FileBaseMode.Append);
         }
     }
 

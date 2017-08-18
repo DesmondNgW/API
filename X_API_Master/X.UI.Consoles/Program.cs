@@ -75,60 +75,8 @@ namespace X.UI.Consoles
     {
         static void Main()
         {
-            //var s = StockHelper.G(0.1, -0.1, 1000, 20);
-            //var l = ScoreHelper.GetScore(s);
-            ////var t = ScoreHelper.GetScoreExtend(l);
-            //var head =
-            //    string.Format(
-            //        "{0}|{1}|{2}|{3}|{4}|{5}|{6}|{7}|{8}|{9}|{10}|{11}|{12}|{13}|{14}|{15}|{16}|{17}|{18}|{19}",
-            //        "Item1",
-            //        "Item2",
-            //        "Item3",
-            //        "Item4",
-            //        "Item5",
-            //        "Item6",
-            //        "Item7",
-            //        "Value",
-            //        "Y[1]",
-            //        "Y[2]",
-            //        "Y[3]",
-            //        "Y[4]",
-            //        "Y[5]",
-            //        "Y[6]",
-            //        "Y[7]",
-            //        "Y[8]",
-            //        "Y[9]",
-            //        "Y[10]",
-            //        "Y[11]",
-            //        "Y[12]");
-            //FileBase.WriteFile(AppDomain.CurrentDomain.BaseDirectory, "1.csv", head, "utf8", FileBaseMode.Create);
+            StockPerformanceHelper.Compute(StockPerformanceHelper.Init());
 
-            //foreach (var d in l)
-            //{
-            //    var content = string.Format("{0}|{1}|{2}|{3}|{4}|{5}|{6}|{7}|{8}|{9}|{10}|{11}|{12}|{13}|{14}|{15}|{16}|{17}|{18}|{19}",
-            //        d.Item1,
-            //        d.Item2,
-            //        d.Item3,
-            //        d.Item4,
-            //        d.Item5,
-            //        d.Item6,
-            //        d.Item7,
-            //        d.Value,
-            //        d.Stock.Y[1],
-            //        d.Stock.Y[2],
-            //        d.Stock.Y[3],
-            //        d.Stock.Y[4],
-            //        d.Stock.Y[5],
-            //        d.Stock.Y[6],
-            //        d.Stock.Y[7],
-            //        d.Stock.Y[8],
-            //        d.Stock.Y[9],
-            //        d.Stock.Y[10],
-            //        d.Stock.Y[11],
-            //        d.Stock.Y[12]);
-            //    FileBase.WriteFile(AppDomain.CurrentDomain.BaseDirectory, "1.csv", content, "utf8", FileBaseMode.Append);
-            //}
-            //FileBase.WriteFile(AppDomain.CurrentDomain.BaseDirectory, "2.txt", t.ToJson(), "utf8", FileBaseMode.Create);
 
             //MongoDbBase<MongoTest1>.Default.SaveMongo(new MongoTest1 { Dt = DateTime.Now, Value = 1, Key = "test" }, "Test", "test");
             //MongoDbBase<MongoTest2>.Default.SaveMongo(new MongoTest2 { Dt = DateTime.Now, Value = "15", Key = "test" }, "Test", "test");
