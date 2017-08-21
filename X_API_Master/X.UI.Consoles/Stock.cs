@@ -224,7 +224,7 @@ namespace X.UI.Consoles
 
     public class StockPerformanceHelper
     {
-        public static List<StockPerformance> Init()
+        public static List<StockPerformance> Init(DateTime start)
         {
             var ret = new List<StockPerformance>();
             ret.Add(new StockPerformance
@@ -291,7 +291,24 @@ namespace X.UI.Consoles
                 Operate = Operate.Buy,
                 Profit = -3.5
             });
-            return ret;
+
+            ret.Add(new StockPerformance
+            {
+                StockCode = "002128",
+                CurrentDate = new DateTime(2017, 8, 21),
+                Operate = Operate.Sell,
+                Profit = -1
+            });
+
+            ret.Add(new StockPerformance
+            {
+                StockCode = "300686",
+                CurrentDate = new DateTime(2017, 8, 21),
+                Operate = Operate.Sell,
+                Profit = 6
+            });
+
+            return ret.Where(p => p.CurrentDate >= start).ToList();
         }
 
         public static void Compute(List<StockPerformance> list)
