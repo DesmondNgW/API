@@ -343,22 +343,6 @@ namespace X.UI.Consoles
                     Profit = 0.5
                 }
             };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
             return ret.Where(p => p.CurrentDate >= start).ToList();
         }
 
