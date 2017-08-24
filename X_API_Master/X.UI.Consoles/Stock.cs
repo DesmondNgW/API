@@ -226,111 +226,138 @@ namespace X.UI.Consoles
     {
         public static List<StockPerformance> Init(DateTime start)
         {
-            var ret = new List<StockPerformance>();
-            ret.Add(new StockPerformance
+            var ret = new List<StockPerformance>
             {
-                StockCode = "002600",
-                CurrentDate = new DateTime(2017, 8, 14),
-                Operate = Operate.Buy,
-                Profit = 3.5
-            });
+                //2017-08-14
+                new StockPerformance
+                {
+                    StockCode = "002600",
+                    CurrentDate = new DateTime(2017, 8, 14),
+                    Operate = Operate.Buy,
+                    Profit = 3.5
+                },
+                //2017-08-15
+                new StockPerformance
+                {
+                    StockCode = "002600",
+                    CurrentDate = new DateTime(2017, 8, 15),
+                    Operate = Operate.None,
+                    Profit = 10
+                },
+                //2017-08-16
+                new StockPerformance
+                {
+                    StockCode = "002600",
+                    CurrentDate = new DateTime(2017, 8, 16),
+                    Operate = Operate.Sell,
+                    Profit = 3
+                },
+                new StockPerformance
+                {
+                    StockCode = "300686",
+                    CurrentDate = new DateTime(2017, 8, 16),
+                    Operate = Operate.Buy,
+                    Profit = 4
+                },
+                //2017-08-17
+                new StockPerformance
+                {
+                    StockCode = "300686",
+                    CurrentDate = new DateTime(2017, 8, 17),
+                    Operate = Operate.Sell,
+                    Profit = 5
+                },
+                new StockPerformance
+                {
+                    StockCode = "600198",
+                    CurrentDate = new DateTime(2017, 8, 17),
+                    Operate = Operate.Buy,
+                    Profit = -2.5
+                },
+                //2017-08-18
+                new StockPerformance
+                {
+                    StockCode = "600198",
+                    CurrentDate = new DateTime(2017, 8, 18),
+                    Operate = Operate.Sell,
+                    Profit = -2
+                },
+                new StockPerformance
+                {
+                    StockCode = "002128",
+                    CurrentDate = new DateTime(2017, 8, 18),
+                    Operate = Operate.Buy,
+                    Profit = -3.5
+                },
+                //2017-08-21
+                new StockPerformance
+                {
+                    StockCode = "002128",
+                    CurrentDate = new DateTime(2017, 8, 21),
+                    Operate = Operate.Sell,
+                    Profit = -1
+                },
+                new StockPerformance
+                {
+                    StockCode = "300686",
+                    CurrentDate = new DateTime(2017, 8, 21),
+                    Operate = Operate.Buy,
+                    Profit = 6
+                },
+                //2017-08-22
+                new StockPerformance
+                {
+                    StockCode = "300686",
+                    CurrentDate = new DateTime(2017, 8, 22),
+                    Operate = Operate.None,
+                    Profit = 6.5
+                },
+                //2017-08-23
+                new StockPerformance
+                {
+                    StockCode = "300686",
+                    CurrentDate = new DateTime(2017, 8, 23),
+                    Operate = Operate.Sell,
+                    Profit = 4.5
+                },
+                new StockPerformance
+                {
+                    StockCode = "300675",
+                    CurrentDate = new DateTime(2017, 8, 23),
+                    Operate = Operate.Buy,
+                    Profit = 0
+                },
+                //2017-08-24
+                new StockPerformance
+                {
+                    StockCode = "300675",
+                    CurrentDate = new DateTime(2017, 8, 24),
+                    Operate = Operate.Sell,
+                    Profit = 0
+                },
+                new StockPerformance
+                {
+                    StockCode = "002677",
+                    CurrentDate = new DateTime(2017, 8, 24),
+                    Operate = Operate.Buy,
+                    Profit = 0.5
+                }
+            };
 
-            ret.Add(new StockPerformance
-            {
-                StockCode = "002600",
-                CurrentDate = new DateTime(2017, 8, 15),
-                Operate = Operate.None,
-                Profit = 10
-            });
-
-            ret.Add(new StockPerformance
-            {
-                StockCode = "002600",
-                CurrentDate = new DateTime(2017, 8, 16),
-                Operate = Operate.Sell,
-                Profit = 3
-            });
-
-            ret.Add(new StockPerformance
-            {
-                StockCode = "300686",
-                CurrentDate = new DateTime(2017, 8, 16),
-                Operate = Operate.Buy,
-                Profit = 4
-            });
-
-            ret.Add(new StockPerformance
-            {
-                StockCode = "300686",
-                CurrentDate = new DateTime(2017, 8, 17),
-                Operate = Operate.Sell,
-                Profit = 5
-            });
-
-            ret.Add(new StockPerformance
-            {
-                StockCode = "600198",
-                CurrentDate = new DateTime(2017, 8, 17),
-                Operate = Operate.Buy,
-                Profit = -2.5
-            });
 
 
-            ret.Add(new StockPerformance
-            {
-                StockCode = "600198",
-                CurrentDate = new DateTime(2017, 8, 18),
-                Operate = Operate.Sell,
-                Profit = -2
-            });
 
-            ret.Add(new StockPerformance
-            {
-                StockCode = "002128",
-                CurrentDate = new DateTime(2017, 8, 18),
-                Operate = Operate.Buy,
-                Profit = -3.5
-            });
 
-            ret.Add(new StockPerformance
-            {
-                StockCode = "002128",
-                CurrentDate = new DateTime(2017, 8, 21),
-                Operate = Operate.Sell,
-                Profit = -1
-            });
 
-            ret.Add(new StockPerformance
-            {
-                StockCode = "300686",
-                CurrentDate = new DateTime(2017, 8, 21),
-                Operate = Operate.Buy,
-                Profit = 6
-            });
 
-            ret.Add(new StockPerformance
-            {
-                StockCode = "300686",
-                CurrentDate = new DateTime(2017, 8, 22),
-                Operate = Operate.None,
-                Profit = 6.5
-            });
 
-            ret.Add(new StockPerformance
-            {
-                StockCode = "300686",
-                CurrentDate = new DateTime(2017, 8, 23),
-                Operate = Operate.Sell,
-                Profit = 4.5
-            });
 
-            ret.Add(new StockPerformance
-            {
-                StockCode = "300675",
-                CurrentDate = new DateTime(2017, 8, 23),
-                Operate = Operate.Buy,
-                Profit = 0
-            });
+
+
+
+
+
+
 
             return ret.Where(p => p.CurrentDate >= start).ToList();
         }

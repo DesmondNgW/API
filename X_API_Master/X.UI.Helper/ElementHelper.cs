@@ -8,13 +8,6 @@ namespace X.UI.Helper
 {
     /// <summary>
     /// 
-    /// 
-    /// 
-    /// 
-    /// 
-    /// 
-    /// 
-    /// 
     /// </summary>
     public class ElementHelper
     {
