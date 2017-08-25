@@ -8,6 +8,7 @@ using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 using StackExchange.Redis;
+using X.Cache.Service;
 using X.UI.API;
 using X.UI.API.Controllers;
 using X.Util.Core;
@@ -77,6 +78,157 @@ namespace X.UI.Consoles
     {
         static void Main()
         {
+            //var client = new CacheClient("172.31.35.95", 12234);
+            //var key = Guid.NewGuid().ToString("N");
+            //var value = Guid.NewGuid().ToString("N");
+            //int c0 = 0, c1 = 0, c2 = 0, c3 = 0, c4 = 0, c5 = 0, c = 0;
+            //for (var i = 0; i < 1000; i++)
+            //{
+            //    var sw = new Stopwatch();
+            //    sw.Start();
+            //    client.Set(key, value, DateTime.Now.AddMinutes(2));
+            //    sw.Stop();
+            //    if (sw.ElapsedMilliseconds < 1)
+            //    {
+            //        c0++;
+            //    }
+            //    else if (sw.ElapsedMilliseconds < 2)
+            //    {
+            //        c1++;
+            //    }
+            //    else if (sw.ElapsedMilliseconds < 3)
+            //    {
+            //        c2++;
+            //    }
+            //    else if (sw.ElapsedMilliseconds < 4)
+            //    {
+            //        c3++;
+            //    }
+            //    else if (sw.ElapsedMilliseconds < 5)
+            //    {
+            //        c4++;
+            //    }
+            //    else if (sw.ElapsedMilliseconds < 6)
+            //    {
+            //        c5++;
+            //    }
+            //    else
+            //    {
+            //        c++;
+            //    }
+            //    Console.WriteLine("Method:{0},key:{1},耗时:{2}", "Set", key, sw.ElapsedMilliseconds);
+
+            //    sw.Restart();
+            //    var ret = client.Get(key);
+            //    sw.Stop();
+            //    if (sw.ElapsedMilliseconds < 1)
+            //    {
+            //        c0++;
+            //    }
+            //    else if (sw.ElapsedMilliseconds < 2)
+            //    {
+            //        c1++;
+            //    }
+            //    else if (sw.ElapsedMilliseconds < 3)
+            //    {
+            //        c2++;
+            //    }
+            //    else if (sw.ElapsedMilliseconds < 4)
+            //    {
+            //        c3++;
+            //    }
+            //    else if (sw.ElapsedMilliseconds < 5)
+            //    {
+            //        c4++;
+            //    }
+            //    else if (sw.ElapsedMilliseconds < 6)
+            //    {
+            //        c5++;
+            //    }
+            //    else
+            //    {
+            //        c++;
+            //    }
+            //    Console.WriteLine("Method:{0},key:{1},value:{2},耗时:{3}", "Get", key, ret, sw.ElapsedMilliseconds);
+
+            //    sw.Restart();
+            //    client.Remove(key);
+            //    sw.Stop();
+            //    if (sw.ElapsedMilliseconds < 1)
+            //    {
+            //        c0++;
+            //    }
+            //    else if (sw.ElapsedMilliseconds < 2)
+            //    {
+            //        c1++;
+            //    }
+            //    else if (sw.ElapsedMilliseconds < 3)
+            //    {
+            //        c2++;
+            //    }
+            //    else if (sw.ElapsedMilliseconds < 4)
+            //    {
+            //        c3++;
+            //    }
+            //    else if (sw.ElapsedMilliseconds < 5)
+            //    {
+            //        c4++;
+            //    }
+            //    else if (sw.ElapsedMilliseconds < 6)
+            //    {
+            //        c5++;
+            //    }
+            //    else
+            //    {
+            //        c++;
+            //    }
+            //    Console.WriteLine("Method:{0},key:{1},耗时:{2}", "Remove", key, sw.ElapsedMilliseconds);
+
+            //    sw.Restart();
+            //    var ret2 = client.Get(key);
+            //    sw.Stop();
+            //    if (sw.ElapsedMilliseconds < 1)
+            //    {
+            //        c0++;
+            //    }
+            //    else if (sw.ElapsedMilliseconds < 2)
+            //    {
+            //        c1++;
+            //    }
+            //    else if (sw.ElapsedMilliseconds < 3)
+            //    {
+            //        c2++;
+            //    }
+            //    else if (sw.ElapsedMilliseconds < 4)
+            //    {
+            //        c3++;
+            //    }
+            //    else if (sw.ElapsedMilliseconds < 5)
+            //    {
+            //        c4++;
+            //    }
+            //    else if (sw.ElapsedMilliseconds < 6)
+            //    {
+            //        c5++;
+            //    }
+            //    else
+            //    {
+            //        c++;
+            //    }
+            //    Console.WriteLine("Method:{0},key:{1},value:{2},耗时:{3}", "Get", key, ret2, sw.ElapsedMilliseconds);
+            //}
+            //double d = c0 + c1 + c2 + c3 + c4 + c5 + c;
+            //Console.WriteLine("0:" + c0 + "r:" + c0 / d);
+            //Console.WriteLine("1:" + c1 + "r:" + c1 / d);
+            //Console.WriteLine("2:" + c2 + "r:" + c2 / d);
+            //Console.WriteLine("3:" + c3 + "r:" + c3 / d);
+            //Console.WriteLine("4:" + c4 + "r:" + c4 / d);
+            //Console.WriteLine("5:" + c5 + "r:" + c5 / d);
+            //Console.WriteLine("6:" + c + "r:" + c / d);
+
+
+
+
             StockPerformanceHelper.Compute(StockPerformanceHelper.Init(new DateTime(2017, 8, 21)));
             //MongoDbBase<MongoTest1>.Default.SaveMongo(new MongoTest1 { Dt = DateTime.Now, Value = 1, Key = "test" }, "Test", "test");
             //MongoDbBase<MongoTest2>.Default.SaveMongo(new MongoTest2 { Dt = DateTime.Now, Value = "15", Key = "test" }, "Test", "test");

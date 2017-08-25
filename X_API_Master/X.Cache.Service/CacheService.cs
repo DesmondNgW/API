@@ -1,4 +1,5 @@
 ﻿using System.ServiceProcess;
+using System.Web;
 using X.Util.Core;
 using X.Util.Core.Cache;
 using X.Util.Core.Configuration;
@@ -19,23 +20,23 @@ namespace X.Cache.Service
             var remotePort = ConfigurationHelper.GetAppSetting("Port").Convert2Int32(12234);
             NetworkCommsHelper.StartListening(remoteIpAddress, remotePort);
 
-            NetworkCommsHelper.Reply<string, object>("Get", (p, c, t) => LocalCache.Get(t));
+            NetworkCommsHelper.Reply<string, object>("Get", (p, c, t) => HttpRuntime.Cache.Get(t));
 
             NetworkCommsHelper.Reply<SendModel, bool>("Set.DateTime", (p, c, t) =>
             {
-                LocalCache.Set(t.Key, t.Value, t.ExpireAt);
+                HttpRuntime.Cache.Insert(t.Key, t.Value, null, t.ExpireAt, System.Web.Caching.Cache.NoSlidingExpiration);
                 return true;
             });
 
             NetworkCommsHelper.Reply<SendModel, bool>("Set.TimeSpan", (p, c, t) =>
             {
-                LocalCache.Set(t.Key, t.Value, t.Expire);
+                HttpRuntime.Cache.Insert(t.Key, t.Value, null, System.Web.Caching.Cache.NoAbsoluteExpiration, t.Expire);
                 return true;
             });
 
-            NetworkCommsHelper.Reply<string, bool>("Set.TimeSpan", (p, c, t) =>
+            NetworkCommsHelper.Reply<string, bool>("Remove", (p, c, t) =>
             {
-                LocalCache.Remove(t);
+                HttpRuntime.Cache.Remove(t);
                 return true;
             });
         }
