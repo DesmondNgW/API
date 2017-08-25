@@ -61,7 +61,7 @@ namespace X.Util.Core.Log
         /// </summary>
         public RequestMethodInfo GetMethodInfo(MethodBase declaringType, object[] values)
         {
-            var id = ExecutionContext<RequestContext>.Current.ApiRequestContext.RequestId;
+            var id = ExecutionContext<RequestContext>.Current.ApiRequestContext != null ? ExecutionContext<RequestContext>.Current.ApiRequestContext.RequestId : Guid.NewGuid().ToString("N");
             var token = ExecutionContext<RequestContext>.Current.Token ?? id;
             return new RequestMethodInfo { Id = id, ClientId = token, ClassName = declaringType.DeclaringType, MethodName = declaringType.Name, Method = declaringType, ParamList = GetParamList(declaringType, values), ClientIp = IpBase.GetIp(), ServerIp = IpBase.GetLocalIp() };
         }

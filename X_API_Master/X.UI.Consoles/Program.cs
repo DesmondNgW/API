@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
+using System.Net;
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
@@ -83,6 +85,30 @@ namespace X.UI.Consoles
             //Console.WriteLine(ThirdPartyTest.CouchBaseTest("1234567890", "1234567890"));
             Console.ReadKey();
         }
+
+        //static void Send()
+        //{
+        //    for (var i = 0; i < 10; i++)
+        //    {
+        //        var sw = new Stopwatch();
+        //        sw.Start();
+        //        var t = NetworkCommsHelper.Send<DateTime, DateTime>("127.0.0.1", 10000, "Test", DateTime.Now, 1000);
+        //        sw.Stop();
+        //        Console.WriteLine("客户端总耗时:" + sw.ElapsedMilliseconds);
+        //        Console.WriteLine("服务端发送到客户端总耗时:" + (DateTime.Now - t).TotalMilliseconds);
+        //    }
+        //}
+
+        //static void Reply()
+        //{
+        //    NetworkCommsHelper.StartListening("127.0.0.1", 10000);
+        //    NetworkCommsHelper.Reply<DateTime, DateTime>("Test", a =>
+        //    {
+        //        Console.WriteLine("客户端发送到服务端总耗时:" + (DateTime.Now - a).TotalMilliseconds);
+        //        return DateTime.Now;
+        //    });
+        //}
+
 
         static void Index()
         {

@@ -4,18 +4,18 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{EABBC505-6258-40CD-B1B6-2D100BA45AEC}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <ProjectGuid>{41E92F93-068C-4AB8-A981-8D18CDAB7838}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>X.Util.Core</RootNamespace>
-    <AssemblyName>X.Util.Core</AssemblyName>
+    <RootNamespace>X.Cache.Service</RootNamespace>
+    <AssemblyName>X.Cache.Service</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -23,96 +23,87 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Couchbase">
-      <HintPath>..\X.IO\Ref\Couchbase.dll</HintPath>
-    </Reference>
-    <Reference Include="Enyim.Caching">
-      <HintPath>..\X.IO\Ref\Enyim.Caching.dll</HintPath>
-    </Reference>
-    <Reference Include="log4net">
-      <HintPath>..\X.IO\Ref\log4net.dll</HintPath>
-    </Reference>
-    <Reference Include="MongoDB.Bson">
-      <HintPath>..\X.IO\Ref\MongoDB.Bson.dll</HintPath>
-    </Reference>
-    <Reference Include="MongoDB.Driver">
-      <HintPath>..\X.IO\Ref\MongoDB.Driver.dll</HintPath>
-    </Reference>
     <Reference Include="NetworkCommsDotNet, Version=3.0.0.0, Culture=neutral, PublicKeyToken=f58108eb6480f6ec, processorArchitecture=MSIL">
       <HintPath>..\packages\NetworkCommsDotNet.3.0.3\lib\NetworkCommsDotNet.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\X.Ref\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="StackExchange.Redis, Version=1.2.5.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\StackExchange.Redis.1.2.5\lib\net45\StackExchange.Redis.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
-    <Reference Include="System.configuration" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Configuration.Install" />
     <Reference Include="System.Core" />
-    <Reference Include="System.IO.Compression" />
-    <Reference Include="System.Net" />
-    <Reference Include="System.Runtime.Serialization" />
-    <Reference Include="System.ServiceModel" />
-    <Reference Include="System.ServiceModel.Web" />
-    <Reference Include="System.Web" />
-    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
+    <Reference Include="System.ServiceProcess" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Cache\CacheDependencyHelper.cs" />
-    <Compile Include="Configuration\AppConfig.cs" />
-    <Compile Include="Kernel\ChannelContext.cs" />
-    <Compile Include="Configuration\ConfigurationHelper.cs" />
-    <Compile Include="Kernel\ContextAttribute.cs" />
-    <Compile Include="Kernel\ContextHelper.cs" />
-    <Compile Include="Kernel\Core.cs" />
-    <Compile Include="Kernel\CoreAccess.cs" />
-    <Compile Include="Kernel\CoreAspect.cs" />
-    <Compile Include="Kernel\CoreChannel.cs" />
-    <Compile Include="Kernel\CoreQueue.cs" />
-    <Compile Include="Kernel\CoreUtil.cs" />
-    <Compile Include="Kernel\ExecutionContext.cs" />
-    <Compile Include="ExtensionMethods.cs" />
-    <Compile Include="Cache\LocalCache.cs" />
-    <Compile Include="Kernel\IPBase.cs" />
-    <Compile Include="Kernel\NetworkCommsHelper.cs" />
-    <Compile Include="Log\Logger.cs" />
-    <Compile Include="Log\LoggerConfig.cs" />
-    <Compile Include="Log\LoggerContext.cs" />
+    <Compile Include="CacheClient.cs" />
+    <Compile Include="CacheService.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CacheService.Designer.cs">
+      <DependentUpon>CacheService.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ICache.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="ProjectInstaller.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ProjectInstaller.Designer.cs">
+      <DependentUpon>ProjectInstaller.cs</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Configuration\ServiceModelTool.cs" />
-    <Compile Include="Common\StringConvert.cs" />
-    <Compile Include="Xml\XmlHelper.cs" />
+    <Compile Include="SendModel.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config" />
+    <None Include="install.bat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="packages.config" />
+    <None Include="uninstall.bat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\X.Util.Core\X.Util.Core.csproj">
+      <Project>{eabbc505-6258-40cd-b1b6-2d100ba45aec}</Project>
+      <Name>X.Util.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\X.Util.Entities\X.Util.Entities.csproj">
       <Project>{85a098ce-6ba6-4c4d-9c7f-1c3dfb5b0a15}</Project>
       <Name>X.Util.Entities</Name>
     </ProjectReference>
+    <ProjectReference Include="..\X.Util.Extend\X.Util.Extend.csproj">
+      <Project>{ecc8b612-a8f0-4604-8ef6-ef9e09bcd5c9}</Project>
+      <Name>X.Util.Extend</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\X.Util.Other\X.Util.Other.csproj">
+      <Project>{534b9a37-9b27-42db-81e8-69f67600934b}</Project>
+      <Name>X.Util.Other</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\X.Util.Provider\X.Util.Provider.csproj">
+      <Project>{9a046362-e6e3-46dc-88ba-a488da92dd5e}</Project>
+      <Name>X.Util.Provider</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
-    <None Include="packages.config" />
+    <EmbeddedResource Include="ProjectInstaller.resx">
+      <DependentUpon>ProjectInstaller.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
