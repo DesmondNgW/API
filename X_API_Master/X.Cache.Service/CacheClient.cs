@@ -1,54 +1,53 @@
 ﻿using System;
+using System.Reflection;
 using X.Util.Core.Kernel;
 
 namespace X.Cache.Service
 {
     public class CacheClient : ICache
     {
-        public string RemoteIpAddress { get; set; }
+        private readonly CoreTcpClient<ICache> _client;
 
-        public int RemotePort { get; set; }
-
-        public CacheClient(string remoteIpAddress, int remotePort)
+        public CacheClient(string ipAddress, int port, int timeOutMilliSeconds)
         {
-            RemoteIpAddress = remoteIpAddress;
-            RemotePort = remotePort;
+            _client = new CoreTcpClient<ICache>(ipAddress, port, timeOutMilliSeconds);
         }
 
         public object Get(string key)
         {
-            const string methodName = "Get";
-            return NetworkCommsHelper.Send<string, object>(RemoteIpAddress, RemotePort, methodName, key, 1000);
+            return _client.SendRequest<string, object>(MethodBase.GetCurrentMethod(), key);
         }
 
-        public bool Set(string key, object value, DateTime expire)
+        public bool Set(SendModel send)
         {
-            const string methodName = "Set.DateTime";
-            return NetworkCommsHelper.Send<SendModel, bool>(RemoteIpAddress, RemotePort, methodName, new SendModel
-            {
-                Key = key,
-                Value = value,
-                Expire = TimeSpan.Zero,
-                ExpireAt = expire
-            }, 1000);
+            return _client.SendRequest<SendModel, bool>(MethodBase.GetCurrentMethod(), send);
         }
 
         public bool Set(string key, object value, TimeSpan expire)
         {
-            const string methodName = "Set.TimeSpan";
-            return NetworkCommsHelper.Send<SendModel, bool>(RemoteIpAddress, RemotePort, methodName, new SendModel
+            return Set(new SendModel
             {
                 Key = key,
                 Value = value,
                 Expire = expire,
                 ExpireAt = DateTime.MinValue
-            }, 1000);
+            });
+        }
+
+        public bool Set(string key, object value, DateTime expire)
+        {
+            return Set(new SendModel
+            {
+                Key = key,
+                Value = value,
+                Expire = TimeSpan.Zero,
+                ExpireAt = expire
+            });
         }
 
         public bool Remove(string key)
         {
-            const string methodName = "Remove";
-            return NetworkCommsHelper.Send<string, bool>(RemoteIpAddress, RemotePort, methodName, key, 1000);
+            return _client.SendRequest<string, bool>(MethodBase.GetCurrentMethod(), key);
         }
     }
 }

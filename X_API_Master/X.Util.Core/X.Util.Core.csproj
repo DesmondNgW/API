@@ -81,6 +81,7 @@
   <ItemGroup>
     <Compile Include="Cache\CacheDependencyHelper.cs" />
     <Compile Include="Configuration\AppConfig.cs" />
+    <Compile Include="Kernel\CoreTcpServer.cs" />
     <Compile Include="Kernel\ChannelContext.cs" />
     <Compile Include="Configuration\ConfigurationHelper.cs" />
     <Compile Include="Kernel\ContextAttribute.cs" />
@@ -96,6 +97,7 @@
     <Compile Include="Cache\LocalCache.cs" />
     <Compile Include="Kernel\IPBase.cs" />
     <Compile Include="Kernel\NetworkCommsHelper.cs" />
+    <Compile Include="Kernel\CoreTcpClient.cs" />
     <Compile Include="Log\Logger.cs" />
     <Compile Include="Log\LoggerConfig.cs" />
     <Compile Include="Log\LoggerContext.cs" />

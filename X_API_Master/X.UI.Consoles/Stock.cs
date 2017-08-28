@@ -228,7 +228,8 @@ namespace X.UI.Consoles
         {
             var ret = new List<StockPerformance>
             {
-                //2017-08-14
+#region 第一周
+		                //2017-08-14
                 new StockPerformance
                 {
                     StockCode = "002600",
@@ -289,8 +290,10 @@ namespace X.UI.Consoles
                     Operate = Operate.Buy,
                     Profit = -3.5
                 },
-                //2017-08-21
-                new StockPerformance
+ 
+	#endregion                //2017-08-21
+#region 第二周
+		                new StockPerformance
                 {
                     StockCode = "002128",
                     CurrentDate = new DateTime(2017, 8, 21),
@@ -356,7 +359,18 @@ namespace X.UI.Consoles
                     CurrentDate = new DateTime(2017, 8, 24),
                     Operate = Operate.Sell,
                     Profit = 0
-                }
+                }, 
+	#endregion
+#region 第三周
+		                //2017-08-28
+                new StockPerformance
+                {
+                    StockCode = "300675",
+                    CurrentDate = new DateTime(2017, 8, 28),
+                    Operate = Operate.None,
+                    Profit = 10
+                } 
+	#endregion
             };
             return ret.Where(p => p.CurrentDate >= start).ToList();
         }

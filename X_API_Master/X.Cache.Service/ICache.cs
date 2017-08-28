@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Web;
 
 namespace X.Cache.Service
 {
@@ -10,10 +7,35 @@ namespace X.Cache.Service
     {
         object Get(string key);
 
-        bool Set(string key, object value, DateTime expire);
-
-        bool Set(string key, object value, TimeSpan expire);
+        bool Set(SendModel send);
 
         bool Remove(string key);
+    }
+
+    public class CacheManager : ICache
+    {
+        public object Get(string key)
+        {
+            return HttpRuntime.Cache.Get(key);
+        }
+
+        public bool Set(SendModel send)
+        {
+            if (send.ExpireAt != DateTime.MinValue)
+            {
+                HttpRuntime.Cache.Insert(send.Key, send.Value, null, send.ExpireAt, System.Web.Caching.Cache.NoSlidingExpiration);
+            }
+            else if (send.Expire != TimeSpan.Zero)
+            {
+                HttpRuntime.Cache.Insert(send.Key, send.Value, null, System.Web.Caching.Cache.NoAbsoluteExpiration, send.Expire);
+            }
+            return true;
+        }
+
+        public bool Remove(string key)
+        {
+            HttpRuntime.Cache.Remove(key);
+            return true;
+        }
     }
 }
