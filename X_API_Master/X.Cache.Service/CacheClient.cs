@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Reflection;
 using X.Util.Core.Kernel;
+using X.Util.Core.Log;
+using X.Util.Entities.Enums;
 
 namespace X.Cache.Service
 {

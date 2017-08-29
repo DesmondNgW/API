@@ -9,8 +9,5 @@
     <add key="CacheKeyVersion" value="0.0.1" />
     <!--debug 客户号-->
     <add key="CustomerNo" value="" />
-    <add key="CouchCacheEnable" value="false" />
-    <add key="RedisCacheEnable" value="false" />
-    <add key="MongoDbEnable" value="false" />
   </AppSettings>
 </configuration>

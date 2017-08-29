@@ -76,9 +76,57 @@ namespace X.UI.Consoles
 
     class Program
     {
+        public static void TestCacheClient(int number)
+        {
+            if (number <= 1) number = 1;
+            var client = new CacheClient("172.31.35.95", 12234, 1000);
+            for (var i = 0; i < number; i++)
+            {
+                var key = Guid.NewGuid().ToString("N");
+                Stopwatch sw = new Stopwatch();
+                
+                sw.Start();
+                var ret1 = client.Get(key);
+                sw.Stop();
+                Console.WriteLine("Get key {0},result {1}, ElapsedMilliseconds {2}", key, ret1, sw.ElapsedMilliseconds);
+                
+                sw.Restart();
+                var ret2 = client.Set(key, key, DateTime.Now.AddMinutes(2));
+                sw.Stop();
+                Console.WriteLine("Set DateTime key {0},result {1}, ElapsedMilliseconds {2}", key, ret2, sw.ElapsedMilliseconds);
+                
+                sw.Restart();
+                var ret3 = client.Get(key);
+                sw.Stop();
+                Console.WriteLine("Get key {0},result {1}, ElapsedMilliseconds {2}", key, ret3, sw.ElapsedMilliseconds);
+
+                sw.Restart();
+                var ret4 = client.Set(key, key, new TimeSpan(0, 2, 0));
+                sw.Stop();
+                Console.WriteLine("Set TimeSpan key {0},result {1}, ElapsedMilliseconds {2}", key, ret4, sw.ElapsedMilliseconds);
+
+                sw.Restart();
+                var ret5 = client.Get(key);
+                sw.Stop();
+                Console.WriteLine("Get key {0},result {1}, ElapsedMilliseconds {2}", key, ret5, sw.ElapsedMilliseconds);
+
+                sw.Restart();
+                var ret6 = client.Remove(key);
+                sw.Stop();
+                Console.WriteLine("Remove key {0},result {1}, ElapsedMilliseconds {2}", key, ret6, sw.ElapsedMilliseconds);
+
+                sw.Restart();
+                var ret7 = client.Get(key);
+                sw.Stop();
+                Console.WriteLine("Get key {0},result {1}, ElapsedMilliseconds {2}", key, ret7, sw.ElapsedMilliseconds);
+            }
+        }
+
+
         static void Main()
         {
-            StockPerformanceHelper.Compute(StockPerformanceHelper.Init(new DateTime(2017, 8, 28)));
+            //TestCacheClient(100);
+            //StockPerformanceHelper.Compute(StockPerformanceHelper.Init(new DateTime(2017, 8, 28)));
             //MongoDbBase<MongoTest1>.Default.SaveMongo(new MongoTest1 { Dt = DateTime.Now, Value = 1, Key = "test" }, "Test", "test");
             //MongoDbBase<MongoTest2>.Default.SaveMongo(new MongoTest2 { Dt = DateTime.Now, Value = "15", Key = "test" }, "Test", "test");
             //var s = MongoDbBase<MongoTest>.Default.FindBsonDocument("Test", "test", Query.Null);
@@ -86,30 +134,6 @@ namespace X.UI.Consoles
             //Console.WriteLine(ThirdPartyTest.CouchBaseTest("1234567890", "1234567890"));
             Console.ReadKey();
         }
-
-        //static void Send()
-        //{
-        //    for (var i = 0; i < 10; i++)
-        //    {
-        //        var sw = new Stopwatch();
-        //        sw.Start();
-        //        var t = NetworkCommsHelper.Send<DateTime, DateTime>("127.0.0.1", 10000, "Test", DateTime.Now, 1000);
-        //        sw.Stop();
-        //        Console.WriteLine("客户端总耗时:" + sw.ElapsedMilliseconds);
-        //        Console.WriteLine("服务端发送到客户端总耗时:" + (DateTime.Now - t).TotalMilliseconds);
-        //    }
-        //}
-
-        //static void Reply()
-        //{
-        //    NetworkCommsHelper.StartListening("127.0.0.1", 10000);
-        //    NetworkCommsHelper.Reply<DateTime, DateTime>("Test", a =>
-        //    {
-        //        Console.WriteLine("客户端发送到服务端总耗时:" + (DateTime.Now - a).TotalMilliseconds);
-        //        return DateTime.Now;
-        //    });
-        //}
-
 
         static void Index()
         {
@@ -119,7 +143,7 @@ namespace X.UI.Consoles
             foreach (var item in (EnumApiTestItem[])Enum.GetValues(typeof(EnumApiTestItem)))
             {
                 Console.WriteLine("┣━━━━━━━━━━━━━━━┫");
-                Console.WriteLine("┃" + (item.GetHashCode() + "." + item).PadRight(30) + "┃");           
+                Console.WriteLine("┃" + (item.GetHashCode() + "." + item).PadRight(30) + "┃");
             }
             Console.WriteLine("┗━━━━━━━━━━━━━━━┛");
             Next();
