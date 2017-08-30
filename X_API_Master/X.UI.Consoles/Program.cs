@@ -79,7 +79,7 @@ namespace X.UI.Consoles
         public static void TestCacheClient(int number)
         {
             if (number <= 1) number = 1;
-            var client = new CacheClient("192.168.3.102", 12234, 1000);
+            var client = new CacheClient("127.0.0.1", 12234, 1000);
             var c1 = 0;
             var c2 = 0;
             var total = new Stopwatch();
@@ -143,10 +143,9 @@ namespace X.UI.Consoles
             Console.WriteLine("Total ElapsedMilliseconds {0}", total.ElapsedMilliseconds);
         }
 
-
         static void Main()
         {
-            TestCacheClient(1000);
+            //TestCacheClient(1000);
             //StockPerformanceHelper.Compute(StockPerformanceHelper.Init(new DateTime(2017, 8, 28)));
             //MongoDbBase<MongoTest1>.Default.SaveMongo(new MongoTest1 { Dt = DateTime.Now, Value = 1, Key = "test" }, "Test", "test");
             //MongoDbBase<MongoTest2>.Default.SaveMongo(new MongoTest2 { Dt = DateTime.Now, Value = "15", Key = "test" }, "Test", "test");
