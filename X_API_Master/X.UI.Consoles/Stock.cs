@@ -484,6 +484,29 @@ namespace X.UI.Consoles
                     Operate = Operate.Sell,
                     Profit = -3
                 },
+                //2017-09-07
+                new StockPerformance
+                {
+                    StockCode = "300520",
+                    CurrentDate = new DateTime(2017, 9, 7),
+                    Operate = Operate.Buy,
+                    Profit = 6.5
+                },
+                //2017-09-07
+                new StockPerformance
+                {
+                    StockCode = "300520",
+                    CurrentDate = new DateTime(2017, 9, 8),
+                    Operate = Operate.Sell,
+                    Profit = -4
+                },
+                new StockPerformance
+                {
+                    StockCode = "300639",
+                    CurrentDate = new DateTime(2017, 9, 8),
+                    Operate = Operate.Buy,
+                    Profit = 1.5
+                },
                 #endregion
             };
             return ret.Where(p => p.CurrentDate >= start).ToList();
