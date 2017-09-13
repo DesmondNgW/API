@@ -492,7 +492,7 @@ namespace X.UI.Consoles
                     Operate = Operate.Buy,
                     Profit = 6.5
                 },
-                //2017-09-07
+                //2017-09-08
                 new StockPerformance
                 {
                     StockCode = "300520",
@@ -506,6 +506,38 @@ namespace X.UI.Consoles
                     CurrentDate = new DateTime(2017, 9, 8),
                     Operate = Operate.Buy,
                     Profit = 1.5
+                },
+                #endregion
+                #region 第五周
+                //2017-09-11
+                new StockPerformance
+                {
+                    StockCode = "002497",
+                    CurrentDate = new DateTime(2017, 9, 11),
+                    Operate = Operate.Buy,
+                    Profit = 4.5
+                },
+                new StockPerformance
+                {
+                    StockCode = "300639",
+                    CurrentDate = new DateTime(2017, 9, 11),
+                    Operate = Operate.Sell,
+                    Profit = -1.5
+                },
+                //2017-09-11
+                new StockPerformance
+                {
+                    StockCode = "002497",
+                    CurrentDate = new DateTime(2017, 9, 12),
+                    Operate = Operate.Sell,
+                    Profit = 8
+                },
+                new StockPerformance
+                {
+                    StockCode = "002497",
+                    CurrentDate = new DateTime(2017, 9, 12),
+                    Operate = Operate.Buy,
+                    Profit = -4
                 },
                 #endregion
             };

@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Reflection;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using StackExchange.Redis;
@@ -146,7 +147,7 @@ namespace X.UI.Consoles
         static void Main()
         {
             //TestCacheClient(1000);
-            StockPerformanceHelper.Compute(StockPerformanceHelper.Init(new DateTime(2017, 9, 4)));
+            //StockPerformanceHelper.Compute(StockPerformanceHelper.Init(new DateTime(2017, 9, 11)));
             //MongoDbBase<MongoTest1>.Default.SaveMongo(new MongoTest1 { Dt = DateTime.Now, Value = 1, Key = "test" }, "Test", "test");
             //MongoDbBase<MongoTest2>.Default.SaveMongo(new MongoTest2 { Dt = DateTime.Now, Value = "15", Key = "test" }, "Test", "test");
             //var s = MongoDbBase<MongoTest>.Default.FindBsonDocument("Test", "test", Query.Null);

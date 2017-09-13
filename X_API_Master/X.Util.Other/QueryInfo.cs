@@ -2,14 +2,24 @@
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.IO;
+using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Web;
 using X.Util.Core;
+using X.Util.Core.Log;
+using X.Util.Entities.Enums;
 
 namespace X.Util.Other
 {
     public class QueryInfo
-    {
+    {        
+        private const string SqlStr = @"and|or|exec|execute|insert|select|delete|update|alter|create|drop|count|\*|chr|char|asc|mid|substring|master|truncate|declare|xp_cmdshell|restore|backup|net +user|net +localgroup +administrators";
+
+        /// <summary>
+        /// Xss过滤
+        /// </summary>
+        /// <param name="html"></param>
+        /// <returns></returns>
         public static string FilterXss(string html)
         {
             if (string.IsNullOrEmpty(html)) return string.Empty;
@@ -19,6 +29,32 @@ namespace X.Util.Other
                 html = regex.Replace(html, p => string.Empty);
             }
             return html;
+        }
+
+        /// <summary>
+        /// 验证sql注入
+        /// </summary>
+        /// <param name="inputObj"></param>
+        /// <returns></returns>
+        public static bool ProcessSqlStr(object inputObj)
+        {
+            try
+            {
+                if (inputObj != null)
+                {
+                    var inputString = inputObj.ToString();
+                    if (!inputString.IsNullOrEmpty())
+                    {
+                        if (Regex.IsMatch(inputString, @"\b(" + SqlStr + @")\b", RegexOptions.IgnoreCase)) return false;
+                    }
+                }
+            }
+            catch(Exception e)
+            {
+                Logger.Client.Error(Logger.Client.GetMethodInfo(MethodBase.GetCurrentMethod(), new[] { inputObj }), e, LogDomain.Util);
+                return false;
+            }
+            return true;
         }
 
         #region GetQuery
