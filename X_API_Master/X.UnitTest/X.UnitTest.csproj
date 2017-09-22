@@ -99,10 +99,6 @@
       <Project>{1D4D1D51-F564-4681-B971-A473F3ACACD6}</Project>
       <Name>X.Interface.Other</Name>
     </ProjectReference>
-    <ProjectReference Include="..\X.UI.API\X.UI.API.csproj">
-      <Project>{A118B6C5-18A7-4A69-8483-7560F57FEB14}</Project>
-      <Name>X.UI.API</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
