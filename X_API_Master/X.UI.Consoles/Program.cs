@@ -10,8 +10,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using StackExchange.Redis;
 using X.Cache.Service;
-using X.UI.API;
-using X.UI.API.Controllers;
 using X.Util.Core;
 using X.Util.Core.Cache;
 using X.Util.Core.Configuration;

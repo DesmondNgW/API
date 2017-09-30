@@ -78,7 +78,6 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="KmsControllerTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
