@@ -10,8 +10,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using StackExchange.Redis;
 using X.Cache.Service;
-using X.UI.API;
-using X.UI.API.Controllers;
 using X.Util.Core;
 using X.Util.Core.Cache;
 using X.Util.Core.Configuration;
@@ -147,7 +145,7 @@ namespace X.UI.Consoles
         static void Main()
         {
             //TestCacheClient(1000);
-            StockPerformanceHelper.Compute(StockPerformanceHelper.Init(new DateTime(2017, 9, 25)));
+            //StockPerformanceHelper.Compute(StockPerformanceHelper.Init(new DateTime(2017, 9, 25)));
             //MongoDbBase<MongoTest1>.Default.SaveMongo(new MongoTest1 { Dt = DateTime.Now, Value = 1, Key = "test" }, "Test", "test");
             //MongoDbBase<MongoTest2>.Default.SaveMongo(new MongoTest2 { Dt = DateTime.Now, Value = "15", Key = "test" }, "Test", "test");
             //var s = MongoDbBase<MongoTest>.Default.FindBsonDocument("Test", "test", Query.Null);

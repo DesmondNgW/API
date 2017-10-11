@@ -98,7 +98,28 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Stock.cs" />
+    <Compile Include="Auto\AutoComplete.cs" />
+    <Compile Include="Stock\Stock.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Stock\StockHelper.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Stock\StockPerformance.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Stock\StockPerformanceHelper.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Stock\StockScore.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Stock\StockScoreExtend.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Stock\StockScoreHelper.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="ThirdPartyTest.cs" />
     <Compile Include="APITestMethods.cs" />
     <Compile Include="Program.cs" />
