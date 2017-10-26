@@ -2,6 +2,7 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Reflection;
@@ -142,8 +143,23 @@ namespace X.UI.Consoles
             Console.WriteLine("Total ElapsedMilliseconds {0}", total.ElapsedMilliseconds);
         }
 
+
+
         static void Main()
         {
+            Console.WriteLine("1.MobileEncrypt");
+            Console.WriteLine("请输入选项和参数，格式如1.15901846845");
+            string input;
+            while (!string.IsNullOrEmpty(input = Console.ReadLine()))
+            {
+                switch (input.Split('.')[0])
+                {
+                    case "1":
+                        Console.WriteLine(ConsoleHelper.MobileEncrypt(input.Split('.')[1]).ToJson());
+                        break;
+                }
+            }
+
             //TestCacheClient(1000);
             //StockPerformanceHelper.Compute(StockPerformanceHelper.Init(new DateTime(2017, 9, 25)));
             //MongoDbBase<MongoTest1>.Default.SaveMongo(new MongoTest1 { Dt = DateTime.Now, Value = 1, Key = "test" }, "Test", "test");
