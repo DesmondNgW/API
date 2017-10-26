@@ -78,7 +78,8 @@ namespace MongoDbHelper
         /// <param name="password"></param>
         /// <param name="maxConnectionPoolSize"></param>
         /// <param name="credential"></param>
-        public static void Configure(IEnumerable<Uri> servers, string connectName, string userName, string password, int maxConnectionPoolSize = MaxConnectionPoolSize, MongoDbCredential credential = MongoDbCredential.ScramSha1)
+        /// <param name="credentialDb">验证密码的数据库</param>
+        public static void Configure(IEnumerable<Uri> servers, string connectName, string userName, string password, int maxConnectionPoolSize = MaxConnectionPoolSize, MongoDbCredential credential = MongoDbCredential.ScramSha1, string credentialDb = "")
         {
             if (_configures == null) _configures = new ConcurrentDictionary<string, MongoDbConfigure>();
             if (!_configures.ContainsKey(connectName))
@@ -90,7 +91,8 @@ namespace MongoDbHelper
                     UserName = userName,
                     Password = password,
                     Credential = credential,
-                    MaxConnectionPoolSize = maxConnectionPoolSize
+                    MaxConnectionPoolSize = maxConnectionPoolSize,
+                    CredentialDb = credentialDb
                 };
             }
         }
@@ -121,7 +123,7 @@ namespace MongoDbHelper
             if (string.IsNullOrEmpty(password)) password = _configures[connectName].Password;
             if (!string.IsNullOrEmpty(userName) && !string.IsNullOrEmpty(password))
             {
-                if (string.IsNullOrEmpty(database)) database = "admin";
+                if (!string.IsNullOrEmpty(_configures[connectName].CredentialDb)) database = _configures[connectName].CredentialDb;
             }
             else
             {
@@ -185,6 +187,11 @@ namespace MongoDbHelper
         /// 验证协议类型
         /// </summary>
         public MongoDbCredential Credential { get; set; }
+
+        /// <summary>
+        /// 验证密码的数据库
+        /// </summary>
+        public string CredentialDb { get; set; }
     }
 
 }

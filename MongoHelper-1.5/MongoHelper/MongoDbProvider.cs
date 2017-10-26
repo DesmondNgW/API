@@ -1,4 +1,5 @@
 ﻿using System;
+using MongoDB.Bson;
 using MongoDB.Driver;
 
 namespace MongoDbHelper
@@ -10,7 +11,7 @@ namespace MongoDbHelper
     public class MongoDbProvider : IDisposable
     {
         #region 对外Api
-        public MongoCollection Collection { get; set; } 
+        public MongoCollection<BsonDocument> Collection { get; set; } 
         #endregion
 
         #region 构造函数

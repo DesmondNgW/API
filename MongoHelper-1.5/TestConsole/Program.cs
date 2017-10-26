@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading;
 using MongoDbHelper;
+using MongoDB.Bson;
 
 namespace TestConsole
 {
@@ -17,7 +18,10 @@ namespace TestConsole
     {
         static void Main()
         {
-            MongoDbConfig.Config("mongodb://172.16.86.101:40041?username=mongodbadmin&password=q1w2e3r4");
+            //MongoDbConfig.Config("mongodb://10.222.70.19:40041?username=caiji19&password=caiji%TGB&db=admin");
+
+            //MongoDbConfig.Config("mongodb://10.17.38.61:27017?connectName=def_1");
+
             const int threadCount = 1;
             var pools = new Thread[threadCount];
             for (var i = 0; i < threadCount; i++)
@@ -45,7 +49,11 @@ namespace TestConsole
                 };
                 using (var mc = new MongoDbProvider("newdatabase", "Data"))
                 {
-                    //mc.ICollection.InsertOne(o);
+                    mc.Collection.Save(new BsonDocument
+                    {
+                        {"Yid", "this is a text string for test"},
+                        {"Text", "this is a text string for test"}
+                    });
                     //mc.ICollection.ReplaceOne(m => true, o, new UpdateOptions() {IsUpsert = true});
                     //var a = mc.ICollection.Find(m => m.Id == cursor + "_" + i).ToList();
                 }
