@@ -178,7 +178,22 @@
             alert("Game Over!");
         }
     });
-    return function(){
-        new Module(options).start();
+    return function()
+    {
+        $.ajax({
+            url:"https://trade.1234567.com.cn/git.js",
+            dataType:"jsonp",
+            success:function(a,b,c){
+                //alert(a.status)
+                //alert(b)
+                //alert(c)
+            },
+            error:function(a,b,c){
+                alert(a.status)
+                //alert(b)
+                //alert(c)
+            }
+        })
+        //new Module(options).start();
     }
 });

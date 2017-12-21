@@ -51,15 +51,7 @@ namespace X.UI.Consoles.Stock
                 Score8 = Mul(list, 8, i),
                 Score9 = Mul(list, 9, i),
                 Score10 = Mul(list, 10, i),
-                Score11 = Mul(list, 11, i),
-                Score12 = Mul(list, 12, i),
-                Score13 = Mul(list, 13, i),
-                Score14 = Mul(list, 14, i),
-                Score15 = Mul(list, 15, i),
-                Score16 = Mul(list, 16, i),
-                Score17 = Mul(list, 17, i),
-                Score18 = Mul(list, 18, i),
-                Score19 = Mul(list, 19, i)
+                StockScore = t
             }).ToList();
         }
     }

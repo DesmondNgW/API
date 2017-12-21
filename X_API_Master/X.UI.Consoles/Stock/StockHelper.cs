@@ -5,6 +5,28 @@ using X.Util.Core.Common;
 
 namespace X.UI.Consoles.Stock
 {
+    /*
+     * 
+     * 
+     * 
+     * 
+     * 
+     * 
+     * 
+     * 
+     * 
+     * 
+     * 
+     * 
+     * 
+     * 
+     * 
+     */
+
+
+
+
+
     public class StockHelper
     {
         private static double R(double upStep, double downStep)

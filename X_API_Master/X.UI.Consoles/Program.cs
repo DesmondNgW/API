@@ -11,6 +11,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using StackExchange.Redis;
 using X.Cache.Service;
+using X.UI.Consoles.Stock;
 using X.Util.Core;
 using X.Util.Core.Cache;
 using X.Util.Core.Configuration;
@@ -147,18 +148,34 @@ namespace X.UI.Consoles
 
         static void Main()
         {
-            Console.WriteLine("1.MobileEncrypt");
-            Console.WriteLine("请输入选项和参数，格式如1.15901846845");
-            string input;
-            while (!string.IsNullOrEmpty(input = Console.ReadLine()))
-            {
-                switch (input.Split('.')[0])
-                {
-                    case "1":
-                        Console.WriteLine(ConsoleHelper.MobileEncrypt(input.Split('.')[1]).ToJson());
-                        break;
-                }
-            }
+            //Console.WriteLine(ConsoleHelper.MobileEncrypt("15618169140").ToJson());
+            //Console.WriteLine(ConsoleHelper.MobileEncrypt("156****9140").ToJson());
+
+            var g = StockHelper.G(0.1, -0.1, 10000, 20);
+            var s = StockScoreHelper.GetScore(g);
+            var se = StockScoreHelper.GetScoreExtend(s);
+
+
+
+
+
+            //Logger.Client.Debug(se.ToJson(), LogDomain.Ui);
+            //Console.WriteLine(se.ToJson());
+
+
+
+            //Console.WriteLine("1.MobileEncrypt");
+            //Console.WriteLine("请输入选项和参数，格式如1.15901846845");
+            //string input;
+            //while (!string.IsNullOrEmpty(input = Console.ReadLine()))
+            //{
+            //    switch (input.Split('.')[0])
+            //    {
+            //        case "1":
+            //            Console.WriteLine(ConsoleHelper.MobileEncrypt(input.Split('.')[1]).ToJson());
+            //            break;
+            //    }
+            //}
 
             //TestCacheClient(1000);
             //StockPerformanceHelper.Compute(StockPerformanceHelper.Init(new DateTime(2017, 9, 25)));
