@@ -215,8 +215,11 @@ namespace X.UI.Consoles
 
         static void Main()
         {
-            //Console.WriteLine(ConsoleHelper.MobileEncrypt("15618169140").ToJson());
-            //Console.WriteLine(ConsoleHelper.MobileEncrypt("156****9140").ToJson());
+            Console.WriteLine(string.Join("|", ChineseConvert.Get("相王璟")));
+            Console.WriteLine(string.Join(",", ChineseConvert.GetFirst("相王璟")));
+
+            Console.WriteLine(ConsoleHelper.MobileEncrypt("15618169140").ToJson());
+            Console.WriteLine(ConsoleHelper.MobileEncrypt("156****9140").ToJson());
 
             //var g = StockHelper.G(0.1, -0.1, 1000, 20);
             //var s = StockScoreHelper.GetScore(g);

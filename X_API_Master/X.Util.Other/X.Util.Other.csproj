@@ -35,6 +35,10 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ChnCharInfo, Version=1.0.0.0, Culture=neutral, PublicKeyToken=18f031bd02e5e291, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.PinYinConverter.1.0.0\lib\ChnCharInfo.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="ICSharpCode.SharpZipLib">
       <HintPath>..\X.IO\Ref\NPOI\ICSharpCode.SharpZipLib.dll</HintPath>
     </Reference>
