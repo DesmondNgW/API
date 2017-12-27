@@ -86,6 +86,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CacheClientTest.cs" />
     <Compile Include="ConsoleHelper.cs" />
     <Compile Include="Stock\Stock.cs">
       <SubType>Code</SubType>
@@ -106,6 +107,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Stock\StockScoreHelper.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Stock\StockTest.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="ThirdPartyTest.cs" />
@@ -208,6 +212,7 @@
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
