@@ -1,8 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using MongoDB.Bson;
 using X.Util.Other;
-
 
 namespace X.UI.Consoles
 {
@@ -15,6 +15,8 @@ namespace X.UI.Consoles
 
             Console.WriteLine(ConsoleHelper.MobileEncrypt("15618169140").ToJson());
             Console.WriteLine(ConsoleHelper.MobileEncrypt("156****9140").ToJson());
+
+
 
             //TestCacheClient(1000);
             //StockPerformanceHelper.Compute(StockPerformanceHelper.Init(new DateTime(2017, 9, 25)));
@@ -53,3 +55,12 @@ namespace X.UI.Consoles
         }
     }
 }
+
+
+/*
+ * net work js 
+ * 
+ * 
+ * 
+ * 
+ */
