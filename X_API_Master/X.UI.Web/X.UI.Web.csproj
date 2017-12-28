@@ -67,7 +67,6 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="app_offline.htm" />
     <Content Include="css\framework\framework.css" />
     <Content Include="css\page\demo\iconfonts.css" />
     <Content Include="css\page\demo\test.css" />
@@ -114,6 +113,7 @@
     <Content Include="lib\error.min.js" />
     <Content Include="lib\lib.js" />
     <Content Include="lib\XCode.js" />
+    <Content Include="nocache.aspx" />
     <Content Include="seajs\sea-2.3.0.js" />
     <Content Include="seajs\sea-debug-2.3.0.js" />
     <Content Include="seajs\seajs-config.js" />
@@ -122,6 +122,13 @@
   <ItemGroup>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="nocache.aspx.cs">
+      <DependentUpon>nocache.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="nocache.aspx.designer.cs">
+      <DependentUpon>nocache.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -147,6 +154,10 @@
     <ProjectReference Include="..\X.Util.Entities\X.Util.Entities.csproj">
       <Project>{85a098ce-6ba6-4c4d-9c7f-1c3dfb5b0a15}</Project>
       <Name>X.Util.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\X.Util.Other\X.Util.Other.csproj">
+      <Project>{534B9A37-9B27-42DB-81E8-69F67600934B}</Project>
+      <Name>X.Util.Other</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
