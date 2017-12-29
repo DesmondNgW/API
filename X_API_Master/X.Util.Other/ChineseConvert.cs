@@ -1,6 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using Microsoft.International.Converters.PinYinConverter;
+using X.Util.Core.Log;
+using X.Util.Entities.Enums;
 
 namespace X.Util.Other
 {
@@ -40,8 +44,16 @@ namespace X.Util.Other
         /// <returns></returns>
         public static List<string> Get(char ch)
         {
-            var chineseChar = new ChineseChar(ch);
-            return (from item in chineseChar.Pinyins where item != null select item.Substring(0, item.Length - 1)).ToList();
+            try
+            {
+                var chineseChar = new ChineseChar(ch);
+                return (from item in chineseChar.Pinyins where item != null select item.Substring(0, item.Length - 1)).ToList();
+            }
+            catch (Exception e)
+            {
+                Logger.Client.Error(Logger.Client.GetMethodInfo(MethodBase.GetCurrentMethod(), new object[] { ch }), e, LogDomain.Util);
+            }
+            return null;
         }
 
         /// <summary>

@@ -43,6 +43,9 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Em.FundTrade.EncryptHelper">
+      <HintPath>..\X.IO\Ref\Em.FundTrade.EncryptHelper.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="StackExchange.Redis, Version=1.2.5.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\StackExchange.Redis.1.2.5\lib\net45\StackExchange.Redis.dll</HintPath>
@@ -67,6 +70,17 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\app.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="App_Data\Config.xml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="App_Data\endpoint.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="app_offline1.htm" />
     <Content Include="css\framework\framework.css" />
     <Content Include="css\page\demo\iconfonts.css" />
     <Content Include="css\page\demo\test.css" />
@@ -89,6 +103,7 @@
     <Content Include="css\util\table.css" />
     <Content Include="css\util\tipbox.css" />
     <Content Include="css\util\tiptext.css" />
+    <Content Include="data.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="gulpfile.js" />
@@ -120,6 +135,13 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="data.aspx.cs">
+      <DependentUpon>data.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="data.aspx.designer.cs">
+      <DependentUpon>data.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

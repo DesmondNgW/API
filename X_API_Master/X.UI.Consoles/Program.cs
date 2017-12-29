@@ -10,12 +10,6 @@ namespace X.UI.Consoles
     {
         static void Main()
         {
-            Console.WriteLine(ChineseConvert.Get("相王璟").ToJson());
-            Console.WriteLine(ChineseConvert.GetFirst("相王璟").ToJson());
-
-            Console.WriteLine(ConsoleHelper.MobileEncrypt("15618169140").ToJson());
-            Console.WriteLine(ConsoleHelper.MobileEncrypt("156****9140").ToJson());
-
             //TestCacheClient(1000);
             //StockPerformanceHelper.Compute(StockPerformanceHelper.Init(new DateTime(2017, 9, 25)));
             //MongoDbBase<MongoTest1>.Default.SaveMongo(new MongoTest1 { Dt = DateTime.Now, Value = 1, Key = "test" }, "Test", "test");
