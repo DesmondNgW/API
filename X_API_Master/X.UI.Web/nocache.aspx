@@ -266,9 +266,14 @@
         </div>
     </form>
     <script type="text/javascript">
-        var server = <%=DateTime.Now.GetMilliseconds()%>;
-        var local = +new Date();
-        var h = server - local;
+        (function() {
+            var server = <%=DateTime.Now.GetMilliseconds()%>;
+            var local = +new Date();
+            var h = Math.abs(server - local);
+            if (h >= 1000 * 60 * 10) {
+                console.log("refresh");
+            }
+        })();
     </script>
 </body>
 </html>
