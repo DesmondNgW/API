@@ -1,12 +1,13 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="nocache.aspx.cs" Inherits="X.UI.Web.NoCache" %>
+<%@ Import Namespace="X.Util.Core" %>
 
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta http-equiv="pragma" content="no-cache" />
-    <meta http-equiv="cache-control" content="no-cache" />
-    <meta http-equiv="expires" content="0" />
+    <meta http-equiv="cache-control" content="no-cache, must-revalidate, no-store" />
+    <meta http-equiv="expires" content="-1" />
     <title>IconFont Code</title>
     <link rel="stylesheet" href="./css/framework/framework.css" />
     <link rel="stylesheet" href="./css/page/demo/iconfonts.css" />
@@ -264,6 +265,10 @@
             </ul>
         </div>
     </form>
-    
+    <script type="text/javascript">
+        var server = <%=DateTime.Now.GetMilliseconds()%>;
+        var local = +new Date();
+        var h = server - local;
+    </script>
 </body>
 </html>

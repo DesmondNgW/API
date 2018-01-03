@@ -14,7 +14,7 @@ namespace X.Interface.Core
         {
             size = Math.Max(1024, size);
             var key = Guid.NewGuid().ToString("N");
-            var nonce = (DateTime.Now - new DateTime(1970, 1, 1)).TotalMilliseconds.ToString(CultureInfo.InvariantCulture);
+            var nonce = (DateTime.Now - new DateTime(1970, 1, 1).ToLocalTime()).TotalMilliseconds.ToString(CultureInfo.InvariantCulture);
             var publicKey = RsaCryption.GetPublicKey(key, size, nonce, true);
             var dto = new PublicKeyDto
             {
