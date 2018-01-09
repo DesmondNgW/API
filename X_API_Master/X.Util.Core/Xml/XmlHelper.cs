@@ -2,6 +2,7 @@
 using System.Globalization;
 using System.IO;
 using System.Reflection;
+using System.Text;
 using System.Web.Caching;
 using System.Xml;
 using System.Xml.Serialization;
@@ -62,6 +63,23 @@ namespace X.Util.Core.Xml
                     Logger.Client.Error(Logger.Client.GetMethodInfo(MethodBase.GetCurrentMethod(), new object[] { item, path }), ex, LogDomain.Util);
                 }
             });
+        }
+
+        public static StringBuilder WriteXml<T>(T item)
+        {
+            var ret = new StringBuilder();
+            var serializer = new XmlSerializer(typeof(T));
+            try
+            {
+                var xw = XmlWriter.Create(ret);
+                serializer.Serialize(xw, item);
+                xw.Close();
+            }
+            catch (Exception ex)
+            {
+                Logger.Client.Error(Logger.Client.GetMethodInfo(MethodBase.GetCurrentMethod(), new object[] { item }), ex, LogDomain.Util);
+            }
+            return ret;
         }
 
         public static XmlDocument GetXmlDocument(object item)

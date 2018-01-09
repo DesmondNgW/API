@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Web.UI.HtmlControls;
 using System.Xml;
 using MongoDB.Bson;
 using X.Util.Core.Xml;
@@ -12,23 +13,20 @@ namespace X.UI.Consoles
     {
         static void Main()
         {
-            var ret = new List<List<string>>();
-            var doc = XmlHelper.GetXmlDocCache(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "rarecharacter.xml"));
-            var nodes = doc.SelectNodes("/RareCharacters/characters/words");
-            if (nodes != null)
-            {
-                ret.AddRange(from XmlNode node in nodes
-                    let @group = XmlHelper.GetXmlAttributeValue(node, "group", string.Empty)
-                    from XmlNode sub in node.ChildNodes
-                    select new List<string>
-                    {
-                        @group, XmlHelper.GetXmlAttributeValue(sub, "pinyin", string.Empty), XmlHelper.GetXmlAttributeValue(sub, "text", string.Empty),
-                    });
-            }
-            Console.WriteLine(ret.ToJson());
-
-
-
+            //var ret = new List<List<string>>();
+            //var doc = XmlHelper.GetXmlDocCache(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "rarecharacter.xml"));
+            //var nodes = doc.SelectNodes("/RareCharacters/characters/words");
+            //if (nodes != null)
+            //{
+            //    ret.AddRange(from XmlNode node in nodes
+            //                 let @group = XmlHelper.GetXmlAttributeValue(node, "group", string.Empty)
+            //                 from XmlNode sub in node.ChildNodes
+            //                 select new List<string>
+            //        {
+            //            @group, XmlHelper.GetXmlAttributeValue(sub, "pinyin", string.Empty), XmlHelper.GetXmlAttributeValue(sub, "text", string.Empty),
+            //        });
+            //}
+            //Console.WriteLine(ret.ToJson());
             //TestCacheClient(1000);
             //StockPerformanceHelper.Compute(StockPerformanceHelper.Init(new DateTime(2017, 9, 25)));
             //MongoDbBase<MongoTest1>.Default.SaveMongo(new MongoTest1 { Dt = DateTime.Now, Value = 1, Key = "test" }, "Test", "test");
