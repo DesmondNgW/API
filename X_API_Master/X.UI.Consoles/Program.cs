@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Web.UI.HtmlControls;
 using System.Xml;
 using MongoDB.Bson;
 using X.Util.Core.Xml;
+using X.Util.Other;
 
 namespace X.UI.Consoles
 {
@@ -13,6 +15,15 @@ namespace X.UI.Consoles
     {
         static void Main()
         {
+            //while (true)
+            //{
+            //    var ret = HttpRequestBase.PostHttpInfo("https://114.141.171.67/Home/GetUserInfoForLang", "utf-8", null,
+            //        "application/json",
+            //        null, string.Empty);
+            //    Console.WriteLine(ret.ToJson());
+            //    Thread.Sleep(100);
+            //}
+
             //var ret = new List<List<string>>();
             //var doc = XmlHelper.GetXmlDocCache(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "rarecharacter.xml"));
             //var nodes = doc.SelectNodes("/RareCharacters/characters/words");
