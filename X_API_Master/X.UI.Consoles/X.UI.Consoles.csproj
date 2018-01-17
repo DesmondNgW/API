@@ -94,6 +94,8 @@
     <Compile Include="Stock\StockHelper.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Stock\StockL2.cs" />
+    <Compile Include="Stock\StockL2Helper.cs" />
     <Compile Include="Stock\StockPerformance.cs">
       <SubType>Code</SubType>
     </Compile>

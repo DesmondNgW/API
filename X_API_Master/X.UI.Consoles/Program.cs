@@ -6,6 +6,7 @@ using System.Threading;
 using System.Web.UI.HtmlControls;
 using System.Xml;
 using MongoDB.Bson;
+using X.UI.Consoles.Stock;
 using X.Util.Core.Xml;
 using X.Util.Other;
 
@@ -15,7 +16,6 @@ namespace X.UI.Consoles
     {
         static void Main()
         {
-
             //var ret = new List<List<string>>();
             //var doc = XmlHelper.GetXmlDocCache(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "rarecharacter.xml"));
             //var nodes = doc.SelectNodes("/RareCharacters/characters/words");
