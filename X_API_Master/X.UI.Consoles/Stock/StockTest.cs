@@ -5,7 +5,17 @@ using X.Util.Entities.Enums;
 using X.Util.Other;
 
 namespace X.UI.Consoles.Stock
-{
+{ 
+    /*
+     * 资金是推动力、也是阻力。买方资金是推动力，卖方资金是阻力，寻找阻力最小/推动力最大
+     * 
+     * 
+     * 
+     * 
+     */
+
+
+
     public class StockTest
     {
         public static void Test1Result(IEnumerable<StockScoreExtend> data)
