@@ -6,16 +6,6 @@ using X.Util.Other;
 
 namespace X.UI.Consoles.Stock
 { 
-    /*
-     * 资金是推动力、也是阻力。买方资金是推动力，卖方资金是阻力，寻找阻力最小/推动力最大
-     * 
-     * 
-     * 
-     * 
-     */
-
-
-
     public class StockTest
     {
         public static void Test1Result(IEnumerable<StockScoreExtend> data)
@@ -30,6 +20,7 @@ namespace X.UI.Consoles.Stock
                 item.Score,
                 item.Score2,
                 item.Score3,
+                item.Score3,
                 item.Score4,
                 item.Score5,
                 item.Score6,
@@ -40,8 +31,7 @@ namespace X.UI.Consoles.Stock
                 item.Stock.Y[1],
                 item.Stock.Y[2],
                 item.Stock.Y[3],
-                item.Stock.Y[4],
-                item.Stock.Y[5])))
+                item.Stock.Y[4])))
             {
                 FileBase.WriteFile(AppDomain.CurrentDomain.BaseDirectory, "1.csv", content, "utf-8", FileBaseMode.Append);
             }
