@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace X.UI.Consoles.Stock
 {
@@ -13,6 +14,12 @@ namespace X.UI.Consoles.Stock
         public double Low { get; set; }
 
         public double Inc { get; set; }
+
+        public string StockCode { get; set; }
+
+        public string StockName { get; set; }
+
+        public DateTime? Date { get; set; }
 
         public Dictionary<int, double> Y { get; set; }
     }

@@ -6,6 +6,7 @@ using System.Threading;
 using System.Web.UI.HtmlControls;
 using System.Xml;
 using MongoDB.Bson;
+using X.DataBase.Helper;
 using X.UI.Consoles.Stock;
 using X.Util.Core.Xml;
 using X.Util.Other;
@@ -16,6 +17,19 @@ namespace X.UI.Consoles
     {
         static void Main()
         {
+            //StockTest.Test("603628");
+            //StockTest.Test("603036");
+            //StockTest.Test("000856");
+            //StockTest.Test("600874");
+            //StockTest.Test("600516");
+            //StockTest.Test("000830");
+            //StockTest.Test("300675");
+            //StockTest.Test("300678");
+            //StockTest.Test("603559");
+            //StockTest.Test("002194");
+            //StockTest.Test("600903");
+            //StockTest.Test("002908");
+
             //var ret = new List<List<string>>();
             //var doc = XmlHelper.GetXmlDocCache(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "rarecharacter.xml"));
             //var nodes = doc.SelectNodes("/RareCharacters/characters/words");

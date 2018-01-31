@@ -6,7 +6,7 @@ namespace X.DataBase.Helper
     public class DalHelper
     {
         #region AppConfig中须配置对应的数据库连接
-        protected static DbHelper DbHelper = GetHelper("XDataBase");
+        public static DbHelper DbHelper = GetHelper("XDataBase");
 
         /// <summary>
         /// 从Web.config从读取数据库的连接以及数据库类型
@@ -139,6 +139,12 @@ namespace X.DataBase.Helper
         {
             double result;
             return (obj != null && obj != DBNull.Value && double.TryParse(obj.ToString(), out result)) ? (double?)result : null;
+        }
+
+        public static double GetDouble(object obj, double defaultDouble)
+        {
+            double result;
+            return (obj != null && obj != DBNull.Value && double.TryParse(obj.ToString(), out result)) ? result : defaultDouble;
         }
 
         /// <summary>

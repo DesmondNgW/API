@@ -91,6 +91,7 @@
     <Compile Include="Stock\Stock.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Stock\StockDataHelper.cs" />
     <Compile Include="Stock\StockHelper.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -168,6 +169,10 @@
     <ProjectReference Include="..\X.Cache.Service\X.Cache.Service.csproj">
       <Project>{41e92f93-068c-4ab8-a981-8d18cdab7838}</Project>
       <Name>X.Cache.Service</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\X.DataBase.Helper\X.DataBase.Helper.csproj">
+      <Project>{FD2D5673-7E88-4675-9A21-3075704C1AFC}</Project>
+      <Name>X.DataBase.Helper</Name>
     </ProjectReference>
     <ProjectReference Include="..\X.Interface.Dto\X.Interface.Dto.csproj">
       <Project>{4603dd54-fbc3-42ac-ad98-f0dbd0944f00}</Project>

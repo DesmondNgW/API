@@ -8,13 +8,13 @@ namespace X.UI.Consoles.Stock
 { 
     public class StockTest
     {
-        public static void Test1Result(IEnumerable<StockScoreExtend> data)
+        public static void Test1Result(IEnumerable<StockScoreExtend> data, string code)
         {
-            FileBase.WriteFile(AppDomain.CurrentDomain.BaseDirectory, "1.csv",
+            FileBase.WriteFile(AppDomain.CurrentDomain.BaseDirectory, code + "_1.csv",
                 "Inc|Close|Score|Score2|Score3|Score4|Score5|Score6|Score7|Score8|Score9|Score10|Y1|Y2|Y3|Y4|Y5", "utf-8",
                 FileBaseMode.Create);
             foreach (var content in data.Select(item => string.Format(
-                "{0}|{1}|{2}|{3}|{4}|{5}|{6}|{7}|{8}{9}|{10}|{11}|{12}|{13}|{14}|{15}|{16}",
+                "{0}|{1}|{2}|{3}|{4}|{5}|{6}|{7}|{8}{9}|{10}|{11}|{12}|{13}|{14}|{15}|{16}|{17}|{18}|{19}|{20}|{21}|{22}|{23}|{24}|{25}|{26}|{27}|{28}|{29}|{30}|{31}|{32}",
                 item.Stock.Inc,
                 item.Stock.Close,
                 item.Score,
@@ -31,15 +31,31 @@ namespace X.UI.Consoles.Stock
                 item.Stock.Y[1],
                 item.Stock.Y[2],
                 item.Stock.Y[3],
-                item.Stock.Y[4])))
+                item.Stock.Y[4],
+                item.Stock.Y[5],
+                item.Stock.Y[6],
+                item.Stock.Y[7],
+                item.Stock.Y[8],
+                item.Stock.Y[9],
+                item.Stock.Y[10],
+                item.Stock.Y[11],
+                item.Stock.Y[12],
+                item.Stock.Y[13],
+                item.Stock.Y[14],
+                item.Stock.Y[15],
+                item.Stock.Y[16],
+                item.Stock.Y[17],
+                item.Stock.Y[18],
+                item.Stock.Y[19],
+                item.Stock.Y[20])))
             {
-                FileBase.WriteFile(AppDomain.CurrentDomain.BaseDirectory, "1.csv", content, "utf-8", FileBaseMode.Append);
+                FileBase.WriteFile(AppDomain.CurrentDomain.BaseDirectory, code + "_1.csv", content, "utf-8", FileBaseMode.Append);
             }
         }
 
-        public static void Test2Result(List<StockScoreExtend> data, int count, double step)
+        public static void Test2Result(List<StockScoreExtend> data, int count, double step, string code)
         {
-            FileBase.WriteFile(AppDomain.CurrentDomain.BaseDirectory, "2.csv",
+            FileBase.WriteFile(AppDomain.CurrentDomain.BaseDirectory, code + "_2.csv",
                 "Item|Score|Score2|Score3|Score4|Score5|Score6|Score7|Score8|Score9|Score10", "utf-8",
                 FileBaseMode.Create);
             for (var i = 0; i < count; i++)
@@ -70,13 +86,13 @@ namespace X.UI.Consoles.Stock
                         data.Count(t8),
                         data.Count(t9),
                         data.Count(t10));
-                FileBase.WriteFile(AppDomain.CurrentDomain.BaseDirectory, "2.csv", content, "utf-8", FileBaseMode.Append);
+                FileBase.WriteFile(AppDomain.CurrentDomain.BaseDirectory, code + "_2.csv", content, "utf-8", FileBaseMode.Append);
             }
         }
 
-        public static void Test()
+        public static void Test(string code)
         {
-            var g = StockHelper.G(0.1, -0.1, 1000, 20);
+            var g = StockDataHelper.StockData(code);//StockHelper.G(0.1, -0.1, 1000, 20);
             var s = StockScoreHelper.GetScore(g);
             var se = StockScoreHelper.GetScoreExtend(s);
 
@@ -89,9 +105,9 @@ namespace X.UI.Consoles.Stock
 
             var all = se.Where(func).ToList();
 
-            Test2Result(all, 50, 0.1);
+            Test2Result(all, 50, 0.1, code);
 
-            Test1Result(all);
+            Test1Result(all, code);
         }
     }
 }
