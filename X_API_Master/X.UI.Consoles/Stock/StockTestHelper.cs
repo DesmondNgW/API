@@ -5,7 +5,39 @@ using X.Util.Core.Log;
 using X.Util.Entities.Enums;
 
 namespace X.UI.Consoles.Stock
-{ 
+{
+
+/* 接力模式
+N>2:{
+S1:=HIGH/REF(HIGH,1)*100;
+S2:=OPEN/REF(CLOSE,1)*100;
+S3:=CLOSE/REF(CLOSE,1)*100;
+S4:=CLOSE*2/(HIGH+LOW)*100;
+S5:=CLOSE/OPEN*100;
+S6:=LOW/REF(LOW,1)*100;
+S7:=CLOSE/REF(HIGH,1)*100;
+S:S1*S2*S3*S4*S5*S6*S7/100/100/100/100/100/100/100;
+N:BARSLASTCOUNT(S>=1.3);
+}
+
+N>2:{
+R:(C-O)/(H-L);
+N:BARSLASTCOUNT(R>0.8);
+}
+
+N>2|N>1:{
+DR:CLOSE/REF(CLOSE, 1)*100-100;
+N:BARSLASTCOUNT(DR>9.8);
+}
+
+*/
+
+
+
+
+
+
+
     public class StockTestHelper
     {
         public static void Test(string code, Func<List<Stock>, List<Stock>> compute, Func<Stock, bool> condition)
@@ -208,33 +240,15 @@ namespace X.UI.Consoles.Stock
             {
                 if (i > 0)
                 {
-                    data[i].Compute1 = data[i].High/data[i - 1].High;
-                    data[i].Compute1 *= data[i].Open/data[i - 1].Close;
-                    data[i].Compute1 *= data[i].Close/data[i - 1].Close;
-                    data[i].Compute1 *= data[i].Close/data[i - 1].Close;
-                    data[i].Compute1 *= data[i].Low/data[i - 1].Low;
-                    data[i].Compute1 *= data[i].Close/data[i - 1].High;
-                    data[i].Compute1 *= 2*data[i].Close/(data[i].High + data[i].Low);
+                    data[i].Compute1 = (data[i].Close - data[i].Open) / (data[i].High - data[i].Low);
                 }
             }
             for (var i = 0; i < data.Count; i++)
             {
-                if (i > 1)
-                {
-                    data[i].Compute2 = data[i].Compute1*data[i - 1].Compute1*data[i - 2].Compute1;
-                }
-                var j = i;
-                while (j > 0 && data[j - 1].Compute1 >= 1.33)
-                {
-                    data[i].Compute3++;
-                    j--;
-                }
-                var k = i;
-                while (k > 0 && data[k - 1].Compute2 >= 1)
-                {
-                    data[i].Compute4++;
-                    k--;
-                }
+                if (i > 0) data[i].Compute2 = data[i - 1].Compute1;
+                if (i > 1) data[i].Compute3 = data[i - 2].Compute1;
+                if (i > 2) data[i].Compute4 = data[i - 3].Compute1;
+                if (i > 3) data[i].Compute5 = data[i - 4].Compute1;
             }
             return data;
         }

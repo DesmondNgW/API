@@ -20,7 +20,7 @@ namespace X.UI.Consoles
         {
             StockTestHelper.Test("600903", StockTestHelper.Compute1, stock =>
             {
-                return stock.Compute2 > 2 ;
+                return stock.Compute1 > 0.8 && stock.Compute2 > 0.8;
             });
             //var ret = new List<List<string>>();
             //var doc = XmlHelper.GetXmlDocCache(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "rarecharacter.xml"));
