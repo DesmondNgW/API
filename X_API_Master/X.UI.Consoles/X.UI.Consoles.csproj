@@ -92,9 +92,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Stock\StockDataHelper.cs" />
-    <Compile Include="Stock\StockHelper.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Stock\StockL2.cs" />
     <Compile Include="Stock\StockL2Helper.cs" />
     <Compile Include="Stock\StockPerformance.cs">
@@ -112,7 +109,7 @@
     <Compile Include="Stock\StockScoreHelper.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Stock\StockTest.cs">
+    <Compile Include="Stock\StockTestHelper.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="ThirdPartyTest.cs" />

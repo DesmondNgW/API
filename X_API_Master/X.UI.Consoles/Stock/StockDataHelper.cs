@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Common;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using X.DataBase.Helper;
 
 namespace X.UI.Consoles.Stock
@@ -27,7 +23,9 @@ namespace X.UI.Consoles.Stock
                     High = DalHelper.GetDouble(ret["HighPrice"], 0),
                     Close = DalHelper.GetDouble(ret["ClosePrice"], 0),
                     Low = DalHelper.GetDouble(ret["LowPrice"], 0),
-                    Y = new Dictionary<int, double>()
+                    PriceC = new Dictionary<int, double>(),
+                    PriceL = new Dictionary<int, double>(),
+                    PriceH = new Dictionary<int, double>()
                 };
                 result.Add(item);
             }
@@ -38,14 +36,24 @@ namespace X.UI.Consoles.Stock
                 {
                     if (i + j < result.Count)
                     {
-                        result[i].Y[j] = (result[i + j].Close - result[i].Close) / result[i].Close;
+                        result[i].PriceC[j] = result[i + j].Close;
+                        result[i].PriceL[j] = result[i + j].Low;
+                        result[i].PriceH[j] = result[i + j].High;
                     }
                 }
                 for (var j = 1; j <= 20; j++)
                 {
-                    if (!result[i].Y.ContainsKey(j))
+                    if (!result[i].PriceC.ContainsKey(j))
                     {
-                        result[i].Y[j] = 0;
+                        result[i].PriceC[j] = 0;
+                    }
+                    if (!result[i].PriceL.ContainsKey(j))
+                    {
+                        result[i].PriceL[j] = 0;
+                    }
+                    if (!result[i].PriceH.ContainsKey(j))
+                    {
+                        result[i].PriceH[j] = 0;
                     }
                 }
             }

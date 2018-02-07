@@ -21,6 +21,20 @@ namespace X.UI.Consoles.Stock
 
         public DateTime? Date { get; set; }
 
-        public Dictionary<int, double> Y { get; set; }
+        public Dictionary<int, double> PriceC { get; set; }
+
+        public Dictionary<int, double> PriceL { get; set; }
+
+        public Dictionary<int, double> PriceH { get; set; }
+
+        public double Compute1 { get; set; }
+
+        public double Compute2 { get; set; }
+
+        public double Compute3 { get; set; }
+
+        public double Compute4 { get; set; }
+
+        public double Compute5 { get; set; }
     }
 }
