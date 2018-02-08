@@ -21,20 +21,43 @@ namespace X.UI.Consoles.Stock
 
         public DateTime? Date { get; set; }
 
-        public Dictionary<int, double> PriceC { get; set; }
+        public Dictionary<int, StockSimple> StockSimple { get; set; }
 
-        public Dictionary<int, double> PriceL { get; set; }
+        /// <summary>
+        /// Strong
+        /// </summary>
+        public double Strong { get; set; }
 
-        public Dictionary<int, double> PriceH { get; set; }
+        /// <summary>
+        /// StrongLength
+        /// </summary>
+        public int StrongLength { get; set; }
 
-        public double Compute1 { get; set; }
+        public double Position { get; set; }
 
-        public double Compute2 { get; set; }
+        public int PositionLength { get; set; }
 
-        public double Compute3 { get; set; }
+        public int IncLength { get; set; }
 
-        public double Compute4 { get; set; }
+        public double Atr { get; set; }
 
-        public double Compute5 { get; set; }
+        public double Remark { get; set; }
+    }
+
+    public class StockSimple
+    {
+        public double Open { get; set; }
+
+        public double Close { get; set; }
+
+        public double High { get; set; }
+
+        public double Low { get; set; }
+
+        public DateTime Date { get; set; }
+
+        public string StockCode { get; set; }
+
+        public string StockName { get; set; }
     }
 }

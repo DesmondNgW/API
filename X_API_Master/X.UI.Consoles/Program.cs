@@ -18,9 +18,9 @@ namespace X.UI.Consoles
     {
         static void Main()
         {
-            StockTestHelper.Test("600903", StockTestHelper.Compute1, stock =>
+            StockTestHelper.Test("300666", stock =>
             {
-                return stock.Compute1 > 0.8 && stock.Compute2 > 0.8;
+                return (stock.IncLength > 1 || stock.PositionLength > 2 || stock.StrongLength > 2) && stock.Atr > 0;
             });
             //var ret = new List<List<string>>();
             //var doc = XmlHelper.GetXmlDocCache(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "rarecharacter.xml"));
