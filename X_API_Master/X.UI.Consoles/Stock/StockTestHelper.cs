@@ -31,6 +31,54 @@ N:BARSLASTCOUNT(DR>9.8);
 }
 */
 
+
+
+
+/*
+    
+S:HIGH/REF(HIGH,1)*
+    OPEN/REF(CLOSE,1)*
+    CLOSE/REF(CLOSE,1)*
+    CLOSE*2/(HIGH+LOW)*
+    CLOSE/OPEN*
+    LOW/REF(LOW,1)*
+    CLOSE/REF(HIGH,1);
+    
+MAC:AMOUNT/VOL/100;
+    
+MAS:HIGH/REF(HIGH,1)*
+    OPEN/REF(CLOSE,1)*
+    MAC/REF(CLOSE,1)*
+    MAC*2/(HIGH+LOW)*
+    MAC/OPEN*
+    LOW/REF(LOW,1)*
+    MAC/REF(HIGH,1);
+    
+NS:BARSLASTCOUNT(S>=1.3);
+NMAS:BARSLASTCOUNT(MAS>=1.3);
+N1:IF(MAS>=1.3,REF(NS,1)+1,0);
+
+R:(C-O)/(H-L);
+MAR:(MAC-O)/(H-L);
+    
+NR:BARSLASTCOUNT(R>=0.8);
+NMAR:BARSLASTCOUNT(MAR>=0.8);
+N2:IF(MAR>=0.8,REF(NR,1)+1,0);
+    
+DR:CLOSE/REF(CLOSE, 1)*100-100;
+N3:REF(BARSLASTCOUNT(DR>=9.8),1);
+ 
+*/
+
+
+
+
+
+
+
+
+
+
     public class StockResult
     {
         public string StockCode { get; set; }
