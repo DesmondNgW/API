@@ -31,11 +31,7 @@ N:BARSLASTCOUNT(DR>9.8);
 }
 */
 
-
-
-
 /*
-    
 S:HIGH/REF(HIGH,1)*
     OPEN/REF(CLOSE,1)*
     CLOSE/REF(CLOSE,1)*
@@ -71,15 +67,6 @@ N3:REF(BARSLASTCOUNT(DR>=9.8),1);
 K1:IF(NS>2,1,0)+IF(NR>2,1,0);
 K2:IF(NMAS>2,1,0)+IF(N1>2,1,0)+IF(NMAR>2,1,0)+IF(N2>2,1,0);
 */
-
-
-
-
-
-
-
-
-
 
     public class StockResult
     {
