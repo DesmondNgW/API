@@ -6,68 +6,6 @@ using X.Util.Entities.Enums;
 
 namespace X.UI.Consoles.Stock
 {
-
-/* 接力模式
-N>2:{
-S1:=HIGH/REF(HIGH,1)*100;
-S2:=OPEN/REF(CLOSE,1)*100;
-S3:=CLOSE/REF(CLOSE,1)*100;
-S4:=CLOSE*2/(HIGH+LOW)*100;
-S5:=CLOSE/OPEN*100;
-S6:=LOW/REF(LOW,1)*100;
-S7:=CLOSE/REF(HIGH,1)*100;
-S:S1*S2*S3*S4*S5*S6*S7/100/100/100/100/100/100/100;
-N:BARSLASTCOUNT(S>=1.3);
-}
-
-N>2:{
-R:(C-O)/(H-L);
-N:BARSLASTCOUNT(R>0.8);
-}
-
-N>2|N>1:{
-DR:CLOSE/REF(CLOSE, 1)*100-100;
-N:BARSLASTCOUNT(DR>9.8);
-}
-*/
-
-/*
-S:HIGH/REF(HIGH,1)*
-    OPEN/REF(CLOSE,1)*
-    CLOSE/REF(CLOSE,1)*
-    CLOSE*2/(HIGH+LOW)*
-    CLOSE/OPEN*
-    LOW/REF(LOW,1)*
-    CLOSE/REF(HIGH,1);
-    
-MAC:AMOUNT/VOL/100;
-    
-MAS:HIGH/REF(HIGH,1)*
-    OPEN/REF(CLOSE,1)*
-    MAC/REF(CLOSE,1)*
-    MAC*2/(HIGH+LOW)*
-    MAC/OPEN*
-    LOW/REF(LOW,1)*
-    MAC/REF(HIGH,1);
-    
-NS:BARSLASTCOUNT(S>=1.3);
-NMAS:BARSLASTCOUNT(MAS>=1.3);
-N1:IF(MAS>=1.3,REF(NS,1)+1,0);
-
-R:(C-O)/(H-L);
-MAR:(MAC-O)/(H-L);
-    
-NR:BARSLASTCOUNT(R>=0.8);
-NMAR:BARSLASTCOUNT(MAR>=0.8);
-N2:IF(MAR>=0.8,REF(NR,1)+1,0);
-    
-DR:CLOSE/REF(CLOSE, 1)*100-100;
-N3:REF(BARSLASTCOUNT(DR>=9.8),1);
-
-K1:IF(NS>2,1,0)+IF(NR>2,1,0);
-K2:IF(NMAS>2,1,0)+IF(N1>2,1,0)+IF(NMAR>2,1,0)+IF(N2>2,1,0);
-*/
-
     public class StockResult
     {
         public string StockCode { get; set; }
