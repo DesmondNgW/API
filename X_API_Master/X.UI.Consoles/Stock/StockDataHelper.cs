@@ -21,11 +21,12 @@ namespace X.UI.Consoles.Stock
             return ret;
         }
 
-        public static double GetAtr(Stock current, Stock prevent)
+        public static double GetComputePrice(List<Stock> list)
         {
-            //var ret = Math.Max(current.High - current.Low, Math.Abs(prevent.Close - current.High));
-            //ret = Math.Max(ret, Math.Abs(prevent.Close - current.Low));
-            return (current.High - current.Low) / prevent.Close;
+            var data = list.OrderBy(p => p.Date);
+            var ma = data.Skip(1).Average(p => p.Close);
+            var roc = (data.Last().Close - data.First().Close)/(list.Count - 1);
+            return ma + roc;
         }
 
         public static List<Stock> StockData(string code)
@@ -50,21 +51,21 @@ namespace X.UI.Consoles.Stock
             result = result.OrderBy(p => p.Date).ToList();
             for (var i = 0; i < result.Count; i++)
             {
+                result[i].ComputePrice = i < 6 ? 0 : GetComputePrice(result.Skip(i - 6).Take(6).ToList());
+                result[i].ComputePrice2 = i < 11 ? 0 : GetComputePrice(result.Skip(i - 11).Take(11).ToList());
                 result[i].Inc = i == 0 ? 0 : (result[i].Close - result[i - 1].Close)/result[i - 1].Close;
-                result[i].Position = (result[i].Close - result[i].Open) / (result[i].High - result[i].Low);
                 result[i].Strong = i == 0 ? 0 : GetStrong(result[i], result[i - 1]);
-                result[i].Atr = i == 0 ? 0 : GetAtr(result[i], result[i - 1]);
-                if (i == 0)
+                if (i < 2)
                 {
-                    result[i].PositionLength = result[i].Position >= 0.8 ? 1 : 0;
-                    result[i].StrongLength = result[i].Strong >= 1.3 ? 1 : 0;
-                    result[i].IncLength = result[i].Inc >= 0.095 ? 1 : 0;
+                    result[i].StrongLength = 0;
+                }
+                else if (i == 2)
+                {
+                    result[i].StrongLength = result[i].Strong * result[i - 1].Strong * result[i - 2].Strong >= 1 ? 1 : 0;
                 }
                 else
                 {
-                    result[i].PositionLength = result[i].Position >= 0.8 ? 1 + result[i - 1].PositionLength : 0;
-                    result[i].StrongLength = result[i].Strong >= 1.3 ? 1 + result[i - 1].StrongLength : 0;
-                    result[i].IncLength = result[i].Inc >= 0.095 ? 1 + result[i - 1].IncLength : 0;
+                    result[i].StrongLength = result[i].Strong * result[i - 1].Strong * result[i - 2].Strong >= 1 ? 1 + result[i - 1].StrongLength : 0;
                 }
                 for (var j = 1; j <= 20; j++)
                 {

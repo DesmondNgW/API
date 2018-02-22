@@ -33,13 +33,9 @@ namespace X.UI.Consoles.Stock
         /// </summary>
         public int StrongLength { get; set; }
 
-        public double Position { get; set; }
+        public double ComputePrice { get; set; }
 
-        public int PositionLength { get; set; }
-
-        public int IncLength { get; set; }
-
-        public double Atr { get; set; }
+        public double ComputePrice2 { get; set; }
 
         public double Remark { get; set; }
     }

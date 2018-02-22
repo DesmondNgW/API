@@ -21,7 +21,7 @@ namespace X.UI.Consoles
         {
             //StockTestHelper.Test("300666", stock =>
             //{
-            //    return (stock.IncLength > 1 || stock.PositionLength > 2 || stock.StrongLength > 2) && stock.Atr > 0;
+            //    return stock.StrongLength > 5;
             //});
 
             //TestCacheClient(1000);
@@ -39,7 +39,7 @@ namespace X.UI.Consoles
             //    Console.WriteLine("---------------------");
             //    Console.WriteLine(match.Groups[2]);
             //}
-            //Console.ReadKey();
+            Console.ReadKey();
         }
 
         static void Index()
