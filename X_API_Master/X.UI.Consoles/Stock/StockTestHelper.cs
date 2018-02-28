@@ -6,7 +6,7 @@ using X.Util.Entities.Enums;
 
 namespace X.UI.Consoles.Stock
 {
-    //基本分析 => 确认热点题材
+    //基本分析 => 确认热点题材以及龙头
     //技术分析 => 平均理念/摆荡理念/量能理念
     
     //趋势选股:
