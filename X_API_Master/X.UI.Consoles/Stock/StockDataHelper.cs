@@ -29,6 +29,18 @@ namespace X.UI.Consoles.Stock
             return ma + roc;
         }
 
+        public static double P(double ma, double std,double c)
+        {
+            return 1/Math.Pow(2*Math.PI, 0.5)/std*Math.Exp(-Math.Pow(c - ma, 2)/2/std/std);
+        }
+
+        public static double std(List<Stock> list)
+        {
+            var ma = list.Average(p => p.Close);
+            var std = Math.Pow(list.Sum(p => Math.Pow(p.Close - ma, 2))/list.Count, 0.5);
+            return std;
+        }
+
         public static List<Stock> StockData(string code)
         {
             var result = new List<Stock>();
@@ -55,6 +67,8 @@ namespace X.UI.Consoles.Stock
                 result[i].ComputePrice2 = i < 11 ? 0 : GetComputePrice(result.Skip(i - 11).Take(11).ToList());
                 result[i].Inc = i == 0 ? 0 : (result[i].Close - result[i - 1].Close)/result[i - 1].Close;
                 result[i].Strong = i == 0 ? 0 : GetStrong(result[i], result[i - 1]);
+                result[i].Ma = i < 4 ? 0 : result.Skip(i - 4).Take(5).Average(p => p.Close);
+                result[i].Std = i < 4 ? 0 : std(result.Skip(i - 4).Take(5).ToList());
                 if (i < 2)
                 {
                     result[i].StrongLength = 0;

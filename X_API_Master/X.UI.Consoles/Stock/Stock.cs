@@ -23,6 +23,10 @@ namespace X.UI.Consoles.Stock
 
         public Dictionary<int, StockSimple> StockSimple { get; set; }
 
+        public double Ma { get; set; }
+
+        public double Std { get; set; }
+
         /// <summary>
         /// Strong
         /// </summary>
