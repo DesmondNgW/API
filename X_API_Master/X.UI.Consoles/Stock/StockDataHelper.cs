@@ -29,11 +29,6 @@ namespace X.UI.Consoles.Stock
             return ma + roc;
         }
 
-        public static double P(double ma, double std,double c)
-        {
-            return 1/Math.Pow(2*Math.PI, 0.5)/std*Math.Exp(-Math.Pow(c - ma, 2)/2/std/std);
-        }
-
         public static double std(List<Stock> list)
         {
             var ma = list.Average(p => p.Close);
@@ -44,7 +39,7 @@ namespace X.UI.Consoles.Stock
         public static List<Stock> StockData(string code)
         {
             var result = new List<Stock>();
-            var ret = DbHelper.GetPageList("tradedata_tdx", "tdate desc", "scode='" + code + "'", 0, 500);
+            var ret = DbHelper.GetPageList("tradedata_tdx", "tdate desc", "scode='" + code + "'", 0, 10000);
             while (ret.Read())
             {
                 var item = new Stock
@@ -69,6 +64,14 @@ namespace X.UI.Consoles.Stock
                 result[i].Strong = i == 0 ? 0 : GetStrong(result[i], result[i - 1]);
                 result[i].Ma = i < 4 ? 0 : result.Skip(i - 4).Take(5).Average(p => p.Close);
                 result[i].Std = i < 4 ? 0 : std(result.Skip(i - 4).Take(5).ToList());
+                if (result[i].Std > 0)
+                {
+                    result[i].K = (result[i].Close - result[i].Ma)/result[i].Std;
+                }
+                if (result[i].Ma > 0)
+                {
+                    result[i].Cv = result[i].Std / result[i].Ma;
+                }
                 if (i < 2)
                 {
                     result[i].StrongLength = 0;

@@ -27,6 +27,10 @@ namespace X.UI.Consoles.Stock
 
         public double Std { get; set; }
 
+        public double K { get; set; }
+
+        public double Cv { get; set; }
+
         /// <summary>
         /// Strong
         /// </summary>

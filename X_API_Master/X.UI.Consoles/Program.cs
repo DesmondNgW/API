@@ -24,6 +24,8 @@ namespace X.UI.Consoles
             //    return stock.StrongLength > 5;
             //});
 
+            //StockTestHelper.TestP("600516");
+            
             //TestCacheClient(1000);
 
             //MongoDbBase<MongoTest1>.Default.SaveMongo(new MongoTest1 { Dt = DateTime.Now, Value = 1, Key = "test" }, "Test", "test");

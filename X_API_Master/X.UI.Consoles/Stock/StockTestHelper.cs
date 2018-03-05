@@ -162,5 +162,23 @@ namespace X.UI.Consoles.Stock
                 }
             }
         }
+
+        public static void TestP(string code)
+        {
+            var g = StockDataHelper.StockData(code);
+            var max = g.Max(p => p.K);
+            var min = g.Min(p => p.K);
+            var count = (max - min)*10;
+            for (var i = 0; i < count; i++)
+            {
+                var st = min + i*0.1;
+                var et = min + i*0.1 + 0.1;
+                var r = g.Count(k => k.K >= st && k.K <= et);
+                var p = (double)r/(double)g.Count;
+                Console.WriteLine("{0}-{1}:{2}", st, et, p);
+            }
+        }
+
+
     }
 }
