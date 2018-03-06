@@ -9,26 +9,6 @@ namespace X.UI.Consoles.Stock
     {
         private static readonly DbHelper DbHelper = DalHelper.DbHelper;
 
-        public static double GetStrong(Stock current, Stock prevent)
-        {
-            var ret = current.High/prevent.High;
-            ret *= current.Open/prevent.Close;
-            ret *= current.Close / prevent.Close;
-            ret *= 2*current.Close / (current.High + current.Low);
-            ret *= current.Close / current.Open;
-            ret *= current.Low / prevent.Low;
-            ret *= current.Close / prevent.High;
-            return ret;
-        }
-
-        public static double GetComputePrice(List<Stock> list)
-        {
-            var data = list.OrderBy(p => p.Date);
-            var ma = data.Skip(1).Average(p => p.Close);
-            var roc = (data.Last().Close - data.First().Close)/(list.Count - 1);
-            return ma + roc;
-        }
-
         public static double Std(List<Stock> list)
         {
             var ma = list.Average(p => p.Close);
@@ -62,6 +42,7 @@ namespace X.UI.Consoles.Stock
                 result[i].Ev = i < 4 ? 0 : result.Skip(i - 4).Take(5).Average(p => p.Close);
                 result[i].Std = i < 4 ? 0 : Std(result.Skip(i - 4).Take(5).ToList());
                 result[i].Ze = result.Take(i + 1).Average(p => p.ZScore);
+                result[i].Cve = result.Take(i + 1).Average(p => p.CoefficientVariation);
                 for (var j = 1; j <= 20; j++)
                 {
                     if (i + j < result.Count)

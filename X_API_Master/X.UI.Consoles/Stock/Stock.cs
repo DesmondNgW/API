@@ -53,6 +53,11 @@ namespace X.UI.Consoles.Stock
         /// 标准分数总体均值
         /// </summary>
         public double Ze { get; set; }
+
+        /// <summary>
+        /// 变异系数总体均值
+        /// </summary>
+        public double Cve { get; set; }
     }
 
     public class StockSimple

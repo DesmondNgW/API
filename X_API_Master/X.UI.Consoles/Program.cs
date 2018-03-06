@@ -24,8 +24,16 @@ namespace X.UI.Consoles
             //    return stock.StrongLength > 5;
             //});
 
-            //StockTestHelper.TestP("600516");
-            
+            var list = StockDataHelper.StockData("000333");
+            FileBase.WriteFile(AppDomain.CurrentDomain.BaseDirectory, "1.csv", string.Empty, "utf-8", FileBaseMode.Create);
+            foreach (var item in list)
+            {
+                FileBase.WriteFile(AppDomain.CurrentDomain.BaseDirectory, "1.csv",
+                    string.Format("{0},{1},{2},{3},{4}", item.ZScore, item.Ze,
+                        item.CoefficientVariation, item.Inc,item.Cve),
+                    "utf-8", FileBaseMode.Append);
+            }
+
             //TestCacheClient(1000);
 
             //MongoDbBase<MongoTest1>.Default.SaveMongo(new MongoTest1 { Dt = DateTime.Now, Value = 1, Key = "test" }, "Test", "test");
