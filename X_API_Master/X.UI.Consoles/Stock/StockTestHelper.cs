@@ -7,13 +7,7 @@ using X.Util.Entities.Enums;
 namespace X.UI.Consoles.Stock
 {
     //基本分析 => 确认热点题材以及龙头
-    //技术分析 => 平均理念/摆荡理念/量能理念
-    
-    //趋势选股:
-    
-    //策略1:10日内出现涨停收盘, 5日真实波动率大于4%, 5日均线向上、股价位于5日均线上方, 回踩5日线位置（盘中计算5日线动态位置）时买入;次日高抛.
-    //策略2:连续5日趋势向上, 5日真实波动率大于4%, 5日均线向上、股价位于5日均线上方, 回踩5日线位置（盘中计算5日线动态位置）时买入;次日高抛.
-    //策略3:趋势向上, 热点题材突破甚至涨停。
+    //技术分析 => 平均理念/摆荡理念/分时强度
 
     public class StockResult
     {
@@ -162,23 +156,5 @@ namespace X.UI.Consoles.Stock
                 }
             }
         }
-
-        public static void TestP(string code)
-        {
-            var g = StockDataHelper.StockData(code);
-            var max = g.Max(p => p.K);
-            var min = g.Min(p => p.K);
-            var count = (max - min)*10;
-            for (var i = 0; i < count; i++)
-            {
-                var st = min + i*0.1;
-                var et = min + i*0.1 + 0.1;
-                var r = g.Count(k => k.K >= st && k.K <= et);
-                var p = (double)r/(double)g.Count;
-                Console.WriteLine("{0}-{1}:{2}", st, et, p);
-            }
-        }
-
-
     }
 }

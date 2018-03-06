@@ -29,7 +29,7 @@ namespace X.UI.Consoles.Stock
             return ma + roc;
         }
 
-        public static double std(List<Stock> list)
+        public static double Std(List<Stock> list)
         {
             var ma = list.Average(p => p.Close);
             var std = Math.Pow(list.Sum(p => Math.Pow(p.Close - ma, 2))/list.Count, 0.5);
@@ -58,32 +58,10 @@ namespace X.UI.Consoles.Stock
             result = result.OrderBy(p => p.Date).ToList();
             for (var i = 0; i < result.Count; i++)
             {
-                result[i].ComputePrice = i < 6 ? 0 : GetComputePrice(result.Skip(i - 6).Take(6).ToList());
-                result[i].ComputePrice2 = i < 11 ? 0 : GetComputePrice(result.Skip(i - 11).Take(11).ToList());
                 result[i].Inc = i == 0 ? 0 : (result[i].Close - result[i - 1].Close)/result[i - 1].Close;
-                result[i].Strong = i == 0 ? 0 : GetStrong(result[i], result[i - 1]);
-                result[i].Ma = i < 4 ? 0 : result.Skip(i - 4).Take(5).Average(p => p.Close);
-                result[i].Std = i < 4 ? 0 : std(result.Skip(i - 4).Take(5).ToList());
-                if (result[i].Std > 0)
-                {
-                    result[i].K = (result[i].Close - result[i].Ma)/result[i].Std;
-                }
-                if (result[i].Ma > 0)
-                {
-                    result[i].Cv = result[i].Std / result[i].Ma;
-                }
-                if (i < 2)
-                {
-                    result[i].StrongLength = 0;
-                }
-                else if (i == 2)
-                {
-                    result[i].StrongLength = result[i].Strong * result[i - 1].Strong * result[i - 2].Strong >= 1 ? 1 : 0;
-                }
-                else
-                {
-                    result[i].StrongLength = result[i].Strong * result[i - 1].Strong * result[i - 2].Strong >= 1 ? 1 + result[i - 1].StrongLength : 0;
-                }
+                result[i].Ev = i < 4 ? 0 : result.Skip(i - 4).Take(5).Average(p => p.Close);
+                result[i].Std = i < 4 ? 0 : Std(result.Skip(i - 4).Take(5).ToList());
+                result[i].Ze = result.Take(i + 1).Average(p => p.ZScore);
                 for (var j = 1; j <= 20; j++)
                 {
                     if (i + j < result.Count)

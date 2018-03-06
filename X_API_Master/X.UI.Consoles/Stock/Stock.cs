@@ -23,29 +23,36 @@ namespace X.UI.Consoles.Stock
 
         public Dictionary<int, StockSimple> StockSimple { get; set; }
 
-        public double Ma { get; set; }
+        /// <summary>
+        /// 均值
+        /// </summary>
+        public double Ev  { get; set; }
 
+        /// <summary>
+        /// 标准差
+        /// </summary>
         public double Std { get; set; }
 
-        public double K { get; set; }
-
-        public double Cv { get; set; }
+        /// <summary>
+        /// 标准分数
+        /// </summary>
+        public double ZScore
+        {
+            get { return Std > 0 ? (Close - Ev) / Std : 0; }
+        }
 
         /// <summary>
-        /// Strong
+        /// 变异系数
         /// </summary>
-        public double Strong { get; set; }
+        public double CoefficientVariation
+        {
+            get { return Ev > 0 ? Std / Ev : 0; }
+        }
 
         /// <summary>
-        /// StrongLength
+        /// 标准分数总体均值
         /// </summary>
-        public int StrongLength { get; set; }
-
-        public double ComputePrice { get; set; }
-
-        public double ComputePrice2 { get; set; }
-
-        public double Remark { get; set; }
+        public double Ze { get; set; }
     }
 
     public class StockSimple
