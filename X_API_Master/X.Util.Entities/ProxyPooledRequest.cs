@@ -16,6 +16,14 @@ namespace X.Util.Entities
 
         public Func<TChannel, bool> ChannelIsVail { get; set; }
 
+        /// <summary>
+        /// 通道生命周期,0=>使用一次
+        /// </summary>
         public TimeSpan ChannelLifeCycle { get; set; }
+
+        /// <summary>
+        /// 通道回收周期
+        /// </summary>
+        public TimeSpan ChannelRecycle { get; set; }
     }
 }

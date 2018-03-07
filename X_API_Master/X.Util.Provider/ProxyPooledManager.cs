@@ -24,6 +24,7 @@ namespace X.Util.Provider
             if (request.CreateChannel == null) throw new Exception("CreateChannel is method.");
             if (request.CloseChannel == null) request.CloseChannel = chnanel => { };
             if (request.ChannelIsVail == null) request.ChannelIsVail = channel => true;
+            if (request.ChannelRecycle == default(TimeSpan)) request.ChannelRecycle = new TimeSpan(0, 1, 0);
             Request = request;
             CacheKey = string.Format("{0}_{1}", Request.EndpointAddress, Request.PoolSize);
             var th = new Thread(() =>
@@ -37,7 +38,7 @@ namespace X.Util.Provider
                             Request.CloseChannel(contextChannel.Channel);
                         }
                     }
-                    Thread.Sleep(60000);
+                    Thread.Sleep(request.ChannelRecycle);
                 }
                 // ReSharper disable once FunctionNeverReturns
             }) {IsBackground = true};

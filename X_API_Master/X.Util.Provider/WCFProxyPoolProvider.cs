@@ -21,14 +21,15 @@ namespace X.Util.Provider
         public readonly CoreServiceModel ServiceModel = ServiceModelTool.GetServiceModel<TChannel>();
         private IProxyPooled<TChannel> GetProxyPooledManager()
         {
-            return new ProxyPooledManager<TChannel>(new ProxyPooledRequest<TChannel>()
+            return new ProxyPooledManager<TChannel>(new ProxyPooledRequest<TChannel>
             {
                 PoolSize = Math.Max(ServiceModel.MaxPoolSize, 20),
                 EndpointAddress = EndpointAddress,
                 CreateChannel = CoreChannelFactory.CreateChannel,
                 InitChannel = InitChannel,
                 CloseChannel = CloseChannel,
-                ChannelLifeCycle = new TimeSpan(0, 3, 0),
+                ChannelLifeCycle = new TimeSpan(0, 0, 0),
+                ChannelRecycle = new TimeSpan(0, 1, 0),
                 ChannelIsVail = Core<TChannel>.IsValid4CommunicationObject
             });
         }
