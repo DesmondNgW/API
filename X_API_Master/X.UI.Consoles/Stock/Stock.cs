@@ -26,7 +26,7 @@ namespace X.UI.Consoles.Stock
         /// <summary>
         /// 均值
         /// </summary>
-        public double Ev  { get; set; }
+        public double Ma  { get; set; }
 
         /// <summary>
         /// 标准差
@@ -38,7 +38,7 @@ namespace X.UI.Consoles.Stock
         /// </summary>
         public double ZScore
         {
-            get { return Std > 0 ? (Close - Ev) / Std : 0; }
+            get { return Std > 0 ? (Close - Ma) / Std : 0; }
         }
 
         /// <summary>
@@ -46,18 +46,23 @@ namespace X.UI.Consoles.Stock
         /// </summary>
         public double CoefficientVariation
         {
-            get { return Ev > 0 ? Std / Ev : 0; }
+            get { return Ma > 0 ? Std / Ma : 0; }
         }
 
         /// <summary>
         /// 标准分数总体均值
         /// </summary>
-        public double Ze { get; set; }
+        public double ZScoreMa { get; set; }
 
         /// <summary>
-        /// 变异系数总体均值
+        /// Score
         /// </summary>
-        public double Cve { get; set; }
+        public double Score { get; set; }
+
+        /// <summary>
+        /// ScoreMax
+        /// </summary>
+        public double ScoreMax { get; set; }
     }
 
     public class StockSimple

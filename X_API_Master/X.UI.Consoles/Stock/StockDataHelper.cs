@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using X.DataBase.Helper;
+using X.Util.Core.Common;
 
 namespace X.UI.Consoles.Stock
 {
@@ -16,7 +17,34 @@ namespace X.UI.Consoles.Stock
             return std;
         }
 
-        public static List<Stock> StockData(string code)
+        public static double Score(Stock current, Stock previous)
+        {
+            return current.High/previous.High*
+                   current.Open/previous.Close*
+                   current.Close/previous.Close*
+                   current.Close/previous.Close*
+                   2*current.Close/(current.High + current.Low)*
+                   current.Low/previous.Low*
+                   current.Close/previous.High;
+        }
+
+        public static double ScoreMax(Stock current, Stock previous)
+        {
+            return current.High / previous.High *
+                   current.Open / previous.Close *
+                   current.High / previous.Close *
+                   current.High / previous.Close *
+                   2 * current.High / (current.High + current.Low) *
+                   current.Low / previous.Low *
+                   current.High / previous.High;
+        }
+
+        /// <summary>
+        /// 数据库数据
+        /// </summary>
+        /// <param name="code"></param>
+        /// <returns></returns>
+        public static List<Stock> GetRealStockData(string code)
         {
             var result = new List<Stock>();
             var ret = DbHelper.GetPageList("tradedata_tdx", "tdate desc", "scode='" + code + "'", 0, 10000);
@@ -35,14 +63,57 @@ namespace X.UI.Consoles.Stock
                 };
                 result.Add(item);
             }
+            return result;
+        }
+
+        public static Stock GetStock(Stock t, double prev, int count)
+        {
+            var f = 0.2*(StringConvert.SysRandom.NextDouble() - 0.5)*prev;
+            t.Open = f;
+            t.High = f;
+            t.Low = f;
+            t.Close = f;
+            while (count-- > 0)
+            {
+                t.Close = 0.2*(StringConvert.SysRandom.NextDouble() - 0.5)*prev;
+                t.High = Math.Max(t.High, 0.2*(StringConvert.SysRandom.NextDouble() - 0.5)*prev);
+                t.Low = Math.Min(t.Low, 0.2*(StringConvert.SysRandom.NextDouble() - 0.5)*prev);
+            }
+            return t;
+        }
+
+        public static List<Stock> GetTestStockData(int count)
+        {
+            var result = new List<Stock>();
+            var ret = default(Stock);
+            while (count-- > 0)
+            {
+                var prev = ret != null ? ret.Close : 14;
+                ret = new Stock
+                {
+                    StockSimple = new Dictionary<int, StockSimple>(),
+                    StockCode = "TestCode",
+                    StockName = "TestName",
+                    Date = DateTime.MaxValue
+                };
+                ret = GetStock(ret, prev, 240);
+                result.Add(ret);
+            }
+            return result;
+        }
+
+        public static List<Stock> StockData(string code, bool test = false)
+        {
+            var result = test ? GetTestStockData(25000) : GetRealStockData(code);
             result = result.OrderBy(p => p.Date).ToList();
             for (var i = 0; i < result.Count; i++)
             {
                 result[i].Inc = i == 0 ? 0 : (result[i].Close - result[i - 1].Close)/result[i - 1].Close;
-                result[i].Ev = i < 4 ? 0 : result.Skip(i - 4).Take(5).Average(p => p.Close);
+                result[i].Ma = i < 4 ? 0 : result.Skip(i - 4).Take(5).Average(p => p.Close);
                 result[i].Std = i < 4 ? 0 : Std(result.Skip(i - 4).Take(5).ToList());
-                result[i].Ze = result.Take(i + 1).Average(p => p.ZScore);
-                result[i].Cve = result.Take(i + 1).Average(p => p.CoefficientVariation);
+                result[i].ZScoreMa = result.Take(i + 1).Average(p => p.ZScore);
+                result[i].Score = i == 0 ? 0 : Score(result[i], result[i - 1]);
+                result[i].ScoreMax = i == 0 ? 0 : ScoreMax(result[i], result[i - 1]);
                 for (var j = 1; j <= 20; j++)
                 {
                     if (i + j < result.Count)

@@ -24,13 +24,13 @@ namespace X.UI.Consoles
             //    return stock.StrongLength > 5;
             //});
 
-            //var list = StockDataHelper.StockData("000333");
+            //var list = StockDataHelper.StockData("600903", true);
             //FileBase.WriteFile(AppDomain.CurrentDomain.BaseDirectory, "1.csv", string.Empty, "utf-8", FileBaseMode.Create);
             //foreach (var item in list)
             //{
             //    FileBase.WriteFile(AppDomain.CurrentDomain.BaseDirectory, "1.csv",
             //        string.Format("{0},{1},{2},{3},{4}", item.ZScore, item.Ze,
-            //            item.CoefficientVariation, item.Inc,item.Cve),
+            //            item.CoefficientVariation, item.Inc, item.Cve),
             //        "utf-8", FileBaseMode.Append);
             //}
 
@@ -40,7 +40,6 @@ namespace X.UI.Consoles
             //MongoDbBase<MongoTest2>.Default.SaveMongo(new MongoTest2 { Dt = DateTime.Now, Value = "15", Key = "test" }, "Test", "test");
             //var s = MongoDbBase<MongoTest>.Default.FindBsonDocument("Test", "test", Query.Null);
             //var f = MongoDbBase<MongoTest>.ToEntity(s);
-
             Console.ReadKey();
         }
 
