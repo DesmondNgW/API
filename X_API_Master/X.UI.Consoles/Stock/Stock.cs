@@ -63,6 +63,35 @@ namespace X.UI.Consoles.Stock
         /// ScoreMax
         /// </summary>
         public double ScoreMax { get; set; }
+
+        /// <summary>
+        /// HeiKinAShiClose
+        /// </summary>
+        public double HeiKinAShiClose
+        {
+            get { return Close + High + Low + Open; }
+        }
+
+        /// <summary>
+        /// HeiKinAShiLow
+        /// </summary>
+        public double HeiKinAShiLow
+        {
+            get { return Math.Min(Math.Min(HeiKinAShiClose, HeiKinAShiOpen), Low); }
+        }
+
+        /// <summary>
+        /// HeiKinAShiOpen
+        /// </summary>
+        public double HeiKinAShiOpen { get; set; }
+
+        /// <summary>
+        /// HeiKinAShiHigh
+        /// </summary>
+        public double HeiKinAShiHigh
+        {
+            get { return Math.Max(Math.Max(HeiKinAShiClose, HeiKinAShiOpen), High); }
+        }
     }
 
     public class StockSimple

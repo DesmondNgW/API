@@ -108,6 +108,7 @@ namespace X.UI.Consoles.Stock
             result = result.OrderBy(p => p.Date).ToList();
             for (var i = 0; i < result.Count; i++)
             {
+                result[i].HeiKinAShiOpen = i == 0 ? 0 : (result[i - 1].Open + result[i - 1].Close)/2;
                 result[i].Inc = i == 0 ? 0 : (result[i].Close - result[i - 1].Close)/result[i - 1].Close;
                 result[i].Ma = i < 4 ? 0 : result.Skip(i - 4).Take(5).Average(p => p.Close);
                 result[i].Std = i < 4 ? 0 : Std(result.Skip(i - 4).Take(5).ToList());
