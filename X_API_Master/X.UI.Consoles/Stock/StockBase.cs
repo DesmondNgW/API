@@ -36,7 +36,9 @@ namespace X.UI.Consoles.Stock
         /// </summary>
         public string StockCode { get; set; }
 
-
+        /// <summary>
+        /// 名称
+        /// </summary>
         public string StockName { get; set; }
         /// <summary>
         /// 最高价
