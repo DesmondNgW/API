@@ -1,5 +1,5 @@
 ﻿
-namespace X.UI.Consoles.Stock
+namespace X.UI.Web.Stock
 {
     public class StockBase
     {
@@ -35,7 +35,6 @@ namespace X.UI.Consoles.Stock
         /// 代码
         /// </summary>
         public string StockCode { get; set; }
-
 
         public string StockName { get; set; }
         /// <summary>

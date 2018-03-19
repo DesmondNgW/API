@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Linq;
 using System.Web;
 using Em.FundTrade.EncryptHelper;
+using X.UI.Web.Stock;
 using X.Util.Core;
 using X.Util.Core.Xml;
 using X.Util.Other;
@@ -29,6 +31,12 @@ namespace X.UI.Web
                     break;
                 case 2:
                     Out(contentType, ChineseConvert.Get(p1));
+                    break;
+                case 3:
+                    var dic = StockMonitor.GetStockPrice();
+                    var special = StockMonitor.GetSpecialStockPrice(dic);
+                    special.AddRange(dic.Select(item => item.Value).OrderByDescending(p => p.Inc));
+                    Out(contentType, special);
                     break;
                 default:
                     break;

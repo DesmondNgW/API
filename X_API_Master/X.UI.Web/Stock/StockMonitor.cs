@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading;
 using X.Util.Other;
 
-namespace X.UI.Consoles.Stock
+namespace X.UI.Web.Stock
 {
     public class StockMonitor
     {
@@ -81,7 +81,7 @@ namespace X.UI.Consoles.Stock
             var ret = HttpRequestBase.GetHttpInfo(uri, "gb2312", "application/json", null, string.Empty);
             var content = ret.Content.Split('\"')[1];
             var arr = content.Split(',');
-            var result = new StockPrice
+            var result =new StockPrice
             {
                 StockCode = code,
                 StockName = arr[0],
