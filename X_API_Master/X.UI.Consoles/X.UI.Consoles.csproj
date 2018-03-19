@@ -91,9 +91,11 @@
     <Compile Include="Stock\Stock.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Stock\StockBase.cs" />
     <Compile Include="Stock\StockDataHelper.cs" />
     <Compile Include="Stock\StockL2.cs" />
     <Compile Include="Stock\StockL2Helper.cs" />
+    <Compile Include="Stock\StockMonitor.cs" />
     <Compile Include="Stock\StockPerformance.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -127,6 +129,24 @@
     <Content Include="App_Data\app.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="App_Data\code_1.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="App_Data\code_2.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="App_Data\code_3.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="App_Data\code_4.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="App_Data\code_5.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="App_Data\code_6.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="App_Data\Config.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <SubType>Designer</SubType>
@@ -134,6 +154,9 @@
     <Content Include="App_Data\endpoint.xml">
       <SubType>
       </SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="App_Data\stockbase.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Em.FundTrade.EncryptHelper.dll" />

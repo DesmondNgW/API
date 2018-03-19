@@ -19,6 +19,7 @@ namespace X.UI.Consoles
     {
         static void Main()
         {
+            StockMonitor.Monitor();
             //StockTestHelper.Test("300666", stock =>
             //{
             //    return stock.StrongLength > 5;
