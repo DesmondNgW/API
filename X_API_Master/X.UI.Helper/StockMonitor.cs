@@ -80,6 +80,7 @@ namespace X.UI.Helper
         {
             var uri = code.StartsWith("6") ? "http://hq.sinajs.cn/list=sh" + code : "http://hq.sinajs.cn/list=sz" + code;
             var ret = HttpRequestBase.GetHttpInfo(uri, "gb2312", "application/json", null, string.Empty);
+            if (string.IsNullOrEmpty(ret.Content)) return default(StockPrice);
             var content = ret.Content.Split('\"')[1];
             var arr = content.Split(',');
             var result = new StockPrice
@@ -132,7 +133,7 @@ namespace X.UI.Helper
                 var item = stockPrice[code];
                 var capital = StockBase.First(p => p.StockCode == code).NegotiableCapital;
                 toatlCapital += capital;
-                ret += capital * item.Inc;
+                ret += capital*(item != null ? item.Inc : 0);
             }
             ret /= toatlCapital;
             return ret;
@@ -176,7 +177,6 @@ namespace X.UI.Helper
             return ret;
         }
 
-
         public static void Monitor()
         {
             var d1 = DateTime.Now.Date.AddHours(9).AddMinutes(30);
@@ -188,13 +188,19 @@ namespace X.UI.Helper
                 var dic = GetStockPrice();
                 if ((DateTime.Now >= d1 && DateTime.Now <= d2) || (DateTime.Now >= d3 && DateTime.Now <= d4))
                 {
-                    Console.WriteLine("code_1:" + Monitor(dic, GetCodeList_1()));
-                    Console.WriteLine("code_2:" + Monitor(dic, GetCodeList_2()));
-                    Console.WriteLine("code_3:" + Monitor(dic, GetCodeList_3()));
-                    Console.WriteLine("code_4:" + Monitor(dic, GetCodeList_4()));
-                    Console.WriteLine("code_5:" + Monitor(dic, GetCodeList_5()));
-                    Console.WriteLine("code_6:" + Monitor(dic, GetCodeList_6()));
-                    foreach (var item in dic.Where(p => p.Value.Inc >= 4).OrderByDescending(p => p.Value.Inc))
+                    var monitor1 = Monitor(dic, GetCodeList_1());
+                    var monitor2 = Monitor(dic, GetCodeList_2());
+                    var monitor3 = Monitor(dic, GetCodeList_3());
+                    var monitor4 = Monitor(dic, GetCodeList_4());
+                    var monitor5 = Monitor(dic, GetCodeList_5());
+                    var monitor6 = Monitor(dic, GetCodeList_6());
+                    if (monitor1 >= 0.5M) Console.WriteLine("code_1:" + monitor1);
+                    if (monitor2 >= 0.5M) Console.WriteLine("code_2:" + monitor2);
+                    if (monitor3 >= 0.5M) Console.WriteLine("code_3:" + monitor3);
+                    if (monitor4 >= 0.5M) Console.WriteLine("code_4:" + monitor4);
+                    if (monitor5 >= 0.5M) Console.WriteLine("code_5:" + monitor5);
+                    if (monitor6 >= 0.5M) Console.WriteLine("code_6:" + monitor6);
+                    foreach (var item in dic.Where(p => p.Value != null && (p.Value.Inc >= 4 || p.Value.Inc <= -6)).OrderByDescending(p => p.Value.Inc))
                     {
                         Console.WriteLine(item.Value.StockName + "(" + item.Value.StockCode + ")" + ":" + item.Value.Inc);
                     }
