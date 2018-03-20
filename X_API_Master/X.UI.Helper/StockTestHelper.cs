@@ -1,34 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using X.UI.Entities;
 using X.Util.Core.Log;
 using X.Util.Entities.Enums;
 
-namespace X.UI.Consoles.Stock
+namespace X.UI.Helper
 {
     //基本分析 => 确认热点题材以及龙头
     //技术分析 => 平均理念/摆荡理念/分时强度
-
-    public class StockResult
-    {
-        public string StockCode { get; set; }
-
-        public string StockName { get; set; }
-
-        public double Nav1 { get; set; }
-        public double Nav2 { get; set; }
-        public double Nav3 { get; set; }
-        public double Nav4 { get; set; }
-        public double Nav5 { get; set; }
-        public double Nav6 { get; set; }
-        public double Nav7 { get; set; }
-        public double Nav8 { get; set; }
-        public double Nav9 { get; set; }
-
-        public int Times { get; set; }
-
-        public DateTime NextDateTime { get; set; }
-    }
 
     public class StockTestHelper
     {

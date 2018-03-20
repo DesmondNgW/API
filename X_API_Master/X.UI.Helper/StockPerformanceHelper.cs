@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using X.UI.Entities;
 using X.Util.Entities.Enums;
 using X.Util.Other;
 
-namespace X.UI.Consoles.Stock
+namespace X.UI.Helper
 {
     public class StockPerformanceHelper
     {

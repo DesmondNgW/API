@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using X.UI.Entities;
 
-namespace X.UI.Consoles.Stock
+namespace X.UI.Helper
 {
     public class StockScoreHelper
     {

@@ -1,4 +1,4 @@
-﻿namespace X.UI.Consoles.Stock
+﻿namespace X.UI.Entities
 {
     public class StockScoreExtend
     {

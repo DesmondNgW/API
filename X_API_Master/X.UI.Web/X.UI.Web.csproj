@@ -172,8 +172,6 @@
       <DependentUpon>nocache.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Stock\StockBase.cs" />
-    <Compile Include="Stock\StockMonitor.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="gulp-build.bat" />
@@ -190,6 +188,14 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\X.UI.Entities\X.UI.Entities.csproj">
+      <Project>{599E03E7-AFD7-4F51-8069-CA70A343B127}</Project>
+      <Name>X.UI.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\X.UI.Helper\X.UI.Helper.csproj">
+      <Project>{76A733D7-EDAA-4EDF-B4A3-CFD197B467EB}</Project>
+      <Name>X.UI.Helper</Name>
+    </ProjectReference>
     <ProjectReference Include="..\X.Util.Core\X.Util.Core.csproj">
       <Project>{eabbc505-6258-40cd-b1b6-2d100ba45aec}</Project>
       <Name>X.Util.Core</Name>

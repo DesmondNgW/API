@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace X.UI.Consoles.Stock
+namespace X.UI.Entities
 {
     public enum Operate
     {

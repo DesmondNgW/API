@@ -2,22 +2,23 @@
 using System.Collections.Generic;
 using System.Linq;
 using X.DataBase.Helper;
+using X.UI.Entities;
 using X.Util.Core.Common;
 
-namespace X.UI.Consoles.Stock
+namespace X.UI.Helper
 {
     public class StockDataHelper
     {
         private static readonly DbHelper DbHelper = DalHelper.DbHelper;
 
-        public static double Std(List<Stock> list)
+        public static double Std(List<Entities.Stock> list)
         {
             var ma = list.Average(p => p.Close);
             var std = Math.Pow(list.Sum(p => Math.Pow(p.Close - ma, 2))/list.Count, 0.5);
             return std;
         }
 
-        public static double Score(Stock current, Stock previous)
+        public static double Score(Entities.Stock current, Entities.Stock previous)
         {
             return current.High/previous.High*
                    current.Open/previous.Close*
@@ -28,7 +29,7 @@ namespace X.UI.Consoles.Stock
                    current.Close/previous.High;
         }
 
-        public static double ScoreMax(Stock current, Stock previous)
+        public static double ScoreMax(Entities.Stock current, Entities.Stock previous)
         {
             return current.High / previous.High *
                    current.Open / previous.Close *
@@ -44,13 +45,13 @@ namespace X.UI.Consoles.Stock
         /// </summary>
         /// <param name="code"></param>
         /// <returns></returns>
-        public static List<Stock> GetRealStockData(string code)
+        public static List<Entities.Stock> GetRealStockData(string code)
         {
-            var result = new List<Stock>();
+            var result = new List<Entities.Stock>();
             var ret = DbHelper.GetPageList("tradedata_tdx", "tdate desc", "scode='" + code + "'", 0, 10000);
             while (ret.Read())
             {
-                var item = new Stock
+                var item = new Entities.Stock
                 {
                     StockCode = DalHelper.GetString(ret["Scode"]),
                     StockName = DalHelper.GetString(ret["Sname"]),
@@ -66,7 +67,7 @@ namespace X.UI.Consoles.Stock
             return result;
         }
 
-        public static Stock GetStock(Stock t, double prev, int count)
+        public static Entities.Stock GetStock(Entities.Stock t, double prev, int count)
         {
             var f = 0.2*(StringConvert.SysRandom.NextDouble() - 0.5)*prev;
             t.Open = f;
@@ -82,14 +83,14 @@ namespace X.UI.Consoles.Stock
             return t;
         }
 
-        public static List<Stock> GetTestStockData(int count)
+        public static List<Entities.Stock> GetTestStockData(int count)
         {
-            var result = new List<Stock>();
-            var ret = default(Stock);
+            var result = new List<Entities.Stock>();
+            var ret = default(Entities.Stock);
             while (count-- > 0)
             {
                 var prev = ret != null ? ret.Close : 14;
-                ret = new Stock
+                ret = new Entities.Stock
                 {
                     StockSimple = new Dictionary<int, StockSimple>(),
                     StockCode = "TestCode",
@@ -102,7 +103,7 @@ namespace X.UI.Consoles.Stock
             return result;
         }
 
-        public static List<Stock> StockData(string code, bool test = false)
+        public static List<Entities.Stock> StockData(string code, bool test = false)
         {
             var result = test ? GetTestStockData(25000) : GetRealStockData(code);
             result = result.OrderBy(p => p.Date).ToList();

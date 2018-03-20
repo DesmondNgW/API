@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading;
+using X.UI.Entities;
 using X.Util.Other;
 
-namespace X.UI.Web.Stock
+namespace X.UI.Helper
 {
     public class StockMonitor
     {
@@ -81,7 +82,7 @@ namespace X.UI.Web.Stock
             var ret = HttpRequestBase.GetHttpInfo(uri, "gb2312", "application/json", null, string.Empty);
             var content = ret.Content.Split('\"')[1];
             var arr = content.Split(',');
-            var result =new StockPrice
+            var result = new StockPrice
             {
                 StockCode = code,
                 StockName = arr[0],
@@ -181,7 +182,7 @@ namespace X.UI.Web.Stock
             var d1 = DateTime.Now.Date.AddHours(9).AddMinutes(30);
             var d2 = DateTime.Now.Date.AddHours(11).AddMinutes(30);
             var d3 = DateTime.Now.Date.AddHours(13);
-            var d4 = DateTime.Now.Date.AddHours(15);
+            var d4 = DateTime.Now.Date.AddHours(19);
             while (true)
             {
                 var dic = GetStockPrice();
@@ -193,6 +194,10 @@ namespace X.UI.Web.Stock
                     Console.WriteLine("code_4:" + Monitor(dic, GetCodeList_4()));
                     Console.WriteLine("code_5:" + Monitor(dic, GetCodeList_5()));
                     Console.WriteLine("code_6:" + Monitor(dic, GetCodeList_6()));
+                    foreach (var item in dic.Where(p => p.Value.Inc >= 4).OrderByDescending(p => p.Value.Inc))
+                    {
+                        Console.WriteLine(item.Value.StockName + "(" + item.Value.StockCode + ")" + ":" + item.Value.Inc);
+                    }
                 }
                 Thread.Sleep(6000);
             }

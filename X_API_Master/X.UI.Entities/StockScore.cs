@@ -1,4 +1,4 @@
-﻿namespace X.UI.Consoles.Stock
+﻿namespace X.UI.Entities
 {
     /// <summary>
     /// 计算证券的得分,量化股票的强度,

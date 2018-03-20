@@ -4,12 +4,12 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{76A733D7-EDAA-4EDF-B4A3-CFD197B467EB}</ProjectGuid>
+    <ProjectGuid>{599E03E7-AFD7-4F51-8069-CA70A343B127}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>X.UI.Helper</RootNamespace>
-    <AssemblyName>X.UI.Helper</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <RootNamespace>X.UI.Entities</RootNamespace>
+    <AssemblyName>X.UI.Entities</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -39,36 +39,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ElementHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="StockDataHelper.cs" />
-    <Compile Include="StockL2Helper.cs" />
-    <Compile Include="StockMonitor.cs" />
-    <Compile Include="StockPerformanceHelper.cs" />
-    <Compile Include="StockScoreHelper.cs" />
-    <Compile Include="StockTestHelper.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\X.DataBase.Helper\X.DataBase.Helper.csproj">
-      <Project>{FD2D5673-7E88-4675-9A21-3075704C1AFC}</Project>
-      <Name>X.DataBase.Helper</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\X.UI.Entities\X.UI.Entities.csproj">
-      <Project>{599e03e7-afd7-4f51-8069-ca70a343b127}</Project>
-      <Name>X.UI.Entities</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\X.Util.Core\X.Util.Core.csproj">
-      <Project>{EABBC505-6258-40CD-B1B6-2D100BA45AEC}</Project>
-      <Name>X.Util.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\X.Util.Entities\X.Util.Entities.csproj">
-      <Project>{85A098CE-6BA6-4C4D-9C7F-1C3DFB5B0A15}</Project>
-      <Name>X.Util.Entities</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\X.Util.Other\X.Util.Other.csproj">
-      <Project>{534B9A37-9B27-42DB-81E8-69F67600934B}</Project>
-      <Name>X.Util.Other</Name>
-    </ProjectReference>
+    <Compile Include="Stock.cs" />
+    <Compile Include="StockBase.cs" />
+    <Compile Include="StockL2.cs" />
+    <Compile Include="StockPerformance.cs" />
+    <Compile Include="StockPrice.cs" />
+    <Compile Include="StockResult.cs" />
+    <Compile Include="StockScore.cs" />
+    <Compile Include="StockScoreExtend.cs" />
+    <Compile Include="StockSimple.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

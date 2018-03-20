@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using X.UI.Entities;
 using X.Util.Core;
 
-namespace X.UI.Consoles.Stock
+namespace X.UI.Helper
 {
     public class StockL2Helper
     {

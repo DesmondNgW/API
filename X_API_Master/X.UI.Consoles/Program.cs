@@ -8,7 +8,7 @@ using System.Web.UI.HtmlControls;
 using System.Xml;
 using MongoDB.Bson;
 using X.DataBase.Helper;
-using X.UI.Consoles.Stock;
+using X.UI.Helper;
 using X.Util.Core.Xml;
 using X.Util.Entities.Enums;
 using X.Util.Other;

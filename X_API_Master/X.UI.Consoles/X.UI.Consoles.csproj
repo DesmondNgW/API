@@ -88,32 +88,6 @@
   <ItemGroup>
     <Compile Include="CacheClientTest.cs" />
     <Compile Include="ConsoleHelper.cs" />
-    <Compile Include="Stock\Stock.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Stock\StockBase.cs" />
-    <Compile Include="Stock\StockDataHelper.cs" />
-    <Compile Include="Stock\StockL2.cs" />
-    <Compile Include="Stock\StockL2Helper.cs" />
-    <Compile Include="Stock\StockMonitor.cs" />
-    <Compile Include="Stock\StockPerformance.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Stock\StockPerformanceHelper.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Stock\StockScore.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Stock\StockScoreExtend.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Stock\StockScoreHelper.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Stock\StockTestHelper.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="ThirdPartyTest.cs" />
     <Compile Include="APITestMethods.cs" />
     <Compile Include="Program.cs" />
@@ -197,6 +171,10 @@
     <ProjectReference Include="..\X.Interface.Dto\X.Interface.Dto.csproj">
       <Project>{4603dd54-fbc3-42ac-ad98-f0dbd0944f00}</Project>
       <Name>X.Interface.Dto</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\X.UI.Helper\X.UI.Helper.csproj">
+      <Project>{76A733D7-EDAA-4EDF-B4A3-CFD197B467EB}</Project>
+      <Name>X.UI.Helper</Name>
     </ProjectReference>
     <ProjectReference Include="..\X.Util.Core\X.Util.Core.csproj">
       <Project>{eabbc505-6258-40cd-b1b6-2d100ba45aec}</Project>

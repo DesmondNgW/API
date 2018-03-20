@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace X.UI.Consoles.Stock
+namespace X.UI.Entities
 {
     public class Stock
     {
@@ -92,22 +92,5 @@ namespace X.UI.Consoles.Stock
         {
             get { return Math.Max(Math.Max(HeiKinAShiClose, HeiKinAShiOpen), High); }
         }
-    }
-
-    public class StockSimple
-    {
-        public double Open { get; set; }
-
-        public double Close { get; set; }
-
-        public double High { get; set; }
-
-        public double Low { get; set; }
-
-        public DateTime Date { get; set; }
-
-        public string StockCode { get; set; }
-
-        public string StockName { get; set; }
     }
 }

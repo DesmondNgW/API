@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Web;
 using Em.FundTrade.EncryptHelper;
-using X.UI.Web.Stock;
+using X.UI.Helper;
 using X.Util.Core;
 using X.Util.Core.Xml;
 using X.Util.Other;
