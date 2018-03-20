@@ -212,8 +212,20 @@ namespace X.UI.Helper
                     {
                         SetConsoleColor(item.Value.Inc, item.Value.StockName + "(" + item.Value.StockCode + ")" + ":{0}");
                     }
+                    Thread.Sleep(2000);
                 }
-                Thread.Sleep(2000);
+                else
+                {
+                    Console.WriteLine("非交易时间,行情不更新");
+                    var ts = DateTime.Now > d1
+                        ? DateTime.Now - d1
+                        : DateTime.Now > d2
+                            ? DateTime.Now - d2
+                            : DateTime.Now > d3
+                                ? DateTime.Now - d3
+                                : DateTime.Now > d4 ? DateTime.Now - d4 : default(TimeSpan);
+                    Thread.Sleep(ts.TotalHours > 1 ? 1800*1000 : ts.TotalMinutes > 1 ? 30*1000 : 2000);
+                }
             }
         }
     }
