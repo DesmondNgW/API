@@ -182,7 +182,7 @@ namespace X.UI.Helper
             var d1 = DateTime.Now.Date.AddHours(9).AddMinutes(30);
             var d2 = DateTime.Now.Date.AddHours(11).AddMinutes(30);
             var d3 = DateTime.Now.Date.AddHours(13);
-            var d4 = DateTime.Now.Date.AddHours(19);
+            var d4 = DateTime.Now.Date.AddHours(15);
             while (true)
             {
                 var dic = GetStockPrice();
