@@ -205,7 +205,7 @@ namespace X.UI.Helper
                         Console.WriteLine(item.Value.StockName + "(" + item.Value.StockCode + ")" + ":" + item.Value.Inc);
                     }
                 }
-                Thread.Sleep(6000);
+                Thread.Sleep(2000);
             }
         }
     }
