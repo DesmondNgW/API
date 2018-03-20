@@ -1,4 +1,6 @@
-﻿namespace X.UI.Entities
+﻿
+
+namespace X.UI.Entities
 {
     public class StockPrice
     {
