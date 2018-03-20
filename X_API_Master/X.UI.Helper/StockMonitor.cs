@@ -177,6 +177,17 @@ namespace X.UI.Helper
             return ret;
         }
 
+        public static void SetConsoleColor(decimal value, string format)
+        {
+            Console.BackgroundColor = ConsoleColor.White;
+            Console.ForegroundColor = value > 0
+                ? ConsoleColor.Red
+                : value < 0
+                    ? ConsoleColor.Green
+                    : ConsoleColor.Black;
+            Console.WriteLine(format, value);
+        }
+
         public static void Monitor()
         {
             var d1 = DateTime.Now.Date.AddHours(9).AddMinutes(30);
@@ -188,21 +199,18 @@ namespace X.UI.Helper
                 var dic = GetStockPrice();
                 if ((DateTime.Now >= d1 && DateTime.Now <= d2) || (DateTime.Now >= d3 && DateTime.Now <= d4))
                 {
-                    var monitor1 = Monitor(dic, GetCodeList_1());
-                    var monitor2 = Monitor(dic, GetCodeList_2());
-                    var monitor3 = Monitor(dic, GetCodeList_3());
-                    var monitor4 = Monitor(dic, GetCodeList_4());
-                    var monitor5 = Monitor(dic, GetCodeList_5());
-                    var monitor6 = Monitor(dic, GetCodeList_6());
-                    if (monitor1 >= 0.5M) Console.WriteLine("code_1:" + monitor1);
-                    if (monitor2 >= 0.5M) Console.WriteLine("code_2:" + monitor2);
-                    if (monitor3 >= 0.5M) Console.WriteLine("code_3:" + monitor3);
-                    if (monitor4 >= 0.5M) Console.WriteLine("code_4:" + monitor4);
-                    if (monitor5 >= 0.5M) Console.WriteLine("code_5:" + monitor5);
-                    if (monitor6 >= 0.5M) Console.WriteLine("code_6:" + monitor6);
-                    foreach (var item in dic.Where(p => p.Value != null && (p.Value.Inc >= 4 || p.Value.Inc <= -6)).OrderByDescending(p => p.Value.Inc))
+                    SetConsoleColor(Monitor(dic, GetCodeList_1()), "code_1:{0}");
+                    SetConsoleColor(Monitor(dic, GetCodeList_2()), "code_2:{0}");
+                    SetConsoleColor(Monitor(dic, GetCodeList_3()), "code_3:{0}");
+                    SetConsoleColor(Monitor(dic, GetCodeList_4()), "code_4:{0}");
+                    SetConsoleColor(Monitor(dic, GetCodeList_5()), "code_5:{0}");
+                    SetConsoleColor(Monitor(dic, GetCodeList_6()), "code_6:{0}");
+                    foreach (
+                        var item in
+                            dic.Where(p => p.Value != null && (p.Value.Inc >= 4 || p.Value.Inc <= -4))
+                                .OrderByDescending(p => p.Value.Inc))
                     {
-                        Console.WriteLine(item.Value.StockName + "(" + item.Value.StockCode + ")" + ":" + item.Value.Inc);
+                        SetConsoleColor(item.Value.Inc, item.Value.StockName + "(" + item.Value.StockCode + ")" + ":{0}");
                     }
                 }
                 Thread.Sleep(2000);
