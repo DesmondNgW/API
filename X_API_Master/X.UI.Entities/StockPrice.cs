@@ -1,5 +1,7 @@
 ﻿
 
+using System.Collections.Generic;
+
 namespace X.UI.Entities
 {
     public class StockPrice
@@ -52,5 +54,10 @@ namespace X.UI.Entities
         /// 最小涨幅
         /// </summary>
         public decimal MinInc { get; set; }
+
+        /// <summary>
+        /// 指数
+        /// </summary>
+        public List<string> Indexs { get; set; } 
     }
 }

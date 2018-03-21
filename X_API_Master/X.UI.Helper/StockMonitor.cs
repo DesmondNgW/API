@@ -10,13 +10,20 @@ namespace X.UI.Helper
 {
     public class StockMonitor
     {
+        #region 静态文件数据
         public static List<StockBase> StockBase = GetStockBase();
+        public static List<string> CodeList1 = GetCodeList("code_1.txt");
+        public static List<string> CodeList2 = GetCodeList("code_2.txt");
+        public static List<string> CodeList3 = GetCodeList("code_3.txt");
+        public static List<string> CodeList4 = GetCodeList("code_4.txt");
+        public static List<string> CodeList5 = GetCodeList("code_5.txt");
+        public static List<string> CodeList6 = GetCodeList("code_6.txt");
 
         private static decimal GetDecimal(string str)
         {
             if (str.Contains("亿"))
             {
-                return decimal.Parse(str.Split('亿')[0])*100000000;
+                return decimal.Parse(str.Split('亿')[0]) * 100000000;
             }
             if (str.Contains("万"))
             {
@@ -27,7 +34,7 @@ namespace X.UI.Helper
             return ret;
         }
 
-        public static List<StockBase> GetStockBase()
+        private static List<StockBase> GetStockBase()
         {
             var content =
                 FileBase.ReadFile(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "App_Data", "stockbase.txt"),
@@ -35,46 +42,21 @@ namespace X.UI.Helper
             var list = content.Trim().Split('\n');
             return list.Select(item => item.Trim().Split('\t')).Select(arr => new StockBase
             {
-                StockCode = arr[0].Trim(), StockName = arr[1].Trim(), Industry = arr[2].Trim(), GeneralCapital = GetDecimal(arr[3].Trim()), NegotiableCapital = GetDecimal(arr[4].Trim())
+                StockCode = arr[0].Trim(),
+                StockName = arr[1].Trim(),
+                Industry = arr[2].Trim(),
+                GeneralCapital = GetDecimal(arr[3].Trim()),
+                NegotiableCapital = GetDecimal(arr[4].Trim())
             }).ToList();
         }
 
-        public static List<string> GetCodeList_1()
+        private static List<string> GetCodeList(string file)
         {
-            var content = FileBase.ReadFile(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "App_Data", "code_1.txt"), "gb2312");
+            var content = FileBase.ReadFile(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "App_Data", file), "gb2312");
             var list = content.Trim().Split('\n');
             return list.Select(item => item.Trim()).ToList();
-        }
-        public static List<string> GetCodeList_2()
-        {
-            var content = FileBase.ReadFile(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "App_Data", "code_2.txt"), "gb2312");
-            var list = content.Trim().Split('\n');
-            return list.Select(item => item.Trim()).ToList();
-        }
-        public static List<string> GetCodeList_3()
-        {
-            var content = FileBase.ReadFile(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "App_Data", "code_3.txt"), "gb2312");
-            var list = content.Trim().Split('\n');
-            return list.Select(item => item.Trim()).ToList();
-        }
-        public static List<string> GetCodeList_4()
-        {
-            var content = FileBase.ReadFile(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "App_Data", "code_4.txt"), "gb2312");
-            var list = content.Trim().Split('\n');
-            return list.Select(item => item.Trim()).ToList();
-        }
-        public static List<string> GetCodeList_5()
-        {
-            var content = FileBase.ReadFile(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "App_Data", "code_5.txt"), "gb2312");
-            var list = content.Trim().Split('\n');
-            return list.Select(item => item.Trim()).ToList();
-        }
-        public static List<string> GetCodeList_6()
-        {
-            var content = FileBase.ReadFile(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "App_Data", "code_6.txt"), "gb2312");
-            var list = content.Trim().Split('\n');
-            return list.Select(item => item.Trim()).ToList();
-        }
+        } 
+        #endregion
 
         public static StockPrice GetStockPrice(string code)
         {
@@ -92,10 +74,17 @@ namespace X.UI.Helper
                 MinPrice = decimal.Parse(arr[5]),
                 OpenPrice = decimal.Parse(arr[1]),
                 LastClosePrice = decimal.Parse(arr[2]),
+                Indexs = new List<string>()
             };
             result.Inc = result.CurrentPrice / result.LastClosePrice * 100 - 100;
             result.MaxInc = result.MaxPrice / result.LastClosePrice * 100 - 100;
             result.MinInc = result.MinPrice / result.LastClosePrice * 100 - 100;
+            //if (CodeList1.Contains(code)) result.Indexs.Add("Code_1");
+            //if (CodeList2.Contains(code)) result.Indexs.Add("Code_2");
+            if (CodeList3.Contains(code)) result.Indexs.Add("Code_3");
+            if (CodeList4.Contains(code)) result.Indexs.Add("Code_4");
+            if (CodeList5.Contains(code)) result.Indexs.Add("Code_5");
+            if (CodeList6.Contains(code)) result.Indexs.Add("Code_6");
             return result;
         }
 
@@ -115,12 +104,12 @@ namespace X.UI.Helper
         /// <returns></returns>
         public static Dictionary<string, StockPrice> GetStockPrice()
         {
-            return GetStockPrice(GetCodeList_1().
-                Union(GetCodeList_2()).
-                Union(GetCodeList_3()).
-                Union(GetCodeList_4()).
-                Union(GetCodeList_5()).
-                Union(GetCodeList_6()).ToList());
+            return GetStockPrice(CodeList1.
+                Union(CodeList2).
+                Union(CodeList3).
+                Union(CodeList4).
+                Union(CodeList5).
+                Union(CodeList6).ToList());
         }
 
 
@@ -146,32 +135,32 @@ namespace X.UI.Helper
                 new StockPrice
                 {
                     StockCode = "393701",
-                    Inc = Monitor(dictionary, GetCodeList_1()),
+                    Inc = Monitor(dictionary, CodeList1),
                 },
                 new StockPrice
                 {
                     StockCode = "393702",
-                    Inc = Monitor(dictionary, GetCodeList_2()),
+                    Inc = Monitor(dictionary, CodeList2),
                 },
                 new StockPrice
                 {
                     StockCode = "393703",
-                    Inc = Monitor(dictionary, GetCodeList_3())
+                    Inc = Monitor(dictionary, CodeList3)
                 },
                 new StockPrice
                 {
                     StockCode = "393704",
-                    Inc = Monitor(dictionary, GetCodeList_4())
+                    Inc = Monitor(dictionary, CodeList4)
                 },
                 new StockPrice
                 {
                     StockCode = "393705",
-                    Inc = Monitor(dictionary, GetCodeList_5())
+                    Inc = Monitor(dictionary, CodeList5)
                 },
                 new StockPrice
                 {
                     StockCode = "393706",
-                    Inc = Monitor(dictionary, GetCodeList_6())
+                    Inc = Monitor(dictionary, CodeList6)
                 },
             };
             return ret;
@@ -194,37 +183,38 @@ namespace X.UI.Helper
             var d2 = DateTime.Now.Date.AddHours(11).AddMinutes(30);
             var d3 = DateTime.Now.Date.AddHours(13);
             var d4 = DateTime.Now.Date.AddHours(15);
+            var d5 = DateTime.Now.Date.AddDays(1);
             while (true)
             {
                 var dic = GetStockPrice();
                 if ((DateTime.Now >= d1 && DateTime.Now <= d2) || (DateTime.Now >= d3 && DateTime.Now <= d4))
                 {
-                    SetConsoleColor(Monitor(dic, GetCodeList_1()), "code_1:{0}");
-                    SetConsoleColor(Monitor(dic, GetCodeList_2()), "code_2:{0}");
-                    SetConsoleColor(Monitor(dic, GetCodeList_3()), "code_3:{0}");
-                    SetConsoleColor(Monitor(dic, GetCodeList_4()), "code_4:{0}");
-                    SetConsoleColor(Monitor(dic, GetCodeList_5()), "code_5:{0}");
-                    SetConsoleColor(Monitor(dic, GetCodeList_6()), "code_6:{0}");
+                    SetConsoleColor(Monitor(dic, CodeList1), "code_1:{0}");
+                    SetConsoleColor(Monitor(dic, CodeList2), "code_2:{0}");
+                    SetConsoleColor(Monitor(dic, CodeList3), "code_3:{0}");
+                    SetConsoleColor(Monitor(dic, CodeList4), "code_4:{0}");
+                    SetConsoleColor(Monitor(dic, CodeList5), "code_5:{0}");
+                    SetConsoleColor(Monitor(dic, CodeList6), "code_6:{0}");
                     foreach (
                         var item in
                             dic.Where(p => p.Value != null && (p.Value.Inc >= 4 || p.Value.Inc <= -4))
                                 .OrderByDescending(p => p.Value.Inc))
                     {
-                        SetConsoleColor(item.Value.Inc, item.Value.StockName + "(" + item.Value.StockCode + ")" + ":{0}");
+                        SetConsoleColor(item.Value.Inc, item.Value.StockName + "(" + item.Value.StockCode + ")(" + string.Join("|", item.Value.Indexs) + ")" + ":{0}");
                     }
                     Thread.Sleep(2000);
                 }
                 else
                 {
                     Console.WriteLine("非交易时间,行情不更新");
-                    var ts = DateTime.Now > d1
-                        ? DateTime.Now - d1
-                        : DateTime.Now > d2
-                            ? DateTime.Now - d2
-                            : DateTime.Now > d3
-                                ? DateTime.Now - d3
-                                : DateTime.Now > d4 ? DateTime.Now - d4 : default(TimeSpan);
-                    Thread.Sleep(ts.TotalHours > 1 ? 1800*1000 : ts.TotalMinutes > 1 ? 30*1000 : 2000);
+                    var ts = DateTime.Now < d1
+                        ? d1 - DateTime.Now
+                        : DateTime.Now < d2
+                            ? d2 - DateTime.Now
+                            : DateTime.Now < d3
+                                ? d3 - DateTime.Now
+                                : DateTime.Now < d4 ? d4 - DateTime.Now : d5 - DateTime.Now;
+                    Thread.Sleep(Math.Max((int)Math.Floor(ts.TotalMilliseconds / 2), 2000));
                 }
             }
         }
