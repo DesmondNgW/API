@@ -172,6 +172,10 @@
       <Project>{4603dd54-fbc3-42ac-ad98-f0dbd0944f00}</Project>
       <Name>X.Interface.Dto</Name>
     </ProjectReference>
+    <ProjectReference Include="..\X.UI.Entities\X.UI.Entities.csproj">
+      <Project>{599E03E7-AFD7-4F51-8069-CA70A343B127}</Project>
+      <Name>X.UI.Entities</Name>
+    </ProjectReference>
     <ProjectReference Include="..\X.UI.Helper\X.UI.Helper.csproj">
       <Project>{76A733D7-EDAA-4EDF-B4A3-CFD197B467EB}</Project>
       <Name>X.UI.Helper</Name>

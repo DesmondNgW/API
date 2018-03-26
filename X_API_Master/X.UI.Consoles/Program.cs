@@ -19,21 +19,14 @@ namespace X.UI.Consoles
     {
         static void Main()
         {
-            StockMonitor.Monitor();
+            var ret = StockDataHelper.StockData("600903");
+
+
+            //StockMonitor.Monitor();
             //StockTestHelper.Test("300666", stock =>
             //{
             //    return stock.StrongLength > 5;
             //});
-
-            //var list = StockDataHelper.StockData("600903", true);
-            //FileBase.WriteFile(AppDomain.CurrentDomain.BaseDirectory, "1.csv", string.Empty, "utf-8", FileBaseMode.Create);
-            //foreach (var item in list)
-            //{
-            //    FileBase.WriteFile(AppDomain.CurrentDomain.BaseDirectory, "1.csv",
-            //        string.Format("{0},{1},{2},{3},{4}", item.ZScore, item.Ze,
-            //            item.CoefficientVariation, item.Inc, item.Cve),
-            //        "utf-8", FileBaseMode.Append);
-            //}
 
             //TestCacheClient(1000);
 

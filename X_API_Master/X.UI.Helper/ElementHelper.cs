@@ -12,10 +12,5 @@ namespace X.UI.Helper
     public class ElementHelper
     {
         
-
-
-
-
-
     }
 }

@@ -11,14 +11,14 @@ namespace X.UI.Helper
     {
         private static readonly DbHelper DbHelper = DalHelper.DbHelper;
 
-        public static double Std(List<Entities.Stock> list)
+        public static double Std(List<Stock> list)
         {
             var ma = list.Average(p => p.Close);
             var std = Math.Pow(list.Sum(p => Math.Pow(p.Close - ma, 2))/list.Count, 0.5);
             return std;
         }
 
-        public static double Score(Entities.Stock current, Entities.Stock previous)
+        public static double Score(Stock current, Stock previous)
         {
             return current.High/previous.High*
                    current.Open/previous.Close*
@@ -29,7 +29,7 @@ namespace X.UI.Helper
                    current.Close/previous.High;
         }
 
-        public static double ScoreMax(Entities.Stock current, Entities.Stock previous)
+        public static double ScoreMax(Stock current, Stock previous)
         {
             return current.High / previous.High *
                    current.Open / previous.Close *
@@ -45,13 +45,13 @@ namespace X.UI.Helper
         /// </summary>
         /// <param name="code"></param>
         /// <returns></returns>
-        public static List<Entities.Stock> GetRealStockData(string code)
+        public static List<Stock> GetRealStockData(string code)
         {
-            var result = new List<Entities.Stock>();
+            var result = new List<Stock>();
             var ret = DbHelper.GetPageList("tradedata_tdx", "tdate desc", "scode='" + code + "'", 0, 10000);
             while (ret.Read())
             {
-                var item = new Entities.Stock
+                var item = new Stock
                 {
                     StockCode = DalHelper.GetString(ret["Scode"]),
                     StockName = DalHelper.GetString(ret["Sname"]),
@@ -60,14 +60,15 @@ namespace X.UI.Helper
                     High = DalHelper.GetDouble(ret["HighPrice"], 0),
                     Close = DalHelper.GetDouble(ret["ClosePrice"], 0),
                     Low = DalHelper.GetDouble(ret["LowPrice"], 0),
-                    StockSimple = new Dictionary<int, StockSimple>()
+                    StockSimple = new Dictionary<int, StockSimple>(),
+                    Feature = new Dictionary<double, double>()
                 };
                 result.Add(item);
             }
             return result;
         }
 
-        public static Entities.Stock GetStock(Entities.Stock t, double prev, int count)
+        public static Stock GetStock(Stock t, double prev, int count)
         {
             var f = 0.2*(StringConvert.SysRandom.NextDouble() - 0.5)*prev;
             t.Open = f;
@@ -83,14 +84,14 @@ namespace X.UI.Helper
             return t;
         }
 
-        public static List<Entities.Stock> GetTestStockData(int count)
+        public static List<Stock> GetTestStockData(int count)
         {
-            var result = new List<Entities.Stock>();
-            var ret = default(Entities.Stock);
+            var result = new List<Stock>();
+            var ret = default(Stock);
             while (count-- > 0)
             {
                 var prev = ret != null ? ret.Close : 14;
-                ret = new Entities.Stock
+                ret = new Stock
                 {
                     StockSimple = new Dictionary<int, StockSimple>(),
                     StockCode = "TestCode",
@@ -103,7 +104,7 @@ namespace X.UI.Helper
             return result;
         }
 
-        public static List<Entities.Stock> StockData(string code, bool test = false)
+        public static List<Stock> StockData(string code, bool test = false)
         {
             var result = test ? GetTestStockData(25000) : GetRealStockData(code);
             result = result.OrderBy(p => p.Date).ToList();
@@ -116,6 +117,20 @@ namespace X.UI.Helper
                 result[i].ZScoreMa = result.Take(i + 1).Average(p => p.ZScore);
                 result[i].Score = i == 0 ? 0 : Score(result[i], result[i - 1]);
                 result[i].ScoreMax = i == 0 ? 0 : ScoreMax(result[i], result[i - 1]);
+
+                for (var k = 0; k <= i; k++)
+                {
+                    var key = Math.Floor(result[k].Inc*100)/100;
+                    if (!result[i].Feature.ContainsKey(key))
+                    {
+                        result[i].Feature[key] = 1.0/(i+1);
+                    }
+                    else
+                    {
+                        result[i].Feature[key] += 1.0 / (i + 1);
+                    }
+                }
+                
                 for (var j = 1; j <= 20; j++)
                 {
                     if (i + j < result.Count)
