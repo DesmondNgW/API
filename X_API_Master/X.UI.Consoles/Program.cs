@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Web.UI.HtmlControls;
@@ -12,6 +13,7 @@ using X.UI.Helper;
 using X.Util.Core.Xml;
 using X.Util.Entities.Enums;
 using X.Util.Other;
+using Binder = Microsoft.CSharp.RuntimeBinder.Binder;
 
 namespace X.UI.Consoles
 {

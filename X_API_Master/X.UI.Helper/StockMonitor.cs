@@ -76,9 +76,9 @@ namespace X.UI.Helper
                 LastClosePrice = decimal.Parse(arr[2]),
                 Indexs = new List<string>()
             };
-            result.Inc = result.CurrentPrice / result.LastClosePrice * 100 - 100;
-            result.MaxInc = result.MaxPrice / result.LastClosePrice * 100 - 100;
-            result.MinInc = result.MinPrice / result.LastClosePrice * 100 - 100;
+            if (result.CurrentPrice != 0) result.Inc = result.CurrentPrice / result.LastClosePrice * 100 - 100;
+            if (result.MaxPrice != 0) result.MaxInc = result.MaxPrice / result.LastClosePrice * 100 - 100;
+            if (result.MinPrice != 0) result.MinInc = result.MinPrice / result.LastClosePrice * 100 - 100;
             //if (CodeList1.Contains(code)) result.Indexs.Add("Code_1");
             //if (CodeList2.Contains(code)) result.Indexs.Add("Code_2");
             if (CodeList3.Contains(code)) result.Indexs.Add("Code_3");
