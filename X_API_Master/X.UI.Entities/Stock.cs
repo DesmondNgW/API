@@ -96,6 +96,6 @@ namespace X.UI.Entities
         /// <summary>
         /// 概率数据
         /// </summary>
-        public Dictionary<double, double> Feature { get; set; }
+        public Dictionary<string, double> Feature { get; set; }
     }
 }

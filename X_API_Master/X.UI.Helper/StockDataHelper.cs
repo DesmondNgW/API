@@ -61,7 +61,7 @@ namespace X.UI.Helper
                     Close = DalHelper.GetDouble(ret["ClosePrice"], 0),
                     Low = DalHelper.GetDouble(ret["LowPrice"], 0),
                     StockSimple = new Dictionary<int, StockSimple>(),
-                    Feature = new Dictionary<double, double>()
+                    Feature = new Dictionary<string, double>()
                 };
                 result.Add(item);
             }
@@ -117,10 +117,11 @@ namespace X.UI.Helper
                 result[i].ZScoreMa = result.Take(i + 1).Average(p => p.ZScore);
                 result[i].Score = i == 0 ? 0 : Score(result[i], result[i - 1]);
                 result[i].ScoreMax = i == 0 ? 0 : ScoreMax(result[i], result[i - 1]);
-
-                for (var k = 0; k <= i; k++)
+                for (var k = 1; k <= i; k++)
                 {
-                    var key = Math.Floor(result[k].Inc*100)/100;
+                    var source = Math.Floor(result[k - 1].Inc*100)/100;
+                    var target = Math.Floor(result[k].Inc*100)/100;
+                    var key = source + "_" + target;
                     if (!result[i].Feature.ContainsKey(key))
                     {
                         result[i].Feature[key] = 1.0/(i+1);

@@ -13,7 +13,6 @@ using X.UI.Helper;
 using X.Util.Core.Xml;
 using X.Util.Entities.Enums;
 using X.Util.Other;
-using Binder = Microsoft.CSharp.RuntimeBinder.Binder;
 
 namespace X.UI.Consoles
 {
@@ -21,12 +20,11 @@ namespace X.UI.Consoles
     {
         static void Main()
         {
-            StockMonitor.Monitor();
+            //StockMonitor.Monitor();
             //StockTestHelper.Test("300666", stock =>
             //{
             //    return stock.StrongLength > 5;
             //});
-
             //TestCacheClient(1000);
 
             //MongoDbBase<MongoTest1>.Default.SaveMongo(new MongoTest1 { Dt = DateTime.Now, Value = 1, Key = "test" }, "Test", "test");
