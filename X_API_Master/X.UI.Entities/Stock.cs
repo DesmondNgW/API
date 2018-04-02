@@ -92,10 +92,5 @@ namespace X.UI.Entities
         {
             get { return Math.Max(Math.Max(HeiKinAShiClose, HeiKinAShiOpen), High); }
         }
-
-        /// <summary>
-        /// 概率数据
-        /// </summary>
-        public Dictionary<string, double> Feature { get; set; }
     }
 }

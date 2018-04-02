@@ -179,7 +179,7 @@ namespace X.UI.Helper
 
         public static void Monitor()
         {
-            var d1 = DateTime.Now.Date.AddHours(9).AddMinutes(30);
+            var d1 = DateTime.Now.Date.AddHours(9).AddMinutes(25);
             var d2 = DateTime.Now.Date.AddHours(11).AddMinutes(30);
             var d3 = DateTime.Now.Date.AddHours(13);
             var d4 = DateTime.Now.Date.AddHours(15);
