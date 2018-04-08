@@ -11,6 +11,7 @@ namespace X.UI.Helper
     public class StockMonitor
     {
         #region 静态文件数据
+
         public static List<StockBase> StockBase = GetStockBase();
         public static List<string> CodeList1 = GetCodeList("code_1.txt");
         public static List<string> CodeList2 = GetCodeList("code_2.txt");
@@ -23,11 +24,11 @@ namespace X.UI.Helper
         {
             if (str.Contains("亿"))
             {
-                return decimal.Parse(str.Split('亿')[0]) * 100000000;
+                return decimal.Parse(str.Split('亿')[0])*100000000;
             }
             if (str.Contains("万"))
             {
-                return decimal.Parse(str.Split('万')[0]) * 10000;
+                return decimal.Parse(str.Split('万')[0])*10000;
             }
             decimal ret;
             decimal.TryParse(str, out ret);
@@ -52,10 +53,12 @@ namespace X.UI.Helper
 
         private static List<string> GetCodeList(string file)
         {
-            var content = FileBase.ReadFile(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "App_Data", file), "gb2312");
+            var content = FileBase.ReadFile(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "App_Data", file),
+                "gb2312");
             var list = content.Trim().Split('\n');
             return list.Select(item => item.Trim()).ToList();
-        } 
+        }
+
         #endregion
 
         public static StockPrice GetStockPrice(string code)
@@ -76,9 +79,9 @@ namespace X.UI.Helper
                 LastClosePrice = decimal.Parse(arr[2]),
                 Indexs = new List<string>()
             };
-            if (result.CurrentPrice != 0) result.Inc = result.CurrentPrice / result.LastClosePrice * 100 - 100;
-            if (result.MaxPrice != 0) result.MaxInc = result.MaxPrice / result.LastClosePrice * 100 - 100;
-            if (result.MinPrice != 0) result.MinInc = result.MinPrice / result.LastClosePrice * 100 - 100;
+            if (result.CurrentPrice != 0) result.Inc = result.CurrentPrice/result.LastClosePrice*100 - 100;
+            if (result.MaxPrice != 0) result.MaxInc = result.MaxPrice/result.LastClosePrice*100 - 100;
+            if (result.MinPrice != 0) result.MinInc = result.MinPrice/result.LastClosePrice*100 - 100;
             //if (CodeList1.Contains(code)) result.Indexs.Add("Code_1");
             //if (CodeList2.Contains(code)) result.Indexs.Add("Code_2");
             if (CodeList3.Contains(code)) result.Indexs.Add("Code_3");
@@ -200,7 +203,9 @@ namespace X.UI.Helper
                             dic.Where(p => p.Value != null && (p.Value.Inc >= 4 || p.Value.Inc <= -4))
                                 .OrderByDescending(p => p.Value.Inc))
                     {
-                        SetConsoleColor(item.Value.Inc, item.Value.StockName + "(" + item.Value.StockCode + ")(" + string.Join("|", item.Value.Indexs) + ")" + ":{0}");
+                        SetConsoleColor(item.Value.Inc,
+                            item.Value.StockName + "(" + item.Value.StockCode + ")(" +
+                            string.Join("|", item.Value.Indexs) + ")" + ":{0}");
                     }
                     Thread.Sleep(2000);
                 }
@@ -214,7 +219,7 @@ namespace X.UI.Helper
                             : DateTime.Now < d3
                                 ? d3 - DateTime.Now
                                 : DateTime.Now < d4 ? d4 - DateTime.Now : d5 - DateTime.Now;
-                    Thread.Sleep(Math.Max((int)Math.Floor(ts.TotalMilliseconds / 2), 2000));
+                    Thread.Sleep(Math.Max((int) Math.Floor(ts.TotalMilliseconds/2), 2000));
                 }
             }
         }
