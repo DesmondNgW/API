@@ -21,7 +21,7 @@ namespace X.UI.Consoles
     {
         public static void ApiMd5Test()
         {
-            Console.WriteLine("请输入需要计算MD5值的字符串:");
+            Console.WriteLine(@"请输入需要计算MD5值的字符串:");
             string md5;
             while (!string.IsNullOrEmpty(md5 = Console.ReadLine()))
             {
@@ -33,11 +33,11 @@ namespace X.UI.Consoles
         {
             do
             {
-                Console.WriteLine("CouchBase测试:");
+                Console.WriteLine(@"CouchBase测试:");
                 Console.WriteLine(ThirdPartyTest.CouchBaseTest("test", "CouchBaseWriteTest"));
-                Console.WriteLine("MongoDB测试:");
+                Console.WriteLine(@"MongoDB测试:");
                 ThirdPartyTest.MongoTest();
-                Console.WriteLine("Redis测试:");
+                Console.WriteLine(@"Redis测试:");
                 Console.WriteLine(ThirdPartyTest.RedisTest("test", "RedisWriteTest"));
             }
             while (!string.IsNullOrEmpty(Console.ReadLine()));
@@ -45,7 +45,7 @@ namespace X.UI.Consoles
 
         public static void ApiWebHtmlTest()
         {
-            Console.WriteLine("请输入需要访问的url:");
+            Console.WriteLine(@"请输入需要访问的url:");
             string url;
             var cookie = string.Empty;
             while (!string.IsNullOrEmpty(url = Console.ReadLine()))
@@ -59,14 +59,14 @@ namespace X.UI.Consoles
             var nodes = new List<string> { "1", "2", "3" };
             do
             {
-                Console.WriteLine("一致性Hash测试:");
+                Console.WriteLine(@"一致性Hash测试:");
                 var dic = new Dictionary<string, int>();
                 for (var i = 0; i < 10000; i++)
                 {
                     var r = CoreUtil.GetConsistentHash(nodes, Guid.NewGuid().ToString("N"));
                     if (dic.ContainsKey(r)) dic[r]++;
                     else dic[r] = 1;
-                    Console.WriteLine(DateTime.Now.ToString("HH:mm:ss.fff") + "\t序号：" + i + "\t值：" + r + "\t次数：" + dic[r]);
+                    Console.WriteLine(@"{0:HH:mm:ss.fff} 序号：{1} 值：{2} 次数：{3}", DateTime.Now, i, r, dic[r]);
                 }
             }
             while (!string.IsNullOrEmpty(Console.ReadLine()));
@@ -76,12 +76,12 @@ namespace X.UI.Consoles
         {
             const string id = "RSATest";
             const string nonce = "RSATestNonce";
-            Console.WriteLine("请输入需要加密的字符串:");
+            Console.WriteLine(@"请输入需要加密的字符串:");
             string rsa;
             while (!string.IsNullOrEmpty(rsa = Console.ReadLine()))
             {
                 var en = RsaCryption.Encrypt(id, rsa, nonce);
-                Console.WriteLine("密文：" + en);
+                Console.WriteLine(@"密文：" + en);
             }
         }
 
@@ -89,12 +89,12 @@ namespace X.UI.Consoles
         {
             const string id = "RSATest";
             const string nonce = "RSATestNonce";
-            Console.WriteLine("请输入需要解密的字符串:");
+            Console.WriteLine(@"请输入需要解密的字符串:");
             string rsa;
             while (!string.IsNullOrEmpty(rsa = Console.ReadLine()))
             {
                 var de = RsaCryption.Decrypt(id, rsa, nonce);
-                Console.WriteLine("明文：" + de);
+                Console.WriteLine(@"明文：" + de);
             }
         }
     }

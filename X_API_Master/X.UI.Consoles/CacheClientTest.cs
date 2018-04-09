@@ -22,55 +22,55 @@ namespace X.UI.Consoles
                 sw.Start();
                 var ret1 = client.Get(key);
                 sw.Stop();
-                Console.WriteLine("Get key {0},result {1}, ElapsedMilliseconds {2}", key, ret1, sw.ElapsedMilliseconds);
+                Console.WriteLine(@"Get key {0},result {1}, ElapsedMilliseconds {2}", key, ret1, sw.ElapsedMilliseconds);
                 if (sw.ElapsedMilliseconds > 0) c1++;
                 c2++;
 
                 sw.Restart();
                 var ret2 = client.Set(key, key, DateTime.Now.AddMinutes(2));
                 sw.Stop();
-                Console.WriteLine("Set DateTime key {0},result {1}, ElapsedMilliseconds {2}", key, ret2, sw.ElapsedMilliseconds);
+                Console.WriteLine(@"Set DateTime key {0},result {1}, ElapsedMilliseconds {2}", key, ret2, sw.ElapsedMilliseconds);
                 if (sw.ElapsedMilliseconds > 0) c1++;
                 c2++;
 
                 sw.Restart();
                 var ret3 = client.Get(key);
                 sw.Stop();
-                Console.WriteLine("Get key {0},result {1}, ElapsedMilliseconds {2}", key, ret3, sw.ElapsedMilliseconds);
+                Console.WriteLine(@"Get key {0},result {1}, ElapsedMilliseconds {2}", key, ret3, sw.ElapsedMilliseconds);
                 if (sw.ElapsedMilliseconds > 0) c1++;
                 c2++;
 
                 sw.Restart();
                 var ret4 = client.Set(key, key, new TimeSpan(0, 2, 0));
                 sw.Stop();
-                Console.WriteLine("Set TimeSpan key {0},result {1}, ElapsedMilliseconds {2}", key, ret4, sw.ElapsedMilliseconds);
+                Console.WriteLine(@"Set TimeSpan key {0},result {1}, ElapsedMilliseconds {2}", key, ret4, sw.ElapsedMilliseconds);
                 if (sw.ElapsedMilliseconds > 0) c1++;
                 c2++;
                 c2++;
                 sw.Restart();
                 var ret5 = client.Get(key);
                 sw.Stop();
-                Console.WriteLine("Get key {0},result {1}, ElapsedMilliseconds {2}", key, ret5, sw.ElapsedMilliseconds);
+                Console.WriteLine(@"Get key {0},result {1}, ElapsedMilliseconds {2}", key, ret5, sw.ElapsedMilliseconds);
                 if (sw.ElapsedMilliseconds > 0) c1++;
                 c2++;
 
                 sw.Restart();
                 var ret6 = client.Remove(key);
                 sw.Stop();
-                Console.WriteLine("Remove key {0},result {1}, ElapsedMilliseconds {2}", key, ret6, sw.ElapsedMilliseconds);
+                Console.WriteLine(@"Remove key {0},result {1}, ElapsedMilliseconds {2}", key, ret6, sw.ElapsedMilliseconds);
                 if (sw.ElapsedMilliseconds > 0) c1++;
                 c2++;
 
                 sw.Restart();
                 var ret7 = client.Get(key);
                 sw.Stop();
-                Console.WriteLine("Get key {0},result {1}, ElapsedMilliseconds {2}", key, ret7, sw.ElapsedMilliseconds);
+                Console.WriteLine(@"Get key {0},result {1}, ElapsedMilliseconds {2}", key, ret7, sw.ElapsedMilliseconds);
                 if (sw.ElapsedMilliseconds > 0) c1++;
                 c2++;
             }
             total.Stop();
-            Console.WriteLine("above zoro {0}, total {1}", c1, c2);
-            Console.WriteLine("Total ElapsedMilliseconds {0}", total.ElapsedMilliseconds);
+            Console.WriteLine(@"above zoro {0}, total {1}", c1, c2);
+            Console.WriteLine(@"Total ElapsedMilliseconds {0}", total.ElapsedMilliseconds);
         }
     }
 }

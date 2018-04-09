@@ -1,18 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Reflection;
-using System.Text.RegularExpressions;
-using System.Threading;
-using System.Web.UI.HtmlControls;
-using System.Xml;
-using MongoDB.Bson;
-using X.DataBase.Helper;
 using X.UI.Helper;
-using X.Util.Core.Xml;
-using X.Util.Entities.Enums;
-using X.Util.Other;
 
 namespace X.UI.Consoles
 {
@@ -20,10 +8,9 @@ namespace X.UI.Consoles
     {
         static void Main()
         {
-            var key = Guid.NewGuid().ToString("N");
-            Console.WriteLine(ThirdPartyTest.CouchBaseTest(key, key));
-
-            //StockMonitor.Monitor();
+            StockMonitor.Monitor();
+            //var key = Guid.NewGuid().ToString("N");
+            //Console.WriteLine(ThirdPartyTest.CouchBaseTest(key, key));
             //StockTestHelper.Test("300666", stock =>
             //{
             //    return stock.StrongLength > 5;
@@ -45,7 +32,7 @@ namespace X.UI.Consoles
             foreach (var item in (EnumApiTestItem[])Enum.GetValues(typeof(EnumApiTestItem)))
             {
                 Console.WriteLine(@"┣━━━━━━━━━━━━━━━┫");
-                Console.WriteLine(@"┃" + (item.GetHashCode() + "." + item).PadRight(30) + @"┃");
+                Console.WriteLine(@"┃{0}.{1}┃", item.GetHashCode(), item.ToString().PadRight(30));
             }
             Console.WriteLine(@"┗━━━━━━━━━━━━━━━┛");
             Next();
