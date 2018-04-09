@@ -20,7 +20,10 @@ namespace X.UI.Consoles
     {
         static void Main()
         {
-            StockMonitor.Monitor();
+            var key = Guid.NewGuid().ToString("N");
+            Console.WriteLine(ThirdPartyTest.CouchBaseTest(key, key));
+
+            //StockMonitor.Monitor();
             //StockTestHelper.Test("300666", stock =>
             //{
             //    return stock.StrongLength > 5;
@@ -37,14 +40,14 @@ namespace X.UI.Consoles
         static void Index()
         {
             Console.Clear();
-            Console.WriteLine("┏━━━━━━━━━━━━━━━┓");
-            Console.WriteLine("┃\tAPI-Console-Test:\t┃");
+            Console.WriteLine(@"┏━━━━━━━━━━━━━━━┓");
+            Console.WriteLine(@"┃	API-Console-Test:	┃");
             foreach (var item in (EnumApiTestItem[])Enum.GetValues(typeof(EnumApiTestItem)))
             {
-                Console.WriteLine("┣━━━━━━━━━━━━━━━┫");
-                Console.WriteLine("┃" + (item.GetHashCode() + "." + item).PadRight(30) + "┃");
+                Console.WriteLine(@"┣━━━━━━━━━━━━━━━┫");
+                Console.WriteLine(@"┃" + (item.GetHashCode() + "." + item).PadRight(30) + @"┃");
             }
-            Console.WriteLine("┗━━━━━━━━━━━━━━━┛");
+            Console.WriteLine(@"┗━━━━━━━━━━━━━━━┛");
             Next();
         }
 
