@@ -218,7 +218,7 @@ namespace X.UI.Helper
                             : DateTime.Now < d3
                                 ? d3 - DateTime.Now
                                 : DateTime.Now < d4 ? d4 - DateTime.Now : d5 - DateTime.Now;
-                    Console.WriteLine("非交易时间,行情不更新--{0}", Math.Floor(ts.TotalMilliseconds / 2));
+                    Console.WriteLine("非交易时间,行情不更新,{0}毫秒后刷新行情", Math.Floor(ts.TotalMilliseconds / 2));
                     Thread.Sleep(Math.Max((int) Math.Floor(ts.TotalMilliseconds/2), 2000));
                 }
             }
