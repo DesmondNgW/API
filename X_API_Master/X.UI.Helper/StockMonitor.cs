@@ -94,7 +94,7 @@ namespace X.UI.Helper
         public static Dictionary<string, StockPrice> GetStockPrice(List<string> list)
         {
             var ret = new Dictionary<string, StockPrice>();
-            foreach (var code in list.Where(code => !ret.ContainsKey(code)))
+            foreach (var code in list.Where(code => !ret.ContainsKey(code) && !string.IsNullOrEmpty(code)))
             {
                 ret[code] = GetStockPrice(code);
             }
@@ -120,7 +120,7 @@ namespace X.UI.Helper
         {
             var ret = default(decimal);
             var toatlCapital = default(decimal);
-            foreach (var code in list)
+            foreach (var code in list.Where(p=>!string.IsNullOrEmpty(p)))
             {
                 var item = stockPrice[code];
                 var capital = StockBase.First(p => p.StockCode == code).NegotiableCapital;
