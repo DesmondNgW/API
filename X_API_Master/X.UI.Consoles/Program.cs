@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Linq;
+using System.ServiceModel;
 using X.UI.Helper;
+using X.Util.Core.Kernel;
 
 namespace X.UI.Consoles
 {
