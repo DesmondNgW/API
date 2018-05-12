@@ -7,7 +7,7 @@ using System.Drawing;
 using Microsoft.VisualStudio.TestTools.UITesting;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Microsoft.VisualStudio.TestTools.UITest.Extension;
-using Keyboard = Microsoft.VisualStudio.TestTools.UITesting.Keyboard;
+//using Keyboard = Microsoft.VisualStudio.TestTools.UITesting.Keyboard;
 
 
 namespace X.CodedUITest
@@ -15,7 +15,7 @@ namespace X.CodedUITest
     /// <summary>
     /// CodedUITest1 的摘要说明
     /// </summary>
-    [CodedUITest]
+    //[CodedUITest]
     public class CodedUITest1
     {
         public CodedUITest1()

@@ -10,6 +10,7 @@ namespace X.UI.Consoles
     {
         static void Main()
         {
+            //ConsoleHelper.Draw(".", 30).ForEach(p => Console.WriteLine(p));
             //StockMonitor.Monitor();
             //var key = Guid.NewGuid().ToString("N");
             //Console.WriteLine(ThirdPartyTest.CouchBaseTest(key, key));
