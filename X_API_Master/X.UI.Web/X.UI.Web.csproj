@@ -148,6 +148,7 @@
     <Content Include="lib\lib.js" />
     <Content Include="lib\XCode.js" />
     <Content Include="nocache.aspx" />
+    <Content Include="react\react-learn.js" />
     <Content Include="react\react-with-addons.js" />
     <Content Include="react\react-with-addons.min.js" />
     <Content Include="react\react.js" />
