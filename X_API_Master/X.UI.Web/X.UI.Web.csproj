@@ -148,6 +148,10 @@
     <Content Include="lib\lib.js" />
     <Content Include="lib\XCode.js" />
     <Content Include="nocache.aspx" />
+    <Content Include="react\react-with-addons.js" />
+    <Content Include="react\react-with-addons.min.js" />
+    <Content Include="react\react.js" />
+    <Content Include="react\react.min.js" />
     <Content Include="seajs\sea-2.3.0.js" />
     <Content Include="seajs\sea-debug-2.3.0.js" />
     <Content Include="seajs\seajs-config.js" />
