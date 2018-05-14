@@ -107,6 +107,8 @@ var KeyEscapeUtils = {
 
 module.exports = KeyEscapeUtils;
         }, {}],
+
+        // ∂‘œÛ≥ÿ
         2: [function (_dereq_, module, exports) {
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -4382,6 +4384,7 @@ module.exports = function(isValidElement, throwOnDirectAccess) {
 
         }, { "28": 28, "30": 30, "31": 31, "33": 33, "36": 36 }],
 
+        //SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED
         36: [function (_dereq_, module, exports) {
 /**
  * Copyright 2013-present, Facebook, Inc.
@@ -4398,5 +4401,7 @@ var ReactPropTypesSecret = 'SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED';
 
 module.exports = ReactPropTypesSecret;
 
-},{}]},{},[16])(16)
+        }, {}]
+    },
+{}, [16])(16)
 });
