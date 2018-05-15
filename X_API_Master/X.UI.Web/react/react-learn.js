@@ -1111,6 +1111,7 @@ var ReactCurrentOwner = {
 module.exports = ReactCurrentOwner;
         }, {}],
 
+        //Create a factory that creates HTML tag elements
         8: [function (_dereq_, module, exports) {
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -1657,6 +1658,7 @@ var REACT_ELEMENT_TYPE = typeof Symbol === 'function' && Symbol['for'] && Symbol
 module.exports = REACT_ELEMENT_TYPE;
         }, {}],
 
+        // ReactElementValidator —È÷§ReactElement
         11: [function (_dereq_, module, exports) {
 /**
  * Copyright (c) 2014-present, Facebook, Inc.
@@ -2468,6 +2470,7 @@ function reactProdInvariant(code) {
 module.exports = reactProdInvariant;
         }, {}],
 
+        //traverseAllChildren
         26: [function (_dereq_, module, exports) {
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
