@@ -354,6 +354,10 @@ module.exports = React;
 },
 { "11": 11, "14": 14, "17": 17, "18": 18, "20": 20, "23": 23, "24": 24, "32": 32, "4": 4, "5": 5, "8": 8, "9": 9 }],
 
+        //return ReactComponent & ReactPureComponent
+        //ReactPureComponent继承ReactComponent
+        //ReactComponent 原型上有setState以及forceUpdate 方法，放入队列处理。用于组件更新
+        //弃用Api:isMounted和replaceState，会有信息提示
         4: [function (_dereq_, module, exports) {
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -415,7 +419,11 @@ ReactComponent.prototype.isReactComponent = {};
  * @protected
  */
 ReactComponent.prototype.setState = function (partialState, callback) {
-  !(typeof partialState === 'object' || typeof partialState === 'function' || partialState == null) ? "development" !== 'production' ? invariant(false, 'setState(...): takes an object of state variables to update or a function which returns an object of state variables.') : _prodInvariant('85') : void 0;
+    !(typeof partialState === 'object' || typeof partialState === 'function' || partialState == null) ?
+      "development" !== 'production' ?
+    invariant(false, 'setState(...): takes an object of state variables to update or a function which returns an object of state variables.') :
+    _prodInvariant('85') :
+    void 0;
   this.updater.enqueueSetState(this, partialState);
   if (callback) {
     this.updater.enqueueCallback(this, callback, 'setState');
@@ -448,6 +456,8 @@ ReactComponent.prototype.forceUpdate = function (callback) {
  * we would like to deprecate them, we're not going to move them over to this
  * modern base class. Instead, we define a getter that warns if it's accessed.
  */
+
+// Api 弃用并提示
 if ("development" !== 'production') {
   var deprecatedAPIs = {
     isMounted: ['isMounted', 'Instead, make sure to clean up subscriptions and pending requests in ' + 'componentWillUnmount to prevent memory leaks.'],
@@ -483,8 +493,11 @@ function ReactPureComponent(props, context, updater) {
   this.updater = updater || ReactNoopUpdateQueue;
 }
 
+//通过中间代理ComponentDummy,ReactPureComponent的原型指向ReactComponent，并把ReactComponent的原型对象合并到ReactPureComponent的原型中
+//忽略ReactComponent的实例属性和方法
 function ComponentDummy() {}
 ComponentDummy.prototype = ReactComponent.prototype;
+
 ReactPureComponent.prototype = new ComponentDummy();
 ReactPureComponent.prototype.constructor = ReactPureComponent;
 // Avoid an extra prototype jump for these methods.
@@ -688,6 +701,7 @@ var ReactChildren = {
 module.exports = ReactChildren;
         }, { "2": 2, "26": 26, "28": 28, "9": 9 }],
 
+        //ReactComponentTreeHook 存储数据
         6: [function (_dereq_, module, exports) {
 /**
  * Copyright (c) 2016-present, Facebook, Inc.
@@ -816,11 +830,11 @@ if (canUseCollections) {
 
 var unmountedIDs = [];
 
+//深 清除
 function purgeDeep(id) {
   var item = getItem(id);
   if (item) {
     var childIDs = item.childIDs;
-
     removeItem(id);
     childIDs.forEach(purgeDeep);
   }
@@ -1266,6 +1280,16 @@ var ReactDOMFactories = {
 module.exports = ReactDOMFactories;
         }, { "11": 11, "9": 9 }],
 
+        //ReactElement Object.freeze ReactElement.props & ReactElement
+        //API:ReactElement.createElement(),
+        //ReactElement.createFactory,
+        //ReactElement.cloneAndReplaceKey,
+        //ReactElement.cloneElement,
+        //ReactElement.isValidElement
+        //内置属性:ref key _self _source props $$typeof type
+        //children 可能是数组
+
+        //存储ReactElement对象
         9: [function (_dereq_, module, exports) {
 /**
  * Copyright (c) 2014-present, Facebook, Inc.
@@ -1324,7 +1348,10 @@ function defineKeyPropWarningGetter(props, displayName) {
   var warnAboutAccessingKey = function () {
     if (!specialPropKeyWarningShown) {
       specialPropKeyWarningShown = true;
-      "development" !== 'production' ? warning(false, '%s: `key` is not a prop. Trying to access it will result ' + 'in `undefined` being returned. If you need to access the same ' + 'value within the child component, you should pass it as a different ' + 'prop. (https://fb.me/react-special-props)', displayName) : void 0;
+      "development" !== 'production' ?
+      warning(false, '%s: `key` is not a prop. Trying to access it will result ' + 'in `undefined` being returned. If you need to access the same ' + 'value within the child component, you should pass it as a different ' + 'prop. (https://fb.me/react-special-props)', displayName)
+      :
+      void 0;
     }
   };
   warnAboutAccessingKey.isReactWarning = true;
@@ -1338,7 +1365,9 @@ function defineRefPropWarningGetter(props, displayName) {
   var warnAboutAccessingRef = function () {
     if (!specialPropRefWarningShown) {
       specialPropRefWarningShown = true;
-      "development" !== 'production' ? warning(false, '%s: `ref` is not a prop. Trying to access it will result ' + 'in `undefined` being returned. If you need to access the same ' + 'value within the child component, you should pass it as a different ' + 'prop. (https://fb.me/react-special-props)', displayName) : void 0;
+      "development" !== 'production' ?
+      warning(false, '%s: `ref` is not a prop. Trying to access it will result ' + 'in `undefined` being returned. If you need to access the same ' + 'value within the child component, you should pass it as a different ' + 'prop. (https://fb.me/react-special-props)', displayName)
+      : void 0;
     }
   };
   warnAboutAccessingRef.isReactWarning = true;
@@ -1883,7 +1912,7 @@ var ReactElementValidator = {
 module.exports = ReactElementValidator;
         }, { "18": 18, "19": 19, "21": 21, "23": 23, "31": 31, "6": 6, "7": 7, "9": 9 }],
 
-        //ReactNoopUpdateQueue  abstract API 
+        //ReactNoopUpdateQueue abstract API 
         12: [function (_dereq_, module, exports) {
 /**
  * Copyright (c) 2015-present, Facebook, Inc.
@@ -2117,6 +2146,7 @@ if ("development" !== 'production') {
 module.exports = canDefineProperty;
         }, {}],
 
+        //checkReactTypeSpec with error
         19: [function (_dereq_, module, exports) {
 (function (process){
 /**
@@ -2293,7 +2323,7 @@ function getNextDebugID() {
 module.exports = getNextDebugID;
         }, {}],
 
-        // return EmptyFunction & dev_env warning msg with lowPriority
+        // return EmptyFunction warning msg with lowPriority
         23: [function (_dereq_, module, exports) {
 /**
  * Copyright (c) 2014-present, Facebook, Inc.
@@ -2359,6 +2389,7 @@ if ("development" !== 'production') {
 module.exports = lowPriorityWarning;
         }, {}],
 
+        //return onlyChild(children) with error msg
         24: [function (_dereq_, module, exports) {
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -3531,7 +3562,7 @@ emptyFunction.thatReturnsArgument = function (arg) {
 module.exports = emptyFunction;
         }, {}],
 
-        //return EmptyObject  in dev_env Object.freeze
+        //return EmptyObject with Object.freeze
         29: [function (_dereq_, module, exports) {
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -3613,7 +3644,7 @@ function invariant(condition, format, a, b, c, d, e, f) {
 module.exports = invariant;
         }, {}],
 
-        // return EmptyFunction & dev_env warning msg...
+        // return warning msg...
         31: [function (_dereq_, module, exports) {
 /**
  * Copyright 2014-2015, Facebook, Inc.
@@ -3778,6 +3809,7 @@ module.exports = shouldUseNative() ? Object.assign : function (target, source) {
 
         }, {}],
 
+        //checkPropTypes with error 
         33: [function (_dereq_, module, exports) {
 /**
  * Copyright 2013-present, Facebook, Inc.
