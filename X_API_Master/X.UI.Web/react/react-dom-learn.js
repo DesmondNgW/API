@@ -537,6 +537,7 @@ var BeforeInputEventPlugin = {
 module.exports = BeforeInputEventPlugin;
 },{"138":138,"20":20,"21":21,"89":89,"93":93}],
 
+            //CSSProperty
             4: [function (_dereq_, module, exports) {
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -1682,6 +1683,7 @@ DOMLazyTree.queueText = queueText;
 module.exports = DOMLazyTree;
             }, { "10": 10, "105": 105, "128": 128, "129": 129 }],
 
+            //DOMNamespaces
             10: [function (_dereq_, module, exports) {
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -2192,6 +2194,7 @@ var Danger = {
 module.exports = Danger;
             }, { "126": 126, "138": 138, "143": 143, "144": 144, "152": 152, "9": 9 }],
 
+            //DefaultEventPluginOrder
             14: [function (_dereq_, module, exports) {
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -2316,6 +2319,7 @@ var EnterLeaveEventPlugin = {
 module.exports = EnterLeaveEventPlugin;
             }, { "20": 20, "34": 34, "95": 95 }],
 
+            //EventConstants.topLevelTypes (浏览器事件类型在顶层捕获)
             16: [function (_dereq_, module, exports) {
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -3627,6 +3631,7 @@ var HTMLDOMPropertyConfig = {
 module.exports = HTMLDOMPropertyConfig;
             }, { "11": 11 }],
 
+            //KeyEscapeUtils 定义编码解码规范
             23: [function (_dereq_, module, exports) {
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -6512,6 +6517,7 @@ _assign(ReactDOMComponent.prototype, ReactDOMComponent.Mixin, ReactMultiChild.Mi
 module.exports = ReactDOMComponent;
             }, { "10": 10, "107": 107, "11": 11, "12": 12, "120": 120, "122": 122, "126": 126, "132": 132, "144": 144, "152": 152, "158": 158, "159": 159, "160": 160, "17": 17, "18": 18, "2": 2, "26": 26, "33": 33, "34": 34, "39": 39, "42": 42, "43": 43, "46": 46, "5": 5, "64": 64, "68": 68, "77": 77, "9": 9 }],
 
+            //ReactDOMComponentFlags{hasCachedChildNodes:1}
             33: [function (_dereq_, module, exports) {
 /**
  * Copyright (c) 2015-present, Facebook, Inc.
@@ -6818,6 +6824,7 @@ _assign(ReactDOMEmptyComponent.prototype, {
 module.exports = ReactDOMEmptyComponent;
             }, { "160": 160, "34": 34, "9": 9 }],
 
+            //ReactDOMFeatureFlags{useCreateElement:true,useFiber: false}
             37: [function (_dereq_, module, exports) {
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -8946,6 +8953,7 @@ module.exports = {
 };
             }, { "1": 1, "14": 14, "15": 15, "22": 22, "28": 28, "3": 3, "32": 32, "34": 34, "36": 36, "45": 45, "47": 47, "51": 51, "57": 57, "61": 61, "7": 7, "74": 74, "84": 84, "85": 85, "86": 86 }],
 
+            //REACT_ELEMENT_TYPE  Symbol['for']('react.element') || 0xeac7
             53: [function (_dereq_, module, exports) {
 /**
  * Copyright (c) 2014-present, Facebook, Inc.
@@ -8966,6 +8974,7 @@ var REACT_ELEMENT_TYPE = typeof Symbol === 'function' && Symbol['for'] && Symbol
 module.exports = REACT_ELEMENT_TYPE;
             }, {}],
 
+            //ReactEmptyComponent.create:ReactEmptyComponent.injection.injectEmptyComponentFactory(factory)
             54: [function (_dereq_, module, exports) {
 /**
  * Copyright (c) 2014-present, Facebook, Inc.
@@ -8996,6 +9005,7 @@ ReactEmptyComponent.injection = ReactEmptyComponentInjection;
 module.exports = ReactEmptyComponent;
             }, {}],
 
+            //ReactErrorUtils
             55: [function (_dereq_, module, exports) {
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -9261,6 +9271,7 @@ var ReactEventListener = {
 module.exports = ReactEventListener;
             }, { "114": 114, "137": 137, "138": 138, "149": 149, "160": 160, "25": 25, "34": 34, "82": 82 }],
 
+            //ReactFeatureFlags{logTopLevelRenders: false}
             58: [function (_dereq_, module, exports) {
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -9351,6 +9362,7 @@ var ReactHostComponent = {
 module.exports = ReactHostComponent;
             }, { "126": 126, "152": 152 }],
 
+            //ReactHostOperationHistoryHook
             60: [function (_dereq_, module, exports) {
 /**
  * Copyright (c) 2016-present, Facebook, Inc.
@@ -9542,6 +9554,7 @@ var ReactInputSelection = {
 module.exports = ReactInputSelection;
             }, { "141": 141, "146": 146, "147": 147, "44": 44 }],
 
+            //ReactInstanceMap
             63: [function (_dereq_, module, exports) {
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -11317,6 +11330,7 @@ var ReactPerfAnalysis = {
 module.exports = ReactPerfAnalysis;
 },{"124":124,"160":160,"50":50}],
 
+            //ReactPropTypeLocationNames
             72: [function (_dereq_, module, exports) {
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -11342,6 +11356,7 @@ if ("development" !== 'production') {
 module.exports = ReactPropTypeLocationNames;
             }, {}],
 
+            //ReactPropTypesSecret==SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED
             73: [function (_dereq_, module, exports) {
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -13080,6 +13095,7 @@ var ReactUpdates = {
 module.exports = ReactUpdates;
             }, { "100": 100, "126": 126, "152": 152, "160": 160, "25": 25, "58": 58, "6": 6, "75": 75 }],
 
+            // Version
             83: [function (_dereq_, module, exports) {
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -13094,6 +13110,7 @@ module.exports = ReactUpdates;
 module.exports = '15.6.2';
             }, {}],
 
+            //SVGDOMPropertyConfig
             84: [function (_dereq_, module, exports) {
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -14881,6 +14898,7 @@ var TransactionImpl = {
 module.exports = TransactionImpl;
 },{"126":126,"152":152}],
 
+            //ViewportMetrics 滚动位置
             101: [function (_dereq_, module, exports) {
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -14964,6 +14982,7 @@ function accumulateInto(current, next) {
 module.exports = accumulateInto;
             }, { "126": 126, "152": 152 }],
 
+            //adler32 校验和算法
             103: [function (_dereq_, module, exports) {
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -15097,6 +15116,7 @@ module.exports = checkReactTypeSpec;
 }).call(this,undefined)
             }, { "126": 126, "133": 133, "152": 152, "159": 159, "72": 72, "73": 73 }],
 
+            //createMicrosoftUnsafeLocalFunction(Create a function which has 'unsafe' privileges (required by windows8 apps))
             105: [function (_dereq_, module, exports) {
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -15208,6 +15228,7 @@ function dangerousStyleValue(name, value, component, isCustomProperty) {
 module.exports = dangerousStyleValue;
             }, { "159": 159, "4": 4 }],
 
+            //escapeTextContentForBrowser
             107: [function (_dereq_, module, exports) {
 /**
  * Copyright (c) 2016-present, Facebook, Inc.
@@ -15468,6 +15489,7 @@ module.exports = flattenChildren;
 }).call(this,undefined)
             }, { "131": 131, "133": 133, "159": 159, "23": 23 }],
 
+            //forEachAccumulated
             110: [function (_dereq_, module, exports) {
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -15499,6 +15521,7 @@ function forEachAccumulated(arr, cb, scope) {
 module.exports = forEachAccumulated;
 },{}],
 
+            //getEventCharCode
             111: [function (_dereq_, module, exports) {
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -15661,6 +15684,7 @@ function getEventKey(nativeEvent) {
 module.exports = getEventKey;
             }, { "111": 111 }],
 
+            //getEventModifierState
             113: [function (_dereq_, module, exports) {
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -15704,6 +15728,7 @@ function getEventModifierState(nativeEvent) {
 module.exports = getEventModifierState;
             }, {}],
 
+            //getEventTarget
             114: [function (_dereq_, module, exports) {
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -15769,6 +15794,7 @@ function getHostComponentFromComposite(inst) {
 module.exports = getHostComponentFromComposite;
             }, { "69": 69 }],
 
+            //getIteratorFn 遍历器
             116: [function (_dereq_, module, exports) {
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -15810,6 +15836,7 @@ function getIteratorFn(maybeIterable) {
 module.exports = getIteratorFn;
             }, {}],
 
+            //getNodeForCharacterOffset
             117: [function (_dereq_, module, exports) {
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -16330,6 +16357,7 @@ function isEventSupported(eventNameSuffix, capture) {
 module.exports = isEventSupported;
             }, { "138": 138 }],
 
+            //isTextInputElement
             123: [function (_dereq_, module, exports) {
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -16381,6 +16409,7 @@ function isTextInputElement(elem) {
 module.exports = isTextInputElement;
             }, {}],
 
+            //lowPriorityWarning
             124: [function (_dereq_, module, exports) {
 /**
  * Copyright (c) 2014-present, Facebook, Inc.
@@ -16472,6 +16501,7 @@ function quoteAttributeValueForBrowser(value) {
 module.exports = quoteAttributeValueForBrowser;
             }, { "107": 107 }],
 
+            //reactProdInvariant
             126: [function (_dereq_, module, exports) {
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -16677,6 +16707,7 @@ if (ExecutionEnvironment.canUseDOM) {
 module.exports = setTextContent;
             }, { "107": 107, "128": 128, "138": 138 }],
 
+            //shouldUpdateReactComponent{key,type一致}||empty||text
             130: [function (_dereq_, module, exports) {
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -17266,6 +17297,7 @@ if ("development" !== 'production') {
 module.exports = validateDOMNesting;
             }, { "144": 144, "159": 159, "160": 160 }],
 
+            //React.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED.ReactComponentTreeHook
             133: [function (_dereq_, module, exports) {
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -17284,6 +17316,7 @@ var ReactInternals = React.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
 module.exports = ReactInternals.ReactComponentTreeHook;
             }, {}],
 
+            //React.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED.ReactCurrentOwner
             134: [function (_dereq_, module, exports) {
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -17300,8 +17333,9 @@ module.exports = ReactInternals.ReactComponentTreeHook;
 var ReactInternals = React.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
 
 module.exports = ReactInternals.ReactCurrentOwner;
-},{}],
+}, {}],
 
+            //React
             135: [function (_dereq_, module, exports) {
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -17318,6 +17352,7 @@ module.exports = ReactInternals.ReactCurrentOwner;
 module.exports = React;
             }, {}],
 
+            //React.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED.getNextDebugID
             136: [function (_dereq_, module, exports) {
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -17422,6 +17457,7 @@ var EventListener = {
 module.exports = EventListener;
             }, { "144": 144 }],
 
+            //ExecutionEnvironment
             138: [function (_dereq_, module, exports) {
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
