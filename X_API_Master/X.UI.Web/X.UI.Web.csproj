@@ -148,6 +148,12 @@
     <Content Include="lib\lib.js" />
     <Content Include="lib\XCode.js" />
     <Content Include="nocache.aspx" />
+    <Content Include="react\react-dom-learn.js" />
+    <Content Include="react\react-dom-server-learn.js" />
+    <Content Include="react\react-dom-server.js" />
+    <Content Include="react\react-dom-server.min.js" />
+    <Content Include="react\react-dom.js" />
+    <Content Include="react\react-dom.min.js" />
     <Content Include="react\react-learn.js" />
     <Content Include="react\react-with-addons.js" />
     <Content Include="react\react-with-addons.min.js" />

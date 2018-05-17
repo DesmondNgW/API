@@ -221,6 +221,7 @@ var PooledClass = {
 module.exports = PooledClass;
         }, { "25": 25, "30": 30 }],
 
+        //React.js
         3: [function (_dereq_, module, exports) {
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -510,6 +511,7 @@ module.exports = {
 };
         }, { "12": 12, "18": 18, "23": 23, "25": 25, "29": 29, "30": 30, "32": 32 }],
 
+        //ReactChildren
         5: [function (_dereq_, module, exports) {
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -2036,6 +2038,7 @@ if ("development" !== 'production') {
 module.exports = ReactPropTypeLocationNames;
         }, {}],
 
+        // ReactPropTypes
         14: [function (_dereq_, module, exports) {
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -2073,6 +2076,7 @@ var ReactPropTypesSecret = 'SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED';
 module.exports = ReactPropTypesSecret;
         }, {}],
 
+        //ReactUMDEntry getNextDebugID ReactComponentTreeHook
         16: [function (_dereq_, module, exports) {
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -2238,6 +2242,7 @@ module.exports = checkReactTypeSpec;
 }).call(this,undefined)
         }, { "13": 13, "15": 15, "25": 25, "30": 30, "31": 31, "6": 6 }],
 
+        //createReactClass
         20: [function (_dereq_, module, exports) {
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -2648,6 +2653,7 @@ function traverseAllChildren(children, callback, traverseContext) {
 module.exports = traverseAllChildren;
         }, { "1": 1, "10": 10, "21": 21, "25": 25, "30": 30, "31": 31, "7": 7 }],
 
+        //createReactClass fatory core-code£¨ºËÐÄ´úÂë£©
         27: [function (_dereq_, module, exports) {
 /**
  * Copyright 2013-present, Facebook, Inc.
@@ -3879,6 +3885,7 @@ module.exports = checkPropTypes;
 
         }, { "30": 30, "31": 31, "36": 36 }],
 
+        // ReactPropTypes
         34: [function (_dereq_, module, exports) {
 /**
  * Copyright 2013-present, Facebook, Inc.
@@ -3904,6 +3911,7 @@ module.exports = function(isValidElement) {
 
         }, { "35": 35 }],
 
+        //ReactPropTypes--factoryWithTypeCheckers.js Core Code
         35: [function (_dereq_, module, exports) {
 /**
  * Copyright 2013-present, Facebook, Inc.
