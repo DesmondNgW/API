@@ -1,6 +1,7 @@
 ﻿using Em.FundTrade.EncryptHelper;
 using System.Collections.Generic;
 using System;
+using System.Text.RegularExpressions;
 
 namespace X.UI.Consoles
 {
@@ -23,6 +24,19 @@ namespace X.UI.Consoles
                 i = add ? i + 1 : i - 1;
             }
             return ret;
+        }
+
+        public static uint ConvertIpv4(string ipv4)
+        {
+            Match match = Regex.Match(ipv4, "^\\s*(\\d{1,3})\\s*\\.\\s*(\\d{1,3})\\s*\\.\\s*(\\d{1,3})\\s*\\.\\s*(\\d{1,3})\\s*$");
+            if (match.Groups.Count != 5)
+            {
+                throw new ArgumentException("参数格式不正确");
+            }
+            return uint.Parse(match.Groups[1].ToString()) * 256 * 256 * 256 +
+                uint.Parse(match.Groups[2].ToString()) * 256 * 256 +
+                uint.Parse(match.Groups[3].ToString()) * 256 +
+                uint.Parse(match.Groups[4].ToString());
         }
     }
 }

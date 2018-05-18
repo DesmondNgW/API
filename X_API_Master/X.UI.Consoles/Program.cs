@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.ServiceModel;
 using X.UI.Helper;
@@ -10,6 +11,9 @@ namespace X.UI.Consoles
     {
         static void Main()
         {
+            Console.WriteLine(ConsoleHelper.ConvertIpv4("17 2.168.5.1"));
+
+
             //ConsoleHelper.Draw(".", 30).ForEach(p => Console.WriteLine(p));
             //StockMonitor.Monitor();
             //var key = Guid.NewGuid().ToString("N");

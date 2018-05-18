@@ -17496,6 +17496,7 @@ var ExecutionEnvironment = {
 module.exports = ExecutionEnvironment;
             }, {}],
 
+            //Camelcases a hyphenated string{'background-color'=>'backgroundColor'}
             139: [function (_dereq_, module, exports) {
 "use strict";
 
@@ -17829,6 +17830,7 @@ function createNodesFromMarkup(markup, handleScript) {
 module.exports = createNodesFromMarkup;
             }, { "138": 138, "142": 142, "148": 148, "152": 152 }],
 
+            // return simple-returns function false/true/null/this/Arguments
             144: [function (_dereq_, module, exports) {
 "use strict";
 
@@ -17870,6 +17872,7 @@ emptyFunction.thatReturnsArgument = function (arg) {
 module.exports = emptyFunction;
             }, {}],
 
+            //return EmptyObject with Object.freeze
             145: [function (_dereq_, module, exports) {
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -17892,6 +17895,7 @@ if ("development" !== 'production') {
 module.exports = emptyObject;
             }, {}],
 
+            //focusNode{node.focus()}
             146: [function (_dereq_, module, exports) {
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -17921,6 +17925,7 @@ function focusNode(node) {
 module.exports = focusNode;
             }, {}],
 
+            //getActiveElement 获取焦点的元素
             147: [function (_dereq_, module, exports) {
 'use strict';
 
@@ -18059,6 +18064,7 @@ function getMarkupWrap(nodeName) {
 module.exports = getMarkupWrap;
 },{"138":138,"152":152}],
 
+            //getUnboundedScrollPosition{pageXOffset||scrollLeft}
             149: [function (_dereq_, module, exports) {
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -18100,6 +18106,7 @@ function getUnboundedScrollPosition(scrollable) {
 module.exports = getUnboundedScrollPosition;
             }, {}],
 
+            //Hyphenates a camelcased string{'backgroundColor'=>'background-color'}
             150: [function (_dereq_, module, exports) {
 'use strict';
 
@@ -18176,6 +18183,7 @@ function hyphenateStyleName(string) {
 module.exports = hyphenateStyleName;
             }, { "150": 150 }],
 
+            //invariant 格式化错误信息
             152: [function (_dereq_, module, exports) {
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -18234,6 +18242,7 @@ function invariant(condition, format, a, b, c, d, e, f) {
 module.exports = invariant;
             }, {}],
 
+            //isNode:Whether or not the object is a DOM node.
             153: [function (_dereq_, module, exports) {
 'use strict';
 
@@ -18253,9 +18262,12 @@ module.exports = invariant;
  * @return {boolean} Whether or not the object is a DOM node.
  */
 function isNode(object) {
-  var doc = object ? object.ownerDocument || object : document;
-  var defaultView = doc.defaultView || window;
-  return !!(object && (typeof defaultView.Node === 'function' ? object instanceof defaultView.Node : typeof object === 'object' && typeof object.nodeType === 'number' && typeof object.nodeName === 'string'));
+    var doc = object ? object.ownerDocument || object : document;
+    var defaultView = doc.defaultView || window;
+    return !!(object && (
+        typeof defaultView.Node === 'function' ?
+        object instanceof defaultView.Node :
+        typeof object === 'object' && typeof object.nodeType === 'number' && typeof object.nodeName === 'string'));
 }
 
 module.exports = isNode;
@@ -18288,6 +18300,8 @@ function isTextNode(object) {
 module.exports = isTextNode;
             }, { "153": 153 }],
 
+            //memoizeStringOnly:Memoizes the return value of a function that accepts one string argument
+            // callback传参的string 作为key,之前调用过，直接获取结果
             155: [function (_dereq_, module, exports) {
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -18381,6 +18395,7 @@ if (performance.now) {
 module.exports = performanceNow;
             }, { "156": 156 }],
 
+            //shallowEqual 浅比较
             158: [function (_dereq_, module, exports) {
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
