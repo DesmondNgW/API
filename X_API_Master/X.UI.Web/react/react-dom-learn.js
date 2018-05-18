@@ -18535,6 +18535,7 @@ if ("development" !== 'production') {
 module.exports = warning;
             }, { "144": 144 }],
 
+            //Object.assign
             160: [function (_dereq_, module, exports) {
 /*
 object-assign
@@ -19235,6 +19236,7 @@ module.exports = function(isValidElement, throwOnDirectAccess) {
 
 }, { "144": 144, "152": 152, "159": 159, "161": 161, "164": 164 }],
 
+            //SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED
             164: [function (_dereq_, module, exports) {
 /**
  * Copyright 2013-present, Facebook, Inc.
