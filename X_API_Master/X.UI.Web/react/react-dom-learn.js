@@ -129,6 +129,7 @@ var ARIADOMPropertyConfig = {
 module.exports = ARIADOMPropertyConfig;
             }, {}],
 
+            //AutoFocusUtils{focusDOMComponent} require(ReactDOMComponentTree)
             2: [function (_dereq_, module, exports) {
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -1704,6 +1705,7 @@ var DOMNamespaces = {
 module.exports = DOMNamespaces;
             }, {}],
 
+            //DOMProperty?
             11: [function (_dereq_, module, exports) {
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -3394,6 +3396,7 @@ PooledClass.addPoolingTo(FallbackCompositionState);
 module.exports = FallbackCompositionState;
 },{"118":118,"160":160,"25":25}],
 
+            //HTMLDOMPropertyConfig?
             22: [function (_dereq_, module, exports) {
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -4420,6 +4423,7 @@ module.exports = ReactChildReconciler;
 }).call(this,undefined)
             }, { "121": 121, "130": 130, "131": 131, "133": 133, "159": 159, "23": 23, "75": 75 }],
 
+            //ReactComponentBrowserEnvironment
             28: [function (_dereq_, module, exports) {
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -4448,6 +4452,7 @@ var ReactComponentBrowserEnvironment = {
 module.exports = ReactComponentBrowserEnvironment;
             }, { "38": 38, "8": 8 }],
 
+            //ReactComponentEnvironment{replaceNodeWithMarkup,processChildrenUpdates}
             29: [function (_dereq_, module, exports) {
 /**
  * Copyright (c) 2014-present, Facebook, Inc.
@@ -6536,6 +6541,7 @@ var ReactDOMComponentFlags = {
 module.exports = ReactDOMComponentFlags;
             }, {}],
 
+            //ReactDOMComponentTree?
             34: [function (_dereq_, module, exports) {
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -6731,6 +6737,7 @@ var ReactDOMComponentTree = {
 module.exports = ReactDOMComponentTree;
             }, { "11": 11, "126": 126, "152": 152, "33": 33 }],
 
+            //ReactDOMContainerInfo?
             35: [function (_dereq_, module, exports) {
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -6844,6 +6851,7 @@ var ReactDOMFeatureFlags = {
 module.exports = ReactDOMFeatureFlags;
             }, {}],
 
+            //ReactDOMIDOperations{dangerouslyProcessChildrenUpdates}
             38: [function (_dereq_, module, exports) {
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -7257,6 +7265,7 @@ var ReactDOMInvalidARIAHook = {
 module.exports = ReactDOMInvalidARIAHook;
             }, { "11": 11, "133": 133, "159": 159 }],
 
+            //ReactDOMNullInputValuePropHook (props value null check)
             41: [function (_dereq_, module, exports) {
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -9084,6 +9093,7 @@ if ("development" !== 'production') {
 module.exports = ReactErrorUtils;
             }, {}],
 
+            //ReactEventEmitterMixin
             56: [function (_dereq_, module, exports) {
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -9294,6 +9304,7 @@ var ReactFeatureFlags = {
 module.exports = ReactFeatureFlags;
 },{}],
 
+            //ReactHostComponent
             59: [function (_dereq_, module, exports) {
 /**
  * Copyright (c) 2014-present, Facebook, Inc.
@@ -9625,6 +9636,7 @@ if ("development" !== 'production') {
 module.exports = { debugTool: debugTool };
             }, { "50": 50 }],
 
+            //ReactInvalidSetStateWarningHook
             65: [function (_dereq_, module, exports) {
 /**
  * Copyright (c) 2016-present, Facebook, Inc.
@@ -10736,6 +10748,7 @@ var ReactNodeTypes = {
 module.exports = ReactNodeTypes;
             }, { "126": 126, "135": 135, "152": 152 }],
 
+            //ReactOwner
             70: [function (_dereq_, module, exports) {
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -11718,6 +11731,7 @@ var ReactReconciler = {
 module.exports = ReactReconciler;
             }, { "159": 159, "64": 64, "76": 76 }],
 
+            //ReactRef
             76: [function (_dereq_, module, exports) {
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -11897,6 +11911,7 @@ PooledClass.addPoolingTo(ReactServerRenderingTransaction);
 module.exports = ReactServerRenderingTransaction;
             }, { "100": 100, "160": 160, "25": 25, "64": 64, "78": 78 }],
 
+            //ReactServerUpdateQueue
             78: [function (_dereq_, module, exports) {
 /**
  * Copyright (c) 2015-present, Facebook, Inc.
@@ -11909,7 +11924,11 @@ module.exports = ReactServerRenderingTransaction;
 
 'use strict';
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+        throw new TypeError("Cannot call a class as a function");
+    }
+}
 
 var ReactUpdateQueue = _dereq_(81);
 
@@ -13827,6 +13846,7 @@ var SimpleEventPlugin = {
 module.exports = SimpleEventPlugin;
             }, { "111": 111, "126": 126, "137": 137, "144": 144, "152": 152, "20": 20, "34": 34, "87": 87, "88": 88, "90": 90, "91": 91, "92": 92, "94": 94, "95": 95, "96": 96, "97": 97, "98": 98, "99": 99 }],
 
+            //SyntheticAnimationEvent
             87: [function (_dereq_, module, exports) {
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -13866,6 +13886,7 @@ SyntheticEvent.augmentClass(SyntheticAnimationEvent, AnimationEventInterface);
 module.exports = SyntheticAnimationEvent;
             }, { "91": 91 }],
 
+            //SyntheticClipboardEvent
             88: [function (_dereq_, module, exports) {
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -13904,6 +13925,7 @@ SyntheticEvent.augmentClass(SyntheticClipboardEvent, ClipboardEventInterface);
 module.exports = SyntheticClipboardEvent;
             }, { "91": 91 }],
 
+            //SyntheticCompositionEvent
             89: [function (_dereq_, module, exports) {
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -13940,6 +13962,7 @@ SyntheticEvent.augmentClass(SyntheticCompositionEvent, CompositionEventInterface
 module.exports = SyntheticCompositionEvent;
             }, { "91": 91 }],
 
+            //SyntheticDragEvent
             90: [function (_dereq_, module, exports) {
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -14247,6 +14270,7 @@ function getPooledWarningPropertyDefinition(propName, getVal) {
 }
             }, { "144": 144, "159": 159, "160": 160, "25": 25 }],
 
+            //SyntheticFocusEvent
             92: [function (_dereq_, module, exports) {
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -14283,6 +14307,7 @@ SyntheticUIEvent.augmentClass(SyntheticFocusEvent, FocusEventInterface);
 module.exports = SyntheticFocusEvent;
             }, { "98": 98 }],
 
+            //SyntheticInputEvent
             93: [function (_dereq_, module, exports) {
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -14521,6 +14546,7 @@ SyntheticUIEvent.augmentClass(SyntheticTouchEvent, TouchEventInterface);
 module.exports = SyntheticTouchEvent;
             }, { "113": 113, "98": 98 }],
 
+            //SyntheticTransitionEvent
             97: [function (_dereq_, module, exports) {
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -14619,6 +14645,7 @@ SyntheticEvent.augmentClass(SyntheticUIEvent, UIEventInterface);
 module.exports = SyntheticUIEvent;
             }, { "114": 114, "91": 91 }],
 
+            // SyntheticWheelEvent
             99: [function (_dereq_, module, exports) {
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -14924,6 +14951,7 @@ var ViewportMetrics = {
 module.exports = ViewportMetrics;
             }, {}],
 
+            //accumulateInto
             102: [function (_dereq_, module, exports) {
 /**
  * Copyright (c) 2014-present, Facebook, Inc.
@@ -15149,6 +15177,7 @@ var createMicrosoftUnsafeLocalFunction = function (func) {
 module.exports = createMicrosoftUnsafeLocalFunction;
             }, {}],
 
+            //dangerousStyleValue
             106: [function (_dereq_, module, exports) {
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -15572,6 +15601,7 @@ function getEventCharCode(nativeEvent) {
 module.exports = getEventCharCode;
             }, {}],
 
+            //getEventKey
             112: [function (_dereq_, module, exports) {
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -15764,6 +15794,7 @@ function getEventTarget(nativeEvent) {
 module.exports = getEventTarget;
             }, {}],
 
+            //getHostComponentFromComposite
             115: [function (_dereq_, module, exports) {
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -15911,6 +15942,7 @@ function getNodeForCharacterOffset(root, offset) {
 module.exports = getNodeForCharacterOffset;
             }, {}],
 
+            //getTextContentAccessor
             118: [function (_dereq_, module, exports) {
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -15944,6 +15976,7 @@ function getTextContentAccessor() {
 module.exports = getTextContentAccessor;
             }, { "138": 138 }],
 
+            //getVendorPrefixedEventName 动画属性以及事件的前缀
             119: [function (_dereq_, module, exports) {
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -16297,6 +16330,7 @@ _assign(ReactCompositeComponentWrapper.prototype, ReactCompositeComponent, {
 module.exports = instantiateReactComponent;
             }, { "126": 126, "136": 136, "152": 152, "159": 159, "160": 160, "30": 30, "54": 54, "59": 59 }],
 
+            //isEventSupported
             122: [function (_dereq_, module, exports) {
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -16475,6 +16509,7 @@ if ("development" !== 'production') {
 module.exports = lowPriorityWarning;
             }, {}],
 
+            //quoteAttributeValueForBrowser
             125: [function (_dereq_, module, exports) {
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -16541,6 +16576,7 @@ function reactProdInvariant(code) {
 module.exports = reactProdInvariant;
             }, {}],
 
+            //ReactMount.renderSubtreeIntoContainer;
             127: [function (_dereq_, module, exports) {
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -17371,6 +17407,7 @@ var ReactInternals = React.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
 module.exports = ReactInternals.getNextDebugID;
             }, {}],
 
+            //EventListener 外层封装
             137: [function (_dereq_, module, exports) {
 'use strict';
 
@@ -17531,6 +17568,7 @@ function camelize(string) {
 module.exports = camelize;
             }, {}],
 
+            //camelizeStyleName for -ms-
             140: [function (_dereq_, module, exports) {
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -17573,6 +17611,7 @@ function camelizeStyleName(string) {
 module.exports = camelizeStyleName;
             }, { "139": 139 }],
 
+            //containsNode
             141: [function (_dereq_, module, exports) {
 'use strict';
 
@@ -17615,6 +17654,7 @@ function containsNode(outerNode, innerNode) {
 module.exports = containsNode;
             }, { "154": 154 }],
 
+            //createArrayFromMixed
             142: [function (_dereq_, module, exports) {
 'use strict';
 
@@ -17967,6 +18007,7 @@ function getActiveElement(doc) /*?DOMElement*/{
 module.exports = getActiveElement;
             }, {}],
 
+            //getMarkupWrap
             148: [function (_dereq_, module, exports) {
 'use strict';
 
@@ -18142,6 +18183,7 @@ function hyphenate(string) {
 module.exports = hyphenate;
             }, {}],
 
+            //hyphenateStyleName for '-ms-'
             151: [function (_dereq_, module, exports) {
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -18273,6 +18315,7 @@ function isNode(object) {
 module.exports = isNode;
             }, {}],
 
+            //isTextNode
             154: [function (_dereq_, module, exports) {
 'use strict';
 
@@ -18334,6 +18377,7 @@ function memoizeStringOnly(callback) {
 module.exports = memoizeStringOnly;
             }, {}],
 
+            //window.performance || window.msPerformance || window.webkitPerformance;
             156: [function (_dereq_, module, exports) {
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
