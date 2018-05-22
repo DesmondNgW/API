@@ -1567,6 +1567,7 @@ var DOMChildrenOperations = {
 module.exports = DOMChildrenOperations;
             }, { "105": 105, "128": 128, "129": 129, "13": 13, "34": 34, "64": 64, "9": 9 }],
 
+            
             9: [function (_dereq_, module, exports) {
 /**
  * Copyright (c) 2015-present, Facebook, Inc.
@@ -2224,6 +2225,7 @@ var DefaultEventPluginOrder = ['ResponderEventPlugin', 'SimpleEventPlugin', 'Tap
 module.exports = DefaultEventPluginOrder;
             }, {}],
 
+            //EnterLeaveEventPlugin?
             15: [function (_dereq_, module, exports) {
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -2943,6 +2945,7 @@ var EventPluginRegistry = {
 module.exports = EventPluginRegistry;
             }, { "126": 126, "152": 152 }],
 
+            //EventPluginUtils?
             19: [function (_dereq_, module, exports) {
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -3169,6 +3172,7 @@ var EventPluginUtils = {
 module.exports = EventPluginUtils;
             }, { "126": 126, "152": 152, "159": 159, "55": 55 }],
 
+            //EventPropagators?
             20: [function (_dereq_, module, exports) {
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -3303,6 +3307,7 @@ var EventPropagators = {
 module.exports = EventPropagators;
             }, { "102": 102, "110": 110, "159": 159, "17": 17, "19": 19 }],
 
+            //FallbackCompositionState
             21: [function (_dereq_, module, exports) {
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -10712,6 +10717,7 @@ var ReactMultiChild = {
 module.exports = ReactMultiChild;
             }, { "109": 109, "126": 126, "134": 134, "144": 144, "152": 152, "27": 27, "29": 29, "63": 63, "64": 64, "75": 75 }],
 
+            ///ReactNodeTypes
             69: [function (_dereq_, module, exports) {
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -14003,6 +14009,7 @@ SyntheticMouseEvent.augmentClass(SyntheticDragEvent, DragEventInterface);
 module.exports = SyntheticDragEvent;
             }, { "95": 95 }],
 
+            //SyntheticEvent?
             91: [function (_dereq_, module, exports) {
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -14349,6 +14356,7 @@ SyntheticEvent.augmentClass(SyntheticInputEvent, InputEventInterface);
 module.exports = SyntheticInputEvent;
             }, { "91": 91 }],
 
+            //SyntheticKeyboardEvent
             94: [function (_dereq_, module, exports) {
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -14433,6 +14441,7 @@ SyntheticUIEvent.augmentClass(SyntheticKeyboardEvent, KeyboardEventInterface);
 module.exports = SyntheticKeyboardEvent;
             }, { "111": 111, "112": 112, "113": 113, "98": 98 }],
 
+            //SyntheticMouseEvent
             95: [function (_dereq_, module, exports) {
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -14505,6 +14514,7 @@ SyntheticUIEvent.augmentClass(SyntheticMouseEvent, MouseEventInterface);
 module.exports = SyntheticMouseEvent;
             }, { "101": 101, "113": 113, "98": 98 }],
 
+            //SyntheticTouchEvent
             96: [function (_dereq_, module, exports) {
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -14590,6 +14600,7 @@ SyntheticEvent.augmentClass(SyntheticTransitionEvent, TransitionEventInterface);
 module.exports = SyntheticTransitionEvent;
             }, { "91": 91 }],
 
+            //SyntheticUIEvent
             98: [function (_dereq_, module, exports) {
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -16082,6 +16093,7 @@ function getVendorPrefixedEventName(eventName) {
 module.exports = getVendorPrefixedEventName;
             }, { "138": 138 }],
 
+            //inputValueTracking 观察者模式监视
             120: [function (_dereq_, module, exports) {
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -16597,6 +16609,7 @@ var ReactMount = _dereq_(67);
 module.exports = ReactMount.renderSubtreeIntoContainer;
             }, { "67": 67 }],
 
+            //setInnerHTML
             128: [function (_dereq_, module, exports) {
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -17788,6 +17801,7 @@ function createArrayFromMixed(obj) {
 module.exports = createArrayFromMixed;
             }, { "152": 152 }],
 
+            //createNodesFromMarkup
             143: [function (_dereq_, module, exports) {
 'use strict';
 
