@@ -909,6 +909,7 @@ var CSSPropertyOperations = {
 module.exports = CSSPropertyOperations;
             }, { "106": 106, "138": 138, "140": 140, "151": 151, "155": 155, "159": 159, "4": 4, "64": 64 }],
 
+            //CallbackQueue
             6: [function (_dereq_, module, exports) {
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -2688,6 +2689,7 @@ var EventPluginHub = {
 module.exports = EventPluginHub;
             }, { "102": 102, "110": 110, "126": 126, "152": 152, "18": 18, "19": 19, "55": 55 }],
 
+            //EventPluginRegistry?
             18: [function (_dereq_, module, exports) {
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -3832,6 +3834,7 @@ var LinkedValueUtils = {
 module.exports = LinkedValueUtils;
             }, { "126": 126, "135": 135, "152": 152, "159": 159, "162": 162, "73": 73 }],
 
+            //PooledClass
             25: [function (_dereq_, module, exports) {
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -8165,6 +8168,7 @@ function _handleChange(event) {
 module.exports = ReactDOMTextarea;
             }, { "126": 126, "152": 152, "159": 159, "160": 160, "24": 24, "34": 34, "82": 82 }],
 
+            // 时间冒泡和时间捕获的实现，遍历父节点
             47: [function (_dereq_, module, exports) {
 /**
  * Copyright (c) 2015-present, Facebook, Inc.
@@ -18403,6 +18407,7 @@ if (ExecutionEnvironment.canUseDOM) {
 module.exports = performance || {};
             }, { "138": 138 }],
 
+            //performanceNow
             157: [function (_dereq_, module, exports) {
 'use strict';
 
@@ -18510,6 +18515,7 @@ function shallowEqual(objA, objB) {
 module.exports = shallowEqual;
             }, {}],
 
+            //warning
             159: [function (_dereq_, module, exports) {
 /**
  * Copyright 2014-2015, Facebook, Inc.
@@ -18674,6 +18680,7 @@ module.exports = shouldUseNative() ? Object.assign : function (target, source) {
 
             }, {}],
 
+            //checkPropTypes
             161: [function (_dereq_, module, exports) {
 /**
  * Copyright 2013-present, Facebook, Inc.
@@ -18739,6 +18746,7 @@ module.exports = checkPropTypes;
 
             }, { "152": 152, "159": 159, "164": 164 }],
 
+            // ReactPropTypes
             162: [function (_dereq_, module, exports) {
 /**
  * Copyright 2013-present, Facebook, Inc.
@@ -18764,6 +18772,7 @@ module.exports = function(isValidElement) {
 
             }, { "163": 163 }],
 
+            //ReactPropTypes--factoryWithTypeCheckers.js Core Code
             163: [function (_dereq_, module, exports) {
 /**
  * Copyright 2013-present, Facebook, Inc.
