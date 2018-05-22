@@ -8456,6 +8456,7 @@ var ReactDOMUnknownPropertyHook = {
 module.exports = ReactDOMUnknownPropertyHook;
             }, { "11": 11, "133": 133, "159": 159, "18": 18 }],
 
+            //ReactDebugTool?
             50: [function (_dereq_, module, exports) {
 /**
  * Copyright (c) 2016-present, Facebook, Inc.
@@ -9621,6 +9622,7 @@ var ReactInstanceMap = {
 module.exports = ReactInstanceMap;
             }, {}],
 
+            //debugTool
             64: [function (_dereq_, module, exports) {
 /**
  * Copyright (c) 2016-present, Facebook, Inc.
