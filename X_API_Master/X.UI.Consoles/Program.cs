@@ -11,11 +11,9 @@ namespace X.UI.Consoles
     {
         static void Main()
         {
-            Console.WriteLine(ConsoleHelper.ConvertIpv4("17 2.168.5.1"));
-
-
+            //Console.WriteLine(ConsoleHelper.ConvertIpv4("17 2.168.5.1"));
             //ConsoleHelper.Draw(".", 30).ForEach(p => Console.WriteLine(p));
-            //StockMonitor.Monitor();
+            StockMonitor.Monitor();
             //var key = Guid.NewGuid().ToString("N");
             //Console.WriteLine(ThirdPartyTest.CouchBaseTest(key, key));
             //StockTestHelper.Test("300666", stock =>

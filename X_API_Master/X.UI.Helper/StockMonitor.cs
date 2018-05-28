@@ -2,8 +2,11 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Threading;
 using X.UI.Entities;
+using X.Util.Core.Log;
+using X.Util.Entities.Enums;
 using X.Util.Other;
 
 namespace X.UI.Helper
@@ -13,12 +16,19 @@ namespace X.UI.Helper
         #region 静态文件数据
 
         public static List<StockBase> StockBase = GetStockBase();
-        public static List<string> CodeList1 = GetCodeList("code_1.txt");
-        public static List<string> CodeList2 = GetCodeList("code_2.txt");
-        public static List<string> CodeList3 = GetCodeList("code_3.txt");
-        public static List<string> CodeList4 = GetCodeList("code_4.txt");
-        public static List<string> CodeList5 = GetCodeList("code_5.txt");
-        public static List<string> CodeList6 = GetCodeList("code_6.txt");
+        //public static List<string> CodeList1 = GetCodeList("code_1.txt");
+        //public static List<string> CodeList2 = GetCodeList("code_2.txt");
+        //public static List<string> CodeList3 = GetCodeList("code_3.txt");
+        //public static List<string> CodeList4 = GetCodeList("code_4.txt");
+        //public static List<string> CodeList5 = GetCodeList("code_5.txt");
+        //public static List<string> CodeList6 = GetCodeList("code_6.txt");
+
+        public static List<string> K005List = GetCodeList("K005.EBK");
+        public static List<string> K010List = GetCodeList("K010.EBK");
+        public static List<string> K015List = GetCodeList("K015.EBK");
+        public static List<string> K110List = GetCodeList("K110.EBK");
+        public static List<string> K122List = GetCodeList("K122.EBK");
+        public static List<string> K132List = GetCodeList("K132.EBK");
 
         private static decimal GetDecimal(string str)
         {
@@ -56,7 +66,8 @@ namespace X.UI.Helper
             var content = FileBase.ReadFile(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "App_Data", file),
                 "gb2312");
             var list = content.Trim().Split('\n');
-            return list.Select(item => item.Trim()).ToList();
+            return list.Where(item => !string.IsNullOrEmpty(item.Trim()))
+                .Select(item => item.Trim().Substring(item.Trim().Length - 6)).ToList();
         }
 
         #endregion
@@ -82,12 +93,12 @@ namespace X.UI.Helper
             if (result.CurrentPrice != 0) result.Inc = result.CurrentPrice/result.LastClosePrice*100 - 100;
             if (result.MaxPrice != 0) result.MaxInc = result.MaxPrice/result.LastClosePrice*100 - 100;
             if (result.MinPrice != 0) result.MinInc = result.MinPrice/result.LastClosePrice*100 - 100;
-            //if (CodeList1.Contains(code)) result.Indexs.Add("Code_1");
-            //if (CodeList2.Contains(code)) result.Indexs.Add("Code_2");
-            if (CodeList3.Contains(code)) result.Indexs.Add("Code_3");
-            if (CodeList4.Contains(code)) result.Indexs.Add("Code_4");
-            if (CodeList5.Contains(code)) result.Indexs.Add("Code_5");
-            if (CodeList6.Contains(code)) result.Indexs.Add("Code_6");
+            if (K110List.Contains(code)) result.Indexs.Add("393110");
+            if (K005List.Contains(code)) result.Indexs.Add("393005");
+            if (K122List.Contains(code)) result.Indexs.Add("393122");
+            if (K010List.Contains(code)) result.Indexs.Add("393010");
+            if (K132List.Contains(code)) result.Indexs.Add("393132");
+            if (K015List.Contains(code)) result.Indexs.Add("393015");
             return result;
         }
 
@@ -107,12 +118,12 @@ namespace X.UI.Helper
         /// <returns></returns>
         public static Dictionary<string, StockPrice> GetStockPrice()
         {
-            return GetStockPrice(CodeList1.
-                Union(CodeList2).
-                Union(CodeList3).
-                Union(CodeList4).
-                Union(CodeList5).
-                Union(CodeList6).ToList());
+            return GetStockPrice(K110List.
+                Union(K005List).
+                Union(K122List).
+                Union(K010List).
+                Union(K132List).
+                Union(K015List).ToList());
         }
 
 
@@ -122,10 +133,18 @@ namespace X.UI.Helper
             var toatlCapital = default(decimal);
             foreach (var code in list.Where(p=>!string.IsNullOrEmpty(p)))
             {
-                var item = stockPrice[code];
-                var capital = StockBase.First(p => p.StockCode == code).NegotiableCapital;
-                toatlCapital += capital;
-                ret += capital*(item != null ? item.Inc : 0);
+                try
+                {
+                    var item = stockPrice[code];
+                    var capital = StockBase.First(p => p.StockCode == code).NegotiableCapital;
+                    toatlCapital += capital;
+                    ret += capital * (item != null ? item.Inc : 0);
+                }
+                catch(Exception e)
+                {
+                    //Logger.Client.Error(Logger.Client.GetMethodInfo(MethodBase.GetCurrentMethod(), new object[] { code }), e, LogDomain.Ui);
+                    continue;
+                }
             }
             ret /= toatlCapital;
             return ret;
@@ -137,33 +156,33 @@ namespace X.UI.Helper
             {
                 new StockPrice
                 {
-                    StockCode = "393701",
-                    Inc = Monitor(dictionary, CodeList1),
+                    StockCode = "393110",
+                    Inc = Monitor(dictionary, K010List),
                 },
                 new StockPrice
                 {
-                    StockCode = "393702",
-                    Inc = Monitor(dictionary, CodeList2),
+                    StockCode = "393005",
+                    Inc = Monitor(dictionary, K005List),
                 },
                 new StockPrice
                 {
-                    StockCode = "393703",
-                    Inc = Monitor(dictionary, CodeList3)
+                    StockCode = "393122",
+                    Inc = Monitor(dictionary, K122List)
                 },
                 new StockPrice
                 {
-                    StockCode = "393704",
-                    Inc = Monitor(dictionary, CodeList4)
+                    StockCode = "393010",
+                    Inc = Monitor(dictionary, K010List)
                 },
                 new StockPrice
                 {
-                    StockCode = "393705",
-                    Inc = Monitor(dictionary, CodeList5)
+                    StockCode = "393132",
+                    Inc = Monitor(dictionary, K132List)
                 },
                 new StockPrice
                 {
-                    StockCode = "393706",
-                    Inc = Monitor(dictionary, CodeList6)
+                    StockCode = "393015",
+                    Inc = Monitor(dictionary, K015List)
                 },
             };
             return ret;
@@ -192,12 +211,12 @@ namespace X.UI.Helper
                 var dic = GetStockPrice();
                 if ((DateTime.Now >= d1 && DateTime.Now <= d2) || (DateTime.Now >= d3 && DateTime.Now <= d4))
                 {
-                    SetConsoleColor(Monitor(dic, CodeList1), "code_1:{0}");
-                    SetConsoleColor(Monitor(dic, CodeList2), "code_2:{0}");
-                    SetConsoleColor(Monitor(dic, CodeList3), "code_3:{0}");
-                    SetConsoleColor(Monitor(dic, CodeList4), "code_4:{0}");
-                    SetConsoleColor(Monitor(dic, CodeList5), "code_5:{0}");
-                    SetConsoleColor(Monitor(dic, CodeList6), "code_6:{0}");
+                    SetConsoleColor(Monitor(dic, K110List), "393110:{0}");
+                    SetConsoleColor(Monitor(dic, K005List), "393005:{0}");
+                    SetConsoleColor(Monitor(dic, K122List), "393122:{0}");
+                    SetConsoleColor(Monitor(dic, K010List), "393010:{0}");
+                    SetConsoleColor(Monitor(dic, K132List), "393132:{0}");
+                    SetConsoleColor(Monitor(dic, K015List), "393015:{0}");
                     foreach (
                         var item in
                             dic.Where(p => p.Value != null && (p.Value.Inc >= 4 || p.Value.Inc <= -4))
