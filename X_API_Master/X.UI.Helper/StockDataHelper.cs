@@ -142,5 +142,30 @@ namespace X.UI.Helper
             }
             return result.OrderBy(p=>p.Date).ToList();
         }
+
+
+        public static List<StockKLine> GetMinuteData(string code ,DateTime date)
+        {
+            var result = new List<StockKLine>();
+            var ret = DbHelper.GetPageList("TDXMinData", "TTime asc", "sCode='" + code + "' and  TDate='"+ date.ToString("yyyy-MM-dd") + "'", 0, 10000);
+            while (ret.Read())
+            {
+                var item = new StockKLine
+                {
+                    StockCode = DalHelper.GetString(ret["SCode"]),
+                    StockName = DalHelper.GetString(ret["SName"]),
+                    Date = DalHelper.GetDateTime(ret["TDate"]).Value,
+                    Open = DalHelper.GetDecimal(ret["Open"]).Value,
+                    High = DalHelper.GetDecimal(ret["High"]).Value,
+                    Close = DalHelper.GetDecimal(ret["Close"]).Value,
+                    Low = DalHelper.GetDecimal(ret["Low"]).Value,
+                    Time = DalHelper.GetInt(ret["TTime"]).Value,
+                    Vol = DalHelper.GetDecimal(ret["Vol"]).Value,
+                    Amount = DalHelper.GetDecimal(ret["Amt"]).Value,
+                };
+                result.Add(item);
+            }
+            return result;
+        }
     }
 }

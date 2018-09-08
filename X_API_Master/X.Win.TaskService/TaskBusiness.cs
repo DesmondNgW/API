@@ -1,4 +1,6 @@
 ﻿
+using X.UI.Helper;
+
 namespace X.Win.TaskService
 {
     public class TaskBusiness
@@ -40,7 +42,8 @@ namespace X.Win.TaskService
         /// </summary>
         public void HalfHourInvoke()
         {
-
+            StockTask.Task1();
+            StockTask.Task2();
         }
 
         /// <summary>

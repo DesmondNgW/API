@@ -4,8 +4,12 @@ using System.Linq;
 using System.ServiceModel;
 using System.Text.RegularExpressions;
 using X.UI.Helper;
+using X.Util.Core;
+using X.Util.Extend;
 using X.Util.Core.Kernel;
 using X.Util.Other;
+using X.Util.Extend.Mongo;
+using X.Util.Entities;
 
 namespace X.UI.Consoles
 {
@@ -13,6 +17,11 @@ namespace X.UI.Consoles
 
     class Program
     {
+
+
+
+
+
         static void Main()
         {
             //Console.WriteLine(ConsoleHelper.ConvertIpv4("17 2.168.5.1"));
@@ -31,8 +40,9 @@ namespace X.UI.Consoles
             //var s = MongoDbBase<MongoTest>.Default.FindBsonDocument("Test", "test", Query.Null);
             //var f = MongoDbBase<MongoTest>.ToEntity(s);
 
-            StockHelper.Down();
-            var ret = StockHelper.Load(DateTime.Now);
+            //var ret = StockDataHelper.GetMinuteData("601330", DateTime.Now.AddDays(-1));
+
+            StockTask.Task2();
 
             Console.ReadKey();
         }

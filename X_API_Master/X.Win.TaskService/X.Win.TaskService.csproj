@@ -120,6 +120,14 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\X.UI.Entities\X.UI.Entities.csproj">
+      <Project>{599e03e7-afd7-4f51-8069-ca70a343b127}</Project>
+      <Name>X.UI.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\X.UI.Helper\X.UI.Helper.csproj">
+      <Project>{76a733d7-edaa-4edf-b4a3-cfd197b467eb}</Project>
+      <Name>X.UI.Helper</Name>
+    </ProjectReference>
     <ProjectReference Include="..\X.Util.Core\X.Util.Core.csproj">
       <Project>{eabbc505-6258-40cd-b1b6-2d100ba45aec}</Project>
       <Name>X.Util.Core</Name>

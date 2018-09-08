@@ -1,10 +1,10 @@
-﻿
-
+﻿using System;
 using System.Collections.Generic;
+using X.Util.Entities;
 
 namespace X.UI.Entities
 {
-    public class StockPrice
+    public class StockPrice: MongoBaseModel
     {
         /// <summary>
         /// 代码
@@ -54,6 +54,12 @@ namespace X.UI.Entities
         /// 最小涨幅
         /// </summary>
         public decimal MinInc { get; set; }
+
+        /// <summary>
+        /// 日期
+        /// </summary>
+        [MongoDB.Bson.Serialization.Attributes.BsonDateTimeOptions(Kind = DateTimeKind.Local)]
+        public DateTime Datetime { get; set; }
 
         /// <summary>
         /// 指数

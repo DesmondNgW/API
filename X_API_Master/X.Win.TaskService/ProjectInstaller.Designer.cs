@@ -34,8 +34,8 @@
             // 
             // serviceInstaller1
             // 
-            serviceInstaller1.Description = "TaskService";
-            serviceInstaller1.ServiceName = "TaskService";
+            serviceInstaller1.Description = "StockTaskService";
+            serviceInstaller1.ServiceName = "StockTaskService";
             serviceInstaller1.AfterInstall += new System.Configuration.Install.InstallEventHandler(this.serviceInstaller1_AfterInstall);
             // 
             // serviceProcessInstaller1
