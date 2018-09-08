@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Text.RegularExpressions;
 using System.Threading;
 using X.UI.Entities;
 using X.Util.Core.Log;
@@ -79,6 +80,7 @@ namespace X.UI.Helper
             if (string.IsNullOrEmpty(ret.Content)) return default(StockPrice);
             var content = ret.Content.Split('\"')[1];
             var arr = content.Split(',');
+            if (string.IsNullOrEmpty(content) || arr.Length == 1) return default(StockPrice);
             var result = new StockPrice
             {
                 StockCode = code,

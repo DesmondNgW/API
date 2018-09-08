@@ -13444,6 +13444,7 @@ Object.keys(ATTRS).forEach(function (key) {
 module.exports = SVGDOMPropertyConfig;
             }, {}],
 
+            //SelectEventPlugin
             85: [function (_dereq_, module, exports) {
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -13632,6 +13633,7 @@ var SelectEventPlugin = {
 module.exports = SelectEventPlugin;
             }, { "123": 123, "138": 138, "147": 147, "158": 158, "20": 20, "34": 34, "62": 62, "91": 91 }],
 
+            //SimpleEventPlugin
             86: [function (_dereq_, module, exports) {
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -15072,6 +15074,7 @@ function adler32(data) {
 module.exports = adler32;
             }, {}],
 
+            //checkReactTypeSpec
             104: [function (_dereq_, module, exports) {
 (function (process){
 /**
@@ -16710,6 +16713,7 @@ if (ExecutionEnvironment.canUseDOM) {
 module.exports = setInnerHTML;
             }, { "10": 10, "105": 105, "138": 138 }],
 
+            //setTextContent
             129: [function (_dereq_, module, exports) {
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -16805,6 +16809,7 @@ function shouldUpdateReactComponent(prevElement, nextElement) {
 module.exports = shouldUpdateReactComponent;
             }, {}],
 
+            //traverseAllChildren
             131: [function (_dereq_, module, exports) {
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -16981,6 +16986,7 @@ function traverseAllChildren(children, callback, traverseContext) {
 module.exports = traverseAllChildren;
             }, { "116": 116, "126": 126, "134": 134, "152": 152, "159": 159, "23": 23, "53": 53 }],
 
+            //validateDOMNesting£¿
             132: [function (_dereq_, module, exports) {
 /**
  * Copyright (c) 2015-present, Facebook, Inc.

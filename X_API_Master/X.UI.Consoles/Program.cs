@@ -2,18 +2,22 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.ServiceModel;
+using System.Text.RegularExpressions;
 using X.UI.Helper;
 using X.Util.Core.Kernel;
+using X.Util.Other;
 
 namespace X.UI.Consoles
 {
+
+
     class Program
     {
         static void Main()
         {
             //Console.WriteLine(ConsoleHelper.ConvertIpv4("17 2.168.5.1"));
             //ConsoleHelper.Draw(".", 30).ForEach(p => Console.WriteLine(p));
-            StockMonitor.Monitor();
+            //StockMonitor.Monitor();
             //var key = Guid.NewGuid().ToString("N");
             //Console.WriteLine(ThirdPartyTest.CouchBaseTest(key, key));
             //StockTestHelper.Test("300666", stock =>
@@ -26,8 +30,18 @@ namespace X.UI.Consoles
             //MongoDbBase<MongoTest2>.Default.SaveMongo(new MongoTest2 { Dt = DateTime.Now, Value = "15", Key = "test" }, "Test", "test");
             //var s = MongoDbBase<MongoTest>.Default.FindBsonDocument("Test", "test", Query.Null);
             //var f = MongoDbBase<MongoTest>.ToEntity(s);
+
+            StockHelper.Down();
+            var ret = StockHelper.Load(DateTime.Now);
+
             Console.ReadKey();
         }
+
+        //static List<Tuple<int, int>> GetModel()
+        //{
+
+        //}
+
 
         static void Index()
         {

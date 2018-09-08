@@ -3,3 +3,17 @@
 ################################################################################
 
 /X_API_Master/.vs/X_API_Master/v15/Server/sqlite3
+/X_API_Master/X.UI.Consoles/bin
+/X_API_Master/X.UI.Consoles/obj
+/X_API_Master/.vs
+/X_API_Master/X.Cache.Service/bin/Debug
+/X_API_Master/X.Cache.Service/obj/Debug
+/X_API_Master/X.CodedUITest/bin/Debug
+/X_API_Master/X.CodedUITest/obj/Debug
+/X_API_Master/X.Data.Core.CoreReader/bin/Debug
+/X_API_Master/X.Data.Core.CoreReader/obj/Debug
+/X_API_Master/X.Data.Core.ExtendReader/bin/Debug
+/X_API_Master/X.Business.Core/obj
+/X_API_Master/X.Business.Core/bin
+/X_API_Master/X.Business.Entities/obj
+/X_API_Master/X.Business.Entities/bin
