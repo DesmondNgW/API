@@ -40,10 +40,9 @@ namespace X.UI.Consoles
             //var s = MongoDbBase<MongoTest>.Default.FindBsonDocument("Test", "test", Query.Null);
             //var f = MongoDbBase<MongoTest>.ToEntity(s);
 
-            //var ret = StockDataHelper.GetMinuteData("601330", DateTime.Now.AddDays(-1));
+            var ret = StockDataHelper.GetMinuteData("601330", DateTime.Now.AddDays(-1));
 
-            StockTask.Task2();
-
+            //StockTask.Task2();
             Console.ReadKey();
         }
 
