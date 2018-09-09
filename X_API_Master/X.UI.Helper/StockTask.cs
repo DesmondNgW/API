@@ -43,6 +43,27 @@ namespace X.UI.Helper
             MongoDbBase<StockKLine>.Default.InsertBatchMongo(list, "Stock", "History");
         }
 
+        public void HistoryTopDTask()
+        {
+            var sort = new SortByDocument
+            {
+                { "Datetime", -1 }
+            };
+            var top = MongoDbBase<StockKLine>.Default.Find("Stock", "History", null, null, sort, 10000);
+            var firstDatetime = top.FirstOrDefault().Date;
+            var StockMinutes = new List<StockMinute>();
+            foreach (var item in top)
+            {
+               var t = StockHelper.GetStockMinute(item.StockCode, item.Date.Date);
+               StockMinutes.Add(t);
+               MongoDbBase<StockMinute>.Default.InsertMongo(t, "Stock", "History_D");
+            }
+            //if (StockMinutes.Count > 0)
+            //{
+            //    MongoDbBase<StockMinute>.Default.InsertBatchMongo(StockMinutes, "Stock", "History_D");
+            //}
+        }
+
         public void Task3()
         {
             var sort = new SortByDocument
