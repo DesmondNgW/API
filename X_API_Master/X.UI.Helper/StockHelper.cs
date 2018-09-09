@@ -106,7 +106,7 @@ namespace X.UI.Helper
                         ret.VolOfOnePrice += minute.Vol;
                     }
                 }
-                ret.PriceOfOnePrice = ret.AmountOfOnePrice / ret.VolOfOnePrice;
+                ret.PriceOfOnePrice = ret.VolOfOnePrice != 0 ? ret.AmountOfOnePrice / ret.VolOfOnePrice : 0;
                 ret.PriceOfHighPrice = ret.VolOfHighPrice != 0 ? ret.AmountOfHighPrice / ret.VolOfHighPrice : 0;
                 ret.AHP = ret.AmountOfHighPrice / ret.AmountOfDay * 100;
                 ret.VHP = ret.VolOfHighPrice / ret.VolOfDay * 100;
