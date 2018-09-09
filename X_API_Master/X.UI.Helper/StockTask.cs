@@ -4,6 +4,8 @@ using X.UI.Entities;
 using X.Util.Entities;
 using X.Util.Extend.Mongo;
 using MongoDB.Driver;
+using System;
+using System.Globalization;
 
 namespace X.UI.Helper
 {
@@ -43,27 +45,6 @@ namespace X.UI.Helper
             MongoDbBase<StockKLine>.Default.InsertBatchMongo(list, "Stock", "History");
         }
 
-        public void HistoryTopDTask()
-        {
-            var sort = new SortByDocument
-            {
-                { "Datetime", -1 }
-            };
-            var top = MongoDbBase<StockKLine>.Default.Find("Stock", "History", null, null, sort, 10000);
-            var firstDatetime = top.FirstOrDefault().Date;
-            var StockMinutes = new List<StockMinute>();
-            foreach (var item in top)
-            {
-               var t = StockHelper.GetStockMinute(item.StockCode, item.Date.Date);
-               StockMinutes.Add(t);
-               MongoDbBase<StockMinute>.Default.InsertMongo(t, "Stock", "History_D");
-            }
-            //if (StockMinutes.Count > 0)
-            //{
-            //    MongoDbBase<StockMinute>.Default.InsertBatchMongo(StockMinutes, "Stock", "History_D");
-            //}
-        }
-
         public void Task3()
         {
             var sort = new SortByDocument
@@ -83,6 +64,17 @@ namespace X.UI.Helper
             if (StockMinutes.Count > 0)
             {
                 MongoDbBase<StockMinute>.Default.InsertBatchMongo(StockMinutes, "Stock", "Top_D");
+            }
+        }
+
+        public void Task4()
+        {
+            var list = StockDataHelper.History_Top_D();
+            foreach (var item in list)
+            {
+                var dt = DateTime.ParseExact(item.Key.Split('-')[1], "yyyyMMdd", CultureInfo.InvariantCulture);
+                var sk = StockHelper.GetStockMinute(item.Key, dt, item.Value);
+                MongoDbBase<StockMinute>.Default.InsertMongo(sk, "Stock", "History_Top_D");
             }
         }
     }

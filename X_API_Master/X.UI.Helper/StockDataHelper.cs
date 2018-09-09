@@ -1,9 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Globalization;
 using System.Linq;
 using X.DataBase.Helper;
 using X.UI.Entities;
+using X.Util.Core;
 using X.Util.Core.Common;
+using X.Util.Extend.Mongo;
 
 namespace X.UI.Helper
 {
@@ -211,6 +215,43 @@ namespace X.UI.Helper
             }
             ret.Close();
             return result;
+        }
+
+        public static Dictionary<string, List<StockKLine>> History_Top_D()
+        {
+            var ret = DbHelper.ExecuteQuery(CommandType.Text, "select * from tdxmindata as a join (select chg,tdate,scode from skday where chg>9.8) as b on a.tdate=b.tdate and a.scode=b.scode order by a.tdate desc,a.scode,ttime asc;");
+            var list = new Dictionary<string,List<StockKLine>>();
+            foreach (DataTable dt in ret.Tables)
+            {
+                foreach (DataRow dr in dt.Rows)
+                {
+                    var code = DalHelper.GetString(dr["SCode"]);
+                    var time = GetValue(DalHelper.GetDateTime(dr["TDate"]));
+                    var item = new StockKLine
+                    {
+                        Id = string.Format("{0}-{1}", code, time.ToString("yyyyMMdd")),
+                        StockCode = code,
+                        StockName = DalHelper.GetString(dr["SName"]),
+                        Date = time,
+                        Open = GetValue(DalHelper.GetDecimal(dr["Open"])),
+                        High = GetValue(DalHelper.GetDecimal(dr["High"])),
+                        Close = GetValue(DalHelper.GetDecimal(dr["Close"])),
+                        Low = GetValue(DalHelper.GetDecimal(dr["Low"])),
+                        Time = GetValue(DalHelper.GetInt(dr["TTime"])),
+                        Vol = GetValue(DalHelper.GetDecimal(dr["Vol"])),
+                        Amount = GetValue(DalHelper.GetDecimal(dr["Amt"])),
+                    };
+                    if (!list.ContainsKey(item.Id))
+                    {
+                        list[item.Id] = new List<StockKLine>();
+                    }
+                    else
+                    {
+                        list[item.Id].Add(item);
+                    }
+                }
+            }
+            return list;
         }
     }
 }
