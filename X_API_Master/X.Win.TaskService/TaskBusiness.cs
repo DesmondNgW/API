@@ -1,5 +1,10 @@
 ﻿
+using System;
 using X.UI.Helper;
+using X.Util.Core.Kernel;
+using X.Util.Entities;
+using X.Util.Entities.Enums;
+using X.Util.Provider;
 
 namespace X.Win.TaskService
 {
@@ -42,8 +47,12 @@ namespace X.Win.TaskService
         /// </summary>
         public void HalfHourInvoke()
         {
-            StockTask.Task1();
-            StockTask.Task2();
+            if (DateTime.Now.Hour >= 16)
+            {
+                var provider = new InstanceProvider<StockTask>(LogDomain.Ui);
+                CoreAccess<StockTask>.TryCallAsync(provider.Client.Task1, provider, null, new LogOptions());
+                CoreAccess<StockTask>.TryCallAsync(provider.Client.Task2, provider, null, new LogOptions());
+            }
         }
 
         /// <summary>

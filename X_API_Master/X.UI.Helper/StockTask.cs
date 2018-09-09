@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using X.UI.Entities;
 using X.Util.Entities;
 using X.Util.Extend.Mongo;
@@ -12,13 +9,14 @@ namespace X.UI.Helper
 {
     public class StockTask
     {
-        public static void Task1()
+        public void Task1()
         {
             var list = StockHelper.GetStockList();
             MongoDbBase<MongoBaseModel>.Default.InsertBatchMongo(list.Select(p => new MongoBaseModel { Id = p }), "Stock", "StockList");
+
         }
 
-        public static void Task2()
+        public void Task2()
         {
             var list = new List<StockPrice>();
             var ret = MongoDbBase<MongoBaseModel>.Default.Find("Stock", "StockList", null);
@@ -37,6 +35,7 @@ namespace X.UI.Helper
                 }
             }
             MongoDbBase<StockPrice>.Default.InsertBatchMongo(list, "Stock", "Top");
+
         }
     }
 }
