@@ -144,6 +144,20 @@ namespace X.UI.Helper
             return result.OrderBy(p=>p.Date).ToList();
         }
 
+        public static decimal GetValue(decimal? value)
+        {
+            return value!=null? value.Value:0;
+        }
+
+        public static int GetValue(int? value)
+        {
+            return value != null ? value.Value : 0;
+        }
+
+        public static DateTime GetValue(DateTime? value)
+        {
+            return value != null ? value.Value : DateTime.MinValue;
+        }
 
         public static List<StockKLine> GetMinuteData(string code ,DateTime date)
         {
@@ -155,14 +169,43 @@ namespace X.UI.Helper
                 {
                     StockCode = DalHelper.GetString(ret["SCode"]),
                     StockName = DalHelper.GetString(ret["SName"]),
-                    Date = DalHelper.GetDateTime(ret["TDate"]).Value,
-                    Open = DalHelper.GetDecimal(ret["Open"]).Value,
-                    High = DalHelper.GetDecimal(ret["High"]).Value,
-                    Close = DalHelper.GetDecimal(ret["Close"]).Value,
-                    Low = DalHelper.GetDecimal(ret["Low"]).Value,
-                    Time = DalHelper.GetInt(ret["TTime"]).Value,
-                    Vol = DalHelper.GetDecimal(ret["Vol"]).Value,
-                    Amount = DalHelper.GetDecimal(ret["Amt"]).Value,
+                    Date = GetValue(DalHelper.GetDateTime(ret["TDate"])),
+                    Open = GetValue(DalHelper.GetDecimal(ret["Open"])),
+                    High = GetValue(DalHelper.GetDecimal(ret["High"])),
+                    Close = GetValue(DalHelper.GetDecimal(ret["Close"])),
+                    Low = GetValue(DalHelper.GetDecimal(ret["Low"])),
+                    Time = GetValue(DalHelper.GetInt(ret["TTime"])),
+                    Vol = GetValue(DalHelper.GetDecimal(ret["Vol"])),
+                    Amount = GetValue(DalHelper.GetDecimal(ret["Amt"])),
+                };
+                result.Add(item);
+            }
+            ret.Close();
+            return result;
+        }
+
+        public static List<StockKLine> GetDayData()
+        {
+            var result = new List<StockKLine>();
+            var ret = DbHelper.GetPageList("SKDay", "tdate asc", "chg>9.8", 0, 10000000);
+            while (ret.Read())
+            {
+                var code = DalHelper.GetString(ret["SCode"]);
+                var dt = GetValue(DalHelper.GetDateTime(ret["TDate"]));
+                var item = new StockKLine
+                {
+                    Id = string.Format("{0}-{1}", code, dt.ToString("yyyyMMdd")),
+                    StockCode = code,
+                    StockName = DalHelper.GetString(ret["SName"]),
+                    Date = dt,
+                    Open = GetValue(DalHelper.GetDecimal(ret["OpenPrice"])),
+                    High = GetValue(DalHelper.GetDecimal(ret["HighPrice"])),
+                    Close = GetValue(DalHelper.GetDecimal(ret["ClosePrice"])),
+                    Low = GetValue(DalHelper.GetDecimal(ret["LowPrice"])),
+                    LastClose = GetValue(DalHelper.GetDecimal(ret["lastclose"])),
+                    Hsl = GetValue(DalHelper.GetInt(ret["Hsl"])),
+                    Vol = GetValue(DalHelper.GetDecimal(ret["Vol"])),
+                    Amount = GetValue(DalHelper.GetDecimal(ret["amount"])),
                 };
                 result.Add(item);
             }

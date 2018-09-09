@@ -53,6 +53,7 @@ namespace X.Win.TaskService
                 CoreAccess<StockTask>.TryCallAsync(provider.Client.Task1, provider, null, new LogOptions());
                 CoreAccess<StockTask>.TryCallAsync(provider.Client.Task2, provider, null, new LogOptions());
                 CoreAccess<StockTask>.TryCallAsync(provider.Client.Task3, provider, null, new LogOptions());
+                CoreAccess<StockTask>.TryCallAsync(provider.Client.HistoryTask, provider, null, new LogOptions());
             }
         }
 

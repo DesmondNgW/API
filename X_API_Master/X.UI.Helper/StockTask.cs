@@ -37,6 +37,12 @@ namespace X.UI.Helper
             MongoDbBase<StockPrice>.Default.InsertBatchMongo(list, "Stock", "Top");
         }
 
+        public void HistoryTask()
+        {
+            var list = StockDataHelper.GetDayData();
+            MongoDbBase<StockKLine>.Default.InsertBatchMongo(list, "Stock", "History");
+        }
+
         public void Task3()
         {
             var sort = new SortByDocument
