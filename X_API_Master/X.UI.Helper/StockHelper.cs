@@ -76,17 +76,43 @@ namespace X.UI.Helper
             return ret;
         }
 
-        public static void Down()
+        public static StockMinute GetStockMinute(string code, DateTime dt)
         {
-            var dic = GetStockPrice();
-            var content = dic.Where(p => p.Value != null && p.Value.Inc > 9.8M).Select(p=>p.Value).ToJson();
-            FileBase.WriteFile(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "d"), DateTime.Now.ToString("yyyyMMdd"), content, "utf-8", FileBaseMode.Create);
-        }
-
-        public static List<StockPrice> Load(DateTime dt)
-        {
-            var path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "d", dt.ToString("yyyyMMdd"));
-            var ret = FileBase.ReadJson<List<StockPrice>>(path, "utf-8");
+            var ret = new StockMinute();
+            var minutes = StockDataHelper.GetMinuteData(code, dt);
+            if (minutes != null && minutes.Count > 0)
+            {
+                ret.Id = string.Format("{0}-{1}", code, dt.ToString("yyyyMMdd"));
+                ret.DateTime = dt;
+                ret.CountOfDay = minutes.Count;
+                ret.AmountOfDay = minutes.Sum(p => p.Amount);
+                ret.VolOfDay = minutes.Sum(p => p.Vol);
+                ret.PriceOfDay = ret.AmountOfDay / ret.VolOfDay;
+                var high = minutes.Max(p => p.High);
+                foreach (var minute in minutes)
+                {
+                    ret.StockCode = minute.StockCode;
+                    ret.StockName = minute.StockName;
+                    if (minute.Close == high && minute.High > minute.Low)
+                    {
+                        ret.CountOfHighPrice++;
+                        ret.AmountOfHighPrice += minute.Amount;
+                        ret.VolOfHighPrice += minute.Vol;
+                    }
+                    if (minute.Close == high && minute.High == minute.Low)
+                    {
+                        ret.CountOfOnePrice++;
+                        ret.AmountOfOnePrice += minute.Amount;
+                        ret.VolOfOnePrice += minute.Vol;
+                    }
+                }
+                ret.PriceOfOnePrice = ret.AmountOfOnePrice / ret.VolOfOnePrice;
+                ret.PriceOfHighPrice = ret.VolOfHighPrice != 0 ? ret.AmountOfHighPrice / ret.VolOfHighPrice : 0;
+                ret.AHP = ret.AmountOfHighPrice / ret.AmountOfDay * 100;
+                ret.VHP = ret.VolOfHighPrice / ret.VolOfDay * 100;
+                ret.AOP = ret.AmountOfOnePrice / ret.AmountOfDay * 100;
+                ret.VOP = ret.VolOfOnePrice / ret.VolOfDay * 100;
+            }
             return ret;
         }
     }

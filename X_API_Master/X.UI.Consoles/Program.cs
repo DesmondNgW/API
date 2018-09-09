@@ -17,11 +17,6 @@ namespace X.UI.Consoles
 
     class Program
     {
-
-
-
-
-
         static void Main()
         {
             //Console.WriteLine(ConsoleHelper.ConvertIpv4("17 2.168.5.1"));
@@ -40,9 +35,8 @@ namespace X.UI.Consoles
             //var s = MongoDbBase<MongoTest>.Default.FindBsonDocument("Test", "test", Query.Null);
             //var f = MongoDbBase<MongoTest>.ToEntity(s);
 
-            var ret = StockDataHelper.GetMinuteData("601330", DateTime.Now.AddDays(-1));
 
-            //StockTask.Task2();
+            new StockTask().Task3();
             Console.ReadKey();
         }
 

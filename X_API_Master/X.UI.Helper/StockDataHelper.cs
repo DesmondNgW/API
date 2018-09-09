@@ -64,6 +64,7 @@ namespace X.UI.Helper
                 };
                 result.Add(item);
             }
+            ret.Close();
             return result;
         }
 
@@ -147,7 +148,7 @@ namespace X.UI.Helper
         public static List<StockKLine> GetMinuteData(string code ,DateTime date)
         {
             var result = new List<StockKLine>();
-            var ret = DbHelper.GetPageList("TDXMinData", "TTime asc", "sCode='" + code + "' and  TDate='"+ date.ToString("yyyy-MM-dd") + "'", 0, 10000);
+            var ret = DbHelper.GetPageList("TDXMinData", "TTime asc", "sCode='" + code + "' and  TDate='"+ date.ToString("yyyy-MM-dd") + "'", 0, 300);
             while (ret.Read())
             {
                 var item = new StockKLine
@@ -165,6 +166,7 @@ namespace X.UI.Helper
                 };
                 result.Add(item);
             }
+            ret.Close();
             return result;
         }
     }

@@ -4,7 +4,7 @@ using X.Util.Entities;
 
 namespace X.UI.Entities
 {
-    public class StockPrice: MongoBaseModel
+    public class StockPrice : MongoBaseModel
     {
         /// <summary>
         /// 代码
