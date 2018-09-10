@@ -10,6 +10,9 @@ using X.Util.Core.Kernel;
 using X.Util.Other;
 using X.Util.Extend.Mongo;
 using X.Util.Entities;
+using X.Util.Provider;
+using X.Util.Entities.Enums;
+using MongoDB.Driver.Builders;
 
 namespace X.UI.Consoles
 {
@@ -19,22 +22,25 @@ namespace X.UI.Consoles
     {
         static void Main()
         {
-            //Console.WriteLine(ConsoleHelper.ConvertIpv4("17 2.168.5.1"));
             //ConsoleHelper.Draw(".", 30).ForEach(p => Console.WriteLine(p));
             //StockMonitor.Monitor();
             //var key = Guid.NewGuid().ToString("N");
             //Console.WriteLine(ThirdPartyTest.CouchBaseTest(key, key));
-            //StockTestHelper.Test("300666", stock =>
-            //{
-            //    return stock.StrongLength > 5;
-            //});
             //TestCacheClient(1000);
 
             //MongoDbBase<MongoTest1>.Default.SaveMongo(new MongoTest1 { Dt = DateTime.Now, Value = 1, Key = "test" }, "Test", "test");
             //MongoDbBase<MongoTest2>.Default.SaveMongo(new MongoTest2 { Dt = DateTime.Now, Value = "15", Key = "test" }, "Test", "test");
             //var s = MongoDbBase<MongoTest>.Default.FindBsonDocument("Test", "test", Query.Null);
             //var f = MongoDbBase<MongoTest>.ToEntity(s);
-            //new StockTask().HistoryTopDTask();
+            var provider = new InstanceProvider<StockTask>(LogDomain.Ui);
+            if (DateTime.Now.Hour >= 16 && DateTime.Now.Hour <= 22)
+            {
+                //CoreAccess<StockTask>.TryCallAsync(provider.Client.Task1, provider, null, new LogOptions());
+                //CoreAccess<StockTask>.TryCallAsync(provider.Client.Task2, provider, null, new LogOptions());
+                //CoreAccess<StockTask>.TryCallAsync(provider.Client.Task3, provider, null, new LogOptions());
+                //CoreAccess<StockTask>.TryCallAsync(provider.Client.HistoryTask, provider, null, new LogOptions());
+                //CoreAccess<StockTask>.TryCallAsync(provider.Client.Task4, provider, null, new LogOptions());
+            }
             Console.ReadKey();
         }
 
