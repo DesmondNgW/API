@@ -35,10 +35,6 @@ namespace X.UI.Consoles
             //var s = MongoDbBase<MongoTest>.Default.FindBsonDocument("Test", "test", Query.Null);
             //var f = MongoDbBase<MongoTest>.ToEntity(s);
             //new StockTask().HistoryTopDTask();
-
-
-
-
             Console.ReadKey();
         }
 
