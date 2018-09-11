@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using X.UI.Entities;
+using X.Util.Core.Common;
 using X.Util.Core.Log;
 using X.Util.Entities.Enums;
 
@@ -12,10 +13,88 @@ namespace X.UI.Helper
 
     public class StockTestHelper
     {
+        #region 模拟随机行情数据
+        public static Stock GetStock(Stock t, double prev, int count)
+        {
+            var f = 0.2 * (StringConvert.SysRandom.NextDouble() - 0.5) * prev;
+            t.Open = f;
+            t.High = f;
+            t.Low = f;
+            t.Close = f;
+            while (count-- > 0)
+            {
+                t.Close = 0.2 * (StringConvert.SysRandom.NextDouble() - 0.5) * prev;
+                t.High = Math.Max(t.High, 0.2 * (StringConvert.SysRandom.NextDouble() - 0.5) * prev);
+                t.Low = Math.Min(t.Low, 0.2 * (StringConvert.SysRandom.NextDouble() - 0.5) * prev);
+            }
+            return t;
+        }
+
+        public static List<Stock> GetTestStockData(int count)
+        {
+            var result = new List<Stock>();
+            var ret = default(Stock);
+            while (count-- > 0)
+            {
+                var prev = ret != null ? ret.Close : 14;
+                ret = new Stock
+                {
+                    StockSimple = new Dictionary<int, StockSimple>(),
+                    StockCode = "TestCode",
+                    StockName = "TestName",
+                    Date = DateTime.MaxValue
+                };
+                ret = GetStock(ret, prev, 240);
+                result.Add(ret);
+            }
+            return result;
+        }
+
+        public static List<Stock> StockData(string code, bool test = false)
+        {
+            var result = test ? GetTestStockData(25000) : StockDataHelper.GetRealStockData(code);
+            result = result.OrderBy(p => p.Date).ToList();
+            for (var i = 0; i < result.Count; i++)
+            {
+                result[i].HeiKinAShiOpen = i == 0 ? 0 : (result[i - 1].Open + result[i - 1].Close) / 2;
+                result[i].Inc = i == 0 ? 0 : (result[i].Close - result[i - 1].Close) / result[i - 1].Close;
+                result[i].Ma = i < 4 ? 0 : result.Skip(i - 4).Take(5).Average(p => p.Close);
+                result[i].Std = i < 4 ? 0 : StockScoreHelper.Std(result.Skip(i - 4).Take(5).ToList());
+                result[i].ZScoreMa = result.Take(i + 1).Average(p => p.ZScore);
+                result[i].Score = i == 0 ? 0 : StockScoreHelper.Score(result[i], result[i - 1]);
+                result[i].ScoreMax = i == 0 ? 0 : StockScoreHelper.ScoreMax(result[i], result[i - 1]);
+                for (var j = 1; j <= 20; j++)
+                {
+                    if (i + j < result.Count)
+                    {
+                        result[i].StockSimple[j] = new StockSimple
+                        {
+                            Low = result[i + j].Low,
+                            High = result[i + j].High,
+                            Open = result[i + j].Open,
+                            Close = result[i + j].Close,
+                            StockCode = result[i + j].StockCode,
+                            StockName = result[i + j].StockName,
+                            Date = result[i + j].Date ?? DateTime.MinValue
+                        };
+                    }
+                }
+                for (var j = 1; j <= 20; j++)
+                {
+                    if (!result[i].StockSimple.ContainsKey(j))
+                    {
+                        result[i].StockSimple[j] = default(StockSimple);
+                    }
+                }
+            }
+            return result.OrderBy(p => p.Date).ToList();
+        }
+        #endregion
+
         public static void Test(string code, Func<Stock, bool> condition)
         {
             var result = new Dictionary<int, StockResult>();
-            var g = StockDataHelper.StockData(code);
+            var g = StockData(code);
             var ret = g.Where(condition).ToList();
             foreach (var t in ret)
             {

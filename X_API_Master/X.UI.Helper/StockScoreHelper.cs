@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using X.UI.Entities;
 
@@ -6,6 +7,36 @@ namespace X.UI.Helper
 {
     public class StockScoreHelper
     {
+        public static double Std(List<Stock> list)
+        {
+            var ma = list.Average(p => p.Close);
+            var std = Math.Pow(list.Sum(p => Math.Pow(p.Close - ma, 2)) / list.Count, 0.5);
+            return std;
+        }
+
+        public static double Score(Stock current, Stock previous)
+        {
+            return current.High / previous.High *
+                   current.Open / previous.Close *
+                   current.Close / previous.Close *
+                   current.Close / previous.Close *
+                   2 * current.Close / (current.High + current.Low) *
+                   current.Low / previous.Low *
+                   current.Close / previous.High;
+        }
+
+        public static double ScoreMax(Stock current, Stock previous)
+        {
+            return current.High / previous.High *
+                   current.Open / previous.Close *
+                   current.High / previous.Close *
+                   current.High / previous.Close *
+                   2 * current.High / (current.High + current.Low) *
+                   current.Low / previous.Low *
+                   current.High / previous.High;
+        }
+
+
         public static StockScore GetScore(Stock current, Stock previous)
         {
             return new StockScore

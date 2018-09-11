@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Globalization;
 using System.Linq;
+using System.Text.RegularExpressions;
 using X.DataBase.Helper;
 using X.UI.Entities;
-using X.Util.Core;
-using X.Util.Core.Common;
-using X.Util.Extend.Mongo;
+using X.Util.Other;
 
 namespace X.UI.Helper
 {
@@ -15,34 +13,21 @@ namespace X.UI.Helper
     {
         private static readonly DbHelper DbHelper = DalHelper.DbHelper;
 
-        public static double Std(List<Stock> list)
+        private static decimal GetValue(decimal? value)
         {
-            var ma = list.Average(p => p.Close);
-            var std = Math.Pow(list.Sum(p => Math.Pow(p.Close - ma, 2))/list.Count, 0.5);
-            return std;
+            return value != null ? value.Value : 0;
         }
 
-        public static double Score(Stock current, Stock previous)
+        private static int GetValue(int? value)
         {
-            return current.High/previous.High*
-                   current.Open/previous.Close*
-                   current.Close/previous.Close*
-                   current.Close/previous.Close*
-                   2*current.Close/(current.High + current.Low)*
-                   current.Low/previous.Low*
-                   current.Close/previous.High;
+            return value != null ? value.Value : 0;
         }
 
-        public static double ScoreMax(Stock current, Stock previous)
+        private static DateTime GetValue(DateTime? value)
         {
-            return current.High / previous.High *
-                   current.Open / previous.Close *
-                   current.High / previous.Close *
-                   current.High / previous.Close *
-                   2 * current.High / (current.High + current.Low) *
-                   current.Low / previous.Low *
-                   current.High / previous.High;
+            return value != null ? value.Value : DateTime.MinValue;
         }
+        #region 数据库数据
 
         /// <summary>
         /// 数据库数据
@@ -72,101 +57,16 @@ namespace X.UI.Helper
             return result;
         }
 
-        public static Stock GetStock(Stock t, double prev, int count)
-        {
-            var f = 0.2*(StringConvert.SysRandom.NextDouble() - 0.5)*prev;
-            t.Open = f;
-            t.High = f;
-            t.Low = f;
-            t.Close = f;
-            while (count-- > 0)
-            {
-                t.Close = 0.2*(StringConvert.SysRandom.NextDouble() - 0.5)*prev;
-                t.High = Math.Max(t.High, 0.2*(StringConvert.SysRandom.NextDouble() - 0.5)*prev);
-                t.Low = Math.Min(t.Low, 0.2*(StringConvert.SysRandom.NextDouble() - 0.5)*prev);
-            }
-            return t;
-        }
-
-        public static List<Stock> GetTestStockData(int count)
-        {
-            var result = new List<Stock>();
-            var ret = default(Stock);
-            while (count-- > 0)
-            {
-                var prev = ret != null ? ret.Close : 14;
-                ret = new Stock
-                {
-                    StockSimple = new Dictionary<int, StockSimple>(),
-                    StockCode = "TestCode",
-                    StockName = "TestName",
-                    Date = DateTime.MaxValue
-                };
-                ret = GetStock(ret, prev, 240);
-                result.Add(ret);
-            }
-            return result;
-        }
-
-        public static List<Stock> StockData(string code, bool test = false)
-        {
-            var result = test ? GetTestStockData(25000) : GetRealStockData(code);
-            result = result.OrderBy(p => p.Date).ToList();
-            for (var i = 0; i < result.Count; i++)
-            {
-                result[i].HeiKinAShiOpen = i == 0 ? 0 : (result[i - 1].Open + result[i - 1].Close)/2;
-                result[i].Inc = i == 0 ? 0 : (result[i].Close - result[i - 1].Close)/result[i - 1].Close;
-                result[i].Ma = i < 4 ? 0 : result.Skip(i - 4).Take(5).Average(p => p.Close);
-                result[i].Std = i < 4 ? 0 : Std(result.Skip(i - 4).Take(5).ToList());
-                result[i].ZScoreMa = result.Take(i + 1).Average(p => p.ZScore);
-                result[i].Score = i == 0 ? 0 : Score(result[i], result[i - 1]);
-                result[i].ScoreMax = i == 0 ? 0 : ScoreMax(result[i], result[i - 1]);
-                for (var j = 1; j <= 20; j++)
-                {
-                    if (i + j < result.Count)
-                    {
-                        result[i].StockSimple[j] = new StockSimple
-                        {
-                            Low = result[i + j].Low,
-                            High = result[i + j].High,
-                            Open = result[i + j].Open,
-                            Close = result[i + j].Close,
-                            StockCode = result[i + j].StockCode,
-                            StockName = result[i + j].StockName,
-                            Date = result[i + j].Date ?? DateTime.MinValue
-                        };
-                    }
-                }
-                for (var j = 1; j <= 20; j++)
-                {
-                    if (!result[i].StockSimple.ContainsKey(j))
-                    {
-                        result[i].StockSimple[j] = default(StockSimple);
-                    }
-                }
-            }
-            return result.OrderBy(p=>p.Date).ToList();
-        }
-
-        public static decimal GetValue(decimal? value)
-        {
-            return value!=null? value.Value:0;
-        }
-
-        public static int GetValue(int? value)
-        {
-            return value != null ? value.Value : 0;
-        }
-
-        public static DateTime GetValue(DateTime? value)
-        {
-            return value != null ? value.Value : DateTime.MinValue;
-        }
-
-        public static List<StockKLine> GetMinuteData(string code ,DateTime date)
+        /// <summary>
+        /// 数据库分钟线
+        /// </summary>
+        /// <param name="code"></param>
+        /// <param name="date"></param>
+        /// <returns></returns>
+        public static List<StockKLine> GetMinuteData(string code, DateTime date)
         {
             var result = new List<StockKLine>();
-            var ret = DbHelper.GetPageList("TDXMinData", "TTime asc", "sCode='" + code + "' and  TDate='"+ date.ToString("yyyy-MM-dd") + "'", 0, 300);
+            var ret = DbHelper.GetPageList("TDXMinData", "TTime asc", "sCode='" + code + "' and  TDate='" + date.ToString("yyyy-MM-dd") + "'", 0, 300);
             while (ret.Read())
             {
                 var item = new StockKLine
@@ -188,6 +88,10 @@ namespace X.UI.Helper
             return result;
         }
 
+        /// <summary>
+        /// 数据库日线
+        /// </summary>
+        /// <returns></returns>
         public static List<StockKLine> GetDayData()
         {
             var result = new List<StockKLine>();
@@ -217,6 +121,10 @@ namespace X.UI.Helper
             return result;
         }
 
+        /// <summary>
+        /// 日线涨停，分钟数据
+        /// </summary>
+        /// <returns></returns>
         public static Dictionary<string, List<StockKLine>> History_Top_D()
         {
             var list = new Dictionary<string, List<StockKLine>>();
@@ -255,5 +163,83 @@ namespace X.UI.Helper
             }
             return list;
         }
+        #endregion
+
+        #region http 接口数据
+        /// <summary>
+        /// 股票代码列表
+        /// </summary>
+        /// <returns></returns>
+        public static List<string> GetStockList()
+        {
+            var ret = new List<string>();
+            var regex = new Regex("<li><a target=\"_blank\" href=\"http://quote.eastmoney.com/(.+?).html\">(.+?)</a></li>");
+            var content = HttpRequestBase.GetHttpInfo("http://quote.eastmoney.com/stocklist.html", "gb2312", "application/json", null, string.Empty);
+            var list = regex.Matches(content.Content);
+            if (list != null)
+            {
+                foreach (Match Match in list)
+                {
+                    var target = Match.Groups[1].ToString();
+                    if (target.StartsWith("sh60") || target.StartsWith("sz002") || target.StartsWith("sz300"))
+                    {
+                        ret.Add(target.Substring(2));
+                    }
+                }
+            }
+            return ret;
+        }
+
+        /// <summary>
+        /// 单个股票行情实时
+        /// </summary>
+        /// <param name="code"></param>
+        /// <returns></returns>
+        public static StockPrice GetStockPrice(string code)
+        {
+            var uri = code.StartsWith("6") ? "http://hq.sinajs.cn/list=sh" + code : "http://hq.sinajs.cn/list=sz" + code;
+            var ret = HttpRequestBase.GetHttpInfo(uri, "gb2312", "application/json", null, string.Empty);
+            if (string.IsNullOrEmpty(ret.Content)) return default(StockPrice);
+            var content = ret.Content.Split('\"')[1];
+            var arr = content.Split(',');
+            if (string.IsNullOrEmpty(content) || arr.Length == 1) return default(StockPrice);
+            var result = new StockPrice
+            {
+                Id = string.Format("{0}-{1}", code, arr[30]),
+                StockCode = code,
+                StockName = arr[0],
+                CurrentPrice = decimal.Parse(arr[3]),
+                MaxPrice = decimal.Parse(arr[4]),
+                MinPrice = decimal.Parse(arr[5]),
+                OpenPrice = decimal.Parse(arr[1]),
+                LastClosePrice = decimal.Parse(arr[2]),
+                Datetime = DateTime.Parse(arr[30]),
+                Indexs = new List<string>()
+            };
+            if (result.CurrentPrice != 0) result.Inc = result.CurrentPrice / result.LastClosePrice * 100 - 100;
+            if (result.MaxPrice != 0) result.MaxInc = result.MaxPrice / result.LastClosePrice * 100 - 100;
+            if (result.MinPrice != 0) result.MinInc = result.MinPrice / result.LastClosePrice * 100 - 100;
+            return result;
+        }
+
+        /// <summary>
+        /// 所有股票行情
+        /// </summary>
+        /// <returns></returns>
+        public static Dictionary<string, StockPrice> GetStockPrice()
+        {
+            var ret = new Dictionary<string, StockPrice>();
+            var list = GetStockList();
+            foreach (var code in list.Where(code => !ret.ContainsKey(code) && !string.IsNullOrEmpty(code)))
+            {
+                var sp = GetStockPrice(code);
+                if (sp != null)
+                {
+                    ret[code] = GetStockPrice(code);
+                }
+            }
+            return ret;
+        }
+        #endregion
     }
 }

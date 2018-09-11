@@ -20,6 +20,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -53,11 +54,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StockDataHelper.cs" />
     <Compile Include="StockHelper.cs" />
-    <Compile Include="StockL2Helper.cs" />
+    <Compile Include="StockL2FileHelper.cs" />
     <Compile Include="StockMonitor.cs" />
     <Compile Include="StockPerformanceHelper.cs" />
     <Compile Include="StockScoreHelper.cs" />
-    <Compile Include="StockTask.cs" />
     <Compile Include="StockTestHelper.cs" />
   </ItemGroup>
   <ItemGroup>

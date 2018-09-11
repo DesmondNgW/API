@@ -32,15 +32,6 @@ namespace X.UI.Consoles
             //MongoDbBase<MongoTest2>.Default.SaveMongo(new MongoTest2 { Dt = DateTime.Now, Value = "15", Key = "test" }, "Test", "test");
             //var s = MongoDbBase<MongoTest>.Default.FindBsonDocument("Test", "test", Query.Null);
             //var f = MongoDbBase<MongoTest>.ToEntity(s);
-            var provider = new InstanceProvider<StockTask>(LogDomain.Ui);
-            if (DateTime.Now.Hour >= 16 && DateTime.Now.Hour <= 22)
-            {
-                //CoreAccess<StockTask>.TryCallAsync(provider.Client.Task1, provider, null, new LogOptions());
-                //CoreAccess<StockTask>.TryCallAsync(provider.Client.Task2, provider, null, new LogOptions());
-                //CoreAccess<StockTask>.TryCallAsync(provider.Client.Task3, provider, null, new LogOptions());
-                //CoreAccess<StockTask>.TryCallAsync(provider.Client.HistoryTask, provider, null, new LogOptions());
-                //CoreAccess<StockTask>.TryCallAsync(provider.Client.Task4, provider, null, new LogOptions());
-            }
             Console.ReadKey();
         }
 
