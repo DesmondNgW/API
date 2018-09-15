@@ -13,6 +13,8 @@ using X.Util.Entities;
 using X.Util.Provider;
 using X.Util.Entities.Enums;
 using MongoDB.Driver.Builders;
+using System.Globalization;
+using X.UI.Entities;
 
 namespace X.UI.Consoles
 {
@@ -28,17 +30,10 @@ namespace X.UI.Consoles
             //Console.WriteLine(ThirdPartyTest.CouchBaseTest(key, key));
             //TestCacheClient(1000);
 
-            //MongoDbBase<MongoTest1>.Default.SaveMongo(new MongoTest1 { Dt = DateTime.Now, Value = 1, Key = "test" }, "Test", "test");
-            //MongoDbBase<MongoTest2>.Default.SaveMongo(new MongoTest2 { Dt = DateTime.Now, Value = "15", Key = "test" }, "Test", "test");
             //var s = MongoDbBase<MongoTest>.Default.FindBsonDocument("Test", "test", Query.Null);
             //var f = MongoDbBase<MongoTest>.ToEntity(s);
             Console.ReadKey();
         }
-
-        //static List<Tuple<int, int>> GetModel()
-        //{
-
-        //}
 
 
         static void Index()

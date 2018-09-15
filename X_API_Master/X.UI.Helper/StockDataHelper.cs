@@ -125,22 +125,24 @@ namespace X.UI.Helper
         /// 日线涨停，分钟数据
         /// </summary>
         /// <returns></returns>
-        public static Dictionary<string, List<StockKLine>> History_Top_D()
+        public static Dictionary<string, StockKLineCombine> StockKLineCombine()
         {
-            var list = new Dictionary<string, List<StockKLine>>();
-            using (var ret = DbHelper.ExecuteQuery(CommandType.Text, "select * from tdxmindata as a join (select chg,tdate,scode from skday where chg>9.8) as b on a.tdate=b.tdate and a.scode=b.scode order by a.tdate desc,a.scode,ttime asc;"))
+            var list = new Dictionary<string, StockKLineCombine>();
+            using (var ret = DbHelper.ExecuteQuery(CommandType.Text, "select * from tdxmindata as a join (select * from skday where chg>9.8) as b on a.tdate=b.tdate and a.scode=b.scode order by a.tdate desc,a.scode,ttime asc;"))
             {
                 foreach (DataTable dt in ret.Tables)
                 {
                     foreach (DataRow dr in dt.Rows)
                     {
                         var code = DalHelper.GetString(dr["SCode"]);
+                        var name = DalHelper.GetString(dr["SName"]);
                         var time = GetValue(DalHelper.GetDateTime(dr["TDate"]));
+                        var id = string.Format("{0}-{1}", code, time.ToString("yyyyMMdd"));
                         var item = new StockKLine
                         {
-                            Id = string.Format("{0}-{1}", code, time.ToString("yyyyMMdd")),
+                            Id = id,
                             StockCode = code,
-                            StockName = DalHelper.GetString(dr["SName"]),
+                            StockName = name,
                             Date = time,
                             Open = GetValue(DalHelper.GetDecimal(dr["Open"])),
                             High = GetValue(DalHelper.GetDecimal(dr["High"])),
@@ -150,13 +152,33 @@ namespace X.UI.Helper
                             Vol = GetValue(DalHelper.GetDecimal(dr["Vol"])),
                             Amount = GetValue(DalHelper.GetDecimal(dr["Amt"])),
                         };
-                        if (!list.ContainsKey(item.Id))
+                        if (!list.ContainsKey(id))
                         {
-                            list[item.Id] = new List<StockKLine>();
+                            var day = new StockKLine
+                            {
+                                Id = id,
+                                StockCode = code,
+                                StockName = name,
+                                Date = time,
+                                Open = GetValue(DalHelper.GetDecimal(dr["openprice"])),
+                                High = GetValue(DalHelper.GetDecimal(dr["highprice"])),
+                                Close = GetValue(DalHelper.GetDecimal(dr["closeprice"])),
+                                Low = GetValue(DalHelper.GetDecimal(dr["lowprice"])),
+                                LastClose = GetValue(DalHelper.GetDecimal(dr["lastclose"])),
+                                Hsl = GetValue(DalHelper.GetDecimal(dr["hsl"])),
+                                Vol = GetValue(DalHelper.GetDecimal(dr["vol"])),
+                                Amount = GetValue(DalHelper.GetDecimal(dr["amount"])),
+                            };
+                            list[id] = new StockKLineCombine
+                            {
+                                Id = id,
+                                Day = day,
+                                Minutes = new List<StockKLine>() { item }
+                            };
                         }
                         else
                         {
-                            list[item.Id].Add(item);
+                            list[id].Minutes.Add(item);
                         }
                     }
                 }

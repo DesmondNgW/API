@@ -89,6 +89,11 @@
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <Analyzer Include="..\X.IO\Ref\MySql.Data.dll" />
+    <Analyzer Include="..\X.IO\Ref\Oracle.DataAccess.dll" />
+    <Analyzer Include="..\X.IO\Ref\System.Data.SQLite.dll" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

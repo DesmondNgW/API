@@ -11,6 +11,6 @@
     <add key="CustomerNo" value="" />
     <add key="CouchCacheEnable" value="false" />
     <add key="RedisCacheEnable" value="false" />
-    <add key="MongoDbEnable" value="false" />
+    <add key="MongoDbEnable" value="true" />
   </AppSettings>
 </configuration>
