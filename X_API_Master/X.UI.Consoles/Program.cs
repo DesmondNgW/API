@@ -33,28 +33,10 @@ namespace X.UI.Consoles
 
             //var s = MongoDbBase<MongoTest>.Default.FindBsonDocument("Test", "test", Query.Null);
             //var f = MongoDbBase<MongoTest>.ToEntity(s);
-            
-            var fs = new FileStream("C:\\new_tdx\\vipdoc\\sz\\lday\\sz300738.day", FileMode.Open);
-            byte[] data = new byte[fs.Length];
-            fs.Read(data, 0, data.Length);
-            var a = GetValue(data, true);
-            var b = GetValue(data, false);
+
+            TdxFileHelper.BatchDay();
             Console.ReadKey();
         }
-
-        public static uint GetValue(byte[] data, bool High2Low)
-        {
-            if (!High2Low)
-            {
-                return (uint)(data[3] * 255 * 255 * 255 + data[2] * 255 * 255 + data[1] * 255 + data[0]);
-            }
-            else
-            {
-                return (uint)(data[0] * 255 * 255 * 255 + data[1] * 255 * 255 + data[2] * 255 + data[3]);
-            }
-
-        }
-
 
         static void Index()
         {
