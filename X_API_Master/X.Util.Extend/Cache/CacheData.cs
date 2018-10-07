@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
+using System.Runtime.Caching;
 using System.Runtime.Remoting.Messaging;
-using System.Web.Caching;
 using X.Util.Core.Kernel;
 using X.Util.Core.Log;
 using X.Util.Entities;
@@ -87,7 +87,7 @@ namespace X.Util.Extend.Cache
                 setting.AppVersion = version;
                 setting.CacheTime = DateTime.Now;
                 setting.Succeed = iresult != null && iresult.Result != null && iresult.Succeed;
-                if (setting.Succeed) RuntimeCache.Set(key, setting, ts, string.IsNullOrEmpty(filepath) ? null : new CacheDependency(filepath));
+                if (setting.Succeed) RuntimeCache.SlidingExpirationSet(key, setting, ts, string.IsNullOrEmpty(filepath) ? null : new HostFileChangeMonitor(new[] { filepath }));
             }
             return setting;
         }

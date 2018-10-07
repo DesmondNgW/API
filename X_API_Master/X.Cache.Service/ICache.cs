@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Web;
+using X.Util.Core.Cache;
 
 namespace X.Cache.Service
 {
@@ -14,27 +14,28 @@ namespace X.Cache.Service
 
     public class CacheManager : ICache
     {
+        private static LocalCache LocalCache = new LocalCache("CacheManager");
         public object Get(string key)
         {
-            return HttpRuntime.Cache.Get(key);
+            return LocalCache.Get(key);
         }
 
         public bool Set(SendModel send)
         {
             if (send.ExpireAt != DateTime.MinValue)
             {
-                HttpRuntime.Cache.Insert(send.Key, send.Value, null, send.ExpireAt, System.Web.Caching.Cache.NoSlidingExpiration);
+                LocalCache.Set(send.Key, send.Value, send.ExpireAt);
             }
             else if (send.Expire != TimeSpan.Zero)
             {
-                HttpRuntime.Cache.Insert(send.Key, send.Value, null, System.Web.Caching.Cache.NoAbsoluteExpiration, send.Expire);
+                LocalCache.Set(send.Key, send.Value, send.Expire);
             }
             return true;
         }
 
         public bool Remove(string key)
         {
-            HttpRuntime.Cache.Remove(key);
+            LocalCache.Remove(key);
             return true;
         }
     }

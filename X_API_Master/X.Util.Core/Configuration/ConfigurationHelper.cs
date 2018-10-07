@@ -5,9 +5,9 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
 using System.Linq;
+using System.Runtime.Caching;
 using System.ServiceModel.Configuration;
 using System.ServiceModel.Description;
-using System.Web.Caching;
 using System.Xml;
 using Couchbase;
 using Couchbase.Configuration;
@@ -63,14 +63,14 @@ namespace X.Util.Core.Configuration
         public static string GetAppSettingByName(string name, string defaultValue)
         {
             var key = CacheConfigurationPrefix + name + "GetAppSettingByName";
-            var result = LocalCache.Get<string>(key);
+            var result = LocalCache.Default.Get<string>(key);
             if (!string.IsNullOrWhiteSpace(result)) return result;
             result = defaultValue;
             var doc = XmlHelper.GetXmlDocCache(ConfigFile);
             if (Equals(doc, null)) return result;
             var node = doc.SelectSingleNode("/configuration/AppSettings/add[@key='" + name + "']");
             result = XmlHelper.GetXmlAttributeValue(node, "value", defaultValue);
-            LocalCache.SlidingExpirationSet(key, result, new CacheDependency(ConfigFile, DateTime.Now), new TimeSpan(1, 0, 0), CacheItemPriority.AboveNormal);
+            LocalCache.Default.SlidingExpirationSet(key, result, new TimeSpan(1, 0, 0), new HostFileChangeMonitor(new[] { ConfigFile }));
             return result;
         }
 
@@ -139,7 +139,7 @@ namespace X.Util.Core.Configuration
         {
             var zone = Math.Max(ExecutionContext<RequestContext>.Current.Zone, 1);
             var key = CacheConfigurationPrefix + zone + name + "GetEndpointAddressesByName";
-            var result = LocalCache.Get<XmlServiceModel>(key);
+            var result = LocalCache.Default.Get<XmlServiceModel>(key);
             if (result != null) return result;
             var doc = XmlHelper.GetXmlDocCache(EndpointFile);
             var node = doc != null ? doc.SelectSingleNode("/configuration/client/endpoint[@name='" + name + "' and @zone='" + zone + "']") : null;
@@ -155,7 +155,7 @@ namespace X.Util.Core.Configuration
             {
                 result.Endpoints.Add(uri);
             }
-            LocalCache.SlidingExpirationSet(key, result, new CacheDependency(EndpointFile, DateTime.Now), new TimeSpan(1, 0, 0), CacheItemPriority.AboveNormal);
+            LocalCache.Default.SlidingExpirationSet(key, result, new TimeSpan(1, 0, 0), new HostFileChangeMonitor(new[] { EndpointFile }));
             return result;
         }
 

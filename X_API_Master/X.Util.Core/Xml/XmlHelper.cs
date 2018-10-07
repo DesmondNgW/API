@@ -2,8 +2,8 @@
 using System.Globalization;
 using System.IO;
 using System.Reflection;
+using System.Runtime.Caching;
 using System.Text;
-using System.Web.Caching;
 using System.Xml;
 using System.Xml.Serialization;
 using X.Util.Core.Cache;
@@ -35,14 +35,14 @@ namespace X.Util.Core.Xml
         public static XmlDocument GetXmlDocCache(string filePath)
         {
             var key = XmlPrefix + filePath;
-            var cache = LocalCache.Get<XmlDocument>(key);
+            var cache = LocalCache.Default.Get<XmlDocument>(key);
             if (cache != null) return cache;
             lock (CoreUtil.Getlocker(key))
             {
-                cache = LocalCache.Get<XmlDocument>(key);
+                cache = LocalCache.Default.Get<XmlDocument>(key);
                 if (cache != null) return cache;
                 cache = GetXmlDoc(filePath);
-                LocalCache.SlidingExpirationSet(key, cache, new CacheDependency(filePath, DateTime.Now), new TimeSpan(1, 0, 0), CacheItemPriority.Normal);
+                LocalCache.Default.SlidingExpirationSet(key, cache, new TimeSpan(1, 0, 0), new HostFileChangeMonitor(new[] { filePath }));
             }
             return cache;
         }
@@ -97,16 +97,16 @@ namespace X.Util.Core.Xml
         {
             if (!File.Exists(path)) return default(T);
             var key = XmlPrefix + path + typeof(T).FullName;
-            var cache = LocalCache.Get<T>(key);
+            var cache = LocalCache.Default.Get<T>(key);
             if (cache != null) return cache;
             lock (CoreUtil.Getlocker(key))
             {
-                cache = LocalCache.Get<T>(key);
+                cache = LocalCache.Default.Get<T>(key);
                 if (cache != null) return cache;
                 var serializer = new XmlSerializer(typeof(T));
                 var xr = XmlReader.Create(path, null);
                 cache = (T)serializer.Deserialize(xr);
-                LocalCache.SlidingExpirationSet(key, cache, new CacheDependency(path, DateTime.Now), new TimeSpan(1, 0, 0), CacheItemPriority.Normal);
+                LocalCache.Default.SlidingExpirationSet(key, cache, new TimeSpan(1, 0, 0), new HostFileChangeMonitor(new[] { path }));
             }
             return cache;
         }

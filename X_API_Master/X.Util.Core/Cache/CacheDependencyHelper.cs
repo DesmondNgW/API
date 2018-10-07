@@ -1,8 +1,8 @@
 ﻿using System;
 using System.IO;
 using System.Reflection;
+using System.Runtime.Caching;
 using System.Text;
-using System.Web.Caching;
 using X.Util.Core.Configuration;
 using X.Util.Core.Kernel;
 using X.Util.Core.Log;
@@ -88,11 +88,11 @@ namespace X.Util.Core.Cache
         /// <param name="key"></param>
         /// <param name="value"></param>
         /// <returns></returns>
-        public static CacheDependency CacheDependency(string key, object value)
+        public static HostFileChangeMonitor CacheDependency(string key, object value)
         {
             UpdateCacheDependencyFile(true);
             var path = UpdateCacheDependencyFile(key, value);
-            return new CacheDependency(new[] { path, CacheDependencyFile }, DateTime.Now);
+            return new HostFileChangeMonitor(new[] { path, CacheDependencyFile });
         }
 
         /// <summary>

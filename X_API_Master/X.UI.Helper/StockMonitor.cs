@@ -142,7 +142,7 @@ namespace X.UI.Helper
                     toatlCapital += capital;
                     ret += capital * (item != null ? item.Inc : 0);
                 }
-                catch(Exception e)
+                catch//(Exception e)
                 {
                     //Logger.Client.Error(Logger.Client.GetMethodInfo(MethodBase.GetCurrentMethod(), new object[] { code }), e, LogDomain.Ui);
                     continue;

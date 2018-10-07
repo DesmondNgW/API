@@ -3,12 +3,12 @@ using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.Caching;
 using System.Security.Cryptography.X509Certificates;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
 using System.ServiceModel.Configuration;
 using System.ServiceModel.Description;
-using System.Web.Caching;
 using X.Util.Core.Cache;
 using X.Util.Core.Kernel;
 using X.Util.Entities;
@@ -23,12 +23,12 @@ namespace X.Util.Core.Configuration
         public static ServiceModelSectionGroup ConfigInit()
         {
             var key = EndpointPrefix + AppConfigFile;
-            var cache = LocalCache.Get<ServiceModelSectionGroup>(key);
+            var cache = LocalCache.Default.Get<ServiceModelSectionGroup>(key);
             if (cache != null) return cache;
             var map = new ExeConfigurationFileMap {ExeConfigFilename = AppConfigFile};
             var config = ConfigurationManager.OpenMappedExeConfiguration(map, ConfigurationUserLevel.None);
             cache = ServiceModelSectionGroup.GetSectionGroup(config);
-            LocalCache.SlidingExpirationSet(key, cache, new CacheDependency(AppConfigFile, DateTime.Now), new TimeSpan(1, 0, 0), CacheItemPriority.Normal);
+            LocalCache.Default.SlidingExpirationSet(key, cache, new TimeSpan(1, 0, 0), new HostFileChangeMonitor(new[] { AppConfigFile }));
             return cache;
         }
 

@@ -1,11 +1,13 @@
 ﻿using System;
-using System.Web.Caching;
+using System.Runtime.Caching;
 using X.Util.Core.Cache;
 
 namespace X.Util.Extend.Cache
 {
     public class RuntimeCache
     {
+        private static LocalCache LocalCache = new LocalCache("RuntimeCache");
+
         public static object Get(string key)
         {
             return LocalCache.Get(key);
@@ -16,24 +18,24 @@ namespace X.Util.Extend.Cache
             return LocalCache.GetJson(key);
         }
 
-        public static void AbsoluteExpirationSet(string key, object value, CacheDependency dependencies, DateTime absoluteExpiration, CacheItemPriority level)
+        public static void AbsoluteExpirationSet(string key, object value, DateTime absoluteExpiration, HostFileChangeMonitor hostFileMonitor)
         {
-            LocalCache.AbsoluteExpirationSet(key, value, dependencies, absoluteExpiration, level);
+            LocalCache.AbsoluteExpirationSet(key, value, absoluteExpiration, hostFileMonitor);
         }
 
-        public static void AbsoluteExpirationSetJson(string key, object value, CacheDependency dependencies, DateTime absoluteExpiration, CacheItemPriority level)
+        public static void AbsoluteExpirationSetJson(string key, object value, DateTime absoluteExpiration, HostFileChangeMonitor hostFileMonitor)
         {
-            LocalCache.AbsoluteExpirationSetJson(key, value, dependencies, absoluteExpiration, level);
+            LocalCache.AbsoluteExpirationSetJson(key, value, absoluteExpiration, hostFileMonitor);
         }
 
-        public static void SlidingExpirationSet(string key, object value, CacheDependency dependencies, TimeSpan slidingExpiration, CacheItemPriority level)
+        public static void SlidingExpirationSet(string key, object value, TimeSpan slidingExpiration, HostFileChangeMonitor hostFileMonitor)
         {
-            LocalCache.SlidingExpirationSet(key, value, dependencies, slidingExpiration, level);
+            LocalCache.SlidingExpirationSet(key, value, slidingExpiration, hostFileMonitor);
         }
 
-        public static void SlidingExpirationSetJson(string key, object value, CacheDependency dependencies, TimeSpan slidingExpiration, CacheItemPriority level)
+        public static void SlidingExpirationSetJson(string key, object value, TimeSpan slidingExpiration, HostFileChangeMonitor hostFileMonitor)
         {
-            LocalCache.SlidingExpirationSetJson(key, value, dependencies, slidingExpiration, level);
+            LocalCache.SlidingExpirationSetJson(key, value, slidingExpiration, hostFileMonitor);
         }
 
         public static object Remove(string key)
@@ -79,26 +81,6 @@ namespace X.Util.Extend.Cache
         public static void SetJson(string key, object value, TimeSpan ts)
         {
             LocalCache.SetJson(key, value, ts);
-        }
-
-        public static void Set(string key, object value, DateTime dt, CacheDependency dency)
-        {
-            LocalCache.Set(key, value, dt, dency);
-        }
-
-        public static void SetJson(string key, object value, DateTime dt, CacheDependency dency)
-        {
-            LocalCache.SetJson(key, value, dt, dency);
-        }
-
-        public static void Set(string key, object value, TimeSpan ts, CacheDependency dency)
-        {
-            LocalCache.Set(key, value, ts, dency);
-        }
-
-        public static void SetJson(string key, object value, TimeSpan ts, CacheDependency dency)
-        {
-            LocalCache.SetJson(key, value, ts, dency);
         }
     }
 }

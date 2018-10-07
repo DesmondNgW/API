@@ -60,7 +60,7 @@ namespace X.Util.Core.Kernel
         {
             if (nodes.Count.Equals(0)) return string.Empty;
             var cacheKey = Sha1(nodes.ToJson());
-            var circle = LocalCache.Get<IDictionary<string, string>>(cacheKey);
+            var circle = LocalCache.Default.Get<IDictionary<string, string>>(cacheKey);
             if (Equals(circle, null))
             {
                 circle = new Dictionary<string, string>();
@@ -72,7 +72,7 @@ namespace X.Util.Core.Kernel
                         circle[Sha1(t + "_clone_" + j)] = t;
                     }
                 }
-                LocalCache.Set(cacheKey, circle, DateTime.Now.AddDays(1));
+                LocalCache.Default.Set(cacheKey, circle, DateTime.Now.AddDays(1));
             }
             var order = circle.OrderBy(p => p.Key);
             var sha1 = Sha1(key);

@@ -1,109 +1,106 @@
 ﻿using System;
-using System.Web;
-using System.Web.Caching;
+using System.Runtime.Caching;
 
 namespace X.Util.Core.Cache
 {
     public class LocalCache
     {
-        public static object Get(string key)
+        public static LocalCache Default = new LocalCache();
+        private static MemoryCache _MemoryCache = MemoryCache.Default;
+        public LocalCache() { }
+        public LocalCache(string name)
         {
-            return HttpRuntime.Cache.Get(key);
+            _MemoryCache = new MemoryCache(name);
         }
 
-        public static string GetJson(string key)
+        public object Get(string key)
         {
-            return (string)HttpRuntime.Cache.Get(key);
+            return _MemoryCache.Get(key);
         }
 
-        public static void AbsoluteExpirationSet(string key, object value, CacheDependency dependencies, DateTime absoluteExpiration, CacheItemPriority level)
+        public string GetJson(string key)
         {
-            HttpRuntime.Cache.Insert(key, value, dependencies ?? CacheDependencyHelper.CacheDependency(key, value), absoluteExpiration, System.Web.Caching.Cache.NoSlidingExpiration, level, null);
+            return (string)_MemoryCache.Get(key);
         }
 
-        public static void AbsoluteExpirationSetJson(string key, object value, CacheDependency dependencies, DateTime absoluteExpiration, CacheItemPriority level)
+        public void AbsoluteExpirationSet(string key, object value, DateTime absoluteExpiration, HostFileChangeMonitor hostFileMonitor)
         {
-            HttpRuntime.Cache.Insert(key, value.ToJson(), dependencies ?? CacheDependencyHelper.CacheDependency(key, value), absoluteExpiration, System.Web.Caching.Cache.NoSlidingExpiration, level, null);
+            var policy = new CacheItemPolicy
+            {
+                AbsoluteExpiration = absoluteExpiration,
+            };
+            policy.ChangeMonitors.Add(hostFileMonitor ?? CacheDependencyHelper.CacheDependency(key, value));
+            _MemoryCache.Add(new CacheItem(key, value), policy);
         }
 
-        public static void SlidingExpirationSet(string key, object value, CacheDependency dependencies, TimeSpan slidingExpiration, CacheItemPriority level)
+        public void AbsoluteExpirationSetJson(string key, object value, DateTime absoluteExpiration, HostFileChangeMonitor hostFileMonitor)
         {
-            HttpRuntime.Cache.Insert(key, value, dependencies ?? CacheDependencyHelper.CacheDependency(key, value), System.Web.Caching.Cache.NoAbsoluteExpiration, slidingExpiration, level, null);
+            AbsoluteExpirationSet(key, value.ToJson(), absoluteExpiration, hostFileMonitor);
         }
 
-        public static void SlidingExpirationSetJson(string key, object value, CacheDependency dependencies, TimeSpan slidingExpiration, CacheItemPriority level)
+        public void SlidingExpirationSet(string key, object value, TimeSpan slidingExpiration, HostFileChangeMonitor hostFileMonitor)
         {
-            HttpRuntime.Cache.Insert(key, value.ToJson(), dependencies ?? CacheDependencyHelper.CacheDependency(key, value), System.Web.Caching.Cache.NoAbsoluteExpiration, slidingExpiration, level, null);
+            var policy = new CacheItemPolicy
+            {
+                SlidingExpiration = slidingExpiration,
+            };
+            policy.ChangeMonitors.Add(hostFileMonitor ?? CacheDependencyHelper.CacheDependency(key, value));
+            _MemoryCache.Add(new CacheItem(key, value), policy);
         }
 
-        public static object Remove(string key)
+        public void SlidingExpirationSetJson(string key, object value, TimeSpan slidingExpiration, HostFileChangeMonitor hostFileMonitor)
+        {
+            SlidingExpirationSet(key, value.ToJson(), slidingExpiration, hostFileMonitor);
+        }
+
+        public object Remove(string key)
         {
             CacheDependencyHelper.UpdateCacheDependencyFile(key, null);
-            return HttpRuntime.Cache.Remove(key);
+            return _MemoryCache.Remove(key);
         }
 
-        public static T Get<T>(string key)
+        public T Get<T>(string key)
         {
-            var o = HttpRuntime.Cache.Get(key);
+            var o = _MemoryCache.Get(key);
             return o != null ? (T)o : default(T);
         }
 
-        public static T GetFromFile<T>(string key)
+        public T GetFromFile<T>(string key)
         {
-            var o = HttpRuntime.Cache.Get(key);
+            var o = _MemoryCache.Get(key);
             return o != null ? (T)o : CacheDependencyHelper.GetCacheResultFromFile<T>(key);
         }
 
-        public static T GetJson<T>(string key)
+        public T GetJson<T>(string key)
         {
-            var o = (string)HttpRuntime.Cache.Get(key);
+            var o = (string)_MemoryCache.Get(key);
             return o != null ? o.FromJson<T>() : default(T);
         }
 
-        public static T GetJsonFromFile<T>(string key)
+        public T GetJsonFromFile<T>(string key)
         {
-            var o = (string) HttpRuntime.Cache.Get(key);
+            var o = (string)_MemoryCache.Get(key);
             return o != null ? o.FromJson<T>() : CacheDependencyHelper.GetCacheResultFromFile<T>(key);
         }
 
-        public static void Set(string key, object value, DateTime dt)
+        public void Set(string key, object value, DateTime dt)
         {
-            HttpRuntime.Cache.Insert(key, value, CacheDependencyHelper.CacheDependency(key, value), dt, System.Web.Caching.Cache.NoSlidingExpiration, CacheItemPriority.AboveNormal, null);
+            AbsoluteExpirationSet(key, value, dt, null);
         }
 
-        public static void SetJson(string key, object value, DateTime dt)
+        public void SetJson(string key, object value, DateTime dt)
         {
-            HttpRuntime.Cache.Insert(key, value.ToJson(), CacheDependencyHelper.CacheDependency(key, value), dt, System.Web.Caching.Cache.NoSlidingExpiration, CacheItemPriority.AboveNormal, null);
+            AbsoluteExpirationSetJson(key, value, dt, null);
         }
 
-        public static void Set(string key, object value, TimeSpan ts)
+        public void Set(string key, object value, TimeSpan ts)
         {
-            HttpRuntime.Cache.Insert(key, value, CacheDependencyHelper.CacheDependency(key, value), System.Web.Caching.Cache.NoAbsoluteExpiration, ts, CacheItemPriority.AboveNormal, null);
+            SlidingExpirationSet(key, value, ts, null);
         }
 
-        public static void SetJson(string key, object value, TimeSpan ts)
+        public void SetJson(string key, object value, TimeSpan ts)
         {
-            HttpRuntime.Cache.Insert(key, value.ToJson(), CacheDependencyHelper.CacheDependency(key, value), System.Web.Caching.Cache.NoAbsoluteExpiration, ts, CacheItemPriority.AboveNormal, null);
-        }
-
-        public static void Set(string key, object value, DateTime dt, CacheDependency dency)
-        {
-            HttpRuntime.Cache.Insert(key, value, dency ?? CacheDependencyHelper.CacheDependency(key, value), dt, System.Web.Caching.Cache.NoSlidingExpiration, CacheItemPriority.AboveNormal, null);
-        }
-
-        public static void SetJson(string key, object value, DateTime dt, CacheDependency dency)
-        {
-            HttpRuntime.Cache.Insert(key, value.ToJson(), dency ?? CacheDependencyHelper.CacheDependency(key, value), dt, System.Web.Caching.Cache.NoSlidingExpiration, CacheItemPriority.AboveNormal, null);
-        }
-
-        public static void Set(string key, object value, TimeSpan ts, CacheDependency dency)
-        {
-            HttpRuntime.Cache.Insert(key, value, dency ?? CacheDependencyHelper.CacheDependency(key, value), System.Web.Caching.Cache.NoAbsoluteExpiration, ts, CacheItemPriority.AboveNormal, null);
-        }
-
-        public static void SetJson(string key, object value, TimeSpan ts, CacheDependency dency)
-        {
-            HttpRuntime.Cache.Insert(key, value.ToJson(), dency ?? CacheDependencyHelper.CacheDependency(key, value), System.Web.Caching.Cache.NoAbsoluteExpiration, ts, CacheItemPriority.AboveNormal, null);
+            SlidingExpirationSetJson(key, value, ts, null);
         }
     }
 }

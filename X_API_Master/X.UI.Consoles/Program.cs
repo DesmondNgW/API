@@ -19,8 +19,6 @@ using System.IO;
 
 namespace X.UI.Consoles
 {
-
-
     class Program
     {
         static void Main()

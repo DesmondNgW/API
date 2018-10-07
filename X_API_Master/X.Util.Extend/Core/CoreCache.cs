@@ -32,10 +32,10 @@ namespace X.Util.Extend.Core
         {
             var token = ExecutionContext<RequestContext>.Current.Ctoken;
             if (string.IsNullOrEmpty(token)) return;
-            var list = (LocalCache.Get(token) as IList<string>) ?? new List<string>();
+            var list = (LocalCache.Default.Get(token) as IList<string>) ?? new List<string>();
             if (list.Contains(key)) return;
             list.Add(key);
-            LocalCache.Set(token, list, DateTime.Now.AddMinutes(5));
+            LocalCache.Default.Set(token, list, DateTime.Now.AddMinutes(5));
         }
 
         private static string GetCacheKeyPrefix(MethodBase method)
