@@ -28,7 +28,7 @@ namespace X.UI.Web
                 "<td>{10}</td><td>{11}</td>"+
                 "</tr>",
                 "代码", "名称", "价格", "涨幅", 
-                "封成比", "封流比", "封单金额", "金额",
+                "封成比", "封流比", "封单金额<亿元>", "金额<亿元>",
                 "第一次涨停", "最后一次涨停",
                 "打开次数", "涨停强度");
             var data = JRJDataHelper.GetTab(dt, (EnumTab)tab);
@@ -41,7 +41,7 @@ namespace X.UI.Web
                                 "<td>{10}</td><td>{11}</td>" +
                                 "</tr>",
                                 item.StockCode, item.StockName, item.Price, item.PriceLimit,
-                                item.FCB.ToString("0.0000"), item.FLB.ToString("0.0000"), item.FDMoney.ToString("0.00"), item.Amount.ToString("0.00"),
+                                item.FCB.ToString("0.0000"), (item.FLB*100).ToString("0.0000"), (item.FDMoney/1E8M).ToString("0.0000"), (item.Amount / 1E8M).ToString("0.0000"),
                                 item.FirstZtTime.ToString("HH:mm:dd"), item.LastZtTime.ToString("HH:mm:dd"),
                                 item.OpenTime, item.Force.ToString("0.0000"));
 

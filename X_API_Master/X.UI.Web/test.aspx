@@ -44,7 +44,7 @@
     <form id="form1" runat="server">
         <div class="main">
             <h1>IconFont 图标</h1>
-            <ul class="icon_lists fn-clear">
+            <ul class="icon_lists fn-clear" style="display:none">
                 <li>
                     <i class="icon iconfont">&#xe600;</i>
                     <div class="name">转账</div>
