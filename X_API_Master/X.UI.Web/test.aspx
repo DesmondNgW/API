@@ -10,6 +10,35 @@
     <title>IconFont Code</title>
     <link rel="stylesheet" href="./css/framework/framework.css" />
     <link rel="stylesheet" href="./css/page/demo/iconfonts.css" />
+    <style>
+        nav {
+            font-size:20px;
+            display:flex;
+            height:80px;
+            width:100%;
+            align-items:center;
+        }
+        nav a{
+            flex: 1 1 auto;
+            text-align:center;
+            background-color:#f1f1f1;
+            color:#666;
+        }
+        nav a.active{
+            background-color:#08c;
+            color:#fff;
+        }
+        table{
+            width:100%;
+            font-size:20px;
+        }
+        table td{
+            text-align:center;
+        }
+        table tr:nth-child(2n+1){
+            background-color:#f1f1f1;
+        }
+    </style>
 </head>
 <body>
     <form id="form1" runat="server">

@@ -41,9 +41,9 @@ namespace X.UI.Web
                                 "<td>{10}</td><td>{11}</td>" +
                                 "</tr>",
                                 item.StockCode, item.StockName, item.Price, item.PriceLimit,
-                                item.FCB, item.FLB, item.FDMoney, item.Amount,
+                                item.FCB.ToString("0.0000"), item.FLB.ToString("0.0000"), item.FDMoney.ToString("0.00"), item.Amount.ToString("0.00"),
                                 item.FirstZtTime.ToString("HH:mm:dd"), item.LastZtTime.ToString("HH:mm:dd"),
-                                item.OpenTime, item.Force);
+                                item.OpenTime, item.Force.ToString("0.0000"));
 
             }
         }
@@ -52,15 +52,18 @@ namespace X.UI.Web
         protected void Page_Load(object sender, EventArgs e)
         {
             sb = new StringBuilder();
-            sb.Append("<a href=\"/Test.aspx?tab=0\">涨停</a>");
-            sb.Append("<a href=\"/Test.aspx?tab=1\">烂板</a>");
-            sb.Append("<a href=\"/Test.aspx?tab=2\">加速</a>");
-            sb.Append("<a href=\"/Test.aspx?tab=3\">加速烂板</a>");
-            sb.Append("<a href=\"/Test.aspx?tab=4\">加速小成交</a>");
-            sb.Append("<a href=\"/Test.aspx?tab=5\">涨停小成交</a>");
-            sb.Append("<table>");
+            var context = new System.Web.HttpContextWrapper(Context);
+            var dt = QueryInfo.GetQueryString(context, "dt", string.Empty);
+            var tab = QueryInfo.GetQueryInt(context, "tab", 0);
+            sb.AppendFormat("<nav><a class=\"{0}\" href=\"/Test.aspx?tab=0&dt={1}\">涨停</a>", tab == 0 ? "active" : "", dt);
+            sb.AppendFormat("<a class=\"{0}\" href=\"/Test.aspx?tab=1&dt={1}\">烂板</a>", tab == 1 ? "active" : "", dt);
+            sb.AppendFormat("<a class=\"{0}\" href=\"/Test.aspx?tab=2&dt={1}\">加速</a>", tab == 2 ? "active" : "", dt);
+            sb.AppendFormat("<a class=\"{0}\" href=\"/Test.aspx?tab=3&dt={1}\">加速烂板</a>", tab == 3 ? "active" : "", dt);
+            sb.AppendFormat("<a class=\"{0}\" href=\"/Test.aspx?tab=4&dt={1}\">加速小成交</a>", tab == 4 ? "active" : "", dt);
+            sb.AppendFormat("<a class=\"{0}\" href=\"/Test.aspx?tab=5&dt={1}\">涨停小成交</a></nav>", tab == 5 ? "active" : "", dt);
+            sb.AppendFormat("<table>");
             Deal();
-            sb.Append("</table>");
+            sb.AppendFormat("</table>");
         }
     }
 }
