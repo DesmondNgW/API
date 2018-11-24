@@ -23,6 +23,10 @@ namespace X.UI.Consoles
     {
         static void Main()
         {
+
+            //var data = JRJDataHelper.GetTab(new DateTime(2018, 11, 23), 0);
+
+            //JRJDataHelper.DealData(new DateTime(2018, 1, 1), DateTime.Now.Date);
             //ConsoleHelper.Draw(".", 30).ForEach(p => Console.WriteLine(p));
             //StockMonitor.Monitor();
             //var key = Guid.NewGuid().ToString("N");

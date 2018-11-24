@@ -51,6 +51,7 @@
     <Reference Include="System.Xml.Serialization" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="JRJDataHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StockDataHelper.cs" />
     <Compile Include="StockHelper.cs" />
