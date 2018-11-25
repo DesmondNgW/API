@@ -101,7 +101,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "X.Cache.Service", "X.Cache.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "X.UI.Entities", "X.UI.Entities\X.UI.Entities.csproj", "{599E03E7-AFD7-4F51-8069-CA70A343B127}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "X.UI.Core", "X.UI.Core\X.UI.Core.csproj", "{A0EA3CDF-BB7C-402C-8281-0198E9F07C29}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "X.UI.Core", "X.UI.Core\X.UI.Core.csproj", "{A0EA3CDF-BB7C-402C-8281-0198E9F07C29}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

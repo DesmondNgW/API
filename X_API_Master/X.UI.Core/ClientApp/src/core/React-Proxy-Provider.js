@@ -162,15 +162,15 @@ export default class ReactProxyProvider extends Component {
      * @param {*} param 
      */
     async load(param) {
-        return await this.fetchOptions.fetch.call(this.parent, param, this.state.state, this.execContext);
+        return await this.fetchOptions.fetch.call(this.parent, param, this.parent.state.action, this.state.state, this.execContext);
     }
     //next State
     getState(state, data) {
         if (Object.prototype.toString.call(state) === "[object Function]") {
             if (data) {
-                return Object.assign({}, this.state.state, state.call(this.parent, data, this.state.state, this.execContext));
+                return Object.assign({}, this.state.state, state.call(this.parent, this.parent.state.action, data, this.state.state, this.execContext));
             }
-            return Object.assign({}, this.state.state, state.call(this.parent, this.state.state, this.execContext));
+            return Object.assign({}, this.state.state, state.call(this.parent, this.parent.state.action, this.state.state, this.execContext));
         } else if (Object.keys(state).length) {
             return Object.assign({}, this.state.state, state);
         }

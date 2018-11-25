@@ -10,7 +10,8 @@ const COUNTER = {
 const FETCHDATA = {
     ID: "FetchData",
     Actions: {
-        LOAD: "onLoad"
+        LOAD: "onLoad",
+        CHANGE: "onChange"
     }
 }
 

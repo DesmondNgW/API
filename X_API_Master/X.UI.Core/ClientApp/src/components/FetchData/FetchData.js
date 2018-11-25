@@ -2,20 +2,26 @@ import React, { Component } from 'react';
 import { FETCHDATA } from '../../const/components';
 import ReactProxyProvider from '../../core/React-Proxy-Provider'
 import middleWare from './middleWare';
+import './fetch.css';
+
 
 export class FetchData extends Component {
     displayName = FetchData.name
 
     constructor(props) {
         super(props);
+        this.dt = this.props.match.params.dt;
         this.state = {
             action: {
                 type: FETCHDATA.Actions.LOAD,
-                data: null
+                data: {
+                    tab: 0
+                }
             },
             version: 1
         };
         this.execContext = this.props.context || {};
+        console.log(this.props.match)
     }
 
     render() {

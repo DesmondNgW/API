@@ -7,7 +7,7 @@ export default {
     events: {
         [[COUNTER.Actions.LOAD]]: {
             fetchedOptions: {
-                nextState(data, state, context) {
+                nextState(action, data, state, context) {
                     return { }
                 },
                 render(action, isLoading, data, state, context) {
@@ -24,7 +24,7 @@ export default {
         },
         [[COUNTER.Actions.Add]]: {
             fetchedOptions: {
-                nextState(data, state, context) {
+                nextState(action, data, state, context) {
                     return { currentCount: state.currentCount + 1 }
                 },
                 render(action, isLoading, data, state, context) {

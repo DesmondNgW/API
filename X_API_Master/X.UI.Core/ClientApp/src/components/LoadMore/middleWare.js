@@ -12,12 +12,12 @@ export default {
         [[LOADMORE.Actions.LOAD]]: {
             fetchOptions: {
                 params: {},
-                fetch(params, state, context) {
+                fetch(params, action, state, context) {
                     return this.load(Object.assign({}, params, this.loadParams, { currentIndex: state.currentIndex + 1 }));
                 }
             },
             fetchingOptions: {
-                nextState(state, context) {
+                nextState(action, state, context) {
                     return {}
                 },
                 render(action, isLoading, data, state, context) {
@@ -32,7 +32,7 @@ export default {
                 }
             },
             fetchedOptions: {
-                nextState(data, state, context) {
+                nextState(action, data, state, context) {
                     return {
                         list: state.list.concat(data.list),
                         noMore: data.noMore,
@@ -54,12 +54,12 @@ export default {
         [[LOADMORE.Actions.LOADMORE]]: {
             fetchOptions: {
                 params: {},
-                fetch(params, state, context) {
+                fetch(params, action, state, context) {
                     return this.load(Object.assign({}, params, this.loadParams, { currentIndex: state.currentIndex + 1 }));
                 }
             },
             fetchingOptions: {
-                nextState(state, context) {
+                nextState(action, state, context) {
                     return {}
                 },
                 render(action, isLoading, data, state, context) {
@@ -74,7 +74,7 @@ export default {
                 }
             },
             fetchedOptions: {
-                nextState(data, state, context) {
+                nextState(action, data, state, context) {
                     return {
                         list: state.list.concat(data.list),
                         noMore: data.noMore,
