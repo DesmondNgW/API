@@ -1,0 +1,22 @@
+﻿nav.fetch {
+    display:flex;
+    width:100%;
+    align-items:center;
+    background-color:#f1f1f1;
+    color:#666;
+    font-size:30px;
+}
+nav.fetch a {
+    padding:10px 0;
+    cursor: pointer;
+    flex: 1 1 auto;
+    text-align: center;
+    text-decoration:none;
+}
+nav.fetch a.active {
+    background-color: #80c;
+    color:#fff;
+}
+table.table th, table.table td {
+    text-align:center;
+}

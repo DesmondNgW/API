@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { FETCHDATA } from '../../const/components';
+import { glabalEvents } from '../../const/const';
 import ReactProxyProvider from '../../core/React-Proxy-Provider'
 import middleWare from './middleWare';
 import './fetch.css';
@@ -26,6 +27,6 @@ export class FetchData extends Component {
 
     render() {
         return <ReactProxyProvider id={FETCHDATA.ID} parent={this} action={this.state.action} version={this.state.version}
-            context={this.execContext} middleWare={middleWare} />
+            context={this.execContext} middleWare={middleWare} globalEvents={Object.values(glabalEvents)} />
     }
 }

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { COUNTER } from '../../const/components';
+import { glabalEvents } from '../../const/const';
 import ReactProxyProvider from '../../core/React-Proxy-Provider'
 import middleWare from './middleWare';
 
@@ -21,6 +22,6 @@ export class Counter extends Component {
 
     render() {
         return <ReactProxyProvider id={COUNTER.ID} parent={this} action={this.state.action} version={this.state.version}
-            context={this.execContext} middleWare={middleWare} />
+            context={this.execContext} middleWare={middleWare} globalEvents={Object.values(glabalEvents)} />
     }
 }

@@ -26,7 +26,7 @@ namespace X.UI.Consoles
 
             //var data = JRJDataHelper.GetTab(new DateTime(2018, 11, 23), 0);
 
-            //JRJDataHelper.DealData(new DateTime(2018, 1, 1), DateTime.Now.Date);
+            //JRJDataHelper.DealData(DateTime.Now.AddDays(-10).Date, DateTime.Now.Date);
             //ConsoleHelper.Draw(".", 30).ForEach(p => Console.WriteLine(p));
             //StockMonitor.Monitor();
             //var key = Guid.NewGuid().ToString("N");

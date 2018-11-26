@@ -5,7 +5,6 @@
  */
 import { Component } from 'react';
 import eventBus from './eventBus.js';
-import { glabalEvents } from '../const/const';
 
 //onLoad
 //onAppear
@@ -34,10 +33,10 @@ export default class ReactProxyProvider extends Component {
         super(props)
 
         //ProxyProvider's props
-        this.actionType = "onLoad";
-        this.actionData = null;
+        //this.actionType = "onLoad";
+        //this.actionData = null;
         this.propsState = null;
-        this.globalEvents = Object.values(glabalEvents);
+        this.globalEvents = [];
         //Parent's props
         this.id = this.props.id || +new Date();
         this.parent = this.props.parent;
@@ -49,23 +48,26 @@ export default class ReactProxyProvider extends Component {
         }
 
         // get Action
-        if (this.action) {
-            this.actionType = this.action.type;
-            this.actionData = this.action.data;
-        }
+        //if (this.action) {
+        //    this.actionType = this.action.type;
+        //    this.actionData = this.action.data;
+        //}
 
         // get MiddleWare
         if (this.middleWare) {
             this.propsState = this.middleWare.state;
-            this.events = this.middleWare.events;
-            if (this.events) {
-                this.target = this.events[this.actionType];
-                if (this.target) {
-                    this.fetchOptions = this.target.fetchOptions;
-                    this.fetchingOptions = this.target.fetchingOptions;
-                    this.fetchedOptions = this.target.fetchedOptions;
-                }
-            }
+            this.fetchOptions = this.middleWare.fetchOptions;
+            this.fetchingOptions = this.middleWare.fetchingOptions;
+            this.fetchedOptions = this.middleWare.fetchedOptions;
+            //this.events = this.middleWare.events;
+            //if (this.events) {
+            //    this.target = this.events[this.actionType];
+            //    if (this.target) {
+            //        this.fetchOptions = this.target.fetchOptions;
+            //        this.fetchingOptions = this.target.fetchingOptions;
+            //        this.fetchedOptions = this.target.fetchedOptions;
+            //    }
+            //}
         }
 
         //state
@@ -162,15 +164,15 @@ export default class ReactProxyProvider extends Component {
      * @param {*} param 
      */
     async load(param) {
-        return await this.fetchOptions.fetch.call(this.parent, param, this.parent.state.action, this.state.state, this.execContext);
+        return await this.fetchOptions.fetch.call(this.parent, param, this.action, this.state.state, this.execContext);
     }
     //next State
     getState(state, data) {
         if (Object.prototype.toString.call(state) === "[object Function]") {
             if (data) {
-                return Object.assign({}, this.state.state, state.call(this.parent, this.parent.state.action, data, this.state.state, this.execContext));
+                return Object.assign({}, this.state.state, state.call(this.parent, this.action, data, this.state.state, this.execContext));
             }
-            return Object.assign({}, this.state.state, state.call(this.parent, this.parent.state.action, this.state.state, this.execContext));
+            return Object.assign({}, this.state.state, state.call(this.parent, this.action, this.state.state, this.execContext));
         } else if (Object.keys(state).length) {
             return Object.assign({}, this.state.state, state);
         }
@@ -233,7 +235,7 @@ export default class ReactProxyProvider extends Component {
     binding() {
         if (this.fetchOptions) {
             this.setLoading();
-            this.load(this.fetchOptions.params).then((data) => {
+            this.load(this.fetchOptions.params.call(this.parent, this.action, this.state.state, this.execContext)).then((data) => {
                 this.setLoaded(data);
             }).catch((err) => {
                 console.log(err);
@@ -277,26 +279,33 @@ export default class ReactProxyProvider extends Component {
      * @param {*} nextProps 
      */
     componentWillReceiveProps(nextProps) {
-        this.actionType = null;
-        this.actionData = null;
+        //this.actionType = null;
+        //this.actionData = null;
         this.action = nextProps.action;
-        if (this.action) {
-            this.actionType = this.action.type;
-            this.actionData = this.action.data;
-        }
-        if (this.middleWare && this.events && this.actionType) {
-            this.target = this.events[this.actionType];
-            if (this.target) {
-                this.fetchOptions = this.target.fetchOptions;
-                this.fetchingOptions = this.target.fetchingOptions;
-                this.fetchedOptions = this.target.fetchedOptions;
-                if (this.props.version !== nextProps.version) {
-                    if (this.action.isfresh) {
-                        this.freshState();
-                    } else {
-                        this.binding();
-                    }
-                }
+        //if (this.action) {
+        //    this.actionType = this.action.type;
+        //    this.actionData = this.action.data;
+        //}
+        //if (this.middleWare && this.events && this.actionType) {
+        //    this.target = this.events[this.actionType];
+        //    if (this.target) {
+        //        this.fetchOptions = this.target.fetchOptions;
+        //        this.fetchingOptions = this.target.fetchingOptions;
+        //        this.fetchedOptions = this.target.fetchedOptions;
+        //        if (this.props.version !== nextProps.version) {
+        //            if (this.action.isfresh) {
+        //                this.freshState();
+        //            } else {
+        //                this.binding();
+        //            }
+        //        }
+        //    }
+        //}
+        if (this.props.version !== nextProps.version) {
+            if (this.action.isfresh) {
+                this.freshState();
+            } else {
+                this.binding();
             }
         }
     }
@@ -304,7 +313,7 @@ export default class ReactProxyProvider extends Component {
     render() {
         console.log("ReactProxyProvider", {
             target: this.parent,
-            action: this.parent.state.action,
+            action: this.action,
             version: this.parent.state.version,
             ProxyVersion: this.state.version,
             ProxyLoading: this.state.isLoading,
@@ -313,9 +322,9 @@ export default class ReactProxyProvider extends Component {
 
         if (this.fetchOptions || this.fetchedOptions) {
             if (this.state.isLoading) {
-                return this.fetchingOptions.render.call(this.parent, this.parent.state.action, true, null, this.state.state, this.execContext);
+                return this.fetchingOptions.render.call(this.parent, this.action, true, null, this.state.state, this.execContext);
             } else {
-                return this.fetchedOptions.render.call(this.parent, this.parent.state.action, false, this.state.data, this.state.state, this.execContext);
+                return this.fetchedOptions.render.call(this.parent, this.action, false, this.state.data, this.state.state, this.execContext);
             }
         } else {
             return this.props.children || null;
