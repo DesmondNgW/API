@@ -11,7 +11,7 @@ export class FetchData extends Component {
 
     constructor(props) {
         super(props);
-        this.dt = this.props.match.params.dt;
+        this.dt = this.props.match.params.dt || "";
         this.state = {
             action: {
                 type: FETCHDATA.Actions.LOAD,
@@ -22,7 +22,6 @@ export class FetchData extends Component {
             version: 1
         };
         this.execContext = this.props.context || {};
-        console.log(this.props.match)
     }
 
     render() {
