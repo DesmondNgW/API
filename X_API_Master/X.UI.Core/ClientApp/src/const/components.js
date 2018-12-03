@@ -11,7 +11,8 @@ const FETCHDATA = {
     ID: "FetchData",
     Actions: {
         LOAD: "onLoad",
-        CHANGE: "onChange"
+        CHANGE: "onChange",
+        FILTER: "onFilter"
     }
 }
 

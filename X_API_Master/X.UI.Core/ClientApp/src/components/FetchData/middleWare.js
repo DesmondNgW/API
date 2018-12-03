@@ -3,7 +3,7 @@ import render from './render';
 import { FETCHDATA } from '../../const/components';
 
 export default {
-    state: { stockDatas: [], tab: 0 },
+    state: { stockDatas: [], tab: 0, filter: "" },
     fetchOptions: {
         params(action, state, context) {
             return {};
@@ -34,6 +34,8 @@ export default {
                 case FETCHDATA.Actions.LOAD:
                 case FETCHDATA.Actions.CHANGE:
                     return { stockDatas: data, tab: action.data.tab }
+                case FETCHDATA.Actions.FILTER:
+                    return { filter: action.data.filter}
                 default:
                     return {}
             }

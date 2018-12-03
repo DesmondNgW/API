@@ -9,6 +9,12 @@ export default function render(props) {
     //代码	名称	价格	涨幅	封成比	封流比	封单金额 < 亿元 > 金额 < 亿元 > 第一次涨停	最后一次涨停	打开次数	涨停强度
     const { isLoading, state, context, target } = props;
     const stockDatas = state.stockDatas;
+    const stateFilter = (p) => {
+        if (state.filter) {
+            return state.filter.indexOf(p.StockCode) > -1;
+        }
+        return true;
+    }
     let contents = isLoading
         ? <p><em>Loading...</em></p>
         : <table className='table'>
@@ -30,9 +36,9 @@ export default function render(props) {
                 </tr>
             </thead>
             <tbody>
-                {stockDatas.filter(p => p.PriceLimit>7).map((stockData,index) =>
+                {stockDatas.filter(p => p.PriceLimit > 7 && stateFilter(p)).map((stockData, index) =>
                     <tr key={stockData.StockCode}>
-                        <td>{index}</td>
+                        <td>{index+1}</td>
                         <td>{stockData.StockCode}</td>
                         <td>{stockData.StockName}</td>
                         <td>{stockData.Price}</td>
@@ -59,9 +65,19 @@ export default function render(props) {
         });
     };
 
+    const onFilter = (e) => {
+        context.handleEvents.call(target, {
+            type: FETCHDATA.Actions.FILTER,
+            data: {
+                filter: e.target.value
+            }
+        });
+    };
+
     return (
         <div>
             <h1>Stock Datas</h1>
+            <textarea value={state.filter} onChange={onFilter}></textarea>
             <nav className='fetch'>
                 <a className={state.tab === 0 ? "active" : ""} onClick={e => onClick(0)}>涨停</a>
                 <a className={state.tab === 1 ? "active" : ""} onClick={e => onClick(1)}>烂板</a>
