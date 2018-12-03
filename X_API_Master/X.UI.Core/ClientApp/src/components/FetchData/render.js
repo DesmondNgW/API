@@ -14,6 +14,7 @@ export default function render(props) {
         : <table className='table'>
             <thead>
                 <tr>
+                    <th>序号</th>
                     <th>代码</th>
                     <th>名称</th>
                     <th>价格</th>
@@ -29,8 +30,9 @@ export default function render(props) {
                 </tr>
             </thead>
             <tbody>
-                {stockDatas.map(stockData =>
+                {stockDatas.filter(p => p.PriceLimit>7).map((stockData,index) =>
                     <tr key={stockData.StockCode}>
+                        <td>{index}</td>
                         <td>{stockData.StockCode}</td>
                         <td>{stockData.StockName}</td>
                         <td>{stockData.Price}</td>

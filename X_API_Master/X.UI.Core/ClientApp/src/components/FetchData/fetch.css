@@ -20,3 +20,6 @@ nav.fetch a.active {
 table.table th, table.table td {
     text-align:center;
 }
+table.table tr:nth-child(2n){
+    background-color:#f1f1f1;
+}
