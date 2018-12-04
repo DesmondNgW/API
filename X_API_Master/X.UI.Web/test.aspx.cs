@@ -22,26 +22,30 @@ namespace X.UI.Web
             var tab = QueryInfo.GetQueryInt(context, "tab", 0);
             var dt = QueryInfo.GetQueryDateTime(context, "dt", "yyyyMMdd", DateTime.Now.Date);
             sb.AppendFormat("<tr>" +
-                "<td>{0}</td><td>{1}</td><td>{2}</td><td>{3}</td>" +
-                "<td>{4}</td><td>{5}</td><td>{6}</td><td>{7}</td>" +
-                "<td>{8}</td><td>{9}</td>" +
-                "<td>{10}</td><td>{11}</td>"+
+                            "<td>{0}</td>" +
+                            "<td>{1}</td><td>{2}</td><td>{3}</td><td>{4}</td>" +
+                            "<td>{5}</td><td>{6}</td><td>{7}</td><td>{8}</td>" +
+                            "<td>{9}</td><td>{10}</td>" +
+                            "<td>{11}</td><td>{12}</td>" +
                 "</tr>",
-                "代码", "名称", "价格", "涨幅", 
+                "时间",
+                "代码", "名称", "价格", "涨幅",
                 "封成比", "封流比", "封单金额<亿元>", "金额<亿元>",
                 "第一次涨停", "最后一次涨停",
                 "打开次数", "涨停强度");
-            var data = JRJDataHelper.GetTab(dt, (EnumTab)tab);
-            foreach (var item in data)
+            var data = JRJDataHelper.GetDataFromMongo(DateTime.Now.AddMonths(-6), new TimeSpan(9, 35, 0));//JRJDataHelper.GetTab(dt, (EnumTab)tab);
+            foreach (var item in data.Where(p => p.PriceLimit > 7 && p.LastZtTime.TimeOfDay >= new TimeSpan(9, 26, 0)))
             {
                 sb.AppendFormat("<tr>" +
-                                "<td>{0}</td><td>{1}</td><td>{2}</td><td>{3}</td>" +
-                                "<td>{4}</td><td>{5}</td><td>{6}</td><td>{7}</td>" +
-                                "<td>{8}</td><td>{9}</td>" +
-                                "<td>{10}</td><td>{11}</td>" +
+                                "<td>{0}</td>" +
+                                "<td>{1}</td><td>{2}</td><td>{3}</td><td>{4}</td>" +
+                                "<td>{5}</td><td>{6}</td><td>{7}</td><td>{8}</td>" +
+                                "<td>{9}</td><td>{10}</td>" +
+                                "<td>{11}</td><td>{12}</td>" +
                                 "</tr>",
+                                item.DateTime.ToString("yyyy-MM-dd"),
                                 item.StockCode, item.StockName, item.Price, item.PriceLimit,
-                                item.FCB.ToString("0.0000"), (item.FLB*100).ToString("0.0000"), (item.FDMoney/1E8M).ToString("0.0000"), (item.Amount / 1E8M).ToString("0.0000"),
+                                item.FCB.ToString("0.0000"), (item.FLB * 100).ToString("0.0000"), (item.FDMoney / 1E8M).ToString("0.0000"), (item.Amount / 1E8M).ToString("0.0000"),
                                 item.FirstZtTime.ToString("HH:mm:dd"), item.LastZtTime.ToString("HH:mm:dd"),
                                 item.OpenTime, item.Force.ToString("0.0000"));
 

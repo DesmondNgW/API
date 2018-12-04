@@ -45,7 +45,7 @@ namespace X.UI.Entities
         {
             get
             {
-                return FDMoney / FCB;
+                return FCB != 0 ? FDMoney / FCB : 0;
             }
         }
     }

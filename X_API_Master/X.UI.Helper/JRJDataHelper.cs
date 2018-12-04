@@ -75,6 +75,23 @@ namespace X.UI.Helper
                 }
                 Console.WriteLine("insert mongodb end! deal done!{0}", start);
                 start = start.AddDays(1);
+                var a0 = list.Count(p => p.LastZtTime.TimeOfDay <= new TimeSpan(10, 30, 0));
+                var a1 = list.Count(p => p.LastZtTime.TimeOfDay <= new TimeSpan(11, 30, 0));
+                var a2 = list.Count(p => p.LastZtTime.TimeOfDay <= new TimeSpan(14, 00, 0));
+                var a3 = list.Count(p => p.LastZtTime.TimeOfDay <= new TimeSpan(15, 00, 0));
+
+                var b0 = list.Count(p => p.Amount <= 1e8M);
+                var b1 = list.Count(p => p.Amount <= 2e8M);
+                var b2 = list.Count(p => p.Amount <= 3e8M);
+                var b3 = list.Count(p => p.Amount <= 4e8M);
+                var b4 = list.Count(p => p.Amount <= 5e8M);
+                var b5 = list.Count(p => p.Amount <= 8e8M);
+                var b6 = list.Count(p => p.Amount > 8e8M);
+
+                Console.WriteLine("9:30-10:30:<{0}>,10:30-11:30:<{1}>,13:00-14:00:<{2}>,14:00-15:00:<{3}>", a0, a1 - a0, a2 - a1, a3 - a2);
+
+                Console.WriteLine("0-1:<{0}>,1-2:<{1}>,2-3:<{2}>,3-4:<{3}>,4-5:<{4}>,5-8:<{5}>，>8:<{6}>", b0, b1 - b0, b2 - b1, b3 - b2, b4 - b3, b5 - b4, b6);
+
             }
             Console.WriteLine("Task end!");
         }
@@ -82,6 +99,12 @@ namespace X.UI.Helper
         public static List<JRJDataItem> GetDataFromMongo(DateTime dt)
         {
             return MongoDbBase<JRJDataItem>.Default.Find("Stock", "JRJ", Query.EQ("DateTime", dt.Date), Fields.Null, SortBy.Descending("DateTime", "Force")).ToList();
+        }
+
+        public static List<JRJDataItem> GetDataFromMongo(DateTime dt, TimeSpan ts)
+        {
+            return MongoDbBase<JRJDataItem>.Default.Find("Stock", "JRJ", Query.GTE("DateTime", dt), Fields.Null, SortBy.Descending("DateTime", "Force"))
+                .Where(p => p.FirstZtTime.TimeOfDay < ts).ToList();
         }
 
         public static List<JRJDataItem> GetTab(DateTime dt, EnumTab tab)
@@ -95,11 +118,11 @@ namespace X.UI.Helper
                 case EnumTab.LB:
                     return data.Where(p => p.OpenTime > 0).ToList();
                 case EnumTab.FAST:
-                    return data.Where(p => p.FirstZtTime.TimeOfDay<= timeOfDay).ToList();
+                    return data.Where(p => p.LastZtTime.TimeOfDay<= timeOfDay).ToList();
                 case EnumTab.FAST_LB:
-                    return data.Where(p => p.FirstZtTime.TimeOfDay <= timeOfDay && p.OpenTime > 0).ToList();
+                    return data.Where(p => p.LastZtTime.TimeOfDay <= timeOfDay && p.OpenTime > 0).ToList();
                 case EnumTab.FAST_MIN:
-                    return data.Where(p => p.FirstZtTime.TimeOfDay <= timeOfDay && p.Amount <= 3e8M).ToList();
+                    return data.Where(p => p.LastZtTime.TimeOfDay <= timeOfDay && p.Amount <= 2e8M).ToList();
                 case EnumTab.ZT_MIN:
                     return data.Where(p => p.Amount <= 3e8M).ToList();
             }

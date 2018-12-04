@@ -26,6 +26,7 @@ namespace X.UI.Consoles
 
             //var data = JRJDataHelper.GetTab(new DateTime(2018, 11, 23), 0);
 
+            var list = JRJDataHelper.GetDataFromMongo(DateTime.Now.AddMonths(-6), new TimeSpan(9, 35, 0));
             //JRJDataHelper.DealData(DateTime.Now.AddDays(-10).Date, DateTime.Now.Date);
             //ConsoleHelper.Draw(".", 30).ForEach(p => Console.WriteLine(p));
             //StockMonitor.Monitor();
