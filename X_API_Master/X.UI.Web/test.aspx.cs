@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Text;
+using X.UI.Entities;
 using X.UI.Helper;
 using X.Util.Other;
 
@@ -33,22 +35,67 @@ namespace X.UI.Web
                 "封成比", "封流比", "封单金额<亿元>", "金额<亿元>",
                 "第一次涨停", "最后一次涨停",
                 "打开次数", "涨停强度");
-            var data = JRJDataHelper.GetDataFromMongo(DateTime.Now.AddMonths(-6), new TimeSpan(9, 35, 0));//JRJDataHelper.GetTab(dt, (EnumTab)tab);
-            foreach (var item in data.Where(p => p.PriceLimit > 7 && p.LastZtTime.TimeOfDay >= new TimeSpan(9, 26, 0)))
+            var data = JRJDataHelper.GetDataFromMongo(DateTime.Now.AddMonths(-6), new TimeSpan(15, 0, 0))
+                .Where(p => p.PriceLimit > 7 && p.PriceLimit < 11)
+                .OrderBy(p=>p.DateTime);//JRJDataHelper.GetTab(dt, (EnumTab)tab);
+
+            var idata = new List<JRJDataItem>();
+            var dic = new Dictionary<DateTime, List<string>>();
+            foreach (var item in data)
+            {
+                if (dic.ContainsKey(item.DateTime))
+                {
+                    dic[item.DateTime].Add(item.StockCode);
+                }
+                else
+                {
+                    dic[item.DateTime] = new List<string>() { item.StockCode };
+                }
+            }
+            var LastDate = DateTime.MinValue;
+            var CurrentDate = DateTime.MinValue;
+            foreach (var item in data)
+            {
+                if (dic.ContainsKey(LastDate) && !dic[LastDate].Contains(item.StockCode))
+                {
+                    continue;
+                }
+                bool a = false;
+                if (item.FirstZtTime.TimeOfDay <= new TimeSpan(9, 45, 0) && item.LastZtTime.TimeOfDay >= new TimeSpan(9, 26, 0))
+                {
+                    a = true;
+                }
+                if (item.LastZtTime.TimeOfDay <= new TimeSpan(9, 26, 0) && item.FirstZtTime.TimeOfDay >= new TimeSpan(9, 30, 0))
+                {
+                    a = true;
+                }
+                if (a)
+                {
+                    idata.Add(item);
+                }
+                if (CurrentDate != item.DateTime)
+                {
+                    if (CurrentDate != DateTime.MinValue)
+                    {
+                        LastDate = CurrentDate;
+                    }
+                    CurrentDate = item.DateTime;
+                }
+            }
+            foreach (var item in idata.OrderByDescending(p => p.DateTime))
             {
                 sb.AppendFormat("<tr>" +
-                                "<td>{0}</td>" +
-                                "<td>{1}</td><td>{2}</td><td>{3}</td><td>{4}</td>" +
-                                "<td>{5}</td><td>{6}</td><td>{7}</td><td>{8}</td>" +
-                                "<td>{9}</td><td>{10}</td>" +
-                                "<td>{11}</td><td>{12}</td>" +
-                                "</tr>",
-                                item.DateTime.ToString("yyyy-MM-dd"),
-                                item.StockCode, item.StockName, item.Price, item.PriceLimit,
-                                item.FCB.ToString("0.0000"), (item.FLB * 100).ToString("0.0000"), (item.FDMoney / 1E8M).ToString("0.0000"), (item.Amount / 1E8M).ToString("0.0000"),
-                                item.FirstZtTime.ToString("HH:mm:dd"), item.LastZtTime.ToString("HH:mm:dd"),
-                                item.OpenTime, item.Force.ToString("0.0000"));
-
+                "<td>{0}</td>" +
+                "<td>{1}</td><td>{2}</td><td>{3}</td><td>{4}</td>" +
+                "<td>{5}</td><td>{6}</td><td>{7}</td><td>{8}</td>" +
+                "<td>{9}</td><td>{10}</td>" +
+                "<td>{11}</td><td>{12}</td>" +
+                "</tr>",
+                item.DateTime.ToString("yyyy-MM-dd"),
+                item.StockCode, item.StockName, item.Price, item.PriceLimit,
+                item.FCB.ToString("0.0000"), (item.FLB * 100).ToString("0.0000"), (item.FDMoney / 1E8M).ToString("0.0000"), (item.Amount / 1E8M).ToString("0.0000"),
+                item.FirstZtTime.ToString("HH:mm:dd"), item.LastZtTime.ToString("HH:mm:dd"),
+                item.OpenTime, item.Force.ToString("0.0000"));
             }
         }
 

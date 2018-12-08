@@ -26,7 +26,16 @@ namespace X.UI.Consoles
 
             //var data = JRJDataHelper.GetTab(new DateTime(2018, 11, 23), 0);
 
-            var list = JRJDataHelper.GetDataFromMongo(DateTime.Now.AddMonths(-6), new TimeSpan(9, 35, 0));
+            //var list = JRJDataHelper.GetDataFromMongo(DateTime.Now.AddMonths(-6), new TimeSpan(9, 35, 0));
+
+            var list = JRJDataHelper.GetTab(DateTime.Now.Date, EnumTab.ZT);
+
+            var f1 = list.Where(p => p.StockCode.ToList().Sum(q => int.Parse(q.ToString())) % 5 == 0 && p.PriceLimit > 7);
+            var f2 = list.Where(p => p.StockCode.ToList().Skip(3).Sum(q => int.Parse(q.ToString())) % 5 == 0 && p.PriceLimit > 7);
+            Console.WriteLine(f1.Select(p => p.StockName).ToJson());
+            Console.WriteLine(f2.Select(p => p.StockName).ToJson());
+
+
             //JRJDataHelper.DealData(DateTime.Now.AddDays(-10).Date, DateTime.Now.Date);
             //ConsoleHelper.Draw(".", 30).ForEach(p => Console.WriteLine(p));
             //StockMonitor.Monitor();
