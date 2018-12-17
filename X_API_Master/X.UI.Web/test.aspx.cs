@@ -35,53 +35,8 @@ namespace X.UI.Web
                 "封成比", "封流比", "封单金额<亿元>", "金额<亿元>",
                 "第一次涨停", "最后一次涨停",
                 "打开次数", "涨停强度");
-            var data = JRJDataHelper.GetDataFromMongo(DateTime.Now.AddMonths(-6), new TimeSpan(15, 0, 0))
-                .Where(p => p.PriceLimit > 7 && p.PriceLimit < 11)
-                .OrderBy(p=>p.DateTime);//JRJDataHelper.GetTab(dt, (EnumTab)tab);
 
-            var idata = new List<JRJDataItem>();
-            var dic = new Dictionary<DateTime, List<string>>();
-            foreach (var item in data)
-            {
-                if (dic.ContainsKey(item.DateTime))
-                {
-                    dic[item.DateTime].Add(item.StockCode);
-                }
-                else
-                {
-                    dic[item.DateTime] = new List<string>() { item.StockCode };
-                }
-            }
-            var LastDate = DateTime.MinValue;
-            var CurrentDate = DateTime.MinValue;
-            foreach (var item in data)
-            {
-                if (dic.ContainsKey(LastDate) && !dic[LastDate].Contains(item.StockCode))
-                {
-                    continue;
-                }
-                bool a = false;
-                if (item.FirstZtTime.TimeOfDay <= new TimeSpan(9, 45, 0) && item.LastZtTime.TimeOfDay >= new TimeSpan(9, 26, 0))
-                {
-                    a = true;
-                }
-                if (item.LastZtTime.TimeOfDay <= new TimeSpan(9, 26, 0) && item.FirstZtTime.TimeOfDay >= new TimeSpan(9, 30, 0))
-                {
-                    a = true;
-                }
-                if (a)
-                {
-                    idata.Add(item);
-                }
-                if (CurrentDate != item.DateTime)
-                {
-                    if (CurrentDate != DateTime.MinValue)
-                    {
-                        LastDate = CurrentDate;
-                    }
-                    CurrentDate = item.DateTime;
-                }
-            }
+            var idata = JRJDataHelper.WebUI(DateTime.Now.AddMonths(-6), new TimeSpan(15, 0, 0));
             foreach (var item in idata.OrderByDescending(p => p.DateTime))
             {
                 sb.AppendFormat("<tr>" +

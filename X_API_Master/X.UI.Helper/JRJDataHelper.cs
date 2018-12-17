@@ -128,5 +128,57 @@ namespace X.UI.Helper
             }
             return data;
         }
+
+        public static List<JRJDataItem> WebUI(DateTime start, TimeSpan ts)
+        {
+            var data = GetDataFromMongo(start, ts)
+                .Where(p => p.PriceLimit > 7 && p.PriceLimit < 11)
+                .OrderBy(p => p.DateTime);
+
+            var dic = new Dictionary<DateTime, List<string>>();
+            foreach (var item in data)
+            {
+                if (dic.ContainsKey(item.DateTime))
+                {
+                    dic[item.DateTime].Add(item.StockCode);
+                }
+                else
+                {
+                    dic[item.DateTime] = new List<string>() { item.StockCode };
+                }
+            }
+            var idata = new List<JRJDataItem>();
+            var LastDate = DateTime.MinValue;
+            var CurrentDate = DateTime.MinValue;
+            foreach (var item in data)
+            {
+                if (dic.ContainsKey(LastDate) && !dic[LastDate].Contains(item.StockCode))
+                {
+                    continue;
+                }
+                bool a = false;
+                if (item.FirstZtTime.TimeOfDay <= new TimeSpan(9, 45, 0) && item.LastZtTime.TimeOfDay >= new TimeSpan(9, 26, 0))
+                {
+                    a = true;
+                }
+                if (item.LastZtTime.TimeOfDay <= new TimeSpan(9, 26, 0) && item.FirstZtTime.TimeOfDay >= new TimeSpan(9, 30, 0))
+                {
+                    a = true;
+                }
+                if (a)
+                {
+                    idata.Add(item);
+                }
+                if (CurrentDate != item.DateTime)
+                {
+                    if (CurrentDate != DateTime.MinValue)
+                    {
+                        LastDate = CurrentDate;
+                    }
+                    CurrentDate = item.DateTime;
+                }
+            }
+            return idata;
+        }
     }
 }

@@ -23,30 +23,43 @@ namespace X.UI.Consoles
     {
         static void Main()
         {
-
-            //var data = JRJDataHelper.GetTab(new DateTime(2018, 11, 23), 0);
-
-            //var list = JRJDataHelper.GetDataFromMongo(DateTime.Now.AddMonths(-6), new TimeSpan(9, 35, 0));
-
-            var list = JRJDataHelper.GetTab(DateTime.Now.Date, EnumTab.ZT);
+            var dt = (DateTime.Now.DayOfWeek == DayOfWeek.Saturday ?
+                DateTime.Now.AddDays(-1) : DateTime.Now.DayOfWeek == DayOfWeek.Sunday ?
+                DateTime.Now.AddDays(-2) : DateTime.Now.AddDays(-1)).Date;
+            var list = JRJDataHelper.GetTab(dt, EnumTab.ZT);
 
             var f1 = list.Where(p => p.StockCode.ToList().Sum(q => int.Parse(q.ToString())) % 5 == 0 && p.PriceLimit > 7);
             var f2 = list.Where(p => p.StockCode.ToList().Skip(3).Sum(q => int.Parse(q.ToString())) % 5 == 0 && p.PriceLimit > 7);
+            var f3 = list.Sum(p => p.Amount) / 100000000;
+
             Console.WriteLine(f1.Select(p => p.StockName).ToJson());
             Console.WriteLine(f2.Select(p => p.StockName).ToJson());
+            Console.WriteLine(f3.ToString("0.00") + "亿");
 
+            Func<double, double, double> c = (p, r) =>
+            {
+                double ret = p - (1 - p) / r;
+                return ret <= 0 ? 0 : ret;
+            };
+            List<double> array = new List<double>()
+            {
+                15.5 /15,
+                27.0 /15,
+                39.75 /15,
+                53.73 /15,
+                69.1 /15,
+                86.0 /15,
+                105.0 /15
+            };
 
-            //JRJDataHelper.DealData(DateTime.Now.AddDays(-10).Date, DateTime.Now.Date);
-            //ConsoleHelper.Draw(".", 30).ForEach(p => Console.WriteLine(p));
-            //StockMonitor.Monitor();
-            //var key = Guid.NewGuid().ToString("N");
-            //Console.WriteLine(ThirdPartyTest.CouchBaseTest(key, key));
-            //TestCacheClient(1000);
+            for (double i = 0.45; i <= 1; i += 0.05)
+            {
+                foreach(double item in array)
+                {
+                    Console.WriteLine("胜率:{0},盈亏比:{1},仓位:{2}", i, item.ToString("0.00"), c(i, item));
+                }
+            }
 
-            //var s = MongoDbBase<MongoTest>.Default.FindBsonDocument("Test", "test", Query.Null);
-            //var f = MongoDbBase<MongoTest>.ToEntity(s);
-
-            //TdxFileHelper.BatchDay();
             Console.ReadKey();
         }
 
