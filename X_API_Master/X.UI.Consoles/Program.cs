@@ -21,11 +21,31 @@ namespace X.UI.Consoles
 {
     class Program
     {
+        static DateTime GetWorkDay(DateTime dt)
+        {
+            if (dt.DayOfWeek == DayOfWeek.Saturday)
+            {
+                return dt.AddDays(-1).Date;
+            }
+            else if (dt.DayOfWeek == DayOfWeek.Sunday)
+            {
+                return dt.AddDays(-2).Date;
+            }
+            else if (dt.DayOfWeek == DayOfWeek.Monday && dt.Hour < 15)
+            {
+                return dt.AddDays(-3).Date;
+            }
+            else if (dt.Hour < 15)
+            {
+                return dt.AddDays(-1).Date;
+            }
+            return dt.Date;
+        }
+
+
         static void Main()
         {
-            var dt = (DateTime.Now.DayOfWeek == DayOfWeek.Saturday ?
-                DateTime.Now.AddDays(-1) : DateTime.Now.DayOfWeek == DayOfWeek.Sunday ?
-                DateTime.Now.AddDays(-2) : DateTime.Now.AddDays(-1)).Date;
+            var dt = GetWorkDay(DateTime.Now);
             var list = JRJDataHelper.GetTab(dt, EnumTab.ZT);
 
             var f1 = list.Where(p => p.StockCode.ToList().Sum(q => int.Parse(q.ToString())) % 5 == 0 && p.PriceLimit > 7);
