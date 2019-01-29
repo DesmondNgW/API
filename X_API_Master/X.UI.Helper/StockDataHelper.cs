@@ -236,6 +236,8 @@ namespace X.UI.Helper
                 OpenPrice = decimal.Parse(arr[1]),
                 LastClosePrice = decimal.Parse(arr[2]),
                 Datetime = DateTime.Parse(arr[30]),
+                Amount = decimal.Parse(arr[9]) / 100000000M,
+                MY = decimal.Parse(arr[10]),
                 Indexs = new List<string>()
             };
             if (result.CurrentPrice != 0) result.Inc = result.CurrentPrice / result.LastClosePrice * 100 - 100;

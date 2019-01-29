@@ -65,5 +65,9 @@ namespace X.UI.Entities
         /// 指数
         /// </summary>
         public List<string> Indexs { get; set; } 
+
+        public decimal Amount { get; set; }
+
+        public decimal MY { get; set; }
     }
 }
