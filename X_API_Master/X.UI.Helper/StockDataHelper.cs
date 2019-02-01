@@ -235,7 +235,7 @@ namespace X.UI.Helper
                 MinPrice = decimal.Parse(arr[5]),
                 OpenPrice = decimal.Parse(arr[1]),
                 LastClosePrice = decimal.Parse(arr[2]),
-                Datetime = DateTime.Parse(arr[30]),
+                Datetime = DateTime.Parse(arr[30] + " " + arr[31]),
                 Amount = decimal.Parse(arr[9]) / 100000000M,
                 MY = decimal.Parse(arr[10]),
                 Indexs = new List<string>()

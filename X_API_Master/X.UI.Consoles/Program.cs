@@ -43,18 +43,20 @@ namespace X.UI.Consoles
             return dt.Date;
         }
 
-
         static void Main()
         {
             var dt = GetWorkDay(DateTime.Now);
             var list = JRJDataHelper.GetTab(dt, EnumTab.ZT);
             Console.BackgroundColor = ConsoleColor.White;
-            while (DateTime.Now.TimeOfDay >= new TimeSpan(9, 15, 0) && DateTime.Now.TimeOfDay <= new TimeSpan(15, 0, 0))
+            while (true)
             {
+                var last = DateTime.Now;
                 var ret = new List<StockPrice>();
                 foreach (var item in list)
                 {
-                    ret.Add(StockDataHelper.GetStockPrice(item.StockCode));
+                    var price = StockDataHelper.GetStockPrice(item.StockCode);
+                    ret.Add(price);
+                    last = price.Datetime;
                 }
                 foreach (var item in ret.OrderByDescending(p => p.Inc))
                 {
@@ -75,42 +77,27 @@ namespace X.UI.Consoles
                         item.Amount.ToString("0.00"),
                         item.Inc > 9.6M ? fb.ToString("0.00") : "0.00");
                 }
-                Thread.Sleep(2000);
+                if ((DateTime.Now - last).TotalMinutes > 10)
+                {
+                    Console.WriteLine("行情暂停");
+                    if (DateTime.Now.Hour < 9 || DateTime.Now.Hour >= 15)
+                    {
+                        Thread.Sleep(1000 * 60 * 15);
+                    }
+                    else if (DateTime.Now.Minute == 29 || DateTime.Now.Minute == 59 || DateTime.Now.Minute == 14)
+                    {
+                        Thread.Sleep(1000);
+                    }
+                    else
+                    {
+                        Thread.Sleep(1000 * 60);
+                    }
+                }
+                else
+                {
+                    Thread.Sleep(1000);
+                }
             }
-
-            //var f1 = list.Where(p => p.StockCode.ToList().Sum(q => int.Parse(q.ToString())) % 5 == 0 && p.PriceLimit > 7);
-            //var f2 = list.Where(p => p.StockCode.ToList().Skip(3).Sum(q => int.Parse(q.ToString())) % 5 == 0 && p.PriceLimit > 7);
-            //var f3 = list.Sum(p => p.Amount) / 100000000;
-
-            //Console.WriteLine(f1.Select(p => p.StockName).ToJson());
-            //Console.WriteLine(f2.Select(p => p.StockName).ToJson());
-            //Console.WriteLine(f3.ToString("0.00") + "亿");
-
-            //Func<double, double, double> c = (p, r) =>
-            //{
-            //    double ret = p - (1 - p) / r;
-            //    return ret <= 0 ? 0 : ret;
-            //};
-            //List<double> array = new List<double>()
-            //{
-            //    15.5 /15,
-            //    27.0 /15,
-            //    39.75 /15,
-            //    53.73 /15,
-            //    69.1 /15,
-            //    86.0 /15,
-            //    105.0 /15
-            //};
-
-            //for (double i = 0.45; i <= 1; i += 0.05)
-            //{
-            //    foreach(double item in array)
-            //    {
-            //        Console.WriteLine("胜率:{0},盈亏比:{1},仓位:{2}", i, item.ToString("0.00"), c(i, item));
-            //    }
-            //}
-
-            Console.ReadKey();
         }
 
         static void Index()
