@@ -58,6 +58,7 @@ namespace X.UI.Consoles
                     ret.Add(price);
                     last = price.Datetime;
                 }
+                int count = 1;
                 foreach (var item in ret.OrderByDescending(p => p.Inc))
                 {
                     if (item.Inc > 0)
@@ -69,13 +70,15 @@ namespace X.UI.Consoles
                         Console.ForegroundColor = ConsoleColor.Green;
                     }
                     var fb = item.MY * item.CurrentPrice / 100000000M;
-                    Console.WriteLine("{0}({1})：当前价格{2}，涨幅{3}%,成交额{4}亿, 封板金额{5}亿",
+                    Console.WriteLine("{6}:{0}({1})：当前价格{2}，涨幅{3}%,成交额{4}亿, 封板金额{5}亿",
                         item.StockName,
                         item.StockCode,
                         item.CurrentPrice,
                         item.Inc.ToString("0.00"),
                         item.Amount.ToString("0.00"),
-                        item.Inc > 9.6M ? fb.ToString("0.00") : "0.00");
+                        item.Inc > 9.6M ? fb.ToString("0.00") : "0.00",
+                        count);
+                    count++;
                 }
                 if ((DateTime.Now - last).TotalMinutes > 10)
                 {
