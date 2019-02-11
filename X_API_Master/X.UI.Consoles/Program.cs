@@ -52,7 +52,7 @@ namespace X.UI.Consoles
             {
                 var last = DateTime.Now;
                 var ret = new List<StockPrice>();
-                foreach (var item in list.Where(p => p.DateTime.Date == dt && p.ZF > 7))
+                foreach (var item in list.Where(p => p.DateTime.Date == dt && p.PriceLimit > 7))
                 {
                     var price = StockDataHelper.GetStockPrice(item.StockCode);
                     ret.Add(price);
