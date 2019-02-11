@@ -45,14 +45,14 @@ namespace X.UI.Consoles
 
         static void Main()
         {
-            var dt = GetWorkDay(DateTime.Now);
-            var list = JRJDataHelper.GetTab(dt, EnumTab.ZT);
+            var list = JRJDataHelper.GetDataFromMongo(DateTime.Now.AddMonths(-1), new TimeSpan(15, 0, 0)).OrderByDescending(p => p.DateTime);
+            var dt = list.FirstOrDefault().DateTime.Date;
             Console.BackgroundColor = ConsoleColor.White;
             while (true)
             {
                 var last = DateTime.Now;
                 var ret = new List<StockPrice>();
-                foreach (var item in list)
+                foreach (var item in list.Where(p => p.DateTime.Date == dt && p.ZF > 7))
                 {
                     var price = StockDataHelper.GetStockPrice(item.StockCode);
                     ret.Add(price);
