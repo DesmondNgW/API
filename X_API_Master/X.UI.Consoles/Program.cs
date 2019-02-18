@@ -82,7 +82,7 @@ namespace X.UI.Consoles
                 }
                 if ((DateTime.Now - last).TotalMinutes > 10)
                 {
-                    Console.WriteLine("行情暂停");
+                    Console.WriteLine("时间:" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "行情暂停");
                     if (DateTime.Now.Hour < 9 || DateTime.Now.Hour >= 15)
                     {
                         Thread.Sleep(1000 * 60 * 15);
@@ -98,6 +98,7 @@ namespace X.UI.Consoles
                 }
                 else
                 {
+                    Console.WriteLine("时间:" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
                     Thread.Sleep(1000);
                 }
             }
