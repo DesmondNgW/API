@@ -91,9 +91,7 @@
   <ItemGroup>
     <Compile Include="CacheClientTest.cs" />
     <Compile Include="ConsoleHelper.cs" />
-    <Compile Include="Program.cs">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Compile>
+    <Compile Include="Program.cs" />
     <Compile Include="ThirdPartyTest.cs" />
     <Compile Include="APITestMethods.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

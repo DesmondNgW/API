@@ -56,4 +56,19 @@ namespace X.UI.Entities
 
         public List<List<string>> Data { get; set; }
     }
+
+    public class Continue
+    {
+        public DateTime Start { get; set; }
+
+        public DateTime End { get; set; }
+
+        public string StockCode { get; set; }
+
+        public string StockName { get; set; }
+
+        public int Count { get; set; }
+
+        public bool Enable { get; set; }
+    }
 }

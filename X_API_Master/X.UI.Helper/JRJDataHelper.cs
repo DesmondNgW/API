@@ -29,7 +29,7 @@ namespace X.UI.Helper
             var index = ret.Content.IndexOf('{');
             var c = ret.Content.Substring(index, ret.Content.Length - index - 1).FromJson<JRJData>();
             var list = new List<JRJDataItem>();
-            if (c.Data != null && c.Data.Count > 0)
+            if (c != null && c.Data != null && c.Data.Count > 0)
             {
                 foreach (var item in c.Data)
                 {
@@ -179,6 +179,59 @@ namespace X.UI.Helper
                 }
             }
             return idata;
+        }
+
+
+        public static List<Continue> Continue(DateTime start, DateTime end, int count = 2)
+        {
+            var query = Query.And(Query.GTE("DateTime", start), Query.LTE("DateTime", end));
+            var list  = MongoDbBase<JRJDataItem>.Default.Find("Stock", "JRJ", query, Fields.Null, SortBy.Ascending("DateTime", "Force")).ToList();
+            var _list = (from item in list group item by item.DateTime).ToList();
+            var ret = new Dictionary<string, Continue>();
+            var LastTime = DateTime.MinValue;
+            for (var i = 0; i < _list.Count; i++)
+            {
+                foreach(var k in _list[i])
+                {
+                    var lastKey = string.Format("{0}_{1}", k.StockCode, LastTime.ToString("yyyyMMdd"));
+                    var key = string.Format("{0}_{1}", k.StockCode, k.DateTime.ToString("yyyyMMdd"));
+                    if (!ret.ContainsKey(lastKey))
+                    {
+                        ret[key] = new Continue
+                        {
+                            StockCode = k.StockCode,
+                            StockName = k.StockName,
+                            Start = k.DateTime,
+                            End = k.DateTime,
+                            Count = 1,
+                            Enable = true
+                        };
+                    }
+                    else
+                    {
+                        ret[lastKey].Enable = false;
+                        ret[key] = ret[lastKey];
+                        ret[key].Count++;
+                        ret[key].End = k.DateTime;
+                        ret[key].Enable = true;
+                    }
+                }
+                LastTime = _list[i].Key;
+            }
+            return ret.Where(p => p.Value.Count >= count
+            && p.Value.Enable
+            && p.Value.StockName.IndexOf("ST", StringComparison.OrdinalIgnoreCase) == -1).Select(p => p.Value).Distinct().ToList();
+        }
+
+        public static void ContinueInFile(List<Continue> list)
+        {
+            FileBase.WriteFile("./", "test.txt", "-------------", "utf-8", Util.Entities.Enums.FileBaseMode.Create);
+            foreach (var item in list)
+            {
+                var content = string.Format("{0}（{1}）【{2}-{3}】长度{4}", item.StockName,
+                    item.StockCode, item.Start, item.End, item.Count);
+                FileBase.WriteFile("./", "test.txt", content, "utf-8", Util.Entities.Enums.FileBaseMode.Append);
+            }
         }
     }
 }
