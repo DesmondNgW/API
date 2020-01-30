@@ -26,10 +26,12 @@ namespace X.UI.Consoles
 
             //var data = JRJDataHelper.GetTab(new DateTime(2018, 11, 23), 0);
 
-            var list = JRJDataHelper.Continue(new DateTime(2019, 8, 1), new DateTime(2019, 8, 12), 3);
-            JRJDataHelper.ContinueInFile(list);
+            JRJDataHelper.DealData(new DateTime(2020,1,1), DateTime.Now.Date);
 
-            //JRJDataHelper.DealData(new DateTime(2016,1,1), DateTime.Now.Date);
+            var list = JRJDataHelper.Continue(new DateTime(2020, 1, 1), DateTime.Now.Date, 2);
+            JRJDataHelper.ContinueInFile(list);
+            //JRJDataHelper.Test();
+
             //ConsoleHelper.Draw(".", 30).ForEach(p => Console.WriteLine(p));
             //StockMonitor.Monitor();
             //var key = Guid.NewGuid().ToString("N");

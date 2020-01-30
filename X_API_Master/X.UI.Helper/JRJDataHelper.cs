@@ -225,13 +225,61 @@ namespace X.UI.Helper
 
         public static void ContinueInFile(List<Continue> list)
         {
-            FileBase.WriteFile("./", "test.txt", "-------------", "utf-8", Util.Entities.Enums.FileBaseMode.Create);
+            FileBase.WriteFile("./", "test-2016.txt", "-------------", "utf-8", Util.Entities.Enums.FileBaseMode.Create);
+            FileBase.WriteFile("./", "test-2017.txt", "-------------", "utf-8", Util.Entities.Enums.FileBaseMode.Create);
+            FileBase.WriteFile("./", "test-2018.txt", "-------------", "utf-8", Util.Entities.Enums.FileBaseMode.Create);
+            FileBase.WriteFile("./", "test-2019.txt", "-------------", "utf-8", Util.Entities.Enums.FileBaseMode.Create);
+            FileBase.WriteFile("./", "test-2020.txt", "-------------", "utf-8", Util.Entities.Enums.FileBaseMode.Create);
             foreach (var item in list)
             {
                 var content = string.Format("{0}（{1}）【{2}-{3}】长度{4}", item.StockName,
                     item.StockCode, item.Start, item.End, item.Count);
-                FileBase.WriteFile("./", "test.txt", content, "utf-8", Util.Entities.Enums.FileBaseMode.Append);
+                FileBase.WriteFile("./", "test-"+ item.Start.Year + ".txt", content, "utf-8", Util.Entities.Enums.FileBaseMode.Append);
             }
         }
+
+        private static List<JRJDataItem> GetLastTest(DateTime dt, int times = 30)
+        {
+            var query = Query.EQ("DateTime", dt);
+            var list = MongoDbBase<JRJDataItem>.Default.Find("Stock", "JRJ", query, Fields.Null, SortBy.Ascending("DateTime", "Force")).ToList();
+            if (list.Count == 0 && times > 0)
+            {
+                return GetLastTest(dt.AddDays(-1), times - 1);
+            }
+            return list;
+        }
+
+
+        public static void TestSingle(DateTime dt)
+        {
+            var query = Query.EQ("DateTime", dt);
+            var list = MongoDbBase<JRJDataItem>.Default.Find("Stock", "JRJ", query, Fields.Null, SortBy.Ascending("DateTime", "Force")).ToList();
+            if (list.Count == 0) return;
+            var last = GetLastTest(dt.AddDays(-1));
+            FileBase.WriteFile("../f", dt.ToString("yyyyMMdd") + "-1.txt", "-------------", "utf-8", Util.Entities.Enums.FileBaseMode.Create);
+            FileBase.WriteFile("../f", dt.ToString("yyyyMMdd") + "-2.txt", "-------------", "utf-8", Util.Entities.Enums.FileBaseMode.Create);
+            foreach (var item in list.Where(p => p.StockName.IndexOf("ST", StringComparison.OrdinalIgnoreCase) == -1))
+            {
+                if (last.Exists(p => p.StockCode == item.StockCode))
+                {
+                    FileBase.WriteFile("./", dt.ToString("yyyyMMdd") + "-2.txt", item.StockName, "utf-8", Util.Entities.Enums.FileBaseMode.Append);
+                }
+                else
+                {
+                    FileBase.WriteFile("./", dt.ToString("yyyyMMdd") + "-1.txt", item.StockName, "utf-8", Util.Entities.Enums.FileBaseMode.Append);
+                }
+            }
+        }
+
+        public static void Test()
+        {
+            var start = new DateTime(2016, 1, 1);
+            while (start < DateTime.Now.Date)
+            {
+                TestSingle(start);
+                start = start.AddDays(1);
+            }
+        }
+
     }
 }
