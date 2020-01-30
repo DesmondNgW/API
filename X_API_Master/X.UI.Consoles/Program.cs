@@ -23,45 +23,21 @@ namespace X.UI.Consoles
     {
         static void Main()
         {
-
-            //var data = JRJDataHelper.GetTab(new DateTime(2018, 11, 23), 0);
-
-            JRJDataHelper.DealData(new DateTime(2020,1,1), DateTime.Now.Date);
-
-            var list = JRJDataHelper.Continue(new DateTime(2020, 1, 1), DateTime.Now.Date, 2);
-            JRJDataHelper.ContinueInFile(list);
-            //JRJDataHelper.Test();
-
-            //ConsoleHelper.Draw(".", 30).ForEach(p => Console.WriteLine(p));
-            //StockMonitor.Monitor();
-            //var key = Guid.NewGuid().ToString("N");
-            //Console.WriteLine(ThirdPartyTest.CouchBaseTest(key, key));
-            //TestCacheClient(1000);
-
-            //var s = MongoDbBase<MongoTest>.Default.FindBsonDocument("Test", "test", Query.Null);
-            //var f = MongoDbBase<MongoTest>.ToEntity(s);
-
-            //TdxFileHelper.BatchDay();
-
-
-
-
-
-
+            Index();
             Console.ReadKey();
         }
 
         static void Index()
         {
             Console.Clear();
-            Console.WriteLine(@"┏━━━━━━━━━━━━━━━┓");
-            Console.WriteLine(@"┃	API-Console-Test:	┃");
+            Console.WriteLine(@"┏" + "━".PadRight(30, '━') + "┓");
+            Console.WriteLine(@"┃API-Console-Test:" + string.Empty.PadRight(13) + "┃");
             foreach (var item in (EnumApiTestItem[])Enum.GetValues(typeof(EnumApiTestItem)))
             {
-                Console.WriteLine(@"┣━━━━━━━━━━━━━━━┫");
-                Console.WriteLine(@"┃{0}.{1}┃", item.GetHashCode(), item.ToString().PadRight(30));
+                Console.WriteLine(@"┣" + "━".PadRight(30, '━') + "┫");
+                Console.WriteLine(@"┃{0}.{1}┃", item.GetHashCode(), item.ToString().PadRight(28));
             }
-            Console.WriteLine(@"┗━━━━━━━━━━━━━━━┛");
+            Console.WriteLine(@"┗" + "━".PadRight(30, '━') + "┛");
             Next();
         }
 

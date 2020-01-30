@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using X.UI.Helper;
 using X.Util.Core;
 using X.Util.Core.Kernel;
 using X.Util.Extend.Cryption;
@@ -14,7 +15,8 @@ namespace X.UI.Consoles
         ApiWebHtmlTest = 3,
         ApiConsistentHashTest = 4,
         ApiRsaEnTest = 5,
-        ApiRsaDeTest = 6
+        ApiRsaDeTest = 6,
+        StockDeal = 7,
     }
 
     public class ApiTestMethods
@@ -96,6 +98,13 @@ namespace X.UI.Consoles
                 var de = RsaCryption.Decrypt(id, rsa, nonce);
                 Console.WriteLine(@"明文：" + de);
             }
+        }
+
+        public static void StockDeal()
+        {
+            JRJDataHelper.DealData(new DateTime(2020, 1, 1), DateTime.Now.Date);
+            var list = JRJDataHelper.Continue(new DateTime(2020, 1, 1), DateTime.Now.Date, 2);
+            JRJDataHelper.ContinueInFile(list);
         }
     }
 }

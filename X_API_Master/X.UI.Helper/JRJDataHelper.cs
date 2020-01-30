@@ -225,17 +225,18 @@ namespace X.UI.Helper
 
         public static void ContinueInFile(List<Continue> list)
         {
-            FileBase.WriteFile("./", "test-2016.txt", "-------------", "utf-8", Util.Entities.Enums.FileBaseMode.Create);
-            FileBase.WriteFile("./", "test-2017.txt", "-------------", "utf-8", Util.Entities.Enums.FileBaseMode.Create);
-            FileBase.WriteFile("./", "test-2018.txt", "-------------", "utf-8", Util.Entities.Enums.FileBaseMode.Create);
-            FileBase.WriteFile("./", "test-2019.txt", "-------------", "utf-8", Util.Entities.Enums.FileBaseMode.Create);
-            FileBase.WriteFile("./", "test-2020.txt", "-------------", "utf-8", Util.Entities.Enums.FileBaseMode.Create);
+            Dictionary<int, bool> tmp = new Dictionary<int, bool>();
             foreach (var item in list)
             {
-                var content = string.Format("{0}（{1}）【{2}-{3}】长度{4}", item.StockName,
-                    item.StockCode, item.Start, item.End, item.Count);
-                FileBase.WriteFile("./", "test-"+ item.Start.Year + ".txt", content, "utf-8", Util.Entities.Enums.FileBaseMode.Append);
+                var content = string.Format("{0}（{1}）【{2}-{3}】长度{4}", item.StockName, item.StockCode, item.Start, item.End, item.Count);
+                if (!tmp.ContainsKey(item.Start.Year))
+                {
+                    tmp[item.Start.Year] = true;
+                    FileBase.WriteFile("./", "test-"+ item.Start.Year + ".txt", "-------------", "utf-8", Util.Entities.Enums.FileBaseMode.Create);
+                }
+                FileBase.WriteFile("./", "test-" + item.Start.Year + ".txt", content, "utf-8", Util.Entities.Enums.FileBaseMode.Append);
             }
+            Console.WriteLine("Write File End!");
         }
 
         private static List<JRJDataItem> GetLastTest(DateTime dt, int times = 30)

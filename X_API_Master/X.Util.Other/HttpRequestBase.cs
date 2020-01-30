@@ -26,7 +26,7 @@ namespace X.Util.Other
             request.CookieContainer = new CookieContainer();
             request.AllowAutoRedirect = true;
             request.UserAgent = "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:30.0) Gecko/20100101 Firefox/30.0";
-            request.Timeout = 20000;
+            request.Timeout = 60000;
             request.Method = method;
             request.ContentType = "application/x-www-form-urlencoded";
             if (extendHeaders != null)
