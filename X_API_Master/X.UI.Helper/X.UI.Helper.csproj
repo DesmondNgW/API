@@ -54,6 +54,7 @@
     <Compile Include="JRJDataHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StockDataHelper.cs" />
+    <Compile Include="StockDealHelper.cs" />
     <Compile Include="StockHelper.cs" />
     <Compile Include="StockL2FileHelper.cs" />
     <Compile Include="StockMonitor.cs" />

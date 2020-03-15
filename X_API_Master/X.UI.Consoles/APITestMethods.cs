@@ -102,8 +102,8 @@ namespace X.UI.Consoles
 
         public static void StockDeal()
         {
-            JRJDataHelper.DealData(new DateTime(2020, 1, 1), DateTime.Now.Date);
-            var list = JRJDataHelper.Continue(new DateTime(2020, 1, 1), DateTime.Now.Date, 2);
+            JRJDataHelper.DealData(new DateTime(2016, 1, 1), DateTime.Now.Date);
+            var list = JRJDataHelper.Continue(new DateTime(2016, 1, 1), DateTime.Now.Date, 2);
             JRJDataHelper.ContinueInFile(list);
         }
     }

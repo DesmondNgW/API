@@ -16,6 +16,7 @@ using MongoDB.Driver.Builders;
 using System.Globalization;
 using X.UI.Entities;
 using System.IO;
+using System.Text;
 
 namespace X.UI.Consoles
 {
@@ -23,21 +24,35 @@ namespace X.UI.Consoles
     {
         static void Main()
         {
-            Index();
+            StockDealHelper.Program();
+
+            //Index();
             Console.ReadKey();
         }
 
-        static void Index()
+        static string Center(string begin, string end, string content, string pad, int total)
+        {
+            var len = total - begin.Length - end.Length - content.Length;
+            int leftLen = len / 2 + 1,
+                retLength = total - content.Length;
+            var ret = new string[retLength + 1];
+            ret[0] = begin;
+            ret[retLength] = end;
+            ret[leftLen] = content;
+            return string.Join(pad, ret);
+        }
+
+        static void Index(int total = 32)
         {
             Console.Clear();
-            Console.WriteLine(@"┏" + "━".PadRight(30, '━') + "┓");
-            Console.WriteLine(@"┃API-Console-Test:" + string.Empty.PadRight(13) + "┃");
+            Console.WriteLine(Center("┏", "┓", "━", "━", total));
+            Console.WriteLine(Center("┃", "┃", "API-Console-Test:", "*", total));
             foreach (var item in (EnumApiTestItem[])Enum.GetValues(typeof(EnumApiTestItem)))
             {
-                Console.WriteLine(@"┣" + "━".PadRight(30, '━') + "┫");
-                Console.WriteLine(@"┃{0}.{1}┃", item.GetHashCode(), item.ToString().PadRight(28));
+                Console.WriteLine(Center("┣", "┫", "━", "━", total));
+                Console.WriteLine(Center("┃", "┃", string.Format("{0}.{1}", item.GetHashCode(), item.ToString()), "*", total));
             }
-            Console.WriteLine(@"┗" + "━".PadRight(30, '━') + "┛");
+            Console.WriteLine(Center("┗", "┛", "━", "━", total));
             Next();
         }
 
