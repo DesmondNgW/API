@@ -62,10 +62,25 @@ namespace X.UI.Helper
             return b1.Where(p => b2.Contains(p)).Distinct().ToArray();
         }
 
-        public static string[] GetStockNameByXS(List<MyStock> list)
+        public static string[] GetStockNameByXS(List<MyStock> list, int top = 0)
         {
-            var sp = SetOrder(list.Where(p => p.Tmp > -100 && !p.Name.Contains("ST") && (p.S1 - p.S3 * 2 > 0 || p.S2 - p.S4 > 0))).OrderBy(p => p.Order);
-            return sp.Select(p => p.Code + " " + p.Name + " " + p.Order + " " + (p.S1 - p.S3 * 2) + " " + (p.S2 - p.S4)).ToArray();
+            var tmp = list.Where(p => p.Tmp > -100 && !p.Name.Contains("ST") && (p.S1 - p.S3 * 2 > 0 || p.S2 - p.S4 > 0));
+            if (top <= 0)
+            {
+                var sp = SetOrder(tmp).OrderBy(p => p.Order);
+                return sp.Select(p => p.Code + " " + p.Name + " " + p.Order).ToArray();
+            }
+            else
+            {
+                var a1 = tmp.OrderByDescending(p => p.S1).Take(top);
+                var a2 = tmp.OrderByDescending(p => p.S2).Take(top);
+                var a3 = tmp.OrderByDescending(p => p.S3).Take(top);
+                var a4 = tmp.OrderByDescending(p => p.S4).Take(top);
+                var b1 = a1.Union(a2);
+                var b2 = a3.Union(a4);
+                var b = SetOrder(b1.Where(p => b2.Count(q => q.Code == p.Code) > 0).Distinct()).OrderBy(p => p.Order);
+                return b.Select(p => p.Code + " " + p.Name + " " + p.Order).ToArray();
+            }
         }
 
         public static double StockScore(MyStock item)
@@ -127,7 +142,7 @@ namespace X.UI.Helper
             var b1 = a1.Union(a2);
             var b2 = a3.Union(a4);
             var b = b1.Where(p => b2.Count(q => q.Code == p.Code) > 0).Distinct();
-            return b1.Select(p => p.Code + " " + p.Name + " " + StockScore(p)).ToArray();
+            return b.Select(p => p.Code + " " + p.Name + " " + StockScore(p)).ToArray();
         }
 
         public static void Monitor(List<MyStock> list, string dir, string encode)
@@ -176,13 +191,14 @@ namespace X.UI.Helper
             FileBase.WriteFile(dir, "K825.txt", string.Join("\t\n", GetStockName(list, 825)), encode,
                 FileBaseMode.Create);
 
-            FileBase.WriteFile(dir, "TAll.txt", string.Join("\t\n", GetStockNameByXS(list)), encode,
-                FileBaseMode.Create);
+            for (var i = 25; i <= 400; i += 25)
+            {
+                FileBase.WriteFile(dir, "T" + i + ".txt", string.Join("\t\n", GetStockNameByXS(list, i)), encode,
+                    FileBaseMode.Create);
+            }
 
             FileBase.WriteFile(dir, "T0400.txt", string.Join("\t\n", _content), encode,
                 FileBaseMode.Create);
-
-
 
             Monitor(list, dir, encode);
         }
