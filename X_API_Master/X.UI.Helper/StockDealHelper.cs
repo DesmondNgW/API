@@ -26,7 +26,7 @@ namespace X.UI.Helper
         /// <returns></returns>
         private static bool F1(MyStock p)
         {
-            return p.Tmp > -100 && !p.Name.Contains("ST");
+            return p.Inc > -100 && !p.Name.Contains("ST");
         }
 
         /// <summary>
@@ -36,7 +36,7 @@ namespace X.UI.Helper
         /// <returns></returns>
         private static bool F2(MyStock p)
         {
-            return p.Tmp > -100 && !p.Name.Contains("ST") && (p.S1 - p.S3 * 2 > 0 || p.S2 - p.S4 > 0);
+            return p.Inc > -100 && !p.Name.Contains("ST") && (p.S1 - p.S3 * 2 > 0 || p.S2 - p.S4 > 0);
         }
 
         /// <summary>
@@ -46,7 +46,7 @@ namespace X.UI.Helper
         /// <returns></returns>
         private static bool F3(MyStock p)
         {
-            return p.Tmp > -100 && !p.Name.Contains("ST") && p.K4 > 0;
+            return p.Inc > -100 && !p.Name.Contains("ST") && p.K4 > 0;
         }
 
         /// <summary>
@@ -69,6 +69,7 @@ namespace X.UI.Helper
             return p.Code + " " + p.Name + " " + (p.K1 + p.K2 + p.K3 + p.K4) / 4;
         }
 
+        #region 废弃代码
         /// <summary>
         /// 设置排序
         /// </summary>
@@ -76,54 +77,73 @@ namespace X.UI.Helper
         /// <param name="index"></param>
         /// <param name="type"></param>
         /// <returns></returns>
-        private static MyStock SetOrder(MyStock item, int index, int type)
-        {
-            switch (type)
-            {
-                case 1:
-                    item.Order1 = index;
-                    break;
-                case 2:
-                    item.Order2 = index;
-                    break;
-                case 3:
-                    item.Order3 = index;
-                    break;
-                case 4:
-                    item.Order4 = index;
-                    break;
-                case 5:
-                    item.Order5 = index;
-                    break;
-                case 6:
-                    item.Order6 = index;
-                    break;
-                case 7:
-                    item.Order7 = index;
-                    break;
-                case 8:
-                    item.Order8 = index;
-                    break;
+        //private static MyStock SetOrder(MyStock item, int index, int type)
+        //{
+        //    switch (type)
+        //    {
+        //        case 1:
+        //            item.Order1 = index;
+        //            break;
+        //        case 2:
+        //            item.Order2 = index;
+        //            break;
+        //        case 3:
+        //            item.Order3 = index;
+        //            break;
+        //        case 4:
+        //            item.Order4 = index;
+        //            break;
+        //        case 5:
+        //            item.Order5 = index;
+        //            break;
+        //        case 6:
+        //            item.Order6 = index;
+        //            break;
+        //        case 7:
+        //            item.Order7 = index;
+        //            break;
+        //        case 8:
+        //            item.Order8 = index;
+        //            break;
 
-            }
-            return item;
-        }
+        //    }
+        //    return item;
+        //}
 
         /// <summary>
         /// 对集合重新计算排序序号
         /// </summary>
         /// <param name="list"></param>
         /// <returns></returns>
-        public static IEnumerable<MyStock> SetOrder(IEnumerable<MyStock> list)
+        //public static IEnumerable<MyStock> SetOrder(IEnumerable<MyStock> list)
+        //{
+        //    return list.OrderByDescending(p => p.S1).Select((p, index) => SetOrder(p, index, 1))
+        //        .OrderByDescending(p => p.S2).Select((p, index) => SetOrder(p, index, 2))
+        //        .OrderByDescending(p => p.S3).Select((p, index) => SetOrder(p, index, 3))
+        //        .OrderByDescending(p => p.S4).Select((p, index) => SetOrder(p, index, 4))
+        //        .OrderByDescending(p => p.K1).Select((p, index) => SetOrder(p, index, 5))
+        //        .OrderByDescending(p => p.K2).Select((p, index) => SetOrder(p, index, 6))
+        //        .OrderByDescending(p => p.K3).Select((p, index) => SetOrder(p, index, 7))
+        //        .OrderByDescending(p => p.K4).Select((p, index) => SetOrder(p, index, 8));
+        //}
+
+        #endregion
+        /// <summary>
+        /// 加权均值
+        /// </summary>
+        /// <param name="list"></param>
+        /// <returns></returns>
+        public static double Calc(IEnumerable<MyStock> list)
         {
-            return list.OrderByDescending(p => p.S1).Select((p, index) => SetOrder(p, index, 1))
-                .OrderByDescending(p => p.S2).Select((p, index) => SetOrder(p, index, 2))
-                .OrderByDescending(p => p.S3).Select((p, index) => SetOrder(p, index, 3))
-                .OrderByDescending(p => p.S4).Select((p, index) => SetOrder(p, index, 4))
-                .OrderByDescending(p => p.K1).Select((p, index) => SetOrder(p, index, 5))
-                .OrderByDescending(p => p.K2).Select((p, index) => SetOrder(p, index, 6))
-                .OrderByDescending(p => p.K3).Select((p, index) => SetOrder(p, index, 7))
-                .OrderByDescending(p => p.K4).Select((p, index) => SetOrder(p, index, 8));
+            double a = 0;
+            double b = 0;
+            double c = 0;
+            foreach (var item in list)
+            {
+                b += item.Cap * item.LastClose;
+                c += item.Cap * item.Close;
+            }
+            return c / b * 100 - 100;
         }
 
         /// <summary>
@@ -131,24 +151,33 @@ namespace X.UI.Helper
         /// </summary>
         /// <param name="list"></param>
         /// <returns></returns>
-        public static int GetAnswer(List<double> list)
+        public static Tuple<int, int> GetAnswer(List<Tuple<double, double>> list)
         {
             if (list.Count >= 5)
             {
-                int countA = 0;
+                int countA = 0, countB = 0, a = 0, b = 0;
                 for (var i = 2; i < list.Count; i++)
                 {
-                    if (list[i - 1] >= list[i - 2] && list[i - 1] >= list[i])
+                    if (list[i - 1].Item1 >= list[i - 2].Item1 && list[i - 1].Item1 >= list[i].Item1)
                     {
                         countA++;
                     }
-                    if (countA == 2 && list[i - 1] <= list[i - 2] && list[i - 1] <= list[i])
+                    if (countA == 3 && a == 0)
                     {
-                        return i * 25;
+                        a = i * 25;
+                    }
+                    if (list[i - 1].Item2 >= list[i - 2].Item2 && list[i - 1].Item2 >= list[i].Item2)
+                    {
+                        countB++;
+                    }
+                    if (b == 0 && countB == 2 && list[i - 1].Item2 <= list[i - 2].Item2 && list[i - 1].Item2 <= list[i].Item2)
+                    {
+                        b = i * 25;
                     }
                 }
+                return new Tuple<int, int>(a, b);
             }
-            return 0;
+            return new Tuple<int, int>(0, 0);
         }
         #endregion
 
@@ -173,6 +202,8 @@ namespace X.UI.Helper
                     {
                         Code = t[0],
                         Name = t[1],
+                        Inc = t[2].Convert2Double(-10000),
+                        Close = t[3].Convert2Double(0),
                         S1 = t[6].Convert2Double(-10000),
                         S2 = t[7].Convert2Double(-10000),
                         S3 = t[8].Convert2Double(-10000),
@@ -181,12 +212,12 @@ namespace X.UI.Helper
                         K2 = t[11].Convert2Double(-100),
                         K3 = t[12].Convert2Double(-100),
                         K4 = t[13].Convert2Double(-100),
-                        Tmp = t[2].Convert2Double(-10000),
+                        Cap = t[14].Convert2Double(0),
                     };
                     ret.Add(myStock);
                 }
             }
-            SetOrder(ret);
+            //SetOrder(ret);
             return ret;
         }
 
@@ -199,13 +230,15 @@ namespace X.UI.Helper
         /// <returns></returns>
         public static string[] GetStockName(List<MyStock> list, int top, Func<MyStock, bool> f, Func<MyStock, string> o)
         {
-            var a1 = list.Where(f).OrderByDescending(p => p.S1).Take(top);
+            var a1 = list.Where(f).OrderByDescending(p => p.S1).Take(top);        
             var a2 = list.Where(f).OrderByDescending(p => p.S2).Take(top);
             var a3 = list.Where(f).OrderByDescending(p => p.S3).Take(top);
             var a4 = list.Where(f).OrderByDescending(p => p.S4).Take(top);
             var b1 = a1.Union(a2);
             var b2 = a3.Union(a4);
-            return SetOrder(b1.Where(p => b2.Count(q => q.Code == p.Code) > 0).Distinct()).OrderBy(p => p.Order).Select(o).ToArray();
+            var b = b1.Where(p => b2.Count(q => q.Code == p.Code) > 0).Distinct();
+            var ret = new List<string>() { Calc(b).ToString("0.00") };
+            return ret.Union(b.OrderBy(p => p.Order).Select(o)).ToArray();
         }
      
         /// <summary>
@@ -254,28 +287,30 @@ namespace X.UI.Helper
         /// <param name="encode"></param>
         public static void Deal(List<MyStock> list, string encode = "utf-8")
         {
-            var dir = "./dest";
-            var KContent = new List<double>();
-            var TContent = new List<double>();
+            string dir = "./dest", dirK = "./dest/K", dirT = "./dest/T";
+            var KContent = new List<Tuple<double, double>>();
+            var TContent = new List<Tuple<double, double>>();
             for (var i = 25; i <= 400; i += 25)
             {
                 //K系列
                 var kContent = GetStockName(list, i, F1, O1);
-                KContent.Add((kContent.Length + 0.0) / i);
-                FileBase.WriteFile(dir, "K" + i + ".txt", string.Join("\t\n", kContent), encode, FileBaseMode.Create);
+                KContent.Add(new Tuple<double, double>(kContent[0].Convert2Double(-10000), (kContent.Length - 1.0) / i));
+                FileBase.WriteFile(dirK, "K" + i + ".txt", string.Join("\t\n", kContent), encode, FileBaseMode.Create);
                 //T系列
                 var tContent = GetStockName(list, i, F2, O2);
-                TContent.Add((tContent.Length + 0.0) / i);
-                FileBase.WriteFile(dir, "T" + i + ".txt", string.Join("\t\n", tContent), encode, FileBaseMode.Create);
+                TContent.Add(new Tuple<double, double>(tContent[0].Convert2Double(-10000), (tContent.Length - 1.0) / i));
+                FileBase.WriteFile(dirT, "T" + i + ".txt", string.Join("\t\n", tContent), encode, FileBaseMode.Create);
             }
-            FileBase.WriteFile(dir, "K500.txt", string.Join("\t\n", GetStockName(list, 500, F1, O1)), encode, FileBaseMode.Create);
-            FileBase.WriteFile(dir, "K825.txt", string.Join("\t\n", GetStockName(list, 825, F1, O1)), encode, FileBaseMode.Create);
-            FileBase.WriteFile(dir, "T500.txt", string.Join("\t\n", GetStockName(list, 500, F2, O2)), encode, FileBaseMode.Create);
-            FileBase.WriteFile(dir, "T825.txt", string.Join("\t\n", GetStockName(list, 825, F2, O2)), encode, FileBaseMode.Create);
-            Console.WriteLine("KContent:{0}", GetAnswer(KContent));
-            Console.WriteLine("TContent:{0}", GetAnswer(TContent));
-            FileBase.WriteFile(dir, "K0400.txt", string.Join("\t\n", KContent.Select((p, index) => (index + 1) * 25 + " " + p.ToString("0.000"))), encode, FileBaseMode.Create);
-            FileBase.WriteFile(dir, "T0400.txt", string.Join("\t\n", KContent.Select((p, index) => (index + 1) * 25 + " " + p.ToString("0.000"))), encode, FileBaseMode.Create);
+            FileBase.WriteFile(dirK, "K500.txt", string.Join("\t\n", GetStockName(list, 500, F1, O1)), encode, FileBaseMode.Create);
+            FileBase.WriteFile(dirK, "K825.txt", string.Join("\t\n", GetStockName(list, 825, F1, O1)), encode, FileBaseMode.Create);
+            FileBase.WriteFile(dirT, "T500.txt", string.Join("\t\n", GetStockName(list, 500, F2, O2)), encode, FileBaseMode.Create);
+            FileBase.WriteFile(dirT, "T825.txt", string.Join("\t\n", GetStockName(list, 825, F2, O2)), encode, FileBaseMode.Create);
+            var KConsole = GetAnswer(KContent);
+            var TConsole = GetAnswer(TContent);
+            Console.WriteLine("KContent:{0}/{1}", KConsole.Item1, KConsole.Item2);
+            Console.WriteLine("TContent:{0}/{1}", TConsole.Item1, TConsole.Item2);
+            FileBase.WriteFile(dir, "K.txt", string.Join("\t\n", KContent.Select((p, index) => (index + 1) * 25 + " " + p.Item1.ToString("0.000") + " " + p.Item2.ToString("0.000"))), encode, FileBaseMode.Create);
+            FileBase.WriteFile(dir, "T.txt", string.Join("\t\n", TContent.Select((p, index) => (index + 1) * 25 + " " + p.Item1.ToString("0.000") + " " + p.Item2.ToString("0.000"))), encode, FileBaseMode.Create);
             Monitor(list, dir, encode);
         }
 
@@ -286,7 +321,7 @@ namespace X.UI.Helper
         /// <param name="encode"></param>
         public static void Deal2(List<MyStock> list, string encode = "utf-8")
         {
-            var dir = "./dest";
+            var dir = "./dest/B";
             for (var i = 3; i <= 48; i += 3)
             {
                 FileBase.WriteFile(dir, "B" + i + ".txt", string.Join("\t\n", GetStockName(list, i, F3, O2)), encode, FileBaseMode.Create);
@@ -302,7 +337,6 @@ namespace X.UI.Helper
             Deal(t1);
             var t2 = GetMyStock(MyStockMode.Index);
             Deal2(t2);
-
             var dt = DateTime.Now;
             while (dt.TimeOfDay >= new TimeSpan(9, 30, 0) && dt.TimeOfDay <= new TimeSpan(15, 0, 0))
             {

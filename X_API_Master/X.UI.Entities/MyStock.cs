@@ -12,6 +12,18 @@ namespace X.UI.Entities
 
         public string Name { get; set; }
 
+        public double Inc { get; set; }
+
+        public double Close { get; set; }
+
+        public double LastClose
+        {
+            get
+            {
+                return Close / (Inc / 100 + 1);
+            }
+        }
+
         public double S1 { get; set; }
 
         public double S2 { get; set; }
@@ -28,7 +40,7 @@ namespace X.UI.Entities
 
         public double K4 { get; set; }
 
-        public double Tmp { get; set; }
+        public double Cap { get; set; }
 
         public decimal Order
         {
