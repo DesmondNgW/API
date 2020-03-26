@@ -151,33 +151,28 @@ namespace X.UI.Helper
         /// </summary>
         /// <param name="list"></param>
         /// <returns></returns>
-        public static Tuple<int, int> GetAnswer(List<Tuple<double, double>> list)
+        public static Tuple<List<int>, List<int>> GetAnswer(List<Tuple<double, double>> list)
         {
+            var ret = new Tuple<List<int>, List<int>>(new List<int>(), new List<int>());
             if (list.Count >= 5)
             {
-                int countA = 0, countB = 0, a = 0, b = 0;
                 for (var i = 2; i < list.Count; i++)
                 {
-                    if (list[i - 1].Item1 >= list[i - 2].Item1 && list[i - 1].Item1 >= list[i].Item1)
+                    //高低点
+                    if ((list[i - 1].Item1 >= list[i - 2].Item1 && list[i - 1].Item1 >= list[i].Item1) ||
+                        (list[i - 1].Item1 <= list[i - 2].Item1 && list[i - 1].Item1 <= list[i].Item1))
                     {
-                        countA++;
+                        ret.Item1.Add(i * 25);
                     }
-                    if (countA == 3 && a == 0)
+                    //高低点
+                    if ((list[i - 1].Item2 >= list[i - 2].Item2 && list[i - 1].Item2 >= list[i].Item2) ||
+                        (list[i - 1].Item2 <= list[i - 2].Item2 && list[i - 1].Item2 <= list[i].Item2))
                     {
-                        a = i * 25;
-                    }
-                    if (list[i - 1].Item2 >= list[i - 2].Item2 && list[i - 1].Item2 >= list[i].Item2)
-                    {
-                        countB++;
-                    }
-                    if (b == 0 && countB == 2 && list[i - 1].Item2 <= list[i - 2].Item2 && list[i - 1].Item2 <= list[i].Item2)
-                    {
-                        b = i * 25;
+                        ret.Item2.Add(i * 25);
                     }
                 }
-                return new Tuple<int, int>(a, b);
             }
-            return new Tuple<int, int>(0, 0);
+            return ret;
         }
         #endregion
 
@@ -307,8 +302,8 @@ namespace X.UI.Helper
             FileBase.WriteFile(dirT, "T825.txt", string.Join("\t\n", GetStockName(list, 825, F2, O2)), encode, FileBaseMode.Create);
             var KConsole = GetAnswer(KContent);
             var TConsole = GetAnswer(TContent);
-            Console.WriteLine("KContent:{0}/{1}", KConsole.Item1, KConsole.Item2);
-            Console.WriteLine("TContent:{0}/{1}", TConsole.Item1, TConsole.Item2);
+            Console.WriteLine("KContent:价格高低点:{0};比例高低点:{1}", string.Join("-", KConsole.Item1), string.Join("-", KConsole.Item2));
+            Console.WriteLine("TContent:价格高低点:{0};比例高低点:{1}", string.Join("-", TConsole.Item1), string.Join("-", TConsole.Item2));
             FileBase.WriteFile(dir, "K.txt", string.Join("\t\n", KContent.Select((p, index) => (index + 1) * 25 + " " + p.Item1.ToString("0.000") + " " + p.Item2.ToString("0.000"))), encode, FileBaseMode.Create);
             FileBase.WriteFile(dir, "T.txt", string.Join("\t\n", TContent.Select((p, index) => (index + 1) * 25 + " " + p.Item1.ToString("0.000") + " " + p.Item2.ToString("0.000"))), encode, FileBaseMode.Create);
             Monitor(list, dir, encode);
