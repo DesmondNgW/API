@@ -108,6 +108,10 @@
       <Project>{ecc8b612-a8f0-4604-8ef6-ef9e09bcd5c9}</Project>
       <Name>X.Util.Extend</Name>
     </ProjectReference>
+    <ProjectReference Include="..\X.Util.Provider\X.Util.Provider.csproj">
+      <Project>{9a046362-e6e3-46dc-88ba-a488da92dd5e}</Project>
+      <Name>X.Util.Provider</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

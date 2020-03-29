@@ -17,6 +17,7 @@ namespace X.UI.Consoles
         ApiRsaEnTest = 5,
         ApiRsaDeTest = 6,
         StockDeal = 7,
+        StockProgram = 8
     }
 
     public class ApiTestMethods
@@ -105,6 +106,11 @@ namespace X.UI.Consoles
             JRJDataHelper.DealData(new DateTime(2016, 1, 1), DateTime.Now.Date);
             var list = JRJDataHelper.Continue(new DateTime(2016, 1, 1), DateTime.Now.Date, 2);
             JRJDataHelper.ContinueInFile(list);
+        }
+
+        public static void StockProgram()
+        {
+            StockDealHelper.Program();
         }
     }
 }

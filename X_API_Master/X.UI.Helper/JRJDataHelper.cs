@@ -24,7 +24,7 @@ namespace X.UI.Helper
         public static List<JRJDataItem> GetJRJData(DateTime dt)
         {
             var ret = HttpRequestBase.GetHttpInfo("http://home.flashdata2.jrj.com.cn/limitStatistic/ztForce/" + dt.ToString("yyyyMMdd") + ".js?_=1543031229126",
-    "gb2312", "appication/json", null, string.Empty);
+                "gb2312", "appication/json", null, string.Empty);
             if (!ret.Success) return null;
             var index = ret.Content.IndexOf('{');
             var c = ret.Content.Substring(index, ret.Content.Length - index - 1).FromJson<JRJData>();

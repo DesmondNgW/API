@@ -339,6 +339,7 @@ namespace X.UI.Helper
                 Thread.Sleep(6000);
                 dt = DateTime.Now;
             }
+            JRJDataHelper.DealData(DateTime.Now.AddMonths(-1), DateTime.Now.Date);
             Console.WriteLine("Program End! Press Any Key!");
             Console.ReadKey();
         }
