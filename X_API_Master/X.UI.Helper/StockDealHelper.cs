@@ -235,7 +235,22 @@ namespace X.UI.Helper
             var ret = new List<string>() { Calc(b).ToString("0.00") };
             return ret.Union(b.OrderBy(p => p.Order).Select(o)).ToArray();
         }
-     
+
+        /// <summary>
+        /// GetS
+        /// </summary>
+        /// <param name="list"></param>
+        /// <param name="top"></param>
+        /// <returns></returns>
+        public static IEnumerable<MyStock> GetS(List<MyStock> list, int top)
+        {
+            var list1 = list.Where(F1).OrderByDescending(p => p.S1).Take(top);
+            var list2 = list.Where(F1).OrderByDescending(p => p.S2).Take(top);
+            var list3 = list.Where(F1).OrderByDescending(p => p.S3).Take(top);
+            var list4 = list.Where(F1).OrderByDescending(p => p.S4).Take(top);
+            return list1.Union(list2).Union(list3).Union(list4).Distinct();
+        }
+
         /// <summary>
         /// 风控输出
         /// </summary>
@@ -252,6 +267,10 @@ namespace X.UI.Helper
             FileBase.WriteFile(dir, "S2.txt", string.Join("\t\n", list2.Select(O1)), encode, FileBaseMode.Create);
             FileBase.WriteFile(dir, "S3.txt", string.Join("\t\n", list3.Select(O1)), encode, FileBaseMode.Create);
             FileBase.WriteFile(dir, "S4.txt", string.Join("\t\n", list4.Select(O1)), encode, FileBaseMode.Create);
+            FileBase.WriteFile(dir, "S500.txt", string.Join("\t\n", GetS(list, 500).Select(O1)), encode, FileBaseMode.Create);
+            FileBase.WriteFile(dir, "S400.txt", string.Join("\t\n", GetS(list, 400).Select(O1)), encode, FileBaseMode.Create);
+            FileBase.WriteFile(dir, "S300.txt", string.Join("\t\n", GetS(list, 300).Select(O1)), encode, FileBaseMode.Create);
+            FileBase.WriteFile(dir, "S200.txt", string.Join("\t\n", GetS(list, 200).Select(O1)), encode, FileBaseMode.Create);
         }
 
         /// <summary>

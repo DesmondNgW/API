@@ -1,22 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
-using System.ServiceModel;
-using System.Text.RegularExpressions;
-using X.UI.Helper;
-using X.Util.Core;
-using X.Util.Extend;
-using X.Util.Core.Kernel;
 using X.Util.Other;
-using X.Util.Extend.Mongo;
-using X.Util.Entities;
-using X.Util.Provider;
-using X.Util.Entities.Enums;
-using MongoDB.Driver.Builders;
-using System.Globalization;
-using X.UI.Entities;
-using System.IO;
-using System.Text;
 
 namespace X.UI.Consoles
 {
@@ -24,6 +10,7 @@ namespace X.UI.Consoles
     {
         static void Main()
         {
+            //StockDealHelper.Program();
             Index();
             Console.ReadKey();
         }
