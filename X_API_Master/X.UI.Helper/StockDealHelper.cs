@@ -343,6 +343,57 @@ namespace X.UI.Helper
         }
         #endregion
 
+        #region 盯盘监控
+        /// <summary>
+        /// 自选股数据
+        /// </summary>
+        /// <returns></returns>
+        public static List<StockPrice> GetMyMonitorStock()
+        {
+            var file = "./src/板块情绪.txt";
+            var content = FileBase.ReadFile(file, "gb2312");
+            var list = Regex.Split(content, "\r\n", RegexOptions.IgnoreCase);
+            var ret = new List<StockPrice>();
+            foreach (var item in list)
+            {
+                var t = item.Split('\t');
+                if (t.Length >= 15)
+                {
+                    ret.Add(new StockPrice()
+                    {
+                        StockCode = t[0].Trim(),
+                        StockName = t[1],
+                        CurrentPrice = t[3].Convert2Decimal(0),
+                        OpenPrice = t[11].Convert2Decimal(0),
+                        MaxPrice = t[12].Convert2Decimal(0),
+                        MinPrice = t[13].Convert2Decimal(0),
+                        LastClosePrice = t[14].Convert2Decimal(0),
+                    });
+                }
+            }
+            return ret;
+        }
+
+        public static void MonitorStock(List<StockPrice> list)
+        {
+            var dt = DateTime.Now;
+            foreach (var item in list.Where(p => p.CurrentPrice > 0))
+            {
+                var t = StockDataHelper.GetStockPrice(item.StockCode);
+                var a = t.MaxPrice / item.MaxPrice * t.MinPrice / item.MinPrice * 61.8M + 38.2M * t.CurrentPrice / item.CurrentPrice - 100;
+                var b = t.CurrentPrice / t.MinPrice * t.CurrentPrice / t.OpenPrice * 38.2M + 61.8M * t.OpenPrice / t.LastClosePrice - 100;
+                if (a >= 6.18M && dt.TimeOfDay <= new TimeSpan(14, 45, 0))
+                {
+                    Console.WriteLine("板块情绪:{0}({1}){2}", item.StockName, item.StockCode, a);
+                }
+                else if (dt.TimeOfDay >= new TimeSpan(14, 45, 0) && b > 0)
+                {
+                    Console.WriteLine("尾盘情绪:{0}({1}){2}", item.StockName, item.StockCode, b);
+                }
+            }
+        }
+        #endregion
+
         public static void Program()
         {
             Console.BackgroundColor = ConsoleColor.White;
@@ -355,6 +406,7 @@ namespace X.UI.Helper
             while (dt.TimeOfDay >= new TimeSpan(9, 30, 0) && dt.TimeOfDay <= new TimeSpan(15, 0, 0))
             {
                 MonitorIndex();
+                MonitorStock(GetMyMonitorStock());
                 Thread.Sleep(6000);
                 dt = DateTime.Now;
             }

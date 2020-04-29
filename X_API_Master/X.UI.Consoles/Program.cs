@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Text.RegularExpressions;
+using X.UI.Entities;
+using X.UI.Helper;
+using X.Util.Core;
 using X.Util.Other;
 
 namespace X.UI.Consoles
@@ -10,8 +14,8 @@ namespace X.UI.Consoles
     {
         static void Main()
         {
-            //StockDealHelper.Program();
-            Index();
+            StockDealHelper.Program();
+            //Index();
             Console.ReadKey();
         }
 

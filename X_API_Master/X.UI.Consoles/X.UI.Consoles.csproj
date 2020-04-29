@@ -138,10 +138,10 @@
     </Content>
     <Content Include="Em.FundTrade.EncryptHelper.dll" />
     <Content Include="favicon.ico" />
-    <Content Include="src\B.txt" />
     <Content Include="src\板块.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="src\板块情绪.txt" />
     <Content Include="src\股票.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
