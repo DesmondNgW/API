@@ -384,11 +384,11 @@ namespace X.UI.Helper
                 var b = t.CurrentPrice / t.MinPrice * t.CurrentPrice / t.OpenPrice * 38.2M + 61.8M * t.OpenPrice / t.LastClosePrice - 100;
                 if (a >= 6.18M && dt.TimeOfDay <= new TimeSpan(14, 45, 0))
                 {
-                    Console.WriteLine("板块情绪:{0}({1}){2}", item.StockName, item.StockCode, a);
+                    Console.WriteLine("板块情绪:{0}({1})涨幅;{2}%,价格;{3},指标;{4}", item.StockName, item.StockCode, t.Inc.ToString("0.00"), t.CurrentPrice, a.ToString("0.00"));
                 }
                 else if (dt.TimeOfDay >= new TimeSpan(14, 45, 0) && b > 0)
                 {
-                    Console.WriteLine("尾盘情绪:{0}({1}){2}", item.StockName, item.StockCode, b);
+                    Console.WriteLine("尾盘情绪:{0}({1})涨幅;{2}%,价格;{3},指标;{3}", item.StockName, item.StockCode, t.Inc.ToString("0.00"), t.CurrentPrice, b.ToString("0.00"));
                 }
             }
         }
@@ -398,10 +398,6 @@ namespace X.UI.Helper
         {
             Console.BackgroundColor = ConsoleColor.White;
             Console.ForegroundColor = ConsoleColor.Black;
-            var t1 = GetMyStock(MyStockMode.Stock);
-            Deal(t1);
-            var t2 = GetMyStock(MyStockMode.Index);
-            Deal2(t2);
             var dt = DateTime.Now;
             while (dt.TimeOfDay >= new TimeSpan(9, 30, 0) && dt.TimeOfDay <= new TimeSpan(15, 0, 0))
             {
@@ -410,6 +406,10 @@ namespace X.UI.Helper
                 Thread.Sleep(6000);
                 dt = DateTime.Now;
             }
+            var t1 = GetMyStock(MyStockMode.Stock);
+            Deal(t1);
+            var t2 = GetMyStock(MyStockMode.Index);
+            Deal2(t2);
             JRJDataHelper.DealData(DateTime.Now.AddMonths(-1), DateTime.Now.Date);
             Console.WriteLine("Program End! Press Any Key!");
             Console.ReadKey();
