@@ -274,27 +274,6 @@ namespace X.UI.Helper
         }
 
         /// <summary>
-        /// 盘中风控指数监控
-        /// </summary>
-        public static void MonitorIndex()
-        {
-            var a = StockDataHelper.GetIndexPrice("sh000001");
-            var b = StockDataHelper.GetIndexPrice("sz399001");
-            var c = StockDataHelper.GetIndexPrice("sz399005");
-            var d = StockDataHelper.GetIndexPrice("sz399006");
-            var e = (a.Inc + b.Inc + c.Inc + d.Inc) / 4;
-            if (a.Inc > 0)
-            {
-                Console.ForegroundColor = ConsoleColor.Red;
-            }
-            else
-            {
-                Console.ForegroundColor = ConsoleColor.Green;
-            }
-            Console.WriteLine("上证:{0}%,深圳:{1}%,中小:{2}%,创业:{3}%,综合:{4}%", a.Inc.ToString("0.00"), b.Inc.ToString("0.00"), c.Inc.ToString("0.00"), d.Inc.ToString("0.00"), e.ToString("0.00"));
-        }
-
-        /// <summary>
         /// 处理股票输出
         /// </summary>
         /// <param name="list"></param>
@@ -344,6 +323,28 @@ namespace X.UI.Helper
         #endregion
 
         #region 盯盘监控
+
+        /// <summary>
+        /// 盘中风控指数监控
+        /// </summary>
+        public static void MonitorIndex()
+        {
+            var a = StockDataHelper.GetIndexPrice("sh000001");
+            var b = StockDataHelper.GetIndexPrice("sz399001");
+            var c = StockDataHelper.GetIndexPrice("sz399005");
+            var d = StockDataHelper.GetIndexPrice("sz399006");
+            var e = (a.Inc + b.Inc + c.Inc + d.Inc) / 4;
+            if (a.Inc > 0)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+            }
+            else
+            {
+                Console.ForegroundColor = ConsoleColor.Green;
+            }
+            Console.WriteLine("上证:{0}%,深圳:{1}%,中小:{2}%,创业:{3}%,综合:{4}%", a.Inc.ToString("0.00"), b.Inc.ToString("0.00"), c.Inc.ToString("0.00"), d.Inc.ToString("0.00"), e.ToString("0.00"));
+        }
+
         /// <summary>
         /// 自选股数据
         /// </summary>
@@ -377,6 +378,8 @@ namespace X.UI.Helper
         public static void MonitorStock(List<StockPrice> list)
         {
             var dt = DateTime.Now;
+            var retA = new List<Tuple<Tuple<decimal, decimal>, string>>();
+            var retB = new List<Tuple<Tuple<decimal, decimal>, string>>();
             foreach (var item in list.Where(p => p.CurrentPrice > 0))
             {
                 var t = StockDataHelper.GetStockPrice(item.StockCode);
@@ -384,11 +387,45 @@ namespace X.UI.Helper
                 var b = t.CurrentPrice / t.MinPrice * t.CurrentPrice / t.OpenPrice * 38.2M + 61.8M * t.OpenPrice / t.LastClosePrice - 100;
                 if (a >= 6.18M && dt.TimeOfDay <= new TimeSpan(14, 45, 0))
                 {
-                    Console.WriteLine("板块情绪:{0}({1})涨幅;{2}%,价格;{3},指标;{4}", item.StockName, item.StockCode, t.Inc.ToString("0.00"), t.CurrentPrice, a.ToString("0.00"));
+                    retA.Add(new Tuple<Tuple<decimal, decimal>, string>(new Tuple<decimal, decimal>(a, t.Inc), 
+                        string.Format("{5}-板块情绪:{0}({1})涨幅;{2}%,价格;{3},指标;{4}", item.StockName, item.StockCode, 
+                        t.Inc.ToString("0.00"), t.CurrentPrice, a.ToString("0.00"), DateTime.Now.ToString("MM-dd HH:mm:ss"))));
                 }
                 else if (dt.TimeOfDay >= new TimeSpan(14, 45, 0) && b > 0)
                 {
-                    Console.WriteLine("尾盘情绪:{0}({1})涨幅;{2}%,价格;{3},指标;{3}", item.StockName, item.StockCode, t.Inc.ToString("0.00"), t.CurrentPrice, b.ToString("0.00"));
+                    retB.Add(new Tuple<Tuple<decimal, decimal>, string>(new Tuple<decimal, decimal>(b, t.Inc), 
+                        string.Format("{5}-尾盘情绪:{0}({1})涨幅;{2}%,价格;{3},指标;{4}", item.StockName, item.StockCode, 
+                        t.Inc.ToString("0.00"), t.CurrentPrice, b.ToString("0.00"), DateTime.Now.ToString("MM-dd HH:mm:ss"))));
+                }
+            }
+            if (retA.Count > 0)
+            {
+                foreach (var t in retA.OrderByDescending(p => p.Item1.Item1))
+                {
+                    if (t.Item1.Item2 > 0)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                    }
+                    else
+                    {
+                        Console.ForegroundColor = ConsoleColor.Green;
+                    }
+                    Console.WriteLine(t.Item2);
+                }
+            }
+            if (retB.Count > 0)
+            {
+                foreach (var t in retB.OrderByDescending(p => p.Item1.Item1))
+                {
+                    if (t.Item1.Item2 > 0)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                    }
+                    else
+                    {
+                        Console.ForegroundColor = ConsoleColor.Green;
+                    }
+                    Console.WriteLine(t.Item2);
                 }
             }
         }
