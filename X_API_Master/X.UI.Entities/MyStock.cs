@@ -24,6 +24,10 @@ namespace X.UI.Entities
             }
         }
 
+        public double Vol { get; set; }
+
+        public double Amount { get; set; }
+
         public double S1 { get; set; }
 
         public double S2 { get; set; }

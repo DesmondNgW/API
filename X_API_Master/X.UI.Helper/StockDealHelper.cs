@@ -50,6 +50,16 @@ namespace X.UI.Helper
         }
 
         /// <summary>
+        /// 非ST，成交在3.82亿以上的股票
+        /// </summary>
+        /// <param name="p"></param>
+        /// <returns></returns>
+        private static bool F4(MyStock p, double t)
+        {
+            return p.Inc > -100 && !p.Name.Contains("ST") && p.Amount >= t;// 3.82 * 1e8;
+        }
+
+        /// <summary>
         /// 输出代码和名称
         /// </summary>
         /// <param name="p"></param>
@@ -199,6 +209,8 @@ namespace X.UI.Helper
                         Name = t[1],
                         Inc = t[2].Convert2Double(-10000),
                         Close = t[3].Convert2Double(0),
+                        Vol = t[4].Convert2Double(0),
+                        Amount = t[5].Convert2Double(0),
                         S1 = t[6].Convert2Double(-10000),
                         S2 = t[7].Convert2Double(-10000),
                         S3 = t[8].Convert2Double(-10000),
@@ -267,10 +279,10 @@ namespace X.UI.Helper
             FileBase.WriteFile(dir, "S2.txt", string.Join("\t\n", list2.Select(O1)), encode, FileBaseMode.Create);
             FileBase.WriteFile(dir, "S3.txt", string.Join("\t\n", list3.Select(O1)), encode, FileBaseMode.Create);
             FileBase.WriteFile(dir, "S4.txt", string.Join("\t\n", list4.Select(O1)), encode, FileBaseMode.Create);
-            FileBase.WriteFile(dir, "S500.txt", string.Join("\t\n", GetS(list, 500).Select(O1)), encode, FileBaseMode.Create);
-            FileBase.WriteFile(dir, "S400.txt", string.Join("\t\n", GetS(list, 400).Select(O1)), encode, FileBaseMode.Create);
-            FileBase.WriteFile(dir, "S300.txt", string.Join("\t\n", GetS(list, 300).Select(O1)), encode, FileBaseMode.Create);
-            FileBase.WriteFile(dir, "S200.txt", string.Join("\t\n", GetS(list, 200).Select(O1)), encode, FileBaseMode.Create);
+            //FileBase.WriteFile(dir, "S500.txt", string.Join("\t\n", GetS(list, 500).Select(O1)), encode, FileBaseMode.Create);
+            //FileBase.WriteFile(dir, "S400.txt", string.Join("\t\n", GetS(list, 400).Select(O1)), encode, FileBaseMode.Create);
+            //FileBase.WriteFile(dir, "S300.txt", string.Join("\t\n", GetS(list, 300).Select(O1)), encode, FileBaseMode.Create);
+            //FileBase.WriteFile(dir, "S200.txt", string.Join("\t\n", GetS(list, 200).Select(O1)), encode, FileBaseMode.Create);
         }
 
         /// <summary>
@@ -280,9 +292,12 @@ namespace X.UI.Helper
         /// <param name="encode"></param>
         public static void Deal(List<MyStock> list, string encode = "utf-8")
         {
-            string dir = "./dest", dirK = "./dest/K", dirT = "./dest/T";
+            var t = list.Sum(p => p.Amount) / 400 * 0.382;
+            Console.WriteLine("{0}亿", (t / 1e8).ToString("0.00"));
+            string dir = "./dest", dirK = "./dest/K", dirT = "./dest/T", dirA = "./dest/A";
             var KContent = new List<Tuple<double, double>>();
             var TContent = new List<Tuple<double, double>>();
+            var AContent = new List<Tuple<double, double>>();
             for (var i = 25; i <= 400; i += 25)
             {
                 //K系列
@@ -293,17 +308,30 @@ namespace X.UI.Helper
                 var tContent = GetStockName(list, i, F2, O2);
                 TContent.Add(new Tuple<double, double>(tContent[0].Convert2Double(-10000), (tContent.Length - 1.0) / i));
                 FileBase.WriteFile(dirT, "T" + i + ".txt", string.Join("\t\n", tContent), encode, FileBaseMode.Create);
+                //A系列
+                var aContent = GetStockName(list, i, p => F4(p, t), O2);
+                AContent.Add(new Tuple<double, double>(aContent[0].Convert2Double(-10000), (aContent.Length - 1.0) / i));
+                FileBase.WriteFile(dirA, "A" + i + ".txt", string.Join("\t\n", aContent), encode, FileBaseMode.Create);
             }
+            //K系列
             FileBase.WriteFile(dirK, "K500.txt", string.Join("\t\n", GetStockName(list, 500, F1, O1)), encode, FileBaseMode.Create);
             FileBase.WriteFile(dirK, "K825.txt", string.Join("\t\n", GetStockName(list, 825, F1, O1)), encode, FileBaseMode.Create);
+            //T系列
             FileBase.WriteFile(dirT, "T500.txt", string.Join("\t\n", GetStockName(list, 500, F2, O2)), encode, FileBaseMode.Create);
             FileBase.WriteFile(dirT, "T825.txt", string.Join("\t\n", GetStockName(list, 825, F2, O2)), encode, FileBaseMode.Create);
+            //A系列
+            FileBase.WriteFile(dirA, "A500.txt", string.Join("\t\n", GetStockName(list, 500, p => F4(p, t), O2)), encode, FileBaseMode.Create);
+            FileBase.WriteFile(dirA, "A825.txt", string.Join("\t\n", GetStockName(list, 825, p => F4(p, t), O2)), encode, FileBaseMode.Create);
+
             var KConsole = GetAnswer(KContent);
             var TConsole = GetAnswer(TContent);
+            var AConsole = GetAnswer(AContent);
             Console.WriteLine("KContent:价格高低点:{0};比例高低点:{1}", string.Join("-", KConsole.Item1), string.Join("-", KConsole.Item2));
             Console.WriteLine("TContent:价格高低点:{0};比例高低点:{1}", string.Join("-", TConsole.Item1), string.Join("-", TConsole.Item2));
+            Console.WriteLine("AContent:价格高低点:{0};比例高低点:{1}", string.Join("-", AConsole.Item1), string.Join("-", AConsole.Item2));
             FileBase.WriteFile(dir, "K.txt", string.Join("\t\n", KContent.Select((p, index) => (index + 1) * 25 + " " + p.Item1.ToString("0.000") + " " + p.Item2.ToString("0.000"))), encode, FileBaseMode.Create);
             FileBase.WriteFile(dir, "T.txt", string.Join("\t\n", TContent.Select((p, index) => (index + 1) * 25 + " " + p.Item1.ToString("0.000") + " " + p.Item2.ToString("0.000"))), encode, FileBaseMode.Create);
+            FileBase.WriteFile(dir, "A.txt", string.Join("\t\n", AContent.Select((p, index) => (index + 1) * 25 + " " + p.Item1.ToString("0.000") + " " + p.Item2.ToString("0.000"))), encode, FileBaseMode.Create);
             Monitor(list, dir, encode);
         }
 
