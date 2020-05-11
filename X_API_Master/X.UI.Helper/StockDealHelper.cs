@@ -412,22 +412,28 @@ namespace X.UI.Helper
             {
                 var t = StockDataHelper.GetStockPrice(item.StockCode);
                 var a = t.MaxPrice / item.MaxPrice * t.MinPrice / item.MinPrice * 61.8M + 38.2M * t.CurrentPrice / item.CurrentPrice - 100;
-                var b = t.CurrentPrice / t.MinPrice * t.CurrentPrice / t.OpenPrice * 38.2M + 61.8M * t.OpenPrice / t.LastClosePrice - 100;
-                if (a >= 6.18M && dt.TimeOfDay <= new TimeSpan(14, 45, 0))
+                var b = t.MaxPrice / item.MaxPrice * t.MinPrice / item.MinPrice * 61.8M + 38.2M * t.OpenPrice / t.LastClosePrice - 100;
+                if (t.MinPrice < item.MinPrice)
                 {
-                    retA.Add(new Tuple<Tuple<decimal, decimal>, string>(new Tuple<decimal, decimal>(a, t.Inc), 
-                        string.Format("{5}-板块情绪:{0}({1})涨幅;{2}%,价格;{3},指标;{4}", item.StockName, item.StockCode, 
-                        t.Inc.ToString("0.00"), t.CurrentPrice, a.ToString("0.00"), DateTime.Now.ToString("MM-dd HH:mm:ss"))));
+                    b = t.CurrentPrice / t.MinPrice * t.CurrentPrice / t.MaxPrice * 61.8M + 38.2M * t.OpenPrice / t.LastClosePrice - 100;
                 }
-                else if (dt.TimeOfDay >= new TimeSpan(14, 45, 0) && b > 0)
+                if (dt.TimeOfDay <= new TimeSpan(14, 45, 0))
                 {
-                    retB.Add(new Tuple<Tuple<decimal, decimal>, string>(new Tuple<decimal, decimal>(b, t.Inc), 
-                        string.Format("{5}-尾盘情绪:{0}({1})涨幅;{2}%,价格;{3},指标;{4}", item.StockName, item.StockCode, 
+                    retA.Add(new Tuple<Tuple<decimal, decimal>, string>(new Tuple<decimal, decimal>(a, t.Inc),
+                        string.Format("{5}-板块情绪:{0}({1})涨幅;{2}%,价格;{3},指标;{4}{6}", item.StockName, item.StockCode,
+                        t.Inc.ToString("0.00"), t.CurrentPrice, a.ToString("0.00"), DateTime.Now.ToString("MM-dd HH:mm:ss"),
+                        a >= 6.18M ? string.Empty : "指标数值不够，排序前5")));
+                }
+                else if (b > 0 && dt.TimeOfDay >= new TimeSpan(14, 45, 0))
+                {
+                    retB.Add(new Tuple<Tuple<decimal, decimal>, string>(new Tuple<decimal, decimal>(b, t.Inc),
+                        string.Format("{5}-尾盘情绪:{0}({1})涨幅;{2}%,价格;{3},指标;{4}", item.StockName, item.StockCode,
                         t.Inc.ToString("0.00"), t.CurrentPrice, b.ToString("0.00"), DateTime.Now.ToString("MM-dd HH:mm:ss"))));
                 }
             }
             if (retA.Count > 0)
             {
+                int count = 5;
                 foreach (var t in retA.OrderByDescending(p => p.Item1.Item1))
                 {
                     if (t.Item1.Item2 > 0)
@@ -438,7 +444,15 @@ namespace X.UI.Helper
                     {
                         Console.ForegroundColor = ConsoleColor.Green;
                     }
-                    Console.WriteLine(t.Item2);
+                    if (t.Item1.Item1 >= 6.18M)
+                    {
+                        Console.WriteLine(t.Item2);
+                    }
+                    else if (count > 0)
+                    {
+                        Console.WriteLine(t.Item2);
+                        count--;
+                    }
                 }
             }
             if (retB.Count > 0)
