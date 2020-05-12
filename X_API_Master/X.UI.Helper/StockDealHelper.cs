@@ -374,16 +374,15 @@ namespace X.UI.Helper
         }
 
         /// <summary>
-        /// 自选股数据
+        /// 自选股数据，包含龙头和板块股
         /// </summary>
         /// <returns></returns>
         public static List<StockPrice> GetMyMonitorStock()
         {
-            var file = "./src/板块情绪.txt";
-            var content = FileBase.ReadFile(file, "gb2312");
-            var list = Regex.Split(content, "\r\n", RegexOptions.IgnoreCase);
+            var list1 = Regex.Split(FileBase.ReadFile("./src/试错.txt", "gb2312"), "\r\n", RegexOptions.IgnoreCase);
+            var list2 = Regex.Split(FileBase.ReadFile("./src/抱团.txt", "gb2312"), "\r\n", RegexOptions.IgnoreCase);
             var ret = new List<StockPrice>();
-            foreach (var item in list)
+            foreach (var item in list1)
             {
                 var t = item.Split('\t');
                 if (t.Length >= 15)
@@ -397,77 +396,151 @@ namespace X.UI.Helper
                         MaxPrice = t[12].Convert2Decimal(0),
                         MinPrice = t[13].Convert2Decimal(0),
                         LastClosePrice = t[14].Convert2Decimal(0),
+                        MyStockType = MyStockType.Try,
+                    });
+                }
+            }
+
+            foreach (var item in list2)
+            {
+                var t = item.Split('\t');
+                if (t.Length >= 15)
+                {
+                    ret.Add(new StockPrice()
+                    {
+                        StockCode = t[0].Trim(),
+                        StockName = t[1],
+                        CurrentPrice = t[3].Convert2Decimal(0),
+                        OpenPrice = t[11].Convert2Decimal(0),
+                        MaxPrice = t[12].Convert2Decimal(0),
+                        MinPrice = t[13].Convert2Decimal(0),
+                        LastClosePrice = t[14].Convert2Decimal(0),
+                        MyStockType = MyStockType.Union,
                     });
                 }
             }
             return ret;
         }
 
-        public static void MonitorStock(List<StockPrice> list)
+        /// <summary>
+        /// 尾盘自选股
+        /// </summary>
+        /// <returns></returns>
+        public static List<StockPrice> GetMyMonitorStockAfter()
+        {
+            var list1 = Regex.Split(FileBase.ReadFile("./src/尾盘.txt", "gb2312"), "\r\n", RegexOptions.IgnoreCase);
+            var ret = new List<StockPrice>();
+            foreach (var item in list1)
+            {
+                var t = item.Split('\t');
+                if (t.Length >= 15)
+                {
+                    ret.Add(new StockPrice()
+                    {
+                        StockCode = t[0].Trim(),
+                        StockName = t[1],
+                        CurrentPrice = t[3].Convert2Decimal(0),
+                        OpenPrice = t[11].Convert2Decimal(0),
+                        MaxPrice = t[12].Convert2Decimal(0),
+                        MinPrice = t[13].Convert2Decimal(0),
+                        LastClosePrice = t[14].Convert2Decimal(0),
+                        MyStockType = MyStockType.Try,
+                    });
+                }
+            }
+            return ret;
+        }
+
+        /// <summary>
+        /// 盘中盯盘
+        /// </summary>
+        /// <param name="list1"></param>
+        /// <param name="list2"></param>
+        public static void MonitorStock(List<StockPrice> list1, List<StockPrice> list2, List<MyStock> list3)
         {
             var dt = DateTime.Now;
-            var retA = new List<Tuple<Tuple<decimal, decimal>, string>>();
-            var retB = new List<Tuple<Tuple<decimal, decimal>, string>>();
-            foreach (var item in list.Where(p => p.CurrentPrice > 0))
+            if (dt.TimeOfDay <= new TimeSpan(14, 45, 0))
             {
-                var t = StockDataHelper.GetStockPrice(item.StockCode);
-                var a = t.MaxPrice / item.MaxPrice * t.MinPrice / item.MinPrice * 61.8M + 38.2M * t.CurrentPrice / item.CurrentPrice - 100;
-                var b = t.MaxPrice / item.MaxPrice * t.MinPrice / item.MinPrice * 61.8M + 38.2M * t.OpenPrice / t.LastClosePrice - 100;
-                if (t.MinPrice < item.MinPrice)
+                var m1 = new List<MyStockMonitor>();
+                foreach (var item in list1.Where(p => p.CurrentPrice > 0))
                 {
-                    b = t.CurrentPrice / t.MinPrice * t.CurrentPrice / t.MaxPrice * 61.8M + 38.2M * t.OpenPrice / t.LastClosePrice - 100;
-                }
-                if (dt.TimeOfDay <= new TimeSpan(14, 45, 0))
-                {
-                    retA.Add(new Tuple<Tuple<decimal, decimal>, string>(new Tuple<decimal, decimal>(a, t.Inc),
-                        string.Format("{5}-板块情绪:{0}({1})涨幅;{2}%,价格;{3},指标;{4}{6}", item.StockName, item.StockCode,
-                        t.Inc.ToString("0.00"), t.CurrentPrice, a.ToString("0.00"), DateTime.Now.ToString("MM-dd HH:mm:ss"),
-                        a >= 6.18M ? string.Empty : "指标数值不够，排序前5")));
-                }
-                else if (b > 0 && dt.TimeOfDay >= new TimeSpan(14, 45, 0))
-                {
-                    retB.Add(new Tuple<Tuple<decimal, decimal>, string>(new Tuple<decimal, decimal>(b, t.Inc),
-                        string.Format("{5}-尾盘情绪:{0}({1})涨幅;{2}%,价格;{3},指标;{4}", item.StockName, item.StockCode,
-                        t.Inc.ToString("0.00"), t.CurrentPrice, b.ToString("0.00"), DateTime.Now.ToString("MM-dd HH:mm:ss"))));
-                }
-            }
-            if (retA.Count > 0)
-            {
-                int count = 5;
-                foreach (var t in retA.OrderByDescending(p => p.Item1.Item1))
-                {
-                    if (t.Item1.Item2 > 0)
+                    var t = StockDataHelper.GetStockPrice(item.StockCode);
+                    var a = t.MaxPrice / item.MaxPrice * t.MinPrice / item.MinPrice * 61.8M + 38.2M * t.CurrentPrice / item.CurrentPrice - 100;
+                    var b = t.MaxPrice / item.MaxPrice * t.MinPrice / item.MinPrice * 61.8M + 38.2M * t.OpenPrice / t.LastClosePrice - 100;
+                    if (t.MinPrice < item.MinPrice)
                     {
-                        Console.ForegroundColor = ConsoleColor.Red;
+                        b = t.CurrentPrice / t.MinPrice * t.CurrentPrice / t.MaxPrice * 61.8M + 38.2M * t.OpenPrice / t.LastClosePrice - 100;
                     }
-                    else
+                    m1.Add(new MyStockMonitor
                     {
-                        Console.ForegroundColor = ConsoleColor.Green;
-                    }
-                    if (t.Item1.Item1 >= 6.18M)
+                        MyStockType = item.MyStockType,
+                        StockCode = t.StockCode,
+                        StockName = t.StockName,
+                        Inc = t.Inc,
+                        Price = t.CurrentPrice,
+                        S = list3.FirstOrDefault(p => p.Code == t.StockCode).S1,
+                        K = a,
+                        L = b
+                    });
+                }
+                if (m1.Count > 0)
+                {
+                    foreach (var t in m1.Where(p => p.KLevel >= 7).OrderByDescending(p => p.KLevel).ThenByDescending(p => p.SLevel).ThenByDescending(p => p.Inc))
                     {
-                        Console.WriteLine(t.Item2);
-                    }
-                    else if (count > 0)
-                    {
-                        Console.WriteLine(t.Item2);
-                        count--;
+                        if (t.Inc > 0)
+                        {
+                            Console.ForegroundColor = ConsoleColor.Red;
+                        }
+                        else
+                        {
+                            Console.ForegroundColor = ConsoleColor.Green;
+                        }
+                        Console.WriteLine("{0}-{1}:{2}({3})涨幅;{4}%,价格;{5},K;{6},KLevel;{7},S;{8},SLevel;{9}",
+                            DateTime.Now.ToString("MM-dd HH:mm:ss"), t.MyStockType == MyStockType.Try ? "预判试错-建议上午" : "报团跟随，建议拐点后或下午",
+                            t.StockName, t.StockCode, t.Inc.ToString("0.00"), t.Price, t.K, t.KLevel, t.S, t.SLevel);
                     }
                 }
             }
-            if (retB.Count > 0)
+            else if (dt.TimeOfDay >= new TimeSpan(14, 45, 0))
             {
-                foreach (var t in retB.OrderByDescending(p => p.Item1.Item1))
+                var m1 = new List<MyStockMonitor>();
+                foreach (var item in list2.Where(p => p.CurrentPrice > 0))
                 {
-                    if (t.Item1.Item2 > 0)
+                    var t = StockDataHelper.GetStockPrice(item.StockCode);
+                    var a = t.MaxPrice / item.MaxPrice * t.MinPrice / item.MinPrice * 61.8M + 38.2M * t.CurrentPrice / item.CurrentPrice - 100;
+                    var b = t.MaxPrice / item.MaxPrice * t.MinPrice / item.MinPrice * 61.8M + 38.2M * t.OpenPrice / t.LastClosePrice - 100;
+                    if (t.MinPrice < item.MinPrice)
                     {
-                        Console.ForegroundColor = ConsoleColor.Red;
+                        b = t.CurrentPrice / t.MinPrice * t.CurrentPrice / t.MaxPrice * 61.8M + 38.2M * t.OpenPrice / t.LastClosePrice - 100;
                     }
-                    else
+                    m1.Add(new MyStockMonitor
                     {
-                        Console.ForegroundColor = ConsoleColor.Green;
+                        MyStockType = item.MyStockType,
+                        StockCode = t.StockCode,
+                        StockName = t.StockName,
+                        Inc = t.Inc,
+                        Price = t.CurrentPrice,
+                        S = list3.FirstOrDefault(p => p.Code == t.StockCode).S1,
+                        K = a,
+                        L = b
+                    });
+                }
+                if (m1.Count > 0)
+                {
+                    foreach (var t in m1.Where(p => p.L > 0).OrderByDescending(p => p.LLevel).ThenByDescending(p => p.SLevel).ThenByDescending(p => p.Inc))
+                    {
+                        if (t.Inc > 0)
+                        {
+                            Console.ForegroundColor = ConsoleColor.Red;
+                        }
+                        else
+                        {
+                            Console.ForegroundColor = ConsoleColor.Green;
+                        }
+                        Console.WriteLine("{0}-{1}:{2}({3})涨幅;{4}%,价格;{5},L;{6},LLevel;{7},S;{8},SLevel;{9}",
+                           DateTime.Now.ToString("MM-dd HH:mm:ss"), "尾盘策略",
+                           t.StockName, t.StockCode, t.Inc.ToString("0.00"), t.Price, t.L, t.LLevel, t.S, t.SLevel);
                     }
-                    Console.WriteLine(t.Item2);
                 }
             }
         }
@@ -478,18 +551,27 @@ namespace X.UI.Helper
             Console.BackgroundColor = ConsoleColor.White;
             Console.ForegroundColor = ConsoleColor.Black;
             var dt = DateTime.Now;
-            while (dt.TimeOfDay >= new TimeSpan(9, 30, 0) && dt.TimeOfDay <= new TimeSpan(15, 0, 0))
+            if (dt.TimeOfDay <= new TimeSpan(15, 0, 0))
             {
-                MonitorIndex();
-                MonitorStock(GetMyMonitorStock());
-                Thread.Sleep(6000);
-                dt = DateTime.Now;
+                var list1 = GetMyMonitorStock();
+                var list2 = GetMyMonitorStockAfter();
+                var list3 = GetMyStock(MyStockMode.Stock);
+                while (dt.TimeOfDay >= new TimeSpan(9, 30, 0) && dt.TimeOfDay <= new TimeSpan(15, 0, 0))
+                {
+                    MonitorIndex();
+                    MonitorStock(list1, list2, list3);
+                    Thread.Sleep(6000);
+                    dt = DateTime.Now;
+                }
             }
-            var t1 = GetMyStock(MyStockMode.Stock);
-            Deal(t1);
-            var t2 = GetMyStock(MyStockMode.Index);
-            Deal2(t2);
-            JRJDataHelper.DealData(DateTime.Now.AddMonths(-1), DateTime.Now.Date);
+            if (dt.TimeOfDay > new TimeSpan(15, 0, 0))
+            {
+                var t1 = GetMyStock(MyStockMode.Stock);
+                Deal(t1);
+                var t2 = GetMyStock(MyStockMode.Index);
+                Deal2(t2);
+                JRJDataHelper.DealData(DateTime.Now.AddMonths(-1), DateTime.Now.Date);
+            }
             Console.WriteLine("Program End! Press Any Key!");
             Console.ReadKey();
         }

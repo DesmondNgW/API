@@ -60,6 +60,7 @@
     <Compile Include="StockKLine.cs" />
     <Compile Include="StockL2.cs" />
     <Compile Include="StockKLineExtend.cs" />
+    <Compile Include="StockMonitor.cs" />
     <Compile Include="StockPerformance.cs" />
     <Compile Include="StockPrice.cs" />
     <Compile Include="StockResult.cs" />

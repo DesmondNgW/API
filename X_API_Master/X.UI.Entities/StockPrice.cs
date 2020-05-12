@@ -4,6 +4,11 @@ using X.Util.Entities;
 
 namespace X.UI.Entities
 {
+    public enum MyStockType
+    {
+        Try,
+        Union
+    }
     public class StockPrice : MongoBaseModel
     {
         /// <summary>
@@ -69,5 +74,7 @@ namespace X.UI.Entities
         public decimal Amount { get; set; }
 
         public decimal MY { get; set; }
+
+        public MyStockType MyStockType { get; set; }
     }
 }
