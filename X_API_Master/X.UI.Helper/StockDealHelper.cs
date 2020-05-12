@@ -465,12 +465,18 @@ namespace X.UI.Helper
                 foreach (var item in list1.Where(p => p.CurrentPrice > 0))
                 {
                     var t = StockDataHelper.GetStockPrice(item.StockCode);
-                    var a = t.MaxPrice / item.MaxPrice * t.MinPrice / item.MinPrice * 61.8M + 38.2M * t.CurrentPrice / item.CurrentPrice - 100;
-                    var b = t.MaxPrice / item.MaxPrice * t.MinPrice / item.MinPrice * 61.8M + 38.2M * t.OpenPrice / t.LastClosePrice - 100;
-                    if (t.MinPrice < item.MinPrice)
+                    decimal a = 0.01M, b= 0.01M;
+                    try
                     {
-                        b = t.CurrentPrice / t.MinPrice * t.CurrentPrice / t.MaxPrice * 61.8M + 38.2M * t.OpenPrice / t.LastClosePrice - 100;
+                        a = t.MaxPrice / item.MaxPrice * t.MinPrice / item.MinPrice * 61.8M + 38.2M * t.CurrentPrice / item.CurrentPrice - 100;
+                        b = t.MaxPrice / item.MaxPrice * t.MinPrice / item.MinPrice * 61.8M + 38.2M * t.OpenPrice / t.LastClosePrice - 100;
+                        if (t.MinPrice < item.MinPrice)
+                        {
+                            b = t.CurrentPrice / t.MinPrice * t.CurrentPrice / t.MaxPrice * 61.8M + 38.2M * t.OpenPrice / t.LastClosePrice - 100;
+                        }
                     }
+                    catch { }
+
                     m1.Add(new MyStockMonitor
                     {
                         MyStockType = item.MyStockType,
@@ -497,7 +503,7 @@ namespace X.UI.Helper
                         }
                         Console.WriteLine("{0}-{1}:{2}({3})涨幅;{4}%,价格;{5},K;{6},KLevel;{7},S;{8},SLevel;{9}",
                             DateTime.Now.ToString("MM-dd HH:mm:ss"), t.MyStockType == MyStockType.Try ? "预判试错-建议上午" : "报团跟随，建议拐点后或下午",
-                            t.StockName, t.StockCode, t.Inc.ToString("0.00"), t.Price, t.K, t.KLevel, t.S, t.SLevel);
+                            t.StockName, t.StockCode, t.Inc.ToString("0.00"), t.Price, t.K.ToString("0.00"), t.KLevel, t.S.ToString("0.00"), t.SLevel);
                     }
                 }
             }
@@ -527,7 +533,7 @@ namespace X.UI.Helper
                 }
                 if (m1.Count > 0)
                 {
-                    foreach (var t in m1.Where(p => p.L > 0).OrderByDescending(p => p.LLevel).ThenByDescending(p => p.SLevel).ThenByDescending(p => p.Inc))
+                    foreach (var t in m1.Where(p => p.LLevel >= 4).OrderByDescending(p => p.LLevel).ThenByDescending(p => p.SLevel).ThenByDescending(p => p.Inc))
                     {
                         if (t.Inc > 0)
                         {
@@ -539,7 +545,7 @@ namespace X.UI.Helper
                         }
                         Console.WriteLine("{0}-{1}:{2}({3})涨幅;{4}%,价格;{5},L;{6},LLevel;{7},S;{8},SLevel;{9}",
                            DateTime.Now.ToString("MM-dd HH:mm:ss"), "尾盘策略",
-                           t.StockName, t.StockCode, t.Inc.ToString("0.00"), t.Price, t.L, t.LLevel, t.S, t.SLevel);
+                           t.StockName, t.StockCode, t.Inc.ToString("0.00"), t.Price, t.L.ToString("0.00"), t.LLevel, t.S.ToString("0.00"), t.SLevel);
                     }
                 }
             }
@@ -556,7 +562,7 @@ namespace X.UI.Helper
                 var list1 = GetMyMonitorStock();
                 var list2 = GetMyMonitorStockAfter();
                 var list3 = GetMyStock(MyStockMode.Stock);
-                while (dt.TimeOfDay >= new TimeSpan(9, 30, 0) && dt.TimeOfDay <= new TimeSpan(15, 0, 0))
+                while (dt.TimeOfDay >= new TimeSpan(9, 25, 0) && dt.TimeOfDay <= new TimeSpan(15, 0, 0))
                 {
                     MonitorIndex();
                     MonitorStock(list1, list2, list3);
