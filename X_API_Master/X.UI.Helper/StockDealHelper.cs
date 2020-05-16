@@ -5,6 +5,7 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using X.UI.Entities;
 using X.Util.Core;
+using X.Util.Core.Configuration;
 using X.Util.Entities.Enums;
 using X.Util.Other;
 
@@ -355,7 +356,7 @@ namespace X.UI.Helper
         /// <summary>
         /// 盘中风控指数监控
         /// </summary>
-        public static void MonitorIndex()
+        public static decimal MonitorIndex()
         {
             var a = StockDataHelper.GetIndexPrice("sh000001");
             var b = StockDataHelper.GetIndexPrice("sz399001");
@@ -371,6 +372,7 @@ namespace X.UI.Helper
                 Console.ForegroundColor = ConsoleColor.Green;
             }
             Console.WriteLine("上证:{0}%,深圳:{1}%,中小:{2}%,创业:{3}%,综合:{4}%", a.Inc.ToString("0.00"), b.Inc.ToString("0.00"), c.Inc.ToString("0.00"), d.Inc.ToString("0.00"), e.ToString("0.00"));
+            return e;
         }
 
         /// <summary>
@@ -456,13 +458,25 @@ namespace X.UI.Helper
         /// </summary>
         /// <param name="list1"></param>
         /// <param name="list2"></param>
-        public static void MonitorStock(List<StockPrice> list1, List<StockPrice> list2, List<MyStock> list3)
+        /// <param name="list3"></param>
+        /// <param name="e"></param>
+        public static void MonitorStock(List<StockPrice> list1, List<StockPrice> list2, List<MyStock> list3, decimal e)
         {
+            var policy = ConfigurationHelper.GetAppSettingByName("Policy", 3);
+            Func<StockPrice, bool> filter = p => true;
+            if (policy == 1)
+            {
+                filter = p => p.MyStockType == MyStockType.Try;
+            }
+            else if (policy == 2)
+            {
+                filter = p => p.MyStockType == MyStockType.Union;
+            }
             var dt = DateTime.Now;
             if (dt.TimeOfDay <= new TimeSpan(14, 45, 0))
             {
                 var m1 = new List<MyStockMonitor>();
-                foreach (var item in list1.Where(p => p.CurrentPrice > 0))
+                foreach (var item in list1.Where(p => p.CurrentPrice > 0 && filter(p)))
                 {
                     var t = StockDataHelper.GetStockPrice(item.StockCode);
                     decimal a = 0.01M, b= 0.01M;
@@ -501,16 +515,25 @@ namespace X.UI.Helper
                         {
                             Console.ForegroundColor = ConsoleColor.Green;
                         }
-                        Console.WriteLine("{0}-{1}:{2}({3})涨幅;{4}%,价格;{5},K;{6},KLevel;{7},S;{8},SLevel;{9}",
+                        if (t.MyStockType == MyStockType.Try)
+                        {
+                            Console.BackgroundColor = ConsoleColor.Gray;
+                        }
+                        else
+                        {
+                            Console.BackgroundColor = ConsoleColor.Yellow;
+                        }
+
+                        Console.WriteLine("{0}-{1}:{2}({3})涨幅;{4}%,价格;{5},K;{6},KLevel;{7},S;{8},SLevel;{9},指数风控:{10}%",
                             DateTime.Now.ToString("MM-dd HH:mm:ss"), t.MyStockType == MyStockType.Try ? "预判试错-建议上午" : "报团跟随，建议拐点后或下午",
-                            t.StockName, t.StockCode, t.Inc.ToString("0.00"), t.Price, t.K.ToString("0.00"), t.KLevel, t.S.ToString("0.00"), t.SLevel);
+                            t.StockName, t.StockCode, t.Inc.ToString("0.00"), t.Price, t.K.ToString("0.00"), t.KLevel, t.S.ToString("0.00"), t.SLevel, e.ToString("0.00"));
                     }
                 }
             }
             else if (dt.TimeOfDay >= new TimeSpan(14, 45, 0))
             {
                 var m1 = new List<MyStockMonitor>();
-                foreach (var item in list2.Where(p => p.CurrentPrice > 0))
+                foreach (var item in list2.Where(p => p.CurrentPrice > 0 && filter(p)))
                 {
                     var t = StockDataHelper.GetStockPrice(item.StockCode);
                     var a = t.MaxPrice / item.MaxPrice * t.MinPrice / item.MinPrice * 61.8M + 38.2M * t.CurrentPrice / item.CurrentPrice - 100;
@@ -543,6 +566,7 @@ namespace X.UI.Helper
                         {
                             Console.ForegroundColor = ConsoleColor.Green;
                         }
+                        Console.BackgroundColor = ConsoleColor.White;
                         Console.WriteLine("{0}-{1}:{2}({3})涨幅;{4}%,价格;{5},L;{6},LLevel;{7},S;{8},SLevel;{9}",
                            DateTime.Now.ToString("MM-dd HH:mm:ss"), "尾盘策略",
                            t.StockName, t.StockCode, t.Inc.ToString("0.00"), t.Price, t.L.ToString("0.00"), t.LLevel, t.S.ToString("0.00"), t.SLevel);
@@ -554,23 +578,25 @@ namespace X.UI.Helper
 
         public static void Program()
         {
+            var tradeStart = ConfigurationHelper.GetAppSettingByName("TradeStart", new DateTime(2099, 1, 1, 9, 15, 0));
+            var tradeEnd = ConfigurationHelper.GetAppSettingByName("TradeEnd", new DateTime(2099, 1, 1, 15, 0, 0));
             Console.BackgroundColor = ConsoleColor.White;
             Console.ForegroundColor = ConsoleColor.Black;
             var dt = DateTime.Now;
-            if (dt.TimeOfDay <= new TimeSpan(15, 0, 0))
+            if (dt.TimeOfDay <= tradeEnd.TimeOfDay)
             {
                 var list1 = GetMyMonitorStock();
                 var list2 = GetMyMonitorStockAfter();
                 var list3 = GetMyStock(MyStockMode.Stock);
-                while (dt.TimeOfDay >= new TimeSpan(9, 25, 0) && dt.TimeOfDay <= new TimeSpan(15, 0, 0))
+                while (dt.TimeOfDay >= tradeStart.TimeOfDay && dt.TimeOfDay <= tradeEnd.TimeOfDay)
                 {
-                    MonitorIndex();
-                    MonitorStock(list1, list2, list3);
+                    var e = MonitorIndex();
+                    MonitorStock(list1, list2, list3, e);
                     Thread.Sleep(6000);
                     dt = DateTime.Now;
                 }
             }
-            if (dt.TimeOfDay > new TimeSpan(15, 0, 0))
+            if (dt.TimeOfDay > tradeEnd.TimeOfDay)
             {
                 var t1 = GetMyStock(MyStockMode.Stock);
                 Deal(t1);
