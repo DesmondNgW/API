@@ -428,7 +428,7 @@ namespace X.UI.Helper
         /// 尾盘自选股
         /// </summary>
         /// <returns></returns>
-        public static List<StockPrice> GetMyMonitorStockAfter()
+        public static List<StockPrice> GetMyMonitorStockAfter(List<StockPrice> list)
         {
             var list1 = Regex.Split(FileBase.ReadFile("./src/尾盘.txt", "gb2312"), "\r\n", RegexOptions.IgnoreCase);
             var ret = new List<StockPrice>();
@@ -437,6 +437,7 @@ namespace X.UI.Helper
                 var t = item.Split('\t');
                 if (t.Length >= 15)
                 {
+                    var filter = list.FirstOrDefault(p => p.StockCode == t[0].Trim());
                     ret.Add(new StockPrice()
                     {
                         StockCode = t[0].Trim(),
@@ -446,7 +447,7 @@ namespace X.UI.Helper
                         MaxPrice = t[12].Convert2Decimal(0),
                         MinPrice = t[13].Convert2Decimal(0),
                         LastClosePrice = t[14].Convert2Decimal(0),
-                        MyStockType = MyStockType.Try,
+                        MyStockType = filter != null ? filter.MyStockType : MyStockType.Union,
                     });
                 }
             }
@@ -592,7 +593,7 @@ namespace X.UI.Helper
             if (dt.TimeOfDay <= tradeEnd.TimeOfDay)
             {
                 var list1 = GetMyMonitorStock();
-                var list2 = GetMyMonitorStockAfter();
+                var list2 = GetMyMonitorStockAfter(list1);
                 var list3 = GetMyStock(MyStockMode.Stock);
                 while (dt.TimeOfDay >= tradeStart.TimeOfDay && dt.TimeOfDay <= tradeEnd.TimeOfDay)
                 {

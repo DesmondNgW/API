@@ -12,5 +12,11 @@
     <add key="CouchCacheEnable" value="false" />
     <add key="RedisCacheEnable" value="false" />
     <add key="MongoDbEnable" value="true" />
+    <add key="TradeStart" value="2099-01-01 9:15:00" />
+    <add key="TradeEnd" value="2099-01-01 15:00:00" />
+    <!--策略模型 1=新周期，2=报团,3=所有-->
+    <add key ="Policy" value="2" />
+    <!--拐点模型 1=拐点，0=非拐点-->
+    <add key ="StockBreak" value="1" />
   </AppSettings>
 </configuration>
