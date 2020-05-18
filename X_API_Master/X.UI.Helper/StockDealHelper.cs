@@ -463,6 +463,12 @@ namespace X.UI.Helper
         public static void MonitorStock(List<StockPrice> list1, List<StockPrice> list2, List<MyStock> list3, decimal e)
         {
             var policy = ConfigurationHelper.GetAppSettingByName("Policy", 3);
+            var stockBreak = ConfigurationHelper.GetAppSettingByName("StockBreak", 0);
+            if (stockBreak == 1)
+            {
+                list1 = list2;
+            }
+            var tradeEnd = ConfigurationHelper.GetAppSettingByName("TradeEnd", new DateTime(2099, 1, 1, 15, 0, 0));
             Func<StockPrice, bool> filter = p => true;
             if (policy == 1)
             {
@@ -473,7 +479,7 @@ namespace X.UI.Helper
                 filter = p => p.MyStockType == MyStockType.Union;
             }
             var dt = DateTime.Now;
-            if (dt.TimeOfDay <= new TimeSpan(14, 45, 0))
+            if (dt.TimeOfDay <= tradeEnd.AddMinutes(-15).TimeOfDay)
             {
                 var m1 = new List<MyStockMonitor>();
                 foreach (var item in list1.Where(p => p.CurrentPrice > 0 && filter(p)))
