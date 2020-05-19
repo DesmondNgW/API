@@ -507,7 +507,8 @@ namespace X.UI.Helper
                         Price = t.CurrentPrice,
                         S = list3.FirstOrDefault(p => p.Code == t.StockCode).S1,
                         K = a,
-                        L = b
+                        L = b,
+                        Amount = t.Amount
                     });
                 }
                 if (m1.Count > 0)
@@ -531,9 +532,10 @@ namespace X.UI.Helper
                             Console.BackgroundColor = ConsoleColor.Yellow;
                         }
 
-                        Console.WriteLine("{0}-{1}:{2}({3})涨幅;{4}%,价格;{5},K;{6},KLevel;{7},S;{8},SLevel;{9},指数风控:{10}%",
+                        Console.WriteLine("{0}-{1}:{2}({3})涨幅;{4}%,价格;{5},K;{6},KLevel;{7},S;{8},SLevel;{9},指数风控:{10}%,成交金额:{11}亿",
                             DateTime.Now.ToString("MM-dd HH:mm:ss"), t.MyStockType == MyStockType.Try ? "预判试错-建议上午" : "报团跟随，建议拐点后或下午",
-                            t.StockName, t.StockCode, t.Inc.ToString("0.00"), t.Price, t.K.ToString("0.00"), t.KLevel, t.S.ToString("0.00"), t.SLevel, e.ToString("0.00"));
+                            t.StockName, t.StockCode, t.Inc.ToString("0.00"), t.Price, t.K.ToString("0.00"), t.KLevel,
+                            t.S.ToString("0.00"), t.SLevel, e.ToString("0.00"), t.Amount.ToString("0.00"));
                     }
                 }
             }
@@ -558,7 +560,8 @@ namespace X.UI.Helper
                         Price = t.CurrentPrice,
                         S = list3.FirstOrDefault(p => p.Code == t.StockCode).S1,
                         K = a,
-                        L = b
+                        L = b,
+                        Amount = t.Amount
                     });
                 }
                 if (m1.Count > 0)
@@ -574,9 +577,10 @@ namespace X.UI.Helper
                             Console.ForegroundColor = ConsoleColor.Green;
                         }
                         Console.BackgroundColor = ConsoleColor.White;
-                        Console.WriteLine("{0}-{1}:{2}({3})涨幅;{4}%,价格;{5},L;{6},LLevel;{7},S;{8},SLevel;{9}",
+                        Console.WriteLine("{0}-{1}:{2}({3})涨幅;{4}%,价格;{5},L;{6},LLevel;{7},S;{8},SLevel;{9},成交金额:{10}亿",
                            DateTime.Now.ToString("MM-dd HH:mm:ss"), "尾盘策略",
-                           t.StockName, t.StockCode, t.Inc.ToString("0.00"), t.Price, t.L.ToString("0.00"), t.LLevel, t.S.ToString("0.00"), t.SLevel);
+                           t.StockName, t.StockCode, t.Inc.ToString("0.00"), t.Price, t.L.ToString("0.00"), t.LLevel,
+                           t.S.ToString("0.00"), t.SLevel, t.Amount.ToString("0.00"));
                     }
                 }
             }
