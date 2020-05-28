@@ -47,7 +47,7 @@ namespace X.UI.Helper
         /// <returns></returns>
         private static bool F3(MyStock p)
         {
-            return p.Inc > -100 && !p.Name.Contains("ST") && p.K4 > 0;
+            return p.Inc > -100 && !p.Name.Contains("ST") && (p.K1 + p.K2 + p.K3 + p.K4) / 4 > 7.5;
         }
 
         /// <summary>
@@ -376,13 +376,12 @@ namespace X.UI.Helper
         }
 
         /// <summary>
-        /// 自选股数据，包含龙头和板块股
+        /// 龙头股数据
         /// </summary>
         /// <returns></returns>
         public static List<StockPrice> GetMyMonitorStock()
         {
-            var list1 = Regex.Split(FileBase.ReadFile("./src/试错.txt", "gb2312"), "\r\n", RegexOptions.IgnoreCase);
-            var list2 = Regex.Split(FileBase.ReadFile("./src/抱团.txt", "gb2312"), "\r\n", RegexOptions.IgnoreCase);
+            var list1 = Regex.Split(FileBase.ReadFile("./src/龙头.txt", "gb2312"), "\r\n", RegexOptions.IgnoreCase);
             var ret = new List<StockPrice>();
             foreach (var item in list1)
             {
@@ -398,26 +397,7 @@ namespace X.UI.Helper
                         MaxPrice = t[12].Convert2Decimal(0),
                         MinPrice = t[13].Convert2Decimal(0),
                         LastClosePrice = t[14].Convert2Decimal(0),
-                        MyStockType = MyStockType.Try,
-                    });
-                }
-            }
-
-            foreach (var item in list2)
-            {
-                var t = item.Split('\t');
-                if (t.Length >= 15)
-                {
-                    ret.Add(new StockPrice()
-                    {
-                        StockCode = t[0].Trim(),
-                        StockName = t[1],
-                        CurrentPrice = t[3].Convert2Decimal(0),
-                        OpenPrice = t[11].Convert2Decimal(0),
-                        MaxPrice = t[12].Convert2Decimal(0),
-                        MinPrice = t[13].Convert2Decimal(0),
-                        LastClosePrice = t[14].Convert2Decimal(0),
-                        MyStockType = MyStockType.Union,
+                        MyStockType = MyStockType.First,
                     });
                 }
             }
@@ -428,7 +408,7 @@ namespace X.UI.Helper
         /// 尾盘自选股
         /// </summary>
         /// <returns></returns>
-        public static List<StockPrice> GetMyMonitorStockAfter(List<StockPrice> list)
+        public static List<StockPrice> GetMyMonitorStockAfter()
         {
             var list1 = Regex.Split(FileBase.ReadFile("./src/尾盘.txt", "gb2312"), "\r\n", RegexOptions.IgnoreCase);
             var ret = new List<StockPrice>();
@@ -437,7 +417,7 @@ namespace X.UI.Helper
                 var t = item.Split('\t');
                 if (t.Length >= 15)
                 {
-                    var filter = list.FirstOrDefault(p => p.StockCode == t[0].Trim());
+                    //var filter = list.FirstOrDefault(p => p.StockCode == t[0].Trim());
                     ret.Add(new StockPrice()
                     {
                         StockCode = t[0].Trim(),
@@ -447,7 +427,7 @@ namespace X.UI.Helper
                         MaxPrice = t[12].Convert2Decimal(0),
                         MinPrice = t[13].Convert2Decimal(0),
                         LastClosePrice = t[14].Convert2Decimal(0),
-                        MyStockType = filter != null ? filter.MyStockType : MyStockType.Union,
+                        MyStockType = MyStockType.Unkown,
                     });
                 }
             }
@@ -464,26 +444,21 @@ namespace X.UI.Helper
         public static void MonitorStock(List<StockPrice> list1, List<StockPrice> list2, List<MyStock> list3, decimal e)
         {
             var policy = ConfigurationHelper.GetAppSettingByName("Policy", 3);
-            var stockBreak = ConfigurationHelper.GetAppSettingByName("StockBreak", 0);
-            if (stockBreak == 1)
-            {
-                list1 = list2;
-            }
             var tradeEnd = ConfigurationHelper.GetAppSettingByName("TradeEnd", new DateTime(2099, 1, 1, 15, 0, 0));
             Func<StockPrice, bool> filter = p => true;
             if (policy == 1)
             {
-                filter = p => p.MyStockType == MyStockType.Try;
+                filter = p => p.MyStockType == MyStockType.First;
             }
             else if (policy == 2)
             {
-                filter = p => p.MyStockType == MyStockType.Union;
+                filter = p => p.MyStockType == MyStockType.Unkown;
             }
             var dt = DateTime.Now;
             if (dt.TimeOfDay <= tradeEnd.AddMinutes(-15).TimeOfDay)
             {
                 var m1 = new List<MyStockMonitor>();
-                foreach (var item in list1.Where(p => p.CurrentPrice > 0 && filter(p)))
+                foreach (var item in list1.Union(list2).Where(p => p.CurrentPrice > 0 && filter(p)))
                 {
                     var t = StockDataHelper.GetStockPrice(item.StockCode);
                     decimal a = 0.01M, b= 0.01M;
@@ -497,19 +472,21 @@ namespace X.UI.Helper
                         }
                     }
                     catch { }
-
-                    m1.Add(new MyStockMonitor
+                    if (!m1.Exists(p => p.StockCode == item.StockCode))
                     {
-                        MyStockType = item.MyStockType,
-                        StockCode = t.StockCode,
-                        StockName = t.StockName,
-                        Inc = t.Inc,
-                        Price = t.CurrentPrice,
-                        S = list3.FirstOrDefault(p => p.Code == t.StockCode).S1,
-                        K = a,
-                        L = b,
-                        Amount = t.Amount
-                    });
+                        m1.Add(new MyStockMonitor
+                        {
+                            MyStockType = item.MyStockType,
+                            StockCode = t.StockCode,
+                            StockName = t.StockName,
+                            Inc = t.Inc,
+                            Price = t.CurrentPrice,
+                            S = list3.FirstOrDefault(p => p.Code == t.StockCode).S1,
+                            K = a,
+                            L = b,
+                            Amount = t.Amount
+                        });
+                    }
                 }
                 if (m1.Count > 0)
                 {
@@ -523,7 +500,7 @@ namespace X.UI.Helper
                         {
                             Console.ForegroundColor = ConsoleColor.Green;
                         }
-                        if (t.MyStockType == MyStockType.Try)
+                        if (t.MyStockType == MyStockType.First)
                         {
                             Console.BackgroundColor = ConsoleColor.Gray;
                         }
@@ -545,12 +522,18 @@ namespace X.UI.Helper
                 foreach (var item in list2.Where(p => p.CurrentPrice > 0 && filter(p)))
                 {
                     var t = StockDataHelper.GetStockPrice(item.StockCode);
-                    var a = t.MaxPrice / item.MaxPrice * t.MinPrice / item.MinPrice * 61.8M + 38.2M * t.CurrentPrice / item.CurrentPrice - 100;
-                    var b = t.MaxPrice / item.MaxPrice * t.MinPrice / item.MinPrice * 61.8M + 38.2M * t.OpenPrice / t.LastClosePrice - 100;
-                    if (t.MinPrice < item.MinPrice)
+                    decimal a = 0.01M, b = 0.01M;
+                    try
                     {
-                        b = t.CurrentPrice / t.MinPrice * t.CurrentPrice / t.MaxPrice * 61.8M + 38.2M * t.OpenPrice / t.LastClosePrice - 100;
+                        a = t.MaxPrice / item.MaxPrice * t.MinPrice / item.MinPrice * 61.8M + 38.2M * t.CurrentPrice / item.CurrentPrice - 100;
+                        b = t.MaxPrice / item.MaxPrice * t.MinPrice / item.MinPrice * 61.8M + 38.2M * t.OpenPrice / t.LastClosePrice - 100;
+                        if (t.MinPrice < item.MinPrice)
+                        {
+                            b = t.CurrentPrice / t.MinPrice * t.CurrentPrice / t.MaxPrice * 61.8M + 38.2M * t.OpenPrice / t.LastClosePrice - 100;
+                        }
                     }
+                    catch { }
+
                     m1.Add(new MyStockMonitor
                     {
                         MyStockType = item.MyStockType,
@@ -597,7 +580,7 @@ namespace X.UI.Helper
             if (dt.TimeOfDay <= tradeEnd.TimeOfDay)
             {
                 var list1 = GetMyMonitorStock();
-                var list2 = GetMyMonitorStockAfter(list1);
+                var list2 = GetMyMonitorStockAfter();
                 var list3 = GetMyStock(MyStockMode.Stock);
                 while (dt.TimeOfDay >= tradeStart.TimeOfDay && dt.TimeOfDay <= tradeEnd.TimeOfDay)
                 {

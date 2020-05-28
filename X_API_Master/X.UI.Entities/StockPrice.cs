@@ -6,8 +6,10 @@ namespace X.UI.Entities
 {
     public enum MyStockType
     {
+        Unkown,
         Try,
-        Union
+        Union,
+        First,
     }
     public class StockPrice : MongoBaseModel
     {
