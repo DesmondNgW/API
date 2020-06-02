@@ -15,7 +15,7 @@ namespace X.UI.Consoles
         static void Main()
         {
             StockDealHelper.Program();
-            //Index();
+            Index();
             Console.ReadKey();
         }
 
