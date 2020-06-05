@@ -7,11 +7,15 @@ namespace X.UI.Entities
     public enum MyStockType
     {
         //龙头
-        First,
-        //板块
-        Middle,
-        //尾盘
-        Last
+        Top,
+        //接力
+        Continie,
+        //股票池
+        Pool,
+        //买点
+        XSB,
+        //趋势
+        Trend
     }
 
     public class StockPrice : MongoBaseModel

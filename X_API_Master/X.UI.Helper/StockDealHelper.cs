@@ -5,6 +5,7 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using X.UI.Entities;
 using X.Util.Core;
+using X.Util.Core.Cache;
 using X.Util.Core.Configuration;
 using X.Util.Entities.Enums;
 using X.Util.Other;
@@ -126,6 +127,65 @@ namespace X.UI.Helper
             }
             return ret;
         }
+
+        /// <summary>
+        /// 二进制数据位解析
+        /// </summary>
+        /// <param name="a"></param>
+        /// <returns></returns>
+        public static List<int> MT(int a)
+        {
+            var ret = new List<int>();
+            var t1 = a % 2;
+            ret.Add(t1);
+
+            var a1 = (a - t1) / 2;
+            var t2 = a1 % 2;
+            ret.Add(t2);
+
+            var a2 = (a1 - t2) / 2;
+            var t3 = a2 % 2;
+            ret.Add(t3);
+
+            var a3 = (a2 - t3) / 2;
+            var t4 = a3 % 2;
+            ret.Add(t4);
+
+            var a4 = (a3 - t4) / 2;
+            var t5 = a4 % 2;
+            ret.Add(t5);
+
+            var a5 = (a4 - t5) / 2;
+            var t6 = a5 % 2;
+            ret.Add(t6);
+
+            var a6 = (a5 - t6) / 2;
+            var t7 = a6 % 2;
+            ret.Add(t7);
+            return ret;
+        }
+
+        /// <summary>
+        /// 匹配值
+        /// </summary>
+        /// <param name="a"></param>
+        /// <param name="b"></param>
+        /// <returns></returns>
+        public static bool MtMatch(int a, int b)
+        {
+            var ret = 0;
+            var r1 = MT(a);
+            var r2 = MT(b);
+            for (var i = 0; i < r1.Count; i++)
+            {
+                if (r1[i] == r2[i])
+                {
+                    ret++;
+                }
+            }
+            return ret >= 5;
+        }
+
         #endregion
 
         #region 复盘逻辑
@@ -143,7 +203,7 @@ namespace X.UI.Helper
             foreach (var item in list)
             {
                 var t = item.Split('\t');
-                if (t.Length >= 15)
+                if (t.Length >= 16)
                 {
                     var myStock = new MyStock()
                     {
@@ -162,6 +222,7 @@ namespace X.UI.Helper
                         K3 = t[12].Convert2Double(-100),
                         K4 = t[13].Convert2Double(-100),
                         Cap = t[14].Convert2Double(0),
+                        MT = t[15].Convert2Int32(0),
                     };
                     ret.Add(myStock);
                 }
@@ -318,8 +379,11 @@ namespace X.UI.Helper
         /// <returns></returns>
         public static List<StockPrice> GetMyMonitorStock(MyStockType mode)
         {
-            var file = mode == MyStockType.First ? "./src/龙头.txt"
-                : mode == MyStockType.Last ? "./src/尾盘.txt" : "./src/套利.txt";
+            var file = mode == MyStockType.Top ? "./src/龙头.txt" :
+                mode == MyStockType.Continie ? "./src/接力.txt" :
+                mode == MyStockType.Pool ? "./src/套利.txt" :
+                 mode == MyStockType.Trend ? "./src/尾盘.txt" :
+                 mode == MyStockType.XSB ? "./src/XSB.txt" : "./src/接力.txt";
             var list1 = Regex.Split(FileBase.ReadFile(file, "gb2312"), "\r\n", RegexOptions.IgnoreCase);
             var ret = new List<StockPrice>();
             foreach (var item in list1)
@@ -344,34 +408,46 @@ namespace X.UI.Helper
         }
 
         /// <summary>
-        /// 盘中盯盘
+        /// 
         /// </summary>
-        /// <param name="list1">龙头</param>
-        /// <param name="list2">板块</param>
-        /// <param name="list3">尾盘</param>
-        /// <param name="list4"></param>
-        /// <param name="e"></param>
-        public static void MonitorStock(List<StockPrice> list1, List<StockPrice> list2, List<StockPrice> list3, List<MyStock> list4, decimal e)
+        /// <param name="Top">龙头</param>
+        /// <param name="Continue">接力</param>
+        /// <param name="Xsb">买点</param>
+        /// <param name="Pool">股票池</param>
+        /// <param name="Trend">趋势</param>
+        /// <param name="all">所有股票</param>
+        /// <param name="e">设置</param>
+        public static void MonitorStock(List<StockPrice> Top, List<StockPrice> Continue, List<StockPrice> Xsb,
+           List<StockPrice> Pool, List<StockPrice> Trend, List<MyStock> all, decimal e)
         {
             var policy = ConfigurationHelper.GetAppSettingByName("Policy", 3);
             var tradeEnd = ConfigurationHelper.GetAppSettingByName("TradeEnd", new DateTime(2099, 1, 1, 15, 0, 0));
             Func<StockPrice, bool> filter = p => true;
+            Func<StockPrice, bool> top = p => Top.Exists(q => q.StockCode == p.StockCode);
+            Func<StockPrice, bool> trend = p => Trend.Exists(q => q.StockCode == p.StockCode);
+            Func<StockPrice, bool> none = p => Top.Union(Trend).All(q => q.StockCode != p.StockCode);
+            Func<StockPrice, bool> _continue = p => Continue.Exists(q => q.StockCode == p.StockCode);
+            Func<StockPrice, bool> _xsb = p => Xsb.Exists(q => q.StockCode == p.StockCode);
             if (policy == 1)
             {
-                filter = p => p.MyStockType == MyStockType.First;
+                filter = top;
             }
             else if (policy == 2)
             {
-                filter = p => p.MyStockType == MyStockType.Middle;
+                filter = trend;
             }
-            var dt = DateTime.Now;
-            if (dt.TimeOfDay <= tradeEnd.AddMinutes(-15).TimeOfDay)
+            else if (policy == 3)
             {
-                var m1 = new List<MyStockMonitor>();
-                foreach (var item in list1.Union(list2).Where(p => p.CurrentPrice > 0 && filter(p)))
+                filter = none;
+            }
+            
+            var m1 = new List<MyStockMonitor>();
+            foreach (var item in Pool.Where(p => p.CurrentPrice > 0 && filter(p)))
+            {
+                if (_continue(item) || _xsb(item))
                 {
                     var t = StockDataHelper.GetStockPrice(item.StockCode);
-                    decimal a = 0.01M, b= 0.01M;
+                    decimal a = 0.01M, b = 0.01M;
                     try
                     {
                         a = t.MaxPrice / item.MaxPrice * t.MinPrice / item.MinPrice * 61.8M + 38.2M * t.CurrentPrice / item.CurrentPrice - 100;
@@ -391,98 +467,57 @@ namespace X.UI.Helper
                             StockName = t.StockName,
                             Inc = t.Inc,
                             Price = t.CurrentPrice,
-                            S = list4.FirstOrDefault(p => p.Code == t.StockCode).S1,
+                            S = all.FirstOrDefault(p => p.Code == t.StockCode).S1,
                             K = a,
                             L = b,
                             Amount = t.Amount
                         });
                     }
                 }
-                if (m1.Count > 0)
-                {
-                    foreach (var t in m1.Where(p => p.KLevel >= 7).OrderByDescending(p => p.KLevel).ThenByDescending(p => p.SLevel).ThenByDescending(p => p.Inc))
-                    {
-                        if (t.Inc > 0)
-                        {
-                            Console.ForegroundColor = ConsoleColor.Red;
-                        }
-                        else
-                        {
-                            Console.ForegroundColor = ConsoleColor.Green;
-                        }
-                        var tmp = list3.Exists(p => p.StockCode == t.StockCode);
-                        if (t.MyStockType == MyStockType.First)
-                        {
-                            Console.BackgroundColor = ConsoleColor.Gray;
-                        }
-                        else if (tmp)
-                        {
-                            Console.BackgroundColor = ConsoleColor.White;//板块趋势股
-                        }
-                        else
-                        {
-                            Console.BackgroundColor = ConsoleColor.Yellow;//板块套利股
-                        }
-                        var tip = tmp ? "板块趋势股" : "板块套利股";
-                        Console.WriteLine("{0}-{1}:{2}({3})涨幅;{4}%,价格;{5},K;{6},KLevel;{7},S;{8},SLevel;{9},指数风控:{10}%,成交金额:{11}亿",
-                            DateTime.Now.ToString("MM-dd HH:mm:ss"), t.MyStockType == MyStockType.First ? "龙头股" : tip,
-                            t.StockName, t.StockCode, t.Inc.ToString("0.00"), t.Price, t.K.ToString("0.00"), t.KLevel,
-                            t.S.ToString("0.00"), t.SLevel, e.ToString("0.00"), t.Amount.ToString("0.00"));
-                    }
-                }
+            }
+            var dt = DateTime.Now;
+            IEnumerable<MyStockMonitor> m2 = null;
+            if (dt.TimeOfDay <= tradeEnd.AddMinutes(-15).TimeOfDay)
+            {
+                m2 = m1.Where(p => p.KLevel >= 7).OrderByDescending(p => p.KLevel).ThenByDescending(p => p.SLevel).ThenByDescending(p => p.Inc);
             }
             else if (dt.TimeOfDay >= new TimeSpan(14, 45, 0))
             {
-                var m1 = new List<MyStockMonitor>();
-                foreach (var item in list3.Where(p => p.CurrentPrice > 0 && filter(p)))
+                m2 = m1.Where(p => p.LLevel >= 4).OrderByDescending(p => p.LLevel).ThenByDescending(p => p.SLevel).ThenByDescending(p => p.Inc);
+            }
+            if (m2 != null && m2.Count() > 0)
+            {
+                foreach (var t in m2)
                 {
-                    var t = StockDataHelper.GetStockPrice(item.StockCode);
-                    decimal a = 0.01M, b = 0.01M;
-                    try
+                    var __continue = Continue.Exists(p => p.StockCode == t.StockCode);
+                    var __trend = Trend.Exists(p => p.StockCode == t.StockCode);
+                    if (t.Inc > 0)
                     {
-                        a = t.MaxPrice / item.MaxPrice * t.MinPrice / item.MinPrice * 61.8M + 38.2M * t.CurrentPrice / item.CurrentPrice - 100;
-                        b = t.MaxPrice / item.MaxPrice * t.MinPrice / item.MinPrice * 61.8M + 38.2M * t.OpenPrice / t.LastClosePrice - 100;
-                        if (t.MinPrice < item.MinPrice)
-                        {
-                            b = t.CurrentPrice / t.MinPrice * t.CurrentPrice / t.MaxPrice * 61.8M + 38.2M * t.OpenPrice / t.LastClosePrice - 100;
-                        }
+                        Console.ForegroundColor = ConsoleColor.Red;
                     }
-                    catch { }
-
-                    m1.Add(new MyStockMonitor
+                    else
                     {
-                        MyStockType = item.MyStockType,
-                        StockCode = t.StockCode,
-                        StockName = t.StockName,
-                        Inc = t.Inc,
-                        Price = t.CurrentPrice,
-                        S = list4.FirstOrDefault(p => p.Code == t.StockCode).S1,
-                        K = a,
-                        L = b,
-                        Amount = t.Amount
-                    });
-                }
-                if (m1.Count > 0)
-                {
-                    foreach (var t in m1.Where(p => p.LLevel >= 4).OrderByDescending(p => p.LLevel).ThenByDescending(p => p.SLevel).ThenByDescending(p => p.Inc))
+                        Console.ForegroundColor = ConsoleColor.Green;
+                    }
+                    if (__continue)
                     {
-                        if (t.Inc > 0)
-                        {
-                            Console.ForegroundColor = ConsoleColor.Red;
-                        }
-                        else
-                        {
-                            Console.ForegroundColor = ConsoleColor.Green;
-                        }
+                        Console.BackgroundColor = ConsoleColor.Gray;
+                    }
+                    else if (__trend)
+                    {
+                        Console.BackgroundColor = ConsoleColor.Yellow;
+                    }
+                    else
+                    {
                         Console.BackgroundColor = ConsoleColor.White;
-                        Console.WriteLine("{0}-{1}:{2}({3})涨幅;{4}%,价格;{5},L;{6},LLevel;{7},S;{8},SLevel;{9},成交金额:{10}亿",
-                           DateTime.Now.ToString("MM-dd HH:mm:ss"), "尾盘股",
-                           t.StockName, t.StockCode, t.Inc.ToString("0.00"), t.Price, t.L.ToString("0.00"), t.LLevel,
-                           t.S.ToString("0.00"), t.SLevel, t.Amount.ToString("0.00"));
                     }
+                    Console.WriteLine("{0}-{1}:{2}({3})涨幅;{4}%,价格;{5},K;{6},KLevel;{7},S;{8},SLevel;{9},指数风控:{10}%,成交金额:{11}亿",
+                        DateTime.Now.ToString("MM-dd HH:mm:ss"), __continue ? "龙头趋势股" : __trend ? "趋势股" : "套利股",
+                        t.StockName, t.StockCode, t.Inc.ToString("0.00"), t.Price, t.K.ToString("0.00"), t.KLevel,
+                        t.S.ToString("0.00"), t.SLevel, e.ToString("0.00"), t.Amount.ToString("0.00"));
                 }
             }
-        }
+            }
         #endregion
 
         public static void Program()
@@ -492,18 +527,33 @@ namespace X.UI.Helper
             Console.BackgroundColor = ConsoleColor.White;
             Console.ForegroundColor = ConsoleColor.Black;
             var dt = DateTime.Now;
+            var _dt = DateTime.Now;
             if (dt.TimeOfDay <= tradeEnd.TimeOfDay)
             {
-                var list1 = GetMyMonitorStock(MyStockType.First);
-                var list2 = GetMyMonitorStock(MyStockType.Middle);
-                var list3 = GetMyMonitorStock(MyStockType.Last);
-                var list4 = GetMyStock(MyStockMode.Stock);
+                //龙头
+                var top = GetMyMonitorStock(MyStockType.Top);
+                //股票池
+                var pool = GetMyMonitorStock(MyStockType.Pool);
+                //接力
+                var Continue = GetMyMonitorStock(MyStockType.Continie);
+                //买点
+                var XSB = GetMyMonitorStock(MyStockType.XSB);
+                //趋势
+                var trend = GetMyMonitorStock(MyStockType.Trend);
+                //所有股票
+                var all = GetMyStock(MyStockMode.Stock);
                 while (dt.TimeOfDay >= tradeStart.TimeOfDay && dt.TimeOfDay <= tradeEnd.TimeOfDay)
                 {
                     var e = MonitorIndex();
-                    MonitorStock(list1, list2, list3,list4, e);
+                    MonitorStock(top, Continue, XSB, pool, trend, all, e);
                     Thread.Sleep(6000);
                     dt = DateTime.Now;
+                    if ((dt - _dt).TotalMinutes >= 10)
+                    {
+                        XSB = GetMyMonitorStock(MyStockType.XSB);
+                        _dt = DateTime.Now;
+                    }
+                    
                 }
             }
             if (dt.TimeOfDay > tradeEnd.TimeOfDay)

@@ -46,6 +46,8 @@ namespace X.UI.Entities
 
         public double Cap { get; set; }
 
+        public int MT { get; set; }
+
         public decimal Order
         {
             get
