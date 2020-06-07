@@ -382,8 +382,7 @@ namespace X.UI.Helper
             var file = mode == MyStockType.Top ? "./src/龙头.txt" :
                 mode == MyStockType.Continie ? "./src/接力.txt" :
                 mode == MyStockType.Pool ? "./src/套利.txt" :
-                 mode == MyStockType.Trend ? "./src/尾盘.txt" :
-                 mode == MyStockType.XSB ? "./src/XSB.txt" : "./src/接力.txt";
+                 mode == MyStockType.Trend ? "./src/趋势套利.txt" : "./src/接力.txt";
             var list1 = Regex.Split(FileBase.ReadFile(file, "gb2312"), "\r\n", RegexOptions.IgnoreCase);
             var ret = new List<StockPrice>();
             foreach (var item in list1)
@@ -417,8 +416,8 @@ namespace X.UI.Helper
         /// <param name="Trend">趋势</param>
         /// <param name="all">所有股票</param>
         /// <param name="e">设置</param>
-        public static void MonitorStock(List<StockPrice> Top, List<StockPrice> Continue, List<StockPrice> Xsb,
-           List<StockPrice> Pool, List<StockPrice> Trend, List<MyStock> all, decimal e)
+        public static void MonitorStock(List<StockPrice> Top, List<StockPrice> Continue, List<StockPrice> Pool, 
+            List<StockPrice> Trend, List<MyStock> all, decimal e)
         {
             var policy = ConfigurationHelper.GetAppSettingByName("Policy", 3);
             var tradeEnd = ConfigurationHelper.GetAppSettingByName("TradeEnd", new DateTime(2099, 1, 1, 15, 0, 0));
@@ -427,7 +426,6 @@ namespace X.UI.Helper
             Func<StockPrice, bool> trend = p => Trend.Exists(q => q.StockCode == p.StockCode);
             Func<StockPrice, bool> none = p => Top.Union(Trend).All(q => q.StockCode != p.StockCode);
             Func<StockPrice, bool> _continue = p => Continue.Exists(q => q.StockCode == p.StockCode);
-            Func<StockPrice, bool> _xsb = p => Xsb.Exists(q => q.StockCode == p.StockCode);
             if (policy == 1)
             {
                 filter = top;
@@ -444,7 +442,7 @@ namespace X.UI.Helper
             var m1 = new List<MyStockMonitor>();
             foreach (var item in Pool.Where(p => p.CurrentPrice > 0 && filter(p)))
             {
-                if (_continue(item) || _xsb(item))
+                if (_continue(item))
                 {
                     var t = StockDataHelper.GetStockPrice(item.StockCode);
                     decimal a = 0.01M, b = 0.01M;
@@ -489,7 +487,7 @@ namespace X.UI.Helper
             {
                 foreach (var t in m2)
                 {
-                    var __continue = Continue.Exists(p => p.StockCode == t.StockCode);
+                    var __top = Top.Exists(p => p.StockCode == t.StockCode);
                     var __trend = Trend.Exists(p => p.StockCode == t.StockCode);
                     if (t.Inc > 0)
                     {
@@ -499,7 +497,7 @@ namespace X.UI.Helper
                     {
                         Console.ForegroundColor = ConsoleColor.Green;
                     }
-                    if (__continue)
+                    if (__top)
                     {
                         Console.BackgroundColor = ConsoleColor.Gray;
                     }
@@ -512,7 +510,7 @@ namespace X.UI.Helper
                         Console.BackgroundColor = ConsoleColor.White;
                     }
                     Console.WriteLine("{0}-{1}:{2}({3})涨幅;{4}%,价格;{5},K;{6},KLevel;{7},S;{8},SLevel;{9},指数风控:{10}%,成交金额:{11}亿",
-                        DateTime.Now.ToString("MM-dd HH:mm:ss"), __continue ? "龙头趋势股" : __trend ? "趋势股" : "套利股",
+                        DateTime.Now.ToString("MM-dd HH:mm:ss"), __top ? "龙头趋势股" : __trend ? "趋势股" : "套利股",
                         t.StockName, t.StockCode, t.Inc.ToString("0.00"), t.Price, t.K.ToString("0.00"), t.KLevel,
                         t.S.ToString("0.00"), t.SLevel, e.ToString("0.00"), t.Amount.ToString("0.00"));
                 }
@@ -527,7 +525,6 @@ namespace X.UI.Helper
             Console.BackgroundColor = ConsoleColor.White;
             Console.ForegroundColor = ConsoleColor.Black;
             var dt = DateTime.Now;
-            var _dt = DateTime.Now;
             if (dt.TimeOfDay <= tradeEnd.TimeOfDay)
             {
                 //龙头
@@ -536,8 +533,6 @@ namespace X.UI.Helper
                 var pool = GetMyMonitorStock(MyStockType.Pool);
                 //接力
                 var Continue = GetMyMonitorStock(MyStockType.Continie);
-                //买点
-                var XSB = GetMyMonitorStock(MyStockType.XSB);
                 //趋势
                 var trend = GetMyMonitorStock(MyStockType.Trend);
                 //所有股票
@@ -545,15 +540,9 @@ namespace X.UI.Helper
                 while (dt.TimeOfDay >= tradeStart.TimeOfDay && dt.TimeOfDay <= tradeEnd.TimeOfDay)
                 {
                     var e = MonitorIndex();
-                    MonitorStock(top, Continue, XSB, pool, trend, all, e);
+                    MonitorStock(top, Continue, pool, trend, all, e);
                     Thread.Sleep(6000);
-                    dt = DateTime.Now;
-                    if ((dt - _dt).TotalMinutes >= 10)
-                    {
-                        XSB = GetMyMonitorStock(MyStockType.XSB);
-                        _dt = DateTime.Now;
-                    }
-                    
+                    dt = DateTime.Now;                    
                 }
             }
             if (dt.TimeOfDay > tradeEnd.TimeOfDay)
