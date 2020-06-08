@@ -196,7 +196,7 @@ namespace X.UI.Helper
         /// <returns></returns>
         public static List<MyStock> GetMyStock(MyStockMode mode)
         {
-            var file = mode == MyStockMode.Index ? "./src/板块.txt" : "./src/股票.txt";
+            var file = mode == MyStockMode.Index ? "./src/fp/板块.txt" : "./src/fp/股票.txt";
             var content = FileBase.ReadFile(file, "gb2312");
             var list = Regex.Split(content, "\r\n", RegexOptions.IgnoreCase);
             var ret = new List<MyStock>();
@@ -379,10 +379,10 @@ namespace X.UI.Helper
         /// <returns></returns>
         public static List<StockPrice> GetMyMonitorStock(MyStockType mode)
         {
-            var file = mode == MyStockType.Top ? "./src/龙头.txt" :
-                mode == MyStockType.Continie ? "./src/接力.txt" :
-                mode == MyStockType.Pool ? "./src/套利.txt" :
-                 mode == MyStockType.Trend ? "./src/趋势套利.txt" : "./src/接力.txt";
+            var file = mode == MyStockType.Top ? "./src/dp/龙头.txt" :
+                mode == MyStockType.Continie ? "./src/dp/接力.txt" :
+                mode == MyStockType.Pool ? "./src/dp/套利.txt" :
+                 mode == MyStockType.Trend ? "./src/dp/趋势套利.txt" : "./src/dp/接力.txt";
             var list1 = Regex.Split(FileBase.ReadFile(file, "gb2312"), "\r\n", RegexOptions.IgnoreCase);
             var ret = new List<StockPrice>();
             foreach (var item in list1)

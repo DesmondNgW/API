@@ -61,6 +61,7 @@
     <Compile Include="StockPerformanceHelper.cs" />
     <Compile Include="StockScoreHelper.cs" />
     <Compile Include="StockTestHelper.cs" />
+    <Compile Include="StockUnitHelper.cs" />
     <Compile Include="TdxFileHelper.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -82,6 +82,8 @@ namespace X.UI.Entities
 
         public decimal Amount { get; set; }
 
+        public decimal Vol { get; set; }
+
         public decimal MY { get; set; }
 
         public MyStockType MyStockType { get; set; }

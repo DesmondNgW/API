@@ -138,20 +138,10 @@
     </Content>
     <Content Include="Em.FundTrade.EncryptHelper.dll" />
     <Content Include="favicon.ico" />
-    <Content Include="src\尾盘.txt">
+    <Content Include="src\fp\板块.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="src\抱团.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="src\板块.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="src\板块情绪.txt" />
-    <Content Include="src\股票.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="src\试错.txt">
+    <Content Include="src\fp\股票.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
@@ -243,6 +233,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="dest\" />
+    <Folder Include="src\dp\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

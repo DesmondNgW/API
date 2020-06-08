@@ -67,6 +67,7 @@
     <Compile Include="StockScore.cs" />
     <Compile Include="StockScoreExtend.cs" />
     <Compile Include="StockSimple.cs" />
+    <Compile Include="StockUnit.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\X.Util.Entities\X.Util.Entities.csproj">
