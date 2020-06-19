@@ -10,8 +10,6 @@ namespace X.UI.Entities
         Top,
         //接力
         Continie,
-        //股票池
-        Pool,
         //买点
         XSB,
         //趋势

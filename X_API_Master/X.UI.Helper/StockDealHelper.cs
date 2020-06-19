@@ -14,8 +14,9 @@ namespace X.UI.Helper
 {
     public enum MyStockMode
     {
-        Stock,
-        Index
+        Index,
+        AQS,
+        Wave
     }
 
     public class StockDealHelper
@@ -29,16 +30,6 @@ namespace X.UI.Helper
         private static bool F1(MyStock p)
         {
             return p.Inc > -100 && !p.Name.Contains("ST");
-        }
-
-        /// <summary>
-        /// 非ST且趋势强的有效股票
-        /// </summary>
-        /// <param name="p"></param>
-        /// <returns></returns>
-        private static bool F2(MyStock p)
-        {
-            return p.Inc > -100 && !p.Name.Contains("ST") && (p.S1 - p.S3 * 2 > 0 || p.S2 - p.S4 > 0);
         }
 
         /// <summary>
@@ -129,6 +120,24 @@ namespace X.UI.Helper
         }
 
         /// <summary>
+        /// 合并多个List
+        /// </summary>
+        /// <param name="list"></param>
+        /// <returns></returns>
+        public static List<MyStock> Union(params List<MyStock>[] list)
+        {
+            var ret = new List<MyStock>();
+            foreach(List<MyStock> item in list)
+            {
+                foreach (var current in item.Where(p => !ret.Exists(q => q.Code == p.Code)))
+                {
+                    ret.Add(current);
+                }
+            }
+            return ret;
+        }
+
+        /// <summary>
         /// 二进制数据位解析
         /// </summary>
         /// <param name="a"></param>
@@ -196,7 +205,9 @@ namespace X.UI.Helper
         /// <returns></returns>
         public static List<MyStock> GetMyStock(MyStockMode mode)
         {
-            var file = mode == MyStockMode.Index ? "./src/fp/板块.txt" : "./src/fp/股票.txt";
+            var file = mode == MyStockMode.Index ? "./src/fp/板块.txt" :
+                 mode == MyStockMode.AQS ? "./src/fp/AQS.txt" :
+                 mode == MyStockMode.Wave ? "./src/fp/Wave.txt" : "./src/fp/AQS.txt";
             var content = FileBase.ReadFile(file, "gb2312");
             var list = Regex.Split(content, "\r\n", RegexOptions.IgnoreCase);
             var ret = new List<MyStock>();
@@ -238,7 +249,7 @@ namespace X.UI.Helper
         /// <param name="top"></param>
         /// <param name="f"></param>
         /// <returns></returns>
-        public static string[] GetStockName(List<MyStock> list, int top, Func<MyStock, bool> f, Func<MyStock, string> o)
+        public static string[] GetStockName(IEnumerable<MyStock> list, int top, Func<MyStock, bool> f, Func<MyStock, string> o)
         {
             var a1 = list.Where(f).OrderByDescending(p => p.S1).Take(top);        
             var a2 = list.Where(f).OrderByDescending(p => p.S2).Take(top);
@@ -266,36 +277,20 @@ namespace X.UI.Helper
             return list1.Union(list2).Union(list3).Union(list4).Distinct();
         }
 
-        /// <summary>
-        /// 风控输出
-        /// </summary>
-        /// <param name="list"></param>
-        /// <param name="dir"></param>
-        /// <param name="encode"></param>
-        public static void Monitor(List<MyStock> list, string dir, string encode)
-        {
-            var list1 = list.Where(F1).OrderByDescending(p => p.S1).Take(500);
-            var list2 = list.Where(F1).OrderByDescending(p => p.S2).Take(500);
-            var list3 = list.Where(F1).OrderByDescending(p => p.S3).Take(500);
-            var list4 = list.Where(F1).OrderByDescending(p => p.S4).Take(500);
-            FileBase.WriteFile(dir, "S1.txt", string.Join("\t\n", list1.Select(O1)), encode, FileBaseMode.Create);
-            FileBase.WriteFile(dir, "S2.txt", string.Join("\t\n", list2.Select(O1)), encode, FileBaseMode.Create);
-            FileBase.WriteFile(dir, "S3.txt", string.Join("\t\n", list3.Select(O1)), encode, FileBaseMode.Create);
-            FileBase.WriteFile(dir, "S4.txt", string.Join("\t\n", list4.Select(O1)), encode, FileBaseMode.Create);
-        }
 
         /// <summary>
         /// 处理股票输出
         /// </summary>
-        /// <param name="list"></param>
+        /// <param name="AQS"></param>
+        /// <param name="Wave"></param>
         /// <param name="encode"></param>
-        public static void Deal(List<MyStock> list, string encode = "utf-8")
+        public static void Deal(List<MyStock> AQS, List<MyStock> Wave, string encode = "utf-8")
         {
+            var list = Union(AQS, Wave);
             var t = list.Sum(p => p.Amount) / 400 * 0.382;
             Console.WriteLine("{0}亿", (t / 1e8).ToString("0.00"));
-            string dir = "./dest", dirK = "./dest/K", dirT = "./dest/T", dirA = "./dest/A";
+            string dir = "./dest", dirK = "./dest/K", dirA = "./dest/A";
             var KContent = new List<Tuple<double, double>>();
-            var TContent = new List<Tuple<double, double>>();
             var AContent = new List<Tuple<double, double>>();
             for (var i = 25; i <= 400; i += 25)
             {
@@ -303,10 +298,6 @@ namespace X.UI.Helper
                 var kContent = GetStockName(list, i, F1, O1);
                 KContent.Add(new Tuple<double, double>(kContent[0].Convert2Double(-10000), (kContent.Length - 1.0) / i));
                 FileBase.WriteFile(dirK, "K" + i + ".txt", string.Join("\t\n", kContent), encode, FileBaseMode.Create);
-                //T系列
-                var tContent = GetStockName(list, i, F2, O2);
-                TContent.Add(new Tuple<double, double>(tContent[0].Convert2Double(-10000), (tContent.Length - 1.0) / i));
-                FileBase.WriteFile(dirT, "T" + i + ".txt", string.Join("\t\n", tContent), encode, FileBaseMode.Create);
                 //A系列
                 var aContent = GetStockName(list, i, p => F4(p, t), O2);
                 AContent.Add(new Tuple<double, double>(aContent[0].Convert2Double(-10000), (aContent.Length - 1.0) / i));
@@ -315,23 +306,17 @@ namespace X.UI.Helper
             //K系列
             FileBase.WriteFile(dirK, "K500.txt", string.Join("\t\n", GetStockName(list, 500, F1, O1)), encode, FileBaseMode.Create);
             FileBase.WriteFile(dirK, "K825.txt", string.Join("\t\n", GetStockName(list, 825, F1, O1)), encode, FileBaseMode.Create);
-            //T系列
-            FileBase.WriteFile(dirT, "T500.txt", string.Join("\t\n", GetStockName(list, 500, F2, O2)), encode, FileBaseMode.Create);
-            FileBase.WriteFile(dirT, "T825.txt", string.Join("\t\n", GetStockName(list, 825, F2, O2)), encode, FileBaseMode.Create);
             //A系列
             FileBase.WriteFile(dirA, "A500.txt", string.Join("\t\n", GetStockName(list, 500, p => F4(p, t), O2)), encode, FileBaseMode.Create);
             FileBase.WriteFile(dirA, "A825.txt", string.Join("\t\n", GetStockName(list, 825, p => F4(p, t), O2)), encode, FileBaseMode.Create);
 
             var KConsole = GetAnswer(KContent);
-            var TConsole = GetAnswer(TContent);
             var AConsole = GetAnswer(AContent);
             Console.WriteLine("KContent:价格高低点:{0};比例高低点:{1}", string.Join("-", KConsole.Item1), string.Join("-", KConsole.Item2));
-            Console.WriteLine("TContent:价格高低点:{0};比例高低点:{1}", string.Join("-", TConsole.Item1), string.Join("-", TConsole.Item2));
             Console.WriteLine("AContent:价格高低点:{0};比例高低点:{1}", string.Join("-", AConsole.Item1), string.Join("-", AConsole.Item2));
             FileBase.WriteFile(dir, "K.txt", string.Join("\t\n", KContent.Select((p, index) => (index + 1) * 25 + " " + p.Item1.ToString("0.000") + " " + p.Item2.ToString("0.000"))), encode, FileBaseMode.Create);
-            FileBase.WriteFile(dir, "T.txt", string.Join("\t\n", TContent.Select((p, index) => (index + 1) * 25 + " " + p.Item1.ToString("0.000") + " " + p.Item2.ToString("0.000"))), encode, FileBaseMode.Create);
             FileBase.WriteFile(dir, "A.txt", string.Join("\t\n", AContent.Select((p, index) => (index + 1) * 25 + " " + p.Item1.ToString("0.000") + " " + p.Item2.ToString("0.000"))), encode, FileBaseMode.Create);
-            Monitor(list, dir, encode);
+            
         }
 
         /// <summary>
@@ -381,8 +366,7 @@ namespace X.UI.Helper
         {
             var file = mode == MyStockType.Top ? "./src/dp/龙头.txt" :
                 mode == MyStockType.Continie ? "./src/dp/接力.txt" :
-                mode == MyStockType.Pool ? "./src/dp/套利.txt" :
-                 mode == MyStockType.Trend ? "./src/dp/趋势套利.txt" : "./src/dp/接力.txt";
+                 mode == MyStockType.Trend ? "./src/dp/趋势接力.txt" : "./src/dp/接力.txt";
             var list1 = Regex.Split(FileBase.ReadFile(file, "gb2312"), "\r\n", RegexOptions.IgnoreCase);
             var ret = new List<StockPrice>();
             foreach (var item in list1)
@@ -406,18 +390,18 @@ namespace X.UI.Helper
             return ret;
         }
 
+
         /// <summary>
-        /// 
+        /// 盯盘
         /// </summary>
         /// <param name="Top">龙头</param>
         /// <param name="Continue">接力</param>
-        /// <param name="Xsb">买点</param>
-        /// <param name="Pool">股票池</param>
         /// <param name="Trend">趋势</param>
-        /// <param name="all">所有股票</param>
-        /// <param name="e">设置</param>
-        public static void MonitorStock(List<StockPrice> Top, List<StockPrice> Continue, List<StockPrice> Pool, 
-            List<StockPrice> Trend, List<MyStock> all, decimal e)
+        /// <param name="AQS">趋势池</param>
+        /// <param name="Wave">异动池</param>
+        /// <param name="e"></param>
+        public static void MonitorStock(List<StockPrice> Top, List<StockPrice> Continue, List<StockPrice> Trend,
+            List<MyStock> AQS, List<MyStock> Wave, decimal e)
         {
             var policy = ConfigurationHelper.GetAppSettingByName("Policy", 3);
             var tradeEnd = ConfigurationHelper.GetAppSettingByName("TradeEnd", new DateTime(2099, 1, 1, 15, 0, 0));
@@ -438,40 +422,38 @@ namespace X.UI.Helper
             {
                 filter = none;
             }
-            
+
             var m1 = new List<MyStockMonitor>();
-            foreach (var item in Pool.Where(p => p.CurrentPrice > 0 && filter(p)))
+            foreach (var item in Continue.Union(Top).Where(p => p.CurrentPrice > 0 && filter(p)))
             {
-                if (_continue(item))
+                var t = StockDataHelper.GetStockPrice(item.StockCode);
+                decimal a = 0.01M, b = 0.01M;
+                try
                 {
-                    var t = StockDataHelper.GetStockPrice(item.StockCode);
-                    decimal a = 0.01M, b = 0.01M;
-                    try
+                    a = t.MaxPrice / item.MaxPrice * t.MinPrice / item.MinPrice * 61.8M + 38.2M * t.CurrentPrice / item.CurrentPrice - 100;
+                    b = t.MaxPrice / item.MaxPrice * t.MinPrice / item.MinPrice * 61.8M + 38.2M * t.OpenPrice / t.LastClosePrice - 100;
+                    if (t.MinPrice < item.MinPrice)
                     {
-                        a = t.MaxPrice / item.MaxPrice * t.MinPrice / item.MinPrice * 61.8M + 38.2M * t.CurrentPrice / item.CurrentPrice - 100;
-                        b = t.MaxPrice / item.MaxPrice * t.MinPrice / item.MinPrice * 61.8M + 38.2M * t.OpenPrice / t.LastClosePrice - 100;
-                        if (t.MinPrice < item.MinPrice)
-                        {
-                            b = t.CurrentPrice / t.MinPrice * t.CurrentPrice / t.MaxPrice * 61.8M + 38.2M * t.OpenPrice / t.LastClosePrice - 100;
-                        }
-                    }
-                    catch { }
-                    if (!m1.Exists(p => p.StockCode == item.StockCode))
-                    {
-                        m1.Add(new MyStockMonitor
-                        {
-                            MyStockType = item.MyStockType,
-                            StockCode = t.StockCode,
-                            StockName = t.StockName,
-                            Inc = t.Inc,
-                            Price = t.CurrentPrice,
-                            S = all.FirstOrDefault(p => p.Code == t.StockCode).S1,
-                            K = a,
-                            L = b,
-                            Amount = t.Amount
-                        });
+                        b = t.CurrentPrice / t.MinPrice * t.CurrentPrice / t.MaxPrice * 61.8M + 38.2M * t.OpenPrice / t.LastClosePrice - 100;
                     }
                 }
+                catch { }
+                if (!m1.Exists(p => p.StockCode == item.StockCode))
+                {
+                    m1.Add(new MyStockMonitor
+                    {
+                        MyStockType = item.MyStockType,
+                        StockCode = t.StockCode,
+                        StockName = t.StockName,
+                        Inc = t.Inc,
+                        Price = t.CurrentPrice,
+                        S = Union(AQS, Wave).FirstOrDefault(p => p.Code == t.StockCode).S1,
+                        K = a,
+                        L = b,
+                        Amount = t.Amount
+                    });
+                }
+
             }
             var dt = DateTime.Now;
             IEnumerable<MyStockMonitor> m2 = null;
@@ -515,7 +497,7 @@ namespace X.UI.Helper
                         t.S.ToString("0.00"), t.SLevel, e.ToString("0.00"), t.Amount.ToString("0.00"));
                 }
             }
-            }
+        }
         #endregion
 
         public static void Program()
@@ -529,26 +511,26 @@ namespace X.UI.Helper
             {
                 //龙头
                 var top = GetMyMonitorStock(MyStockType.Top);
-                //股票池
-                var pool = GetMyMonitorStock(MyStockType.Pool);
                 //接力
                 var Continue = GetMyMonitorStock(MyStockType.Continie);
                 //趋势
                 var trend = GetMyMonitorStock(MyStockType.Trend);
-                //所有股票
-                var all = GetMyStock(MyStockMode.Stock);
+
+                var AQS = GetMyStock(MyStockMode.AQS);
+                var Wave = GetMyStock(MyStockMode.Wave);
                 while (dt.TimeOfDay >= tradeStart.TimeOfDay && dt.TimeOfDay <= tradeEnd.TimeOfDay)
                 {
                     var e = MonitorIndex();
-                    MonitorStock(top, Continue, pool, trend, all, e);
+                    MonitorStock(top, Continue, trend, AQS, Wave, e);
                     Thread.Sleep(6000);
-                    dt = DateTime.Now;                    
+                    dt = DateTime.Now;
                 }
             }
-            if (dt.TimeOfDay > tradeEnd.TimeOfDay)
+            if (dt.TimeOfDay > tradeEnd.TimeOfDay || dt.AddMinutes(30).TimeOfDay <= tradeStart.TimeOfDay)
             {
-                var t1 = GetMyStock(MyStockMode.Stock);
-                Deal(t1);
+                var AQS = GetMyStock(MyStockMode.AQS);
+                var Wave = GetMyStock(MyStockMode.Wave);
+                Deal(AQS, Wave);
                 var t2 = GetMyStock(MyStockMode.Index);
                 Deal2(t2);
                 JRJDataHelper.DealData(DateTime.Now.AddMonths(-1), DateTime.Now.Date);
