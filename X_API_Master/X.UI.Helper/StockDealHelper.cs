@@ -507,7 +507,7 @@ namespace X.UI.Helper
             Console.BackgroundColor = ConsoleColor.White;
             Console.ForegroundColor = ConsoleColor.Black;
             var dt = DateTime.Now;
-            if (dt.TimeOfDay <= tradeEnd.TimeOfDay)
+            if (dt.DayOfWeek != DayOfWeek.Saturday && dt.DayOfWeek != DayOfWeek.Sunday && dt.TimeOfDay <= tradeEnd.TimeOfDay)
             {
                 //龙头
                 var top = GetMyMonitorStock(MyStockType.Top);
@@ -526,7 +526,8 @@ namespace X.UI.Helper
                     dt = DateTime.Now;
                 }
             }
-            if (dt.TimeOfDay > tradeEnd.TimeOfDay || dt.AddMinutes(30).TimeOfDay <= tradeStart.TimeOfDay)
+            if (dt.DayOfWeek == DayOfWeek.Saturday || dt.DayOfWeek == DayOfWeek.Sunday ||
+                dt.TimeOfDay > tradeEnd.TimeOfDay || dt.AddMinutes(30).TimeOfDay <= tradeStart.TimeOfDay)
             {
                 var AQS = GetMyStock(MyStockMode.AQS);
                 var Wave = GetMyStock(MyStockMode.Wave);
