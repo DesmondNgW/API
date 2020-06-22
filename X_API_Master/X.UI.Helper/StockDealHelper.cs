@@ -366,6 +366,9 @@ namespace X.UI.Helper
         {
             var file = mode == MyStockType.Top ? "./src/dp/龙头.txt" :
                 mode == MyStockType.Continie ? "./src/dp/接力.txt" :
+                mode == MyStockType.MiddleTop ? "./src/dp/中线强势.txt" :
+                mode == MyStockType.ShortTopD ? "./src/dp/短线强势D.txt" :
+                mode == MyStockType.ShortTopH ? "./src/dp/短线强势H.txt" :
                  mode == MyStockType.Trend ? "./src/dp/趋势接力.txt" : "./src/dp/接力.txt";
             var list1 = Regex.Split(FileBase.ReadFile(file, "gb2312"), "\r\n", RegexOptions.IgnoreCase);
             var ret = new List<StockPrice>();
@@ -390,26 +393,36 @@ namespace X.UI.Helper
             return ret;
         }
 
-
         /// <summary>
         /// 盯盘
         /// </summary>
         /// <param name="Top">龙头</param>
         /// <param name="Continue">接力</param>
         /// <param name="Trend">趋势</param>
-        /// <param name="AQS">趋势池</param>
-        /// <param name="Wave">异动池</param>
+        /// <param name="MiddleTop">中线强势</param>
+        /// <param name="ShortTopD">短线强势D</param>
+        /// <param name="ShortTopH">短线强势H</param>
+        /// <param name="AQS"></param>
+        /// <param name="Wave"></param>
         /// <param name="e"></param>
         public static void MonitorStock(List<StockPrice> Top, List<StockPrice> Continue, List<StockPrice> Trend,
-            List<MyStock> AQS, List<MyStock> Wave, decimal e)
+            List<StockPrice> MiddleTop, List<StockPrice> ShortTopD, List<StockPrice> ShortTopH, List<MyStock> AQS,
+            List<MyStock> Wave, decimal e)
         {
             var policy = ConfigurationHelper.GetAppSettingByName("Policy", 3);
             var tradeEnd = ConfigurationHelper.GetAppSettingByName("TradeEnd", new DateTime(2099, 1, 1, 15, 0, 0));
+
+            //强势股
+            var _top = Top.Union(MiddleTop).Union(ShortTopD).Union(ShortTopH);
+            #region 过滤器
             Func<StockPrice, bool> filter = p => true;
-            Func<StockPrice, bool> top = p => Top.Exists(q => q.StockCode == p.StockCode);
+            //强势过滤
+            Func<StockPrice, bool> top = p => _top.ToList().Exists(q => q.StockCode == p.StockCode);
+            //趋势过滤
             Func<StockPrice, bool> trend = p => Trend.Exists(q => q.StockCode == p.StockCode);
-            Func<StockPrice, bool> none = p => Top.Union(Trend).All(q => q.StockCode != p.StockCode);
-            Func<StockPrice, bool> _continue = p => Continue.Exists(q => q.StockCode == p.StockCode);
+            //不过滤
+            Func<StockPrice, bool> none = p => _top.Union(Trend).All(q => q.StockCode != p.StockCode);
+            
             if (policy == 1)
             {
                 filter = top;
@@ -422,9 +435,10 @@ namespace X.UI.Helper
             {
                 filter = none;
             }
+            #endregion
 
             var m1 = new List<MyStockMonitor>();
-            foreach (var item in Continue.Union(Top).Where(p => p.CurrentPrice > 0 && filter(p)))
+            foreach (var item in Continue.Union(_top).Where(p => p.CurrentPrice > 0 && filter(p)))
             {
                 var t = StockDataHelper.GetStockPrice(item.StockCode);
                 decimal a = 0.01M, b = 0.01M;
@@ -469,8 +483,17 @@ namespace X.UI.Helper
             {
                 foreach (var t in m2)
                 {
+                    //龙头
                     var __top = Top.Exists(p => p.StockCode == t.StockCode);
+                    //趋势
                     var __trend = Trend.Exists(p => p.StockCode == t.StockCode);
+                    //中线强势
+                    var __middleTop = MiddleTop.Exists(p => p.StockCode == t.StockCode);
+                    //短线强势D
+                    var __shortTopD = ShortTopD.Exists(p => p.StockCode == t.StockCode);
+                    //短线强势H
+                    var __shortTopH = ShortTopH.Exists(p => p.StockCode == t.StockCode);
+                    var tip = "套利股";
                     if (t.Inc > 0)
                     {
                         Console.ForegroundColor = ConsoleColor.Red;
@@ -479,20 +502,23 @@ namespace X.UI.Helper
                     {
                         Console.ForegroundColor = ConsoleColor.Green;
                     }
-                    if (__top)
+                    if (__top || __middleTop || __shortTopD || __shortTopH)
                     {
                         Console.BackgroundColor = ConsoleColor.Gray;
+                        tip = __top ? "龙头强势股" : __middleTop ? "中线强势股" : "短线强势股";
                     }
                     else if (__trend)
                     {
                         Console.BackgroundColor = ConsoleColor.Yellow;
+                        tip = "趋势股";
                     }
                     else
                     {
                         Console.BackgroundColor = ConsoleColor.White;
                     }
+                    
                     Console.WriteLine("{0}-{1}:{2}({3})涨幅;{4}%,价格;{5},K;{6},KLevel;{7},S;{8},SLevel;{9},指数风控:{10}%,成交金额:{11}亿",
-                        DateTime.Now.ToString("MM-dd HH:mm:ss"), __top ? "龙头趋势股" : __trend ? "趋势股" : "套利股",
+                        DateTime.Now.ToString("MM-dd HH:mm:ss"), tip,
                         t.StockName, t.StockCode, t.Inc.ToString("0.00"), t.Price, t.K.ToString("0.00"), t.KLevel,
                         t.S.ToString("0.00"), t.SLevel, e.ToString("0.00"), t.Amount.ToString("0.00"));
                 }
@@ -515,13 +541,19 @@ namespace X.UI.Helper
                 var Continue = GetMyMonitorStock(MyStockType.Continie);
                 //趋势
                 var trend = GetMyMonitorStock(MyStockType.Trend);
+                //中线强势
+                var middleTop = GetMyMonitorStock(MyStockType.MiddleTop);
+                //短线强势D
+                var shortTopD = GetMyMonitorStock(MyStockType.ShortTopD);
+                //短线强势H
+                var shortTopH = GetMyMonitorStock(MyStockType.ShortTopH);
 
                 var AQS = GetMyStock(MyStockMode.AQS);
                 var Wave = GetMyStock(MyStockMode.Wave);
                 while (dt.TimeOfDay >= tradeStart.TimeOfDay && dt.TimeOfDay <= tradeEnd.TimeOfDay)
                 {
                     var e = MonitorIndex();
-                    MonitorStock(top, Continue, trend, AQS, Wave, e);
+                    MonitorStock(top, Continue, trend, middleTop, shortTopD, shortTopH, AQS, Wave, e);
                     Thread.Sleep(6000);
                     dt = DateTime.Now;
                 }
