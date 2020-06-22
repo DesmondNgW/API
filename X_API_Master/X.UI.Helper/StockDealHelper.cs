@@ -504,7 +504,8 @@ namespace X.UI.Helper
                     }
                     if (__top || __middleTop || __shortTopD || __shortTopH)
                     {
-                        Console.BackgroundColor = ConsoleColor.Gray;
+                        Console.BackgroundColor = __top ? ConsoleColor.Gray :
+                            __middleTop ? ConsoleColor.Cyan : ConsoleColor.Black;
                         tip = __top ? "龙头强势股" : __middleTop ? "中线强势股" : "短线强势股";
                     }
                     else if (__trend)
