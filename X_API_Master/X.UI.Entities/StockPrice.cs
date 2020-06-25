@@ -14,6 +14,8 @@ namespace X.UI.Entities
         Trend,
         //中线强势股
         MiddleTop,
+        //短线强势3D
+        ShortTop3D,
         //短线强势D
         ShortTopD,
         //短线强势H，

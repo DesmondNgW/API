@@ -367,6 +367,7 @@ namespace X.UI.Helper
             var file = mode == MyStockType.Top ? "./src/dp/龙头.txt" :
                 mode == MyStockType.Continie ? "./src/dp/接力.txt" :
                 mode == MyStockType.MiddleTop ? "./src/dp/中线强势.txt" :
+                mode == MyStockType.ShortTop3D ? "./src/dp/短线强势3D.txt" :
                 mode == MyStockType.ShortTopD ? "./src/dp/短线强势D.txt" :
                 mode == MyStockType.ShortTopH ? "./src/dp/短线强势H.txt" :
                  mode == MyStockType.Trend ? "./src/dp/趋势接力.txt" : "./src/dp/接力.txt";
@@ -406,14 +407,14 @@ namespace X.UI.Helper
         /// <param name="Wave"></param>
         /// <param name="e"></param>
         public static void MonitorStock(List<StockPrice> Top, List<StockPrice> Continue, List<StockPrice> Trend,
-            List<StockPrice> MiddleTop, List<StockPrice> ShortTopD, List<StockPrice> ShortTopH, List<MyStock> AQS,
-            List<MyStock> Wave, decimal e)
+            List<StockPrice> MiddleTop, List<StockPrice> ShortTop3D, List<StockPrice> ShortTopD, List<StockPrice> ShortTopH, 
+            List<MyStock> AQS, List<MyStock> Wave, decimal e)
         {
             var policy = ConfigurationHelper.GetAppSettingByName("Policy", 3);
             var tradeEnd = ConfigurationHelper.GetAppSettingByName("TradeEnd", new DateTime(2099, 1, 1, 15, 0, 0));
 
             //强势股
-            var _top = Top.Union(MiddleTop).Union(ShortTopD).Union(ShortTopH);
+            var _top = Top.Union(MiddleTop).Union(ShortTop3D).Union(ShortTopD).Union(ShortTopH);
             #region 过滤器
             Func<StockPrice, bool> filter = p => true;
             //强势过滤
@@ -489,6 +490,8 @@ namespace X.UI.Helper
                     var __trend = Trend.Exists(p => p.StockCode == t.StockCode);
                     //中线强势
                     var __middleTop = MiddleTop.Exists(p => p.StockCode == t.StockCode);
+                    //短线强势3D
+                    var __shortTop3D = ShortTop3D.Exists(p => p.StockCode == t.StockCode);
                     //短线强势D
                     var __shortTopD = ShortTopD.Exists(p => p.StockCode == t.StockCode);
                     //短线强势H
@@ -502,7 +505,7 @@ namespace X.UI.Helper
                     {
                         Console.ForegroundColor = ConsoleColor.Green;
                     }
-                    if (__top || __middleTop || __shortTopD || __shortTopH)
+                    if (__top || __middleTop || __shortTop3D || __shortTopD || __shortTopH)
                     {
                         Console.BackgroundColor = __top ? ConsoleColor.Gray :
                             __middleTop ? ConsoleColor.Cyan : ConsoleColor.Black;
@@ -531,10 +534,11 @@ namespace X.UI.Helper
         {
             var tradeStart = ConfigurationHelper.GetAppSettingByName("TradeStart", new DateTime(2099, 1, 1, 9, 15, 0));
             var tradeEnd = ConfigurationHelper.GetAppSettingByName("TradeEnd", new DateTime(2099, 1, 1, 15, 0, 0));
+            var mode = ConfigurationHelper.GetAppSettingByName("mode", 0);
             Console.BackgroundColor = ConsoleColor.White;
             Console.ForegroundColor = ConsoleColor.Black;
             var dt = DateTime.Now;
-            if (dt.DayOfWeek != DayOfWeek.Saturday && dt.DayOfWeek != DayOfWeek.Sunday && dt.TimeOfDay <= tradeEnd.TimeOfDay)
+            if (mode == 1 || (mode == 0 && dt.DayOfWeek != DayOfWeek.Saturday && dt.DayOfWeek != DayOfWeek.Sunday && dt.TimeOfDay <= tradeEnd.TimeOfDay))
             {
                 //龙头
                 var top = GetMyMonitorStock(MyStockType.Top);
@@ -544,6 +548,8 @@ namespace X.UI.Helper
                 var trend = GetMyMonitorStock(MyStockType.Trend);
                 //中线强势
                 var middleTop = GetMyMonitorStock(MyStockType.MiddleTop);
+                //短线强势3D
+                var shortTop3D = GetMyMonitorStock(MyStockType.ShortTop3D);
                 //短线强势D
                 var shortTopD = GetMyMonitorStock(MyStockType.ShortTopD);
                 //短线强势H
@@ -554,13 +560,13 @@ namespace X.UI.Helper
                 while (dt.TimeOfDay >= tradeStart.TimeOfDay && dt.TimeOfDay <= tradeEnd.TimeOfDay)
                 {
                     var e = MonitorIndex();
-                    MonitorStock(top, Continue, trend, middleTop, shortTopD, shortTopH, AQS, Wave, e);
+                    MonitorStock(top, Continue, trend, middleTop, shortTop3D, shortTopD, shortTopH, AQS, Wave, e);
                     Thread.Sleep(6000);
                     dt = DateTime.Now;
                 }
             }
-            if (dt.DayOfWeek == DayOfWeek.Saturday || dt.DayOfWeek == DayOfWeek.Sunday ||
-                dt.TimeOfDay > tradeEnd.TimeOfDay || dt.AddMinutes(30).TimeOfDay <= tradeStart.TimeOfDay)
+            if (mode == 2 || (mode == 0 && (dt.DayOfWeek == DayOfWeek.Saturday || dt.DayOfWeek == DayOfWeek.Sunday ||
+                dt.TimeOfDay > tradeEnd.TimeOfDay || dt.AddMinutes(30).TimeOfDay <= tradeStart.TimeOfDay)))
             {
                 var AQS = GetMyStock(MyStockMode.AQS);
                 var Wave = GetMyStock(MyStockMode.Wave);
