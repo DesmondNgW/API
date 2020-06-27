@@ -471,17 +471,18 @@ namespace X.UI.Helper
                         VolRate = (double)t.Vol / last.Vol * 100,
                     });
                 }
-
             }
             var dt = DateTime.Now;
             IEnumerable<MyStockMonitor> m2 = null;
+            var topCount = ConfigurationHelper.GetAppSettingByName("topCount", 29);
+            topCount = Math.Min(Math.Max(19, topCount), 39);
             if (dt.TimeOfDay <= tradeEnd.AddMinutes(-15).TimeOfDay)
             {
-                m2 = m1.Where(p => p.KLevel >= 7).OrderByDescending(p => p.KLevel).ThenByDescending(p => p.SLevel).ThenByDescending(p => p.Inc);
+                m2 = m1.Where(p => p.KLevel >= 7).OrderByDescending(p => p.KLevel).ThenByDescending(p => p.SLevel).ThenByDescending(p => p.Inc).Take(Top.Count + topCount);
             }
             else if (dt.TimeOfDay >= new TimeSpan(14, 45, 0))
             {
-                m2 = m1.Where(p => p.LLevel >= 4).OrderByDescending(p => p.LLevel).ThenByDescending(p => p.SLevel).ThenByDescending(p => p.Inc);
+                m2 = m1.Where(p => p.LLevel >= 4).OrderByDescending(p => p.LLevel).ThenByDescending(p => p.SLevel).ThenByDescending(p => p.Inc).Take(Top.Count + topCount);
             }
             if (m2 != null && m2.Count() > 0)
             {
