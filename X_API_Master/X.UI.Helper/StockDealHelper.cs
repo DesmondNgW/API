@@ -455,6 +455,7 @@ namespace X.UI.Helper
                 catch { }
                 if (!m1.Exists(p => p.StockCode == item.StockCode))
                 {
+                    var last = Union(AQS, Wave).FirstOrDefault(p => p.Code == t.StockCode);
                     m1.Add(new MyStockMonitor
                     {
                         MyStockType = item.MyStockType,
@@ -462,10 +463,12 @@ namespace X.UI.Helper
                         StockName = t.StockName,
                         Inc = t.Inc,
                         Price = t.CurrentPrice,
-                        S = Union(AQS, Wave).FirstOrDefault(p => p.Code == t.StockCode).S1,
+                        S = last.S1,
                         K = a,
                         L = b,
-                        Amount = t.Amount
+                        Amount = t.Amount,
+                        AmountRate = (double)t.Amount / last.Amount * 100,
+                        VolRate = (double)t.Vol / last.Vol * 100,
                     });
                 }
 
@@ -520,11 +523,12 @@ namespace X.UI.Helper
                     {
                         Console.BackgroundColor = ConsoleColor.White;
                     }
-                    
-                    Console.WriteLine("{0}-{1}:{2}({3})涨幅;{4}%,价格;{5},K;{6},KLevel;{7},S;{8},SLevel;{9},指数风控:{10}%,成交金额:{11}亿",
+
+                    Console.WriteLine("{0}-{1}:{2}({3})涨幅;{4}%,价格;{5},金额比例;{12}%,量能比例;{13}%,K;{6},KLevel;{7},S;{8},SLevel;{9},指数风控:{10}%,成交金额:{11}亿",
                         DateTime.Now.ToString("MM-dd HH:mm:ss"), tip,
                         t.StockName, t.StockCode, t.Inc.ToString("0.00"), t.Price, t.K.ToString("0.00"), t.KLevel,
-                        t.S.ToString("0.00"), t.SLevel, e.ToString("0.00"), t.Amount.ToString("0.00"));
+                        t.S.ToString("0.00"), t.SLevel, e.ToString("0.00"), t.Amount.ToString("0.00"),
+                        t.AmountRate.ToString("0.00"), t.VolRate.ToString("0.00"));
                 }
             }
         }
