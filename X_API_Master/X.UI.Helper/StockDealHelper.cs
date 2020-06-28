@@ -474,8 +474,8 @@ namespace X.UI.Helper
             }
             var dt = DateTime.Now;
             IEnumerable<MyStockMonitor> m2 = null;
-            var topCount = ConfigurationHelper.GetAppSettingByName("topCount", 29);
-            topCount = Math.Min(Math.Max(19, topCount), 39);
+            var topCount = ConfigurationHelper.GetAppSettingByName("topCount", 24);
+            topCount = Math.Min(Math.Max(9, topCount), 39);
             if (dt.TimeOfDay <= tradeEnd.AddMinutes(-15).TimeOfDay)
             {
                 m2 = m1.Where(p => p.KLevel >= 7).OrderByDescending(p => p.KLevel).ThenByDescending(p => p.SLevel).ThenByDescending(p => p.Inc).Take(Top.Count + topCount);
