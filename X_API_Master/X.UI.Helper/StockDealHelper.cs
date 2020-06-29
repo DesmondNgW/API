@@ -467,7 +467,7 @@ namespace X.UI.Helper
                         K = a,
                         L = b,
                         Amount = t.Amount,
-                        AmountRate = (double)t.Amount / last.Amount * 100,
+                        AmountRate = (double)t.Amount*1e8 / last.Amount * 100,
                         VolRate = (double)t.Vol / last.Vol * 100,
                     });
                 }
