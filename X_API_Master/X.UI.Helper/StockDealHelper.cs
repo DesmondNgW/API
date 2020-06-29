@@ -412,7 +412,7 @@ namespace X.UI.Helper
         {
             var policy = ConfigurationHelper.GetAppSettingByName("Policy", 3);
             var tradeEnd = ConfigurationHelper.GetAppSettingByName("TradeEnd", new DateTime(2099, 1, 1, 15, 0, 0));
-
+            var tradeStart = ConfigurationHelper.GetAppSettingByName("TradeStart", new DateTime(2099, 1, 1, 9, 15, 0));
             //强势股
             var _top = Top.Union(MiddleTop).Union(ShortTop3D).Union(ShortTopD).Union(ShortTopH);
             #region 过滤器
@@ -476,13 +476,17 @@ namespace X.UI.Helper
             IEnumerable<MyStockMonitor> m2 = null;
             var topCount = ConfigurationHelper.GetAppSettingByName("topCount", 24);
             topCount = Math.Min(Math.Max(9, topCount), 39);
-            if (dt.TimeOfDay <= tradeEnd.AddMinutes(-15).TimeOfDay)
+            if (dt.TimeOfDay <= tradeEnd.AddMinutes(-15).TimeOfDay && dt.TimeOfDay >= tradeStart.TimeOfDay)
             {
                 m2 = m1.Where(p => p.KLevel >= 7).OrderByDescending(p => p.KLevel).ThenByDescending(p => p.SLevel).ThenByDescending(p => p.Inc).Take(topCount);
             }
-            else if (dt.TimeOfDay >= new TimeSpan(14, 45, 0))
+            else if (dt.TimeOfDay > tradeEnd.AddMinutes(-15).TimeOfDay)
             {
                 m2 = m1.Where(p => p.LLevel >= 4).OrderByDescending(p => p.LLevel).ThenByDescending(p => p.SLevel).ThenByDescending(p => p.Inc).Take(topCount);
+            }
+            else
+            {
+                m2 = m1.OrderByDescending(p => p.SLevel).ThenByDescending(p => p.Inc).Take(topCount);
             }
             if (m2 != null && m2.Count() > 0)
             {
@@ -543,6 +547,7 @@ namespace X.UI.Helper
             Console.BackgroundColor = ConsoleColor.White;
             Console.ForegroundColor = ConsoleColor.Black;
             var dt = DateTime.Now;
+            //盯盘
             if (mode == 1 || (mode == 0 && dt.DayOfWeek != DayOfWeek.Saturday && dt.DayOfWeek != DayOfWeek.Sunday && dt.TimeOfDay <= tradeEnd.TimeOfDay))
             {
                 //龙头
@@ -570,6 +575,7 @@ namespace X.UI.Helper
                     dt = DateTime.Now;
                 }
             }
+            //复盘
             if (mode == 2 || (mode == 0 && (dt.DayOfWeek == DayOfWeek.Saturday || dt.DayOfWeek == DayOfWeek.Sunday ||
                 dt.TimeOfDay > tradeEnd.TimeOfDay || dt.AddMinutes(30).TimeOfDay <= tradeStart.TimeOfDay)))
             {
@@ -578,7 +584,27 @@ namespace X.UI.Helper
                 Deal(AQS, Wave);
                 var t2 = GetMyStock(MyStockMode.Index);
                 Deal2(t2);
-                JRJDataHelper.DealData(DateTime.Now.AddMonths(-1), DateTime.Now.Date);
+            }
+            else
+            {
+                //龙头
+                var top = GetMyMonitorStock(MyStockType.Top);
+                //接力
+                var Continue = GetMyMonitorStock(MyStockType.Continie);
+                //趋势
+                var trend = GetMyMonitorStock(MyStockType.Trend);
+                //中线强势
+                var middleTop = GetMyMonitorStock(MyStockType.MiddleTop);
+                //短线强势3D
+                var shortTop3D = GetMyMonitorStock(MyStockType.ShortTop3D);
+                //短线强势D
+                var shortTopD = GetMyMonitorStock(MyStockType.ShortTopD);
+                //短线强势H
+                var shortTopH = GetMyMonitorStock(MyStockType.ShortTopH);
+                var AQS = GetMyStock(MyStockMode.AQS);
+                var Wave = GetMyStock(MyStockMode.Wave);
+                var e = MonitorIndex();
+                MonitorStock(top, Continue, trend, middleTop, shortTop3D, shortTopD, shortTopH, AQS, Wave, e);
             }
             Console.WriteLine("Program End! Press Any Key!");
             Console.ReadKey();
