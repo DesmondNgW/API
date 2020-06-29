@@ -478,11 +478,11 @@ namespace X.UI.Helper
             topCount = Math.Min(Math.Max(9, topCount), 39);
             if (dt.TimeOfDay <= tradeEnd.AddMinutes(-15).TimeOfDay)
             {
-                m2 = m1.Where(p => p.KLevel >= 7).OrderByDescending(p => p.KLevel).ThenByDescending(p => p.SLevel).ThenByDescending(p => p.Inc).Take(Top.Count + topCount);
+                m2 = m1.Where(p => p.KLevel >= 7).OrderByDescending(p => p.KLevel).ThenByDescending(p => p.SLevel).ThenByDescending(p => p.Inc).Take(topCount);
             }
             else if (dt.TimeOfDay >= new TimeSpan(14, 45, 0))
             {
-                m2 = m1.Where(p => p.LLevel >= 4).OrderByDescending(p => p.LLevel).ThenByDescending(p => p.SLevel).ThenByDescending(p => p.Inc).Take(Top.Count + topCount);
+                m2 = m1.Where(p => p.LLevel >= 4).OrderByDescending(p => p.LLevel).ThenByDescending(p => p.SLevel).ThenByDescending(p => p.Inc).Take(topCount);
             }
             if (m2 != null && m2.Count() > 0)
             {
