@@ -259,7 +259,7 @@ namespace X.UI.Helper
             var b2 = a3.Union(a4);
             var b = b1.Where(p => b2.Count(q => q.Code == p.Code) > 0).Distinct();
             var ret = new List<string>() { Calc(b).ToString("0.00") };
-            return ret.Union(b.OrderBy(p => p.Order).Select(o)).ToArray();
+            return ret.Union(b.OrderByDescending(p => p.K1+ p.K2+ p.K3+ p.K4).Select(o)).ToArray();
         }
 
         /// <summary>
@@ -422,7 +422,7 @@ namespace X.UI.Helper
             //趋势过滤
             Func<StockPrice, bool> trend = p => Trend.Exists(q => q.StockCode == p.StockCode);
             //不过滤
-            Func<StockPrice, bool> none = p => _top.Union(Trend).All(q => q.StockCode != p.StockCode);
+            Func<StockPrice, bool> none = p => _top.Union(Trend).ToList().Exists(q => q.StockCode == p.StockCode);
             
             if (policy == 1)
             {
@@ -456,20 +456,23 @@ namespace X.UI.Helper
                 if (!m1.Exists(p => p.StockCode == item.StockCode))
                 {
                     var last = Union(AQS, Wave).FirstOrDefault(p => p.Code == t.StockCode);
-                    m1.Add(new MyStockMonitor
+                    if (last != null)
                     {
-                        MyStockType = item.MyStockType,
-                        StockCode = t.StockCode,
-                        StockName = t.StockName,
-                        Inc = t.Inc,
-                        Price = t.CurrentPrice,
-                        S = last.S1,
-                        K = a,
-                        L = b,
-                        Amount = t.Amount,
-                        AmountRate = (double)t.Amount*1e8 / last.Amount * 100,
-                        VolRate = (double)t.Vol / last.Vol * 100,
-                    });
+                        m1.Add(new MyStockMonitor
+                        {
+                            MyStockType = item.MyStockType,
+                            StockCode = t.StockCode,
+                            StockName = t.StockName,
+                            Inc = t.Inc,
+                            Price = t.CurrentPrice,
+                            S = last.S1,
+                            K = a,
+                            L = b,
+                            Amount = t.Amount,
+                            AmountRate = (double)t.Amount * 1e8 / last.Amount * 100,
+                            VolRate = (double)t.Vol / last.Vol * 100,
+                        });
+                    }
                 }
             }
             var dt = DateTime.Now;
@@ -585,7 +588,7 @@ namespace X.UI.Helper
                 var t2 = GetMyStock(MyStockMode.Index);
                 Deal2(t2);
             }
-            else
+            else if (mode == 3)
             {
                 //龙头
                 var top = GetMyMonitorStock(MyStockType.Top);
