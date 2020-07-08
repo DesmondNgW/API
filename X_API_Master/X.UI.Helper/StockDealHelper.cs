@@ -286,12 +286,15 @@ namespace X.UI.Helper
         /// <param name="encode"></param>
         public static void Deal(List<MyStock> AQS, List<MyStock> Wave, string encode = "utf-8")
         {
-            var list = Union(AQS, Wave);
+            var tmp = Union(AQS, Wave);
+            var list = tmp.Where(p => !p.Code.StartsWith("8"));
+            var bk = tmp.Where(p => p.Code.StartsWith("8"));
             var t = list.Sum(p => p.Amount) / 400 * 0.382;
             Console.WriteLine("{0}亿", (t / 1e8).ToString("0.00"));
-            string dir = "./dest", dirK = "./dest/K", dirA = "./dest/A";
+            string dir = "./dest", dirK = "./dest/K", dirA = "./dest/A", dirBk = "./dest/Bk";
             var KContent = new List<Tuple<double, double>>();
             var AContent = new List<Tuple<double, double>>();
+            var BkContent = new List<Tuple<double, double>>();
             for (var i = 25; i <= 400; i += 25)
             {
                 //K系列
@@ -303,6 +306,16 @@ namespace X.UI.Helper
                 AContent.Add(new Tuple<double, double>(aContent[0].Convert2Double(-10000), (aContent.Length - 1.0) / i));
                 FileBase.WriteFile(dirA, "A" + i + ".txt", string.Join("\t\n", aContent), encode, FileBaseMode.Create);
             }
+
+            var bkc = bk.Count();
+            for (var i = 3; i <= bkc; i += 3)
+            {
+                //BK系列
+                var kContent = GetStockName(bk, i, F1, O2);
+                BkContent.Add(new Tuple<double, double>(kContent[0].Convert2Double(-10000), (kContent.Length - 1.0) / i));
+                FileBase.WriteFile(dirBk, "BK" + i + ".txt", string.Join("\t\n", kContent), encode, FileBaseMode.Create);
+            }
+
             //K系列
             FileBase.WriteFile(dirK, "K500.txt", string.Join("\t\n", GetStockName(list, 500, F1, O1)), encode, FileBaseMode.Create);
             FileBase.WriteFile(dirK, "K825.txt", string.Join("\t\n", GetStockName(list, 825, F1, O1)), encode, FileBaseMode.Create);
@@ -312,11 +325,13 @@ namespace X.UI.Helper
 
             var KConsole = GetAnswer(KContent);
             var AConsole = GetAnswer(AContent);
+
             Console.WriteLine("KContent:价格高低点:{0};比例高低点:{1}", string.Join("-", KConsole.Item1), string.Join("-", KConsole.Item2));
             Console.WriteLine("AContent:价格高低点:{0};比例高低点:{1}", string.Join("-", AConsole.Item1), string.Join("-", AConsole.Item2));
+            
             FileBase.WriteFile(dir, "K.txt", string.Join("\t\n", KContent.Select((p, index) => (index + 1) * 25 + " " + p.Item1.ToString("0.000") + " " + p.Item2.ToString("0.000"))), encode, FileBaseMode.Create);
             FileBase.WriteFile(dir, "A.txt", string.Join("\t\n", AContent.Select((p, index) => (index + 1) * 25 + " " + p.Item1.ToString("0.000") + " " + p.Item2.ToString("0.000"))), encode, FileBaseMode.Create);
-            
+            FileBase.WriteFile(dir, "Bk.txt", string.Join("\t\n", BkContent.Select((p, index) => (index + 1) * 3 + " " + p.Item1.ToString("0.000") + " " + p.Item2.ToString("0.000"))), encode, FileBaseMode.Create);
         }
 
         /// <summary>
@@ -326,18 +341,12 @@ namespace X.UI.Helper
         /// <param name="encode"></param>
         public static void Deal2(List<MyStock> list, string encode = "utf-8")
         {
-            var dir = "./dest";
             var dirB = "./dest/B";
-            var BContent = new List<Tuple<double, double>>();
             for (var i = 3; i <= 48; i += 3)
             {
                 var bContent = GetStockName(list, i, F3, O2);
-                BContent.Add(new Tuple<double, double>(bContent[0].Convert2Double(-10000), (bContent.Length - 1.0) / i));
                 FileBase.WriteFile(dirB, "B" + i + ".txt", string.Join("\t\n", bContent), encode, FileBaseMode.Create);
             }
-            var BConsole = GetAnswer(BContent);
-            Console.WriteLine("BContent:价格高低点:{0};比例高低点:{1}", string.Join("-", BConsole.Item1), string.Join("-", BConsole.Item2));
-            FileBase.WriteFile(dir, "B.txt", string.Join("\t\n", BContent.Select((p, index) => (index + 1) * 3 + " " + p.Item1.ToString("0.000") + " " + p.Item2.ToString("0.000"))), encode, FileBaseMode.Create);
         }
         #endregion
 
