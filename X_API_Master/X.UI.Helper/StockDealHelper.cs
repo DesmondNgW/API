@@ -326,11 +326,18 @@ namespace X.UI.Helper
         /// <param name="encode"></param>
         public static void Deal2(List<MyStock> list, string encode = "utf-8")
         {
-            var dir = "./dest/B";
+            var dir = "./dest";
+            var dirB = "./dest/B";
+            var BContent = new List<Tuple<double, double>>();
             for (var i = 3; i <= 48; i += 3)
             {
-                FileBase.WriteFile(dir, "B" + i + ".txt", string.Join("\t\n", GetStockName(list, i, F3, O2)), encode, FileBaseMode.Create);
+                var bContent = GetStockName(list, i, F3, O2);
+                BContent.Add(new Tuple<double, double>(bContent[0].Convert2Double(-10000), (bContent.Length - 1.0) / i));
+                FileBase.WriteFile(dirB, "B" + i + ".txt", string.Join("\t\n", bContent), encode, FileBaseMode.Create);
             }
+            var BConsole = GetAnswer(BContent);
+            Console.WriteLine("BContent:价格高低点:{0};比例高低点:{1}", string.Join("-", BConsole.Item1), string.Join("-", BConsole.Item2));
+            FileBase.WriteFile(dir, "B.txt", string.Join("\t\n", BContent.Select((p, index) => (index + 1) * 3 + " " + p.Item1.ToString("0.000") + " " + p.Item2.ToString("0.000"))), encode, FileBaseMode.Create);
         }
         #endregion
 
