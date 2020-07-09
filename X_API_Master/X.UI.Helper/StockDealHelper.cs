@@ -5,7 +5,6 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using X.UI.Entities;
 using X.Util.Core;
-using X.Util.Core.Cache;
 using X.Util.Core.Configuration;
 using X.Util.Entities.Enums;
 using X.Util.Other;
@@ -79,7 +78,6 @@ namespace X.UI.Helper
         /// <returns></returns>
         public static double Calc(IEnumerable<MyStock> list)
         {
-            double a = 0;
             double b = 0;
             double c = 0;
             foreach (var item in list)
@@ -361,7 +359,9 @@ namespace X.UI.Helper
             var b = StockDataHelper.GetIndexPrice("sz399001");
             var c = StockDataHelper.GetIndexPrice("sz399005");
             var d = StockDataHelper.GetIndexPrice("sz399006");
-            var e = (a.Inc + b.Inc + c.Inc + d.Inc) / 4;
+            var count = (a != null ? 1 : 0) + (b != null ? 1 : 0) + (c != null ? 1 : 0) + (d != null ? 1 : 0);
+            var inc = a?.Inc + b?.Inc + c?.Inc + d?.Inc;
+            var e = count > 0 ? inc.Value / count : 0;
             if (a.Inc > 0)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
@@ -382,10 +382,8 @@ namespace X.UI.Helper
         {
             var file = mode == MyStockType.Top ? "./src/dp/龙头.txt" :
                 mode == MyStockType.Continie ? "./src/dp/接力.txt" :
-                mode == MyStockType.MiddleTop ? "./src/dp/中线强势.txt" :
-                mode == MyStockType.ShortTop3D ? "./src/dp/短线强势3D.txt" :
-                mode == MyStockType.ShortTopD ? "./src/dp/短线强势D.txt" :
-                mode == MyStockType.ShortTopH ? "./src/dp/短线强势H.txt" :
+                mode == MyStockType.ShortContinie ? "./src/dp/短线接力.txt" :
+                mode == MyStockType.ShortTrend ? "./src/dp/短线趋势接力.txt" :
                  mode == MyStockType.Trend ? "./src/dp/趋势接力.txt" : "./src/dp/接力.txt";
             var list1 = Regex.Split(FileBase.ReadFile(file, "gb2312"), "\r\n", RegexOptions.IgnoreCase);
             var ret = new List<StockPrice>();
@@ -416,30 +414,53 @@ namespace X.UI.Helper
         /// <param name="Top">龙头</param>
         /// <param name="Continue">接力</param>
         /// <param name="Trend">趋势</param>
-        /// <param name="MiddleTop">中线强势</param>
-        /// <param name="ShortTopD">短线强势D</param>
-        /// <param name="ShortTopH">短线强势H</param>
+        /// <param name="ShortContinue">短线接力</param>
+        /// <param name="ShortTrend">短线趋势</param>
         /// <param name="AQS"></param>
         /// <param name="Wave"></param>
         /// <param name="e"></param>
         public static void MonitorStock(List<StockPrice> Top, List<StockPrice> Continue, List<StockPrice> Trend,
-            List<StockPrice> MiddleTop, List<StockPrice> ShortTop3D, List<StockPrice> ShortTopD, List<StockPrice> ShortTopH, 
-            List<MyStock> AQS, List<MyStock> Wave, decimal e)
+            List<StockPrice> ShortContinue, List<StockPrice> ShortTrend, List<MyStock> AQS, List<MyStock> Wave, decimal e)
         {
             var policy = ConfigurationHelper.GetAppSettingByName("Policy", 3);
             var tradeEnd = ConfigurationHelper.GetAppSettingByName("TradeEnd", new DateTime(2099, 1, 1, 15, 0, 0));
             var tradeStart = ConfigurationHelper.GetAppSettingByName("TradeStart", new DateTime(2099, 1, 1, 9, 15, 0));
+            //盯盘模式，
+            var dpmode = ConfigurationHelper.GetAppSettingByName("DpMode", 1);
+            List<StockPrice> _Continue = null;
+            List<StockPrice> _Trend = null;
+            if (dpmode == 1)
+            {
+                _Continue = Continue;
+                _Trend = Trend;
+            }
+            else if (dpmode == 2)
+            {
+                _Continue = ShortContinue;
+                _Trend = ShortTrend;
+            }
+            else if (dpmode == 3)
+            {
+                _Continue = Continue.Intersect(ShortContinue).ToList();
+                _Trend = Trend.Intersect(ShortTrend).ToList();
+            }
+            else if (dpmode == 4)
+            {
+                _Continue = Continue.Union(ShortContinue).ToList();
+                _Trend = Trend.Union(ShortTrend).ToList();
+            }
+
             //强势股
-            var _top = Top.Union(MiddleTop).Union(ShortTop3D).Union(ShortTopD).Union(ShortTopH);
+            var _top = Top;
             #region 过滤器
             Func<StockPrice, bool> filter = p => true;
             //强势过滤
-            Func<StockPrice, bool> top = p => _top.ToList().Exists(q => q.StockCode == p.StockCode);
+            bool top(StockPrice p) => _top.ToList().Exists(q => q.StockCode == p.StockCode);
             //趋势过滤
-            Func<StockPrice, bool> trend = p => Trend.Exists(q => q.StockCode == p.StockCode);
+            bool trend(StockPrice p) => _Trend.Exists(q => q.StockCode == p.StockCode);
             //不过滤
-            Func<StockPrice, bool> none = p => _top.Union(Trend).ToList().Exists(q => q.StockCode == p.StockCode);
-            
+            bool none(StockPrice p) => _top.Union(_Trend).ToList().Exists(q => q.StockCode == p.StockCode);
+
             if (policy == 1)
             {
                 filter = top;
@@ -455,7 +476,7 @@ namespace X.UI.Helper
             #endregion
 
             var m1 = new List<MyStockMonitor>();
-            foreach (var item in Continue.Union(_top).Where(p => p.CurrentPrice > 0 && filter(p)))
+            foreach (var item in _Continue.Union(_top).Where(p => p.CurrentPrice > 0 && filter(p)))
             {
                 var t = StockDataHelper.GetStockPrice(item.StockCode);
                 decimal a = 0.01M, b = 0.01M;
@@ -514,15 +535,8 @@ namespace X.UI.Helper
                     //龙头
                     var __top = Top.Exists(p => p.StockCode == t.StockCode);
                     //趋势
-                    var __trend = Trend.Exists(p => p.StockCode == t.StockCode);
-                    //中线强势
-                    var __middleTop = MiddleTop.Exists(p => p.StockCode == t.StockCode);
-                    //短线强势3D
-                    var __shortTop3D = ShortTop3D.Exists(p => p.StockCode == t.StockCode);
-                    //短线强势D
-                    var __shortTopD = ShortTopD.Exists(p => p.StockCode == t.StockCode);
-                    //短线强势H
-                    var __shortTopH = ShortTopH.Exists(p => p.StockCode == t.StockCode);
+                    var __trend = _Trend.Exists(p => p.StockCode == t.StockCode);
+                    
                     var tip = "套利股";
                     if (t.Inc > 0)
                     {
@@ -532,11 +546,10 @@ namespace X.UI.Helper
                     {
                         Console.ForegroundColor = ConsoleColor.Green;
                     }
-                    if (__top || __middleTop || __shortTop3D || __shortTopD || __shortTopH)
+                    if (__top)
                     {
-                        Console.BackgroundColor = __top ? ConsoleColor.Gray :
-                            __middleTop ? ConsoleColor.Cyan : ConsoleColor.Black;
-                        tip = __top ? "龙头强势股" : __middleTop ? "中线强势股" : "短线强势股";
+                        Console.BackgroundColor = __top ? ConsoleColor.Gray : ConsoleColor.Cyan;
+                        tip = __top ? "龙头强势股" : "强势股";
                     }
                     else if (__trend)
                     {
@@ -575,21 +588,17 @@ namespace X.UI.Helper
                 var Continue = GetMyMonitorStock(MyStockType.Continie);
                 //趋势
                 var trend = GetMyMonitorStock(MyStockType.Trend);
-                //中线强势
-                var middleTop = GetMyMonitorStock(MyStockType.MiddleTop);
-                //短线强势3D
-                var shortTop3D = GetMyMonitorStock(MyStockType.ShortTop3D);
-                //短线强势D
-                var shortTopD = GetMyMonitorStock(MyStockType.ShortTopD);
-                //短线强势H
-                var shortTopH = GetMyMonitorStock(MyStockType.ShortTopH);
+                //短线接力
+                var shortContinue = GetMyMonitorStock(MyStockType.ShortContinie);
+                //短线趋势
+                var shortTrend = GetMyMonitorStock(MyStockType.ShortTrend);
 
                 var AQS = GetMyStock(MyStockMode.AQS);
                 var Wave = GetMyStock(MyStockMode.Wave);
                 while (dt.TimeOfDay >= tradeStart.TimeOfDay && dt.TimeOfDay <= tradeEnd.TimeOfDay)
                 {
                     var e = MonitorIndex();
-                    MonitorStock(top, Continue, trend, middleTop, shortTop3D, shortTopD, shortTopH, AQS, Wave, e);
+                    MonitorStock(top, Continue, trend, shortContinue, shortTrend, AQS, Wave, e);
                     Thread.Sleep(6000);
                     dt = DateTime.Now;
                 }
@@ -612,18 +621,14 @@ namespace X.UI.Helper
                 var Continue = GetMyMonitorStock(MyStockType.Continie);
                 //趋势
                 var trend = GetMyMonitorStock(MyStockType.Trend);
-                //中线强势
-                var middleTop = GetMyMonitorStock(MyStockType.MiddleTop);
-                //短线强势3D
-                var shortTop3D = GetMyMonitorStock(MyStockType.ShortTop3D);
-                //短线强势D
-                var shortTopD = GetMyMonitorStock(MyStockType.ShortTopD);
-                //短线强势H
-                var shortTopH = GetMyMonitorStock(MyStockType.ShortTopH);
+                //短线接力
+                var shortContinue = GetMyMonitorStock(MyStockType.ShortContinie);
+                //短线趋势
+                var shortTrend = GetMyMonitorStock(MyStockType.ShortTrend);
                 var AQS = GetMyStock(MyStockMode.AQS);
                 var Wave = GetMyStock(MyStockMode.Wave);
                 var e = MonitorIndex();
-                MonitorStock(top, Continue, trend, middleTop, shortTop3D, shortTopD, shortTopH, AQS, Wave, e);
+                MonitorStock(top, Continue, trend, shortContinue, shortTrend, AQS, Wave, e);
             }
             Console.WriteLine("Program End! Press Any Key!");
             Console.ReadKey();

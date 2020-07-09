@@ -12,14 +12,10 @@ namespace X.UI.Entities
         Continie,
         //趋势
         Trend,
-        //中线强势股
-        MiddleTop,
-        //短线强势3D
-        ShortTop3D,
-        //短线强势D
-        ShortTopD,
-        //短线强势H，
-        ShortTopH,
+        //短线接力
+        ShortContinie,
+        //短线趋势
+        ShortTrend,
     }
 
     public class StockPrice : MongoBaseModel
