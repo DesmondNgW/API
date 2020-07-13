@@ -11,13 +11,6 @@ using X.Util.Other;
 
 namespace X.UI.Helper
 {
-    public enum MyStockMode
-    {
-        Index,
-        AQS,
-        Wave
-    }
-
     public class StockDealHelper
     {
         #region 工具算法
@@ -68,7 +61,7 @@ namespace X.UI.Helper
         /// <returns></returns>
         private static string O2(MyStock p)
         {
-            return p.Code + " " + p.Name + " " + (p.K1 + p.K2 + p.K3 + p.K4) / 4;
+            return p.Code + " " + p.Name + " " + (p.K1 + p.K2 + p.K3 + p.K4) / 4 + " " + (p.MyStockMode == MyStockMode.AQS ? "AQS" : "Wave");
         }
 
         /// <summary>
@@ -232,6 +225,7 @@ namespace X.UI.Helper
                         K4 = t[13].Convert2Double(-100),
                         Cap = t[14].Convert2Double(0),
                         MT = t[15].Convert2Int32(0),
+                        MyStockMode = mode
                     };
                     ret.Add(myStock);
                 }
@@ -508,6 +502,8 @@ namespace X.UI.Helper
                             Amount = t.Amount,
                             AmountRate = (double)t.Amount * 1e8 / last.Amount * 100,
                             VolRate = (double)t.Vol / last.Vol * 100,
+                            Buy1 = t.Buy1 * t.CurrentPrice / 100000000,
+                            Sell1 = t.Sell1 * t.CurrentPrice / 100000000,
                         });
                     }
                 }
@@ -536,7 +532,7 @@ namespace X.UI.Helper
                     var __top = Top.Exists(p => p.StockCode == t.StockCode);
                     //趋势
                     var __trend = _Trend.Exists(p => p.StockCode == t.StockCode);
-                    
+
                     var tip = "套利股";
                     if (t.Inc > 0)
                     {
@@ -560,12 +556,21 @@ namespace X.UI.Helper
                     {
                         Console.BackgroundColor = ConsoleColor.White;
                     }
+                    var tip1 = string.Empty;
+                    if (t.Buy1 >= 0.1M)
+                    {
+                        tip1 += "买一:" + t.Buy1.ToString("0.00") + "亿";
+                    }
+                    if (t.Sell1 >= 0.1M)
+                    {
+                        tip1 += "卖一:" + t.Sell1.ToString("0.00") + "亿";
+                    }
 
-                    Console.WriteLine("{0}-{1}:{2}({3})涨幅;{4}%,价格;{5},金额比例;{12}%,量能比例;{13}%,K;{6},KLevel;{7},S;{8},SLevel;{9},指数风控:{10}%,成交金额:{11}亿",
+                    Console.WriteLine("{0}-{1}:{2}({3})涨幅;{4}%,价格;{5},金额比例;{12}%,量能比例;{13}%,K;{6},KLevel;{7},S;{8},SLevel;{9},指数风控:{10}%,成交金额:{11}亿,{14}",
                         DateTime.Now.ToString("MM-dd HH:mm:ss"), tip,
                         t.StockName, t.StockCode, t.Inc.ToString("0.00"), t.Price, t.K.ToString("0.00"), t.KLevel,
                         t.S.ToString("0.00"), t.SLevel, e.ToString("0.00"), t.Amount.ToString("0.00"),
-                        t.AmountRate.ToString("0.00"), t.VolRate.ToString("0.00"));
+                        t.AmountRate.ToString("0.00"), t.VolRate.ToString("0.00"), tip1);
                 }
             }
         }

@@ -234,6 +234,8 @@ namespace X.UI.Helper
                 MaxPrice = decimal.Parse(arr[4]),
                 MinPrice = decimal.Parse(arr[5]),
                 OpenPrice = decimal.Parse(arr[1]),
+                Buy1 = decimal.Parse(arr[10]),
+                Sell1 = decimal.Parse(arr[20]),
                 LastClosePrice = decimal.Parse(arr[2]),
                 Datetime = DateTime.Parse(arr[30] + " " + arr[31]),
                 Vol = decimal.Parse(arr[8]),

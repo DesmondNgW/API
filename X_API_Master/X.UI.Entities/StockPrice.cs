@@ -87,5 +87,15 @@ namespace X.UI.Entities
         public decimal MY { get; set; }
 
         public MyStockType MyStockType { get; set; }
+
+        /// <summary>
+        /// 委托买1
+        /// </summary>
+        public decimal Buy1 { get; set; }
+
+        /// <summary>
+        /// 委托卖1
+        /// </summary>
+        public decimal Sell1 { get; set; }
     }
 }

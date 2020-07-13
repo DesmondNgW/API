@@ -6,6 +6,14 @@ using System.Threading.Tasks;
 
 namespace X.UI.Entities
 {
+    public enum MyStockMode
+    {
+        Index,
+        AQS,
+        Wave
+    }
+
+
     public class MyStock
     {
         public string Code { get; set; }
@@ -71,5 +79,7 @@ namespace X.UI.Entities
         public decimal Order7 { get; set; }
 
         public decimal Order8 { get; set; }
+
+        public MyStockMode MyStockMode { get; set; }
     }
 }
