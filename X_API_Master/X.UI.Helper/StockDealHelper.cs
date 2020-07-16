@@ -378,7 +378,8 @@ namespace X.UI.Helper
                 mode == MyStockType.Continie ? "./src/dp/接力.txt" :
                 mode == MyStockType.ShortContinie ? "./src/dp/短线接力.txt" :
                 mode == MyStockType.ShortTrend ? "./src/dp/短线趋势接力.txt" :
-                 mode == MyStockType.Trend ? "./src/dp/趋势接力.txt" : "./src/dp/接力.txt";
+                 mode == MyStockType.Trend ? "./src/dp/趋势接力.txt" :
+                 mode == MyStockType.R1 ? "./src/dp/R1.txt" : "./src/dp/接力.txt";
             var list1 = Regex.Split(FileBase.ReadFile(file, "gb2312"), "\r\n", RegexOptions.IgnoreCase);
             var ret = new List<StockPrice>();
             foreach (var item in list1)
@@ -410,17 +411,24 @@ namespace X.UI.Helper
         /// <param name="Trend">趋势</param>
         /// <param name="ShortContinue">短线接力</param>
         /// <param name="ShortTrend">短线趋势</param>
+        /// <param name="R1">短线分时</param>
         /// <param name="AQS"></param>
         /// <param name="Wave"></param>
         /// <param name="e"></param>
         public static void MonitorStock(List<StockPrice> Top, List<StockPrice> Continue, List<StockPrice> Trend,
-            List<StockPrice> ShortContinue, List<StockPrice> ShortTrend, List<MyStock> AQS, List<MyStock> Wave, decimal e)
+            List<StockPrice> ShortContinue, List<StockPrice> ShortTrend, List<StockPrice> R1, List<MyStock> AQS, 
+            List<MyStock> Wave, decimal e)
         {
-            var policy = ConfigurationHelper.GetAppSettingByName("Policy", 3);
-            var tradeEnd = ConfigurationHelper.GetAppSettingByName("TradeEnd", new DateTime(2099, 1, 1, 15, 0, 0));
+            //开盘时间
             var tradeStart = ConfigurationHelper.GetAppSettingByName("TradeStart", new DateTime(2099, 1, 1, 9, 15, 0));
+            //收盘时间
+            var tradeEnd = ConfigurationHelper.GetAppSettingByName("TradeEnd", new DateTime(2099, 1, 1, 15, 0, 0)); 
             //盯盘模式，
             var dpmode = ConfigurationHelper.GetAppSettingByName("DpMode", 1);
+            //盯盘过滤器
+            var dpFilter = ConfigurationHelper.GetAppSettingByName("filter", 3);
+
+            #region 盯盘模式
             List<StockPrice> _Continue = null;
             List<StockPrice> _Trend = null;
             if (dpmode == 1)
@@ -443,10 +451,10 @@ namespace X.UI.Helper
                 _Continue = Continue.Union(ShortContinue).ToList();
                 _Trend = Trend.Union(ShortTrend).ToList();
             }
+            #endregion
 
-            //强势股
+            #region 盯盘过滤器
             var _top = Top;
-            #region 过滤器
             Func<StockPrice, bool> filter = p => true;
             //强势过滤
             bool top(StockPrice p) => _top.ToList().Exists(q => q.StockCode == p.StockCode);
@@ -455,20 +463,21 @@ namespace X.UI.Helper
             //不过滤
             bool none(StockPrice p) => _top.Union(_Trend).ToList().Exists(q => q.StockCode == p.StockCode);
 
-            if (policy == 1)
+            if (dpFilter == 1)
             {
                 filter = top;
             }
-            else if (policy == 2)
+            else if (dpFilter == 2)
             {
                 filter = trend;
             }
-            else if (policy == 3)
+            else if (dpFilter == 3)
             {
                 filter = none;
             }
             #endregion
 
+            #region 建模提取数据
             var m1 = new List<MyStockMonitor>();
             foreach (var item in _Continue.Union(_top).Where(p => p.CurrentPrice > 0 && filter(p)))
             {
@@ -508,17 +517,28 @@ namespace X.UI.Helper
                     }
                 }
             }
-            var dt = DateTime.Now;
-            IEnumerable<MyStockMonitor> m2 = null;
-            var topCount = ConfigurationHelper.GetAppSettingByName("topCount", 24);
+            #endregion
+
+            #region 输出配置
+            var topCount = ConfigurationHelper.GetAppSettingByName("topCount", 15);
             topCount = Math.Min(Math.Max(9, topCount), 39);
+            //是否大成交模式
+            var isBig = ConfigurationHelper.GetAppSettingByName("isBig", false);
+            //大成交金额阈值
+            var bigAmount = isBig ? ConfigurationHelper.GetAppSettingByName("bigAmount", 20M) : 0;
+            bool bigFilter(MyStockMonitor p) => p.Amount >= bigAmount;
+            #endregion
+
+            #region 输出
+            IEnumerable<MyStockMonitor> m2 = null;
+            var dt = DateTime.Now;
             if (dt.TimeOfDay <= tradeEnd.AddMinutes(-15).TimeOfDay && dt.TimeOfDay >= tradeStart.TimeOfDay)
             {
-                m2 = m1.Where(p => p.KLevel >= 7).OrderByDescending(p => p.KLevel).ThenByDescending(p => p.SLevel).ThenByDescending(p => p.Inc).Take(topCount);
+                m2 = m1.Where(p => p.KLevel >= 7 && bigFilter(p)).OrderByDescending(p => p.KLevel).ThenByDescending(p => p.SLevel).ThenByDescending(p => p.Inc).Take(topCount);
             }
             else if (dt.TimeOfDay > tradeEnd.AddMinutes(-15).TimeOfDay)
             {
-                m2 = m1.Where(p => p.LLevel >= 4).OrderByDescending(p => p.LLevel).ThenByDescending(p => p.SLevel).ThenByDescending(p => p.Inc).Take(topCount);
+                m2 = m1.Where(p => p.LLevel >= 4 && bigFilter(p)).OrderByDescending(p => p.LLevel).ThenByDescending(p => p.SLevel).ThenByDescending(p => p.Inc).Take(topCount);
             }
             else
             {
@@ -532,7 +552,8 @@ namespace X.UI.Helper
                     var __top = Top.Exists(p => p.StockCode == t.StockCode);
                     //趋势
                     var __trend = _Trend.Exists(p => p.StockCode == t.StockCode);
-
+                    //分时指标
+                    var __r1 = R1.Exists(p => p.StockCode == t.StockCode);
                     var tip = "套利股";
                     if (t.Inc > 0)
                     {
@@ -544,12 +565,12 @@ namespace X.UI.Helper
                     }
                     if (__top)
                     {
-                        Console.BackgroundColor = __top ? ConsoleColor.Gray : ConsoleColor.Cyan;
+                        Console.BackgroundColor = __r1 ? ConsoleColor.Gray : ConsoleColor.White;// : ConsoleColor.Cyan;
                         tip = __top ? "龙头强势股" : "强势股";
                     }
                     else if (__trend)
                     {
-                        Console.BackgroundColor = ConsoleColor.Yellow;
+                        Console.BackgroundColor = __r1 ? ConsoleColor.Yellow : ConsoleColor.White;
                         tip = "趋势股";
                     }
                     else
@@ -559,11 +580,16 @@ namespace X.UI.Helper
                     var tip1 = string.Empty;
                     if (t.Buy1 >= 0.1M)
                     {
-                        tip1 += "买一:" + t.Buy1.ToString("0.00") + "亿";
+                        tip1 += "买一:" + t.Buy1.ToString("0.00") + "亿;";
                     }
                     if (t.Sell1 >= 0.1M)
                     {
-                        tip1 += "卖一:" + t.Sell1.ToString("0.00") + "亿";
+                        tip1 += "卖一:" + t.Sell1.ToString("0.00") + "亿;";
+                    }
+                    if (__r1)
+                    {
+                        Console.BackgroundColor = ConsoleColor.Black;
+                        tip1 += "分时达标";
                     }
 
                     Console.WriteLine("{0}-{1}:{2}({3})涨幅;{4}%,价格;{5},金额比例;{12}%,量能比例;{13}%,K;{6},KLevel;{7},S;{8},SLevel;{9},指数风控:{10}%,成交金额:{11}亿,{14}",
@@ -573,13 +599,17 @@ namespace X.UI.Helper
                         t.AmountRate.ToString("0.00"), t.VolRate.ToString("0.00"), tip1);
                 }
             }
+            #endregion
         }
         #endregion
 
         public static void Program()
         {
+            //开盘时间
             var tradeStart = ConfigurationHelper.GetAppSettingByName("TradeStart", new DateTime(2099, 1, 1, 9, 15, 0));
+            //收盘时间
             var tradeEnd = ConfigurationHelper.GetAppSettingByName("TradeEnd", new DateTime(2099, 1, 1, 15, 0, 0));
+            //运行模式
             var mode = ConfigurationHelper.GetAppSettingByName("mode", 0);
             Console.BackgroundColor = ConsoleColor.White;
             Console.ForegroundColor = ConsoleColor.Black;
@@ -597,13 +627,15 @@ namespace X.UI.Helper
                 var shortContinue = GetMyMonitorStock(MyStockType.ShortContinie);
                 //短线趋势
                 var shortTrend = GetMyMonitorStock(MyStockType.ShortTrend);
+                //短线分时
+                var r1 = GetMyMonitorStock(MyStockType.R1);
 
                 var AQS = GetMyStock(MyStockMode.AQS);
                 var Wave = GetMyStock(MyStockMode.Wave);
                 while (dt.TimeOfDay >= tradeStart.TimeOfDay && dt.TimeOfDay <= tradeEnd.TimeOfDay)
                 {
                     var e = MonitorIndex();
-                    MonitorStock(top, Continue, trend, shortContinue, shortTrend, AQS, Wave, e);
+                    MonitorStock(top, Continue, trend, shortContinue, shortTrend, r1, AQS, Wave, e);
                     Thread.Sleep(6000);
                     dt = DateTime.Now;
                 }
@@ -630,10 +662,12 @@ namespace X.UI.Helper
                 var shortContinue = GetMyMonitorStock(MyStockType.ShortContinie);
                 //短线趋势
                 var shortTrend = GetMyMonitorStock(MyStockType.ShortTrend);
+                //短线分时
+                var r1 = GetMyMonitorStock(MyStockType.R1);
                 var AQS = GetMyStock(MyStockMode.AQS);
                 var Wave = GetMyStock(MyStockMode.Wave);
                 var e = MonitorIndex();
-                MonitorStock(top, Continue, trend, shortContinue, shortTrend, AQS, Wave, e);
+                MonitorStock(top, Continue, trend, shortContinue, shortTrend, r1, AQS, Wave, e);
             }
             Console.WriteLine("Program End! Press Any Key!");
             Console.ReadKey();

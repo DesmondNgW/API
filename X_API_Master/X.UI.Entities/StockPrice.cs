@@ -16,6 +16,8 @@ namespace X.UI.Entities
         ShortContinie,
         //短线趋势
         ShortTrend,
+        //短线分时
+        R1
     }
 
     public class StockPrice : MongoBaseModel
