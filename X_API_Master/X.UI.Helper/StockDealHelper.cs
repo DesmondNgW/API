@@ -377,8 +377,7 @@ namespace X.UI.Helper
             var file = mode == MyStockType.Top ? "./src/dp/龙头.txt" :
                 mode == MyStockType.Continie ? "./src/dp/接力.txt" :
                 mode == MyStockType.ShortContinie ? "./src/dp/短线接力.txt" :
-                 mode == MyStockType.AR ? "./src/dp/分时指标.txt" :
-                 mode == MyStockType.R1 ? "./src/dp/R1.txt" : "./src/dp/接力.txt";
+                 mode == MyStockType.AR ? "./src/dp/分时指标.txt" : "./src/dp/接力.txt";
             var list1 = Regex.Split(FileBase.ReadFile(file, "gb2312"), "\r\n", RegexOptions.IgnoreCase);
             var ret = new List<StockPrice>();
             foreach (var item in list1)
@@ -410,13 +409,13 @@ namespace X.UI.Helper
         /// <param name="Trend">趋势</param>
         /// <param name="ShortContinue">短线接力</param>
         /// <param name="ShortTrend">短线趋势</param>
-        /// <param name="R1">短线分时</param>
         /// <param name="AR">短线分时-All</param> 
         /// <param name="AQS"></param>
         /// <param name="Wave"></param>
         /// <param name="e"></param>
+        /// <param name="debug"></param>
         public static void MonitorStock(List<StockPrice> Top, List<StockPrice> Continue, List<StockPrice> ShortContinue, 
-            List<StockPrice> R1, List<StockPrice> AR, List<MyStock> AQS, List<MyStock> Wave, decimal e)
+            List<StockPrice> AR, List<MyStock> AQS, List<MyStock> Wave, decimal e, bool debug = false)
         {
             //开盘时间
             var tradeStart = ConfigurationHelper.GetAppSettingByName("TradeStart", new DateTime(2099, 1, 1, 9, 15, 0));
@@ -536,11 +535,15 @@ namespace X.UI.Helper
             #region 输出
             IEnumerable<MyStockMonitor> m2 = null;
             var dt = DateTime.Now;
-            if (dt.TimeOfDay <= tradeEnd.AddMinutes(-15).TimeOfDay && dt.TimeOfDay >= tradeStart.TimeOfDay)
+            if (debug)
+            {
+                m2 = m1.OrderByDescending(p => p.SLevel).ThenByDescending(p => p.Inc).Take(topCount);
+            }
+            else if (dt.TimeOfDay <= tradeEnd.AddMinutes(-15).TimeOfDay && dt.TimeOfDay >= tradeStart.TimeOfDay)
             {
                 m2 = m1.Where(p => p.KLevel >= 7 && bigFilter(p)).OrderByDescending(p => p.KLevel).ThenByDescending(p => p.SLevel).ThenByDescending(p => p.Inc).Take(topCount);
             }
-            else if (dt.TimeOfDay > tradeEnd.AddMinutes(-15).TimeOfDay)
+            else if (dt.TimeOfDay > tradeEnd.AddMinutes(-15).TimeOfDay && dt.TimeOfDay <= tradeEnd.AddMinutes(105).TimeOfDay)
             {
                 m2 = m1.Where(p => p.LLevel >= 4 && bigFilter(p)).OrderByDescending(p => p.LLevel).ThenByDescending(p => p.SLevel).ThenByDescending(p => p.Inc).Take(topCount);
             }
@@ -557,7 +560,7 @@ namespace X.UI.Helper
                     //趋势
                     var __trend = _Trend.Exists(p => p.StockCode == t.StockCode);
                     //分时指标
-                    var __r1 = R1.Exists(p => p.StockCode == t.StockCode);
+                    var __ar = AR.Exists(p => p.StockCode == t.StockCode);
                     var tip = "套利股";
                     if (t.Inc > 0)
                     {
@@ -569,12 +572,12 @@ namespace X.UI.Helper
                     }
                     if (__top)
                     {
-                        Console.BackgroundColor = __r1 ? ConsoleColor.Gray : ConsoleColor.White;// : ConsoleColor.Cyan;
+                        Console.BackgroundColor = __ar ? ConsoleColor.Gray : ConsoleColor.White;// : ConsoleColor.Cyan;
                         tip = __top ? "龙头强势股" : "强势股";
                     }
                     else if (__trend)
                     {
-                        Console.BackgroundColor = __r1 ? ConsoleColor.Yellow : ConsoleColor.White;
+                        Console.BackgroundColor = __ar ? ConsoleColor.Yellow : ConsoleColor.White;
                         tip = "趋势股";
                     }
                     else
@@ -590,7 +593,7 @@ namespace X.UI.Helper
                     {
                         tip1 += "卖一:" + t.Sell1.ToString("0.00") + "亿;";
                     }
-                    if (__r1)
+                    if (__ar)
                     {
                         Console.BackgroundColor = ConsoleColor.Black;
                         tip1 += "分时达标";
@@ -627,8 +630,6 @@ namespace X.UI.Helper
                 var Continue = GetMyMonitorStock(MyStockType.Continie);
                 //短线接力
                 var shortContinue = GetMyMonitorStock(MyStockType.ShortContinie);
-                //短线分时
-                var r1 = GetMyMonitorStock(MyStockType.R1);
                 //短线分时-All
                 var ar = GetMyMonitorStock(MyStockType.AR);
 
@@ -637,7 +638,7 @@ namespace X.UI.Helper
                 while (dt.TimeOfDay >= tradeStart.TimeOfDay && dt.TimeOfDay <= tradeEnd.TimeOfDay)
                 {
                     var e = MonitorIndex();
-                    MonitorStock(top, Continue, shortContinue, r1, ar, AQS, Wave, e);
+                    MonitorStock(top, Continue, shortContinue, ar, AQS, Wave, e);
                     Thread.Sleep(6000);
                     dt = DateTime.Now;
                 }
@@ -660,14 +661,12 @@ namespace X.UI.Helper
                 var Continue = GetMyMonitorStock(MyStockType.Continie);
                 //短线接力
                 var shortContinue = GetMyMonitorStock(MyStockType.ShortContinie);
-                //短线分时
-                var r1 = GetMyMonitorStock(MyStockType.R1);
                 //短线分时-All
                 var ar = GetMyMonitorStock(MyStockType.AR);
                 var AQS = GetMyStock(MyStockMode.AQS);
                 var Wave = GetMyStock(MyStockMode.Wave);
                 var e = MonitorIndex();
-                MonitorStock(top, Continue, shortContinue, r1, ar, AQS, Wave, e);
+                MonitorStock(top, Continue, shortContinue, ar, AQS, Wave, e, true);
             }
             Console.WriteLine("Program End! Press Any Key!");
             Console.ReadKey();

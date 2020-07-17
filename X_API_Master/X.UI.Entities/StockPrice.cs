@@ -12,8 +12,6 @@ namespace X.UI.Entities
         Continie,
         //短线接力
         ShortContinie,
-        //短线分时
-        R1,
         //短线分时All
         AR
     }
