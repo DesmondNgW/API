@@ -12,11 +12,19 @@
     <add key="CouchCacheEnable" value="false" />
     <add key="RedisCacheEnable" value="false" />
     <add key="MongoDbEnable" value="true" />
+    <!--开盘时间-->
     <add key="TradeStart" value="2099-01-01 9:15:00" />
+    <!--收盘时间-->
     <add key="TradeEnd" value="2099-01-01 15:00:00" />
-    <!--策略模型 1=新周期，2=报团,3=所有-->
-    <add key ="Policy" value="2" />
-    <!--拐点模型 1=拐点，0=非拐点-->
-    <add key ="StockBreak" value="1" />
+    <!--运行模式 0=自动，1=盯盘，2=复盘, 3=自选股查看-->
+    <add key ="mode" value="0" />
+    <!--盯盘模式 1=中线，2=短线，3=交集,4=并集，0=短线买点-->
+    <add key ="DpMode" value="0" />
+    <!--盯盘过滤器 1=只看龙头，2=只看趋势,3=不过滤-->
+    <add key ="filter" value="3" />
+    <!--9/15/24/39-->
+    <add key ="topCount" value="15" />
+    <add key ="isBig" value="true" />
+    <add key ="bigAmount" value="0" />
   </AppSettings>
 </configuration>

@@ -379,6 +379,7 @@ namespace X.UI.Helper
                 mode == MyStockType.ShortContinie ? "./src/dp/短线接力.txt" :
                 mode == MyStockType.ShortTrend ? "./src/dp/短线趋势接力.txt" :
                  mode == MyStockType.Trend ? "./src/dp/趋势接力.txt" :
+                 mode == MyStockType.AR ? "./src/dp/分时指标.txt" :
                  mode == MyStockType.R1 ? "./src/dp/R1.txt" : "./src/dp/接力.txt";
             var list1 = Regex.Split(FileBase.ReadFile(file, "gb2312"), "\r\n", RegexOptions.IgnoreCase);
             var ret = new List<StockPrice>();
@@ -412,12 +413,13 @@ namespace X.UI.Helper
         /// <param name="ShortContinue">短线接力</param>
         /// <param name="ShortTrend">短线趋势</param>
         /// <param name="R1">短线分时</param>
+        /// <param name="AR">短线分时-All</param> 
         /// <param name="AQS"></param>
         /// <param name="Wave"></param>
         /// <param name="e"></param>
         public static void MonitorStock(List<StockPrice> Top, List<StockPrice> Continue, List<StockPrice> Trend,
-            List<StockPrice> ShortContinue, List<StockPrice> ShortTrend, List<StockPrice> R1, List<MyStock> AQS, 
-            List<MyStock> Wave, decimal e)
+            List<StockPrice> ShortContinue, List<StockPrice> ShortTrend, List<StockPrice> R1, List<StockPrice> AR, 
+            List<MyStock> AQS, List<MyStock> Wave, decimal e)
         {
             //开盘时间
             var tradeStart = ConfigurationHelper.GetAppSettingByName("TradeStart", new DateTime(2099, 1, 1, 9, 15, 0));
@@ -450,6 +452,11 @@ namespace X.UI.Helper
             {
                 _Continue = Continue.Union(ShortContinue).ToList();
                 _Trend = Trend.Union(ShortTrend).ToList();
+            }
+            else if (dpmode == 0)
+            {
+                _Continue = AR;
+                _Trend = AR.Where(p => AQS.Exists(q => q.Code == p.StockCode)).ToList();
             }
             #endregion
 
@@ -629,13 +636,15 @@ namespace X.UI.Helper
                 var shortTrend = GetMyMonitorStock(MyStockType.ShortTrend);
                 //短线分时
                 var r1 = GetMyMonitorStock(MyStockType.R1);
+                //短线分时-All
+                var ar = GetMyMonitorStock(MyStockType.AR);
 
                 var AQS = GetMyStock(MyStockMode.AQS);
                 var Wave = GetMyStock(MyStockMode.Wave);
                 while (dt.TimeOfDay >= tradeStart.TimeOfDay && dt.TimeOfDay <= tradeEnd.TimeOfDay)
                 {
                     var e = MonitorIndex();
-                    MonitorStock(top, Continue, trend, shortContinue, shortTrend, r1, AQS, Wave, e);
+                    MonitorStock(top, Continue, trend, shortContinue, shortTrend, r1, ar, AQS, Wave, e);
                     Thread.Sleep(6000);
                     dt = DateTime.Now;
                 }
@@ -664,10 +673,12 @@ namespace X.UI.Helper
                 var shortTrend = GetMyMonitorStock(MyStockType.ShortTrend);
                 //短线分时
                 var r1 = GetMyMonitorStock(MyStockType.R1);
+                //短线分时-All
+                var ar = GetMyMonitorStock(MyStockType.AR);
                 var AQS = GetMyStock(MyStockMode.AQS);
                 var Wave = GetMyStock(MyStockMode.Wave);
                 var e = MonitorIndex();
-                MonitorStock(top, Continue, trend, shortContinue, shortTrend, r1, AQS, Wave, e);
+                MonitorStock(top, Continue, trend, shortContinue, shortTrend, r1, ar, AQS, Wave, e);
             }
             Console.WriteLine("Program End! Press Any Key!");
             Console.ReadKey();
