@@ -10,12 +10,8 @@ namespace X.UI.Entities
         Top,
         //接力
         Continie,
-        //趋势
-        Trend,
         //短线接力
         ShortContinie,
-        //短线趋势
-        ShortTrend,
         //短线分时
         R1,
         //短线分时All
