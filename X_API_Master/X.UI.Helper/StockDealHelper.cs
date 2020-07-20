@@ -347,15 +347,12 @@ namespace X.UI.Helper
         /// <summary>
         /// 盘中风控指数监控
         /// </summary>
-        public static decimal MonitorIndex()
+        public static void MonitorIndex()
         {
-            var a = StockDataHelper.GetIndexPrice("sh000001");
-            var b = StockDataHelper.GetIndexPrice("sz399001");
-            var c = StockDataHelper.GetIndexPrice("sz399005");
-            var d = StockDataHelper.GetIndexPrice("sz399006");
-            var count = (a != null ? 1 : 0) + (b != null ? 1 : 0) + (c != null ? 1 : 0) + (d != null ? 1 : 0);
-            var inc = a?.Inc + b?.Inc + c?.Inc + d?.Inc;
-            var e = count > 0 ? inc.Value / count : 0;
+            var a = StockDataHelper.GetIndexPrice("sh000001") ?? new StockPrice() { Inc = -10 };
+            var b = StockDataHelper.GetIndexPrice("sz399001") ?? new StockPrice() { Inc = -10 };
+            var c = StockDataHelper.GetIndexPrice("sz399005") ?? new StockPrice() { Inc = -10 };
+            var d = StockDataHelper.GetIndexPrice("sz399006") ?? new StockPrice() { Inc = -10 };
             if (a.Inc > 0)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
@@ -364,8 +361,7 @@ namespace X.UI.Helper
             {
                 Console.ForegroundColor = ConsoleColor.Green;
             }
-            Console.WriteLine("上证:{0}%,深圳:{1}%,中小:{2}%,创业:{3}%,综合:{4}%", a.Inc.ToString("0.00"), b.Inc.ToString("0.00"), c.Inc.ToString("0.00"), d.Inc.ToString("0.00"), e.ToString("0.00"));
-            return e;
+            Console.WriteLine("上证:{0}%,深圳:{1}%,中小:{2}%,创业:{3}%", a.Inc.ToString("0.00"), b.Inc.ToString("0.00"), c.Inc.ToString("0.00"), d.Inc.ToString("0.00"));
         }
 
         /// <summary>
@@ -412,10 +408,9 @@ namespace X.UI.Helper
         /// <param name="AR">短线分时-All</param> 
         /// <param name="AQS"></param>
         /// <param name="Wave"></param>
-        /// <param name="e"></param>
         /// <param name="debug"></param>
         public static void MonitorStock(List<StockPrice> Top, List<StockPrice> Continue, List<StockPrice> ShortContinue, 
-            List<StockPrice> AR, List<MyStock> AQS, List<MyStock> Wave, decimal e, bool debug = false)
+            List<StockPrice> AR, List<MyStock> AQS, List<MyStock> Wave, bool debug = false)
         {
             //开盘时间
             var tradeStart = ConfigurationHelper.GetAppSettingByName("TradeStart", new DateTime(2099, 1, 1, 9, 15, 0));
@@ -463,8 +458,6 @@ namespace X.UI.Helper
             bool top(StockPrice p) => _top.ToList().Exists(q => q.StockCode == p.StockCode);
             //趋势过滤
             bool trend(StockPrice p) => _Trend.Exists(q => q.StockCode == p.StockCode);
-            //不过滤
-            bool none(StockPrice p) => _top.Union(_Trend).ToList().Exists(q => q.StockCode == p.StockCode);
 
             if (dpFilter == 1)
             {
@@ -474,10 +467,6 @@ namespace X.UI.Helper
             {
                 filter = trend;
             }
-            else if (dpFilter == 3)
-            {
-                filter = none;
-            }
             #endregion
 
             #region 建模提取数据
@@ -485,6 +474,7 @@ namespace X.UI.Helper
             foreach (var item in _Continue.Union(_top).Where(p => p.CurrentPrice > 0 && filter(p)))
             {
                 var t = StockDataHelper.GetStockPrice(item.StockCode);
+                if (t == null) continue;
                 decimal a = 0.01M, b = 0.01M;
                 try
                 {
@@ -498,7 +488,7 @@ namespace X.UI.Helper
                 catch { }
                 if (!m1.Exists(p => p.StockCode == item.StockCode))
                 {
-                    var last = Union(AQS, Wave).FirstOrDefault(p => p.Code == t.StockCode);
+                    var last = Union(AQS, Wave).FirstOrDefault(p => p.Code == item.StockCode);
                     if (last != null)
                     {
                         m1.Add(new MyStockMonitor
@@ -524,7 +514,7 @@ namespace X.UI.Helper
 
             #region 输出配置
             var topCount = ConfigurationHelper.GetAppSettingByName("topCount", 15);
-            topCount = Math.Min(Math.Max(9, topCount), 39);
+            //topCount = Math.Min(Math.Max(9, topCount), 39);
             //是否大成交模式
             var isBig = ConfigurationHelper.GetAppSettingByName("isBig", false);
             //大成交金额阈值
@@ -599,10 +589,10 @@ namespace X.UI.Helper
                         tip1 += "分时达标";
                     }
 
-                    Console.WriteLine("{0}-{1}:{2}({3})涨幅;{4}%,价格;{5},金额比例;{12}%,量能比例;{13}%,K;{6},KLevel;{7},S;{8},SLevel;{9},指数风控:{10}%,成交金额:{11}亿,{14}",
+                    Console.WriteLine("{0}-{1}:{2}({3})涨幅;{4}%,价格;{5},金额比例;{11}%,量能比例;{12}%,K;{6},KLevel;{7},S;{8},SLevel;{9},成交金额:{10}亿,{13}",
                         DateTime.Now.ToString("MM-dd HH:mm:ss"), tip,
                         t.StockName, t.StockCode, t.Inc.ToString("0.00"), t.Price, t.K.ToString("0.00"), t.KLevel,
-                        t.S.ToString("0.00"), t.SLevel, e.ToString("0.00"), t.Amount.ToString("0.00"),
+                        t.S.ToString("0.00"), t.SLevel, t.Amount.ToString("0.00"),
                         t.AmountRate.ToString("0.00"), t.VolRate.ToString("0.00"), tip1);
                 }
             }
@@ -637,8 +627,8 @@ namespace X.UI.Helper
                 var Wave = GetMyStock(MyStockMode.Wave);
                 while (dt.TimeOfDay >= tradeStart.TimeOfDay && dt.TimeOfDay <= tradeEnd.TimeOfDay)
                 {
-                    var e = MonitorIndex();
-                    MonitorStock(top, Continue, shortContinue, ar, AQS, Wave, e);
+                    MonitorIndex();
+                    MonitorStock(top, Continue, shortContinue, ar, AQS, Wave);
                     Thread.Sleep(6000);
                     dt = DateTime.Now;
                 }
@@ -665,8 +655,8 @@ namespace X.UI.Helper
                 var ar = GetMyMonitorStock(MyStockType.AR);
                 var AQS = GetMyStock(MyStockMode.AQS);
                 var Wave = GetMyStock(MyStockMode.Wave);
-                var e = MonitorIndex();
-                MonitorStock(top, Continue, shortContinue, ar, AQS, Wave, e, true);
+                MonitorIndex();
+                MonitorStock(top, Continue, shortContinue, ar, AQS, Wave, true);
             }
             Console.WriteLine("Program End! Press Any Key!");
             Console.ReadKey();
