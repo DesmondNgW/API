@@ -198,6 +198,7 @@ namespace X.UI.Helper
         {
             var file = mode == MyStockMode.Index ? "./src/fp/板块.txt" :
                  mode == MyStockMode.AQS ? "./src/fp/AQS.txt" :
+                 mode == MyStockMode.IndexWave ? "./src/fp/BKWave.txt" :
                  mode == MyStockMode.Wave ? "./src/fp/Wave.txt" : "./src/fp/AQS.txt";
             var content = FileBase.ReadFile(file, "gb2312");
             var list = Regex.Split(content, "\r\n", RegexOptions.IgnoreCase);
@@ -330,14 +331,18 @@ namespace X.UI.Helper
         /// 处理板块输出
         /// </summary>
         /// <param name="list"></param>
+        /// <param name="list2"></param>
         /// <param name="encode"></param>
-        public static void Deal2(List<MyStock> list, string encode = "utf-8")
+        public static void Deal2(List<MyStock> list, List<MyStock> list2, string encode = "utf-8")
         {
             var dirB = "./dest/B";
+            var dirBW = "./dest/BW";
             for (var i = 3; i <= 48; i += 3)
             {
                 var bContent = GetStockName(list, i, F3, O2);
                 FileBase.WriteFile(dirB, "B" + i + ".txt", string.Join("\t\n", bContent), encode, FileBaseMode.Create);
+                var bwContent = GetStockName(list2, i, F3, O2);
+                FileBase.WriteFile(dirBW, "BW" + i + ".txt", string.Join("\t\n", bwContent), encode, FileBaseMode.Create);
             }
         }
         #endregion
@@ -347,7 +352,7 @@ namespace X.UI.Helper
         /// <summary>
         /// 盘中风控指数监控
         /// </summary>
-        public static void MonitorIndex()
+        public static double MonitorIndex()
         {
             var a = StockDataHelper.GetIndexPrice("sh000001") ?? new StockPrice() { Inc = -10 };
             var b = StockDataHelper.GetIndexPrice("sz399001") ?? new StockPrice() { Inc = -10 };
@@ -362,6 +367,7 @@ namespace X.UI.Helper
                 Console.ForegroundColor = ConsoleColor.Green;
             }
             Console.WriteLine("上证:{0}%,深圳:{1}%,中小:{2}%,创业:{3}%", a.Inc.ToString("0.00"), b.Inc.ToString("0.00"), c.Inc.ToString("0.00"), d.Inc.ToString("0.00"));
+            return (double)(a.Amount + b.Amount);
         }
 
         /// <summary>
@@ -625,12 +631,16 @@ namespace X.UI.Helper
 
                 var AQS = GetMyStock(MyStockMode.AQS);
                 var Wave = GetMyStock(MyStockMode.Wave);
+                var lastTotalAmount = 0.0;
                 while (dt.TimeOfDay >= tradeStart.TimeOfDay && dt.TimeOfDay <= tradeEnd.TimeOfDay)
                 {
-                    MonitorIndex();
+                    var totalAmount = MonitorIndex();
                     MonitorStock(top, Continue, shortContinue, ar, AQS, Wave);
+                    var calc = (totalAmount - lastTotalAmount) * (new DateTime(dt.Year, dt.Month, dt.Day, 15, 0, 0) - dt).TotalSeconds / ((DateTime.Now - dt).TotalSeconds + 6);
+                    Console.WriteLine("两市预估成交金额：{0}亿", (calc + totalAmount).ToString("0.00"));
                     Thread.Sleep(6000);
                     dt = DateTime.Now;
+                    lastTotalAmount = totalAmount;
                 }
             }
             //复盘
@@ -641,7 +651,8 @@ namespace X.UI.Helper
                 var Wave = GetMyStock(MyStockMode.Wave);
                 Deal(AQS, Wave);
                 var t2 = GetMyStock(MyStockMode.Index);
-                Deal2(t2);
+                var t3 = GetMyStock(MyStockMode.IndexWave);
+                Deal2(t2, t3);
             }
             else if (mode == 3)
             {

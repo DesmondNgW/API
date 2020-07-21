@@ -10,7 +10,8 @@ namespace X.UI.Entities
     {
         Index,
         AQS,
-        Wave
+        Wave,
+        IndexWave
     }
 
 
