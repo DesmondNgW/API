@@ -549,6 +549,7 @@ namespace X.UI.Helper
             }
             if (m2 != null && m2.Count() > 0)
             {
+                var index = 1;
                 foreach (var t in m2)
                 {
                     //龙头
@@ -594,12 +595,13 @@ namespace X.UI.Helper
                         Console.BackgroundColor = ConsoleColor.Black;
                         tip1 += "分时达标";
                     }
-
+                    
                     Console.WriteLine("{0}-{1}:{2}({3})涨幅;{4}%,价格;{5},金额比例;{11}%,量能比例;{12}%,K;{6},KLevel;{7},S;{8},SLevel;{9},成交金额:{10}亿,{13}",
-                        DateTime.Now.ToString("MM-dd HH:mm:ss"), tip,
+                        DateTime.Now.ToString("MM-dd HH:mm:ss<"+ index + ">"), tip,
                         t.StockName, t.StockCode, t.Inc.ToString("0.00"), t.Price, t.K.ToString("0.00"), t.KLevel,
                         t.S.ToString("0.00"), t.SLevel, t.Amount.ToString("0.00"),
                         t.AmountRate.ToString("0.00"), t.VolRate.ToString("0.00"), tip1);
+                    index++;
                 }
             }
             #endregion
