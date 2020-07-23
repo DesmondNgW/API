@@ -471,8 +471,11 @@ namespace X.UI.Helper
             bool trend(StockPrice p) => _Trend.Exists(q => q.StockCode == p.StockCode);
             //首板过滤
             bool first(StockPrice p) => First.Exists(q => q.StockCode == p.StockCode);
-            //涨停过滤
+            //半路过滤
             bool zt(StockPrice p) => ZT.All(q => q.StockCode != p.StockCode);
+            //连板过滤
+            bool lb(StockPrice p) => ZT.Exists(q => q.StockCode == p.StockCode) && First.All(q => q.StockCode != p.StockCode);
+
             if (dpFilter == 1)
             {
                 filter = top;
@@ -481,17 +484,22 @@ namespace X.UI.Helper
             {
                 filter = trend;
             }
-            else if (dpFilter == 3)
+            else if (dpFilter == 3)//连板
+            {
+                filter = lb;
+                _top = new List<StockPrice>();
+            }
+            else if (dpFilter == 4)//首板
             {
                 filter = first;
                 _top = new List<StockPrice>();
             }
-            else if (dpFilter == 4)
+            else if (dpFilter == 5)//半路
             {
                 filter = zt;
                 _top = new List<StockPrice>();
             }
-            else if (dpFilter == 5)
+            else if (dpFilter == 6)//首板或半路
             {
                 filter = p => first(p) || zt(p);
                 _top = new List<StockPrice>();
