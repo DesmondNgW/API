@@ -379,6 +379,8 @@ namespace X.UI.Helper
             var file = mode == MyStockType.Top ? "./src/dp/龙头.txt" :
                 mode == MyStockType.Continie ? "./src/dp/接力.txt" :
                 mode == MyStockType.ShortContinie ? "./src/dp/短线接力.txt" :
+                mode == MyStockType.First ? "./src/dp/首板.txt" :
+                mode == MyStockType.ZT ? "./src/dp/涨停.txt" :
                  mode == MyStockType.AR ? "./src/dp/分时指标.txt" : "./src/dp/接力.txt";
             var list1 = Regex.Split(FileBase.ReadFile(file, "gb2312"), "\r\n", RegexOptions.IgnoreCase);
             var ret = new List<StockPrice>();
@@ -412,11 +414,14 @@ namespace X.UI.Helper
         /// <param name="ShortContinue">短线接力</param>
         /// <param name="ShortTrend">短线趋势</param>
         /// <param name="AR">短线分时-All</param> 
+        /// <param name="First">首板-All</param> 
+        /// <param name="ZT">涨停-All</param> 
         /// <param name="AQS"></param>
         /// <param name="Wave"></param>
         /// <param name="debug"></param>
         public static void MonitorStock(List<StockPrice> Top, List<StockPrice> Continue, List<StockPrice> ShortContinue, 
-            List<StockPrice> AR, List<MyStock> AQS, List<MyStock> Wave, bool debug = false)
+            List<StockPrice> AR, List<StockPrice> First, List<StockPrice> ZT, List<MyStock> AQS, List<MyStock> Wave,
+            bool debug = false)
         {
             //开盘时间
             var tradeStart = ConfigurationHelper.GetAppSettingByName("TradeStart", new DateTime(2099, 1, 1, 9, 15, 0));
@@ -464,7 +469,10 @@ namespace X.UI.Helper
             bool top(StockPrice p) => _top.ToList().Exists(q => q.StockCode == p.StockCode);
             //趋势过滤
             bool trend(StockPrice p) => _Trend.Exists(q => q.StockCode == p.StockCode);
-
+            //首板过滤
+            bool first(StockPrice p) => First.Exists(q => q.StockCode == p.StockCode);
+            //涨停过滤
+            bool zt(StockPrice p) => !ZT.Exists(q => q.StockCode == p.StockCode);
             if (dpFilter == 1)
             {
                 filter = top;
@@ -472,6 +480,16 @@ namespace X.UI.Helper
             else if (dpFilter == 2)
             {
                 filter = trend;
+            }
+            else if (dpFilter == 3)
+            {
+                filter = first;
+                _top = new List<StockPrice>();
+            }
+            else if (dpFilter == 4)
+            {
+                filter = zt;
+                _top = new List<StockPrice>();
             }
             #endregion
 
@@ -630,6 +648,10 @@ namespace X.UI.Helper
                 var shortContinue = GetMyMonitorStock(MyStockType.ShortContinie);
                 //短线分时-All
                 var ar = GetMyMonitorStock(MyStockType.AR);
+                //首板
+                var first = GetMyMonitorStock(MyStockType.First);
+                //涨停
+                var zt = GetMyMonitorStock(MyStockType.ZT);
 
                 var AQS = GetMyStock(MyStockMode.AQS);
                 var Wave = GetMyStock(MyStockMode.Wave);
@@ -637,7 +659,7 @@ namespace X.UI.Helper
                 while (dt.TimeOfDay >= tradeStart.TimeOfDay && dt.TimeOfDay <= tradeEnd.TimeOfDay)
                 {
                     var totalAmount = MonitorIndex();
-                    MonitorStock(top, Continue, shortContinue, ar, AQS, Wave);
+                    MonitorStock(top, Continue, shortContinue, ar, first, zt, AQS, Wave);
                     var calc = (totalAmount - lastTotalAmount) * (new DateTime(dt.Year, dt.Month, dt.Day, 15, 0, 0) - dt).TotalSeconds / ((DateTime.Now - dt).TotalSeconds + 6);
                     Console.WriteLine("两市预估成交金额：{0}亿", (calc + totalAmount).ToString("0.00"));
                     Thread.Sleep(6000);
@@ -666,10 +688,14 @@ namespace X.UI.Helper
                 var shortContinue = GetMyMonitorStock(MyStockType.ShortContinie);
                 //短线分时-All
                 var ar = GetMyMonitorStock(MyStockType.AR);
+                //首板
+                var first = GetMyMonitorStock(MyStockType.First);
+                //涨停
+                var zt = GetMyMonitorStock(MyStockType.ZT);
                 var AQS = GetMyStock(MyStockMode.AQS);
                 var Wave = GetMyStock(MyStockMode.Wave);
                 MonitorIndex();
-                MonitorStock(top, Continue, shortContinue, ar, AQS, Wave, true);
+                MonitorStock(top, Continue, shortContinue, ar, first, zt, AQS, Wave, true);
             }
             Console.WriteLine("Program End! Press Any Key!");
             Console.ReadKey();

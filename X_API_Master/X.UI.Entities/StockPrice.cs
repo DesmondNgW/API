@@ -13,7 +13,11 @@ namespace X.UI.Entities
         //短线接力
         ShortContinie,
         //短线分时All
-        AR
+        AR,
+        //首板
+        First,
+        //涨停
+        ZT
     }
 
     public class StockPrice : MongoBaseModel
