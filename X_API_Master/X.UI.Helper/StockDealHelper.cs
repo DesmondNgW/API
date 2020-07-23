@@ -472,7 +472,7 @@ namespace X.UI.Helper
             //首板过滤
             bool first(StockPrice p) => First.Exists(q => q.StockCode == p.StockCode);
             //涨停过滤
-            bool zt(StockPrice p) => !ZT.Exists(q => q.StockCode == p.StockCode);
+            bool zt(StockPrice p) => ZT.All(q => q.StockCode != p.StockCode);
             if (dpFilter == 1)
             {
                 filter = top;
@@ -489,6 +489,11 @@ namespace X.UI.Helper
             else if (dpFilter == 4)
             {
                 filter = zt;
+                _top = new List<StockPrice>();
+            }
+            else if (dpFilter == 5)
+            {
+                filter = p => first(p) || zt(p);
                 _top = new List<StockPrice>();
             }
             #endregion
