@@ -11,6 +11,7 @@ namespace X.UI.Entities
         Index,
         AQS,
         Wave,
+        AR,
         IndexWave
     }
 

@@ -199,6 +199,7 @@ namespace X.UI.Helper
             var file = mode == MyStockMode.Index ? "./src/fp/板块.txt" :
                  mode == MyStockMode.AQS ? "./src/fp/AQS.txt" :
                  mode == MyStockMode.IndexWave ? "./src/fp/BKWave.txt" :
+                 mode == MyStockMode.AR ? "./src/fp/AR.txt" :
                  mode == MyStockMode.Wave ? "./src/fp/Wave.txt" : "./src/fp/AQS.txt";
             var content = FileBase.ReadFile(file, "gb2312");
             var list = Regex.Split(content, "\r\n", RegexOptions.IgnoreCase);
@@ -276,18 +277,21 @@ namespace X.UI.Helper
         /// </summary>
         /// <param name="AQS"></param>
         /// <param name="Wave"></param>
+        /// <param name="AR"></param>
         /// <param name="encode"></param>
-        public static void Deal(List<MyStock> AQS, List<MyStock> Wave, string encode = "utf-8")
+        public static void Deal(List<MyStock> AQS, List<MyStock> Wave, List<MyStock> AR, string encode = "utf-8")
         {
             var tmp = Union(AQS, Wave);
             var list = tmp.Where(p => !p.Code.StartsWith("8"));
+            var arList = AR.Where(p => !p.Code.StartsWith("8"));
             var bk = tmp.Where(p => p.Code.StartsWith("8"));
             var t = list.Sum(p => p.Amount) / 400 * 0.382;
             Console.WriteLine("{0}亿", (t / 1e8).ToString("0.00"));
-            string dir = "./dest", dirK = "./dest/K", dirA = "./dest/A", dirBk = "./dest/Bk";
+            string dir = "./dest", dirK = "./dest/K", dirA = "./dest/A", dirBk = "./dest/Bk", dirAr = "./dest/Ar";
             var KContent = new List<Tuple<double, double>>();
             var AContent = new List<Tuple<double, double>>();
             var BkContent = new List<Tuple<double, double>>();
+            var ArContent = new List<Tuple<double, double>>();
             for (var i = 25; i <= 400; i += 25)
             {
                 //K系列
@@ -298,6 +302,11 @@ namespace X.UI.Helper
                 var aContent = GetStockName(list, i, p => F4(p, t), O2);
                 AContent.Add(new Tuple<double, double>(aContent[0].Convert2Double(-10000), (aContent.Length - 1.0) / i));
                 FileBase.WriteFile(dirA, "A" + i + ".txt", string.Join("\t\n", aContent), encode, FileBaseMode.Create);
+
+                //Ar系列
+                var arContent = GetStockName(arList, i, F1, O2);
+                ArContent.Add(new Tuple<double, double>(arContent[0].Convert2Double(-10000), (arContent.Length - 1.0) / i));
+                FileBase.WriteFile(dirAr, "Ar" + i + ".txt", string.Join("\t\n", arContent), encode, FileBaseMode.Create);
             }
 
             var bkc = bk.Count();
@@ -315,15 +324,21 @@ namespace X.UI.Helper
             //A系列
             FileBase.WriteFile(dirA, "A500.txt", string.Join("\t\n", GetStockName(list, 500, p => F4(p, t), O2)), encode, FileBaseMode.Create);
             FileBase.WriteFile(dirA, "A825.txt", string.Join("\t\n", GetStockName(list, 825, p => F4(p, t), O2)), encode, FileBaseMode.Create);
+            //Ar系列
+            FileBase.WriteFile(dirAr, "Ar500.txt", string.Join("\t\n", GetStockName(arList, 500, F1, O2)), encode, FileBaseMode.Create);
+            FileBase.WriteFile(dirAr, "Ar825.txt", string.Join("\t\n", GetStockName(arList, 825, F1, O2)), encode, FileBaseMode.Create);
 
             var KConsole = GetAnswer(KContent);
             var AConsole = GetAnswer(AContent);
+            var ArConsole = GetAnswer(ArContent);
 
             Console.WriteLine("KContent:价格高低点:{0};比例高低点:{1}", string.Join("-", KConsole.Item1), string.Join("-", KConsole.Item2));
             Console.WriteLine("AContent:价格高低点:{0};比例高低点:{1}", string.Join("-", AConsole.Item1), string.Join("-", AConsole.Item2));
-            
+            Console.WriteLine("ArContent:价格高低点:{0};比例高低点:{1}", string.Join("-", ArConsole.Item1), string.Join("-", ArConsole.Item2));
+
             FileBase.WriteFile(dir, "K.txt", string.Join("\t\n", KContent.Select((p, index) => (index + 1) * 25 + " " + p.Item1.ToString("0.000") + " " + p.Item2.ToString("0.000"))), encode, FileBaseMode.Create);
             FileBase.WriteFile(dir, "A.txt", string.Join("\t\n", AContent.Select((p, index) => (index + 1) * 25 + " " + p.Item1.ToString("0.000") + " " + p.Item2.ToString("0.000"))), encode, FileBaseMode.Create);
+            FileBase.WriteFile(dir, "Ar.txt", string.Join("\t\n", ArContent.Select((p, index) => (index + 1) * 25 + " " + p.Item1.ToString("0.000") + " " + p.Item2.ToString("0.000"))), encode, FileBaseMode.Create);
             FileBase.WriteFile(dir, "Bk.txt", string.Join("\t\n", BkContent.Select((p, index) => (index + 1) * 3 + " " + p.Item1.ToString("0.000") + " " + p.Item2.ToString("0.000"))), encode, FileBaseMode.Create);
         }
 
@@ -348,11 +363,41 @@ namespace X.UI.Helper
         #endregion
 
         #region 盯盘监控
+        /// <summary>
+        /// 成交金额集合
+        /// </summary>
+        private static Dictionary<DateTime, double> TradeAmount = new Dictionary<DateTime, double>();
+
+        /// <summary>
+        /// 预估成交金额
+        /// </summary>
+        public static void CalcAmount()
+        {
+            var max = TradeAmount.Max(p => p.Key);
+            var list = TradeAmount.Where(p => p.Key >= max.AddSeconds(-1000)).OrderByDescending(p => p.Key);
+            if (list.Count() >= 15)
+            {
+                var first = default(KeyValuePair<DateTime, double>);
+                double k = 0.5, calc = 0.0;
+                DateTime dt = DateTime.Now, end = new DateTime(dt.Year, dt.Month, dt.Day, 15, 0, 0);
+                foreach (var item in list.OrderByDescending(p => p.Key))
+                {
+                    if (first.Equals(default(KeyValuePair<DateTime, double>))) first = item;
+                    else
+                    {
+                        calc += k * (first.Value - item.Value) / (first.Key - item.Key).TotalSeconds;
+                        k *= 0.5;
+                    }
+                }
+                var y = (end - first.Key).TotalSeconds * calc + first.Value;
+                Console.WriteLine("两市预估成交金额：{0}亿", y.ToString("0.00"));
+            }
+        }
 
         /// <summary>
         /// 盘中风控指数监控
         /// </summary>
-        public static double MonitorIndex()
+        public static void MonitorIndex()
         {
             var a = StockDataHelper.GetIndexPrice("sh000001") ?? new StockPrice() { Inc = -10 };
             var b = StockDataHelper.GetIndexPrice("sz399001") ?? new StockPrice() { Inc = -10 };
@@ -367,7 +412,7 @@ namespace X.UI.Helper
                 Console.ForegroundColor = ConsoleColor.Green;
             }
             Console.WriteLine("上证:{0}%,深圳:{1}%,中小:{2}%,创业:{3}%", a.Inc.ToString("0.00"), b.Inc.ToString("0.00"), c.Inc.ToString("0.00"), d.Inc.ToString("0.00"));
-            return (double)(a.Amount + b.Amount);
+            TradeAmount.Add(a.Datetime, (double)(a.Amount + b.Amount));
         }
 
         /// <summary>
@@ -668,16 +713,12 @@ namespace X.UI.Helper
 
                 var AQS = GetMyStock(MyStockMode.AQS);
                 var Wave = GetMyStock(MyStockMode.Wave);
-                var lastTotalAmount = 0.0;
                 while (dt.TimeOfDay >= tradeStart.TimeOfDay && dt.TimeOfDay <= tradeEnd.TimeOfDay)
                 {
-                    var totalAmount = MonitorIndex();
+                    MonitorIndex();
                     MonitorStock(top, Continue, shortContinue, ar, first, zt, AQS, Wave);
-                    var calc = (totalAmount - lastTotalAmount) * (new DateTime(dt.Year, dt.Month, dt.Day, 15, 0, 0) - dt).TotalSeconds / ((DateTime.Now - dt).TotalSeconds + 6);
-                    Console.WriteLine("两市预估成交金额：{0}亿", (calc + totalAmount).ToString("0.00"));
                     Thread.Sleep(6000);
                     dt = DateTime.Now;
-                    lastTotalAmount = totalAmount;
                 }
             }
             //复盘
@@ -686,7 +727,8 @@ namespace X.UI.Helper
             {
                 var AQS = GetMyStock(MyStockMode.AQS);
                 var Wave = GetMyStock(MyStockMode.Wave);
-                Deal(AQS, Wave);
+                var AR = GetMyStock(MyStockMode.AR);
+                Deal(AQS, Wave, AR);
                 var t2 = GetMyStock(MyStockMode.Index);
                 var t3 = GetMyStock(MyStockMode.IndexWave);
                 Deal2(t2, t3);
