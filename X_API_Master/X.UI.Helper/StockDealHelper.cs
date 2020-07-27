@@ -412,7 +412,11 @@ namespace X.UI.Helper
                 Console.ForegroundColor = ConsoleColor.Green;
             }
             Console.WriteLine("上证:{0}%,深圳:{1}%,中小:{2}%,创业:{3}%", a.Inc.ToString("0.00"), b.Inc.ToString("0.00"), c.Inc.ToString("0.00"), d.Inc.ToString("0.00"));
-            TradeAmount.Add(a.Datetime, (double)(a.Amount + b.Amount));
+            if (!TradeAmount.ContainsKey(a.Datetime) && a.Amount >= 100)
+            {
+                TradeAmount.Add(a.Datetime, (double)(a.Amount + b.Amount));
+            }
+            CalcAmount();
         }
 
         /// <summary>

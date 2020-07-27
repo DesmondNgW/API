@@ -138,6 +138,7 @@
     </Content>
     <Content Include="Em.FundTrade.EncryptHelper.dll" />
     <Content Include="favicon.ico" />
+    <Content Include="src\fp\AR.txt" />
     <Content Include="src\fp\板块.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
