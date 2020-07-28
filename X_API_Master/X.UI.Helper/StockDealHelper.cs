@@ -373,6 +373,7 @@ namespace X.UI.Helper
         /// </summary>
         public static void CalcAmount()
         {
+            if (TradeAmount.Count <= 0) return;
             var max = TradeAmount.Max(p => p.Key);
             var list = TradeAmount.Where(p => p.Key >= max.AddSeconds(-1000)).OrderByDescending(p => p.Key);
             if (list.Count() >= 15)
