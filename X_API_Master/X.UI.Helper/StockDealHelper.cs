@@ -497,6 +497,8 @@ namespace X.UI.Helper
             var dpmode = ConfigurationHelper.GetAppSettingByName("DpMode", 1);
             //盯盘过滤器
             var dpFilter = ConfigurationHelper.GetAppSettingByName("filter", 3);
+            //加速模式
+            var spmode = ConfigurationHelper.GetAppSettingByName("SpMode", 0);
 
             #region 盯盘模式
             List<StockPrice> _Continue = null;
@@ -637,11 +639,11 @@ namespace X.UI.Helper
             {
                 m2 = m1.OrderByDescending(p => p.SLevel).ThenByDescending(p => p.Inc).Take(topCount);
             }
-            else if (dt.TimeOfDay <= tradeEnd.AddMinutes(-15).TimeOfDay && dt.TimeOfDay >= tradeStart.TimeOfDay)
+            else if (spmode == 1 || (spmode == 0 && dt.TimeOfDay <= tradeEnd.AddMinutes(-15).TimeOfDay && dt.TimeOfDay >= tradeStart.TimeOfDay))
             {
                 m2 = m1.Where(p => p.KLevel >= 7 && bigFilter(p)).OrderByDescending(p => p.KLevel).ThenByDescending(p => p.SLevel).ThenByDescending(p => p.Inc).Take(topCount);
             }
-            else if (dt.TimeOfDay > tradeEnd.AddMinutes(-15).TimeOfDay && dt.TimeOfDay <= tradeEnd.AddMinutes(105).TimeOfDay)
+            else if (spmode == 2 || (spmode == 0 && dt.TimeOfDay > tradeEnd.AddMinutes(-15).TimeOfDay && dt.TimeOfDay <= tradeEnd.AddMinutes(105).TimeOfDay))
             {
                 m2 = m1.Where(p => p.LLevel >= 4 && bigFilter(p)).OrderByDescending(p => p.LLevel).ThenByDescending(p => p.SLevel).ThenByDescending(p => p.Inc).Take(topCount);
             }
