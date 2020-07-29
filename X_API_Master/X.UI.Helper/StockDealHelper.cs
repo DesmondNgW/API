@@ -445,8 +445,8 @@ namespace X.UI.Helper
                 mode == MyStockType.ShortContinie ? "./src/dp/短线接力.txt" :
                 mode == MyStockType.First ? "./src/dp/首板.txt" :
                 mode == MyStockType.ZT ? "./src/dp/涨停.txt" :
-                mode == MyStockType.HB ? "./src/dp/HB.txt" :
-                 mode == MyStockType.AR ? "./src/dp/分时指标.txt" : "./src/dp/接力.txt";
+                mode == MyStockType.BR ? "./src/dp/虚.txt" :
+                 mode == MyStockType.AR ? "./src/dp/AR.txt" : "./src/dp/接力.txt";
             var list1 = Regex.Split(FileBase.ReadFile(file, "gb2312"), "\r\n", RegexOptions.IgnoreCase);
             var ret = new List<StockPrice>();
             foreach (var item in list1)
@@ -479,14 +479,14 @@ namespace X.UI.Helper
         /// <param name="ShortContinue">短线接力</param>
         /// <param name="ShortTrend">短线趋势</param>
         /// <param name="AR">短线分时-All</param> 
-        /// <param name="HB">修复反包</param> 
+        /// <param name="BR">情绪买点</param> 
         /// <param name="First">首板-All</param> 
         /// <param name="ZT">涨停-All</param> 
         /// <param name="AQS"></param>
         /// <param name="Wave"></param>
         /// <param name="debug"></param>
         public static void MonitorStock(List<StockPrice> Top, List<StockPrice> Continue, List<StockPrice> ShortContinue, 
-            List<StockPrice> AR, List<StockPrice> HB, List<StockPrice> First, List<StockPrice> ZT, List<MyStock> AQS, List<MyStock> Wave,
+            List<StockPrice> AR, List<StockPrice> BR, List<StockPrice> First, List<StockPrice> ZT, List<MyStock> AQS, List<MyStock> Wave,
             bool debug = false)
         {
             //开盘时间
@@ -513,8 +513,8 @@ namespace X.UI.Helper
             }
             else if (dpmode == 3)
             {
-                _Continue = HB;
-                _Trend = HB.Where(p => AQS.Exists(q => q.Code == p.StockCode)).ToList();
+                _Continue = BR;
+                _Trend = BR.Where(p => AQS.Exists(q => q.Code == p.StockCode)).ToList();
             }
             else if (dpmode == 4)
             {
@@ -732,8 +732,8 @@ namespace X.UI.Helper
                 var shortContinue = GetMyMonitorStock(MyStockType.ShortContinie);
                 //短线分时-All
                 var ar = GetMyMonitorStock(MyStockType.AR);
-                //修复反包
-                var hb = GetMyMonitorStock(MyStockType.HB);
+                //情绪买点
+                var br = GetMyMonitorStock(MyStockType.BR);
                 //首板
                 var first = GetMyMonitorStock(MyStockType.First);
                 //涨停
@@ -744,7 +744,7 @@ namespace X.UI.Helper
                 while (dt.TimeOfDay >= tradeStart.TimeOfDay && dt.TimeOfDay <= tradeEnd.TimeOfDay)
                 {
                     MonitorIndex();
-                    MonitorStock(top, Continue, shortContinue, ar, hb, first, zt, AQS, Wave);
+                    MonitorStock(top, Continue, shortContinue, ar, br, first, zt, AQS, Wave);
                     Thread.Sleep(6000);
                     dt = DateTime.Now;
                 }
@@ -772,8 +772,8 @@ namespace X.UI.Helper
                 var shortContinue = GetMyMonitorStock(MyStockType.ShortContinie);
                 //短线分时-All
                 var ar = GetMyMonitorStock(MyStockType.AR);
-                //修复反包
-                var hb = GetMyMonitorStock(MyStockType.HB);
+                //情绪买点
+                var br = GetMyMonitorStock(MyStockType.BR);
                 //首板
                 var first = GetMyMonitorStock(MyStockType.First);
                 //涨停
@@ -781,7 +781,7 @@ namespace X.UI.Helper
                 var AQS = GetMyStock(MyStockMode.AQS);
                 var Wave = GetMyStock(MyStockMode.Wave);
                 MonitorIndex();
-                MonitorStock(top, Continue, shortContinue, ar, hb, first, zt, AQS, Wave, true);
+                MonitorStock(top, Continue, shortContinue, ar, br, first, zt, AQS, Wave, true);
             }
             Console.WriteLine("Program End! Press Any Key!");
             Console.ReadKey();
