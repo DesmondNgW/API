@@ -13,6 +13,7 @@ namespace X.UI.Entities
         Wave,
         AR,
         HB,
+        HS,
         IndexWave
     }
 

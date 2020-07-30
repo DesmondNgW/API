@@ -14,8 +14,10 @@ namespace X.UI.Entities
         ShortContinie,
         //短线分时All
         AR,
-        //修复反包
+        //60买点
         BR,
+        //60卖点
+        SR,
         //首板
         First,
         //涨停
