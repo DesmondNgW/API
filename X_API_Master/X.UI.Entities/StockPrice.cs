@@ -18,6 +18,8 @@ namespace X.UI.Entities
         BR,
         //60卖点
         SR,
+        //120卖点
+        TSR,
         //首板
         First,
         //涨停

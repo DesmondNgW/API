@@ -14,6 +14,7 @@ namespace X.UI.Entities
         AR,
         HB,
         HS,
+        THS,
         IndexWave
     }
 
