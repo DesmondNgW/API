@@ -516,11 +516,11 @@ namespace X.UI.Helper
         /// <param name="First">首板-All</param> 
         /// <param name="ZT">涨停-All</param> 
         /// <param name="AQS"></param>
-        /// <param name="Wave"></param>
+        /// <param name="All"></param>
         /// <param name="debug"></param>
         public static void MonitorStock(List<StockPrice> Top, List<StockPrice> Continue, List<StockPrice> ShortContinue, 
             List<StockPrice> AR, List<StockPrice> BR, List<StockPrice> SR, List<StockPrice> TSR, List<StockPrice> First, 
-            List<StockPrice> ZT, List<MyStock> AQS, List<MyStock> Wave, bool debug = false)
+            List<StockPrice> ZT, List<MyStock> AQS, List<MyStock> All, bool debug = false)
         {
             //开盘时间
             var tradeStart = ConfigurationHelper.GetAppSettingByName("TradeStart", new DateTime(2099, 1, 1, 9, 15, 0));
@@ -624,7 +624,8 @@ namespace X.UI.Helper
 
             #region 建模提取数据
             var m1 = new List<MyStockMonitor>();
-            foreach (var item in _Continue.Union(_top).Where(p => p.CurrentPrice > 0 && filter(p)))
+            var _mainLoop = _Continue.Union(_top).Where(p => p.CurrentPrice > 0 && filter(p));
+            foreach (var item in _mainLoop)
             {
                 var t = StockDataHelper.GetStockPrice(item.StockCode);
                 if (t == null) continue;
@@ -641,7 +642,7 @@ namespace X.UI.Helper
                 catch { }
                 if (!m1.Exists(p => p.StockCode == item.StockCode))
                 {
-                    var last = Union(AQS, Wave).FirstOrDefault(p => p.Code == item.StockCode);
+                    var last = All.FirstOrDefault(p => p.Code == item.StockCode);
                     if (last != null)
                     {
                         m1.Add(new MyStockMonitor
@@ -667,7 +668,6 @@ namespace X.UI.Helper
 
             #region 输出配置
             var topCount = ConfigurationHelper.GetAppSettingByName("topCount", 15);
-            //topCount = Math.Min(Math.Max(9, topCount), 39);
             //是否大成交模式
             var isBig = ConfigurationHelper.GetAppSettingByName("isBig", false);
             //大成交金额阈值
@@ -768,6 +768,66 @@ namespace X.UI.Helper
                 }
             }
             #endregion
+
+            #region Debug模式
+            var list = new List<MyStockMonitor>();
+            for (var i = 0; i <= 6; i++)
+            {
+                Func<StockPrice, bool> debugFilter = p => true;
+                List<StockPrice> debugTop = Top;
+                switch (i)
+                {
+                    case 1:
+                        debugFilter = top;
+                        break;
+                    case 2:
+                        debugFilter = trend;
+                        break;
+                    case 3:
+                        debugFilter = lb;
+                        debugTop = new List<StockPrice>();
+                        break;
+                    case 4:
+                        debugFilter = first;
+                        debugTop = new List<StockPrice>();
+                        break;
+                    case 5:
+                        debugFilter = zt;
+                        debugTop = new List<StockPrice>();
+                        break;
+                    case 6:
+                        debugFilter = p => first(p) || zt(p);
+                        debugTop = new List<StockPrice>();
+                        break;
+                }
+                var mainDebug = _Continue.Union(debugTop).Where(p => p.CurrentPrice > 0 && debugFilter(p));
+                var listDebug = new List<MyStockMonitor>();
+                foreach (var item in mainDebug)
+                {
+                    var last = All.FirstOrDefault(p => p.Code == item.StockCode);
+                    if (last != null)
+                    {
+                        listDebug.Add(new MyStockMonitor()
+                        {
+                            MyStockType = item.MyStockType,
+                            StockCode = item.StockCode,
+                            StockName = item.StockName,
+                            Inc = item.Inc,
+                            Price = item.CurrentPrice,
+                            S = last.S1,
+                            Amount = item.Amount,
+                        });
+                    }
+                }
+                var sub = listDebug.OrderByDescending(p => p.SLevel).ThenByDescending(p => p.Inc).Take(topCount)
+                    .Where(t => AR.Exists(p => p.StockCode == t.StockCode));
+
+                list = list.Union(sub).ToList();
+            }
+            FileBase.WriteFile("./", "dest.txt", string.Join("\t\n", list.OrderByDescending(p => p.SLevel)
+                .ThenByDescending(p => p.Inc).Select(p => p.StockCode + " " + p.StockName)), "utf-8", FileBaseMode.Create);
+            #endregion
+
         }
         #endregion
 
@@ -806,10 +866,15 @@ namespace X.UI.Helper
 
                 var AQS = GetMyStock(MyStockMode.AQS);
                 var Wave = GetMyStock(MyStockMode.Wave);
+                var AR = GetMyStock(MyStockMode.AR);
+                var HB = GetMyStock(MyStockMode.HB);
+                var HS = GetMyStock(MyStockMode.HS);
+                var THS = GetMyStock(MyStockMode.THS);
+                var all = Union(AQS, Wave, AR, HB, HS, THS);
                 while (dt.TimeOfDay >= tradeStart.TimeOfDay && dt.TimeOfDay <= tradeEnd.TimeOfDay)
                 {
                     MonitorIndex();
-                    MonitorStock(top, Continue, shortContinue, ar, br, sr, tsr, first, zt, AQS, Wave);
+                    MonitorStock(top, Continue, shortContinue, ar, br, sr, tsr, first, zt, AQS, all);
                     Thread.Sleep(6000);
                     dt = DateTime.Now;
                 }
@@ -851,8 +916,13 @@ namespace X.UI.Helper
                 var zt = GetMyMonitorStock(MyStockType.ZT);
                 var AQS = GetMyStock(MyStockMode.AQS);
                 var Wave = GetMyStock(MyStockMode.Wave);
+                var AR = GetMyStock(MyStockMode.AR);
+                var HB = GetMyStock(MyStockMode.HB);
+                var HS = GetMyStock(MyStockMode.HS);
+                var THS = GetMyStock(MyStockMode.THS);
+                var all = Union(AQS, Wave, AR, HB, HS, THS);
                 MonitorIndex();
-                MonitorStock(top, Continue, shortContinue, ar, br, sr, tsr, first, zt, AQS, Wave, true);
+                MonitorStock(top, Continue, shortContinue, ar, br, sr, tsr, first, zt, AQS, all, true);
             }
             Console.WriteLine("Program End! Press Any Key!");
             Console.ReadKey();
