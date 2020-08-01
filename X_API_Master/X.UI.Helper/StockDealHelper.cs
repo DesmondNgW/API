@@ -477,6 +477,7 @@ namespace X.UI.Helper
                 mode == MyStockType.BR ? "./src/dp/虚.txt" :
                 mode == MyStockType.SR ? "./src/dp/道.txt" :
                 mode == MyStockType.TSR ? "./src/dp/合.txt" :
+                mode == MyStockType.OP ? "./src/dp/OP.txt" :
                  mode == MyStockType.AR ? "./src/dp/AR.txt" : "./src/dp/接力.txt";
             var list1 = Regex.Split(FileBase.ReadFile(file, "gb2312"), "\r\n", RegexOptions.IgnoreCase);
             var ret = new List<StockPrice>();
@@ -512,15 +513,16 @@ namespace X.UI.Helper
         /// <param name="AR">短线分时-All</param> 
         /// <param name="BR">情绪买点60分钟买点</param> 
         /// <param name="SR">60分钟卖点</param> 
-        /// <param name="TSR">60分钟卖点</param> 
+        /// <param name="TSR">120分钟卖点</param> 
+        /// <param name="OP">自选</param> 
         /// <param name="First">首板-All</param> 
         /// <param name="ZT">涨停-All</param> 
         /// <param name="AQS"></param>
         /// <param name="All"></param>
         /// <param name="debug"></param>
         public static void MonitorStock(List<StockPrice> Top, List<StockPrice> Continue, List<StockPrice> ShortContinue, 
-            List<StockPrice> AR, List<StockPrice> BR, List<StockPrice> SR, List<StockPrice> TSR, List<StockPrice> First, 
-            List<StockPrice> ZT, List<MyStock> AQS, List<MyStock> All, bool debug = false)
+            List<StockPrice> AR, List<StockPrice> BR, List<StockPrice> SR, List<StockPrice> TSR, List<StockPrice> OP, 
+            List<StockPrice> First, List<StockPrice> ZT, List<MyStock> AQS, List<MyStock> All, bool debug = false)
         {
             //开盘时间
             var tradeStart = ConfigurationHelper.GetAppSettingByName("TradeStart", new DateTime(2099, 1, 1, 9, 15, 0));
@@ -770,34 +772,41 @@ namespace X.UI.Helper
             #endregion
 
             #region Debug模式
-            var list = new List<MyStockMonitor>();
+            var list = new Dictionary<string, MyStockMonitor>();
             for (var i = 0; i <= 6; i++)
             {
                 Func<StockPrice, bool> debugFilter = p => true;
                 List<StockPrice> debugTop = Top;
+                var remark = "|TOP";
                 switch (i)
                 {
                     case 1:
                         debugFilter = top;
+                        remark = "|龙头";
                         break;
                     case 2:
                         debugFilter = trend;
+                        remark = "|趋势";
                         break;
                     case 3:
                         debugFilter = lb;
                         debugTop = new List<StockPrice>();
+                        remark = "|连板";
                         break;
                     case 4:
                         debugFilter = first;
                         debugTop = new List<StockPrice>();
+                        remark = "|首板";
                         break;
                     case 5:
                         debugFilter = zt;
                         debugTop = new List<StockPrice>();
+                        remark = "|半路";
                         break;
                     case 6:
                         debugFilter = p => first(p) || zt(p);
                         debugTop = new List<StockPrice>();
+                        remark = "|低位";
                         break;
                 }
                 var mainDebug = _Continue.Union(debugTop).Where(p => p.CurrentPrice > 0 && debugFilter(p));
@@ -805,7 +814,7 @@ namespace X.UI.Helper
                 foreach (var item in mainDebug)
                 {
                     var last = All.FirstOrDefault(p => p.Code == item.StockCode);
-                    if (last != null)
+                    if (last != null && !listDebug.Exists(p => p.StockCode == item.StockCode))
                     {
                         listDebug.Add(new MyStockMonitor()
                         {
@@ -819,13 +828,26 @@ namespace X.UI.Helper
                         });
                     }
                 }
-                var sub = listDebug.OrderByDescending(p => p.SLevel).ThenByDescending(p => p.Inc).Take(topCount)
-                    .Where(t => AR.Exists(p => p.StockCode == t.StockCode));
-
-                list = list.Union(sub).ToList();
+                var j = 0;
+                foreach (var item in listDebug.OrderByDescending(p => p.SLevel).ThenByDescending(p => p.Inc))
+                {
+                    if (i > 0 && j < topCount || i == 0)
+                    {
+                        if (OP.Exists(p => p.StockCode == item.StockCode))
+                        {
+                            if (!list.ContainsKey(item.StockCode))
+                            {
+                                list[item.StockCode] = item;
+                            }
+                            list[item.StockCode].Remark += remark + (j+1);
+                        }
+                    }
+                    j++; 
+                }
             }
-            FileBase.WriteFile("./", "dest.txt", string.Join("\t\n", list.OrderByDescending(p => p.SLevel)
-                .ThenByDescending(p => p.Inc).Select(p => p.StockCode + " " + p.StockName)), "utf-8", FileBaseMode.Create);
+            FileBase.WriteFile("./", "dest.txt", string.Join("\t\n", list.OrderByDescending(p => p.Value.SLevel)
+                .ThenByDescending(p => p.Value.Inc).
+                Select(p => p.Value.StockCode + " " + p.Value.StockName + " " + p.Value.Remark)), "utf-8", FileBaseMode.Create);
             #endregion
 
         }
@@ -859,6 +881,8 @@ namespace X.UI.Helper
                 var sr = GetMyMonitorStock(MyStockType.SR);
                 //120卖点
                 var tsr = GetMyMonitorStock(MyStockType.TSR);
+                //自选股
+                var op = GetMyMonitorStock(MyStockType.OP);
                 //首板
                 var first = GetMyMonitorStock(MyStockType.First);
                 //涨停
@@ -874,7 +898,7 @@ namespace X.UI.Helper
                 while (dt.TimeOfDay >= tradeStart.TimeOfDay && dt.TimeOfDay <= tradeEnd.TimeOfDay)
                 {
                     MonitorIndex();
-                    MonitorStock(top, Continue, shortContinue, ar, br, sr, tsr, first, zt, AQS, all);
+                    MonitorStock(top, Continue, shortContinue, ar, br, sr, tsr, op, first, zt, AQS, all);
                     Thread.Sleep(6000);
                     dt = DateTime.Now;
                 }
@@ -910,6 +934,8 @@ namespace X.UI.Helper
                 var sr = GetMyMonitorStock(MyStockType.SR);
                 //120卖点
                 var tsr = GetMyMonitorStock(MyStockType.TSR);
+                //自选股
+                var op = GetMyMonitorStock(MyStockType.OP);
                 //首板
                 var first = GetMyMonitorStock(MyStockType.First);
                 //涨停
@@ -922,7 +948,7 @@ namespace X.UI.Helper
                 var THS = GetMyStock(MyStockMode.THS);
                 var all = Union(AQS, Wave, AR, HB, HS, THS);
                 MonitorIndex();
-                MonitorStock(top, Continue, shortContinue, ar, br, sr, tsr, first, zt, AQS, all, true);
+                MonitorStock(top, Continue, shortContinue, ar, br, sr, tsr, op, first, zt, AQS, all, true);
             }
             Console.WriteLine("Program End! Press Any Key!");
             Console.ReadKey();

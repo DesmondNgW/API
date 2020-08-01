@@ -20,6 +20,8 @@ namespace X.UI.Entities
         SR,
         //120卖点
         TSR,
+        //自选股
+        OP,
         //首板
         First,
         //涨停
