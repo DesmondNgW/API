@@ -573,6 +573,11 @@ namespace X.UI.Helper
                 _Continue = TSR;
                 _Trend = TSR.Where(p => AQS.Exists(q => q.Code == p.StockCode)).ToList();
             }
+            else if (dpmode == 8)
+            {
+                _Continue = OP;
+                _Trend = OP.Where(p => AQS.Exists(q => q.Code == p.StockCode)).ToList();
+            }
             else if (dpmode == 0)
             {
                 _Continue = AR;
@@ -620,6 +625,10 @@ namespace X.UI.Helper
             else if (dpFilter == 6)//首板或半路
             {
                 filter = p => first(p) || zt(p);
+                _top = new List<StockPrice>();
+            }
+            else if (dpFilter == 7)//无龙头
+            {
                 _top = new List<StockPrice>();
             }
             #endregion
