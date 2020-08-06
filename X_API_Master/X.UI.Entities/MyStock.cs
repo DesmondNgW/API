@@ -12,9 +12,11 @@ namespace X.UI.Entities
         AQS,
         Wave,
         AR,
-        HB,
+        HHS,
         HS,
         THS,
+        DS,
+        TDS,
         IndexWave
     }
 

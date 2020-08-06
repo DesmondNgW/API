@@ -14,12 +14,16 @@ namespace X.UI.Entities
         ShortContinie,
         //短线分时All
         AR,
-        //60买点
-        BR,
+        //30卖点
+        HHS,
         //60卖点
-        SR,
+        HS,
         //120卖点
-        TSR,
+        THS,
+        //日卖点
+        DS,
+        //3日卖点
+        TDS,
         //自选股
         OP,
         //首板
