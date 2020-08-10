@@ -752,6 +752,14 @@ namespace X.UI.Helper
             {
                 m2 = m1.Where(p => p.LLevel >= 4 && bigFilter(p)).OrderByDescending(p => p.S).ThenByDescending(p => p.LLevel).ThenByDescending(p => p.Inc).Take(topCount);
             }
+            else if (spmode == 7)
+            {
+                m2 = m1.OrderByDescending(p => p.KLevel).ThenByDescending(p => p.SLevel).ThenByDescending(p => p.Inc).Take(topCount);
+            }
+            else if (spmode == 8)
+            {
+                m2 = m1.OrderByDescending(p => p.LLevel).ThenByDescending(p => p.SLevel).ThenByDescending(p => p.Inc).Take(topCount);
+            }
             else
             {
                 m2 = m1.OrderByDescending(p => p.SLevel).ThenByDescending(p => p.Inc).Take(topCount);
@@ -884,6 +892,30 @@ namespace X.UI.Helper
                                 list[item.StockCode] = item;
                             }
                             list[item.StockCode].Remark += remark + (j+1);
+                            if (TDS.Exists(p => p.StockCode == item.StockCode))
+                            {
+                                list[item.StockCode].OrderRemark = "TDS";
+                            }
+                            else if (DS.Exists(p => p.StockCode == item.StockCode))
+                            {
+                                list[item.StockCode].OrderRemark = "DS";
+                            }
+                            else if (THS.Exists(p => p.StockCode == item.StockCode))
+                            {
+                                list[item.StockCode].OrderRemark = "THS";
+                            }
+                            else if (HS.Exists(p => p.StockCode == item.StockCode))
+                            {
+                                list[item.StockCode].OrderRemark = "HS";
+                            }
+                            else if (HHS.Exists(p => p.StockCode == item.StockCode))
+                            {
+                                list[item.StockCode].OrderRemark = "HHS";
+                            }
+                            else
+                            {
+                                list[item.StockCode].OrderRemark = "";
+                            }
                         }
                     }
                     j++; 
@@ -891,7 +923,7 @@ namespace X.UI.Helper
             }
             FileBase.WriteFile("./", "dest.txt", string.Join("\t\n", list.OrderByDescending(p => p.Value.SLevel)
                 .ThenByDescending(p => p.Value.Inc).
-                Select(p => p.Value.StockCode + " " + p.Value.StockName + " " + p.Value.Remark)), "utf-8", FileBaseMode.Create);
+                Select(p => p.Value.StockCode + " " + p.Value.StockName + " " + p.Value.Remark+ " " + p.Value.OrderRemark)), "utf-8", FileBaseMode.Create);
             #endregion
 
         }
