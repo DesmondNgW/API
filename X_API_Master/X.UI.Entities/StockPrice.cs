@@ -24,6 +24,16 @@ namespace X.UI.Entities
         DS,
         //3日卖点
         TDS,
+        //60买
+        HB,
+        //120买
+        THB,
+        //日买
+        DB,
+        //3日买
+        TDB,
+        //周买
+        WB,
         //自选股
         OP,
         //首板

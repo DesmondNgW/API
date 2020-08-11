@@ -509,6 +509,11 @@ namespace X.UI.Helper
                 mode == MyStockType.THS ? "./src/dp/CTHS.txt" :
                 mode == MyStockType.DS ? "./src/dp/CDS.txt" :
                 mode == MyStockType.TDS ? "./src/dp/CTDS.txt" :
+                mode == MyStockType.HB ? "./src/dp/CHB.txt" :
+                mode == MyStockType.THB ? "./src/dp/CTHB.txt" :
+                mode == MyStockType.DB ? "./src/dp/CDB.txt" :
+                mode == MyStockType.TDB ? "./src/dp/CTDB.txt" :
+                mode == MyStockType.WB ? "./src/dp/CWB.txt" :
                 mode == MyStockType.OP ? "./src/dp/OP.txt" :
                  mode == MyStockType.AR ? "./src/dp/AR.txt" : "./src/dp/接力.txt";
             var list1 = Regex.Split(FileBase.ReadFile(file, "gb2312"), "\r\n", RegexOptions.IgnoreCase);
@@ -537,26 +542,30 @@ namespace X.UI.Helper
         /// <summary>
         /// 盯盘
         /// </summary>
-        /// <param name="Top">龙头</param>
-        /// <param name="Continue">接力</param>
-        /// <param name="Trend">趋势</param>
-        /// <param name="ShortContinue">短线接力</param>
-        /// <param name="ShortTrend">短线趋势</param>
-        /// <param name="AR">短线分时-All</param> 
-        /// <param name="HHS">39卖</param> 
-        /// <param name="HS">60卖</param> 
-        /// <param name="THS">120卖</param> 
-        /// <param name="DS">日卖</param> 
-        /// <param name="TDS">3日卖</param> 
-        /// <param name="OP">自选</param> 
-        /// <param name="First">首板-All</param> 
-        /// <param name="ZT">涨停-All</param> 
+        /// <param name="Top"></param>
+        /// <param name="Continue"></param>
+        /// <param name="ShortContinue"></param>
+        /// <param name="AR"></param>
+        /// <param name="HHS"></param>
+        /// <param name="HS"></param>
+        /// <param name="THS"></param>
+        /// <param name="DS"></param>
+        /// <param name="TDS"></param>
+        /// <param name="HB"></param>
+        /// <param name="THB"></param>
+        /// <param name="DB"></param>
+        /// <param name="TDB"></param>
+        /// <param name="WB"></param>
+        /// <param name="OP"></param>
+        /// <param name="First"></param>
+        /// <param name="ZT"></param>
         /// <param name="AQS"></param>
         /// <param name="All"></param>
         /// <param name="debug"></param>
         public static void MonitorStock(List<StockPrice> Top, List<StockPrice> Continue, List<StockPrice> ShortContinue, 
             List<StockPrice> AR, List<StockPrice> HHS, List<StockPrice> HS, List<StockPrice> THS, List<StockPrice> DS, 
-            List<StockPrice> TDS, List<StockPrice> OP, List<StockPrice> First, List<StockPrice> ZT, List<MyStock> AQS, 
+            List<StockPrice> TDS, List<StockPrice> HB, List<StockPrice> THB, List<StockPrice> DB, List<StockPrice> TDB,
+            List<StockPrice> WB, List<StockPrice> OP, List<StockPrice> First, List<StockPrice> ZT, List<MyStock> AQS, 
             List<MyStock> All, bool debug = false)
         {
             //开盘时间
@@ -916,6 +925,31 @@ namespace X.UI.Helper
                             {
                                 list[item.StockCode].OrderRemark = "";
                             }
+
+                            if (WB.Exists(p => p.StockCode == item.StockCode))
+                            {
+                                list[item.StockCode].OrderRemark2 = "WB";
+                            }
+                            else if (TDB.Exists(p => p.StockCode == item.StockCode))
+                            {
+                                list[item.StockCode].OrderRemark2 = "TDB";
+                            }
+                            else if (DB.Exists(p => p.StockCode == item.StockCode))
+                            {
+                                list[item.StockCode].OrderRemark2 = "DB";
+                            }
+                            else if (THB.Exists(p => p.StockCode == item.StockCode))
+                            {
+                                list[item.StockCode].OrderRemark2 = "THB";
+                            }
+                            else if (HB.Exists(p => p.StockCode == item.StockCode))
+                            {
+                                list[item.StockCode].OrderRemark2 = "HB";
+                            }
+                            else
+                            {
+                                list[item.StockCode].OrderRemark2 = "";
+                            }
                         }
                     }
                     j++; 
@@ -923,7 +957,8 @@ namespace X.UI.Helper
             }
             FileBase.WriteFile("./", "dest.txt", string.Join("\t\n", list.OrderByDescending(p => p.Value.SLevel)
                 .ThenByDescending(p => p.Value.Inc).
-                Select(p => p.Value.StockCode + " " + p.Value.StockName + " " + p.Value.Remark+ " " + p.Value.OrderRemark)), "utf-8", FileBaseMode.Create);
+                Select(p => p.Value.StockCode + " " + p.Value.StockName + " " + p.Value.Remark + " "
+                + p.Value.OrderRemark + " " + p.Value.OrderRemark2)), "utf-8", FileBaseMode.Create);
             #endregion
 
         }
@@ -961,6 +996,18 @@ namespace X.UI.Helper
                 var ds = GetMyMonitorStock(MyStockType.DS);
                 //3日卖点
                 var tds = GetMyMonitorStock(MyStockType.TDS);
+
+                //60买点
+                var hb = GetMyMonitorStock(MyStockType.HB);
+                //120买点
+                var thb = GetMyMonitorStock(MyStockType.THB);
+                //日买点
+                var db = GetMyMonitorStock(MyStockType.DB);
+                //3日买点
+                var tdb = GetMyMonitorStock(MyStockType.TDB);
+                //周买点
+                var wb = GetMyMonitorStock(MyStockType.WB);
+
                 //自选股
                 var op = GetMyMonitorStock(MyStockType.OP);
                 //首板
@@ -980,7 +1027,8 @@ namespace X.UI.Helper
                 while (dt.TimeOfDay >= tradeStart.TimeOfDay && dt.TimeOfDay <= tradeEnd.TimeOfDay)
                 {
                     MonitorIndex();
-                    MonitorStock(top, Continue, shortContinue, ar, hhs, hs, ths, ds, tds, op, first, zt, AQS, all);
+                    MonitorStock(top, Continue, shortContinue, ar, hhs, hs, ths, ds, tds, hb, thb, db, tdb, wb,
+                        op, first, zt, AQS, all);
                     Thread.Sleep(6000);
                     dt = DateTime.Now;
                 }
@@ -1022,6 +1070,18 @@ namespace X.UI.Helper
                 var ds = GetMyMonitorStock(MyStockType.DS);
                 //3日卖点
                 var tds = GetMyMonitorStock(MyStockType.TDS);
+
+                //60买点
+                var hb = GetMyMonitorStock(MyStockType.HB);
+                //120买点
+                var thb = GetMyMonitorStock(MyStockType.THB);
+                //日买点
+                var db = GetMyMonitorStock(MyStockType.DB);
+                //3日买点
+                var tdb = GetMyMonitorStock(MyStockType.TDB);
+                //周买点
+                var wb = GetMyMonitorStock(MyStockType.WB);
+
                 //自选股
                 var op = GetMyMonitorStock(MyStockType.OP);
                 //首板
@@ -1038,7 +1098,8 @@ namespace X.UI.Helper
                 var TDS = GetMyStock(MyStockMode.TDS);
                 var all = Union(AQS, Wave, AR, HHS, HS, THS, DS, TDS);
                 MonitorIndex();
-                MonitorStock(top, Continue, shortContinue, ar, hhs, hs, ths, ds, tds, op, first, zt, AQS, all, true);
+                MonitorStock(top, Continue, shortContinue, ar, hhs, hs, ths, ds, tds, hb, thb, db, tdb, wb,
+                    op, first, zt, AQS, all, true);
             }
             Console.WriteLine("Program End! Press Any Key!");
             Console.ReadKey();
