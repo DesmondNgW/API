@@ -926,29 +926,35 @@ namespace X.UI.Helper
                                 list[item.StockCode].OrderRemark = "";
                             }
 
-                            if (WB.Exists(p => p.StockCode == item.StockCode))
+                            if (string.IsNullOrEmpty(list[item.StockCode].OrderRemark2))
                             {
-                                list[item.StockCode].OrderRemark2 = "WB";
+                                list[item.StockCode].OrderRemark2 = string.Empty;
                             }
-                            else if (TDB.Exists(p => p.StockCode == item.StockCode))
+
+                            if (WB.Exists(p => p.StockCode == item.StockCode)
+                                && !list[item.StockCode].OrderRemark2.Contains("|WB"))
                             {
-                                list[item.StockCode].OrderRemark2 = "TDB";
+                                list[item.StockCode].OrderRemark2 += "|WB";
                             }
-                            else if (DB.Exists(p => p.StockCode == item.StockCode))
+                            if (TDB.Exists(p => p.StockCode == item.StockCode)
+                                && !list[item.StockCode].OrderRemark2.Contains("|TDB"))
                             {
-                                list[item.StockCode].OrderRemark2 = "DB";
+                                list[item.StockCode].OrderRemark2 += "|TDB";
                             }
-                            else if (THB.Exists(p => p.StockCode == item.StockCode))
+                            if (DB.Exists(p => p.StockCode == item.StockCode)
+                                && !list[item.StockCode].OrderRemark2.Contains("|DB"))
                             {
-                                list[item.StockCode].OrderRemark2 = "THB";
+                                list[item.StockCode].OrderRemark2 += "|DB";
                             }
-                            else if (HB.Exists(p => p.StockCode == item.StockCode))
+                            if (THB.Exists(p => p.StockCode == item.StockCode)
+                                && !list[item.StockCode].OrderRemark2.Contains("|THB"))
                             {
-                                list[item.StockCode].OrderRemark2 = "HB";
+                                list[item.StockCode].OrderRemark2 += "|THB";
                             }
-                            else
+                            if (HB.Exists(p => p.StockCode == item.StockCode)
+                                && !list[item.StockCode].OrderRemark2.Contains("|HB"))
                             {
-                                list[item.StockCode].OrderRemark2 = "";
+                                list[item.StockCode].OrderRemark2 += "|HB";
                             }
                         }
                     }
