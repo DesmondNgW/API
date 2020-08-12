@@ -731,6 +731,11 @@ namespace X.UI.Helper
             #endregion
 
             #region 输出
+            Console.WriteLine("上涨7%个股{0}-下跌7%个数{1}", m1.Count(p => p.Inc >= 7), m1.Count(p => p.Inc <= -7));
+            Console.WriteLine("上涨5%个股{0}-下跌5%个数{1}", m1.Count(p => p.Inc >= 5), m1.Count(p => p.Inc <= -5));
+            Console.WriteLine("上涨3%个股{0}-下跌3%个数{1}", m1.Count(p => p.Inc >= 3), m1.Count(p => p.Inc <= -3));
+            Console.WriteLine("上涨2%个股{0}-下跌2%个数{1}", m1.Count(p => p.Inc >= 2), m1.Count(p => p.Inc <= -2));
+
             IEnumerable<MyStockMonitor> m2 = null;
             var dt = DateTime.Now;
             if (debug)
