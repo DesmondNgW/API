@@ -14,6 +14,8 @@ namespace X.UI.Entities
         ShortContinie,
         //短线分时All
         AR,
+        //AR精选
+        SHEN,
         //30卖点
         HHS,
         //60卖点
@@ -36,6 +38,10 @@ namespace X.UI.Entities
         WB,
         //自选股
         OP,
+        //左侧自选股
+        LOP,
+        //右侧自选股
+        ROP,
         //首板
         First,
         //涨停
