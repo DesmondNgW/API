@@ -22,7 +22,8 @@ namespace X.UI.Entities
         DB,
         TDB,
         WB,
-        IndexWave
+        IndexWave,
+        MS
     }
 
 

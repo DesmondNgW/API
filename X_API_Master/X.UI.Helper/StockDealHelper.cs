@@ -199,6 +199,7 @@ namespace X.UI.Helper
             var file = mode == MyStockMode.Index ? "./src/fp/板块.txt" :
                  mode == MyStockMode.AQS ? "./src/fp/AQS.txt" :
                  mode == MyStockMode.IndexWave ? "./src/fp/BKWave.txt" :
+                 mode == MyStockMode.MS ? "./src/fp/MS.txt" :
                  mode == MyStockMode.AR ? "./src/fp/AR.txt" :
                  mode == MyStockMode.HHS ? "./src/fp/HHS.txt" :
                  mode == MyStockMode.HS ? "./src/fp/HS.txt" :
@@ -285,18 +286,9 @@ namespace X.UI.Helper
         /// <summary>
         /// 处理股票输出
         /// </summary>
-        /// <param name="AQS"></param>
-        /// <param name="Wave"></param>
-        /// <param name="AR"></param>
-        /// <param name="HHS"></param>
-        /// <param name="HS"></param>
-        /// <param name="THS"></param>
-        /// <param name="DS"></param>
-        /// <param name="TDS"></param>
-        /// <param name="encode"></param>
         public static void Deal(List<MyStock> AQS, List<MyStock> Wave, List<MyStock> AR, List<MyStock> HHS, 
             List<MyStock> HS, List<MyStock> THS, List<MyStock> DS, List<MyStock> TDS, List<MyStock> HB, List<MyStock> THB,
-            List<MyStock> DB, List<MyStock> TDB, List<MyStock> WB, string encode = "utf-8")
+            List<MyStock> DB, List<MyStock> TDB, List<MyStock> WB, List<MyStock> MS, string encode = "utf-8")
         {
             var tmp = Union(AQS, Wave);
             //原始数据处理
@@ -352,45 +344,55 @@ namespace X.UI.Helper
                 FileBase.WriteFile(dirAr, "Ar" + i + ".txt", string.Join("\t\n", arContent), encode, FileBaseMode.Create);
                 //Hhs系列
                 var hhsContent = GetStockName(hhsList, i, F3, O2);
+                var _hhsOutput = hhsContent.Where(p => MS.Exists(m => p.Contains(m.Code)));
                 HhsContent.Add(new Tuple<double, double>(hhsContent[0].Convert2Double(-10000), (hhsContent.Length - 1.0) / i));
-                FileBase.WriteFile(dirHHs, "Hhs" + i + ".txt", string.Join("\t\n", hhsContent), encode, FileBaseMode.Create);
+                FileBase.WriteFile(dirHHs, "Hhs" + i + ".txt", string.Join("\t\n", _hhsOutput), encode, FileBaseMode.Create);
                 //HS系列
                 var hsContent = GetStockName(hsList, i, F3, O2);
+                var _hsOutput = hsContent.Where(p => MS.Exists(m => p.Contains(m.Code)));
                 HsContent.Add(new Tuple<double, double>(hsContent[0].Convert2Double(-10000), (hsContent.Length - 1.0) / i));
-                FileBase.WriteFile(dirHs, "Hs" + i + ".txt", string.Join("\t\n", hsContent), encode, FileBaseMode.Create);
+                FileBase.WriteFile(dirHs, "Hs" + i + ".txt", string.Join("\t\n", _hsOutput), encode, FileBaseMode.Create);
                 //THS系列
                 var thsContent = GetStockName(thsList, i, F3, O2);
+                var _thsOutput = thsContent.Where(p => MS.Exists(m => p.Contains(m.Code)));
                 ThsContent.Add(new Tuple<double, double>(thsContent[0].Convert2Double(-10000), (thsContent.Length - 1.0) / i));
-                FileBase.WriteFile(dirThs, "Ths" + i + ".txt", string.Join("\t\n", thsContent), encode, FileBaseMode.Create);
+                FileBase.WriteFile(dirThs, "Ths" + i + ".txt", string.Join("\t\n", _thsOutput), encode, FileBaseMode.Create);
                 //DS系列
                 var dsContent = GetStockName(dsList, i, F3, O2);
+                var _dsOutput = dsContent.Where(p => MS.Exists(m => p.Contains(m.Code)));
                 DsContent.Add(new Tuple<double, double>(dsContent[0].Convert2Double(-10000), (dsContent.Length - 1.0) / i));
-                FileBase.WriteFile(dirDs, "Ds" + i + ".txt", string.Join("\t\n", dsContent), encode, FileBaseMode.Create);
+                FileBase.WriteFile(dirDs, "Ds" + i + ".txt", string.Join("\t\n", _dsOutput), encode, FileBaseMode.Create);
                 //TDS系列
                 var tdsContent = GetStockName(tdsList, i, F3, O2);
+                var _tdsOutput = tdsContent.Where(p => MS.Exists(m => p.Contains(m.Code)));
                 TDsContent.Add(new Tuple<double, double>(tdsContent[0].Convert2Double(-10000), (tdsContent.Length - 1.0) / i));
-                FileBase.WriteFile(dirTDs, "TDs" + i + ".txt", string.Join("\t\n", tdsContent), encode, FileBaseMode.Create);
+                FileBase.WriteFile(dirTDs, "TDs" + i + ".txt", string.Join("\t\n", _tdsOutput), encode, FileBaseMode.Create);
 
                 //Hb系列
                 var hbContent = GetStockName(hbList, i, F3, O2);
+                var _hbOutput = hbContent.Where(p => MS.Exists(m => p.Contains(m.Code)));
                 HbContent.Add(new Tuple<double, double>(hbContent[0].Convert2Double(-10000), (hbContent.Length - 1.0) / i));
-                FileBase.WriteFile(dirHb, "Hb" + i + ".txt", string.Join("\t\n", hbContent), encode, FileBaseMode.Create);
+                FileBase.WriteFile(dirHb, "Hb" + i + ".txt", string.Join("\t\n", _hbOutput), encode, FileBaseMode.Create);
                 //Thb系列
                 var thbContent = GetStockName(thbList, i, F3, O2);
+                var _thbOutput = thbContent.Where(p => MS.Exists(m => p.Contains(m.Code)));
                 ThbContent.Add(new Tuple<double, double>(thbContent[0].Convert2Double(-10000), (thbContent.Length - 1.0) / i));
-                FileBase.WriteFile(dirThb, "Thb" + i + ".txt", string.Join("\t\n", thbContent), encode, FileBaseMode.Create);
+                FileBase.WriteFile(dirThb, "Thb" + i + ".txt", string.Join("\t\n", _thbOutput), encode, FileBaseMode.Create);
                 //Db系列
                 var dbContent = GetStockName(dbList, i, F3, O2);
+                var _dbOutput = dbContent.Where(p => MS.Exists(m => p.Contains(m.Code)));
                 DbContent.Add(new Tuple<double, double>(dbContent[0].Convert2Double(-10000), (dbContent.Length - 1.0) / i));
-                FileBase.WriteFile(dirDb, "Db" + i + ".txt", string.Join("\t\n", dbContent), encode, FileBaseMode.Create);
+                FileBase.WriteFile(dirDb, "Db" + i + ".txt", string.Join("\t\n", _dbOutput), encode, FileBaseMode.Create);
                 //Tdb系列
                 var tdbContent = GetStockName(tdbList, i, F3, O2);
+                var _tdbOutput = tdbContent.Where(p => MS.Exists(m => p.Contains(m.Code)));
                 TDbContent.Add(new Tuple<double, double>(tdbContent[0].Convert2Double(-10000), (tdbContent.Length - 1.0) / i));
-                FileBase.WriteFile(dirTdb, "Tdb" + i + ".txt", string.Join("\t\n", tdbContent), encode, FileBaseMode.Create);
+                FileBase.WriteFile(dirTdb, "Tdb" + i + ".txt", string.Join("\t\n", _tdbOutput), encode, FileBaseMode.Create);
                 //Wb系列
                 var wbContent = GetStockName(wbList, i, F3, O2);
+                var _wbOutput = wbContent.Where(p => MS.Exists(m => p.Contains(m.Code)));
                 WbContent.Add(new Tuple<double, double>(wbContent[0].Convert2Double(-10000), (wbContent.Length - 1.0) / i));
-                FileBase.WriteFile(dirWb, "Wb" + i + ".txt", string.Join("\t\n", wbContent), encode, FileBaseMode.Create);
+                FileBase.WriteFile(dirWb, "Wb" + i + ".txt", string.Join("\t\n", _wbOutput), encode, FileBaseMode.Create);
             }
 
             var bkc = bk.Count();
@@ -412,35 +414,35 @@ namespace X.UI.Helper
             FileBase.WriteFile(dirAr, "Ar500.txt", string.Join("\t\n", GetStockName(arList, 500, F1, O2)), encode, FileBaseMode.Create);
             FileBase.WriteFile(dirAr, "Ar825.txt", string.Join("\t\n", GetStockName(arList, 825, F1, O2)), encode, FileBaseMode.Create);
             //HHs系列
-            FileBase.WriteFile(dirHHs, "Hhs500.txt", string.Join("\t\n", GetStockName(hhsList, 500, F3, O2)), encode, FileBaseMode.Create);
-            FileBase.WriteFile(dirHHs, "Hhs825.txt", string.Join("\t\n", GetStockName(hhsList, 825, F3, O2)), encode, FileBaseMode.Create);
+            FileBase.WriteFile(dirHHs, "Hhs500.txt", string.Join("\t\n", GetStockName(hhsList, 500, F3, O2).Where(p => MS.Exists(m => p.Contains(m.Code)))), encode, FileBaseMode.Create);
+            FileBase.WriteFile(dirHHs, "Hhs825.txt", string.Join("\t\n", GetStockName(hhsList, 825, F3, O2).Where(p => MS.Exists(m => p.Contains(m.Code)))), encode, FileBaseMode.Create);
             //Hs系列
-            FileBase.WriteFile(dirHs, "Hs500.txt", string.Join("\t\n", GetStockName(hsList, 500, F3, O2)), encode, FileBaseMode.Create);
-            FileBase.WriteFile(dirHs, "Hs825.txt", string.Join("\t\n", GetStockName(hsList, 825, F3, O2)), encode, FileBaseMode.Create);
+            FileBase.WriteFile(dirHs, "Hs500.txt", string.Join("\t\n", GetStockName(hsList, 500, F3, O2).Where(p => MS.Exists(m => p.Contains(m.Code)))), encode, FileBaseMode.Create);
+            FileBase.WriteFile(dirHs, "Hs825.txt", string.Join("\t\n", GetStockName(hsList, 825, F3, O2).Where(p => MS.Exists(m => p.Contains(m.Code)))), encode, FileBaseMode.Create);
             //Ths系列
-            FileBase.WriteFile(dirThs, "Ths500.txt", string.Join("\t\n", GetStockName(thsList, 500, F3, O2)), encode, FileBaseMode.Create);
-            FileBase.WriteFile(dirThs, "Ths825.txt", string.Join("\t\n", GetStockName(thsList, 825, F3, O2)), encode, FileBaseMode.Create);
+            FileBase.WriteFile(dirThs, "Ths500.txt", string.Join("\t\n", GetStockName(thsList, 500, F3, O2).Where(p => MS.Exists(m => p.Contains(m.Code)))), encode, FileBaseMode.Create);
+            FileBase.WriteFile(dirThs, "Ths825.txt", string.Join("\t\n", GetStockName(thsList, 825, F3, O2).Where(p => MS.Exists(m => p.Contains(m.Code)))), encode, FileBaseMode.Create);
             //Ds系列
-            FileBase.WriteFile(dirDs, "Ds500.txt", string.Join("\t\n", GetStockName(dsList, 500, F3, O2)), encode, FileBaseMode.Create);
-            FileBase.WriteFile(dirDs, "Ds825.txt", string.Join("\t\n", GetStockName(dsList, 825, F3, O2)), encode, FileBaseMode.Create);
+            FileBase.WriteFile(dirDs, "Ds500.txt", string.Join("\t\n", GetStockName(dsList, 500, F3, O2).Where(p => MS.Exists(m => p.Contains(m.Code)))), encode, FileBaseMode.Create);
+            FileBase.WriteFile(dirDs, "Ds825.txt", string.Join("\t\n", GetStockName(dsList, 825, F3, O2).Where(p => MS.Exists(m => p.Contains(m.Code)))), encode, FileBaseMode.Create);
             //TDs系列
-            FileBase.WriteFile(dirTDs, "TDs500.txt", string.Join("\t\n", GetStockName(tdsList, 500, F3, O2)), encode, FileBaseMode.Create);
-            FileBase.WriteFile(dirTDs, "TDs825.txt", string.Join("\t\n", GetStockName(tdsList, 825, F3, O2)), encode, FileBaseMode.Create);
+            FileBase.WriteFile(dirTDs, "TDs500.txt", string.Join("\t\n", GetStockName(tdsList, 500, F3, O2).Where(p => MS.Exists(m => p.Contains(m.Code)))), encode, FileBaseMode.Create);
+            FileBase.WriteFile(dirTDs, "TDs825.txt", string.Join("\t\n", GetStockName(tdsList, 825, F3, O2).Where(p => MS.Exists(m => p.Contains(m.Code)))), encode, FileBaseMode.Create);
             //Hb系列
-            FileBase.WriteFile(dirHb, "Hb500.txt", string.Join("\t\n", GetStockName(hbList, 500, F3, O2)), encode, FileBaseMode.Create);
-            FileBase.WriteFile(dirHb, "Hb825.txt", string.Join("\t\n", GetStockName(hbList, 825, F3, O2)), encode, FileBaseMode.Create);
+            FileBase.WriteFile(dirHb, "Hb500.txt", string.Join("\t\n", GetStockName(hbList, 500, F3, O2).Where(p => MS.Exists(m => p.Contains(m.Code)))), encode, FileBaseMode.Create);
+            FileBase.WriteFile(dirHb, "Hb825.txt", string.Join("\t\n", GetStockName(hbList, 825, F3, O2).Where(p => MS.Exists(m => p.Contains(m.Code)))), encode, FileBaseMode.Create);
             //Thb系列
-            FileBase.WriteFile(dirThb, "Thb500.txt", string.Join("\t\n", GetStockName(thbList, 500, F3, O2)), encode, FileBaseMode.Create);
-            FileBase.WriteFile(dirThb, "Thb825.txt", string.Join("\t\n", GetStockName(thbList, 825, F3, O2)), encode, FileBaseMode.Create);
+            FileBase.WriteFile(dirThb, "Thb500.txt", string.Join("\t\n", GetStockName(thbList, 500, F3, O2).Where(p => MS.Exists(m => p.Contains(m.Code)))), encode, FileBaseMode.Create);
+            FileBase.WriteFile(dirThb, "Thb825.txt", string.Join("\t\n", GetStockName(thbList, 825, F3, O2).Where(p => MS.Exists(m => p.Contains(m.Code)))), encode, FileBaseMode.Create);
             //Db系列
-            FileBase.WriteFile(dirDb, "Db500.txt", string.Join("\t\n", GetStockName(dbList, 500, F3, O2)), encode, FileBaseMode.Create);
-            FileBase.WriteFile(dirDb, "Db825.txt", string.Join("\t\n", GetStockName(dbList, 825, F3, O2)), encode, FileBaseMode.Create);
+            FileBase.WriteFile(dirDb, "Db500.txt", string.Join("\t\n", GetStockName(dbList, 500, F3, O2).Where(p => MS.Exists(m => p.Contains(m.Code)))), encode, FileBaseMode.Create);
+            FileBase.WriteFile(dirDb, "Db825.txt", string.Join("\t\n", GetStockName(dbList, 825, F3, O2).Where(p => MS.Exists(m => p.Contains(m.Code)))), encode, FileBaseMode.Create);
             //Tdb系列
-            FileBase.WriteFile(dirTdb, "Tdb500.txt", string.Join("\t\n", GetStockName(tdbList, 500, F3, O2)), encode, FileBaseMode.Create);
-            FileBase.WriteFile(dirTdb, "Tdb825.txt", string.Join("\t\n", GetStockName(tdbList, 825, F3, O2)), encode, FileBaseMode.Create);
+            FileBase.WriteFile(dirTdb, "Tdb500.txt", string.Join("\t\n", GetStockName(tdbList, 500, F3, O2).Where(p => MS.Exists(m => p.Contains(m.Code)))), encode, FileBaseMode.Create);
+            FileBase.WriteFile(dirTdb, "Tdb825.txt", string.Join("\t\n", GetStockName(tdbList, 825, F3, O2).Where(p => MS.Exists(m => p.Contains(m.Code)))), encode, FileBaseMode.Create);
             //Wb系列
-            FileBase.WriteFile(dirWb, "Wb500.txt", string.Join("\t\n", GetStockName(wbList, 500, F3, O2)), encode, FileBaseMode.Create);
-            FileBase.WriteFile(dirWb, "Wb825.txt", string.Join("\t\n", GetStockName(wbList, 825, F3, O2)), encode, FileBaseMode.Create);
+            FileBase.WriteFile(dirWb, "Wb500.txt", string.Join("\t\n", GetStockName(wbList, 500, F3, O2).Where(p => MS.Exists(m => p.Contains(m.Code)))), encode, FileBaseMode.Create);
+            FileBase.WriteFile(dirWb, "Wb825.txt", string.Join("\t\n", GetStockName(wbList, 825, F3, O2).Where(p => MS.Exists(m => p.Contains(m.Code)))), encode, FileBaseMode.Create);
 
             var KConsole = GetAnswer(KContent);
             var AConsole = GetAnswer(AContent);
@@ -1143,7 +1145,8 @@ namespace X.UI.Helper
                 var DB = GetMyStock(MyStockMode.DB);
                 var TDB = GetMyStock(MyStockMode.TDB);
                 var WB = GetMyStock(MyStockMode.WB);
-                Deal(AQS, Wave, AR, HHS, HS, THS, DS, TDS, HB, THB, DB, TDB, WB);
+                var MS = GetMyStock(MyStockMode.MS);
+                Deal(AQS, Wave, AR, HHS, HS, THS, DS, TDS, HB, THB, DB, TDB, WB, MS);
                 var t2 = GetMyStock(MyStockMode.Index);
                 var t3 = GetMyStock(MyStockMode.IndexWave);
                 Deal2(t2, t3);

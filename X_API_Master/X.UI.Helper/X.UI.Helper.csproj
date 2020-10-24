@@ -51,6 +51,11 @@
     <Reference Include="System.Xml.Serialization" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Connected Services\TDXQuote\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="JRJDataHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StockDataHelper.cs" />
@@ -89,6 +94,46 @@
       <Project>{534B9A37-9B27-42DB-81E8-69F67600934B}</Project>
       <Name>X.Util.Other</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="Connected Services\TDXQuote\Arrays.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\TDXQuote\service.wsdl" />
+    <None Include="Connected Services\TDXQuote\service.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\TDXQuote\service1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\TDXQuote\TDXQuoteLib.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\TDXQuote\X.UI.Helper.TDXQuote.MinuteData.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TDXQuote\X.UI.Helper.TDXQuote.QuoteData.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Connected Services\TDXQuote\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\TDXQuote\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\TDXQuote\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\TDXQuote\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
