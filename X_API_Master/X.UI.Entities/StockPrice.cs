@@ -24,6 +24,10 @@ namespace X.UI.Entities
         DS,
         //3日卖点
         TDS,
+        //周卖点
+        WS,
+        //2周卖点
+        TWS,
         //60买
         HB,
         //120买
@@ -34,6 +38,10 @@ namespace X.UI.Entities
         TDB,
         //周买
         WB,
+        //2周买
+        TWB,
+        //月买
+        MB,
         //首板
         First,
         //涨停

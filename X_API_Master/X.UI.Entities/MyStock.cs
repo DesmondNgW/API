@@ -17,11 +17,15 @@ namespace X.UI.Entities
         THS,
         DS,
         TDS,
+        WS,
+        TWS,
         HB,
         THB,
         DB,
         TDB,
         WB,
+        TWB,
+        MB,
         IndexWave,
         MS
     }
