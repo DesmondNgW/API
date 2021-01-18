@@ -45,7 +45,11 @@ namespace X.UI.Entities
         //首板
         First,
         //涨停
-        ZT
+        ZT,
+        WV1,
+        WV2,
+        WV3,
+        WV4,
     }
 
     public class StockPrice : MongoBaseModel
