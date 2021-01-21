@@ -691,6 +691,86 @@ namespace X.UI.Helper
             return ret;
         }
 
+        public static List<StockPrice> GetRealAR(List<StockPrice> AR, List<MyStock> HHS, List<MyStock> HS, List<MyStock> THS,
+            List<MyStock> DS, List<MyStock> TDS, List<MyStock> WS, List<MyStock> TWS, List<MyStock> HB, List<MyStock> THB,
+            List<MyStock> DB, List<MyStock> TDB, List<MyStock> WB, List<MyStock> TWB, List<MyStock> MB)
+        {
+            var ret = new List<StockPrice>();
+            foreach (var item in AR)
+            {
+                if (HHS.Exists(p => p.Code == item.StockCode))
+                {
+                    item.Remark = "HHS";
+                }
+                else if (HS.Exists(p => p.Code == item.StockCode))
+                {
+                    item.Remark = "HS";
+                }
+                else if (THS.Exists(p => p.Code == item.StockCode))
+                {
+                    item.Remark = "THS";
+                }
+                else if (DS.Exists(p => p.Code == item.StockCode))
+                {
+                    item.Remark = "DS";
+                }
+                else if (TDS.Exists(p => p.Code == item.StockCode))
+                {
+                    item.Remark = "TDS";
+                }
+                else if (WS.Exists(p => p.Code == item.StockCode))
+                {
+                    item.Remark = "WS";
+                }
+                else if (TWS.Exists(p => p.Code == item.StockCode))
+                {
+                    item.Remark = "TWS";
+                }
+                else
+                {
+                    item.Remark = string.Empty;
+                }
+
+                if (HB.Exists(p => p.Code == item.StockCode))
+                {
+                    item.Remark2 = "HB";
+                }
+                else if (THB.Exists(p => p.Code == item.StockCode))
+                {
+                    item.Remark2 = "THB";
+                }
+                else if (DB.Exists(p => p.Code == item.StockCode))
+                {
+                    item.Remark2 = "DB";
+                }
+                else if (TDB.Exists(p => p.Code == item.StockCode))
+                {
+                    item.Remark2 = "TDB";
+                }
+                else if (WB.Exists(p => p.Code == item.StockCode))
+                {
+                    item.Remark2 = "WB";
+                }
+                else if (TWB.Exists(p => p.Code == item.StockCode))
+                {
+                    item.Remark2 = "TWB";
+                }
+                else if (MB.Exists(p => p.Code == item.StockCode))
+                {
+                    item.Remark2 = "MB";
+                }
+                else
+                {
+                    item.Remark2 = string.Empty;
+                }
+                if (!string.IsNullOrEmpty(item.Remark2) || !string.IsNullOrEmpty(item.Remark))
+                {
+                    ret.Add(item);
+                }
+            }
+            return ret;
+        }
+
         /// <summary>
         /// 盯盘
         /// </summary>
@@ -719,7 +799,7 @@ namespace X.UI.Helper
             List<StockPrice> DS, List<StockPrice> TDS, List<StockPrice> WS, List<StockPrice> TWS, List<StockPrice> HB, 
             List<StockPrice> THB, List<StockPrice> DB, List<StockPrice> TDB, List<StockPrice> WB, List<StockPrice> TWB,
             List<StockPrice> MB, List<StockPrice> First, List<StockPrice> ZT, List<StockPrice> WV1, List<StockPrice> WV2,
-            List<StockPrice> WV3, List<StockPrice> WV4, List<MyStock> AQS, List<MyStock> All, bool debug = false)
+            List<StockPrice> WV3, List<StockPrice> WV4, List<MyStock> AQS, List<StockPrice> RealAR, List<MyStock> All, bool debug = false)
         {
             //开盘时间
             var tradeStart = ConfigurationHelper.GetAppSettingByName("TradeStart", new DateTime(2099, 1, 1, 9, 15, 0));
@@ -733,7 +813,7 @@ namespace X.UI.Helper
             var spmode = ConfigurationHelper.GetAppSettingByName("SpMode", 0);
 
             List<StockPrice> OP = HHS.Union(HS).Union(THS).Union(DS).Union(TDS).Union(WS).Union(TWS)
-                .Union(HB).Union(THB).Union(DB).Union(TDB).Union(WB).Union(TWB).Union(MB).ToList();
+                .Union(HB).Union(THB).Union(DB).Union(TDB).Union(WB).Union(TWB).Union(MB).Union(RealAR).ToList();
 
             List<StockPrice> Top = ZT.Where(p => AQS.Exists(q => q.Code == p.StockCode)).ToList();
 
@@ -1065,6 +1145,8 @@ namespace X.UI.Helper
                             }
                             list[item.StockCode].Remark += remark + (j+1);
 
+                            var realArItem = RealAR.FirstOrDefault(p => p.StockCode == item.StockCode);
+
                             if (TWS.Exists(p => p.StockCode == item.StockCode))
                             {
                                 list[item.StockCode].OrderRemark = "TWS";
@@ -1092,6 +1174,10 @@ namespace X.UI.Helper
                             else if (HHS.Exists(p => p.StockCode == item.StockCode))
                             {
                                 list[item.StockCode].OrderRemark = "HHS";
+                            }
+                            else if (realArItem != null)
+                            {
+                                list[item.StockCode].OrderRemark = realArItem.Remark;
                             }
                             else
                             {
@@ -1125,6 +1211,10 @@ namespace X.UI.Helper
                             else if (HB.Exists(p => p.StockCode == item.StockCode))
                             {
                                 list[item.StockCode].OrderRemark2 = "HB";
+                            }
+                            else if (realArItem != null)
+                            {
+                                list[item.StockCode].OrderRemark2 = realArItem.Remark2;
                             }
                             else
                             {
@@ -1255,12 +1345,14 @@ namespace X.UI.Helper
                 var wv3 = GetMyMonitorStock(MyStockType.WV3);
                 var wv4 = GetMyMonitorStock(MyStockType.WV4);
 
+                var realAR = GetRealAR(ar, HHS, HS, THS, DS, TDS, WS, TWS, HB, THB, DB, TDB, WB, TWB, MB);
+
                 var all = Union(AQS, Wave, AR, HHS, HS, THS, DS, TDS, WS, TWS, HB, THB, DB, TDB, WB, TWB, MB);
                 while (dt.TimeOfDay >= tradeStart.TimeOfDay && dt.TimeOfDay <= tradeEnd.TimeOfDay)
                 {
                     MonitorIndex();
                     MonitorStock(Continue, shortContinue, ar, shen, hhs, hs, ths, ds, tds, ws, tws,
-                        hb, thb, db, tdb, wb, twb, mb, first, zt, wv1, wv2, wv3, wv4, AQS, all);
+                        hb, thb, db, tdb, wb, twb, mb, first, zt, wv1, wv2, wv3, wv4, AQS, realAR, all);
                     Thread.Sleep(6000);
                     dt = DateTime.Now;
                 }
@@ -1356,6 +1448,8 @@ namespace X.UI.Helper
                 var TWB = GetMyStock(MyStockMode.TWB);
                 var MB = GetMyStock(MyStockMode.MB);
 
+                var realAR = GetRealAR(ar, HHS, HS, THS, DS, TDS, WS, TWS, HB, THB, DB, TDB, WB, TWB, MB);
+
                 var wv1 = GetMyMonitorStock(MyStockType.WV1);
                 var wv2 = GetMyMonitorStock(MyStockType.WV2);
                 var wv3 = GetMyMonitorStock(MyStockType.WV3);
@@ -1364,7 +1458,7 @@ namespace X.UI.Helper
                 var all = Union(AQS, Wave, AR, HHS, HS, THS, DS, TDS, WS, TWS, HB, THB, DB, TDB, WB, TWB, MB);
                 MonitorIndex();
                 MonitorStock(Continue, shortContinue, ar, shen, hhs, hs, ths, ds, tds, ws, tws,
-                    hb, thb, db, tdb, wb, twb, mb, first, zt, wv1, wv2, wv3, wv4, AQS, all, true);
+                    hb, thb, db, tdb, wb, twb, mb, first, zt, wv1, wv2, wv3, wv4, AQS, realAR, all, true);
             }
             Console.WriteLine("Program End! Press Any Key!");
             Console.ReadKey();

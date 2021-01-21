@@ -131,5 +131,12 @@ namespace X.UI.Entities
         /// 委托卖1
         /// </summary>
         public decimal Sell1 { get; set; }
+
+        /// <summary>
+        /// 备注信息
+        /// </summary>
+        public string Remark { get; set; }
+
+        public string Remark2 { get; set; }
     }
 }
