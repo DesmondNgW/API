@@ -700,31 +700,31 @@ namespace X.UI.Helper
             {
                 if (HHS.Exists(p => p.Code == item.StockCode))
                 {
-                    item.Remark = "HHS";
+                    item.Remark = "AR-HHS";
                 }
                 else if (HS.Exists(p => p.Code == item.StockCode))
                 {
-                    item.Remark = "HS";
+                    item.Remark = "AR-HS";
                 }
                 else if (THS.Exists(p => p.Code == item.StockCode))
                 {
-                    item.Remark = "THS";
+                    item.Remark = "AR-THS";
                 }
                 else if (DS.Exists(p => p.Code == item.StockCode))
                 {
-                    item.Remark = "DS";
+                    item.Remark = "AR-DS";
                 }
                 else if (TDS.Exists(p => p.Code == item.StockCode))
                 {
-                    item.Remark = "TDS";
+                    item.Remark = "AR-TDS";
                 }
                 else if (WS.Exists(p => p.Code == item.StockCode))
                 {
-                    item.Remark = "WS";
+                    item.Remark = "AR-WS";
                 }
                 else if (TWS.Exists(p => p.Code == item.StockCode))
                 {
-                    item.Remark = "TWS";
+                    item.Remark = "AR-TWS";
                 }
                 else
                 {
@@ -733,31 +733,31 @@ namespace X.UI.Helper
 
                 if (HB.Exists(p => p.Code == item.StockCode))
                 {
-                    item.Remark2 = "HB";
+                    item.Remark2 = "AR-HB";
                 }
                 else if (THB.Exists(p => p.Code == item.StockCode))
                 {
-                    item.Remark2 = "THB";
+                    item.Remark2 = "AR-THB";
                 }
                 else if (DB.Exists(p => p.Code == item.StockCode))
                 {
-                    item.Remark2 = "DB";
+                    item.Remark2 = "AR-DB";
                 }
                 else if (TDB.Exists(p => p.Code == item.StockCode))
                 {
-                    item.Remark2 = "TDB";
+                    item.Remark2 = "AR-TDB";
                 }
                 else if (WB.Exists(p => p.Code == item.StockCode))
                 {
-                    item.Remark2 = "WB";
+                    item.Remark2 = "AR-WB";
                 }
                 else if (TWB.Exists(p => p.Code == item.StockCode))
                 {
-                    item.Remark2 = "TWB";
+                    item.Remark2 = "AR-TWB";
                 }
                 else if (MB.Exists(p => p.Code == item.StockCode))
                 {
-                    item.Remark2 = "MB";
+                    item.Remark2 = "AR-MB";
                 }
                 else
                 {
