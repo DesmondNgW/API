@@ -17,7 +17,7 @@ namespace X.UI.Consoles
         static void Main()
         {
             //RandGame.TestRand2();
-            StockDealHelper.Program();
+            //StockDealHelper.Program();
             Index();
             Console.ReadKey();
         }
@@ -61,86 +61,5 @@ namespace X.UI.Consoles
                 break;
             }
         }
-    }
-
-    class RandGame
-    {
-        public static double Rand(double u, double d)
-        {
-            double u1, u2, z, x;
-            if (d <= 0)
-            {
-
-                return u;
-            }
-            u1 = StringConvert.SysRandom.NextDouble();
-            u2 = StringConvert.SysRandom.NextDouble();
-            z = Math.Sqrt(-2 * Math.Log(u1)) * Math.Sin(2 * Math.PI * u2);
-            x = u + d * z;
-            return x;
-        }
-
-        public static bool TestRand()
-        {
-            Func<int> f = () =>
-            {
-                var r = Rand(20, 4);
-                if (r < 0) return 0;
-                if (r > 32) return 32;
-                return (int)r;
-            };
-
-            var a1 = f();
-            var a2 = f();
-            var a3 = f();
-            var a4 = f();
-            var a5 = f();
-            var a = (a1 + a2 + a3 + a4 + a5) / 5;
-            Console.WriteLine("a1:{0}", a1);
-            Console.WriteLine("a2:{0}", a2);
-            Console.WriteLine("a3:{0}", a3);
-            Console.WriteLine("a4:{0}", a4);
-            Console.WriteLine("a5:{0}", a5);
-            if (a >= 28)
-            {
-                Console.WriteLine("鬼!");
-            }
-            if (a >= 29)
-            {
-                Console.WriteLine("神!");
-            }
-            if (a >= 30)
-            {
-                Console.WriteLine("人!");
-            }
-            if (a >= 31)
-            {
-                Console.WriteLine("地!");
-            }
-            if (a >= 32)
-            {
-                Console.WriteLine("天!");
-            }
-            if (a >= 28) return true;
-            return false;
-        }
-
-        public static void TestRand2()
-        {
-            int count = 0, total = 0;
-            while (total < 10000)
-            {
-                if (TestRand())
-                {
-                    count++;
-                }
-                total++;
-                Thread.Sleep(1000);
-            }
-            Console.WriteLine("{0}/{1}", count, total);
-        }
-
-
-
     }
 }

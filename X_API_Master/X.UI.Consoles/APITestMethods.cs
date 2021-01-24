@@ -17,7 +17,8 @@ namespace X.UI.Consoles
         ApiRsaEnTest = 5,
         ApiRsaDeTest = 6,
         StockDeal = 7,
-        StockProgram = 8
+        StockProgram = 8,
+        TestStockPrice = 9
     }
 
     public class ApiTestMethods
@@ -111,6 +112,32 @@ namespace X.UI.Consoles
         public static void StockProgram()
         {
             StockDealHelper.Program();
+        }
+
+        public static void TestStockPrice()
+        {
+            Console.WriteLine(@"请输入高价-低价-收盘-基础价:");
+            string inputs;
+            while (!string.IsNullOrEmpty(inputs = Console.ReadLine()))
+            {
+                var arr = inputs.Split(' ');
+                if (arr.Length >= 4)
+                {
+                    var t0 = arr[3].Convert2Decimal(0);
+                    var t1 = arr[0].Convert2Decimal(0) * 1.025M;
+                    var t2 = arr[1].Convert2Decimal(0) * 1.025M;
+                    var t3 = arr[2].Convert2Decimal(0);
+                    Console.WriteLine(@"{0}[{1}]", t1, t1 / t3 * 100 - 100);
+                    Console.WriteLine(@"{0}[{1}]", t2, t2 / t3 * 100 - 100);
+                    Console.WriteLine(@"{0}[{1}]", t0 * 1.15M, t0 * 1.15M / t3 * 100 - 100);
+                    Console.WriteLine(@"{0}[{1}]", t0 * 1.3M, t0 * 1.3M / t3 * 100 - 100);
+                    Console.WriteLine(@"{0}[{1}]", t0 * 1.5M, t0 * 1.5M / t3 * 100 - 100);
+                    Console.WriteLine(@"{0}[{1}]", t0 * 1.75M, t0 * 1.75M / t3 * 100 - 100);
+                    Console.WriteLine(@"{0}[{1}]", t0 * 2M, t0 * 2M / t3 * 100 - 100);
+                    Console.WriteLine(@"{0}[{1}]", t0 * 2.25M, t0 * 2.25M / t3 * 100 - 100);
+                    Console.WriteLine(@"{0}[{1}]", t0 * 2.5M, t0 * 2.5M / t3 * 100 - 100);
+                }
+            }
         }
     }
 }
