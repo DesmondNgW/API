@@ -17,7 +17,7 @@ namespace X.UI.Consoles
         static void Main()
         {
             //RandGame.TestRand2();
-            //StockDealHelper.Program();
+            StockDealHelper.Program();
             Index();
             Console.ReadKey();
         }

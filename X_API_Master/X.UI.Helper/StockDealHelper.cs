@@ -44,11 +44,6 @@ namespace X.UI.Helper
             return p.Inc > -100 && !p.Name.Contains("ST") && p.Amount >= t;// 3.82 * 1e8;
         }
 
-        private static bool F5(MyStock p, List<MyStock> list)
-        {
-            return p.Inc > -100 && !p.Name.Contains("ST") && list.Exists(q => q.Code == p.Code);
-        }
-
         /// <summary>
         /// 输出代码和名称
         /// </summary>
@@ -348,7 +343,7 @@ namespace X.UI.Helper
             var TwbContent = new List<Tuple<double, double>>();
             var MbContent = new List<Tuple<double, double>>();
 
-            Func<MyStock, bool> _F5 = p => F5(p, Wave);
+            Func<MyStock, bool> _F5 = F3;
 
             for (var i = 25; i <= 400; i += 25)
             {
@@ -663,11 +658,7 @@ namespace X.UI.Helper
                 mode == MyStockType.TWB ? "./src/dp/CTWB.txt" :
                 mode == MyStockType.MB ? "./src/dp/CMB.txt" :
                 mode == MyStockType.SHEN ? "./src/dp/神.txt" :
-                mode == MyStockType.WV1 ? "./src/dp/WV1.txt" :
-                mode == MyStockType.WV2 ? "./src/dp/WV2.txt" :
-                mode == MyStockType.WV3 ? "./src/dp/WV3.txt" :
-                mode == MyStockType.WV4 ? "./src/dp/WV4.txt" :
-                 mode == MyStockType.AR ? "./src/dp/AR.txt" : "./src/dp/接力.txt";
+                mode == MyStockType.AR ? "./src/dp/AR.txt" : "./src/dp/接力.txt";
             var list1 = Regex.Split(FileBase.ReadFile(file, "gb2312"), "\r\n", RegexOptions.IgnoreCase);
             var ret = new List<StockPrice>();
             foreach (var item in list1)
@@ -686,86 +677,6 @@ namespace X.UI.Helper
                         LastClosePrice = t[14].Convert2Decimal(0),
                         MyStockType = mode,
                     });
-                }
-            }
-            return ret;
-        }
-
-        public static List<StockPrice> GetRealAR(List<StockPrice> AR, List<MyStock> HHS, List<MyStock> HS, List<MyStock> THS,
-            List<MyStock> DS, List<MyStock> TDS, List<MyStock> WS, List<MyStock> TWS, List<MyStock> HB, List<MyStock> THB,
-            List<MyStock> DB, List<MyStock> TDB, List<MyStock> WB, List<MyStock> TWB, List<MyStock> MB)
-        {
-            var ret = new List<StockPrice>();
-            foreach (var item in AR)
-            {
-                if (HHS.Exists(p => p.Code == item.StockCode))
-                {
-                    item.Remark = "AR-HHS";
-                }
-                else if (HS.Exists(p => p.Code == item.StockCode))
-                {
-                    item.Remark = "AR-HS";
-                }
-                else if (THS.Exists(p => p.Code == item.StockCode))
-                {
-                    item.Remark = "AR-THS";
-                }
-                else if (DS.Exists(p => p.Code == item.StockCode))
-                {
-                    item.Remark = "AR-DS";
-                }
-                else if (TDS.Exists(p => p.Code == item.StockCode))
-                {
-                    item.Remark = "AR-TDS";
-                }
-                else if (WS.Exists(p => p.Code == item.StockCode))
-                {
-                    item.Remark = "AR-WS";
-                }
-                else if (TWS.Exists(p => p.Code == item.StockCode))
-                {
-                    item.Remark = "AR-TWS";
-                }
-                else
-                {
-                    item.Remark = string.Empty;
-                }
-
-                if (HB.Exists(p => p.Code == item.StockCode))
-                {
-                    item.Remark2 = "AR-HB";
-                }
-                else if (THB.Exists(p => p.Code == item.StockCode))
-                {
-                    item.Remark2 = "AR-THB";
-                }
-                else if (DB.Exists(p => p.Code == item.StockCode))
-                {
-                    item.Remark2 = "AR-DB";
-                }
-                else if (TDB.Exists(p => p.Code == item.StockCode))
-                {
-                    item.Remark2 = "AR-TDB";
-                }
-                else if (WB.Exists(p => p.Code == item.StockCode))
-                {
-                    item.Remark2 = "AR-WB";
-                }
-                else if (TWB.Exists(p => p.Code == item.StockCode))
-                {
-                    item.Remark2 = "AR-TWB";
-                }
-                else if (MB.Exists(p => p.Code == item.StockCode))
-                {
-                    item.Remark2 = "AR-MB";
-                }
-                else
-                {
-                    item.Remark2 = string.Empty;
-                }
-                if (!string.IsNullOrEmpty(item.Remark2) || !string.IsNullOrEmpty(item.Remark))
-                {
-                    ret.Add(item);
                 }
             }
             return ret;
@@ -798,8 +709,7 @@ namespace X.UI.Helper
             List<StockPrice> AR, List<StockPrice> Shen, List<StockPrice> HHS, List<StockPrice> HS, List<StockPrice> THS, 
             List<StockPrice> DS, List<StockPrice> TDS, List<StockPrice> WS, List<StockPrice> TWS, List<StockPrice> HB, 
             List<StockPrice> THB, List<StockPrice> DB, List<StockPrice> TDB, List<StockPrice> WB, List<StockPrice> TWB,
-            List<StockPrice> MB, List<StockPrice> First, List<StockPrice> ZT, List<StockPrice> WV1, List<StockPrice> WV2,
-            List<StockPrice> WV3, List<StockPrice> WV4, List<MyStock> AQS, List<StockPrice> RealAR, List<MyStock> All, bool debug = false)
+            List<StockPrice> MB, List<StockPrice> First, List<StockPrice> ZT, List<MyStock> AQS, List<MyStock> All, bool debug = false)
         {
             //开盘时间
             var tradeStart = ConfigurationHelper.GetAppSettingByName("TradeStart", new DateTime(2099, 1, 1, 9, 15, 0));
@@ -813,7 +723,7 @@ namespace X.UI.Helper
             var spmode = ConfigurationHelper.GetAppSettingByName("SpMode", 0);
 
             List<StockPrice> OP = HHS.Union(HS).Union(THS).Union(DS).Union(TDS).Union(WS).Union(TWS)
-                .Union(HB).Union(THB).Union(DB).Union(TDB).Union(WB).Union(TWB).Union(MB).Union(RealAR).ToList();
+                .Union(HB).Union(THB).Union(DB).Union(TDB).Union(WB).Union(TWB).Union(MB).ToList();
 
             List<StockPrice> Top = ZT.Where(p => AQS.Exists(q => q.Code == p.StockCode)).ToList();
 
@@ -1145,8 +1055,6 @@ namespace X.UI.Helper
                             }
                             list[item.StockCode].Remark += remark + (j+1);
 
-                            var realArItem = RealAR.FirstOrDefault(p => p.StockCode == item.StockCode);
-
                             if (TWS.Exists(p => p.StockCode == item.StockCode))
                             {
                                 list[item.StockCode].OrderRemark = "TWS";
@@ -1174,10 +1082,6 @@ namespace X.UI.Helper
                             else if (HHS.Exists(p => p.StockCode == item.StockCode))
                             {
                                 list[item.StockCode].OrderRemark = "HHS";
-                            }
-                            else if (realArItem != null)
-                            {
-                                list[item.StockCode].OrderRemark = realArItem.Remark;
                             }
                             else
                             {
@@ -1212,10 +1116,6 @@ namespace X.UI.Helper
                             {
                                 list[item.StockCode].OrderRemark2 = "HB";
                             }
-                            else if (realArItem != null)
-                            {
-                                list[item.StockCode].OrderRemark2 = realArItem.Remark2;
-                            }
                             else
                             {
                                 list[item.StockCode].OrderRemark2 = "";
@@ -1229,27 +1129,6 @@ namespace X.UI.Helper
                             {
                                 list[item.StockCode].OrderRemark3 = "N";
                             }
-
-                            if (WV1.Exists(p => p.StockCode == item.StockCode))
-                            {
-                                list[item.StockCode].OrderRemark4 = "TH";
-                            }
-                            else if (WV2.Exists(p => p.StockCode == item.StockCode))
-                            {
-                                list[item.StockCode].OrderRemark4 = "D";
-                            }
-                            else if (WV3.Exists(p => p.StockCode == item.StockCode))
-                            {
-                                list[item.StockCode].OrderRemark4 = "TD";
-                            }
-                            else if (WV4.Exists(p => p.StockCode == item.StockCode))
-                            {
-                                list[item.StockCode].OrderRemark4 = "W";
-                            }
-                            else
-                            {
-                                list[item.StockCode].OrderRemark4 = "";
-                            }
                         }
                     }
                     j++; 
@@ -1258,7 +1137,7 @@ namespace X.UI.Helper
             FileBase.WriteFile("./", "dest.txt", string.Join("\t\n", list.OrderByDescending(p => p.Value.SLevel)
                 .ThenByDescending(p => p.Value.Inc).
                 Select(p => p.Value.StockCode + " " + p.Value.StockName + " " + p.Value.Remark + " "
-                + p.Value.OrderRemark + " " + p.Value.OrderRemark2 + " " + p.Value.OrderRemark3+ " " + p.Value.OrderRemark4)), "utf-8", FileBaseMode.Create);
+                + p.Value.OrderRemark + " " + p.Value.OrderRemark2 + " " + p.Value.OrderRemark3)), "utf-8", FileBaseMode.Create);
             #endregion
 
         }
@@ -1340,19 +1219,12 @@ namespace X.UI.Helper
                 var TWB = GetMyStock(MyStockMode.TWB);
                 var MB = GetMyStock(MyStockMode.MB);
 
-                var wv1 = GetMyMonitorStock(MyStockType.WV1);
-                var wv2 = GetMyMonitorStock(MyStockType.WV2);
-                var wv3 = GetMyMonitorStock(MyStockType.WV3);
-                var wv4 = GetMyMonitorStock(MyStockType.WV4);
-
-                var realAR = GetRealAR(ar, HHS, HS, THS, DS, TDS, WS, TWS, HB, THB, DB, TDB, WB, TWB, MB);
-
                 var all = Union(AQS, Wave, AR, HHS, HS, THS, DS, TDS, WS, TWS, HB, THB, DB, TDB, WB, TWB, MB);
                 while (dt.TimeOfDay >= tradeStart.TimeOfDay && dt.TimeOfDay <= tradeEnd.TimeOfDay)
                 {
                     MonitorIndex();
                     MonitorStock(Continue, shortContinue, ar, shen, hhs, hs, ths, ds, tds, ws, tws,
-                        hb, thb, db, tdb, wb, twb, mb, first, zt, wv1, wv2, wv3, wv4, AQS, realAR, all);
+                        hb, thb, db, tdb, wb, twb, mb, first, zt, AQS, all);
                     Thread.Sleep(6000);
                     dt = DateTime.Now;
                 }
@@ -1448,17 +1320,10 @@ namespace X.UI.Helper
                 var TWB = GetMyStock(MyStockMode.TWB);
                 var MB = GetMyStock(MyStockMode.MB);
 
-                var realAR = GetRealAR(ar, HHS, HS, THS, DS, TDS, WS, TWS, HB, THB, DB, TDB, WB, TWB, MB);
-
-                var wv1 = GetMyMonitorStock(MyStockType.WV1);
-                var wv2 = GetMyMonitorStock(MyStockType.WV2);
-                var wv3 = GetMyMonitorStock(MyStockType.WV3);
-                var wv4 = GetMyMonitorStock(MyStockType.WV4);
-
                 var all = Union(AQS, Wave, AR, HHS, HS, THS, DS, TDS, WS, TWS, HB, THB, DB, TDB, WB, TWB, MB);
                 MonitorIndex();
                 MonitorStock(Continue, shortContinue, ar, shen, hhs, hs, ths, ds, tds, ws, tws,
-                    hb, thb, db, tdb, wb, twb, mb, first, zt, wv1, wv2, wv3, wv4, AQS, realAR, all, true);
+                    hb, thb, db, tdb, wb, twb, mb, first, zt, AQS, all, true);
             }
             Console.WriteLine("Program End! Press Any Key!");
             Console.ReadKey();
