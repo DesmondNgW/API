@@ -658,6 +658,7 @@ namespace X.UI.Helper
                 mode == MyStockType.TWB ? "./src/dp/CTWB.txt" :
                 mode == MyStockType.MB ? "./src/dp/CMB.txt" :
                 mode == MyStockType.SHEN ? "./src/dp/神.txt" :
+                mode == MyStockType.Kernel ? "./src/dp/Kernel.txt" :
                 mode == MyStockType.AR ? "./src/dp/AR.txt" : "./src/dp/接力.txt";
             var list1 = Regex.Split(FileBase.ReadFile(file, "gb2312"), "\r\n", RegexOptions.IgnoreCase);
             var ret = new List<StockPrice>();
@@ -709,7 +710,7 @@ namespace X.UI.Helper
             List<StockPrice> AR, List<StockPrice> Shen, List<StockPrice> HHS, List<StockPrice> HS, List<StockPrice> THS, 
             List<StockPrice> DS, List<StockPrice> TDS, List<StockPrice> WS, List<StockPrice> TWS, List<StockPrice> HB, 
             List<StockPrice> THB, List<StockPrice> DB, List<StockPrice> TDB, List<StockPrice> WB, List<StockPrice> TWB,
-            List<StockPrice> MB, List<StockPrice> First, List<StockPrice> ZT, List<MyStock> AQS, List<MyStock> All, bool debug = false)
+            List<StockPrice> MB, List<StockPrice> First, List<StockPrice> ZT, List<StockPrice> Kernel, List<MyStock> AQS, List<MyStock> All, bool debug = false)
         {
             //开盘时间
             var tradeStart = ConfigurationHelper.GetAppSettingByName("TradeStart", new DateTime(2099, 1, 1, 9, 15, 0));
@@ -722,8 +723,8 @@ namespace X.UI.Helper
             //加速模式
             var spmode = ConfigurationHelper.GetAppSettingByName("SpMode", 0);
 
-            List<StockPrice> OP = HHS.Union(HS).Union(THS).Union(DS).Union(TDS).Union(WS).Union(TWS)
-                .Union(HB).Union(THB).Union(DB).Union(TDB).Union(WB).Union(TWB).Union(MB).ToList();
+            List<StockPrice> OP = Kernel;//HHS.Union(HS).Union(THS).Union(DS).Union(TDS).Union(WS).Union(TWS)
+                //.Union(HB).Union(THB).Union(DB).Union(TDB).Union(WB).Union(TWB).Union(MB).ToList();
 
             List<StockPrice> Top = ZT.Where(p => AQS.Exists(q => q.Code == p.StockCode)).ToList();
 
@@ -1199,6 +1200,7 @@ namespace X.UI.Helper
                 var first = GetMyMonitorStock(MyStockType.First);
                 //涨停
                 var zt = GetMyMonitorStock(MyStockType.ZT);
+                var kernel = GetMyMonitorStock(MyStockType.Kernel);
 
                 var AQS = GetMyStock(MyStockMode.AQS);
                 var Wave = GetMyStock(MyStockMode.Wave);
@@ -1224,7 +1226,7 @@ namespace X.UI.Helper
                 {
                     MonitorIndex();
                     MonitorStock(Continue, shortContinue, ar, shen, hhs, hs, ths, ds, tds, ws, tws,
-                        hb, thb, db, tdb, wb, twb, mb, first, zt, AQS, all);
+                        hb, thb, db, tdb, wb, twb, mb, first, zt, kernel, AQS, all);
                     Thread.Sleep(6000);
                     dt = DateTime.Now;
                 }
@@ -1300,6 +1302,9 @@ namespace X.UI.Helper
                 var first = GetMyMonitorStock(MyStockType.First);
                 //涨停
                 var zt = GetMyMonitorStock(MyStockType.ZT);
+
+                var kernel = GetMyMonitorStock(MyStockType.Kernel);
+
                 var AQS = GetMyStock(MyStockMode.AQS);
                 var Wave = GetMyStock(MyStockMode.Wave);
                 var AR = GetMyStock(MyStockMode.AR);
@@ -1323,7 +1328,7 @@ namespace X.UI.Helper
                 var all = Union(AQS, Wave, AR, HHS, HS, THS, DS, TDS, WS, TWS, HB, THB, DB, TDB, WB, TWB, MB);
                 MonitorIndex();
                 MonitorStock(Continue, shortContinue, ar, shen, hhs, hs, ths, ds, tds, ws, tws,
-                    hb, thb, db, tdb, wb, twb, mb, first, zt, AQS, all, true);
+                    hb, thb, db, tdb, wb, twb, mb, first, zt, kernel, AQS, all, true);
             }
             Console.WriteLine("Program End! Press Any Key!");
             Console.ReadKey();
