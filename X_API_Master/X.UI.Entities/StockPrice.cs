@@ -10,43 +10,11 @@ namespace X.UI.Entities
         Continie,
         //短线接力
         ShortContinie,
-        //短线分时All
-        AR,
-        //AR精选
-        SHEN,
-        //30卖点
-        HHS,
-        //60卖点
-        HS,
-        //120卖点
-        THS,
-        //日卖点
-        DS,
-        //3日卖点
-        TDS,
-        //周卖点
-        WS,
-        //2周卖点
-        TWS,
-        //60买
-        HB,
-        //120买
-        THB,
-        //日买
-        DB,
-        //3日买
-        TDB,
-        //周买
-        WB,
-        //2周买
-        TWB,
-        //月买
-        MB,
-        //首板
         First,
         //涨停
         ZT,
-        Kernel
+        Kernel,
+        Kernel2
     }
 
     public class StockPrice : MongoBaseModel
