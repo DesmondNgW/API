@@ -139,9 +139,16 @@
     <Content Include="Em.FundTrade.EncryptHelper.dll" />
     <Content Include="favicon.ico" />
     <Content Include="src\dp\AR.txt" />
+    <Content Include="src\dp\Kernel.txt" />
+    <Content Include="src\dp\KernelH.txt" />
+    <Content Include="src\dp\KernelL.txt" />
     <Content Include="src\dp\合.txt" />
+    <Content Include="src\dp\接力.txt" />
+    <Content Include="src\dp\涨停.txt" />
+    <Content Include="src\dp\短线接力.txt" />
     <Content Include="src\dp\虚.txt" />
     <Content Include="src\dp\道.txt" />
+    <Content Include="src\dp\首板.txt" />
     <Content Include="src\fp\2HS.txt" />
     <Content Include="src\fp\AR.txt" />
     <Content Include="src\fp\HB.txt" />

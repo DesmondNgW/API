@@ -581,11 +581,11 @@ namespace X.UI.Helper
                         tip1 += "卖一:" + t.Sell1.ToString("0.00") + "亿;";
                     }
                     
-                    Console.WriteLine("{0}-{1}:{2}({3})涨幅;{4}%,价格;{5},金额比例;{11}%,量能比例;{12}%,K;{6},KLevel;{7},S;{8},SLevel;{9},成交金额:{10}亿,{13}",
-                        DateTime.Now.ToString("MM-dd HH:mm:ss<"+ index + ">"),
-                        t.StockName, t.StockCode, t.Inc.ToString("0.00"), t.Price, t.K.ToString("0.00"), t.KLevel,
-                        t.S.ToString("0.00"), t.SLevel, t.Amount.ToString("0.00"),
-                        t.AmountRate.ToString("0.00"), t.VolRate.ToString("0.00"), tip1);
+                    //Console.WriteLine("{0}-{1}:{2}({3})涨幅;{4}%,价格;{5},金额比例;{11}%,量能比例;{12}%,K;{6},KLevel;{7},S;{8},SLevel;{9},成交金额:{10}亿,{13}",
+                    //    DateTime.Now.ToString("MM-dd HH:mm:ss<"+ index + ">"),
+                    //    t.StockName, t.StockCode, t.Inc.ToString("0.00"), t.Price, t.K.ToString("0.00"), t.KLevel,
+                    //    t.S.ToString("0.00"), t.SLevel, t.Amount.ToString("0.00"),
+                    //    t.AmountRate.ToString("0.00"), t.VolRate.ToString("0.00"), tip1);
                     index++;
                 }
             }
@@ -634,7 +634,7 @@ namespace X.UI.Helper
                 foreach (var item in mainDebug)
                 {
                     var last = All.FirstOrDefault(p => p.Code == item.StockCode);
-                    if (last != null && !listDebug.Exists(p => p.StockCode == item.StockCode))
+                    if (!listDebug.Exists(p => p.StockCode == item.StockCode))
                     {
                         var orderremark = "MIDDLE";
                         if (KernelH.Exists(p => p.StockCode == item.StockCode))
@@ -653,7 +653,7 @@ namespace X.UI.Helper
                             StockName = item.StockName,
                             Inc = item.Inc,
                             Price = item.CurrentPrice,
-                            S = last.S1,
+                            S = last != null ? last.S1 : 0,
                             Amount = item.Amount,
                             OrderRemark = orderremark
                         });
