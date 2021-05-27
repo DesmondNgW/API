@@ -419,7 +419,8 @@ namespace X.UI.Helper
                 mode == MyStockType.First ? "./src/dp/首板.txt" :
                 mode == MyStockType.ZT ? "./src/dp/涨停.txt" :
                 mode == MyStockType.Kernel ? "./src/dp/Kernel.txt" :
-                mode == MyStockType.Kernel2 ? "./src/dp/Kernel2.txt" : "./src/dp/接力.txt";
+                mode == MyStockType.KernelH ? "./src/dp/KernelH.txt" :
+                mode == MyStockType.KernelL ? "./src/dp/KernelL.txt" : "./src/dp/接力.txt";
             var list1 = Regex.Split(FileBase.ReadFile(file, "gb2312"), "\r\n", RegexOptions.IgnoreCase);
             var ret = new List<StockPrice>();
             foreach (var item in list1)
@@ -456,14 +457,14 @@ namespace X.UI.Helper
         /// <param name="All"></param>
         /// <param name="debug"></param>
         public static void MonitorStock(List<StockPrice> Continue, List<StockPrice> ShortContinue, List<StockPrice> First,
-            List<StockPrice> ZT, List<StockPrice> Kernel, List<StockPrice> Kernel2, List<MyStock> AQS, List<MyStock> All, bool debug = false)
+            List<StockPrice> ZT, List<StockPrice> Kernel, List<StockPrice> KernelH, List<StockPrice> KernelL, List<MyStock> AQS, List<MyStock> All, bool debug = false)
         {
             //开盘时间
             var tradeStart = ConfigurationHelper.GetAppSettingByName("TradeStart", new DateTime(2099, 1, 1, 9, 15, 0));
             //收盘时间
             var tradeEnd = ConfigurationHelper.GetAppSettingByName("TradeEnd", new DateTime(2099, 1, 1, 15, 0, 0)); 
 
-            List<StockPrice> OP = Kernel2;
+            List<StockPrice> OP = Kernel;
 
             List<StockPrice> Top = ZT.Where(p => AQS.Exists(q => q.Code == p.StockCode)).ToList();
 
@@ -635,7 +636,16 @@ namespace X.UI.Helper
                     var last = All.FirstOrDefault(p => p.Code == item.StockCode);
                     if (last != null && !listDebug.Exists(p => p.StockCode == item.StockCode))
                     {
-                        var orderremark = Kernel.Exists(p => p.StockCode == item.StockCode) ? "BASE" : "EXT";
+                        var orderremark = "MIDDLE";
+                        if (KernelH.Exists(p => p.StockCode == item.StockCode))
+                        {
+                            orderremark = "HIGH";
+                        }
+                        else if (KernelL.Exists(p => p.StockCode == item.StockCode))
+                        {
+                            orderremark = "LOW";
+                        }
+
                         listDebug.Add(new MyStockMonitor()
                         {
                             MyStockType = item.MyStockType,
@@ -698,7 +708,8 @@ namespace X.UI.Helper
                 //涨停
                 var zt = GetMyMonitorStock(MyStockType.ZT);
                 var kernel = GetMyMonitorStock(MyStockType.Kernel);
-                var kernel2 = GetMyMonitorStock(MyStockType.Kernel2);
+                var kernelH = GetMyMonitorStock(MyStockType.KernelH);
+                var kernelL = GetMyMonitorStock(MyStockType.KernelL);
 
                 var AQS = GetMyStock(MyStockMode.AQS);
                 var Wave = GetMyStock(MyStockMode.Wave);
@@ -707,7 +718,7 @@ namespace X.UI.Helper
                 while (dt.TimeOfDay >= tradeStart.TimeOfDay && dt.TimeOfDay <= tradeEnd.TimeOfDay)
                 {
                     MonitorIndex();
-                    MonitorStock(Continue, shortContinue, first, zt, kernel, kernel2, AQS, all);
+                    MonitorStock(Continue, shortContinue, first, zt, kernel, kernelH, kernelL, AQS, all);
                     Thread.Sleep(6000);
                     dt = DateTime.Now;
                 }
@@ -736,14 +747,15 @@ namespace X.UI.Helper
                 var zt = GetMyMonitorStock(MyStockType.ZT);
 
                 var kernel = GetMyMonitorStock(MyStockType.Kernel);
-                var kernel2 = GetMyMonitorStock(MyStockType.Kernel2);
+                var kernelH = GetMyMonitorStock(MyStockType.KernelH);
+                var kernelL = GetMyMonitorStock(MyStockType.KernelL);
 
                 var AQS = GetMyStock(MyStockMode.AQS);
                 var Wave = GetMyStock(MyStockMode.Wave);
 
                 var all = Union(AQS, Wave);
                 MonitorIndex();
-                MonitorStock(Continue, shortContinue, first, zt, kernel, kernel2, AQS, all, true);
+                MonitorStock(Continue, shortContinue, first, zt, kernel, kernelH, kernelL, AQS, all, true);
             }
             Console.WriteLine("Program End! Press Any Key!");
             Console.ReadKey();

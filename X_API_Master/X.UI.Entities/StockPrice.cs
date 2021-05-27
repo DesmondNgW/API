@@ -14,7 +14,8 @@ namespace X.UI.Entities
         //涨停
         ZT,
         Kernel,
-        Kernel2
+        KernelH,
+        KernelL
     }
 
     public class StockPrice : MongoBaseModel
