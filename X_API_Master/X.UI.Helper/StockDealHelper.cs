@@ -418,6 +418,7 @@ namespace X.UI.Helper
                 mode == MyStockType.ShortContinie ? "./src/dp/短线接力.txt" :
                 mode == MyStockType.First ? "./src/dp/首板.txt" :
                 mode == MyStockType.ZT ? "./src/dp/涨停.txt" :
+                mode == MyStockType.CoreT ? "./src/dp/CORET.txt" :
                 mode == MyStockType.Kernel ? "./src/dp/Kernel.txt" :
                 mode == MyStockType.KernelH ? "./src/dp/KernelH.txt" :
                 mode == MyStockType.KernelL ? "./src/dp/KernelL.txt" : "./src/dp/接力.txt";
@@ -445,6 +446,34 @@ namespace X.UI.Helper
         }
 
         /// <summary>
+        /// GetDDXList
+        /// </summary>
+        /// <returns></returns>
+        public static List<StockPrice> GetDDXList()
+        {
+            var file = "./src/dp/tool.txt";
+            var list1 = Regex.Split(FileBase.ReadFile(file, "gb2312"), "\r\n", RegexOptions.IgnoreCase);
+            var ret = new List<StockPrice>();
+            foreach (var item in list1)
+            {
+                var t = item.Split('\t');
+                if (t.Length >= 6)
+                {
+                    var ddx = t[5].Convert2Decimal(-1);
+                    if (ddx > 0)
+                    {
+                        ret.Add(new StockPrice()
+                        {
+                            StockCode = t[1].Trim(),
+                            StockName = t[2],
+                        });
+                    }
+                }
+            }
+            return ret;
+        }
+
+        /// <summary>
         /// 盯盘
         /// </summary>
         /// <param name="Continue"></param>
@@ -457,7 +486,8 @@ namespace X.UI.Helper
         /// <param name="All"></param>
         /// <param name="debug"></param>
         public static void MonitorStock(List<StockPrice> Continue, List<StockPrice> ShortContinue, List<StockPrice> First,
-            List<StockPrice> ZT, List<StockPrice> Kernel, List<StockPrice> KernelH, List<StockPrice> KernelL, List<MyStock> AQS, List<MyStock> All, bool debug = false)
+            List<StockPrice> ZT, List<StockPrice> Kernel, List<StockPrice> KernelH, List<StockPrice> KernelL,
+            List<StockPrice> Core, List<StockPrice> DDXList, List<MyStock> AQS, List<MyStock> All, bool debug = false)
         {
             //开盘时间
             var tradeStart = ConfigurationHelper.GetAppSettingByName("TradeStart", new DateTime(2099, 1, 1, 9, 15, 0));
@@ -646,6 +676,8 @@ namespace X.UI.Helper
                             orderremark = "LOW";
                         }
 
+                        var orderremark2 = DDXList.Exists(p => p.StockCode == item.StockCode) ? "ddx" : "0";
+                        var orderremark3 = Core.Exists(p => p.StockCode == item.StockCode) ? "Core" : "NO";
                         listDebug.Add(new MyStockMonitor()
                         {
                             MyStockType = item.MyStockType,
@@ -655,7 +687,9 @@ namespace X.UI.Helper
                             Price = item.CurrentPrice,
                             S = last != null ? last.S1 : 0,
                             Amount = item.Amount,
-                            OrderRemark = orderremark
+                            OrderRemark = orderremark,
+                            OrderRemark2 = orderremark2,
+                            OrderRemark3 = orderremark3
                         });
                     }
                 }
@@ -678,7 +712,8 @@ namespace X.UI.Helper
             }
             FileBase.WriteFile("./", "dest.txt", string.Join("\t\n", list.OrderByDescending(p => p.Value.SLevel)
                 .ThenByDescending(p => p.Value.Inc).
-                Select(p => p.Value.StockCode + " " + p.Value.StockName + " " + p.Value.Remark + " " + p.Value.OrderRemark)), "utf-8", FileBaseMode.Create);
+                Select(p => p.Value.StockCode + " " + p.Value.StockName + " " + p.Value.Remark + " " + p.Value.OrderRemark
+                + " " + p.Value.OrderRemark2 + " " + p.Value.OrderRemark3)), "utf-8", FileBaseMode.Create);
             #endregion
 
         }
@@ -710,15 +745,17 @@ namespace X.UI.Helper
                 var kernel = GetMyMonitorStock(MyStockType.Kernel);
                 var kernelH = GetMyMonitorStock(MyStockType.KernelH);
                 var kernelL = GetMyMonitorStock(MyStockType.KernelL);
-
+                var coreT = GetMyMonitorStock(MyStockType.CoreT);
                 var AQS = GetMyStock(MyStockMode.AQS);
                 var Wave = GetMyStock(MyStockMode.Wave);
+                var ddx = GetDDXList();
+
 
                 var all = Union(AQS, Wave);
                 while (dt.TimeOfDay >= tradeStart.TimeOfDay && dt.TimeOfDay <= tradeEnd.TimeOfDay)
                 {
                     MonitorIndex();
-                    MonitorStock(Continue, shortContinue, first, zt, kernel, kernelH, kernelL, AQS, all);
+                    MonitorStock(Continue, shortContinue, first, zt, kernel, kernelH, kernelL, coreT, ddx, AQS, all);
                     Thread.Sleep(6000);
                     dt = DateTime.Now;
                 }
@@ -749,13 +786,14 @@ namespace X.UI.Helper
                 var kernel = GetMyMonitorStock(MyStockType.Kernel);
                 var kernelH = GetMyMonitorStock(MyStockType.KernelH);
                 var kernelL = GetMyMonitorStock(MyStockType.KernelL);
-
+                var coreT = GetMyMonitorStock(MyStockType.CoreT);
+                var ddx = GetDDXList();
                 var AQS = GetMyStock(MyStockMode.AQS);
                 var Wave = GetMyStock(MyStockMode.Wave);
 
                 var all = Union(AQS, Wave);
                 MonitorIndex();
-                MonitorStock(Continue, shortContinue, first, zt, kernel, kernelH, kernelL, AQS, all, true);
+                MonitorStock(Continue, shortContinue, first, zt, kernel, kernelH, kernelL, coreT, ddx, AQS, all, true);
             }
             Console.WriteLine("Program End! Press Any Key!");
             Console.ReadKey();

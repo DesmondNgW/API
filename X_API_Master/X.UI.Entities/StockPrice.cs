@@ -15,7 +15,8 @@ namespace X.UI.Entities
         ZT,
         Kernel,
         KernelH,
-        KernelL
+        KernelL,
+        CoreT
     }
 
     public class StockPrice : MongoBaseModel
