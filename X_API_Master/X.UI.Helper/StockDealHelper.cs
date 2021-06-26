@@ -225,7 +225,8 @@ namespace X.UI.Helper
                         K3 = t[12].Convert2Double(-100),
                         K4 = t[13].Convert2Double(-100),
                         Cap = t[14].Convert2Double(0),
-                        MT = t[15].Convert2Int32(0),
+                        NF = t[15].Convert2Double(0),
+                        KLL = t[16].Convert2Double(-100),
                         MyStockMode = mode
                     };
                     ret.Add(myStock);
@@ -553,6 +554,8 @@ namespace X.UI.Helper
                             Inc = t.Inc,
                             Price = t.CurrentPrice,
                             S = last.S1,
+                            NF = last.NF.ToString("0"),
+                            KLL = last.KLL.ToString("0"),
                             K = a,
                             L = b,
                             Amount = t.Amount,
@@ -584,8 +587,12 @@ namespace X.UI.Helper
             {
                 #region 赚钱效应
                 var L7 = m2.Where(p => Core.Exists(q => q.StockCode == p.StockCode));
-                var L3 = m2.Where(p => Core2.Exists(q => q.StockCode == p.StockCode));
-                var L1 = m2.Where(p => Core3.Exists(q => q.StockCode == p.StockCode));
+                var L3 = m2.Where(p => Core2.Exists(q => q.StockCode == p.StockCode) && 
+                !Core.Exists(q => q.StockCode == p.StockCode));
+                var L1 = m2.Where(p => Core3.Exists(q => q.StockCode == p.StockCode) &&
+                !Core.Exists(q => q.StockCode == p.StockCode) &&
+                !Core2.Exists(q => q.StockCode == p.StockCode)
+                );
                 var L0 = m2.Where(p => !Core.Exists(q => q.StockCode == p.StockCode) &&
                 !Core2.Exists(q => q.StockCode == p.StockCode) &&
                 !Core3.Exists(q => q.StockCode == p.StockCode));
@@ -704,6 +711,8 @@ namespace X.UI.Helper
                             Inc = item.Inc,
                             Price = item.CurrentPrice,
                             S = last != null ? last.S1 : 0,
+                            NF = last != null ? last.NF.ToString("0") : "DEFAULT",
+                            KLL = last != null ? last.KLL.ToString("0") : "DEFAULT",
                             Amount = item.Amount,
                             OrderRemark = orderremark,
                             OrderRemark2 = orderremark2,
@@ -734,7 +743,7 @@ namespace X.UI.Helper
                 FileBase.WriteFile("./", "dest.txt", string.Join("\t\n", list.OrderByDescending(p => p.Value.SLevel)
                     .ThenByDescending(p => p.Value.Inc).
                     Select(p => p.Value.StockCode + " " + p.Value.StockName + " " + p.Value.Remark + " " + p.Value.OrderRemark2
-                    + " " + p.Value.OrderRemark + " " + p.Value.OrderRemark3)), "utf-8", FileBaseMode.Create);
+                    + " " + p.Value.OrderRemark + " " + p.Value.OrderRemark3+ " " + p.Value.KLL+ " " + p.Value.NF)), "utf-8", FileBaseMode.Create);
             }
             #endregion
 

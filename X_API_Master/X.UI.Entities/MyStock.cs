@@ -71,7 +71,9 @@ namespace X.UI.Entities
 
         public double Cap { get; set; }
 
-        public int MT { get; set; }
+        public double NF { get; set; }
+
+        public double KLL { get; set; }
 
         public decimal Order
         {
