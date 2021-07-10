@@ -833,5 +833,53 @@ namespace X.UI.Helper
             Console.WriteLine("Program End! Press Any Key!");
             Console.ReadKey();
         }
+
+
+        public static void Test()
+        {
+            var content = FileBase.ReadFile(@"D:\stock\股票工具\Debug\src\1.txt", "gb2312");
+            var list = Regex.Split(content, "\r\n", RegexOptions.IgnoreCase);
+            var ret = new List<decimal>();
+            foreach (string item in list)
+            {
+                if (!string.IsNullOrEmpty(item))
+                    ret.Add(item.Convert2Decimal(0));
+            }
+            List<int> H = new List<int>();
+            List<int> L = new List<int>();
+            List<decimal> HC = new List<decimal>();
+            List<decimal> LC = new List<decimal>();
+            int lastH = 0;
+            int lastL = 0;
+            for (var i = 1; i < ret.Count - 1; i++)
+            {
+                if (ret[i] > ret[i + 1] && ret[i] > ret[i - 1])
+                {
+                    HC.Add(ret[i]);
+                    lastH = i;
+                    if (lastL != 0)
+                    {
+                        L.Add(lastH - lastL + 1);
+                    }
+
+                }
+                if (ret[i] < ret[i + 1] && ret[i] < ret[i - 1])
+                {
+                    LC.Add(ret[i]);
+                    lastL = i;
+                    if (lastH != 0)
+                    {
+                        H.Add(lastL - lastH + 1);
+                    }
+                }
+            }
+
+            Console.WriteLine("L:" + L.Average());
+            Console.WriteLine("H:" + H.Average());
+            Console.WriteLine("Concat:" + L.Concat(H).Average());
+            Console.WriteLine("LC:" + LC.Average());
+            Console.WriteLine("HC:" + HC.Average());
+            Console.WriteLine("Concat-C:" + LC.Concat(HC).Average());
+        }
     }
 }
