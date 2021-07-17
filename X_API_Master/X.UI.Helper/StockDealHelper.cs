@@ -507,15 +507,15 @@ namespace X.UI.Helper
         /// GetFilterList
         /// </summary>
         /// <returns></returns>
-        public static List<string[]> GetFilterList()
+        public static List<Tuple<string, string[]>> GetFilterList()
         {
             var file = "./src/dp/code.txt";
             var content = FileBase.ReadFile(file, "utf-8");
-            var list = Regex.Matches(content, "【(.+)】");
-            var ret = new List<string[]>();
+            var list = Regex.Matches(content, "(.+)：【(.+)】");
+            var ret = new List<Tuple<string, string[]>>();
             foreach (Match item in list)
             {
-                ret.Add(item.Groups[1].Value.Split('-'));
+                ret.Add(new Tuple<string, string[]>(item.Groups[1].Value, item.Groups[2].Value.Split('-')));
             }
             return ret;
         }
@@ -524,47 +524,42 @@ namespace X.UI.Helper
         /// GetFilterList2
         /// </summary>
         /// <returns></returns>
-        public static List<string[]> GetFilterList2()
+        public static List<Tuple<string, string[]>> GetFilterList2()
         {
             var file = "./src/dp/bk.txt";
             var content = FileBase.ReadFile(file, "utf-8");
-            var list = Regex.Matches(content, "【(.+)】");
-            var ret = new List<string[]>();
+            var list = Regex.Matches(content, "(.+)：【(.+)】");
+            var ret = new List<Tuple<string, string[]>>();
             foreach (Match item in list)
             {
-                ret.Add(item.Groups[1].Value.Split('-'));
+                ret.Add(new Tuple<string, string[]>(item.Groups[1].Value, item.Groups[2].Value.Split('-')));
             }
             return ret;
         }
 
 
-        public static Dictionary<string, ModeCompare> GetModeCompare(List<StockCompare> ddxList, List<string[]> filter, int imode = 0)
+        public static Dictionary<string, ModeCompare> GetModeCompare(List<StockCompare> ddxList, List<Tuple<string, string[]>> filter)
         {
             Dictionary<string, ModeCompare> ret = new Dictionary<string, ModeCompare>();
-            var names = new string[] { "试错突破", "试错加速", "试错回踩", "低位突破", "低位加速", "低位回踩", "高位突破", "高位加速", "高位回踩" };
-            if (imode == 1)
-            {
-                names = new string[] {"板块1", "板块2", "板块3", "板块4", "板块5", "板块6", "板块7", "板块8", "板块9", "板块10", "板块11", "板块12" };
-            }
             for (var i = 0; i < filter.Count; i++)
             {
-                if (filter[i].Length > 0)
+                if (filter[i].Item2.Length > 0)
                 {
                     var mode = new ModeCompare()
                     {
                         CodeList = new List<StockCompare>()
                     };
-                    foreach (var item in filter[i])
+                    foreach (var item in filter[i].Item2)
                     {
                         if (!string.IsNullOrEmpty(item))
                         {
                             var select = ddxList.FirstOrDefault(p => p.Name == item);
-                            select.Mode = names[i];
+                            select.Mode = filter[i].Item1;
                             mode.CodeList.Add(select);
-                            mode.Name = names[i];
+                            mode.Name = filter[i].Item1;
                         }
                     }
-                    ret[names[i]] = mode;
+                    ret[filter[i].Item1] = mode;
                 }
             }
             return ret;
@@ -592,7 +587,7 @@ namespace X.UI.Helper
                 {
                     newMode[list[i].Mode] = new ModeCompare()
                     {
-                        Name = list[i].Name,
+                        Name = list[i].Mode,
                         CodeList = new List<StockCompare>()
                         {
                             list[i]
@@ -612,7 +607,8 @@ namespace X.UI.Helper
 
             foreach (var item in ret)
             {
-                Console.WriteLine(item.ToJson());
+                Console.WriteLine(item.Value.CodeList.ToJson());
+                Console.WriteLine("----------");
             }
         }
 
@@ -976,7 +972,7 @@ namespace X.UI.Helper
                 var a2 = GetFilterList2();
                 var b = GetDDXList2();
                 GetModeCompareWithOrder(GetModeCompare(b, a1));
-                GetModeCompareWithOrder(GetModeCompare(b, a2, 1));
+                GetModeCompareWithOrder(GetModeCompare(b, a2));
             }
 
             Console.WriteLine("Program End! Press Any Key!");
