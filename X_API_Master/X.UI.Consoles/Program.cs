@@ -19,7 +19,7 @@ namespace X.UI.Consoles
             //RandGame.TestRand2();
             StockDealHelper.Program();
 
-            //StockDealHelper.Test();
+            //StockDealHelper.GetFilterList();//Test();
 
             Index();
             Console.ReadKey();

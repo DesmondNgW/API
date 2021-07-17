@@ -101,4 +101,50 @@ namespace X.UI.Entities
 
         public MyStockMode MyStockMode { get; set; }
     }
+
+    public class StockCompare
+    {
+        public string Code { get; set; }
+
+        public string Name { get; set; }
+
+        public decimal Inc { get; set; }
+
+        public decimal DDX { get; set; }
+
+        public int DDXOrder { get; set; }
+
+        public string Mode { get; set; }
+    }
+
+    public class ModeCompare
+    {
+        public string Name { get; set; }
+
+        public List<StockCompare> CodeList { get; set; }
+
+        public decimal DDX
+        {
+            get
+            {
+                return CodeList.Average(p => p.DDX);
+            }
+        }
+
+        public double DDXOrder
+        {
+            get
+            {
+                return CodeList.Average(p => p.DDXOrder);
+            }
+        }
+
+        public decimal Inc
+        {
+            get
+            {
+                return CodeList.Average(p => p.Inc);
+            }
+        }
+    }
 }

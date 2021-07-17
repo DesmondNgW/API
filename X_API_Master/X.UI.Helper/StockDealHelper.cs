@@ -477,6 +477,146 @@ namespace X.UI.Helper
         }
 
         /// <summary>
+        /// GetDDXList2
+        /// </summary>
+        /// <returns></returns>
+        public static List<StockCompare> GetDDXList2()
+        {
+            var file = "./src/dp/tool.txt";
+            var list1 = Regex.Split(FileBase.ReadFile(file, "gb2312"), "\r\n", RegexOptions.IgnoreCase);
+            var ret = new List<StockCompare>();
+            foreach (var item in list1)
+            {
+                var t = item.Split('\t');
+                if (t.Length >= 6)
+                {
+                    var ddx = t[5].Convert2Decimal(-1);
+                    ret.Add(new StockCompare()
+                    {
+                        Code = t[1].Trim(),
+                        Name = t[2],
+                        DDX = ddx,
+                        Inc = t[4].Convert2Decimal(-1)
+                    });
+                }
+            }
+            return ret;
+        }
+
+        /// <summary>
+        /// GetFilterList
+        /// </summary>
+        /// <returns></returns>
+        public static List<string[]> GetFilterList()
+        {
+            var file = "./src/dp/code.txt";
+            var content = FileBase.ReadFile(file, "utf-8");
+            var list = Regex.Matches(content, "【(.+)】");
+            var ret = new List<string[]>();
+            foreach (Match item in list)
+            {
+                ret.Add(item.Groups[1].Value.Split('-'));
+            }
+            return ret;
+        }
+
+        /// <summary>
+        /// GetFilterList2
+        /// </summary>
+        /// <returns></returns>
+        public static List<string[]> GetFilterList2()
+        {
+            var file = "./src/dp/bk.txt";
+            var content = FileBase.ReadFile(file, "utf-8");
+            var list = Regex.Matches(content, "【(.+)】");
+            var ret = new List<string[]>();
+            foreach (Match item in list)
+            {
+                ret.Add(item.Groups[1].Value.Split('-'));
+            }
+            return ret;
+        }
+
+
+        public static Dictionary<string, ModeCompare> GetModeCompare(List<StockCompare> ddxList, List<string[]> filter, int imode = 0)
+        {
+            Dictionary<string, ModeCompare> ret = new Dictionary<string, ModeCompare>();
+            var names = new string[] { "试错突破", "试错加速", "试错回踩", "低位突破", "低位加速", "低位回踩", "高位突破", "高位加速", "高位回踩" };
+            if (imode == 1)
+            {
+                names = new string[] {"板块1", "板块2", "板块3", "板块4", "板块5", "板块6", "板块7", "板块8", "板块9", "板块10", "板块11", "板块12" };
+            }
+            for (var i = 0; i < filter.Count; i++)
+            {
+                if (filter[i].Length > 0)
+                {
+                    var mode = new ModeCompare()
+                    {
+                        CodeList = new List<StockCompare>()
+                    };
+                    foreach (var item in filter[i])
+                    {
+                        if (!string.IsNullOrEmpty(item))
+                        {
+                            var select = ddxList.FirstOrDefault(p => p.Name == item);
+                            select.Mode = names[i];
+                            mode.CodeList.Add(select);
+                            mode.Name = names[i];
+                        }
+                    }
+                    ret[names[i]] = mode;
+                }
+            }
+            return ret;
+        }
+
+        /// <summary>
+        /// GetModeCompareWithOrder
+        /// </summary>
+        /// <param name="mode"></param>
+        /// <returns></returns>
+        public static void GetModeCompareWithOrder(Dictionary<string, ModeCompare> mode)
+        {
+            var newMode = new Dictionary<string, ModeCompare>();
+            var list = new List<StockCompare>();
+            foreach(var item in mode)
+            {
+                list = list.Concat(item.Value.CodeList).ToList();
+            }
+            list = list.OrderByDescending(p => p.DDX).ToList();
+
+            for (var i = 0; i < list.Count; i++)
+            {
+                list[i].DDXOrder = i + 1;
+                if (!newMode.ContainsKey(list[i].Mode))
+                {
+                    newMode[list[i].Mode] = new ModeCompare()
+                    {
+                        Name = list[i].Name,
+                        CodeList = new List<StockCompare>()
+                        {
+                            list[i]
+                        }
+                    };
+                }
+                else
+                {
+                    newMode[list[i].Mode].CodeList.Add(list[i]);
+                }
+            }
+            var stdOrder = 0.5 * list.Count;
+            var stdInc = list.Average(p => p.Inc);
+            var stdDDX = list.Average(p => p.DDX);
+
+            var ret = newMode.Where(p => p.Value.DDX >= stdDDX && p.Value.Inc >= stdInc && p.Value.DDXOrder <= stdOrder);
+
+            foreach (var item in ret)
+            {
+                Console.WriteLine(item.ToJson());
+            }
+        }
+
+        /// <summary>
         /// 盯盘
         /// </summary>
         /// <param name="Continue"></param>
@@ -830,9 +970,19 @@ namespace X.UI.Helper
                 MonitorIndex();
                 MonitorStock(Continue, shortContinue, first, zt, kernel, kernelH, kernelL, coreT, coreT2, coreT3, ddx, AQS, all, true);
             }
+            else if(mode == 4)
+            {
+                var a1 = GetFilterList();
+                var a2 = GetFilterList2();
+                var b = GetDDXList2();
+                GetModeCompareWithOrder(GetModeCompare(b, a1));
+                GetModeCompareWithOrder(GetModeCompare(b, a2, 1));
+            }
+
             Console.WriteLine("Program End! Press Any Key!");
             Console.ReadKey();
         }
+
 
 
         public static void Test()
@@ -849,6 +999,9 @@ namespace X.UI.Helper
             List<int> L = new List<int>();
             List<decimal> HC = new List<decimal>();
             List<decimal> LC = new List<decimal>();
+            List<decimal> secHC = new List<decimal>();
+            List<decimal> secLC = new List<decimal>();
+
             int lastH = 0;
             int lastL = 0;
             for (var i = 1; i < ret.Count - 1; i++)
@@ -856,16 +1009,17 @@ namespace X.UI.Helper
                 if (ret[i] > ret[i + 1] && ret[i] > ret[i - 1])
                 {
                     HC.Add(ret[i]);
+                    secHC.Add(ret[i + 1]);
                     lastH = i;
                     if (lastL != 0)
                     {
                         L.Add(lastH - lastL + 1);
                     }
-
                 }
                 if (ret[i] < ret[i + 1] && ret[i] < ret[i - 1])
                 {
                     LC.Add(ret[i]);
+                    secLC.Add(ret[i + 1]);
                     lastL = i;
                     if (lastH != 0)
                     {
@@ -880,6 +1034,12 @@ namespace X.UI.Helper
             Console.WriteLine("LC:" + LC.Average());
             Console.WriteLine("HC:" + HC.Average());
             Console.WriteLine("Concat-C:" + LC.Concat(HC).Average());
+
+            Console.WriteLine("secLC:" + secLC.Average());
+            Console.WriteLine("secHC:" + secHC.Average());
+            Console.WriteLine("Concat-secC:" + secLC.Concat(secHC).Average());
+
+
         }
     }
 }
