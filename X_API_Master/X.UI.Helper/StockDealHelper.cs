@@ -998,6 +998,8 @@ namespace X.UI.Helper
             List<decimal> secHC = new List<decimal>();
             List<decimal> secLC = new List<decimal>();
 
+            List<int> LL = new List<int>();//两个低点之间的距离
+
             int lastH = 0;
             int lastL = 0;
             for (var i = 1; i < ret.Count - 1; i++)
@@ -1016,6 +1018,10 @@ namespace X.UI.Helper
                 {
                     LC.Add(ret[i]);
                     secLC.Add(ret[i + 1]);
+                    if (lastL != 0)
+                    {
+                        LL.Add(i - lastL + 1);
+                    }
                     lastL = i;
                     if (lastH != 0)
                     {
@@ -1035,7 +1041,13 @@ namespace X.UI.Helper
             Console.WriteLine("secHC:" + secHC.Average());
             Console.WriteLine("Concat-secC:" + secLC.Concat(secHC).Average());
 
+            Console.WriteLine("LL:" + LL.Average());
 
+            Console.WriteLine("pp3:" + (LL.Count(p => p == 3) + 0.0) / LL.Count);
+            Console.WriteLine("pp4:" + (LL.Count(p => p == 4) + 0.0) / LL.Count);
+            Console.WriteLine("pp5:" + (LL.Count(p => p == 5) + 0.0) / LL.Count);
+            Console.WriteLine("pp6:" + (LL.Count(p => p == 6) + 0.0) / LL.Count);
+            Console.WriteLine("pp7:" + (LL.Count(p => p == 7) + 0.0) / LL.Count);
         }
     }
 }
