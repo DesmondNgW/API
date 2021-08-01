@@ -8,9 +8,11 @@ namespace X.UI.Entities
 {
     public enum MyStockMode
     {
-        Index,
+        //Index,
         AQS,
         Wave,
+        JX,
+        JX2
         //AR,
         //HHS,
         //HS,
@@ -26,7 +28,7 @@ namespace X.UI.Entities
         //WB,
         //TWB,
         //MB,
-        IndexWave,
+        //IndexWave,
         //MS
     }
 
@@ -74,6 +76,10 @@ namespace X.UI.Entities
         public double NF { get; set; }
 
         public double KLL { get; set; }
+
+        public double SP { get; set; }
+
+
 
         public decimal Order
         {
@@ -146,5 +152,7 @@ namespace X.UI.Entities
                 return CodeList.Average(p => p.Inc);
             }
         }
+
+        public string Remark { get; set; }
     }
 }

@@ -196,9 +196,9 @@ namespace X.UI.Helper
         /// <returns></returns>
         public static List<MyStock> GetMyStock(MyStockMode mode)
         {
-            var file = mode == MyStockMode.Index ? "./src/fp/板块.txt" :
+            var file = mode == MyStockMode.JX ? "./src/dp/精选.txt" :
                  mode == MyStockMode.AQS ? "./src/fp/AQS.txt" :
-                 mode == MyStockMode.IndexWave ? "./src/fp/BKWave.txt" :
+                 mode == MyStockMode.JX2 ? "./src/dp/精选2.txt" :
                  mode == MyStockMode.Wave ? "./src/fp/Wave.txt" : "./src/fp/AQS.txt";
             var content = FileBase.ReadFile(file, "gb2312");
             var list = Regex.Split(content, "\r\n", RegexOptions.IgnoreCase);
@@ -227,6 +227,7 @@ namespace X.UI.Helper
                         Cap = t[14].Convert2Double(0),
                         NF = t[15].Convert2Double(0),
                         KLL = t[16].Convert2Double(-100),
+                        SP = t[17].Convert2Double(-100),
                         MyStockMode = mode
                     };
                     ret.Add(myStock);
@@ -504,27 +505,10 @@ namespace X.UI.Helper
         }
 
         /// <summary>
-        /// GetFilterList
-        /// </summary>
-        /// <returns></returns>
-        public static List<Tuple<string, string[]>> GetFilterList()
-        {
-            var file = "./src/dp/code.txt";
-            var content = FileBase.ReadFile(file, "utf-8");
-            var list = Regex.Matches(content, "(.+)：【(.+)】");
-            var ret = new List<Tuple<string, string[]>>();
-            foreach (Match item in list)
-            {
-                ret.Add(new Tuple<string, string[]>(item.Groups[1].Value, item.Groups[2].Value.Split('-')));
-            }
-            return ret;
-        }
-
-        /// <summary>
         /// GetFilterList2
         /// </summary>
         /// <returns></returns>
-        public static List<Tuple<string, string[]>> GetFilterList2()
+        public static List<Tuple<string, string[]>> GetFilterListFromFile()
         {
             var file = "./src/dp/bk.txt";
             var content = FileBase.ReadFile(file, "utf-8");
@@ -537,6 +521,40 @@ namespace X.UI.Helper
             return ret;
         }
 
+        /// <summary>
+        /// GetModeCompareAuto
+        /// </summary>
+        /// <param name="ddxList"></param>
+        /// <param name="JX"></param>
+        /// <param name="Core"></param>
+        /// <returns></returns>
+        public static Dictionary<string, ModeCompare> GetModeCompareAuto(List<StockCompare> ddxList, List<MyStock> JX, List<StockPrice> Core)
+        {
+            Dictionary<string, ModeCompare> ret = new Dictionary<string, ModeCompare>();
+            foreach (var item in JX)
+            {
+                if (item.SP > 0)
+                {
+                    string key = item.SP.ToString();
+                    if (Core.Exists(p => p.StockCode == item.Code))
+                    {
+                        key = (item.SP + 3).ToString();
+                    }
+                    if (!ret.ContainsKey(key))
+                    {
+                        ret[key] = new ModeCompare()
+                        {
+                            CodeList = new List<StockCompare>()
+                        };
+                    }
+                    var ddx = ddxList.FirstOrDefault(p => p.Code == item.Code);
+                    ddx.Mode = key;
+                    ret[key].CodeList.Add(ddx);
+                    ret[key].Name = key;
+                }
+            }
+            return ret;
+        }
 
         public static Dictionary<string, ModeCompare> GetModeCompare(List<StockCompare> ddxList, List<Tuple<string, string[]>> filter)
         {
@@ -570,7 +588,7 @@ namespace X.UI.Helper
         /// </summary>
         /// <param name="mode"></param>
         /// <returns></returns>
-        public static void GetModeCompareWithOrder(Dictionary<string, ModeCompare> mode)
+        public static void GetModeCompareWithOrder(Dictionary<string, ModeCompare> mode, string remark)
         {
             var newMode = new Dictionary<string, ModeCompare>();
             var list = new List<StockCompare>();
@@ -604,10 +622,10 @@ namespace X.UI.Helper
             var stdDDX = list.Average(p => p.DDX);
 
             var ret = newMode.Where(p => p.Value.DDX >= stdDDX && p.Value.Inc >= stdInc && p.Value.DDXOrder <= stdOrder);
-
+            Console.WriteLine(remark);
             foreach (var item in ret)
             {
-                Console.WriteLine(item.Value.CodeList.ToJson());
+                Console.WriteLine("key:{0},value:{1}", item.Key, string.Join("-", item.Value.CodeList.Select(p => p.Name)));
                 Console.WriteLine("----------");
             }
         }
@@ -936,9 +954,6 @@ namespace X.UI.Helper
                 var AQS = GetMyStock(MyStockMode.AQS);
                 var Wave = GetMyStock(MyStockMode.Wave);
                 Deal(AQS, Wave);
-                var t2 = GetMyStock(MyStockMode.Index);
-                var t3 = GetMyStock(MyStockMode.IndexWave);
-                Deal2(t2, t3);
             }
             else if (mode == 3)
             {
@@ -968,11 +983,15 @@ namespace X.UI.Helper
             }
             else if(mode == 4)
             {
-                var a1 = GetFilterList();
-                var a2 = GetFilterList2();
+                var jx = GetMyStock(MyStockMode.JX);
+                var jx2 = GetMyStock(MyStockMode.JX2);
+                var core = GetMyMonitorStock(MyStockType.CoreT);
+
+                var a2 = GetFilterListFromFile();
                 var b = GetDDXList2();
-                GetModeCompareWithOrder(GetModeCompare(b, a1));
-                GetModeCompareWithOrder(GetModeCompare(b, a2));
+                GetModeCompareWithOrder(GetModeCompareAuto(b, jx, core),"精选-开始");
+                GetModeCompareWithOrder(GetModeCompareAuto(b, jx2, core), "精选2-开始");
+                GetModeCompareWithOrder(GetModeCompare(b, a2), "板块-开始");
             }
 
             Console.WriteLine("Program End! Press Any Key!");
