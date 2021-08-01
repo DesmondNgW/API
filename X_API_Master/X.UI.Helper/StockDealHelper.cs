@@ -331,23 +331,232 @@ namespace X.UI.Helper
 
             FileBase.WriteFile(dir, "Bk.txt", string.Join("\t\n", BkContent.Select((p, index) => (index + 1) * 3 + " " + p.Item1.ToString("0.000") + " " + p.Item2.ToString("0.000"))), encode, FileBaseMode.Create);
         }
+        #endregion
+
+        #region 复盘数据加工
+        /// <summary>
+        /// 复盘数据映射
+        /// </summary>
+        /// <returns></returns>
+        public static List<StockPrice> GetMyMonitorStock(MyStockType mode)
+        {
+            var file = mode == MyStockType.Continie ? "./src/dp/接力.txt" :
+                mode == MyStockType.ShortContinie ? "./src/dp/短线接力.txt" :
+                mode == MyStockType.First ? "./src/dp/首板.txt" :
+                mode == MyStockType.ZT ? "./src/dp/涨停.txt" :
+                mode == MyStockType.CoreT ? "./src/dp/CORET.txt" :
+                mode == MyStockType.CoreT2 ? "./src/dp/CORET2.txt" :
+                mode == MyStockType.CoreT3 ? "./src/dp/CORET3.txt" :
+                mode == MyStockType.Kernel ? "./src/dp/Kernel.txt" :
+                mode == MyStockType.KernelH ? "./src/dp/KernelH.txt" :
+                mode == MyStockType.KernelL ? "./src/dp/KernelL.txt" : "./src/dp/接力.txt";
+            var list1 = Regex.Split(FileBase.ReadFile(file, "gb2312"), "\r\n", RegexOptions.IgnoreCase);
+            var ret = new List<StockPrice>();
+            foreach (var item in list1)
+            {
+                var t = item.Split('\t');
+                if (t.Length >= 15)
+                {
+                    ret.Add(new StockPrice()
+                    {
+                        StockCode = t[0].Trim(),
+                        StockName = t[1],
+                        CurrentPrice = t[3].Convert2Decimal(0),
+                        OpenPrice = t[11].Convert2Decimal(0),
+                        MaxPrice = t[12].Convert2Decimal(0),
+                        MinPrice = t[13].Convert2Decimal(0),
+                        LastClosePrice = t[14].Convert2Decimal(0),
+                        MyStockType = mode,
+                    });
+                }
+            }
+            return ret;
+        }
 
         /// <summary>
-        /// 处理板块输出
+        /// 资金流文件
         /// </summary>
-        /// <param name="list"></param>
-        /// <param name="list2"></param>
-        /// <param name="encode"></param>
-        public static void Deal2(List<MyStock> list, List<MyStock> list2, string encode = "utf-8")
+        /// <returns></returns>
+        public static List<StockPrice> GetDDXList()
         {
-            var dirB = "./dest/B";
-            var dirBW = "./dest/BW";
-            for (var i = 3; i <= 48; i += 3)
+            var file = "./src/dp/tool.txt";
+            var list1 = Regex.Split(FileBase.ReadFile(file, "gb2312"), "\r\n", RegexOptions.IgnoreCase);
+            var ret = new List<StockPrice>();
+            foreach (var item in list1)
             {
-                var bContent = GetStockName(list, i, F3, O2);
-                FileBase.WriteFile(dirB, "B" + i + ".txt", string.Join("\t\n", bContent), encode, FileBaseMode.Create);
-                var bwContent = GetStockName(list2, i, F3, O2);
-                FileBase.WriteFile(dirBW, "BW" + i + ".txt", string.Join("\t\n", bwContent), encode, FileBaseMode.Create);
+                var t = item.Split('\t');
+                if (t.Length >= 6)
+                {
+                    var ddx = t[5].Convert2Decimal(-1);
+                    if (ddx > 0)
+                    {
+                        ret.Add(new StockPrice()
+                        {
+                            StockCode = t[1].Trim(),
+                            StockName = t[2],
+                        });
+                    }
+                }
+            }
+            return ret;
+        }
+
+        /// <summary>
+        /// 资金流文件
+        /// </summary>
+        /// <returns></returns>
+        public static List<StockCompare> GetDDXList2()
+        {
+            var file = "./src/dp/tool.txt";
+            var list1 = Regex.Split(FileBase.ReadFile(file, "gb2312"), "\r\n", RegexOptions.IgnoreCase);
+            var ret = new List<StockCompare>();
+            foreach (var item in list1)
+            {
+                var t = item.Split('\t');
+                if (t.Length >= 6)
+                {
+                    var ddx = t[5].Convert2Decimal(-1);
+                    ret.Add(new StockCompare()
+                    {
+                        Code = t[1].Trim(),
+                        Name = t[2],
+                        DDX = ddx,
+                        Inc = t[4].Convert2Decimal(-1)
+                    });
+                }
+            }
+            return ret;
+        }
+
+        /// <summary>
+        /// 对数据进行模式自动分类
+        /// </summary>
+        /// <param name="ddxList"></param>
+        /// <param name="JX"></param>
+        /// <param name="Core"></param>
+        /// <returns></returns>
+        public static Dictionary<string, ModeCompare> GetModeCompareAuto(List<StockCompare> ddxList, List<MyStock> JX, List<StockPrice> Core)
+        {
+            Dictionary<string, ModeCompare> ret = new Dictionary<string, ModeCompare>();
+            foreach (var item in JX)
+            {
+                if (item.SP > 0)
+                {
+                    string key = item.SP.ToString();
+                    if (Core.Exists(p => p.StockCode == item.Code))
+                    {
+                        key = (item.SP + 3).ToString();
+                    }
+                    if (!ret.ContainsKey(key))
+                    {
+                        ret[key] = new ModeCompare()
+                        {
+                            CodeList = new List<StockCompare>()
+                        };
+                    }
+                    var ddx = ddxList.FirstOrDefault(p => p.Code == item.Code);
+                    ddx.Mode = key;
+                    ret[key].CodeList.Add(ddx);
+                    ret[key].Name = key;
+                }
+            }
+            return ret;
+        }
+
+        /// <summary>
+        /// 手动输入外置模式
+        /// </summary>
+        /// <returns></returns>
+        public static List<Tuple<string, string[]>> GetFilterListFromFile()
+        {
+            var file = "./src/dp/bk.txt";
+            var content = FileBase.ReadFile(file, "utf-8");
+            var list = Regex.Matches(content, "(.+)：【(.+)】");
+            var ret = new List<Tuple<string, string[]>>();
+            foreach (Match item in list)
+            {
+                ret.Add(new Tuple<string, string[]>(item.Groups[1].Value, item.Groups[2].Value.Split('-')));
+            }
+            return ret;
+        }
+
+        /// <summary>
+        /// 对外置模式数据统一格式
+        /// </summary>
+        /// <param name="ddxList"></param>
+        /// <param name="filter"></param>
+        /// <returns></returns>
+        public static Dictionary<string, ModeCompare> GetModeCompare(List<StockCompare> ddxList, List<Tuple<string, string[]>> filter)
+        {
+            Dictionary<string, ModeCompare> ret = new Dictionary<string, ModeCompare>();
+            for (var i = 0; i < filter.Count; i++)
+            {
+                if (filter[i].Item2.Length > 0)
+                {
+                    var mode = new ModeCompare()
+                    {
+                        CodeList = new List<StockCompare>()
+                    };
+                    foreach (var item in filter[i].Item2)
+                    {
+                        if (!string.IsNullOrEmpty(item))
+                        {
+                            var select = ddxList.FirstOrDefault(p => p.Name == item);
+                            select.Mode = filter[i].Item1;
+                            mode.CodeList.Add(select);
+                            mode.Name = filter[i].Item1;
+                        }
+                    }
+                    ret[filter[i].Item1] = mode;
+                }
+            }
+            return ret;
+        }
+
+        /// <summary>
+        /// 输出模式结果
+        /// </summary>
+        /// <param name="mode"></param>
+        /// <returns></returns>
+        public static void GetModeCompareWithOrder(Dictionary<string, ModeCompare> mode, string remark)
+        {
+            var newMode = new Dictionary<string, ModeCompare>();
+            var list = new List<StockCompare>();
+            foreach (var item in mode)
+            {
+                list = list.Concat(item.Value.CodeList).ToList();
+            }
+            list = list.OrderByDescending(p => p.DDX).ToList();
+
+            for (var i = 0; i < list.Count; i++)
+            {
+                list[i].DDXOrder = i + 1;
+                if (!newMode.ContainsKey(list[i].Mode))
+                {
+                    newMode[list[i].Mode] = new ModeCompare()
+                    {
+                        Name = list[i].Mode,
+                        CodeList = new List<StockCompare>()
+                        {
+                            list[i]
+                        }
+                    };
+                }
+                else
+                {
+                    newMode[list[i].Mode].CodeList.Add(list[i]);
+                }
+            }
+            var stdOrder = 0.5 * list.Count;
+            var stdInc = list.Average(p => p.Inc);
+            var stdDDX = list.Average(p => p.DDX);
+
+            var ret = newMode.Where(p => p.Value.DDX >= stdDDX && p.Value.Inc >= stdInc && p.Value.DDXOrder <= stdOrder);
+            Console.WriteLine(remark);
+            foreach (var item in ret)
+            {
+                Console.WriteLine("key:{0},value:{1}", item.Key, string.Join("-", item.Value.CodeList.Select(p => p.Name)));
+                Console.WriteLine("----------");
             }
         }
         #endregion
@@ -408,226 +617,6 @@ namespace X.UI.Helper
                 TradeAmount.Add(a.Datetime, (double)(a.Amount + b.Amount));
             }
             CalcAmount();
-        }
-
-        /// <summary>
-        /// 自选板块数据
-        /// </summary>
-        /// <returns></returns>
-        public static List<StockPrice> GetMyMonitorStock(MyStockType mode)
-        {
-            var file = mode == MyStockType.Continie ? "./src/dp/接力.txt" :
-                mode == MyStockType.ShortContinie ? "./src/dp/短线接力.txt" :
-                mode == MyStockType.First ? "./src/dp/首板.txt" :
-                mode == MyStockType.ZT ? "./src/dp/涨停.txt" :
-                mode == MyStockType.CoreT ? "./src/dp/CORET.txt" :
-                mode == MyStockType.CoreT2 ? "./src/dp/CORET2.txt" :
-                mode == MyStockType.CoreT3 ? "./src/dp/CORET3.txt" :
-                mode == MyStockType.Kernel ? "./src/dp/Kernel.txt" :
-                mode == MyStockType.KernelH ? "./src/dp/KernelH.txt" :
-                mode == MyStockType.KernelL ? "./src/dp/KernelL.txt" : "./src/dp/接力.txt";
-            var list1 = Regex.Split(FileBase.ReadFile(file, "gb2312"), "\r\n", RegexOptions.IgnoreCase);
-            var ret = new List<StockPrice>();
-            foreach (var item in list1)
-            {
-                var t = item.Split('\t');
-                if (t.Length >= 15)
-                {
-                    ret.Add(new StockPrice()
-                    {
-                        StockCode = t[0].Trim(),
-                        StockName = t[1],
-                        CurrentPrice = t[3].Convert2Decimal(0),
-                        OpenPrice = t[11].Convert2Decimal(0),
-                        MaxPrice = t[12].Convert2Decimal(0),
-                        MinPrice = t[13].Convert2Decimal(0),
-                        LastClosePrice = t[14].Convert2Decimal(0),
-                        MyStockType = mode,
-                    });
-                }
-            }
-            return ret;
-        }
-
-        /// <summary>
-        /// GetDDXList
-        /// </summary>
-        /// <returns></returns>
-        public static List<StockPrice> GetDDXList()
-        {
-            var file = "./src/dp/tool.txt";
-            var list1 = Regex.Split(FileBase.ReadFile(file, "gb2312"), "\r\n", RegexOptions.IgnoreCase);
-            var ret = new List<StockPrice>();
-            foreach (var item in list1)
-            {
-                var t = item.Split('\t');
-                if (t.Length >= 6)
-                {
-                    var ddx = t[5].Convert2Decimal(-1);
-                    if (ddx > 0)
-                    {
-                        ret.Add(new StockPrice()
-                        {
-                            StockCode = t[1].Trim(),
-                            StockName = t[2],
-                        });
-                    }
-                }
-            }
-            return ret;
-        }
-
-        /// <summary>
-        /// GetDDXList2
-        /// </summary>
-        /// <returns></returns>
-        public static List<StockCompare> GetDDXList2()
-        {
-            var file = "./src/dp/tool.txt";
-            var list1 = Regex.Split(FileBase.ReadFile(file, "gb2312"), "\r\n", RegexOptions.IgnoreCase);
-            var ret = new List<StockCompare>();
-            foreach (var item in list1)
-            {
-                var t = item.Split('\t');
-                if (t.Length >= 6)
-                {
-                    var ddx = t[5].Convert2Decimal(-1);
-                    ret.Add(new StockCompare()
-                    {
-                        Code = t[1].Trim(),
-                        Name = t[2],
-                        DDX = ddx,
-                        Inc = t[4].Convert2Decimal(-1)
-                    });
-                }
-            }
-            return ret;
-        }
-
-        /// <summary>
-        /// GetFilterList2
-        /// </summary>
-        /// <returns></returns>
-        public static List<Tuple<string, string[]>> GetFilterListFromFile()
-        {
-            var file = "./src/dp/bk.txt";
-            var content = FileBase.ReadFile(file, "utf-8");
-            var list = Regex.Matches(content, "(.+)：【(.+)】");
-            var ret = new List<Tuple<string, string[]>>();
-            foreach (Match item in list)
-            {
-                ret.Add(new Tuple<string, string[]>(item.Groups[1].Value, item.Groups[2].Value.Split('-')));
-            }
-            return ret;
-        }
-
-        /// <summary>
-        /// GetModeCompareAuto
-        /// </summary>
-        /// <param name="ddxList"></param>
-        /// <param name="JX"></param>
-        /// <param name="Core"></param>
-        /// <returns></returns>
-        public static Dictionary<string, ModeCompare> GetModeCompareAuto(List<StockCompare> ddxList, List<MyStock> JX, List<StockPrice> Core)
-        {
-            Dictionary<string, ModeCompare> ret = new Dictionary<string, ModeCompare>();
-            foreach (var item in JX)
-            {
-                if (item.SP > 0)
-                {
-                    string key = item.SP.ToString();
-                    if (Core.Exists(p => p.StockCode == item.Code))
-                    {
-                        key = (item.SP + 3).ToString();
-                    }
-                    if (!ret.ContainsKey(key))
-                    {
-                        ret[key] = new ModeCompare()
-                        {
-                            CodeList = new List<StockCompare>()
-                        };
-                    }
-                    var ddx = ddxList.FirstOrDefault(p => p.Code == item.Code);
-                    ddx.Mode = key;
-                    ret[key].CodeList.Add(ddx);
-                    ret[key].Name = key;
-                }
-            }
-            return ret;
-        }
-
-        public static Dictionary<string, ModeCompare> GetModeCompare(List<StockCompare> ddxList, List<Tuple<string, string[]>> filter)
-        {
-            Dictionary<string, ModeCompare> ret = new Dictionary<string, ModeCompare>();
-            for (var i = 0; i < filter.Count; i++)
-            {
-                if (filter[i].Item2.Length > 0)
-                {
-                    var mode = new ModeCompare()
-                    {
-                        CodeList = new List<StockCompare>()
-                    };
-                    foreach (var item in filter[i].Item2)
-                    {
-                        if (!string.IsNullOrEmpty(item))
-                        {
-                            var select = ddxList.FirstOrDefault(p => p.Name == item);
-                            select.Mode = filter[i].Item1;
-                            mode.CodeList.Add(select);
-                            mode.Name = filter[i].Item1;
-                        }
-                    }
-                    ret[filter[i].Item1] = mode;
-                }
-            }
-            return ret;
-        }
-
-        /// <summary>
-        /// GetModeCompareWithOrder
-        /// </summary>
-        /// <param name="mode"></param>
-        /// <returns></returns>
-        public static void GetModeCompareWithOrder(Dictionary<string, ModeCompare> mode, string remark)
-        {
-            var newMode = new Dictionary<string, ModeCompare>();
-            var list = new List<StockCompare>();
-            foreach(var item in mode)
-            {
-                list = list.Concat(item.Value.CodeList).ToList();
-            }
-            list = list.OrderByDescending(p => p.DDX).ToList();
-
-            for (var i = 0; i < list.Count; i++)
-            {
-                list[i].DDXOrder = i + 1;
-                if (!newMode.ContainsKey(list[i].Mode))
-                {
-                    newMode[list[i].Mode] = new ModeCompare()
-                    {
-                        Name = list[i].Mode,
-                        CodeList = new List<StockCompare>()
-                        {
-                            list[i]
-                        }
-                    };
-                }
-                else
-                {
-                    newMode[list[i].Mode].CodeList.Add(list[i]);
-                }
-            }
-            var stdOrder = 0.5 * list.Count;
-            var stdInc = list.Average(p => p.Inc);
-            var stdDDX = list.Average(p => p.DDX);
-
-            var ret = newMode.Where(p => p.Value.DDX >= stdDDX && p.Value.Inc >= stdInc && p.Value.DDXOrder <= stdOrder);
-            Console.WriteLine(remark);
-            foreach (var item in ret)
-            {
-                Console.WriteLine("key:{0},value:{1}", item.Key, string.Join("-", item.Value.CodeList.Select(p => p.Name)));
-                Console.WriteLine("----------");
-            }
         }
 
         /// <summary>
@@ -981,7 +970,7 @@ namespace X.UI.Helper
                 MonitorIndex();
                 MonitorStock(Continue, shortContinue, first, zt, kernel, kernelH, kernelL, coreT, coreT2, coreT3, ddx, AQS, all, true);
             }
-            else if(mode == 4)
+            else if (mode == 4)
             {
                 var jx = GetMyStock(MyStockMode.JX);
                 var jx2 = GetMyStock(MyStockMode.JX2);
@@ -989,7 +978,7 @@ namespace X.UI.Helper
 
                 var a2 = GetFilterListFromFile();
                 var b = GetDDXList2();
-                GetModeCompareWithOrder(GetModeCompareAuto(b, jx, core),"精选-开始");
+                GetModeCompareWithOrder(GetModeCompareAuto(b, jx, core), "精选-开始");
                 GetModeCompareWithOrder(GetModeCompareAuto(b, jx2, core), "精选2-开始");
                 GetModeCompareWithOrder(GetModeCompare(b, a2), "板块-开始");
             }
@@ -998,8 +987,9 @@ namespace X.UI.Helper
             Console.ReadKey();
         }
 
-
-
+        /// <summary>
+        /// 测试阈值
+        /// </summary>
         public static void Test()
         {
             var content = FileBase.ReadFile(@"D:\stock\股票工具\Debug\src\1.txt", "gb2312");
