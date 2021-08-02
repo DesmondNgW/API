@@ -559,6 +559,39 @@ namespace X.UI.Helper
                 Console.WriteLine("----------");
             }
         }
+
+        /// <summary>
+        /// MonitorModeFour 盘中监控
+        /// </summary>
+        /// <param name="JX"></param>
+        /// <param name="JX2"></param>
+        /// <param name="Core"></param>
+        public static void MonitorModeFour(List<MyStock> JX, List<MyStock> JX2, List<StockPrice> Core)
+        {
+            var tradeStart = ConfigurationHelper.GetAppSettingByName("TradeStart", new DateTime(2099, 1, 1, 9, 15, 0));
+            var tradeEnd = ConfigurationHelper.GetAppSettingByName("TradeEnd", new DateTime(2099, 1, 1, 15, 0, 0));
+            var dt = DateTime.Now;
+            if (dt.DayOfWeek != DayOfWeek.Saturday && dt.DayOfWeek != DayOfWeek.Sunday && dt.TimeOfDay <= tradeEnd.TimeOfDay)
+            {
+                var list = JX.Union(JX2);
+                foreach(var item in list)
+                {
+                    var t = StockDataHelper.GetStockPrice(item.Code);
+                    if (t != null)
+                    {
+                        if (t.Inc < 5) continue;
+                        var sp = item.SP;
+                        if (Core.Exists(p => p.StockCode == item.Code))
+                        {
+                            sp += 3;
+                        }
+                        Console.WriteLine("{0}:{1}", sp, item.Name);
+                    }
+                }
+            }
+        }
+
+
         #endregion
 
         #region 盯盘监控
@@ -981,6 +1014,8 @@ namespace X.UI.Helper
                 GetModeCompareWithOrder(GetModeCompareAuto(b, jx, core), "精选-开始");
                 GetModeCompareWithOrder(GetModeCompareAuto(b, jx2, core), "精选2-开始");
                 GetModeCompareWithOrder(GetModeCompare(b, a2), "板块-开始");
+
+                MonitorModeFour(jx, jx2, core);
             }
 
             Console.WriteLine("Program End! Press Any Key!");
