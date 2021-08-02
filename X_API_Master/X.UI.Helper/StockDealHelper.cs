@@ -568,13 +568,13 @@ namespace X.UI.Helper
         /// <param name="Core"></param>
         public static void MonitorModeFour(List<MyStock> JX, List<MyStock> JX2, List<StockPrice> Core)
         {
-            var tradeStart = ConfigurationHelper.GetAppSettingByName("TradeStart", new DateTime(2099, 1, 1, 9, 15, 0));
-            var tradeEnd = ConfigurationHelper.GetAppSettingByName("TradeEnd", new DateTime(2099, 1, 1, 15, 0, 0));
             var dt = DateTime.Now;
-            if (dt.DayOfWeek != DayOfWeek.Saturday && dt.DayOfWeek != DayOfWeek.Sunday && dt.TimeOfDay <= tradeEnd.TimeOfDay)
+            while (true)
             {
                 var list = JX.Union(JX2);
-                foreach(var item in list)
+                var tmp = new string[] { "试错突破", "试错加速", "试错回踩", "低位突破", "低位加速", "低位回踩", "高位突破", "高位加速", "高位回踩" };
+                Dictionary<double, List<string>> ret = new Dictionary<double, List<string>>();
+                foreach (var item in list)
                 {
                     var t = StockDataHelper.GetStockPrice(item.Code);
                     if (t != null)
@@ -585,8 +585,36 @@ namespace X.UI.Helper
                         {
                             sp += 3;
                         }
-                        Console.WriteLine("{0}:{1}", sp, item.Name);
+                        if (!ret.ContainsKey(sp))
+                        {
+                            ret[sp] = new List<string>() { item.Name };
+                        }
+                        else
+                        {
+                            ret[sp].Add(item.Name);
+                        }
                     }
+                }
+
+                foreach (var item in ret)
+                {
+                    Console.WriteLine("{0}:{1}:{2}", DateTime.Now.ToString("HH:mm:ss.fff"), tmp[(int)item.Key - 1], string.Join("-", item.Value));
+                }
+                if (dt.Hour >= 18)
+                {
+                    break;
+                }
+                else if (dt.Hour >= 16 || dt.Hour <= 7)
+                {
+                    Thread.Sleep(3600 * 1000);
+                }
+                else if (dt.Hour >= 15 || dt.Hour <= 9)
+                {
+                    Thread.Sleep(600 * 1000);
+                }
+                else
+                {
+                    Thread.Sleep(60 * 1000);
                 }
             }
         }
