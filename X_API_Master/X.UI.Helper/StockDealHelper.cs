@@ -568,55 +568,35 @@ namespace X.UI.Helper
         /// <param name="Core"></param>
         public static void MonitorModeFour(List<MyStock> JX, List<MyStock> JX2, List<StockPrice> Core)
         {
-            var dt = DateTime.Now;
-            while (true)
+            var list = JX.Union(JX2);
+            var tmp = new string[] { "试错突破", "试错加速", "试错回踩", "低位突破", "低位加速", "低位回踩", "高位突破", "高位加速", "高位回踩" };
+            Dictionary<double, List<string>> ret = new Dictionary<double, List<string>>();
+            foreach (var item in list)
             {
-                var list = JX.Union(JX2);
-                var tmp = new string[] { "试错突破", "试错加速", "试错回踩", "低位突破", "低位加速", "低位回踩", "高位突破", "高位加速", "高位回踩" };
-                Dictionary<double, List<string>> ret = new Dictionary<double, List<string>>();
-                foreach (var item in list)
+                var t = StockDataHelper.GetStockPrice(item.Code);
+                if (t != null)
                 {
-                    var t = StockDataHelper.GetStockPrice(item.Code);
-                    if (t != null)
+                    if (t.Inc < 5) continue;
+                    var sp = item.SP;
+                    if (Core.Exists(p => p.StockCode == item.Code))
                     {
-                        if (t.Inc < 5) continue;
-                        var sp = item.SP;
-                        if (Core.Exists(p => p.StockCode == item.Code))
-                        {
-                            sp += 3;
-                        }
-                        if (!ret.ContainsKey(sp))
-                        {
-                            ret[sp] = new List<string>() { item.Name };
-                        }
-                        else
-                        {
-                            ret[sp].Add(item.Name);
-                        }
+                        sp += 3;
+                    }
+                    if (!ret.ContainsKey(sp))
+                    {
+                        ret[sp] = new List<string>() { item.Name };
+                    }
+                    else
+                    {
+                        ret[sp].Add(item.Name);
                     }
                 }
-
-                foreach (var item in ret)
-                {
-                    Console.WriteLine("{0}:{1}:{2}", DateTime.Now.ToString("HH:mm:ss.fff"), tmp[(int)item.Key - 1], string.Join("-", item.Value));
-                }
-                if (dt.Hour >= 18)
-                {
-                    break;
-                }
-                else if (dt.Hour >= 16 || dt.Hour <= 7)
-                {
-                    Thread.Sleep(3600 * 1000);
-                }
-                else if (dt.Hour >= 15 || dt.Hour <= 9)
-                {
-                    Thread.Sleep(600 * 1000);
-                }
-                else
-                {
-                    Thread.Sleep(60 * 1000);
-                }
             }
+            foreach (var item in ret)
+            {
+                Console.WriteLine("{0}:{1}:{2}", DateTime.Now.ToString("HH:mm:ss.fff"), tmp[(int)item.Key - 1], string.Join("-", item.Value));
+            }
+            
         }
 
 
