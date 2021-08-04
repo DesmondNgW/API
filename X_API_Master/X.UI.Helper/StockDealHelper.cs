@@ -333,6 +333,162 @@ namespace X.UI.Helper
         }
         #endregion
 
+        #region 选股逻辑
+        /// <summary>
+        /// FilterStock 选股
+        /// </summary>
+        /// <param name="First"></param>
+        /// <param name="ZT"></param>
+        /// <param name="Kernel"></param>
+        /// <param name="KernelH"></param>
+        /// <param name="KernelL"></param>
+        /// <param name="Core"></param>
+        /// <param name="Core2"></param>
+        /// <param name="Core3"></param>
+        /// <param name="DDXList"></param>
+        /// <param name="AQS"></param>
+        /// <param name="All"></param>
+        public static void FilterStock(List<StockPrice> First, List<StockPrice> ZT, List<StockPrice> Kernel, 
+            List<StockPrice> KernelH, List<StockPrice> KernelL, List<StockPrice> Core, List<StockPrice> Core2, 
+            List<StockPrice> Core3, List<StockPrice> DDXList, List<MyStock> AQS, List<MyStock> All)
+        {
+            var topCount = ConfigurationHelper.GetAppSettingByName("topCount", 15);
+            List<StockPrice> OP = Kernel;
+            List<StockPrice> Top = ZT.Where(p => AQS.Exists(q => q.Code == p.StockCode)).ToList();
+
+            List<StockPrice> _Continue = OP;
+            List<StockPrice> _Trend = OP.Where(p => AQS.Exists(q => q.Code == p.StockCode)).ToList();
+
+            #region 过滤器
+            var _top = Top;
+            Func<StockPrice, bool> filter = p => true;
+            //强势过滤
+            bool top(StockPrice p) => _top.ToList().Exists(q => q.StockCode == p.StockCode);
+            //趋势过滤
+            bool trend(StockPrice p) => _Trend.Exists(q => q.StockCode == p.StockCode);
+            //首板过滤
+            bool first(StockPrice p) => First.Exists(q => q.StockCode == p.StockCode);
+            //半路过滤
+            bool zt(StockPrice p) => ZT.All(q => q.StockCode != p.StockCode);
+            //连板过滤
+            bool lb(StockPrice p) => ZT.Exists(q => q.StockCode == p.StockCode) && First.All(q => q.StockCode != p.StockCode);
+
+            _top = new List<StockPrice>();
+            #endregion
+            Console.WriteLine("开始选股");
+            #region 选股
+            var list = new Dictionary<string, MyStockMonitor>();
+            for (var i = 0; i <= 6; i++)
+            {
+                Func<StockPrice, bool> debugFilter = p => true;
+                List<StockPrice> debugTop = Top;
+                var remark = "|TOP";
+                switch (i)
+                {
+                    case 1:
+                        debugFilter = top;
+                        remark = "|龙头";
+                        break;
+                    case 2:
+                        debugFilter = trend;
+                        remark = "|趋势";
+                        break;
+                    case 3:
+                        debugFilter = lb;
+                        debugTop = new List<StockPrice>();
+                        remark = "|连板";
+                        break;
+                    case 4:
+                        debugFilter = first;
+                        debugTop = new List<StockPrice>();
+                        remark = "|首板";
+                        break;
+                    case 5:
+                        debugFilter = zt;
+                        debugTop = new List<StockPrice>();
+                        remark = "|半路";
+                        break;
+                    case 6:
+                        debugFilter = p => first(p) || zt(p);
+                        debugTop = new List<StockPrice>();
+                        remark = "|低位";
+                        break;
+                }
+                var mainDebug = _Continue.Union(debugTop).Where(p => p.CurrentPrice > 0 && debugFilter(p));
+                var listDebug = new List<MyStockMonitor>();
+                foreach (var item in mainDebug)
+                {
+                    var last = All.FirstOrDefault(p => p.Code == item.StockCode);
+                    if (!listDebug.Exists(p => p.StockCode == item.StockCode))
+                    {
+                        var orderremark = "MIDDLE";
+                        if (KernelH.Exists(p => p.StockCode == item.StockCode))
+                        {
+                            orderremark = "HIGH";
+                        }
+                        else if (KernelL.Exists(p => p.StockCode == item.StockCode))
+                        {
+                            orderremark = "LOW";
+                        }
+
+                        var orderremark2 = DDXList.Exists(p => p.StockCode == item.StockCode) ? "ddx" : "0";
+                        var orderremark3 = string.Empty;
+                        if (Core.Exists(p => p.StockCode == item.StockCode))
+                        {
+                            orderremark3 = "7";
+                        }
+                        else if (Core2.Exists(p => p.StockCode == item.StockCode))
+                        {
+                            orderremark3 = "3";
+                        }
+                        else if (Core3.Exists(p => p.StockCode == item.StockCode))
+                        {
+                            orderremark3 = "1";
+                        }
+
+                        listDebug.Add(new MyStockMonitor()
+                        {
+                            MyStockType = item.MyStockType,
+                            StockCode = item.StockCode,
+                            StockName = item.StockName,
+                            Inc = item.Inc,
+                            Price = item.CurrentPrice,
+                            S = last != null ? last.S1 : 0,
+                            NF = last != null ? last.NF.ToString("0") : "DEFAULT",
+                            KLL = last != null ? last.KLL.ToString("0") : "DEFAULT",
+                            Amount = item.Amount,
+                            OrderRemark = orderremark,
+                            OrderRemark2 = orderremark2,
+                            OrderRemark3 = orderremark3
+                        });
+                    }
+                }
+                var j = 0;
+                foreach (var item in listDebug.OrderByDescending(p => p.SLevel).ThenByDescending(p => p.Inc))
+                {
+                    if (i > 0 && j < topCount || i == 0)
+                    {
+                        if (OP.Exists(p => p.StockCode == item.StockCode))
+                        {
+                            if (!list.ContainsKey(item.StockCode))
+                            {
+                                list[item.StockCode] = item;
+                            }
+                            list[item.StockCode].Remark += remark + (j + 1);
+                        }
+                    }
+                    j++;
+                }
+            }
+            FileBase.WriteFile("./", "dest.txt", string.Join("\t\n", list.OrderByDescending(p => p.Value.SLevel)
+                .ThenByDescending(p => p.Value.Inc).
+                Select(p => p.Value.StockCode + " " + p.Value.StockName + " " + p.Value.Remark + " " + p.Value.OrderRemark2
+                + " " + p.Value.OrderRemark + " " + p.Value.OrderRemark3 + " " + p.Value.KLL + " " + p.Value.NF)), "utf-8", FileBaseMode.Create);
+            #endregion
+            Console.WriteLine("选股完成");
+        }
+        #endregion
+
         #region 复盘数据加工
         /// <summary>
         /// 复盘数据映射
@@ -518,7 +674,7 @@ namespace X.UI.Helper
         /// </summary>
         /// <param name="mode"></param>
         /// <returns></returns>
-        public static void GetModeCompareWithOrder(Dictionary<string, ModeCompare> mode, string remark)
+        public static IEnumerable<KeyValuePair<string, ModeCompare>> GetModeCompareWithOrder(Dictionary<string, ModeCompare> mode, string remark)
         {
             var newMode = new Dictionary<string, ModeCompare>();
             var list = new List<StockCompare>();
@@ -558,15 +714,16 @@ namespace X.UI.Helper
                 Console.WriteLine("key:{0},value:{1}", item.Key, string.Join("-", item.Value.CodeList.Select(p => p.Name)));
                 Console.WriteLine("----------");
             }
+            return ret;
         }
 
         /// <summary>
-        /// MonitorModeFour 盘中监控
+        /// GetStockResult 收盘统计
         /// </summary>
         /// <param name="JX"></param>
         /// <param name="JX2"></param>
         /// <param name="Core"></param>
-        public static void MonitorModeFour(List<MyStock> JX, List<MyStock> JX2, List<StockPrice> Core)
+        public static void GetStockResult(List<MyStock> JX, List<MyStock> JX2, List<StockPrice> Core)
         {
             var list = JX.Union(JX2);
             var tmp = new string[] { "试错突破", "试错加速", "试错回踩", "低位突破", "低位加速", "低位回踩", "高位突破", "高位加速", "高位回踩" };
@@ -661,78 +818,35 @@ namespace X.UI.Helper
         }
 
         /// <summary>
-        /// 盯盘
+        /// MonitorStock
         /// </summary>
-        /// <param name="Continue"></param>
-        /// <param name="ShortContinue"></param>
-        /// <param name="First"></param>
-        /// <param name="ZT"></param>
-        /// <param name="Kernel"></param>
-        /// <param name="Kernel2"></param>
         /// <param name="AQS"></param>
         /// <param name="All"></param>
-        /// <param name="debug"></param>
-        public static void MonitorStock(List<StockPrice> Continue, List<StockPrice> ShortContinue, List<StockPrice> First,
-            List<StockPrice> ZT, List<StockPrice> Kernel, List<StockPrice> KernelH, List<StockPrice> KernelL,
-            List<StockPrice> Core, List<StockPrice> Core2, List<StockPrice> Core3, List<StockPrice> DDXList, 
-            List<MyStock> AQS, List<MyStock> All, bool debug = false)
+        /// <param name="SP"></param>
+        public static void MonitorStock(List<MyStock> AQS, List<MyStock> All, List<string> SP)
         {
             //开盘时间
             var tradeStart = ConfigurationHelper.GetAppSettingByName("TradeStart", new DateTime(2099, 1, 1, 9, 15, 0));
             //收盘时间
-            var tradeEnd = ConfigurationHelper.GetAppSettingByName("TradeEnd", new DateTime(2099, 1, 1, 15, 0, 0)); 
-
-            List<StockPrice> OP = Kernel;
-
-            List<StockPrice> Top = ZT.Where(p => AQS.Exists(q => q.Code == p.StockCode)).ToList();
-
-            List<StockPrice> _Continue = OP;
-            List<StockPrice> _Trend = OP.Where(p => AQS.Exists(q => q.Code == p.StockCode)).ToList();
-
-            #region 盯盘过滤器
-            var _top = Top;
-            Func<StockPrice, bool> filter = p => true;
-            //强势过滤
-            bool top(StockPrice p) => _top.ToList().Exists(q => q.StockCode == p.StockCode);
-            //趋势过滤
-            bool trend(StockPrice p) => _Trend.Exists(q => q.StockCode == p.StockCode);
-            //首板过滤
-            bool first(StockPrice p) => First.Exists(q => q.StockCode == p.StockCode);
-            //半路过滤
-            bool zt(StockPrice p) => ZT.All(q => q.StockCode != p.StockCode);
-            //连板过滤
-            bool lb(StockPrice p) => ZT.Exists(q => q.StockCode == p.StockCode) && First.All(q => q.StockCode != p.StockCode);
-   
-            _top = new List<StockPrice>();
-
-            #endregion
+            var tradeEnd = ConfigurationHelper.GetAppSettingByName("TradeEnd", new DateTime(2099, 1, 1, 15, 0, 0));
+            List<MyStock> OP = All;
+            List<MyStock> _Continue = All;
+            List<MyStock> _Trend = OP.Where(p => AQS.Exists(q => q.Code == p.Code)).ToList();
 
             #region 建模提取数据
             var m1 = new List<MyStockMonitor>();
-            var _mainLoop = _Continue.Union(_top).Where(p => p.CurrentPrice > 0 && filter(p));
-            foreach (var item in _mainLoop)
+            var _mainLoop = All.Where(p => p.Close > 0);
+            foreach (var item in _mainLoop.Where(p => SP.Exists(q => q == p.SP.ToString())))
             {
-                var t = StockDataHelper.GetStockPrice(item.StockCode);
+                var t = StockDataHelper.GetStockPrice(item.Code);
                 if (t == null) continue;
-                decimal a = 0.01M, b = 0.01M;
-                try
+                if (!m1.Exists(p => p.StockCode == item.Code))
                 {
-                    a = t.MaxPrice / item.MaxPrice * t.MinPrice / item.MinPrice * 61.8M + 38.2M * t.CurrentPrice / item.CurrentPrice - 100;
-                    b = t.MaxPrice / item.MaxPrice * t.MinPrice / item.MinPrice * 61.8M + 38.2M * t.OpenPrice / t.LastClosePrice - 100;
-                    if (t.MinPrice < item.MinPrice)
-                    {
-                        b = t.CurrentPrice / t.MinPrice * t.CurrentPrice / t.MaxPrice * 61.8M + 38.2M * t.OpenPrice / t.LastClosePrice - 100;
-                    }
-                }
-                catch { }
-                if (!m1.Exists(p => p.StockCode == item.StockCode))
-                {
-                    var last = All.FirstOrDefault(p => p.Code == item.StockCode);
+                    var last = All.FirstOrDefault(p => p.Code == item.Code);
                     if (last != null)
                     {
                         m1.Add(new MyStockMonitor
                         {
-                            MyStockType = item.MyStockType,
                             StockCode = t.StockCode,
                             StockName = t.StockName,
                             Inc = t.Inc,
@@ -740,8 +854,6 @@ namespace X.UI.Helper
                             S = last.S1,
                             NF = last.NF.ToString("0"),
                             KLL = last.KLL.ToString("0"),
-                            K = a,
-                            L = b,
                             Amount = t.Amount,
                             AmountRate = (double)t.Amount * 1e8 / last.Amount * 100,
                             VolRate = (double)t.Vol / last.Vol * 100,
@@ -752,185 +864,15 @@ namespace X.UI.Helper
                 }
             }
             #endregion
-
-            #region 输出配置
             var topCount = ConfigurationHelper.GetAppSettingByName("topCount", 15);
-            #endregion
-
-            #region 输出
-            Console.WriteLine("上涨7%个股{0}-下跌7%个数{1}", m1.Count(p => p.Inc >= 7), m1.Count(p => p.Inc <= -7));
-            Console.WriteLine("上涨5%个股{0}-下跌5%个数{1}", m1.Count(p => p.Inc >= 5), m1.Count(p => p.Inc <= -5));
-            Console.WriteLine("上涨3%个股{0}-下跌3%个数{1}", m1.Count(p => p.Inc >= 3), m1.Count(p => p.Inc <= -3));
-            Console.WriteLine("上涨2%个股{0}-下跌2%个数{1}", m1.Count(p => p.Inc >= 2), m1.Count(p => p.Inc <= -2));
-
-            var dt = DateTime.Now;
-
             IEnumerable<MyStockMonitor> m2 = m1.OrderByDescending(p => p.SLevel).ThenByDescending(p => p.Inc).Take(topCount);
-            
             if (m2 != null && m2.Count() > 0)
             {
-                #region 赚钱效应
-                var L7 = m2.Where(p => Core.Exists(q => q.StockCode == p.StockCode));
-                var L3 = m2.Where(p => Core2.Exists(q => q.StockCode == p.StockCode) && 
-                !Core.Exists(q => q.StockCode == p.StockCode));
-                var L1 = m2.Where(p => Core3.Exists(q => q.StockCode == p.StockCode) &&
-                !Core.Exists(q => q.StockCode == p.StockCode) &&
-                !Core2.Exists(q => q.StockCode == p.StockCode)
-                );
-                var L0 = m2.Where(p => !Core.Exists(q => q.StockCode == p.StockCode) &&
-                !Core2.Exists(q => q.StockCode == p.StockCode) &&
-                !Core3.Exists(q => q.StockCode == p.StockCode));
-                Func<MyStockMonitor, bool> ifilter = p => p.Inc >= 4.99M;
-                var p7 = (L7.Count(ifilter) + 0.0) / L7.Count() * 100.00;
-                var p3 = (L3.Count(ifilter) + 0.0) / L3.Count() * 100.00;
-                var p1 = (L1.Count(ifilter) + 0.0) / L1.Count() * 100.00;
-                var p0 = (L0.Count(ifilter) + 0.0) / L0.Count() * 100.00;
-
-                Console.WriteLine("赚钱效应-7：个数：{0}，比例：{1}%", L7.Count(ifilter), p7.ToString("0.00"));
-                Console.WriteLine("赚钱效应-3：个数：{0}，比例：{1}%", L3.Count(ifilter), p3.ToString("0.00"));
-                Console.WriteLine("赚钱效应-1：个数：{0}，比例：{1}%", L1.Count(ifilter), p1.ToString("0.00"));
-                Console.WriteLine("赚钱效应-0：个数：{0}，比例：{1}%", L0.Count(ifilter), p0.ToString("0.00"));
-
-                var w7 = L7.Where(ifilter).OrderByDescending(p => p.SLevel).ThenByDescending(p => p.Inc)
-                    .Select(p => p.StockName + "(" + p.StockCode + ")");
-
-                Console.WriteLine("777-{0}", string.Join("\t\n", w7));
-                if (w7.Count() <= 14)
+                foreach (var item in m2.Where(p => p.Inc >= 3.82M))
                 {
-                    var w3 = L3.Where(ifilter).OrderByDescending(p => p.SLevel).ThenByDescending(p => p.Inc)
-                        .Select(p => p.StockName + "(" + p.StockCode + ")");
-                    Console.WriteLine("333-{0}", string.Join("\t\n", w3));
-                    if (w7.Count() + w3.Count() <= 14)
-                    {
-                        var w1 = L1.Where(ifilter).OrderByDescending(p => p.SLevel).ThenByDescending(p => p.Inc)
-                            .Select(p => p.StockName + "(" + p.StockCode + ")");
-                        Console.WriteLine("111-{0}", string.Join("\t\n", w1));
-                        if(w7.Count() + w3.Count()+ w1.Count() <= 14)
-                        {
-                            var w0 = L0.Where(ifilter).OrderByDescending(p => p.SLevel).ThenByDescending(p => p.Inc)
-                                .Select(p => p.StockName + "(" + p.StockCode + ")");
-                            Console.WriteLine("000-{0}", string.Join("\t\n", w0));
-                        }
-                    }
-                }
-                #endregion
-            }
-            #endregion
-
-            #region Debug模式
-            var list = new Dictionary<string, MyStockMonitor>();
-            for (var i = 0; i <= 6; i++)
-            {
-                Func<StockPrice, bool> debugFilter = p => true;
-                List<StockPrice> debugTop = Top;
-                var remark = "|TOP";
-                switch (i)
-                {
-                    case 1:
-                        debugFilter = top;
-                        remark = "|龙头";
-                        break;
-                    case 2:
-                        debugFilter = trend;
-                        remark = "|趋势";
-                        break;
-                    case 3:
-                        debugFilter = lb;
-                        debugTop = new List<StockPrice>();
-                        remark = "|连板";
-                        break;
-                    case 4:
-                        debugFilter = first;
-                        debugTop = new List<StockPrice>();
-                        remark = "|首板";
-                        break;
-                    case 5:
-                        debugFilter = zt;
-                        debugTop = new List<StockPrice>();
-                        remark = "|半路";
-                        break;
-                    case 6:
-                        debugFilter = p => first(p) || zt(p);
-                        debugTop = new List<StockPrice>();
-                        remark = "|低位";
-                        break;
-                }
-                var mainDebug = _Continue.Union(debugTop).Where(p => p.CurrentPrice > 0 && debugFilter(p));
-                var listDebug = new List<MyStockMonitor>();
-                foreach (var item in mainDebug)
-                {
-                    var last = All.FirstOrDefault(p => p.Code == item.StockCode);
-                    if (!listDebug.Exists(p => p.StockCode == item.StockCode))
-                    {
-                        var orderremark = "MIDDLE";
-                        if (KernelH.Exists(p => p.StockCode == item.StockCode))
-                        {
-                            orderremark = "HIGH";
-                        }
-                        else if (KernelL.Exists(p => p.StockCode == item.StockCode))
-                        {
-                            orderremark = "LOW";
-                        }
-
-                        var orderremark2 = DDXList.Exists(p => p.StockCode == item.StockCode) ? "ddx" : "0";
-                        var orderremark3 = string.Empty;
-                        if (Core.Exists(p => p.StockCode == item.StockCode))
-                        {
-                            orderremark3 = "7";
-                        }
-                        else if (Core2.Exists(p => p.StockCode == item.StockCode))
-                        {
-                            orderremark3 = "3";
-                        }
-                        else if (Core3.Exists(p => p.StockCode == item.StockCode))
-                        {
-                            orderremark3 = "1";
-                        }
-
-                        listDebug.Add(new MyStockMonitor()
-                        {
-                            MyStockType = item.MyStockType,
-                            StockCode = item.StockCode,
-                            StockName = item.StockName,
-                            Inc = item.Inc,
-                            Price = item.CurrentPrice,
-                            S = last != null ? last.S1 : 0,
-                            NF = last != null ? last.NF.ToString("0") : "DEFAULT",
-                            KLL = last != null ? last.KLL.ToString("0") : "DEFAULT",
-                            Amount = item.Amount,
-                            OrderRemark = orderremark,
-                            OrderRemark2 = orderremark2,
-                            OrderRemark3 = orderremark3
-                        });
-                    }
-                }
-                var j = 0;
-                foreach (var item in listDebug.OrderByDescending(p => p.SLevel).ThenByDescending(p => p.Inc))
-                {
-                    if (i > 0 && j < topCount || i == 0)
-                    {
-                        if (OP.Exists(p => p.StockCode == item.StockCode))
-                        {
-                            if (!list.ContainsKey(item.StockCode))
-                            {
-                                list[item.StockCode] = item;
-                            }
-                            list[item.StockCode].Remark += remark + (j+1);
-                        }
-                    }
-                    j++; 
+                    Console.WriteLine("{0}-{1}({2}):{3}%", DateTime.Now.ToString("HH:MM:ss"), item.StockName, item.StockCode, item.Inc.ToString("0.00"));
                 }
             }
-
-            if (debug)
-            {
-                FileBase.WriteFile("./", "dest.txt", string.Join("\t\n", list.OrderByDescending(p => p.Value.SLevel)
-                    .ThenByDescending(p => p.Value.Inc).
-                    Select(p => p.Value.StockCode + " " + p.Value.StockName + " " + p.Value.Remark + " " + p.Value.OrderRemark2
-                    + " " + p.Value.OrderRemark + " " + p.Value.OrderRemark3+ " " + p.Value.KLL+ " " + p.Value.NF)), "utf-8", FileBaseMode.Create);
-            }
-            #endregion
-
         }
         #endregion
 
@@ -948,31 +890,21 @@ namespace X.UI.Helper
             //盯盘
             if (mode == 1 || (mode == 0 && dt.DayOfWeek != DayOfWeek.Saturday && dt.DayOfWeek != DayOfWeek.Sunday && dt.TimeOfDay <= tradeEnd.TimeOfDay))
             {
-                //接力
-                var Continue = GetMyMonitorStock(MyStockType.Continie);
-                //短线接力
-                var shortContinue = GetMyMonitorStock(MyStockType.ShortContinie);
-
-                //首板
-                var first = GetMyMonitorStock(MyStockType.First);
-                //涨停
-                var zt = GetMyMonitorStock(MyStockType.ZT);
-                var kernel = GetMyMonitorStock(MyStockType.Kernel);
-                var kernelH = GetMyMonitorStock(MyStockType.KernelH);
-                var kernelL = GetMyMonitorStock(MyStockType.KernelL);
-                var coreT = GetMyMonitorStock(MyStockType.CoreT);
-                var coreT2 = GetMyMonitorStock(MyStockType.CoreT2);
-                var coreT3 = GetMyMonitorStock(MyStockType.CoreT3);
                 var AQS = GetMyStock(MyStockMode.AQS);
                 var Wave = GetMyStock(MyStockMode.Wave);
-                var ddx = GetDDXList();
-
+                var ddx = GetDDXList2();
+                var jx = GetMyStock(MyStockMode.JX);
+                var jx2 = GetMyStock(MyStockMode.JX2);
+                var core = GetMyMonitorStock(MyStockType.CoreT);
+                var sp1 = GetModeCompareWithOrder(GetModeCompareAuto(ddx, jx, core), "精选-开始");
+                var sp2 = GetModeCompareWithOrder(GetModeCompareAuto(ddx, jx2, core), "精选2-开始");
+                var sp = sp1.Select(p => p.Key).Union(sp2.Select(p => p.Key)).ToList();
 
                 var all = Union(AQS, Wave);
                 while (dt.TimeOfDay >= tradeStart.TimeOfDay && dt.TimeOfDay <= tradeEnd.TimeOfDay)
                 {
                     MonitorIndex();
-                    MonitorStock(Continue, shortContinue, first, zt, kernel, kernelH, kernelL, coreT, coreT2, coreT3, ddx, AQS, all);
+                    MonitorStock(AQS, all, sp);
                     Thread.Sleep(6000);
                     dt = DateTime.Now;
                 }
@@ -987,16 +919,10 @@ namespace X.UI.Helper
             }
             else if (mode == 3)
             {
-                //接力
-                var Continue = GetMyMonitorStock(MyStockType.Continie);
-                //短线接力
-                var shortContinue = GetMyMonitorStock(MyStockType.ShortContinie);
-
                 //首板
                 var first = GetMyMonitorStock(MyStockType.First);
                 //涨停
                 var zt = GetMyMonitorStock(MyStockType.ZT);
-
                 var kernel = GetMyMonitorStock(MyStockType.Kernel);
                 var kernelH = GetMyMonitorStock(MyStockType.KernelH);
                 var kernelL = GetMyMonitorStock(MyStockType.KernelL);
@@ -1006,10 +932,8 @@ namespace X.UI.Helper
                 var ddx = GetDDXList();
                 var AQS = GetMyStock(MyStockMode.AQS);
                 var Wave = GetMyStock(MyStockMode.Wave);
-
                 var all = Union(AQS, Wave);
-                MonitorIndex();
-                MonitorStock(Continue, shortContinue, first, zt, kernel, kernelH, kernelL, coreT, coreT2, coreT3, ddx, AQS, all, true);
+                FilterStock(first, zt, kernel, kernelH, kernelL, coreT, coreT2, coreT3, ddx, AQS, all);
             }
             else if (mode == 4)
             {
@@ -1022,8 +946,7 @@ namespace X.UI.Helper
                 GetModeCompareWithOrder(GetModeCompareAuto(b, jx, core), "精选-开始");
                 GetModeCompareWithOrder(GetModeCompareAuto(b, jx2, core), "精选2-开始");
                 GetModeCompareWithOrder(GetModeCompare(b, a2), "板块-开始");
-
-                MonitorModeFour(jx, jx2, core);
+                GetStockResult(jx, jx2, core);
             }
 
             Console.WriteLine("Program End! Press Any Key!");
