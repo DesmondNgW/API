@@ -899,12 +899,12 @@ namespace X.UI.Helper
                 var sp1 = GetModeCompareWithOrder(GetModeCompareAuto(ddx, jx, core), "精选-开始");
                 var sp2 = GetModeCompareWithOrder(GetModeCompareAuto(ddx, jx2, core), "精选2-开始");
                 var sp = sp1.Select(p => p.Key).Union(sp2.Select(p => p.Key)).ToList();
-
                 var all = Union(AQS, Wave);
                 while (dt.TimeOfDay >= tradeStart.TimeOfDay && dt.TimeOfDay <= tradeEnd.TimeOfDay)
                 {
                     MonitorIndex();
                     MonitorStock(AQS, all, sp);
+                    GetStockResult(jx, jx2, core);
                     Thread.Sleep(6000);
                     dt = DateTime.Now;
                 }
