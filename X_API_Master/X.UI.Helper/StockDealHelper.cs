@@ -870,7 +870,9 @@ namespace X.UI.Helper
             {
                 foreach (var item in m2.Where(p => p.Inc >= 3.82M))
                 {
-                    Console.WriteLine("{0}-{1}({2}):{3}%", DateTime.Now.ToString("HH:mm:ss"), item.StockName, item.StockCode, item.Inc.ToString("0.00"));
+                    Console.WriteLine("{0}-{1}({2}):涨跌幅{3}%，日成交{4}亿，买一{5}亿，卖一{6}亿", DateTime.Now.ToString("HH:mm:ss"),
+                        item.StockName, item.StockCode, item.Inc.ToString("0.00"), item.Amount.ToString("0.00"),
+                        item.Buy1.ToString("0.00"), item.Sell1.ToString("0.00"));
                 }
             }
         }
