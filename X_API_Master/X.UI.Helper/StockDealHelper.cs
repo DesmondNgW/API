@@ -823,7 +823,7 @@ namespace X.UI.Helper
         /// <param name="AQS"></param>
         /// <param name="All"></param>
         /// <param name="SP"></param>
-        public static void MonitorStock(List<MyStock> AQS, List<MyStock> All, List<string> SP)
+        public static void MonitorStock(List<MyStock> AQS, List<MyStock> All, List<MyStock> Jx, List<MyStock> Jx2, List<string> SP)
         {
             //开盘时间
             var tradeStart = ConfigurationHelper.GetAppSettingByName("TradeStart", new DateTime(2099, 1, 1, 9, 15, 0));
@@ -843,6 +843,7 @@ namespace X.UI.Helper
                 if (!m1.Exists(p => p.StockCode == item.Code))
                 {
                     var last = All.FirstOrDefault(p => p.Code == item.Code);
+                    var isHigh = Jx.Union(Jx2).ToList().Exists(p => p.Code == item.Code);
                     if (last != null)
                     {
                         m1.Add(new MyStockMonitor
@@ -859,6 +860,7 @@ namespace X.UI.Helper
                             VolRate = (double)t.Vol / last.Vol * 100,
                             Buy1 = t.Buy1 * t.CurrentPrice / 100000000,
                             Sell1 = t.Sell1 * t.CurrentPrice / 100000000,
+                            IsHigh = isHigh
                         });
                     }
                 }
@@ -871,6 +873,17 @@ namespace X.UI.Helper
                 var i = 1;
                 foreach (var item in m2.Where(p => p.Inc >= 3.82M))
                 {
+                    if (item.IsHigh)
+                    {
+                        Console.BackgroundColor = ConsoleColor.Black;
+                        Console.ForegroundColor = ConsoleColor.White;
+                    }
+                    else
+                    {
+                        Console.BackgroundColor = ConsoleColor.White;
+                        Console.ForegroundColor = ConsoleColor.Red;
+                    }
+
                     Console.WriteLine("{10}-{0}-{1}({2}):涨跌幅{3}%，日成交{4}亿，买一{5}亿，卖一{6}亿，放量比例{7}%，S:{8},股价{9}",
                         DateTime.Now.ToString("HH:mm:ss"), item.StockName, item.StockCode, item.Inc.ToString("0.00"),
                         item.Amount.ToString("0.00"), item.Buy1.ToString("0.00"), item.Sell1.ToString("0.00"),
@@ -908,7 +921,7 @@ namespace X.UI.Helper
                 while (dt.TimeOfDay >= tradeStart.TimeOfDay && dt.TimeOfDay <= tradeEnd.TimeOfDay)
                 {
                     MonitorIndex();
-                    MonitorStock(AQS, all, sp);
+                    MonitorStock(AQS, all, jx, jx2, sp);
                     GetStockResult(jx, jx2, core);
                     Thread.Sleep(6000);
                     dt = DateTime.Now;
