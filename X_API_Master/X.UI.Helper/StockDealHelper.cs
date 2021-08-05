@@ -868,12 +868,14 @@ namespace X.UI.Helper
             IEnumerable<MyStockMonitor> m2 = m1.OrderByDescending(p => p.SLevel).ThenByDescending(p => p.Inc).Take(topCount);
             if (m2 != null && m2.Count() > 0)
             {
+                var i = 1;
                 foreach (var item in m2.Where(p => p.Inc >= 3.82M))
                 {
-                    Console.WriteLine("{0}-{1}({2}):涨跌幅{3}%，日成交{4}亿，买一{5}亿，卖一{6}亿，放量比例{7}%，S:{8},股价{9}",
+                    Console.WriteLine("{10}-{0}-{1}({2}):涨跌幅{3}%，日成交{4}亿，买一{5}亿，卖一{6}亿，放量比例{7}%，S:{8},股价{9}",
                         DateTime.Now.ToString("HH:mm:ss"), item.StockName, item.StockCode, item.Inc.ToString("0.00"),
                         item.Amount.ToString("0.00"), item.Buy1.ToString("0.00"), item.Sell1.ToString("0.00"),
-                        item.AmountRate.ToString("0.00"), item.S.ToString("0"), item.Price.ToString("0.00"));
+                        item.AmountRate.ToString("0.00"), item.S.ToString("0"), item.Price.ToString("0.00"), i);
+                    i++;
                 }
             }
         }
