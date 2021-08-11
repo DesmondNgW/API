@@ -199,6 +199,7 @@ namespace X.UI.Helper
             var file = mode == MyStockMode.JX ? "./src/dp/精选.txt" :
                  mode == MyStockMode.AQS ? "./src/fp/AQS.txt" :
                  mode == MyStockMode.JX2 ? "./src/dp/精选2.txt" :
+                 mode == MyStockMode.Kernel ? "./src/dp/Kernel精选.txt" :
                  mode == MyStockMode.Wave ? "./src/fp/Wave.txt" : "./src/fp/AQS.txt";
             var content = FileBase.ReadFile(file, "gb2312");
             var list = Regex.Split(content, "\r\n", RegexOptions.IgnoreCase);
@@ -594,7 +595,7 @@ namespace X.UI.Helper
         public static Dictionary<string, ModeCompare> GetModeCompareAuto(List<StockCompare> ddxList, List<MyStock> JX, List<StockPrice> Core)
         {
             Dictionary<string, ModeCompare> ret = new Dictionary<string, ModeCompare>();
-            foreach (var item in JX)
+            foreach (var item in JX.Where(p => !p.Name.Contains("转债")))
             {
                 if (item.SP > 0)
                 {
@@ -611,6 +612,11 @@ namespace X.UI.Helper
                         };
                     }
                     var ddx = ddxList.FirstOrDefault(p => p.Code == item.Code);
+                    if (ddx == null)
+                    {
+                        Console.WriteLine(item.Name + "找不到ddx");
+                        continue;
+                    }
                     ddx.Mode = key;
                     ret[key].CodeList.Add(ddx);
                     ret[key].Name = key;
@@ -714,6 +720,7 @@ namespace X.UI.Helper
                 Console.WriteLine("key:{0},value:{1}", item.Key, string.Join("-", item.Value.CodeList.Select(p => p.Name)));
                 Console.WriteLine("----------");
             }
+            Console.WriteLine("当前模块结束");
             return ret;
         }
 
@@ -957,12 +964,14 @@ namespace X.UI.Helper
             {
                 var jx = GetMyStock(MyStockMode.JX);
                 var jx2 = GetMyStock(MyStockMode.JX2);
+                var kernel = GetMyStock(MyStockMode.Kernel);
                 var core = GetMyMonitorStock(MyStockType.CoreT);
 
                 var a2 = GetFilterListFromFile();
                 var b = GetDDXList2();
                 GetModeCompareWithOrder(GetModeCompareAuto(b, jx, core), "精选-开始");
                 GetModeCompareWithOrder(GetModeCompareAuto(b, jx2, core), "精选2-开始");
+                GetModeCompareWithOrder(GetModeCompareAuto(b, kernel, core), "Kernel-开始");
                 GetModeCompareWithOrder(GetModeCompare(b, a2), "板块-开始");
                 GetStockResult(jx, jx2, core);
             }
@@ -974,9 +983,9 @@ namespace X.UI.Helper
         /// <summary>
         /// 测试阈值
         /// </summary>
-        public static void Test()
+        public static void Test(int mode = 1)
         {
-            var content = FileBase.ReadFile(@"D:\stock\股票工具\Debug\src\1.txt", "gb2312");
+            var content = FileBase.ReadFile(@"D:\stock\股票工具\Debug\src\" + mode + ".txt", "gb2312");
             var list = Regex.Split(content, "\r\n", RegexOptions.IgnoreCase);
             var ret = new List<decimal>();
             foreach (string item in list)

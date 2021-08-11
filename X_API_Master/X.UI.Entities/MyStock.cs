@@ -12,7 +12,8 @@ namespace X.UI.Entities
         AQS,
         Wave,
         JX,
-        JX2
+        JX2,
+        Kernel
         //AR,
         //HHS,
         //HS,
