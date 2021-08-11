@@ -349,8 +349,8 @@ namespace X.UI.Helper
         /// <param name="DDXList"></param>
         /// <param name="AQS"></param>
         /// <param name="All"></param>
-        public static void FilterStock(List<StockPrice> First, List<StockPrice> ZT, List<StockPrice> Kernel, 
-            List<StockPrice> KernelH, List<StockPrice> KernelL, List<StockPrice> Core, List<StockPrice> Core2, 
+        public static void FilterStock(List<StockPrice> First, List<StockPrice> ZT, List<StockPrice> Kernel,
+            List<StockPrice> KernelH, List<StockPrice> KernelL, List<StockPrice> Core, List<StockPrice> Core2,
             List<StockPrice> Core3, List<StockPrice> DDXList, List<MyStock> AQS, List<MyStock> All)
         {
             var topCount = ConfigurationHelper.GetAppSettingByName("topCount", 15);
@@ -359,6 +359,8 @@ namespace X.UI.Helper
 
             List<StockPrice> _Continue = OP;
             List<StockPrice> _Trend = OP.Where(p => AQS.Exists(q => q.Code == p.StockCode)).ToList();
+
+            var des = GetStockDes(StockDesType.DateBase);
 
             #region 过滤器
             var _top = Top;
@@ -446,7 +448,15 @@ namespace X.UI.Helper
                         {
                             orderremark3 = "1";
                         }
-
+                        List<string> bks = new List<string>();
+                        if (!ZT.Exists(p => p.StockCode == item.StockCode) && !First.Exists(p => p.StockCode == item.StockCode))
+                        {
+                            var firstDes = des.FirstOrDefault(p => p.Code == item.StockCode);
+                            if (firstDes != null)
+                            {
+                                bks = firstDes.Bk;
+                            }
+                        }
                         listDebug.Add(new MyStockMonitor()
                         {
                             MyStockType = item.MyStockType,
@@ -460,7 +470,8 @@ namespace X.UI.Helper
                             Amount = item.Amount,
                             OrderRemark = orderremark,
                             OrderRemark2 = orderremark2,
-                            OrderRemark3 = orderremark3
+                            OrderRemark3 = orderremark3,
+                            BK = bks
                         });
                     }
                 }
@@ -483,7 +494,7 @@ namespace X.UI.Helper
             }
             FileBase.WriteFile("./", "dest.txt", string.Join("\t\n", list.OrderByDescending(p => p.Value.SLevel)
                 .ThenByDescending(p => p.Value.Inc).
-                Select(p => p.Value.StockCode + " " + p.Value.StockName + " " + p.Value.Remark + " " + p.Value.OrderRemark2
+                Select(p => p.Value.StockCode + " " + p.Value.StockName + " " + string.Join("+", p.Value.BK) + " " + p.Value.Remark + " " + p.Value.OrderRemark2
                 + " " + p.Value.OrderRemark + " " + p.Value.OrderRemark3 + " " + p.Value.KLL + " " + p.Value.NF)), "utf-8", FileBaseMode.Create);
             #endregion
             Console.WriteLine("选股完成");
@@ -901,6 +912,52 @@ namespace X.UI.Helper
         }
         #endregion
 
+        #region 题材数据处理
+        public static List<StockDes> GetStockDes(StockDesType type)
+        {
+            var file = "./src/data/bak.txt";
+            if(type== StockDesType.DateBase)
+            {
+                file = "./src/data/database.txt";
+            }
+            var ret = new List<StockDes>();
+            var content = FileBase.ReadFile(file, "utf-8");
+            var list = Regex.Split(content, "\r\n", RegexOptions.IgnoreCase);
+            foreach (var item in list.Where(p => !string.IsNullOrEmpty(p)))
+            {
+                var t = item.Split('\t');
+                var des = new StockDes()
+                {
+                    Code = t[0],
+                    Name = t[1]
+                };
+                var tmp = t[2].Split('+');
+                if (tmp.Length == 1)
+                {
+                    tmp = t[2].Split('-');
+                }
+                des.Bk = tmp.ToList();
+                ret.Add(des);
+            }
+            return ret;
+        }
+
+        public static void SaveDataBase()
+        {
+            var bak = GetStockDes(StockDesType.Bak);
+            var data = GetStockDes(StockDesType.DateBase);
+            foreach(var item in data)
+            {
+                if (!bak.Exists(p => p.Code == item.Code))
+                {
+                    bak.Add(item);
+                }
+            }
+            FileBase.WriteFile("./src/data", "database.txt", string.Join("\r\n", bak.
+                Select(p => p.Code + "\t" + p.Name + "\t" + string.Join("+", p.Bk) + "\t")), "utf-8", FileBaseMode.Create);
+        }
+        #endregion
+
         public static void Program()
         {
             //开盘时间
@@ -974,6 +1031,10 @@ namespace X.UI.Helper
                 GetModeCompareWithOrder(GetModeCompareAuto(b, kernel, core), "Kernel-开始");
                 GetModeCompareWithOrder(GetModeCompare(b, a2), "板块-开始");
                 GetStockResult(jx, jx2, core);
+            }
+            else if (mode == 5)
+            {
+                SaveDataBase();
             }
 
             Console.WriteLine("Program End! Press Any Key!");
