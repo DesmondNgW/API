@@ -7,9 +7,9 @@ namespace X.UI.Entities
     public enum MyStockType
     {
         //接力
-        Continie,
+        //Continie,
         //短线接力
-        ShortContinie,
+        //ShortContinie,
         First,
         //涨停
         ZT,

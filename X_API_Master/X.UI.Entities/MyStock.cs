@@ -119,6 +119,8 @@ namespace X.UI.Entities
 
         public decimal DDX { get; set; }
 
+        public decimal Amount { get; set; }
+
         public int DDXOrder { get; set; }
 
         public string Mode { get; set; }
@@ -134,7 +136,8 @@ namespace X.UI.Entities
         {
             get
             {
-                return CodeList.Average(p => p.DDX);
+                var sumAmount = CodeList.Sum(p => p.Amount);
+                return CodeList.Sum(p => p.Amount / sumAmount * p.DDX);
             }
         }
 
@@ -150,7 +153,8 @@ namespace X.UI.Entities
         {
             get
             {
-                return CodeList.Average(p => p.Inc);
+                var sumAmount = CodeList.Sum(p => p.Amount);
+                return CodeList.Sum(p => p.Amount / sumAmount * p.Inc);
             }
         }
 

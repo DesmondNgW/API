@@ -508,8 +508,8 @@ namespace X.UI.Helper
         /// <returns></returns>
         public static List<StockPrice> GetMyMonitorStock(MyStockType mode)
         {
-            var file = mode == MyStockType.Continie ? "./src/dp/接力.txt" :
-                mode == MyStockType.ShortContinie ? "./src/dp/短线接力.txt" :
+            var file = //mode == MyStockType.Continie ? "./src/dp/接力.txt" :
+                //mode == MyStockType.ShortContinie ? "./src/dp/短线接力.txt" :
                 mode == MyStockType.First ? "./src/dp/首板.txt" :
                 mode == MyStockType.ZT ? "./src/dp/涨停.txt" :
                 mode == MyStockType.CoreT ? "./src/dp/CORET.txt" :
@@ -629,6 +629,7 @@ namespace X.UI.Helper
                         continue;
                     }
                     ddx.Mode = key;
+                    ddx.Amount = (decimal)item.Amount;
                     ret[key].CodeList.Add(ddx);
                     ret[key].Name = key;
                 }
@@ -659,7 +660,7 @@ namespace X.UI.Helper
         /// <param name="ddxList"></param>
         /// <param name="filter"></param>
         /// <returns></returns>
-        public static Dictionary<string, ModeCompare> GetModeCompare(List<StockCompare> ddxList, List<Tuple<string, string[]>> filter)
+        public static Dictionary<string, ModeCompare> GetModeCompare(List<StockCompare> ddxList, List<Tuple<string, string[]>> filter, List<MyStock> Kernel)
         {
             Dictionary<string, ModeCompare> ret = new Dictionary<string, ModeCompare>();
             for (var i = 0; i < filter.Count; i++)
@@ -675,7 +676,9 @@ namespace X.UI.Helper
                         if (!string.IsNullOrEmpty(item))
                         {
                             var select = ddxList.FirstOrDefault(p => p.Name == item);
+                            var kernelItem = Kernel.FirstOrDefault(p => p.Code == select.Code);
                             select.Mode = filter[i].Item1;
+                            select.Amount = (decimal)kernelItem.Amount;
                             mode.CodeList.Add(select);
                             mode.Name = filter[i].Item1;
                         }
@@ -721,8 +724,9 @@ namespace X.UI.Helper
                 }
             }
             var stdOrder = 0.5 * list.Count;
-            var stdInc = list.Average(p => p.Inc);
-            var stdDDX = list.Average(p => p.DDX);
+            var sumAmount = list.Sum(p => p.Amount);
+            var stdInc = list.Sum(p => p.Inc * p.Amount / sumAmount);
+            var stdDDX = list.Average(p => p.DDX * p.Amount / sumAmount);
 
             var ret = newMode.Where(p => p.Value.DDX >= stdDDX && p.Value.Inc >= stdInc && p.Value.DDXOrder <= stdOrder);
             Console.WriteLine(remark);
@@ -1029,7 +1033,7 @@ namespace X.UI.Helper
                 GetModeCompareWithOrder(GetModeCompareAuto(b, jx, core), "精选-开始");
                 GetModeCompareWithOrder(GetModeCompareAuto(b, jx2, core), "精选2-开始");
                 GetModeCompareWithOrder(GetModeCompareAuto(b, kernel, core), "Kernel-开始");
-                GetModeCompareWithOrder(GetModeCompare(b, a2), "板块-开始");
+                GetModeCompareWithOrder(GetModeCompare(b, a2, kernel), "板块-开始");
                 GetStockResult(jx, jx2, core);
             }
             else if (mode == 5)
