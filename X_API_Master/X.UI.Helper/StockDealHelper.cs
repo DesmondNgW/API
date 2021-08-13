@@ -643,10 +643,22 @@ namespace X.UI.Helper
         /// <param name="ddxList"></param>
         /// <param name="JX"></param>
         /// <returns></returns>
-        public static Dictionary<string, ModeCompare> GetModeCompareAutoByBk(List<StockCompare> ddxList, List<MyStock> JX)
+        public static Dictionary<string, ModeCompare> GetModeCompareAutoByBk(IEnumerable<KeyValuePair<string, ModeCompare>> iRet)
         {
+            var list = new List<StockCompare>();
+            foreach (var item in iRet)
+            {
+                foreach (var cl in item.Value.CodeList)
+                {
+                    if (!list.Exists(p => p.Code == cl.Code))
+                    {
+                        list.Add(cl);
+                    }
+                }
+            }
+
             Dictionary<string, ModeCompare> ret = new Dictionary<string, ModeCompare>();
-            foreach (var item in JX.Where(p => !p.Name.Contains("转债")))
+            foreach (var item in list)
             {
                 string key = item.Code.StartsWith("30") || item.Code.StartsWith("68") ? "创业板" : "主板";
                 if (!ret.ContainsKey(key))
@@ -656,15 +668,9 @@ namespace X.UI.Helper
                         CodeList = new List<StockCompare>()
                     };
                 }
-                var ddx = ddxList.FirstOrDefault(p => p.Code == item.Code);
-                if (ddx == null)
-                {
-                    Console.WriteLine(item.Name + "找不到ddx");
-                    continue;
-                }
-                ddx.Mode = key;
-                ddx.Amount = (decimal)item.Amount;
-                ret[key].CodeList.Add(ddx);
+
+                item.Mode = key;
+                ret[key].CodeList.Add(item);
                 ret[key].Name = key;
             }
             return ret;
@@ -1110,15 +1116,15 @@ namespace X.UI.Helper
                 var a2 = GetFilterListFromFile();
                 var b = GetDDXList2();
                 var iret1 = GetModeCompareWithOrder(GetModeCompareAuto(b, jx, core), "精选模式-开始");
-                //GetModeCompareWithOrder(GetModeCompareAutoByBk(b, jx), "精选长度-开始");
+                GetModeCompareWithOrder(GetModeCompareAutoByBk(iret1), "精选长度-开始");
                 GetModeCompareWithOrder(GetModeCompareAutoByBk(iret1, des), "精选板块-开始");
 
                 var iret2 = GetModeCompareWithOrder(GetModeCompareAuto(b, jx2, core), "精选2模式-开始");
-                //GetModeCompareWithOrder(GetModeCompareAutoByBk(b, jx2), "精选2长度-开始");
+                GetModeCompareWithOrder(GetModeCompareAutoByBk(iret2), "精选2长度-开始");
                 GetModeCompareWithOrder(GetModeCompareAutoByBk(iret2, des), "精选2板块-开始");
 
                 var iret3 = GetModeCompareWithOrder(GetModeCompareAuto(b, kernel, core), "Kernel模式-开始");
-                //GetModeCompareWithOrder(GetModeCompareAutoByBk(b, kernel), "Kernel长度-开始");
+                GetModeCompareWithOrder(GetModeCompareAutoByBk(iret3), "Kernel长度-开始");
                 GetModeCompareWithOrder(GetModeCompareAutoByBk(iret3, des), "Kernel板块-开始");
 
                 GetModeCompareWithOrder(GetModeCompare(b, a2, kernel), "板块-开始");
