@@ -638,6 +638,84 @@ namespace X.UI.Helper
         }
 
         /// <summary>
+        /// 对数据进行模式10cm或20cm分类
+        /// </summary>
+        /// <param name="ddxList"></param>
+        /// <param name="JX"></param>
+        /// <returns></returns>
+        public static Dictionary<string, ModeCompare> GetModeCompareAutoByBk(List<StockCompare> ddxList, List<MyStock> JX)
+        {
+            Dictionary<string, ModeCompare> ret = new Dictionary<string, ModeCompare>();
+            foreach (var item in JX.Where(p => !p.Name.Contains("转债")))
+            {
+                string key = item.Code.StartsWith("30") || item.Code.StartsWith("68") ? "创业板" : "主板";
+                if (!ret.ContainsKey(key))
+                {
+                    ret[key] = new ModeCompare()
+                    {
+                        CodeList = new List<StockCompare>()
+                    };
+                }
+                var ddx = ddxList.FirstOrDefault(p => p.Code == item.Code);
+                if (ddx == null)
+                {
+                    Console.WriteLine(item.Name + "找不到ddx");
+                    continue;
+                }
+                ddx.Mode = key;
+                ddx.Amount = (decimal)item.Amount;
+                ret[key].CodeList.Add(ddx);
+                ret[key].Name = key;
+            }
+            return ret;
+        }
+
+        /// <summary>
+        /// 对数据进行模式题材分类
+        /// </summary>
+        /// <param name="ddxList"></param>
+        /// <param name="JX"></param>
+        /// <param name="Des"></param>
+        /// <returns></returns>
+        public static Dictionary<string, ModeCompare> GetModeCompareAutoByBk(IEnumerable<KeyValuePair<string, ModeCompare>> iRet, List<StockDes> Des)
+        {
+            var list = new List<StockCompare>();
+            foreach(var item in iRet)
+            {
+                foreach (var cl in item.Value.CodeList)
+                {
+                    if (!list.Exists(p => p.Code == cl.Code))
+                    {
+                        list.Add(cl);
+                    }
+                }
+            }
+            Dictionary<string, ModeCompare> ret = new Dictionary<string, ModeCompare>();
+            foreach (var item in list)
+            {
+                var desItem = Des.FirstOrDefault(p => p.Code == item.Code);
+                if (desItem != null && desItem.Bk != null)
+                {
+                    foreach (var bkItem in desItem.Bk)
+                    {
+                        string key = bkItem;
+                        if (!ret.ContainsKey(key))
+                        {
+                            ret[key] = new ModeCompare()
+                            {
+                                CodeList = new List<StockCompare>()
+                            };
+                        }
+                        item.Mode = key;
+                        ret[key].CodeList.Add(item);
+                        ret[key].Name = key;
+                    }
+                }
+            }
+            return ret;
+        }
+
+        /// <summary>
         /// 手动输入外置模式
         /// </summary>
         /// <returns></returns>
@@ -703,7 +781,7 @@ namespace X.UI.Helper
                 list = list.Concat(item.Value.CodeList).ToList();
             }
             list = list.OrderByDescending(p => p.DDX).ToList();
-
+            if (list.Count == 0) return null;
             for (var i = 0; i < list.Count; i++)
             {
                 list[i].DDXOrder = i + 1;
@@ -728,7 +806,8 @@ namespace X.UI.Helper
             var stdInc = list.Sum(p => p.Inc * p.Amount / sumAmount);
             var stdDDX = list.Average(p => p.DDX * p.Amount / sumAmount);
 
-            var ret = newMode.Where(p => p.Value.DDX >= stdDDX && p.Value.Inc >= stdInc && p.Value.DDXOrder <= stdOrder);
+            var ret = newMode.Count > 1 ? newMode.Where(p => p.Value.DDX >= stdDDX && p.Value.Inc >= stdInc && p.Value.DDXOrder <= stdOrder) :
+                newMode;
             Console.WriteLine(remark);
             foreach (var item in ret)
             {
@@ -1027,12 +1106,21 @@ namespace X.UI.Helper
                 var jx2 = GetMyStock(MyStockMode.JX2);
                 var kernel = GetMyStock(MyStockMode.Kernel);
                 var core = GetMyMonitorStock(MyStockType.CoreT);
-
+                var des = GetStockDes(StockDesType.DateBase);
                 var a2 = GetFilterListFromFile();
                 var b = GetDDXList2();
-                GetModeCompareWithOrder(GetModeCompareAuto(b, jx, core), "精选-开始");
-                GetModeCompareWithOrder(GetModeCompareAuto(b, jx2, core), "精选2-开始");
-                GetModeCompareWithOrder(GetModeCompareAuto(b, kernel, core), "Kernel-开始");
+                var iret1 = GetModeCompareWithOrder(GetModeCompareAuto(b, jx, core), "精选模式-开始");
+                //GetModeCompareWithOrder(GetModeCompareAutoByBk(b, jx), "精选长度-开始");
+                GetModeCompareWithOrder(GetModeCompareAutoByBk(iret1, des), "精选板块-开始");
+
+                var iret2 = GetModeCompareWithOrder(GetModeCompareAuto(b, jx2, core), "精选2模式-开始");
+                //GetModeCompareWithOrder(GetModeCompareAutoByBk(b, jx2), "精选2长度-开始");
+                GetModeCompareWithOrder(GetModeCompareAutoByBk(iret2, des), "精选2板块-开始");
+
+                var iret3 = GetModeCompareWithOrder(GetModeCompareAuto(b, kernel, core), "Kernel模式-开始");
+                //GetModeCompareWithOrder(GetModeCompareAutoByBk(b, kernel), "Kernel长度-开始");
+                GetModeCompareWithOrder(GetModeCompareAutoByBk(iret3, des), "Kernel板块-开始");
+
                 GetModeCompareWithOrder(GetModeCompare(b, a2, kernel), "板块-开始");
                 GetStockResult(jx, jx2, core);
             }
