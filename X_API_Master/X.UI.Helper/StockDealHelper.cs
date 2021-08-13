@@ -1042,8 +1042,9 @@ namespace X.UI.Helper
                     bak.Add(item);
                 }
             }
+            
             FileBase.WriteFile("./src/data", "database.txt", string.Join("\r\n", bak.
-                Select(p => p.Code + "\t" + p.Name + "\t" + string.Join("+", p.Bk) + "\t")), "utf-8", FileBaseMode.Create);
+                Select(p => p.Code.Convert2Int32(0).ToString("000000") + "\t" + p.Name + "\t" + string.Join("+", p.Bk) + "\t")), "utf-8", FileBaseMode.Create);
         }
         #endregion
 
@@ -1116,15 +1117,12 @@ namespace X.UI.Helper
                 var a2 = GetFilterListFromFile();
                 var b = GetDDXList2();
                 var iret1 = GetModeCompareWithOrder(GetModeCompareAuto(b, jx, core), "精选模式-开始");
-                GetModeCompareWithOrder(GetModeCompareAutoByBk(iret1), "精选长度-开始");
                 GetModeCompareWithOrder(GetModeCompareAutoByBk(iret1, des), "精选板块-开始");
 
                 var iret2 = GetModeCompareWithOrder(GetModeCompareAuto(b, jx2, core), "精选2模式-开始");
-                GetModeCompareWithOrder(GetModeCompareAutoByBk(iret2), "精选2长度-开始");
                 GetModeCompareWithOrder(GetModeCompareAutoByBk(iret2, des), "精选2板块-开始");
 
                 var iret3 = GetModeCompareWithOrder(GetModeCompareAuto(b, kernel, core), "Kernel模式-开始");
-                GetModeCompareWithOrder(GetModeCompareAutoByBk(iret3), "Kernel长度-开始");
                 GetModeCompareWithOrder(GetModeCompareAutoByBk(iret3, des), "Kernel板块-开始");
 
                 GetModeCompareWithOrder(GetModeCompare(b, a2, kernel), "板块-开始");
