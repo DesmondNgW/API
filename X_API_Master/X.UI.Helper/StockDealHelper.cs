@@ -508,9 +508,7 @@ namespace X.UI.Helper
         /// <returns></returns>
         public static List<StockPrice> GetMyMonitorStock(MyStockType mode)
         {
-            var file = //mode == MyStockType.Continie ? "./src/dp/接力.txt" :
-                //mode == MyStockType.ShortContinie ? "./src/dp/短线接力.txt" :
-                mode == MyStockType.First ? "./src/dp/首板.txt" :
+            var file = mode == MyStockType.First ? "./src/dp/首板.txt" :
                 mode == MyStockType.ZT ? "./src/dp/涨停.txt" :
                 mode == MyStockType.CoreT ? "./src/dp/CORET.txt" :
                 mode == MyStockType.CoreT2 ? "./src/dp/CORET2.txt" :
@@ -603,7 +601,7 @@ namespace X.UI.Helper
         /// <param name="JX"></param>
         /// <param name="Core"></param>
         /// <returns></returns>
-        public static Dictionary<string, ModeCompare> GetModeCompareAuto(List<StockCompare> ddxList, List<MyStock> JX, List<StockPrice> Core)
+        public static Dictionary<string, ModeCompare> GetModeCompareAuto(List<StockCompare> ddxList, List<MyStock> JX, List<StockPrice> Core, string weight)
         {
             Dictionary<string, ModeCompare> ret = new Dictionary<string, ModeCompare>();
             foreach (var item in JX.Where(p => !p.Name.Contains("转债")))
@@ -629,7 +627,7 @@ namespace X.UI.Helper
                         continue;
                     }
                     ddx.Mode = key;
-                    ddx.Amount = (decimal)item.Amount;
+                    ddx.Amount = weight == "auto" ? (decimal)item.Amount : 1M;
                     ret[key].CodeList.Add(ddx);
                     ret[key].Name = key;
                 }
@@ -744,7 +742,7 @@ namespace X.UI.Helper
         /// <param name="ddxList"></param>
         /// <param name="filter"></param>
         /// <returns></returns>
-        public static Dictionary<string, ModeCompare> GetModeCompare(List<StockCompare> ddxList, List<Tuple<string, string[]>> filter, List<MyStock> Kernel)
+        public static Dictionary<string, ModeCompare> GetModeCompare(List<StockCompare> ddxList, List<Tuple<string, string[]>> filter, List<MyStock> Kernel, string weight)
         {
             Dictionary<string, ModeCompare> ret = new Dictionary<string, ModeCompare>();
             for (var i = 0; i < filter.Count; i++)
@@ -762,7 +760,7 @@ namespace X.UI.Helper
                             var select = ddxList.FirstOrDefault(p => p.Name == item);
                             var kernelItem = Kernel.FirstOrDefault(p => p.Code == select.Code);
                             select.Mode = filter[i].Item1;
-                            select.Amount = (decimal)kernelItem.Amount;
+                            select.Amount = weight == "auto" ? (decimal)kernelItem.Amount : 1M;
                             mode.CodeList.Add(select);
                             mode.Name = filter[i].Item1;
                         }
@@ -862,8 +860,6 @@ namespace X.UI.Helper
             }
             
         }
-
-
         #endregion
 
         #region 盯盘监控
@@ -1056,6 +1052,9 @@ namespace X.UI.Helper
             var tradeEnd = ConfigurationHelper.GetAppSettingByName("TradeEnd", new DateTime(2099, 1, 1, 15, 0, 0));
             //运行模式
             var mode = ConfigurationHelper.GetAppSettingByName("mode", 0);
+            //权重
+            var weight = ConfigurationHelper.GetAppSettingByName("weight", "auto");
+
             Console.BackgroundColor = ConsoleColor.White;
             Console.ForegroundColor = ConsoleColor.Black;
             var dt = DateTime.Now;
@@ -1068,8 +1067,8 @@ namespace X.UI.Helper
                 var jx = GetMyStock(MyStockMode.JX);
                 var jx2 = GetMyStock(MyStockMode.JX2);
                 var core = GetMyMonitorStock(MyStockType.CoreT);
-                var sp1 = GetModeCompareWithOrder(GetModeCompareAuto(ddx, jx, core), "精选-开始");
-                var sp2 = GetModeCompareWithOrder(GetModeCompareAuto(ddx, jx2, core), "精选2-开始");
+                var sp1 = GetModeCompareWithOrder(GetModeCompareAuto(ddx, jx, core, weight), "精选-开始");
+                var sp2 = GetModeCompareWithOrder(GetModeCompareAuto(ddx, jx2, core, weight), "精选2-开始");
                 var sp = sp1.Select(p => p.Key).Union(sp2.Select(p => p.Key)).ToList();
                 var all = Union(AQS, Wave);
                 while (dt.TimeOfDay >= tradeStart.TimeOfDay && dt.TimeOfDay <= tradeEnd.TimeOfDay)
@@ -1116,16 +1115,16 @@ namespace X.UI.Helper
                 var des = GetStockDes(StockDesType.DateBase);
                 var a2 = GetFilterListFromFile();
                 var b = GetDDXList2();
-                var iret1 = GetModeCompareWithOrder(GetModeCompareAuto(b, jx, core), "精选模式-开始");
-                GetModeCompareWithOrder(GetModeCompareAutoByBk(iret1, des), "精选板块-开始");
+                var iret1 = GetModeCompareWithOrder(GetModeCompareAuto(b, jx, core, weight), "精选模式-开始");
+                //GetModeCompareWithOrder(GetModeCompareAutoByBk(iret1, des), "精选板块-开始");
 
-                var iret2 = GetModeCompareWithOrder(GetModeCompareAuto(b, jx2, core), "精选2模式-开始");
-                GetModeCompareWithOrder(GetModeCompareAutoByBk(iret2, des), "精选2板块-开始");
+                var iret2 = GetModeCompareWithOrder(GetModeCompareAuto(b, jx2, core, weight), "精选2模式-开始");
+                //GetModeCompareWithOrder(GetModeCompareAutoByBk(iret2, des), "精选2板块-开始");
 
-                var iret3 = GetModeCompareWithOrder(GetModeCompareAuto(b, kernel, core), "Kernel模式-开始");
-                GetModeCompareWithOrder(GetModeCompareAutoByBk(iret3, des), "Kernel板块-开始");
+                var iret3 = GetModeCompareWithOrder(GetModeCompareAuto(b, kernel, core, weight), "Kernel模式-开始");
+                //GetModeCompareWithOrder(GetModeCompareAutoByBk(iret3, des), "Kernel板块-开始");
 
-                GetModeCompareWithOrder(GetModeCompare(b, a2, kernel), "板块-开始");
+                GetModeCompareWithOrder(GetModeCompare(b, a2, kernel, weight), "板块-开始");
                 GetStockResult(jx, jx2, core);
             }
             else if (mode == 5)
