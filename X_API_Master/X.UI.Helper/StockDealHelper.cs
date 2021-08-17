@@ -758,6 +758,10 @@ namespace X.UI.Helper
                         if (!string.IsNullOrEmpty(item))
                         {
                             var select = ddxList.FirstOrDefault(p => p.Name == item);
+                            if (select == null)
+                            {
+                                select = ddxList.FirstOrDefault(p => p.Code == item);
+                            }
                             var kernelItem = Kernel.FirstOrDefault(p => p.Code == select.Code);
                             select.Mode = filter[i].Item1;
                             select.Amount = weight == "auto" ? (decimal)kernelItem.Amount : 1M;
@@ -820,6 +824,33 @@ namespace X.UI.Helper
             }
             Console.WriteLine("当前模块结束");
             return ret;
+        }
+
+        /// <summary>
+        /// 输出模式结果
+        /// </summary>
+        /// <param name="iret"></param>
+        /// <param name="Des"></param>
+        public static void GetResultFromMode(IEnumerable<KeyValuePair<string, ModeCompare>> iret, List<StockDes> Des)
+        {
+            var list = new List<StockCompare>();
+            foreach (var item in iret)
+            {
+                foreach (var cl in item.Value.CodeList)
+                {
+                    if (!list.Exists(p => p.Code == cl.Code))
+                    {
+                        list.Add(cl);
+                    }
+                }
+            }
+            Console.WriteLine("-------输出开始---------");
+            foreach (var item in list)
+            {
+                var desItem = Des.FirstOrDefault(p => p.Code == item.Code);
+                Console.Write("{0}({1})：{2};", item.Name, item.Code, string.Join("+", desItem?.Bk));
+            }
+            Console.WriteLine("\r\n-------输出结束---------");
         }
 
         /// <summary>
@@ -926,7 +957,7 @@ namespace X.UI.Helper
         /// <param name="AQS"></param>
         /// <param name="All"></param>
         /// <param name="SP"></param>
-        public static void MonitorStock(List<MyStock> AQS, List<MyStock> All, List<MyStock> Jx, List<MyStock> Jx2, List<string> SP)
+        public static void MonitorStock(List<MyStock> AQS, List<MyStock> All, List<MyStock> Jx, List<MyStock> Jx2, List<string> SP, List<StockDes> Des)
         {
             //开盘时间
             var tradeStart = ConfigurationHelper.GetAppSettingByName("TradeStart", new DateTime(2099, 1, 1, 9, 15, 0));
@@ -987,10 +1018,12 @@ namespace X.UI.Helper
                         Console.ForegroundColor = ConsoleColor.Red;
                     }
 
-                    Console.WriteLine("{10}-{0}-{1}({2}):涨跌幅{3}%，日成交{4}亿，买一{5}亿，卖一{6}亿，放量比例{7}%，S:{8},股价{9}",
+                    var desItem = Des.FirstOrDefault(p => p.Code == item.StockCode);
+                    Console.WriteLine("{10}-{0}-{1}({2}):涨跌幅{3}%，所属板块：{11}，日成交{4}亿，买一{5}亿，卖一{6}亿，放量比例{7}%，S:{8},股价{9}",
                         DateTime.Now.ToString("HH:mm:ss"), item.StockName, item.StockCode, item.Inc.ToString("0.00"),
                         item.Amount.ToString("0.00"), item.Buy1.ToString("0.00"), item.Sell1.ToString("0.00"),
-                        item.AmountRate.ToString("0.00"), item.S.ToString("0"), item.Price.ToString("0.00"), i);
+                        item.AmountRate.ToString("0.00"), item.S.ToString("0"), item.Price.ToString("0.00"), i
+                        , string.Join("+", desItem != null ? desItem.Bk : new List<string>() { "未知板块" }));
                     i++;
                 }
             }
@@ -1064,6 +1097,7 @@ namespace X.UI.Helper
                 var AQS = GetMyStock(MyStockMode.AQS);
                 var Wave = GetMyStock(MyStockMode.Wave);
                 var ddx = GetDDXList2();
+                var des = GetStockDes(StockDesType.DateBase);
                 var jx = GetMyStock(MyStockMode.JX);
                 var jx2 = GetMyStock(MyStockMode.JX2);
                 var core = GetMyMonitorStock(MyStockType.CoreT);
@@ -1074,7 +1108,7 @@ namespace X.UI.Helper
                 while (dt.TimeOfDay >= tradeStart.TimeOfDay && dt.TimeOfDay <= tradeEnd.TimeOfDay)
                 {
                     MonitorIndex();
-                    MonitorStock(AQS, all, jx, jx2, sp);
+                    MonitorStock(AQS, all, jx, jx2, sp, des);
                     GetStockResult(jx, jx2, core);
                     Thread.Sleep(6000);
                     dt = DateTime.Now;
@@ -1117,12 +1151,15 @@ namespace X.UI.Helper
                 var b = GetDDXList2();
                 var iret1 = GetModeCompareWithOrder(GetModeCompareAuto(b, jx, core, weight), "精选模式-开始");
                 //GetModeCompareWithOrder(GetModeCompareAutoByBk(iret1, des), "精选板块-开始");
+                GetResultFromMode(iret1, des);
 
                 var iret2 = GetModeCompareWithOrder(GetModeCompareAuto(b, jx2, core, weight), "精选2模式-开始");
                 //GetModeCompareWithOrder(GetModeCompareAutoByBk(iret2, des), "精选2板块-开始");
+                GetResultFromMode(iret2, des);
 
                 var iret3 = GetModeCompareWithOrder(GetModeCompareAuto(b, kernel, core, weight), "Kernel模式-开始");
                 //GetModeCompareWithOrder(GetModeCompareAutoByBk(iret3, des), "Kernel板块-开始");
+                GetResultFromMode(iret3, des);
 
                 GetModeCompareWithOrder(GetModeCompare(b, a2, kernel, weight), "板块-开始");
                 GetStockResult(jx, jx2, core);
