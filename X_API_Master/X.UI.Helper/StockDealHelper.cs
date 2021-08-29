@@ -1100,10 +1100,12 @@ namespace X.UI.Helper
                 var des = GetStockDes(StockDesType.DateBase);
                 var jx = GetMyStock(MyStockMode.JX);
                 var jx2 = GetMyStock(MyStockMode.JX2);
+                var kernel = GetMyStock(MyStockMode.Kernel);
                 var core = GetMyMonitorStock(MyStockType.CoreT);
-                var sp1 = GetModeCompareWithOrder(GetModeCompareAuto(ddx, jx, core, weight), "精选-开始");
-                var sp2 = GetModeCompareWithOrder(GetModeCompareAuto(ddx, jx2, core, weight), "精选2-开始");
-                var sp = sp1.Select(p => p.Key).Union(sp2.Select(p => p.Key)).ToList();
+                var spK = GetModeCompareWithOrder(GetModeCompareAuto(ddx, kernel, core, weight), "Kernel模式-开始");
+                //var sp1 = GetModeCompareWithOrder(GetModeCompareAuto(ddx, jx, core, weight), "精选-开始");
+                //var sp2 = GetModeCompareWithOrder(GetModeCompareAuto(ddx, jx2, core, weight), "精选2-开始");
+                var sp = spK.Select(p => p.Key).ToList();
                 var all = Union(AQS, Wave);
                 while (dt.TimeOfDay >= tradeStart.TimeOfDay && dt.TimeOfDay <= tradeEnd.TimeOfDay)
                 {
@@ -1148,20 +1150,17 @@ namespace X.UI.Helper
                 var core = GetMyMonitorStock(MyStockType.CoreT);
                 var des = GetStockDes(StockDesType.DateBase);
                 var a2 = GetFilterListFromFile();
-                var b = GetDDXList2();
-                var iret1 = GetModeCompareWithOrder(GetModeCompareAuto(b, jx, core, weight), "精选模式-开始");
-                //GetModeCompareWithOrder(GetModeCompareAutoByBk(iret1, des), "精选板块-开始");
+                var ddxList = GetDDXList2();
+                var iret1 = GetModeCompareWithOrder(GetModeCompareAuto(ddxList, jx, core, weight), "精选模式-开始");
                 GetResultFromMode(iret1, des);
 
-                var iret2 = GetModeCompareWithOrder(GetModeCompareAuto(b, jx2, core, weight), "精选2模式-开始");
-                //GetModeCompareWithOrder(GetModeCompareAutoByBk(iret2, des), "精选2板块-开始");
+                var iret2 = GetModeCompareWithOrder(GetModeCompareAuto(ddxList, jx2, core, weight), "精选2模式-开始");
                 GetResultFromMode(iret2, des);
 
-                var iret3 = GetModeCompareWithOrder(GetModeCompareAuto(b, kernel, core, weight), "Kernel模式-开始");
-                //GetModeCompareWithOrder(GetModeCompareAutoByBk(iret3, des), "Kernel板块-开始");
+                var iret3 = GetModeCompareWithOrder(GetModeCompareAuto(ddxList, kernel, core, weight), "Kernel模式-开始");
                 GetResultFromMode(iret3, des);
 
-                GetModeCompareWithOrder(GetModeCompare(b, a2, kernel, weight), "板块-开始");
+                GetModeCompareWithOrder(GetModeCompare(ddxList, a2, kernel, weight), "板块-开始");
                 GetStockResult(jx, jx2, core);
             }
             else if (mode == 5)
