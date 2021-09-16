@@ -587,7 +587,8 @@ namespace X.UI.Helper
                         Code = t[1].Trim(),
                         Name = t[2],
                         DDX = ddx,
-                        Inc = t[4].Convert2Decimal(-1)
+                        DDXWeek = t[8].Convert2Decimal(-1),
+                    Inc = t[4].Convert2Decimal(-1)
                     });
                 }
             }
@@ -780,7 +781,7 @@ namespace X.UI.Helper
         /// </summary>
         /// <param name="mode"></param>
         /// <returns></returns>
-        public static IEnumerable<KeyValuePair<string, ModeCompare>> GetModeCompareWithOrder(Dictionary<string, ModeCompare> mode, string remark)
+        public static IEnumerable<KeyValuePair<string, ModeCompare>> GetModeCompareWithOrder(Dictionary<string, ModeCompare> mode, string remark, string weekddx)
         {
             var newMode = new Dictionary<string, ModeCompare>();
             var list = new List<StockCompare>();
@@ -813,8 +814,9 @@ namespace X.UI.Helper
             var sumAmount = list.Sum(p => p.Amount);
             var stdInc = list.Sum(p => p.Inc * p.Amount / sumAmount);
             var stdDDX = list.Average(p => p.DDX * p.Amount / sumAmount);
-
-            var ret = newMode.Count > 1 ? newMode.Where(p => p.Value.DDX >= stdDDX && p.Value.Inc >= stdInc && p.Value.DDXOrder <= stdOrder) :
+            var stdDDXWeek = weekddx == "auto" ? list.Average(p => p.DDXWeek * p.Amount / sumAmount) : decimal.MinValue;
+            var ret = newMode.Count > 1 ? newMode.Where(p => p.Value.DDX >= stdDDX && p.Value.Inc >= stdInc && 
+            p.Value.DDXOrder <= stdOrder && p.Value.DDXWeek >= stdDDXWeek) :
                 newMode;
             Console.WriteLine(remark);
             foreach (var item in ret)
@@ -1087,6 +1089,8 @@ namespace X.UI.Helper
             var mode = ConfigurationHelper.GetAppSettingByName("mode", 0);
             //权重
             var weight = ConfigurationHelper.GetAppSettingByName("weight", "auto");
+            //趋势因子weekDDX
+            var weekddx = ConfigurationHelper.GetAppSettingByName("weekddx", "auto");
 
             Console.BackgroundColor = ConsoleColor.White;
             Console.ForegroundColor = ConsoleColor.Black;
@@ -1102,7 +1106,7 @@ namespace X.UI.Helper
                 var jx2 = GetMyStock(MyStockMode.JX2);
                 var kernel = GetMyStock(MyStockMode.Kernel);
                 var core = GetMyMonitorStock(MyStockType.CoreT);
-                var spK = GetModeCompareWithOrder(GetModeCompareAuto(ddx, kernel, core, weight), "Kernel模式-开始");
+                var spK = GetModeCompareWithOrder(GetModeCompareAuto(ddx, kernel, core, weight), "Kernel模式-开始", weekddx);
                 //var sp1 = GetModeCompareWithOrder(GetModeCompareAuto(ddx, jx, core, weight), "精选-开始");
                 //var sp2 = GetModeCompareWithOrder(GetModeCompareAuto(ddx, jx2, core, weight), "精选2-开始");
                 var sp = spK.Select(p => p.Key).ToList();
@@ -1151,16 +1155,16 @@ namespace X.UI.Helper
                 var des = GetStockDes(StockDesType.DateBase);
                 var a2 = GetFilterListFromFile();
                 var ddxList = GetDDXList2();
-                var iret1 = GetModeCompareWithOrder(GetModeCompareAuto(ddxList, jx, core, weight), "精选模式-开始");
+                var iret1 = GetModeCompareWithOrder(GetModeCompareAuto(ddxList, jx, core, weight), "精选模式-开始", weekddx);
                 GetResultFromMode(iret1, des);
 
-                var iret2 = GetModeCompareWithOrder(GetModeCompareAuto(ddxList, jx2, core, weight), "精选2模式-开始");
+                var iret2 = GetModeCompareWithOrder(GetModeCompareAuto(ddxList, jx2, core, weight), "精选2模式-开始", weekddx);
                 GetResultFromMode(iret2, des);
 
-                var iret3 = GetModeCompareWithOrder(GetModeCompareAuto(ddxList, kernel, core, weight), "Kernel模式-开始");
+                var iret3 = GetModeCompareWithOrder(GetModeCompareAuto(ddxList, kernel, core, weight), "Kernel模式-开始", weekddx);
                 GetResultFromMode(iret3, des);
 
-                GetModeCompareWithOrder(GetModeCompare(ddxList, a2, kernel, weight), "板块-开始");
+                GetModeCompareWithOrder(GetModeCompare(ddxList, a2, kernel, weight), "板块-开始", weekddx);
                 GetStockResult(jx, jx2, core);
             }
             else if (mode == 5)

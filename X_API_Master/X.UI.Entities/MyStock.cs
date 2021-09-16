@@ -119,6 +119,8 @@ namespace X.UI.Entities
 
         public decimal DDX { get; set; }
 
+        public decimal DDXWeek { get; set; }
+
         public decimal Amount { get; set; }
 
         public int DDXOrder { get; set; }
@@ -140,6 +142,16 @@ namespace X.UI.Entities
                 return CodeList.Sum(p => p.Amount / sumAmount * p.DDX);
             }
         }
+
+        public decimal DDXWeek
+        {
+            get
+            {
+                var sumAmount = CodeList.Sum(p => p.Amount);
+                return CodeList.Sum(p => p.Amount / sumAmount * p.DDXWeek);
+            }
+        }
+
 
         public double DDXOrder
         {
