@@ -550,7 +550,15 @@ namespace X.UI.Helper
             var ret = new List<StockPrice>();
             foreach (var item in list1)
             {
-                var t = item.Split('\t');
+                string[] t;
+                if (item.Contains("\t"))
+                {
+                    t = item.Split('\t');
+                }
+                else
+                {
+                    t = Regex.Split(item, "    ", RegexOptions.IgnoreCase);
+                }
                 if (t.Length >= 6)
                 {
                     var ddx = t[5].Convert2Decimal(-1);
@@ -578,7 +586,15 @@ namespace X.UI.Helper
             var ret = new List<StockCompare>();
             foreach (var item in list1)
             {
-                var t = item.Split('\t');
+                string[] t;
+                if (item.Contains("\t"))
+                {
+                    t = item.Split('\t');
+                }
+                else
+                {
+                    t = Regex.Split(item, "    ", RegexOptions.IgnoreCase);
+                }
                 if (t.Length >= 6)
                 {
                     var ddx = t[5].Convert2Decimal(-1);
@@ -1079,6 +1095,103 @@ namespace X.UI.Helper
         }
         #endregion
 
+        #region 情绪周期模型
+        /// <summary>
+        /// 读取源数据
+        /// </summary>
+        /// <returns></returns>
+        public static List<StockCircleUnit> GetStockCircleUnitList()
+        {
+            var content = FileBase.ReadFile(@"D:\stock\股票工具\Debug\src\1.txt", "gb2312");
+            var list = Regex.Split(content, "\r\n", RegexOptions.IgnoreCase);
+            var ret = new List<decimal>();
+            var result = new List<StockCircleUnit>();
+            foreach (string item in list)
+            {
+                if (!string.IsNullOrEmpty(item))
+                    ret.Add(item.Convert2Decimal(0));
+            }
+            int lastH = 0, lastL = 0;
+            for (var i = 1; i < ret.Count - 1; i++)
+            {
+                if (ret[i] > ret[i + 1] && ret[i] > ret[i - 1])
+                {
+                    lastH = i;
+                    if (lastL != 0)
+                    {
+                        var item = new StockCircleUnit()
+                        {
+                            High = ret[i],
+                            Low = ret[lastL],
+                            Mode = CircleUnitMode.UP,
+                            Data = new List<decimal>()
+                        };
+                        for (var k = lastL; k <= i; k++)
+                        {
+                            item.Data.Add(ret[k]);
+                        }
+                        result.Add(item);
+                    }
+                }
+                if (ret[i] < ret[i + 1] && ret[i] < ret[i - 1])
+                {
+                    lastL = i;
+                    if (lastH != 0)
+                    {
+                        var item = new StockCircleUnit()
+                        {
+                            High = ret[lastH],
+                            Low = ret[i],
+                            Mode = CircleUnitMode.DOWN,
+                            Data = new List<decimal>()
+                        };
+                        for (var k = lastH; k <= i; k++)
+                        {
+                            item.Data.Add(ret[k]);
+                        }
+                        result.Add(item);
+                    }
+                }
+            }
+            return result;
+        }
+
+        /// <summary>
+        /// 输出
+        /// </summary>
+        /// <param name="ret"></param>
+        public static void TestCircle(List<StockCircleUnit> ret)
+        {
+            Console.WriteLine("一日游比例：{0}", (ret.Where(p => p.Data.Count <= 2).Count() + 0.0) / ret.Count);
+
+            Console.WriteLine("高点：{0}，低点：{1}", ret.Average(p => p.High), ret.Average(p => p.Low));
+
+            Console.WriteLine("一日游空仓比例：{0}", (ret.Where(p => p.Data.Count <= 2 && p.Low <= -2 && p.High >= 2).Count() + 0.0) / ret.Count);
+
+            var k1 = ret.Where(p => p.Mode == CircleUnitMode.UP && p.SecondData < 2 && p.Low < -2);
+            Console.WriteLine("冰点次日非高潮：{0}", k1.Average(p => p.SecondData));
+
+            var k2 = ret.Where(p => p.Mode == CircleUnitMode.DOWN && p.SecondData > -2 && p.High > 2);
+            Console.WriteLine("高潮次日非冰点：{0}", k2.Average(p => p.SecondData));
+
+            var k3 = ret.Where(p => p.Data.Count <= 2 && p.Mode == CircleUnitMode.UP && p.SecondData < 2 && p.Low < -2);
+            Console.WriteLine("一日游冰点次日非高潮：{0}", k3.Average(p => p.SecondData));
+
+            var k4 = ret.Where(p => p.Data.Count <= 2 && p.Mode == CircleUnitMode.DOWN && p.SecondData > -2 && p.High > 2);
+            Console.WriteLine("一日游高潮次日非冰点：{0}", k2.Average(p => p.SecondData));
+
+            var next = ret.Where(p => p.Data[0] < 2 && p.Data[0] > -2);
+            Console.WriteLine("弱分歧中一日游比例：{0}", (next.Where(p => p.Data.Count <= 2).Count() + 0.0) / next.Count());
+
+            Console.WriteLine("弱分歧上升当日结果：{0}", next.Where(p => p.Mode == CircleUnitMode.UP).Average(p => p.Data[0]));
+            Console.WriteLine("弱分歧次日上升结果：{0}", next.Where(p => p.Mode == CircleUnitMode.UP).Average(p => p.Data[1]));
+
+            Console.WriteLine("弱分歧当日下降结果：{0}", next.Where(p => p.Mode == CircleUnitMode.DOWN).Average(p => p.Data[0]));
+            Console.WriteLine("弱分歧次日下降结果：{0}", next.Where(p => p.Mode == CircleUnitMode.DOWN).Average(p => p.Data[1]));
+        }
+        #endregion
+
+
         public static void Program()
         {
             //开盘时间
@@ -1176,9 +1289,6 @@ namespace X.UI.Helper
             Console.ReadKey();
         }
 
-        /// <summary>
-        /// 测试阈值
-        /// </summary>
         public static void Test(int mode = 1)
         {
             var content = FileBase.ReadFile(@"D:\stock\股票工具\Debug\src\" + mode + ".txt", "gb2312");

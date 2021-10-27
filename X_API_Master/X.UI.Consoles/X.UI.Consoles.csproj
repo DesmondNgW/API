@@ -138,6 +138,11 @@
     </Content>
     <Content Include="Em.FundTrade.EncryptHelper.dll" />
     <Content Include="favicon.ico" />
+    <Content Include="src\1.txt" />
+    <Content Include="src\2.txt" />
+    <Content Include="src\data\bak.txt" />
+    <Content Include="src\data\database.txt" />
+    <Content Include="src\data\人工板块.txt" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\X.Business.Core\X.Business.Core.csproj">
@@ -227,7 +232,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="dest\" />
-    <Folder Include="src\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

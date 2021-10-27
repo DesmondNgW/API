@@ -57,6 +57,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Stock.cs" />
     <Compile Include="StockBase.cs" />
+    <Compile Include="StockCircle.cs" />
     <Compile Include="StockDes.cs" />
     <Compile Include="StockKLine.cs" />
     <Compile Include="StockL2.cs" />
