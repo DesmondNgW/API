@@ -21,7 +21,7 @@ namespace X.UI.Helper
         /// <returns></returns>
         private static bool F1(MyStock p)
         {
-            return p.Inc > -100 && !p.Name.Contains("ST");
+            return p.Inc > -100 && !p.Name.Contains(StockConstHelper.ST);
         }
 
         /// <summary>
@@ -31,7 +31,7 @@ namespace X.UI.Helper
         /// <returns></returns>
         private static bool F3(MyStock p)
         {
-            return p.Inc > -100 && !p.Name.Contains("ST") && (p.K1 + p.K2 + p.K3 + p.K4) / 4 > 7.5 && p.K4 > 0;
+            return p.Inc > -100 && !p.Name.Contains(StockConstHelper.ST) && (p.K1 + p.K2 + p.K3 + p.K4) / 4 > 7.5 && p.K4 > 0;
         }
 
         /// <summary>
@@ -41,7 +41,7 @@ namespace X.UI.Helper
         /// <returns></returns>
         private static bool F4(MyStock p, double t)
         {
-            return p.Inc > -100 && !p.Name.Contains("ST") && p.Amount >= t;// 3.82 * 1e8;
+            return p.Inc > -100 && !p.Name.Contains(StockConstHelper.ST) && p.Amount >= t;// 3.82 * 1e8;
         }
 
         /// <summary>
@@ -61,7 +61,7 @@ namespace X.UI.Helper
         /// <returns></returns>
         private static string O2(MyStock p)
         {
-            return p.Code + " " + p.Name + " " + (p.K1 + p.K2 + p.K3 + p.K4) / 4 + " " + (p.MyStockMode == MyStockMode.AQS ? "AQS" : "Wave");
+            return p.Code + " " + p.Name + " " + (p.K1 + p.K2 + p.K3 + p.K4) / 4 + " " + (p.MyStockMode == MyStockMode.AQS ? StockConstHelper.AQS : StockConstHelper.WAVE);
         }
 
         /// <summary>
@@ -196,17 +196,17 @@ namespace X.UI.Helper
         /// <returns></returns>
         public static List<MyStock> GetMyStock(MyStockMode mode)
         {
-            var file = mode == MyStockMode.JX ? "./src/dp/精选.txt" :
-                 mode == MyStockMode.AQS ? "./src/fp/AQS.txt" :
-                 mode == MyStockMode.JX2 ? "./src/dp/精选2.txt" :
-                 mode == MyStockMode.Kernel ? "./src/dp/Kernel精选.txt" :
-                 mode == MyStockMode.Wave ? "./src/fp/Wave.txt" : "./src/fp/AQS.txt";
-            var content = FileBase.ReadFile(file, "gb2312");
-            var list = Regex.Split(content, "\r\n", RegexOptions.IgnoreCase);
+            var file = mode == MyStockMode.JX ? StockConstHelper.JXPATH :
+                 mode == MyStockMode.AQS ? StockConstHelper.AQSPATH :
+                 mode == MyStockMode.JX2 ? StockConstHelper.JXPATH2 :
+                 mode == MyStockMode.Kernel ? StockConstHelper.KERNELJXPATH :
+                 mode == MyStockMode.Wave ? StockConstHelper.WAVEPATH : StockConstHelper.AQSPATH;
+            var content = FileBase.ReadFile(file, StockConstHelper.GB2312);
+            var list = Regex.Split(content, StockConstHelper.RN, RegexOptions.IgnoreCase);
             var ret = new List<MyStock>();
             foreach (var item in list)
             {
-                var t = item.Split('\t');
+                var t = item.Split(StockConstHelper.T);
                 if (t.Length >= 16)
                 {
                     var myStock = new MyStock()
@@ -286,7 +286,8 @@ namespace X.UI.Helper
             var bk = tmp.Where(p => p.Code.StartsWith("8"));
             var t = list.Sum(p => p.Amount) / 400 * 0.382;
             Console.WriteLine("{0}亿", (t / 1e8).ToString("0.00"));
-            string dir = "./dest", dirK = "./dest/K", dirA = "./dest/A", dirBk = "./dest/Bk";
+            string dir = StockConstHelper.DIRPATH, dirK = StockConstHelper.DIRKPATH, dirA = StockConstHelper.DIRAPATH, 
+                dirBk = StockConstHelper.DIRBKPATH;
             var KContent = new List<Tuple<double, double>>();
             var AContent = new List<Tuple<double, double>>();
             var BkContent = new List<Tuple<double, double>>();
@@ -298,11 +299,11 @@ namespace X.UI.Helper
                 //K系列
                 var kContent = GetStockName(list, i, F1, O1);
                 KContent.Add(new Tuple<double, double>(kContent[0].Convert2Double(-10000), (kContent.Length - 1.0) / i));
-                FileBase.WriteFile(dirK, "K" + i + ".txt", string.Join("\t\n", kContent), encode, FileBaseMode.Create);
+                FileBase.WriteFile(dirK, "K" + i + ".txt", string.Join(StockConstHelper.TN, kContent), encode, FileBaseMode.Create);
                 //A系列
                 var aContent = GetStockName(list, i, p => F4(p, t), O2);
                 AContent.Add(new Tuple<double, double>(aContent[0].Convert2Double(-10000), (aContent.Length - 1.0) / i));
-                FileBase.WriteFile(dirA, "A" + i + ".txt", string.Join("\t\n", aContent), encode, FileBaseMode.Create);
+                FileBase.WriteFile(dirA, "A" + i + ".txt", string.Join(StockConstHelper.TN, aContent), encode, FileBaseMode.Create);
             }
 
             var bkc = bk.Count();
@@ -311,15 +312,15 @@ namespace X.UI.Helper
                 //BK系列
                 var kContent = GetStockName(bk, i, F1, O2);
                 BkContent.Add(new Tuple<double, double>(kContent[0].Convert2Double(-10000), (kContent.Length - 1.0) / i));
-                FileBase.WriteFile(dirBk, "BK" + i + ".txt", string.Join("\t\n", kContent), encode, FileBaseMode.Create);
+                FileBase.WriteFile(dirBk, "BK" + i + ".txt", string.Join(StockConstHelper.TN, kContent), encode, FileBaseMode.Create);
             }
 
             //K系列
-            FileBase.WriteFile(dirK, "K500.txt", string.Join("\t\n", GetStockName(list, 500, F1, O1)), encode, FileBaseMode.Create);
-            FileBase.WriteFile(dirK, "K825.txt", string.Join("\t\n", GetStockName(list, 825, F1, O1)), encode, FileBaseMode.Create);
+            FileBase.WriteFile(dirK, "K500.txt", string.Join(StockConstHelper.TN, GetStockName(list, 500, F1, O1)), encode, FileBaseMode.Create);
+            FileBase.WriteFile(dirK, "K825.txt", string.Join(StockConstHelper.TN, GetStockName(list, 825, F1, O1)), encode, FileBaseMode.Create);
             //A系列
-            FileBase.WriteFile(dirA, "A500.txt", string.Join("\t\n", GetStockName(list, 500, p => F4(p, t), O2)), encode, FileBaseMode.Create);
-            FileBase.WriteFile(dirA, "A825.txt", string.Join("\t\n", GetStockName(list, 825, p => F4(p, t), O2)), encode, FileBaseMode.Create);
+            FileBase.WriteFile(dirA, "A500.txt", string.Join(StockConstHelper.TN, GetStockName(list, 500, p => F4(p, t), O2)), encode, FileBaseMode.Create);
+            FileBase.WriteFile(dirA, "A825.txt", string.Join(StockConstHelper.TN, GetStockName(list, 825, p => F4(p, t), O2)), encode, FileBaseMode.Create);
 
             var KConsole = GetAnswer(KContent);
             var AConsole = GetAnswer(AContent);
@@ -327,10 +328,10 @@ namespace X.UI.Helper
             Console.WriteLine("KContent:价格高低点:{0};比例高低点:{1}", string.Join("-", KConsole.Item1), string.Join("-", KConsole.Item2));
             Console.WriteLine("AContent:价格高低点:{0};比例高低点:{1}", string.Join("-", AConsole.Item1), string.Join("-", AConsole.Item2));
 
-            FileBase.WriteFile(dir, "K.txt", string.Join("\t\n", KContent.Select((p, index) => (index + 1) * 25 + " " + p.Item1.ToString("0.000") + " " + p.Item2.ToString("0.000"))), encode, FileBaseMode.Create);
-            FileBase.WriteFile(dir, "A.txt", string.Join("\t\n", AContent.Select((p, index) => (index + 1) * 25 + " " + p.Item1.ToString("0.000") + " " + p.Item2.ToString("0.000"))), encode, FileBaseMode.Create);
+            FileBase.WriteFile(dir, "K.txt", string.Join(StockConstHelper.TN, KContent.Select((p, index) => (index + 1) * 25 + " " + p.Item1.ToString("0.000") + " " + p.Item2.ToString("0.000"))), encode, FileBaseMode.Create);
+            FileBase.WriteFile(dir, "A.txt", string.Join(StockConstHelper.TN, AContent.Select((p, index) => (index + 1) * 25 + " " + p.Item1.ToString("0.000") + " " + p.Item2.ToString("0.000"))), encode, FileBaseMode.Create);
 
-            FileBase.WriteFile(dir, "Bk.txt", string.Join("\t\n", BkContent.Select((p, index) => (index + 1) * 3 + " " + p.Item1.ToString("0.000") + " " + p.Item2.ToString("0.000"))), encode, FileBaseMode.Create);
+            FileBase.WriteFile(dir, "Bk.txt", string.Join(StockConstHelper.TN, BkContent.Select((p, index) => (index + 1) * 3 + " " + p.Item1.ToString("0.000") + " " + p.Item2.ToString("0.000"))), encode, FileBaseMode.Create);
         }
         #endregion
 
@@ -492,7 +493,7 @@ namespace X.UI.Helper
                     j++;
                 }
             }
-            FileBase.WriteFile("./", "dest.txt", string.Join("\t\n", list.OrderByDescending(p => p.Value.SLevel)
+            FileBase.WriteFile("./", "dest.txt", string.Join(StockConstHelper.TN, list.OrderByDescending(p => p.Value.SLevel)
                 .ThenByDescending(p => p.Value.Inc).
                 Select(p => p.Value.StockCode + " " + p.Value.StockName + " " + string.Join("+", p.Value.BK) + " " + p.Value.Remark + " " + p.Value.OrderRemark2
                 + " " + p.Value.OrderRemark + " " + p.Value.OrderRemark3 + " " + p.Value.KLL + " " + p.Value.NF)), "utf-8", FileBaseMode.Create);
@@ -508,19 +509,19 @@ namespace X.UI.Helper
         /// <returns></returns>
         public static List<StockPrice> GetMyMonitorStock(MyStockType mode)
         {
-            var file = mode == MyStockType.First ? "./src/dp/首板.txt" :
-                mode == MyStockType.ZT ? "./src/dp/涨停.txt" :
-                mode == MyStockType.CoreT ? "./src/dp/CORET.txt" :
-                mode == MyStockType.CoreT2 ? "./src/dp/CORET2.txt" :
-                mode == MyStockType.CoreT3 ? "./src/dp/CORET3.txt" :
-                mode == MyStockType.Kernel ? "./src/dp/Kernel.txt" :
-                mode == MyStockType.KernelH ? "./src/dp/KernelH.txt" :
-                mode == MyStockType.KernelL ? "./src/dp/KernelL.txt" : "./src/dp/接力.txt";
-            var list1 = Regex.Split(FileBase.ReadFile(file, "gb2312"), "\r\n", RegexOptions.IgnoreCase);
+            var file = mode == MyStockType.First ? StockConstHelper.FIRSTPATH :
+                mode == MyStockType.ZT ? StockConstHelper.ZTPATH :
+                mode == MyStockType.CoreT ? StockConstHelper.CORETPATH :
+                mode == MyStockType.CoreT2 ? StockConstHelper.CORETPATH2 :
+                mode == MyStockType.CoreT3 ? StockConstHelper.CORETPATH3 :
+                mode == MyStockType.Kernel ? StockConstHelper.KERNELPATH :
+                mode == MyStockType.KernelH ? StockConstHelper.KERNELHPATH :
+                mode == MyStockType.KernelL ? StockConstHelper.KERNELLPATH : StockConstHelper.JLPATH;
+            var list1 = Regex.Split(FileBase.ReadFile(file, StockConstHelper.GB2312), StockConstHelper.RN, RegexOptions.IgnoreCase);
             var ret = new List<StockPrice>();
             foreach (var item in list1)
             {
-                var t = item.Split('\t');
+                var t = item.Split(StockConstHelper.T);
                 if (t.Length >= 15)
                 {
                     ret.Add(new StockPrice()
@@ -540,25 +541,27 @@ namespace X.UI.Helper
         }
 
         /// <summary>
+        /// 分隔符计算
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
+        public static string[] StringCompute(string item)
+        {
+            return item.Contains(StockConstHelper.T) ? item.Split(StockConstHelper.T) : Regex.Split(item, StockConstHelper.SPACE4, RegexOptions.IgnoreCase);
+        }
+
+        /// <summary>
         /// 资金流文件
         /// </summary>
         /// <returns></returns>
         public static List<StockPrice> GetDDXList()
         {
-            var file = "./src/dp/tool.txt";
-            var list1 = Regex.Split(FileBase.ReadFile(file, "gb2312"), "\r\n", RegexOptions.IgnoreCase);
+            var file = StockConstHelper.TOOLPATH;
+            var list1 = Regex.Split(FileBase.ReadFile(file, StockConstHelper.GB2312), StockConstHelper.RN, RegexOptions.IgnoreCase);
             var ret = new List<StockPrice>();
             foreach (var item in list1)
             {
-                string[] t;
-                if (item.Contains("\t"))
-                {
-                    t = item.Split('\t');
-                }
-                else
-                {
-                    t = Regex.Split(item, "    ", RegexOptions.IgnoreCase);
-                }
+                string[] t = StringCompute(item);
                 if (t.Length >= 6)
                 {
                     var ddx = t[5].Convert2Decimal(-1);
@@ -581,20 +584,12 @@ namespace X.UI.Helper
         /// <returns></returns>
         public static List<StockCompare> GetDDXList2()
         {
-            var file = "./src/dp/tool.txt";
-            var list1 = Regex.Split(FileBase.ReadFile(file, "gb2312"), "\r\n", RegexOptions.IgnoreCase);
+            var file = StockConstHelper.TOOLPATH;
+            var list1 = Regex.Split(FileBase.ReadFile(file, StockConstHelper.GB2312), StockConstHelper.RN, RegexOptions.IgnoreCase);
             var ret = new List<StockCompare>();
             foreach (var item in list1)
             {
-                string[] t;
-                if (item.Contains("\t"))
-                {
-                    t = item.Split('\t');
-                }
-                else
-                {
-                    t = Regex.Split(item, "    ", RegexOptions.IgnoreCase);
-                }
+                string[] t = StringCompute(item);
                 if (t.Length >= 6)
                 {
                     var ddx = t[5].Convert2Decimal(-1);
@@ -621,7 +616,7 @@ namespace X.UI.Helper
         public static Dictionary<string, ModeCompare> GetModeCompareAuto(List<StockCompare> ddxList, List<MyStock> JX, List<StockPrice> Core, string weight)
         {
             Dictionary<string, ModeCompare> ret = new Dictionary<string, ModeCompare>();
-            foreach (var item in JX.Where(p => !p.Name.Contains("转债")))
+            foreach (var item in JX.Where(p => !p.Name.Contains(StockConstHelper.KZZ)))
             {
                 if (item.SP > 0)
                 {
@@ -644,7 +639,7 @@ namespace X.UI.Helper
                         continue;
                     }
                     ddx.Mode = key;
-                    ddx.Amount = weight == "auto" ? (decimal)item.Amount : 1M;
+                    ddx.Amount = weight == StockConstHelper.AUTO ? (decimal)item.Amount : 1M;
                     ret[key].CodeList.Add(ddx);
                     ret[key].Name = key;
                 }
@@ -675,7 +670,8 @@ namespace X.UI.Helper
             Dictionary<string, ModeCompare> ret = new Dictionary<string, ModeCompare>();
             foreach (var item in list)
             {
-                string key = item.Code.StartsWith("30") || item.Code.StartsWith("68") ? "创业板" : "主板";
+                string key = item.Code.StartsWith("30") || item.Code.StartsWith("68") ? StockConstHelper.CYB
+                    : StockConstHelper.ZB;
                 if (!ret.ContainsKey(key))
                 {
                     ret[key] = new ModeCompare()
@@ -742,9 +738,9 @@ namespace X.UI.Helper
         /// <returns></returns>
         public static List<Tuple<string, string[]>> GetFilterListFromFile()
         {
-            var file = "./src/dp/bk.txt";
-            var content = FileBase.ReadFile(file, "utf-8");
-            var list = Regex.Matches(content, "(.+)：【(.+)】");
+            var file = StockConstHelper.DPBKPATH;
+            var content = FileBase.ReadFile(file, StockConstHelper.UTF8);
+            var list = Regex.Matches(content, StockConstHelper.REGEXBK);
             var ret = new List<Tuple<string, string[]>>();
             foreach (Match item in list)
             {
@@ -781,7 +777,7 @@ namespace X.UI.Helper
                             }
                             var kernelItem = Kernel.FirstOrDefault(p => p.Code == select.Code);
                             select.Mode = filter[i].Item1;
-                            select.Amount = weight == "auto" ? (decimal)kernelItem.Amount : 1M;
+                            select.Amount = weight == StockConstHelper.AUTO ? (decimal)kernelItem.Amount : 1M;
                             mode.CodeList.Add(select);
                             mode.Name = filter[i].Item1;
                         }
@@ -830,7 +826,7 @@ namespace X.UI.Helper
             var sumAmount = list.Sum(p => p.Amount);
             var stdInc = list.Sum(p => p.Inc * p.Amount / sumAmount);
             var stdDDX = list.Average(p => p.DDX * p.Amount / sumAmount);
-            var stdDDXWeek = weekddx == "auto" ? list.Average(p => p.DDXWeek * p.Amount / sumAmount) : decimal.MinValue;
+            var stdDDXWeek = weekddx == StockConstHelper.AUTO ? list.Average(p => p.DDXWeek * p.Amount / sumAmount) : decimal.MinValue;
             var ret = newMode.Count > 1 ? newMode.Where(p => p.Value.DDX >= stdDDX && p.Value.Inc >= stdInc && 
             p.Value.DDXOrder <= stdOrder && p.Value.DDXWeek >= stdDDXWeek) :
                 newMode;
@@ -1051,17 +1047,17 @@ namespace X.UI.Helper
         #region 题材数据处理
         public static List<StockDes> GetStockDes(StockDesType type)
         {
-            var file = "./src/data/bak.txt";
-            if(type== StockDesType.DateBase)
+            var file = StockConstHelper.BAKPATH;
+            if (type == StockDesType.DateBase)
             {
-                file = "./src/data/database.txt";
+                file = StockConstHelper.DATABASEPATH;
             }
             var ret = new List<StockDes>();
-            var content = FileBase.ReadFile(file, "utf-8");
-            var list = Regex.Split(content, "\r\n", RegexOptions.IgnoreCase);
+            var content = FileBase.ReadFile(file, StockConstHelper.UTF8);
+            var list = Regex.Split(content, StockConstHelper.RN, RegexOptions.IgnoreCase);
             foreach (var item in list.Where(p => !string.IsNullOrEmpty(p)))
             {
-                var t = item.Split('\t');
+                var t = item.Split(StockConstHelper.T);
                 var des = new StockDes()
                 {
                     Code = t[0],
@@ -1190,7 +1186,6 @@ namespace X.UI.Helper
             Console.WriteLine("弱分歧次日下降结果：{0}", next.Where(p => p.Mode == CircleUnitMode.DOWN).Average(p => p.Data[1]));
         }
         #endregion
-
 
         public static void Program()
         {
