@@ -1,5 +1,9 @@
-﻿using System;
+﻿using NPOI.HSSF.UserModel;
+using NPOI.SS.UserModel;
+using NPOI.XSSF.UserModel;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading;
@@ -126,6 +130,35 @@ namespace X.UI.Helper
                 }
             }
             return ret;
+        }
+
+        /// <summary>
+        /// 正则分割字段
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
+        public static string[] SplitFiledByRegex(string item, int length, int start)
+        {
+            var list = Regex.Matches(item, StockConstHelper.REGEXSPACE).Cast<Match>().Select(p => p.Groups[0].Value).ToArray();
+            if (list.Length == length) return list;
+            var ret = new string[length];
+            var tmp = list.Length - length;
+            for (var i = 0; i < list.Length; i++)
+            {
+                if (i < start)
+                {
+                    ret[i] = list[i];
+                }
+                else if (i <= start + tmp)
+                {
+                    ret[start] += list[i];
+                }
+                else
+                {
+                    ret[i - tmp] = list[i];
+                }
+            }
+            return ret.ToArray();
         }
 
         /// <summary>
@@ -504,6 +537,68 @@ namespace X.UI.Helper
 
         #region 复盘数据加工
         /// <summary>
+        /// GetDDXListFromExcel
+        /// </summary>
+        /// <returns></returns>
+        public static List<StockPrice> GetDDXListFromExcel()
+        {
+            var ret = new List<StockPrice>();
+            var file = StockConstHelper.TOOLPATH;
+            FileBase.ReadExcel(file, (sheet) =>
+            {
+                IRow row = sheet.GetRow(0);
+                for (int i = 0; i <= sheet.LastRowNum; i++)
+                {
+                    row = sheet.GetRow(i);
+                    if (row != null)
+                    {
+                        var ddx = row.GetCell(5).ToString().Convert2Decimal(-1);
+                        if (ddx > 0)
+                        {
+                            ret.Add(new StockPrice()
+                            {
+                                StockCode = row.GetCell(1).ToString().Trim(),
+                                StockName = row.GetCell(2).ToString(),
+                            });
+                        }
+                    }
+                }
+            });
+            return ret;
+        }
+
+        /// <summary>
+        /// GetDDXList2FromExcel
+        /// </summary>
+        /// <returns></returns>
+        public static List<StockCompare> GetDDXList2FromExcel()
+        {
+            var ret = new List<StockCompare>();
+            var file = StockConstHelper.TOOLPATH;
+            FileBase.ReadExcel(file, (sheet) =>
+            {
+                IRow row = sheet.GetRow(0);
+                for (int i = 0; i <= sheet.LastRowNum; i++)
+                {
+                    row = sheet.GetRow(i);
+                    if (row != null)
+                    {
+                        var ddx = row.GetCell(5).ToString().Convert2Decimal(-1);
+                        ret.Add(new StockCompare()
+                        {
+                            Code = row.GetCell(1).ToString().Trim(),
+                            Name = row.GetCell(2).ToString(),
+                            DDX = ddx,
+                            DDXWeek = row.GetCell(8).ToString().Convert2Decimal(-1),
+                            Inc = row.GetCell(4).ToString().Convert2Decimal(-1)
+                        });
+                    }
+                }
+            });
+            return ret;
+        }
+
+        /// <summary>
         /// 复盘数据映射
         /// </summary>
         /// <returns></returns>
@@ -541,16 +636,6 @@ namespace X.UI.Helper
         }
 
         /// <summary>
-        /// 分隔符计算
-        /// </summary>
-        /// <param name="item"></param>
-        /// <returns></returns>
-        public static string[] StringCompute(string item)
-        {
-            return item.Contains(StockConstHelper.T) ? item.Split(StockConstHelper.T) : Regex.Split(item, StockConstHelper.SPACE4, RegexOptions.IgnoreCase);
-        }
-
-        /// <summary>
         /// 资金流文件
         /// </summary>
         /// <returns></returns>
@@ -561,7 +646,7 @@ namespace X.UI.Helper
             var ret = new List<StockPrice>();
             foreach (var item in list1)
             {
-                string[] t = StringCompute(item);
+                string[] t = SplitFiledByRegex(item, 21, 2);
                 if (t.Length >= 6)
                 {
                     var ddx = t[5].Convert2Decimal(-1);
@@ -589,7 +674,8 @@ namespace X.UI.Helper
             var ret = new List<StockCompare>();
             foreach (var item in list1)
             {
-                string[] t = StringCompute(item);
+                if (string.IsNullOrEmpty(item)) continue;
+                string[] t = SplitFiledByRegex(item, 21, 2);
                 if (t.Length >= 6)
                 {
                     var ddx = t[5].Convert2Decimal(-1);
@@ -599,12 +685,42 @@ namespace X.UI.Helper
                         Name = t[2],
                         DDX = ddx,
                         DDXWeek = t[8].Convert2Decimal(-1),
-                    Inc = t[4].Convert2Decimal(-1)
+                        Inc = t[4].Convert2Decimal(-1)
                     });
                 }
             }
             return ret;
         }
+
+        /// <summary>
+        /// 资金流文件3
+        /// </summary>
+        /// <returns></returns>
+        public static List<StockCompare> GetDDXList3()
+        {
+            var file = StockConstHelper.TOOLALLPATH;
+            var list1 = Regex.Split(FileBase.ReadFile(file, StockConstHelper.GB2312), StockConstHelper.RN, RegexOptions.IgnoreCase);
+            var ret = new List<StockCompare>();
+            foreach (var item in list1)
+            {
+                if (string.IsNullOrEmpty(item)) continue;
+                string[] t = SplitFiledByRegex(item, 21, 2);
+                if (t.Length >= 6)
+                {
+                    var ddx = t[5].Convert2Decimal(-1);
+                    ret.Add(new StockCompare()
+                    {
+                        Code = t[1].Trim(),
+                        Name = t[2],
+                        DDX = ddx,
+                        DDXWeek = t[8].Convert2Decimal(-1),
+                        Inc = t[4].Convert2Decimal(-1)
+                    });
+                }
+            }
+            return ret;
+        }
+
 
         /// <summary>
         /// 对数据进行模式自动分类
@@ -646,6 +762,35 @@ namespace X.UI.Helper
             }
             return ret;
         }
+
+        /// <summary>
+        /// 全体ddx数据
+        /// </summary>
+        /// <param name="ddxList"></param>
+        /// <param name="weight"></param>
+        /// <returns></returns>
+        public static Dictionary<string, ModeCompare> GetModeCompareAutoAll(List<StockCompare> ddxList, string weight)
+        {
+            Dictionary<string, ModeCompare> ret = new Dictionary<string, ModeCompare>();
+            foreach (var item in ddxList)
+            {
+                string key = item.Code;
+                if (!ret.ContainsKey(key))
+                {
+                    ret[key] = new ModeCompare()
+                    {
+                        CodeList = new List<StockCompare>()
+                    };
+                }
+                var ddx = item;
+                ddx.Mode = key;
+                ddx.Amount = 1M;
+                ret[key].CodeList.Add(ddx);
+                ret[key].Name = key;
+            }
+            return ret;
+        }
+
 
         /// <summary>
         /// 对数据进行模式10cm或20cm分类
@@ -840,6 +985,61 @@ namespace X.UI.Helper
             return ret;
         }
 
+
+        /// <summary>
+        /// 输出模式结果
+        /// </summary>
+        /// <param name="mode"></param>
+        /// <param name="remark"></param>
+        /// <param name="weekddx"></param>
+        /// <returns></returns>
+        public static IEnumerable<KeyValuePair<string, ModeCompare>> GetModeCompareWithOrder(IEnumerable<KeyValuePair<string, ModeCompare>> mode, string remark, string weekddx)
+        {
+            var newMode = new Dictionary<string, ModeCompare>();
+            var list = new List<StockCompare>();
+            foreach (var item in mode)
+            {
+                list = list.Concat(item.Value.CodeList).ToList();
+            }
+            list = list.OrderByDescending(p => p.DDX).ToList();
+            if (list.Count == 0) return null;
+            for (var i = 0; i < list.Count; i++)
+            {
+                list[i].DDXOrder = i + 1;
+                if (!newMode.ContainsKey(list[i].Mode))
+                {
+                    newMode[list[i].Mode] = new ModeCompare()
+                    {
+                        Name = list[i].Mode,
+                        CodeList = new List<StockCompare>()
+                        {
+                            list[i]
+                        }
+                    };
+                }
+                else
+                {
+                    newMode[list[i].Mode].CodeList.Add(list[i]);
+                }
+            }
+            var stdOrder = 0.5 * list.Count;
+            var sumAmount = list.Sum(p => p.Amount);
+            var stdInc = list.Sum(p => p.Inc * p.Amount / sumAmount);
+            var stdDDX = list.Average(p => p.DDX * p.Amount / sumAmount);
+            var stdDDXWeek = weekddx == StockConstHelper.AUTO ? list.Average(p => p.DDXWeek * p.Amount / sumAmount) : decimal.MinValue;
+            var ret = newMode.Count > 1 ? newMode.Where(p => p.Value.DDX >= stdDDX && p.Value.Inc >= stdInc &&
+            p.Value.DDXOrder <= stdOrder && p.Value.DDXWeek >= stdDDXWeek) :
+                newMode;
+            Console.WriteLine(remark);
+            foreach (var item in ret)
+            {
+                Console.WriteLine("key:{0},value:{1}", item.Key, string.Join("-", item.Value.CodeList.Select(p => p.Name)));
+                Console.WriteLine("----------");
+            }
+            Console.WriteLine("当前模块结束");
+            return ret;
+        }
+
         /// <summary>
         /// 输出模式结果
         /// </summary>
@@ -862,7 +1062,7 @@ namespace X.UI.Helper
             foreach (var item in list)
             {
                 var desItem = Des.FirstOrDefault(p => p.Code == item.Code);
-                Console.Write("{0}({1})：{2};", item.Name, item.Code, string.Join("+", desItem?.Bk));
+                Console.Write("{0}({1})：{2};", item.Name, item.Code, desItem != null ? string.Join("+", desItem.Bk) : "");
             }
             Console.WriteLine("\r\n-------输出结束---------");
         }
@@ -1278,6 +1478,17 @@ namespace X.UI.Helper
             else if (mode == 5)
             {
                 SaveDataBase();
+            }
+            else if (mode == 6)
+            {
+                var des = GetStockDes(StockDesType.DateBase);
+                var ddxList = GetDDXList3();
+                var iret1 = GetModeCompareWithOrder(GetModeCompareAutoAll(ddxList, weight), "最强资金流", weekddx);
+                for(var i = 1; i < 4; i++)
+                {
+                    iret1 = GetModeCompareWithOrder(iret1, "最强资金流-" + i, weekddx);
+                    GetResultFromMode(iret1, des);
+                }
             }
 
             Console.WriteLine("Program End! Press Any Key!");

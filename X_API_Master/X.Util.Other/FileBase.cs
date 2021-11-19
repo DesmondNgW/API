@@ -1,4 +1,7 @@
-﻿using System;
+﻿using NPOI.HSSF.UserModel;
+using NPOI.SS.UserModel;
+using NPOI.XSSF.UserModel;
+using System;
 using System.IO;
 using System.Reflection;
 using System.Text;
@@ -137,6 +140,40 @@ namespace X.Util.Other
                 Logger.Client.Error(Logger.Client.GetMethodInfo(MethodBase.GetCurrentMethod(), new object[] { filePath }), ex, LogDomain.Util);
             }
             return state;
+        }
+
+        /// <summary>
+        /// 读取excel文件
+        /// </summary>
+        /// <param name="filePath"></param>
+        /// <param name="func"></param>
+        public static void ReadExcel(string filePath, Action<ISheet> func)
+        {
+            IWorkbook wk = null;
+            try
+            {
+                var fi = new FileInfo(filePath);
+                if (fi.Exists)
+                {
+                    var extension = fi.Extension;
+                    var fs = new FileStream(filePath, FileMode.Open);
+                    if (extension.Equals(".xls"))
+                    {
+                        wk = new HSSFWorkbook(fs);
+                    }
+                    else
+                    {
+                        wk = new XSSFWorkbook(fs);
+                    }
+                    fs.Close();
+                    ISheet sheet = wk.GetSheetAt(0);
+                    func(sheet);
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Client.Error(Logger.Client.GetMethodInfo(MethodBase.GetCurrentMethod(), new object[] { filePath }), ex, LogDomain.Util);
+            }
         }
     }
 }
