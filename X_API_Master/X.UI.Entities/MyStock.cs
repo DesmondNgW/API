@@ -13,6 +13,7 @@ namespace X.UI.Entities
         Wave,
         JX,
         JX2,
+        ALL,
         Kernel
         //AR,
         //HHS,

@@ -1,9 +1,6 @@
-﻿using NPOI.HSSF.UserModel;
-using NPOI.SS.UserModel;
-using NPOI.XSSF.UserModel;
+﻿using NPOI.SS.UserModel;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading;
@@ -161,6 +158,7 @@ namespace X.UI.Helper
             return ret.ToArray();
         }
 
+        #region unuse
         /// <summary>
         /// 二进制数据位解析
         /// </summary>
@@ -217,7 +215,8 @@ namespace X.UI.Helper
                 }
             }
             return ret >= 5;
-        }
+        } 
+        #endregion
 
         #endregion
 
@@ -232,6 +231,7 @@ namespace X.UI.Helper
             var file = mode == MyStockMode.JX ? StockConstHelper.JXPATH :
                  mode == MyStockMode.AQS ? StockConstHelper.AQSPATH :
                  mode == MyStockMode.JX2 ? StockConstHelper.JXPATH2 :
+                 mode == MyStockMode.ALL ? StockConstHelper.ALLPATH :
                  mode == MyStockMode.Kernel ? StockConstHelper.KERNELJXPATH :
                  mode == MyStockMode.Wave ? StockConstHelper.WAVEPATH : StockConstHelper.AQSPATH;
             var content = FileBase.ReadFile(file, StockConstHelper.GB2312);
@@ -267,7 +267,6 @@ namespace X.UI.Helper
                     ret.Add(myStock);
                 }
             }
-            //SetOrder(ret);
             return ret;
         }
 
@@ -721,7 +720,6 @@ namespace X.UI.Helper
             return ret;
         }
 
-
         /// <summary>
         /// 对数据进行模式自动分类
         /// </summary>
@@ -755,6 +753,7 @@ namespace X.UI.Helper
                         continue;
                     }
                     ddx.Mode = key;
+                    if (item.Amount <= 0) continue;
                     ddx.Amount = weight == StockConstHelper.AUTO ? (decimal)item.Amount : 1M;
                     ret[key].CodeList.Add(ddx);
                     ret[key].Name = key;
@@ -762,35 +761,6 @@ namespace X.UI.Helper
             }
             return ret;
         }
-
-        /// <summary>
-        /// 全体ddx数据
-        /// </summary>
-        /// <param name="ddxList"></param>
-        /// <param name="weight"></param>
-        /// <returns></returns>
-        public static Dictionary<string, ModeCompare> GetModeCompareAutoAll(List<StockCompare> ddxList, string weight)
-        {
-            Dictionary<string, ModeCompare> ret = new Dictionary<string, ModeCompare>();
-            foreach (var item in ddxList)
-            {
-                string key = item.Code;
-                if (!ret.ContainsKey(key))
-                {
-                    ret[key] = new ModeCompare()
-                    {
-                        CodeList = new List<StockCompare>()
-                    };
-                }
-                var ddx = item;
-                ddx.Mode = key;
-                ddx.Amount = 1M;
-                ret[key].CodeList.Add(ddx);
-                ret[key].Name = key;
-            }
-            return ret;
-        }
-
 
         /// <summary>
         /// 对数据进行模式10cm或20cm分类
@@ -987,7 +957,7 @@ namespace X.UI.Helper
 
 
         /// <summary>
-        /// 输出模式结果
+        /// 输出模式结果；个股做key
         /// </summary>
         /// <param name="mode"></param>
         /// <param name="remark"></param>
@@ -1006,11 +976,11 @@ namespace X.UI.Helper
             for (var i = 0; i < list.Count; i++)
             {
                 list[i].DDXOrder = i + 1;
-                if (!newMode.ContainsKey(list[i].Mode))
+                if (!newMode.ContainsKey(list[i].Code))
                 {
-                    newMode[list[i].Mode] = new ModeCompare()
+                    newMode[list[i].Code] = new ModeCompare()
                     {
-                        Name = list[i].Mode,
+                        Name = list[i].Code,
                         CodeList = new List<StockCompare>()
                         {
                             list[i]
@@ -1019,7 +989,7 @@ namespace X.UI.Helper
                 }
                 else
                 {
-                    newMode[list[i].Mode].CodeList.Add(list[i]);
+                    newMode[list[i].Code].CodeList.Add(list[i]);
                 }
             }
             var stdOrder = 0.5 * list.Count;
@@ -1483,7 +1453,9 @@ namespace X.UI.Helper
             {
                 var des = GetStockDes(StockDesType.DateBase);
                 var ddxList = GetDDXList3();
-                var iret1 = GetModeCompareWithOrder(GetModeCompareAutoAll(ddxList, weight), "最强资金流", weekddx);
+                var all = GetMyStock(MyStockMode.ALL);
+                var core = GetMyMonitorStock(MyStockType.CoreT);
+                var iret1 = GetModeCompareWithOrder(GetModeCompareAuto(ddxList, all, core, weight), "最强资金流", weekddx);
                 for(var i = 1; i < 4; i++)
                 {
                     iret1 = GetModeCompareWithOrder(iret1, "最强资金流-" + i, weekddx);
