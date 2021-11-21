@@ -111,7 +111,7 @@ namespace X.UI.Consoles
 
         public static void StockProgram()
         {
-            StockDealHelper.Program();
+            StockDealHelper.Main();
         }
 
         public static void TestStockPrice()

@@ -68,7 +68,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StockConstHelper.cs" />
     <Compile Include="StockDataHelper.cs" />
+    <Compile Include="StockDealBase.cs" />
+    <Compile Include="StockDealBusiness.cs" />
     <Compile Include="StockDealHelper.cs" />
+    <Compile Include="StockDealIO.cs" />
+    <Compile Include="StockDealTest.cs" />
     <Compile Include="StockHelper.cs" />
     <Compile Include="StockL2FileHelper.cs" />
     <Compile Include="StockMonitor.cs" />

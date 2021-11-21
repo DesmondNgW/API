@@ -16,7 +16,7 @@ namespace X.UI.Consoles
     {
         static void Main()
         {
-            StockDealHelper.Program();
+            StockDealHelper.Main();
             //StockDealHelper.TestCircle(StockDealHelper.GetStockCircleUnitList());
             //Index();
             Console.ReadKey();
