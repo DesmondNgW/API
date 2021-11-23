@@ -105,7 +105,8 @@ namespace X.UI.Helper
                 var kernel = StockDealIO.GetMyStock(MyStockMode.Kernel);
                 var core = StockDealIO.GetMyMonitorStock(MyStockType.CoreT);
                 var iret1 = StockDealIO.GetModeCompareWithOrder(StockDealBusiness.GetModeCompareAuto(ddxList, kernel, core, weight), "最强资金流", weekddx);
-                for(var i = 1; i < 4; i++)
+                StockDealIO.GetResultFromMode(iret1, des);
+                for (var i = 1; i < 4; i++)
                 {
                     iret1 = StockDealIO.GetModeCompareWithOrder(iret1, "最强资金流-" + i, weekddx);
                     StockDealIO.GetResultFromMode(iret1, des);
