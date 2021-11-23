@@ -18,7 +18,8 @@ namespace X.UI.Consoles
         ApiRsaDeTest = 6,
         StockDeal = 7,
         StockProgram = 8,
-        TestStockPrice = 9
+        TestStockPrice = 9,
+        MyTest = 10
     }
 
     public class ApiTestMethods
@@ -138,6 +139,12 @@ namespace X.UI.Consoles
                     Console.WriteLine(@"{0}[{1}]", t0 * 2.5M, t0 * 2.5M / t3 * 100 - 100);
                 }
             }
+        }
+
+        //tmp todo
+        public static void MyTest()
+        {
+            
         }
     }
 }

@@ -1,14 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Text.RegularExpressions;
-using System.Threading;
-using X.UI.Entities;
 using X.UI.Helper;
-using X.Util.Core;
-using X.Util.Core.Common;
-using X.Util.Other;
 
 namespace X.UI.Consoles
 {
@@ -16,9 +8,14 @@ namespace X.UI.Consoles
     {
         static void Main()
         {
-            StockDealHelper.Main();
-            //StockDealHelper.TestCircle(StockDealHelper.GetStockCircleUnitList());
-            //Index();
+            if (AppDomain.CurrentDomain.BaseDirectory.StartsWith(@"D:\stock\"))
+            {
+                StockDealHelper.Main();
+            }
+            else
+            {
+                Index();
+            }
             Console.ReadKey();
         }
 

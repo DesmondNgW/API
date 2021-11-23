@@ -24,7 +24,6 @@ namespace X.UI.Helper
             var file = mode == MyStockMode.JX ? StockConstHelper.JXPATH :
                  mode == MyStockMode.AQS ? StockConstHelper.AQSPATH :
                  mode == MyStockMode.JX2 ? StockConstHelper.JXPATH2 :
-                 mode == MyStockMode.ALL ? StockConstHelper.ALLPATH :
                  mode == MyStockMode.Kernel ? StockConstHelper.KERNELJXPATH :
                  mode == MyStockMode.Wave ? StockConstHelper.WAVEPATH : StockConstHelper.AQSPATH;
             var content = FileBase.ReadFile(file, StockConstHelper.GB2312);
@@ -410,36 +409,6 @@ namespace X.UI.Helper
             }
             return ret;
         }
-
-        /// <summary>
-        /// 资金流文件3
-        /// </summary>
-        /// <returns></returns>
-        public static List<StockCompare> GetDDXList3()
-        {
-            var file = StockConstHelper.TOOLALLPATH;
-            var list1 = Regex.Split(FileBase.ReadFile(file, StockConstHelper.GB2312), StockConstHelper.RN, RegexOptions.IgnoreCase);
-            var ret = new List<StockCompare>();
-            foreach (var item in list1)
-            {
-                if (string.IsNullOrEmpty(item)) continue;
-                string[] t = StockDealBase.SplitFiledByRegex(item, 21, 2);
-                if (t.Length >= 6)
-                {
-                    var ddx = t[5].Convert2Decimal(-1);
-                    ret.Add(new StockCompare()
-                    {
-                        Code = t[1].Trim(),
-                        Name = t[2],
-                        DDX = ddx,
-                        DDXWeek = t[8].Convert2Decimal(-1),
-                        Inc = t[4].Convert2Decimal(-1)
-                    });
-                }
-            }
-            return ret;
-        }
-
 
         /// <summary>
         /// 复盘数据映射

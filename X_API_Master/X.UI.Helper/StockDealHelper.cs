@@ -101,10 +101,10 @@ namespace X.UI.Helper
             else if (mode == 6)
             {
                 var des = StockDealIO.GetStockDes(StockDesType.DateBase);
-                var ddxList = StockDealIO.GetDDXList3();
-                var all = StockDealIO.GetMyStock(MyStockMode.ALL);
+                var ddxList = StockDealIO.GetDDXList2();
+                var kernel = StockDealIO.GetMyStock(MyStockMode.Kernel);
                 var core = StockDealIO.GetMyMonitorStock(MyStockType.CoreT);
-                var iret1 = StockDealIO.GetModeCompareWithOrder(StockDealBusiness.GetModeCompareAuto(ddxList, all, core, weight), "最强资金流", weekddx);
+                var iret1 = StockDealIO.GetModeCompareWithOrder(StockDealBusiness.GetModeCompareAuto(ddxList, kernel, core, weight), "最强资金流", weekddx);
                 for(var i = 1; i < 4; i++)
                 {
                     iret1 = StockDealIO.GetModeCompareWithOrder(iret1, "最强资金流-" + i, weekddx);

@@ -33,8 +33,6 @@ namespace X.UI.Helper
 
         public static readonly string KERNELJXPATH = "./src/dp/Kernel精选.txt";
 
-        public static readonly string ALLPATH = "./src/dp/ALL.txt";
-
         public static readonly string WAVEPATH = "./src/fp/Wave.txt";
 
         public static readonly string DIRPATH = "./dest";
@@ -64,8 +62,6 @@ namespace X.UI.Helper
         public static readonly string JLPATH = "./src/dp/接力.txt";
 
         public static readonly string TOOLPATH = "./src/dp/tool.txt";
-
-        public static readonly string TOOLALLPATH = "./src/dp/toolall.txt";
 
         public static readonly string DPBKPATH = "./src/dp/bk.txt";
 
