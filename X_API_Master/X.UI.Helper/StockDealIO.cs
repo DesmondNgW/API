@@ -532,9 +532,7 @@ namespace X.UI.Helper
         /// <summary>
         /// 输出模式结果
         /// </summary>
-        /// <param name="mode"></param>
-        /// <returns></returns>
-        public static IEnumerable<KeyValuePair<string, ModeCompare>> GetModeCompareWithOrder(Dictionary<string, ModeCompare> mode, string remark, string weekddx)
+        public static IEnumerable<KeyValuePair<string, ModeCompare>> GetModeCompareWithOrder(Dictionary<string, ModeCompare> mode, string remark, string weekddx, string ddxmode)
         {
             var newMode = new Dictionary<string, ModeCompare>();
             var list = new List<StockCompare>();
@@ -542,7 +540,14 @@ namespace X.UI.Helper
             {
                 list = list.Concat(item.Value.CodeList).ToList();
             }
-            list = list.OrderByDescending(p => p.DDX).ToList();
+            if (ddxmode == "week")
+            {
+                list = list.OrderByDescending(p => p.DDXWeek).ToList();
+            }
+            else
+            {
+                list = list.OrderByDescending(p => p.DDX).ToList();
+            }
             if (list.Count == 0) return null;
             for (var i = 0; i < list.Count; i++)
             {
@@ -569,8 +574,13 @@ namespace X.UI.Helper
             var stdDDX = list.Average(p => p.DDX * p.Amount / sumAmount);
             var stdDDXWeek = weekddx == StockConstHelper.AUTO ? list.Average(p => p.DDXWeek * p.Amount / sumAmount) : decimal.MinValue;
             var ret = newMode.Count > 1 ? newMode.Where(p => p.Value.DDX >= stdDDX && p.Value.Inc >= stdInc &&
-            p.Value.DDXOrder <= stdOrder && p.Value.DDXWeek >= stdDDXWeek) :
+                p.Value.DDXOrder <= stdOrder && p.Value.DDXWeek >= stdDDXWeek) :
                 newMode;
+            if (ddxmode == "week")
+            {
+                ret = newMode.Count > 1 ? newMode.Where(p => p.Value.Inc >= stdInc && p.Value.DDXOrder <= stdOrder && p.Value.DDXWeek >= stdDDXWeek) :
+                newMode;
+            }
             Console.WriteLine(remark);
             foreach (var item in ret)
             {
@@ -589,7 +599,7 @@ namespace X.UI.Helper
         /// <param name="remark"></param>
         /// <param name="weekddx"></param>
         /// <returns></returns>
-        public static IEnumerable<KeyValuePair<string, ModeCompare>> GetModeCompareWithOrder(IEnumerable<KeyValuePair<string, ModeCompare>> mode, string remark, string weekddx)
+        public static IEnumerable<KeyValuePair<string, ModeCompare>> GetModeCompareWithOrder(IEnumerable<KeyValuePair<string, ModeCompare>> mode, string remark, string weekddx, string ddxmode)
         {
             var newMode = new Dictionary<string, ModeCompare>();
             var list = new List<StockCompare>();
@@ -597,7 +607,14 @@ namespace X.UI.Helper
             {
                 list = list.Concat(item.Value.CodeList).ToList();
             }
-            list = list.OrderByDescending(p => p.DDX).ToList();
+            if (ddxmode == "week")
+            {
+                list = list.OrderByDescending(p => p.DDXWeek).ToList();
+            }
+            else
+            {
+                list = list.OrderByDescending(p => p.DDX).ToList();
+            }
             if (list.Count == 0) return null;
             for (var i = 0; i < list.Count; i++)
             {
@@ -624,8 +641,15 @@ namespace X.UI.Helper
             var stdDDX = list.Average(p => p.DDX * p.Amount / sumAmount);
             var stdDDXWeek = weekddx == StockConstHelper.AUTO ? list.Average(p => p.DDXWeek * p.Amount / sumAmount) : decimal.MinValue;
             var ret = newMode.Count > 1 ? newMode.Where(p => p.Value.DDX >= stdDDX && p.Value.Inc >= stdInc &&
-            p.Value.DDXOrder <= stdOrder && p.Value.DDXWeek >= stdDDXWeek) :
+                p.Value.DDXOrder <= stdOrder && p.Value.DDXWeek >= stdDDXWeek) :
                 newMode;
+            if (ddxmode == "week")
+            {
+                ret = newMode.Count > 1 ? newMode.Where(p => p.Value.Inc >= stdInc && p.Value.DDXOrder <= stdOrder &&
+                p.Value.DDXWeek >= stdDDXWeek) :
+                newMode;
+            }
+
             Console.WriteLine(remark);
             foreach (var item in ret)
             {

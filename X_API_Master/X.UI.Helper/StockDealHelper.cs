@@ -21,6 +21,8 @@ namespace X.UI.Helper
             //趋势因子weekDDX
             var weekddx = ConfigurationHelper.GetAppSettingByName("weekddx", "auto");
 
+            var ddxmode = ConfigurationHelper.GetAppSettingByName("ddxmode", "day");
+
             Console.BackgroundColor = ConsoleColor.White;
             Console.ForegroundColor = ConsoleColor.Black;
             var dt = DateTime.Now;
@@ -35,7 +37,7 @@ namespace X.UI.Helper
                 var jx2 = StockDealIO.GetMyStock(MyStockMode.JX2);
                 var kernel = StockDealIO.GetMyStock(MyStockMode.Kernel);
                 var core = StockDealIO.GetMyMonitorStock(MyStockType.CoreT);
-                var spK = StockDealIO.GetModeCompareWithOrder(StockDealBusiness.GetModeCompareAuto(ddx, kernel, core, weight), "Kernel模式-开始", weekddx);
+                var spK = StockDealIO.GetModeCompareWithOrder(StockDealBusiness.GetModeCompareAuto(ddx, kernel, core, weight), "Kernel模式-开始", weekddx, ddxmode);
                 var sp = spK.Select(p => p.Key).ToList();
                 var all = StockDealBase.Union(AQS, Wave);
                 while (dt.TimeOfDay >= tradeStart.TimeOfDay && dt.TimeOfDay <= tradeEnd.TimeOfDay)
@@ -82,16 +84,16 @@ namespace X.UI.Helper
                 var des = StockDealIO.GetStockDes(StockDesType.DateBase);
                 var a2 = StockDealIO.GetFilterListFromFile();
                 var ddxList = StockDealIO.GetDDXList2();
-                var iret1 = StockDealIO.GetModeCompareWithOrder(StockDealBusiness.GetModeCompareAuto(ddxList, jx, core, weight), "精选模式-开始", weekddx);
+                var iret1 = StockDealIO.GetModeCompareWithOrder(StockDealBusiness.GetModeCompareAuto(ddxList, jx, core, weight), "精选模式-开始", weekddx, ddxmode);
                 StockDealIO.GetResultFromMode(iret1, des);
 
-                var iret2 = StockDealIO.GetModeCompareWithOrder(StockDealBusiness.GetModeCompareAuto(ddxList, jx2, core, weight), "精选2模式-开始", weekddx);
+                var iret2 = StockDealIO.GetModeCompareWithOrder(StockDealBusiness.GetModeCompareAuto(ddxList, jx2, core, weight), "精选2模式-开始", weekddx, ddxmode);
                 StockDealIO.GetResultFromMode(iret2, des);
 
-                var iret3 = StockDealIO.GetModeCompareWithOrder(StockDealBusiness.GetModeCompareAuto(ddxList, kernel, core, weight), "Kernel模式-开始", weekddx);
+                var iret3 = StockDealIO.GetModeCompareWithOrder(StockDealBusiness.GetModeCompareAuto(ddxList, kernel, core, weight), "Kernel模式-开始", weekddx, ddxmode);
                 StockDealIO.GetResultFromMode(iret3, des);
 
-                StockDealIO.GetModeCompareWithOrder(StockDealBusiness.GetModeCompare(ddxList, a2, kernel, weight), "板块-开始", weekddx);
+                StockDealIO.GetModeCompareWithOrder(StockDealBusiness.GetModeCompare(ddxList, a2, kernel, weight), "板块-开始", weekddx, ddxmode);
                 StockDealIO.GetStockResult(jx, jx2, core);
             }
             else if (mode == 5)
@@ -104,11 +106,11 @@ namespace X.UI.Helper
                 var ddxList = StockDealIO.GetDDXList2();
                 var kernel = StockDealIO.GetMyStock(MyStockMode.Kernel);
                 var core = StockDealIO.GetMyMonitorStock(MyStockType.CoreT);
-                var iret1 = StockDealIO.GetModeCompareWithOrder(StockDealBusiness.GetModeCompareAuto(ddxList, kernel, core, weight), "最强资金流", weekddx);
+                var iret1 = StockDealIO.GetModeCompareWithOrder(StockDealBusiness.GetModeCompareAuto(ddxList, kernel, core, weight), "最强资金流", weekddx, ddxmode);
                 StockDealIO.GetResultFromMode(iret1, des);
                 for (var i = 1; i < 4; i++)
                 {
-                    iret1 = StockDealIO.GetModeCompareWithOrder(iret1, "最强资金流-" + i, weekddx);
+                    iret1 = StockDealIO.GetModeCompareWithOrder(iret1, "最强资金流-" + i, weekddx, ddxmode);
                     StockDealIO.GetResultFromMode(iret1, des);
                 }
             }
