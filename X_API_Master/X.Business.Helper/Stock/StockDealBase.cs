@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
-using X.UI.Entities;
+using X.Business.Entities.Enums;
+using X.Business.Entities.Stock;
 
-namespace X.UI.Helper
+namespace X.Business.Helper.Stock
 {
     public class StockDealBase
     {
@@ -151,68 +152,6 @@ namespace X.UI.Helper
             }
             return ret.ToArray();
         }
-
-        #region unuse
-        /// <summary>
-        /// 二进制数据位解析
-        /// </summary>
-        /// <param name="a"></param>
-        /// <returns></returns>
-        public static List<int> MT(int a)
-        {
-            var ret = new List<int>();
-            var t1 = a % 2;
-            ret.Add(t1);
-
-            var a1 = (a - t1) / 2;
-            var t2 = a1 % 2;
-            ret.Add(t2);
-
-            var a2 = (a1 - t2) / 2;
-            var t3 = a2 % 2;
-            ret.Add(t3);
-
-            var a3 = (a2 - t3) / 2;
-            var t4 = a3 % 2;
-            ret.Add(t4);
-
-            var a4 = (a3 - t4) / 2;
-            var t5 = a4 % 2;
-            ret.Add(t5);
-
-            var a5 = (a4 - t5) / 2;
-            var t6 = a5 % 2;
-            ret.Add(t6);
-
-            var a6 = (a5 - t6) / 2;
-            var t7 = a6 % 2;
-            ret.Add(t7);
-            return ret;
-        }
-
-        /// <summary>
-        /// 匹配值
-        /// </summary>
-        /// <param name="a"></param>
-        /// <param name="b"></param>
-        /// <returns></returns>
-        public static bool MtMatch(int a, int b)
-        {
-            var ret = 0;
-            var r1 = MT(a);
-            var r2 = MT(b);
-            for (var i = 0; i < r1.Count; i++)
-            {
-                if (r1[i] == r2[i])
-                {
-                    ret++;
-                }
-            }
-            return ret >= 5;
-        }
         #endregion
-
-        #endregion
-
     }
 }

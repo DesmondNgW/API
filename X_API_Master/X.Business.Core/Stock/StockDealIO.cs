@@ -3,13 +3,16 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
-using X.UI.Entities;
+using X.Business.Entities.Enums;
+using X.Business.Entities.Stock;
+using X.Business.Helper.Stock;
 using X.Util.Core;
 using X.Util.Core.Configuration;
+using X.Util.Core.Log;
 using X.Util.Entities.Enums;
 using X.Util.Other;
 
-namespace X.UI.Helper
+namespace X.Business.Core.Stock
 {
     public class StockDealIO
     {
@@ -73,7 +76,7 @@ namespace X.UI.Helper
 
             var bk = tmp.Where(p => p.Code.StartsWith("8"));
             var t = list.Sum(p => p.Amount) / 400 * 0.382;
-            Console.WriteLine("{0}亿", (t / 1e8).ToString("0.00"));
+            Logger.Client.Debug(string.Format("{0}亿", (t / 1e8).ToString("0.00")), LogDomain.Business);
             string dir = StockConstHelper.DIRPATH, dirK = StockConstHelper.DIRKPATH, dirA = StockConstHelper.DIRAPATH,
                 dirBk = StockConstHelper.DIRBKPATH;
             var KContent = new List<Tuple<double, double>>();
@@ -112,13 +115,10 @@ namespace X.UI.Helper
 
             var KConsole = StockDealBase.GetAnswer(KContent);
             var AConsole = StockDealBase.GetAnswer(AContent);
-
-            Console.WriteLine("KContent:价格高低点:{0};比例高低点:{1}", string.Join("-", KConsole.Item1), string.Join("-", KConsole.Item2));
-            Console.WriteLine("AContent:价格高低点:{0};比例高低点:{1}", string.Join("-", AConsole.Item1), string.Join("-", AConsole.Item2));
-
+            Logger.Client.Debug(string.Format("KContent:价格高低点:{0};比例高低点:{1}", string.Join("-", KConsole.Item1), string.Join("-", KConsole.Item2)), LogDomain.Business);
+            Logger.Client.Debug(string.Format("AContent:价格高低点:{0};比例高低点:{1}", string.Join("-", AConsole.Item1), string.Join("-", AConsole.Item2)), LogDomain.Business);
             FileBase.WriteFile(dir, "K.txt", string.Join(StockConstHelper.TN, KContent.Select((p, index) => (index + 1) * 25 + " " + p.Item1.ToString("0.000") + " " + p.Item2.ToString("0.000"))), encode, FileBaseMode.Create);
             FileBase.WriteFile(dir, "A.txt", string.Join(StockConstHelper.TN, AContent.Select((p, index) => (index + 1) * 25 + " " + p.Item1.ToString("0.000") + " " + p.Item2.ToString("0.000"))), encode, FileBaseMode.Create);
-
             FileBase.WriteFile(dir, "Bk.txt", string.Join(StockConstHelper.TN, BkContent.Select((p, index) => (index + 1) * 3 + " " + p.Item1.ToString("0.000") + " " + p.Item2.ToString("0.000"))), encode, FileBaseMode.Create);
         }
         #endregion
@@ -140,7 +140,7 @@ namespace X.UI.Helper
         /// <param name="All"></param>
         public static void FilterStock(List<StockPrice> First, List<StockPrice> ZT, List<StockPrice> Kernel,
             List<StockPrice> KernelH, List<StockPrice> KernelL, List<StockPrice> Core, List<StockPrice> Core2,
-            List<StockPrice> Core3, List<StockPrice> DDXList, List<MyStock> AQS, List<MyStock> All)
+            List<StockPrice> Core3, List<StockPrice> LDX, List<StockPrice> DDXList, List<MyStock> AQS, List<MyStock> All)
         {
             var topCount = ConfigurationHelper.GetAppSettingByName("topCount", 15);
             List<StockPrice> OP = Kernel;
@@ -167,7 +167,6 @@ namespace X.UI.Helper
 
             _top = new List<StockPrice>();
             #endregion
-            Console.WriteLine("开始选股");
             #region 选股
             var list = new Dictionary<string, MyStockMonitor>();
             for (var i = 0; i <= 6; i++)
@@ -237,6 +236,8 @@ namespace X.UI.Helper
                         {
                             orderremark3 = "1";
                         }
+                        var ldx = LDX.Exists(p => p.StockCode == item.StockCode) ? "Y" : "N";
+
                         List<string> bks = new List<string>();
                         if (!ZT.Exists(p => p.StockCode == item.StockCode) && !First.Exists(p => p.StockCode == item.StockCode))
                         {
@@ -260,7 +261,8 @@ namespace X.UI.Helper
                             OrderRemark = orderremark,
                             OrderRemark2 = orderremark2,
                             OrderRemark3 = orderremark3,
-                            BK = bks
+                            BK = bks,
+                            LDX = ldx
                         });
                     }
                 }
@@ -284,9 +286,8 @@ namespace X.UI.Helper
             FileBase.WriteFile("./", "dest.txt", string.Join(StockConstHelper.TN, list.OrderByDescending(p => p.Value.SLevel)
                 .ThenByDescending(p => p.Value.Inc).
                 Select(p => p.Value.StockCode + " " + p.Value.StockName + " " + string.Join("+", p.Value.BK) + " " + p.Value.Remark + " " + p.Value.OrderRemark2
-                + " " + p.Value.OrderRemark + " " + p.Value.OrderRemark3 + " " + p.Value.KLL + " " + p.Value.NF)), "utf-8", FileBaseMode.Create);
+                + " " + p.Value.OrderRemark + " " + p.Value.OrderRemark3 + " " + p.Value.LDX + " " + p.Value.KLL + " " + p.Value.NF)), "utf-8", FileBaseMode.Create);
             #endregion
-            Console.WriteLine("选股完成");
         }
         #endregion
 
@@ -419,6 +420,7 @@ namespace X.UI.Helper
             var file = mode == MyStockType.First ? StockConstHelper.FIRSTPATH :
                 mode == MyStockType.ZT ? StockConstHelper.ZTPATH :
                 mode == MyStockType.CoreT ? StockConstHelper.CORETPATH :
+                mode == MyStockType.LDX ? StockConstHelper.LDXPATH :
                 mode == MyStockType.CoreT2 ? StockConstHelper.CORETPATH2 :
                 mode == MyStockType.CoreT3 ? StockConstHelper.CORETPATH3 :
                 mode == MyStockType.Kernel ? StockConstHelper.KERNELPATH :
@@ -482,13 +484,11 @@ namespace X.UI.Helper
                     }
                 }
             }
-            Console.WriteLine("-------输出开始---------");
             foreach (var item in list)
             {
                 var desItem = Des.FirstOrDefault(p => p.Code == item.Code);
-                Console.Write("{0}({1})：{2};", item.Name, item.Code, desItem != null ? string.Join("+", desItem.Bk) : "");
+                Logger.Client.Debug(string.Format("{0}({1})：{2};", item.Name, item.Code, desItem != null ? string.Join("+", desItem.Bk) : ""), LogDomain.Business);
             }
-            Console.WriteLine("\r\n-------输出结束---------");
         }
 
         /// <summary>
@@ -525,7 +525,7 @@ namespace X.UI.Helper
             }
             foreach (var item in ret)
             {
-                Console.WriteLine("{0}:{1}:{2}", DateTime.Now.ToString("HH:mm:ss.fff"), tmp[(int)item.Key - 1], string.Join("-", item.Value));
+                Logger.Client.Debug(string.Format("{0}:{1}:{2}", DateTime.Now.ToString("HH:mm:ss.fff"), tmp[(int)item.Key - 1], string.Join("-", item.Value)), LogDomain.Business);
             }
         }
 
@@ -581,13 +581,10 @@ namespace X.UI.Helper
                 ret = newMode.Count > 1 ? newMode.Where(p => p.Value.Inc >= stdInc && p.Value.DDXOrder <= stdOrder && p.Value.DDXWeek >= stdDDXWeek) :
                 newMode;
             }
-            Console.WriteLine(remark);
             foreach (var item in ret)
             {
-                Console.WriteLine("key:{0},value:{1}", item.Key, string.Join("-", item.Value.CodeList.Select(p => p.Name)));
-                Console.WriteLine("----------");
+                Logger.Client.Debug(string.Format("key:{0},value:{1}", item.Key, string.Join("-", item.Value.CodeList.Select(p => p.Name))), LogDomain.Business);
             }
-            Console.WriteLine("当前模块结束");
             return ret;
         }
 
@@ -649,14 +646,10 @@ namespace X.UI.Helper
                 p.Value.DDXWeek >= stdDDXWeek) :
                 newMode;
             }
-
-            Console.WriteLine(remark);
             foreach (var item in ret)
             {
-                Console.WriteLine("key:{0},value:{1}", item.Key, string.Join("-", item.Value.CodeList.Select(p => p.Name)));
-                Console.WriteLine("----------");
+                Logger.Client.Debug(string.Format("key:{0},value:{1}", item.Key, string.Join("-", item.Value.CodeList.Select(p => p.Name))), LogDomain.Business);
             }
-            Console.WriteLine("当前模块结束");
             return ret;
         }
         #endregion
@@ -690,7 +683,7 @@ namespace X.UI.Helper
                     }
                 }
                 var y = (end - first.Key).TotalSeconds * calc + first.Value;
-                Console.WriteLine("两市预估成交金额：{0}亿", y.ToString("0.00"));
+                Logger.Client.Debug(string.Format("两市预估成交金额：{0}亿", y.ToString("0.00")), LogDomain.Business);
             }
         }
 
@@ -703,15 +696,7 @@ namespace X.UI.Helper
             var b = StockDataHelper.GetIndexPrice("sz399001") ?? new StockPrice() { Inc = -10 };
             var c = StockDataHelper.GetIndexPrice("sz399005") ?? new StockPrice() { Inc = -10 };
             var d = StockDataHelper.GetIndexPrice("sz399006") ?? new StockPrice() { Inc = -10 };
-            if (a.Inc > 0)
-            {
-                Console.ForegroundColor = ConsoleColor.Red;
-            }
-            else
-            {
-                Console.ForegroundColor = ConsoleColor.Green;
-            }
-            Console.WriteLine("上证:{0}%,深圳:{1}%,中小:{2}%,创业:{3}%", a.Inc.ToString("0.00"), b.Inc.ToString("0.00"), c.Inc.ToString("0.00"), d.Inc.ToString("0.00"));
+            Logger.Client.Debug(string.Format("上证:{0}%,深圳:{1}%,中小:{2}%,创业:{3}%", a.Inc.ToString("0.00"), b.Inc.ToString("0.00"), c.Inc.ToString("0.00"), d.Inc.ToString("0.00")), LogDomain.Business);
             if (!TradeAmount.ContainsKey(a.Datetime) && a.Amount >= 100)
             {
                 TradeAmount.Add(a.Datetime, (double)(a.Amount + b.Amount));
@@ -775,23 +760,12 @@ namespace X.UI.Helper
                 var i = 1;
                 foreach (var item in m2.Where(p => p.Inc >= 3.82M))
                 {
-                    if (item.IsHigh)
-                    {
-                        Console.BackgroundColor = ConsoleColor.Black;
-                        Console.ForegroundColor = ConsoleColor.White;
-                    }
-                    else
-                    {
-                        Console.BackgroundColor = ConsoleColor.White;
-                        Console.ForegroundColor = ConsoleColor.Red;
-                    }
-
                     var desItem = Des.FirstOrDefault(p => p.Code == item.StockCode);
-                    Console.WriteLine("{10}-{0}-{1}({2}):涨跌幅{3}%，所属板块：{11}，日成交{4}亿，买一{5}亿，卖一{6}亿，放量比例{7}%，S:{8},股价{9}",
+                    Logger.Client.Debug(string.Format("{10}-{0}-{1}({2}):涨跌幅{3}%，所属板块：{11}，日成交{4}亿，买一{5}亿，卖一{6}亿，放量比例{7}%，S:{8},股价{9}",
                         DateTime.Now.ToString("HH:mm:ss"), item.StockName, item.StockCode, item.Inc.ToString("0.00"),
                         item.Amount.ToString("0.00"), item.Buy1.ToString("0.00"), item.Sell1.ToString("0.00"),
                         item.AmountRate.ToString("0.00"), item.S.ToString("0"), item.Price.ToString("0.00"), i
-                        , string.Join("+", desItem != null ? desItem.Bk : new List<string>() { "未知板块" }));
+                        , string.Join("+", desItem != null ? desItem.Bk : new List<string>() { "未知板块" })), LogDomain.Business);
                     i++;
                 }
             }

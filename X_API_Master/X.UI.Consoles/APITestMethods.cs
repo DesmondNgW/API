@@ -16,7 +16,6 @@ namespace X.UI.Consoles
         ApiConsistentHashTest = 4,
         ApiRsaEnTest = 5,
         ApiRsaDeTest = 6,
-        StockDeal = 7,
         StockProgram = 8,
         TestStockPrice = 9,
         MyTest = 10
@@ -101,13 +100,6 @@ namespace X.UI.Consoles
                 var de = RsaCryption.Decrypt(id, rsa, nonce);
                 Console.WriteLine(@"明文：" + de);
             }
-        }
-
-        public static void StockDeal()
-        {
-            JRJDataHelper.DealData(new DateTime(2020, 1, 1), DateTime.Now.Date);
-            var list = JRJDataHelper.Continue(new DateTime(2020, 1, 1), DateTime.Now.Date, 2);
-            JRJDataHelper.ContinueInFile(list);
         }
 
         public static void StockProgram()

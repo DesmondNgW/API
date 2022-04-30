@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 
-namespace X.UI.Helper
+namespace X.Business.Helper.Stock
 {
     public class StockConstHelper
     {
@@ -68,6 +64,9 @@ namespace X.UI.Helper
         public static readonly string BAKPATH = "./src/data/bak.txt";
 
         public static readonly string DATABASEPATH = "./src/data/database.txt";
+
+        public static readonly string LDXPATH = "./src/dp/流动性.txt";
+
         #endregion
 
         #region 字符常量

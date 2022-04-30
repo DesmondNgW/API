@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using X.UI.Entities;
+using X.Business.Entities.Stock;
+using X.Business.Helper.Stock;
+using X.Util.Core.Log;
+using X.Util.Entities.Enums;
 
-namespace X.UI.Helper
+namespace X.Business.Core.Stock
 {
     public class StockDealBusiness
     {
@@ -74,7 +77,7 @@ namespace X.UI.Helper
                     var ddx = ddxList.FirstOrDefault(p => p.Code == item.Code);
                     if (ddx == null)
                     {
-                        Console.WriteLine(item.Name + "找不到ddx");
+                        Logger.Client.Warn(string.Format("ddx: {0}找不到.", item.Name), LogDomain.Business);
                         continue;
                     }
                     ddx.Mode = key;

@@ -291,7 +291,6 @@
                     <div class="code">&amp;#xe630;</div>
                 </li>
             </ul>
-            <%=sb.ToString() %>
         </div>
     </form>
 </body>

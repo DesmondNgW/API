@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Linq;
 using System.Threading;
-using X.UI.Entities;
+using X.Business.Core.Stock;
+using X.Business.Entities.Enums;
+using X.Business.Helper.Stock;
 using X.Util.Core.Configuration;
 
 namespace X.UI.Helper
@@ -69,11 +71,12 @@ namespace X.UI.Helper
                 var coreT = StockDealIO.GetMyMonitorStock(MyStockType.CoreT);
                 var coreT2 = StockDealIO.GetMyMonitorStock(MyStockType.CoreT2);
                 var coreT3 = StockDealIO.GetMyMonitorStock(MyStockType.CoreT3);
+                var ldx = StockDealIO.GetMyMonitorStock(MyStockType.LDX);
                 var ddx = StockDealIO.GetDDXList();
                 var AQS = StockDealIO.GetMyStock(MyStockMode.AQS);
                 var Wave = StockDealIO.GetMyStock(MyStockMode.Wave);
                 var all = StockDealBase.Union(AQS, Wave);
-                StockDealIO.FilterStock(first, zt, kernel, kernelH, kernelL, coreT, coreT2, coreT3, ddx, AQS, all);
+                StockDealIO.FilterStock(first, zt, kernel, kernelH, kernelL, coreT, coreT2, coreT3, ldx, ddx, AQS, all);
             }
             else if (mode == 4)
             {
