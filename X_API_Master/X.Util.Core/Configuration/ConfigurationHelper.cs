@@ -17,6 +17,7 @@ using X.Util.Core.Kernel;
 using X.Util.Core.Xml;
 using X.Util.Entities;
 using X.Util.Entities.Enums;
+//using Microsoft.Extensions.Caching.Memory;
 
 namespace X.Util.Core.Configuration
 {
