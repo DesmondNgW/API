@@ -65,10 +65,8 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RequestStatus.cs" />
-    <Compile Include="Stock\ModeCompare.cs" />
     <Compile Include="Stock\MyStock.cs" />
     <Compile Include="Stock\MyStockMonitor.cs" />
-    <Compile Include="Stock\StockCompare.cs" />
     <Compile Include="Stock\StockDes.cs" />
     <Compile Include="Stock\StockPrice.cs" />
     <Compile Include="Token.cs">

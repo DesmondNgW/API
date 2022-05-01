@@ -59,6 +59,7 @@
     <Compile Include="HttpRequestContext.cs" />
     <Compile Include="HttpResponse\DateTimeDto.cs" />
     <Compile Include="Interface\IImageManager.cs" />
+    <Compile Include="Interface\IStockManager.cs" />
     <Compile Include="Interface\IUserManager.cs" />
     <Compile Include="Interface\IRequestManager.cs" />
     <Compile Include="Interface\IKms.cs" />
@@ -71,6 +72,10 @@
     <Folder Include="HttpRequest\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\X.Business.Entities\X.Business.Entities.csproj">
+      <Project>{3A4E1B51-BDE8-4E07-BAFC-35C0965313B9}</Project>
+      <Name>X.Business.Entities</Name>
+    </ProjectReference>
     <ProjectReference Include="..\X.Util.Entities\X.Util.Entities.csproj">
       <Project>{85a098ce-6ba6-4c4d-9c7f-1c3dfb5b0a15}</Project>
       <Name>X.Util.Entities</Name>
