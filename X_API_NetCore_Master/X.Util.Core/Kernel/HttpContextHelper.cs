@@ -7,8 +7,13 @@ namespace X.Util.Core.Kernel
     {
         private static IServiceCollection iServiceCollection;
 
+        /// <summary>
+        /// HttpContextAccessor 注入
+        /// </summary>
+        /// <param name="serviceCollection"></param>
         public static void SetServiceCollection(IServiceCollection serviceCollection)
         {
+            serviceCollection.AddHttpContextAccessor();
             iServiceCollection = serviceCollection;
         }
 
@@ -43,7 +48,6 @@ namespace X.Util.Core.Kernel
         /// <param name="serviceCollection"></param>
         public static void SetHttpContex(this IServiceCollection serviceCollection)
         {
-            serviceCollection.AddHttpContextAccessor();
             HttpContextHelper.SetServiceCollection(serviceCollection);
         }
     }
