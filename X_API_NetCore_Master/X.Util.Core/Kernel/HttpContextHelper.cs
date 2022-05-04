@@ -16,7 +16,8 @@ namespace X.Util.Core.Kernel
         {
             get
             {
-                IHttpContextAccessor factory = (IHttpContextAccessor)iServiceCollection.BuildServiceProvider().GetService(typeof(IHttpContextAccessor));
+                object ifactory = iServiceCollection.BuildServiceProvider().GetService(typeof(IHttpContextAccessor));
+                IHttpContextAccessor factory = (IHttpContextAccessor)ifactory;
                 if (factory != null)
                 {
                     factory.Update(string.Empty, string.Empty);
@@ -31,6 +32,19 @@ namespace X.Util.Core.Kernel
             {
                 return ExecutionContext<IHttpContextAccessor>.Current.HttpContext;
             }
+        }
+    }
+
+    public static class ServiceCollectionExtension
+    {
+        /// <summary>
+        /// SetHttpContex
+        /// </summary>
+        /// <param name="serviceCollection"></param>
+        public static void SetHttpContex(this IServiceCollection serviceCollection)
+        {
+            serviceCollection.AddHttpContextAccessor();
+            HttpContextHelper.SetServiceCollection(serviceCollection);
         }
     }
 }

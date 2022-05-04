@@ -20,7 +20,7 @@ namespace X.Util.Core.Kernel
         public static string GetIp(HttpContext context)
         {
             if (Equals(context, null)) return LocalIp;
-            var ips = new[] { LocalIp, context.Request.Headers["REMOTE_ADDR"].ToString(), context.Request.Headers["HTTP_X_FORWARDED_FOR"].ToString() };
+            var ips = new[] { LocalIp, context.Connection.LocalIpAddress.ToString(), context.Request.Headers["REMOTE_ADDR"].ToString(), context.Request.Headers["HTTP_X_FORWARDED_FOR"].ToString() };
             var length = ips.Length;
             var ret = ips[0];
             while (length-- > 0)
