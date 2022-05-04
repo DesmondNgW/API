@@ -9,7 +9,7 @@
   </mongodb>
   <!--自定义Couchbase配置节点-->
   <couchbase zone="1">
-    <server name="XCouch" bucket="default" password="">
+    <server name="XCouch" bucket="default" password="" username="" uri="http://127.0.0.1:8091/pools/">
       <urls>
         <add uri="http://127.0.0.1:8091/pools/" />
       </urls>
