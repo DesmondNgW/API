@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\X.Interface.Core\X.Interface.Core.csproj" />
+    <ProjectReference Include="..\X.Interface.Dto\X.Interface.Dto.csproj" />
+    <ProjectReference Include="..\X.Util.Core\X.Util.Core.csproj" />
+    <ProjectReference Include="..\X.Util.Provider\X.Util.Provider.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="App_Data\app.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="App_Data\Config.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="App_Data\endpoint.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>

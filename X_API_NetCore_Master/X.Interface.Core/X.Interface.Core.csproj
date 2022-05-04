@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\X.Business.Util\X.Business.Util.csproj" />
+    <ProjectReference Include="..\X.Interface.Dto\X.Interface.Dto.csproj" />
+    <ProjectReference Include="..\X.Util.Extend\X.Util.Extend.csproj" />
+  </ItemGroup>
+
+</Project>

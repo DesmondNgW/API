@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using System.Threading.Tasks;
 using X.Util.Core.Kernel;
 using X.Util.Entities;
 using X.Util.Entities.Interface;
@@ -201,7 +202,7 @@ namespace X.Util.Core.Log
         /// <param name="domain"></param>
         public void Request(RequestMethodInfo request, LogDomain domain)
         {
-            ((Action<RequestMethodInfo, LogDomain>)LogRequest).BeginInvoke(request, domain, null, null);
+            Task.Run(() => { LogRequest(request, domain); });
         }
 
         /// <summary>
@@ -213,7 +214,7 @@ namespace X.Util.Core.Log
         /// <param name="logtype"></param>
         public void Response(RequestMethodInfo request, ResponseResult response, LogDomain domain, LogType logtype)
         {
-            ((Action<RequestMethodInfo, ResponseResult, LogDomain, LogType>)LogResponse).BeginInvoke(request, response, domain, logtype, null, null);
+            Task.Run(() => { LogResponse(request, response, domain, logtype); });
         }
 
         /// <summary>
@@ -224,7 +225,7 @@ namespace X.Util.Core.Log
         /// <param name="domain"></param>
         public void Error(RequestMethodInfo request, Exception exception, LogDomain domain)
         {
-            ((Action<RequestMethodInfo, ResponseResult, LogDomain, LogType>)LogResponse).BeginInvoke(request, new ResponseResult { Exception = exception }, domain, LogType.Error, null, null);
+            Task.Run(() => { LogResponse(request, new ResponseResult { Exception = exception }, domain, LogType.Error); });
         }
 
         /// <summary>
@@ -235,7 +236,7 @@ namespace X.Util.Core.Log
         /// <param name="domain"></param>
         public void Fatal(RequestMethodInfo request, Exception exception, LogDomain domain)
         {
-            ((Action<RequestMethodInfo, ResponseResult, LogDomain, LogType>)LogResponse).BeginInvoke(request, new ResponseResult { Exception = exception }, domain, LogType.Fatal, null, null);
+            Task.Run(() => { LogResponse(request, new ResponseResult { Exception = exception }, domain, LogType.Fatal); });
         }
 
         /// <summary>
@@ -246,7 +247,7 @@ namespace X.Util.Core.Log
         /// <param name="domain"></param>
         public void Warn(RequestMethodInfo request, Exception exception, LogDomain domain)
         {
-            ((Action<RequestMethodInfo, ResponseResult, LogDomain, LogType>)LogResponse).BeginInvoke(request, new ResponseResult { Exception = exception }, domain, LogType.Warn, null, null);
+            Task.Run(() => { LogResponse(request, new ResponseResult { Exception = exception }, domain, LogType.Warn); });
         }
 
         /// <summary>
