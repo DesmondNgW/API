@@ -26,5 +26,17 @@ namespace X.Interface.Core
             };
             return new ApiResult<PublicKeyDto> { Success = true, Data = dto };
         }
+
+        public ApiResult<string> Encrypt(string key, string content, string nonce, int size = 1024)
+        {
+            var ret = RsaCryption.Encrypt(key, content, nonce, true, size);
+            return new ApiResult<string> { Success = true, Data = ret };
+        }
+
+        public ApiResult<string> Decrypt(string key, string content, string nonce, int size = 1024)
+        {
+            var ret = RsaCryption.Decrypt(key, content, nonce, size);
+            return new ApiResult<string> { Success = true, Data = ret };
+        }
     }
 }
