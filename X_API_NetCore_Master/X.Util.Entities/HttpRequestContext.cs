@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace X.Util.Entities
+﻿namespace X.Util.Entities
 {
     /// <summary>
     /// 请求上下文（把相应参数通过请求头部传递）
