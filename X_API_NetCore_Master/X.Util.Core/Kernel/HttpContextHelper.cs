@@ -28,7 +28,7 @@ namespace X.Util.Core.Kernel
                     factory.Update(string.Empty, string.Empty);
                     return factory.HttpContext;
                 }
-                return default(HttpContext);
+                return default;
             }
         }
 
