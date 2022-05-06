@@ -25,31 +25,10 @@ namespace X.Util.Core.Kernel
                 IHttpContextAccessor factory = (IHttpContextAccessor)ifactory;
                 if (factory != null)
                 {
-                    factory.Update(string.Empty, string.Empty);
                     return factory.HttpContext;
                 }
                 return default;
             }
-        }
-
-        public static HttpContext CallContext
-        {
-            get
-            {
-                return ExecutionContext<IHttpContextAccessor>.Current.HttpContext;
-            }
-        }
-    }
-
-    public static class ServiceCollectionExtension
-    {
-        /// <summary>
-        /// SetHttpContex
-        /// </summary>
-        /// <param name="serviceCollection"></param>
-        public static void SetHttpContex(this IServiceCollection serviceCollection)
-        {
-            HttpContextHelper.SetServiceCollection(serviceCollection);
         }
     }
 }

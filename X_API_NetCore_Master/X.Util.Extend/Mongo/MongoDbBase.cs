@@ -389,14 +389,7 @@ namespace X.Util.Extend.Mongo
             var list = default(List<T>);
             if (result != null && result.Current != null)
             {
-                list = new List<T>();
-                foreach (var current in result.Current)
-                {
-                    var document = current.ToDictionary();
-                    var item = document.AutoMapper<T>();
-                    typeof(T).GetProperty("Id").SetValue(result, document["_id"], null);
-                    list.Add(item);
-                }
+                list = (from current in result.Current select ToEntity(current)).ToList();
             }
             return list;
         }
@@ -411,11 +404,7 @@ namespace X.Util.Extend.Mongo
             var list = default(List<T>);
             if (result != null && result.Current != null)
             {
-                list = new List<T>();
-                foreach (var current in result.Current)
-                {
-                    list.Add(current);
-                }
+                list = (from current in result.Current select current).ToList();
             }
             return list;
         }

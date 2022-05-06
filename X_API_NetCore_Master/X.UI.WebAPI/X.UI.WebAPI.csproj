@@ -13,6 +13,7 @@
   <ItemGroup>
     <ProjectReference Include="..\X.Interface.Core\X.Interface.Core.csproj" />
     <ProjectReference Include="..\X.Interface.Dto\X.Interface.Dto.csproj" />
+    <ProjectReference Include="..\X.UI.Util\X.UI.Util.csproj" />
     <ProjectReference Include="..\X.Util.Core\X.Util.Core.csproj" />
     <ProjectReference Include="..\X.Util.Provider\X.Util.Provider.csproj" />
   </ItemGroup>

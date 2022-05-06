@@ -95,7 +95,7 @@ namespace X.Util.Core.Xml
 
         public static T ReadXmlCache<T>(string path)
         {
-            if (!File.Exists(path)) return default(T);
+            if (!File.Exists(path)) return default;
             var key = XmlPrefix + path + typeof(T).FullName;
             var cache = LocalCache.Default.Get<T>(key);
             if (cache != null) return cache;

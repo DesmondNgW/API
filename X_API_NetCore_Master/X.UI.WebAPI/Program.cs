@@ -1,4 +1,4 @@
-using X.Util.Core.Kernel;
+using X.UI.Util;
 
 var builder = WebApplication.CreateBuilder(args);
 

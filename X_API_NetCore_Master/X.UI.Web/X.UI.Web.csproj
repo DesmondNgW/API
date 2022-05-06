@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\X.UI.Util\X.UI.Util.csproj" />
     <ProjectReference Include="..\X.Util.Core\X.Util.Core.csproj" />
   </ItemGroup>
 
