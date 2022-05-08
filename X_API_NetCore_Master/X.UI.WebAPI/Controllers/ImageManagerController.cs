@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using X.UI.Util.Controller;
+using X.UI.Util.Helper;
 using X.Util.Other;
 
 namespace X.UI.WebAPI.Controllers
@@ -13,19 +14,14 @@ namespace X.UI.WebAPI.Controllers
         {
             var vc = CaptchaHelper.CaptchaOptions();
             var result = CaptchaHelper.GetCaptchaByte(vc);
-            Response.ContentType = "image/png";
-            Response.StatusCode = 200;
-            Response.Headers.Add("vc", CaptchaHelper.GetCaptchaCode("VerifyCode", vc.Value));
-            Response.Body.WriteAsync(result, 0, result.Length);
+            ResponseHelper.ResponseWrite(Response, "image/png", result, "vc", CaptchaHelper.GetCaptchaCode("VerifyCode", vc.Value));
         }
 
         [HttpGet(Name = "BitMap")]
         public void BitMap()
         {
             var result = CaptchaHelper.GetBitMapByte();
-            Response.ContentType = "image/png";
-            Response.StatusCode = 200;
-            Response.Body.WriteAsync(result, 0, result.Length);
+            ResponseHelper.ResponseWrite(Response, "image/png", result);
         }
 
         [HttpGet(Name = "TextImage")]
@@ -34,10 +30,7 @@ namespace X.UI.WebAPI.Controllers
             var opt = CaptchaHelper.TextImageOptions();
             opt.Value = value;
             var result = CaptchaHelper.GetTextImageByte(opt);
-            Response.ContentType = "image/png";
-            Response.StatusCode = 200;
-            Response.Headers.Add("opt", CaptchaHelper.GetCaptchaCode("TextImage", opt.Value));
-            Response.Body.WriteAsync(result, 0, result.Length);
+            ResponseHelper.ResponseWrite(Response, "image/png", result, "opt", CaptchaHelper.GetCaptchaCode("TextImage", opt.Value));
         }
     }
 }

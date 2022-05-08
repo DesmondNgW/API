@@ -98,6 +98,7 @@ namespace X.UI.Util.Helper
             var apiContext = GetApiRequestContext(context);
             var businessRequestContext = GetBusinessRequestContext(apiContext, verifyClient, isLogin);
             businessRequestContext.Update(string.Empty, string.Empty);
+            AddResponseHeaders(context.HttpContext);
         }
 
         /// <summary>
@@ -106,7 +107,7 @@ namespace X.UI.Util.Helper
         /// <param name="context"></param>
         public static void FilterActionExecuted(ActionExecutedContext context)
         {
-            AddResponseHeaders(context.HttpContext);
+            
         }
 
         /// <summary>
