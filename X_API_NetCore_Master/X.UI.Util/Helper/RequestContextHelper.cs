@@ -44,15 +44,18 @@ namespace X.UI.Util.Helper
             return ApiRequestContext;
         }
 
-        private static BusinessRequestContext GetBusinessRequestContext(ApiRequestContext context, bool isLogin)
+        private static BusinessRequestContext GetBusinessRequestContext(ApiRequestContext context, bool verifyClient, bool isLogin)
         {
-            //验证Token
-            TokenHelper.VerifyToken(context.Heads.Token, context.Heads.ClientId, context.Heads.ClientIp, context.UserAgent, context.Interface);
-            //验证客户端时间
-            var ts = context.ServerTime - new DateTime(context.Heads.Timestamp);
-            if (ts.Minutes >= 30 || ts.Minutes <= -30)
+            if (verifyClient)
             {
-                throw new InvalidOperationException("Timestamp和服务器校准不一致");
+                //验证Token
+                TokenHelper.VerifyToken(context.Heads.Token, context.Heads.ClientId, context.Heads.ClientIp, context.UserAgent, context.Interface);
+                //验证客户端时间
+                var ts = context.ServerTime - new DateTime(context.Heads.Timestamp);
+                if (ts.Minutes >= 30 || ts.Minutes <= -30)
+                {
+                    throw new InvalidOperationException("Timestamp和服务器校准不一致");
+                }
             }
             var BusinessRequestContext = new BusinessRequestContext()
             {
@@ -80,19 +83,20 @@ namespace X.UI.Util.Helper
         {
             context.Response.Headers.Add("PCToken", ExecutionContext<BusinessRequestContext>.Current.Ctoken);
             context.Response.Headers.Add("Cid", ExecutionContext<BusinessRequestContext>.Current.Cid);
-        } 
+        }
         #endregion
 
         #region Override Web-API:Filter
         /// <summary>
-        /// override:ActionFilterAttribute.OnActionExecuting
+        ///  override:ActionFilterAttribute.OnActionExecuting
         /// </summary>
         /// <param name="context"></param>
+        /// <param name="verifyClient"></param>
         /// <param name="isLogin"></param>
-        public static void FilterActionExecuting(ActionExecutingContext context, bool isLogin)
+        public static void FilterActionExecuting(ActionExecutingContext context, bool verifyClient, bool isLogin)
         {
             var apiContext = GetApiRequestContext(context);
-            var businessRequestContext = GetBusinessRequestContext(apiContext, isLogin);
+            var businessRequestContext = GetBusinessRequestContext(apiContext, verifyClient, isLogin);
             businessRequestContext.Update(string.Empty, string.Empty);
         }
 

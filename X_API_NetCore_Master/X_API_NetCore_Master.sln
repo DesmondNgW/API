@@ -47,7 +47,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "X.Business.Model", "X.Busin
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "X.DB.Entitis", "X.DB.Entitis\X.DB.Entitis.csproj", "{8D1B7F52-826B-428D-9ACB-819B4B31654A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "X.UI.Util", "X.UI.Util\X.UI.Util.csproj", "{11CE6C2D-9CA7-4458-8C2D-D5C85E96B1FE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "X.UI.Util", "X.UI.Util\X.UI.Util.csproj", "{11CE6C2D-9CA7-4458-8C2D-D5C85E96B1FE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

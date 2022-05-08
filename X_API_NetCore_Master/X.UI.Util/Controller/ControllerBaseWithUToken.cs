@@ -3,9 +3,9 @@ using X.UI.Util.Filter;
 
 namespace X.UI.Util.Controller
 {
+    [ActionFilterWithUToken]
     [GlobalExceptionFilter]
-    public class ControllerBaseWithOutFilter : ControllerBase
+    public class ControllerBaseWithUToken : ControllerBase
     {
-
     }
 }

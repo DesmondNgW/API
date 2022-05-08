@@ -11,7 +11,7 @@ namespace X.UI.WebAPI.Controllers
 {
     [ApiController]
     [Route("api/[controller]/[action]")]
-    public class RequestManagerController : ControllerBaseWithOutFilter
+    public class RequestManagerController : ControllerBaseWithOutToken
     {
         [HttpGet(Name = "GetTimestamp")]
         public ApiResult<string> GetTimestamp()

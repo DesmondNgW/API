@@ -12,7 +12,7 @@ namespace X.UI.WebAPI.Controllers
 {
     [ApiController]
     [Route("api/[controller]/[action]")]
-    public class KeyManagerController : ControllerBaseWithOutToken
+    public class KeyManagerController : ControllerBaseWithToken
     {
         [HttpGet(Name = "GetPublicKey")]
         public ApiResult<PublicKeyDto> GetPublicKey(int size)

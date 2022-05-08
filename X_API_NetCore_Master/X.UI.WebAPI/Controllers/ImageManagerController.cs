@@ -6,7 +6,7 @@ namespace X.UI.WebAPI.Controllers
 {
     [ApiController]
     [Route("api/[controller]/[action]")]
-    public class ImageManagerController : ControllerBaseWithOutFilter
+    public class ImageManagerController : ControllerBaseWithOutToken
     {
         [HttpGet(Name = "VerifyCode")]
         public void VerifyCode()

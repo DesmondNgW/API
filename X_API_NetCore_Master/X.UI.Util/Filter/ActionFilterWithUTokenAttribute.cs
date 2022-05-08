@@ -3,11 +3,11 @@ using X.UI.Util.Helper;
 
 namespace X.UI.Util.Filter
 {
-    public class ActionFilterWithTokenAttribute : ActionFilterAttribute
+    public class ActionFilterWithUTokenAttribute : ActionFilterAttribute
     {
         public override void OnActionExecuting(ActionExecutingContext context)
         {
-            RequestContextHelper.FilterActionExecuting(context, true, false);
+            RequestContextHelper.FilterActionExecuting(context, true, true);
         }
 
         public override void OnActionExecuted(ActionExecutedContext context)

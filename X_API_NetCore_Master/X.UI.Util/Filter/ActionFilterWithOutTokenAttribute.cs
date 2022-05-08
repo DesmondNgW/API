@@ -8,7 +8,7 @@ namespace X.UI.Util.Filter
     {
         public override void OnActionExecuting(ActionExecutingContext context)
         {
-            RequestContextHelper.FilterActionExecuting(context, false);
+            RequestContextHelper.FilterActionExecuting(context, false, false);
         }
 
         public override void OnActionExecuted(ActionExecutedContext context)
