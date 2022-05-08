@@ -18,6 +18,7 @@ namespace X.UI.Util.Helper
 {
     public class RequestContextHelper
     {
+        #region 内部实现
         private static ApiRequestContext GetApiRequestContext(ActionExecutingContext context)
         {
             var request = context.HttpContext.Request;
@@ -75,6 +76,14 @@ namespace X.UI.Util.Helper
             return BusinessRequestContext;
         }
 
+        private static void AddResponseHeaders(HttpContext context)
+        {
+            context.Response.Headers.Add("PCToken", ExecutionContext<BusinessRequestContext>.Current.Ctoken);
+            context.Response.Headers.Add("Cid", ExecutionContext<BusinessRequestContext>.Current.Cid);
+        } 
+        #endregion
+
+        #region Override Web-API:Filter
         /// <summary>
         /// override:ActionFilterAttribute.OnActionExecuting
         /// </summary>
@@ -105,18 +114,13 @@ namespace X.UI.Util.Helper
 
         }
 
-        private static void AddResponseHeaders(HttpContext context)
-        {
-            context.Response.Headers.Add("PCToken", ExecutionContext<BusinessRequestContext>.Current.Ctoken);
-            context.Response.Headers.Add("Cid", ExecutionContext<BusinessRequestContext>.Current.Cid);
-        }
-
         /// <summary>
         /// override:ActionFilterAttribute.OnResultExecuted
         /// </summary>
         /// <param name="context"></param>
         public static void FilterResultExecuted(ResultExecutedContext context)
         {
+
         }
 
         /// <summary>
@@ -142,5 +146,6 @@ namespace X.UI.Util.Helper
                 };
             }
         }
+        #endregion    
     }
 }
