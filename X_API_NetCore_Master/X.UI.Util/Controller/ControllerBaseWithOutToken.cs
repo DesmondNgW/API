@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc;
 using X.UI.Util.Filter;
 
 namespace X.UI.Util.Controller
