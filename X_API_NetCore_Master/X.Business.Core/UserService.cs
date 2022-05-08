@@ -61,7 +61,7 @@ namespace X.Business.Core
         /// <param name="utoken"></param>
         /// <param name="uri"></param>
         /// <exception cref="InvalidOperationException"></exception>
-        public static void VerifyToken(string utoken, string uri)
+        public static User VerifyToken(string utoken, string uri)
         {
             if (!BaseCryption.VerifyData(ConstHelper.GenerateHmacKey, utoken, HmacType.Md5)) throw new InvalidOperationException("utoken错误或过期");
             var key = ConstHelper.LoginKeyPrefix + utoken;
@@ -89,6 +89,7 @@ namespace X.Business.Core
                 requestStatus.RequesTime = DateTime.Now;
                 CacheData.Default.SetCacheDbData(requestKey, requestStatus, DateTime.Now.AddMinutes(ConstHelper.RequestExpireMinutes), CacheType);
             }
+            return obj;
         }
     }
 }

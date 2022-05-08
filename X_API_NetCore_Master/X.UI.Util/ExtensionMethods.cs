@@ -17,21 +17,6 @@ namespace X.UI.Util
         public static void SetHttpContex(this IServiceCollection serviceCollection)
         {
             HttpContextHelper.SetServiceCollection(serviceCollection);
-            InjectClientRequestContext(serviceCollection);
-        }
-
-        public static void InjectClientRequestContext(this IServiceCollection serviceCollection)
-        {
-            object ifactory = serviceCollection.BuildServiceProvider().GetService(typeof(IHttpContextAccessor));
-            IHttpContextAccessor factory = (IHttpContextAccessor)ifactory;
-            if (factory != null)
-            {
-                var clientRequestContext = new ClientRequestContext()
-                {
-                    HttpContextAccessor = factory,
-                };
-                clientRequestContext.Update(string.Empty, string.Empty);
-            }
         }
     }
 }

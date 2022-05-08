@@ -92,9 +92,15 @@ namespace X.Interface.Core
             }
         }
 
-        public static void VerifyUToken(string utoken, string uri)
+        /// <summary>
+        /// 验证登录
+        /// </summary>
+        /// <param name="utoken"></param>
+        /// <param name="uri"></param>
+        /// <returns></returns>
+        public static User VerifyUToken(string utoken, string uri)
         {
-            UserService.VerifyToken(utoken, uri);
+            return UserService.VerifyToken(utoken, uri);
         }
     }
 }

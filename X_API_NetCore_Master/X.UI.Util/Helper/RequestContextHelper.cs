@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc.Filters;
 using System;
 using System.Linq;
 using System.Threading;
-using X.Business.Core;
 using X.Interface.Core;
 using X.Interface.Dto;
 using X.UI.Util.Model;
@@ -15,7 +14,7 @@ namespace X.UI.Util.Helper
 {
     public class RequestContextHelper
     {
-        public static ApiRequestContext GetApiRequestContext(ActionExecutingContext context)
+        private static ApiRequestContext GetApiRequestContext(ActionExecutingContext context)
         {
             var request = context.HttpContext.Request;
             var headers = request.Headers;
@@ -40,7 +39,7 @@ namespace X.UI.Util.Helper
             return ApiRequestContext;
         }
 
-        public static BusinessRequestContext GetBusinessRequestContext(ApiRequestContext context, bool isLogin)
+        private static BusinessRequestContext GetBusinessRequestContext(ApiRequestContext context, bool isLogin)
         {
             //验证Token
             TokenHelper.VerifyToken(context.Heads.Token, context.Heads.ClientId, context.Heads.ClientIp, context.UserAgent, context.Interface);
@@ -50,13 +49,43 @@ namespace X.UI.Util.Helper
             {
                 throw new InvalidOperationException("Timestamp和服务器校准不一致");
             }
+            var BusinessRequestContext = new BusinessRequestContext()
+            {
+                RequestId = context.RequestId,
+                Token = context.Heads.Token,
+                UToken = context.Heads.UToken,
+                Version = context.Heads.Version,
+                ClientType = (EnumClientType)context.Heads.ClientType,
+                ApiRequestContext = context.ToJson(),
+                Ctoken = Guid.NewGuid().ToString("N"),
+                Ptoken = context.Heads.PCToken,
+                Cid = context.Cid
+            };
             //验证登录
             if (isLogin)
             {
-                TokenHelper.VerifyUToken(context.Heads.UToken, context.Interface);
+                var user = TokenHelper.VerifyUToken(context.Heads.UToken, context.Interface);
+                BusinessRequestContext.CustomerNo = user.CustomerNo;
+                BusinessRequestContext.CustomerName = user.UserInfo.CustomerName;
             }
-            return null;
+            return BusinessRequestContext;
+        }
 
+        public static void FilterActionExecutingContext(ActionExecutingContext context, bool isLogin)
+        {
+            var apiContext = GetApiRequestContext(context);
+            var businessRequestContext = GetBusinessRequestContext(apiContext, isLogin);
+            businessRequestContext.Update(string.Empty, string.Empty);
+        }
+
+        /// <summary>
+        /// AddResponseHeaders
+        /// </summary>
+        /// <param name="context"></param>
+        public static void AddResponseHeaders(ResultExecutedContext context)
+        {
+            context.HttpContext.Response.Headers.Add("PCToken", ExecutionContext<BusinessRequestContext>.Current.Ctoken);
+            context.HttpContext.Response.Headers.Add("Cid", ExecutionContext<BusinessRequestContext>.Current.Cid);
         }
     }
 }

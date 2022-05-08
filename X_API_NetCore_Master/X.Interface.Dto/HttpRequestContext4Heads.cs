@@ -65,13 +65,19 @@ namespace X.Interface.Dto
         /// Timestamp(必须传递)
         /// </summary>
         public long Timestamp { get; set; }
+
+        /// <summary>
+        /// Prev Ctoken
+        /// </summary>
+        public string PCToken { get; set; }
+
         #endregion
 
         #region 服务器信息
         /// <summary>
         /// Last Request Thread id
         /// </summary>
-        public string Tid { get; set; }
+        public string Cid { get; set; }
         #endregion
     }
 }

@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc.Filters;
+using X.UI.Util.Helper;
+using X.Util.Core;
 
 namespace X.UI.Util.Filter
 {
@@ -6,22 +8,22 @@ namespace X.UI.Util.Filter
     {
         public override void OnActionExecuting(ActionExecutingContext context)
         {
-            //context.HttpContext.Request.Headers
+            RequestContextHelper.FilterActionExecutingContext(context, false);
         }
 
         public override void OnActionExecuted(ActionExecutedContext context)
         {
-            throw null;
+            
         }
 
         public override void OnResultExecuting(ResultExecutingContext context)
         {
-            throw null;
+            
         }
 
         public override void OnResultExecuted(ResultExecutedContext context)
         {
-            throw null;
+            RequestContextHelper.AddResponseHeaders(context);
         }
     }
 }

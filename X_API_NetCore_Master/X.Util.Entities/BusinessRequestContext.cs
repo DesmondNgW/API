@@ -13,32 +13,34 @@
     /// </summary>
     public class BusinessRequestContext
     {
-        #region 用户信息相关
-
+        #region 来自Context
+        /// <summary>
+        /// 
+        /// </summary>
         public string RequestId { get; set; }
-
-
-        /// <summary>
-        /// 用户登录后唯一编号
-        /// </summary>
-        public string Uid { get; set; }
-
-        /// <summary>
-        /// 用户编号
-        /// </summary>
-        public string CustomerNo { get; set; }
-
-        /// <summary>
-        /// 用户名
-        /// </summary>
-        public string CustomerName { get; set; }
-
         /// <summary>
         /// token
         /// </summary>
         public string Token { get; set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public string UToken { get; set; }
+        /// <summary>
+        /// API版本号
+        /// </summary>
+        public string Version { get; set; }
+
+        /// <summary>
+        /// 来源类型
+        /// </summary>
+        public EnumClientType ClientType { get; set; }
+
+        /// <summary>
+        /// ApiRequestContext
+        /// </summary>
+        public string ApiRequestContext { get; set; }
 
         /// <summary>
         /// Current Cache token key
@@ -49,25 +51,23 @@
         /// Prev Cache token key
         /// </summary>
         public string Ptoken { get; set; }
+
+        /// <summary>
+        /// Last Thread Id 
+        /// </summary>
+        public string Cid { get; set; }
         #endregion
 
-        #region 系统信息
+        #region 用户信息相关
         /// <summary>
-        /// API版本号
+        /// 用户编号
         /// </summary>
-        public string Version { get; set; }
+        public string CustomerNo { get; set; }
 
         /// <summary>
-        /// 来源类型
+        /// 用户名
         /// </summary>
-        public EnumClientType ClientType { get; set; }
-        #endregion
-
-        #region Request
-        /// <summary>
-        /// ApiRequestContext
-        /// </summary>
-        public string ApiRequestContext { get; set; }
+        public string CustomerName { get; set; }
         #endregion
     }
 }

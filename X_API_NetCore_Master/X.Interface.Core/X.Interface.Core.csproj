@@ -9,6 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\X.Business.Core\X.Business.Core.csproj" />
     <ProjectReference Include="..\X.Business.Util\X.Business.Util.csproj" />
     <ProjectReference Include="..\X.Interface.Dto\X.Interface.Dto.csproj" />
     <ProjectReference Include="..\X.Util.Extend\X.Util.Extend.csproj" />
