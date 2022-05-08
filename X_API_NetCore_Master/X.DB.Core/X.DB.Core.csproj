@@ -4,4 +4,18 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\X.DB.Entitis\X.DB.Entitis.csproj" />
+    <ProjectReference Include="..\X.DB.Util\X.DB.Util.csproj" />
+    <ProjectReference Include="..\X.Util.Core\X.Util.Core.csproj" />
+    <ProjectReference Include="..\X.Util.Entities\X.Util.Entities.csproj" />
+    <ProjectReference Include="..\X.Util.Extend\X.Util.Extend.csproj" />
+    <ProjectReference Include="..\X.Util.Other\X.Util.Other.csproj" />
+    <ProjectReference Include="..\X.Util.Provider\X.Util.Provider.csproj" />
+  </ItemGroup>
+
 </Project>

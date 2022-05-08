@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\X.Business.Model\X.Business.Model.csproj" />
     <ProjectReference Include="..\X.Util.Entities\X.Util.Entities.csproj" />
     <ProjectReference Include="..\X.Util.Extend\X.Util.Extend.csproj" />

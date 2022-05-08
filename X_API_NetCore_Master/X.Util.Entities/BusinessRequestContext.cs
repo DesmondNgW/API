@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace X.Util.Entities
+﻿namespace X.Util.Entities
 {
     public enum EnumClientType
     {
@@ -15,9 +11,13 @@ namespace X.Util.Entities
     /// <summary>
     /// 请求上下文
     /// </summary>
-    public class RequestContext
+    public class BusinessRequestContext
     {
         #region 用户信息相关
+
+        public string RequestId { get; set; }
+
+
         /// <summary>
         /// 用户登录后唯一编号
         /// </summary>
@@ -29,11 +29,6 @@ namespace X.Util.Entities
         public string CustomerNo { get; set; }
 
         /// <summary>
-        /// 用户所属分区
-        /// </summary>
-        public int Zone { get; set; }
-
-        /// <summary>
         /// 用户名
         /// </summary>
         public string CustomerName { get; set; }
@@ -42,6 +37,8 @@ namespace X.Util.Entities
         /// token
         /// </summary>
         public string Token { get; set; }
+
+        public string UToken { get; set; }
 
         /// <summary>
         /// Current Cache token key
@@ -70,7 +67,7 @@ namespace X.Util.Entities
         /// <summary>
         /// ApiRequestContext
         /// </summary>
-        public ApiRequestContext ApiRequestContext { get; set; }
+        public string ApiRequestContext { get; set; }
         #endregion
     }
 }

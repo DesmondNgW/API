@@ -18,9 +18,9 @@ namespace X.Interface.Core
         /// <param name="iresult">接口数据</param>
         /// <param name="init">初始化UI实体</param>
         /// <returns></returns>
-        public static ApiResult<T> Convert<T, TS>(this CacheResult<TS> iresult, Func<TS, T> init)
+        public static ApiResult<T> Convert<T, TS>(this ResultInfo<TS> iresult, Func<TS, T> init)
         {
-            if (Equals(iresult, null)) iresult = new CacheResult<TS> { Succeed = false, Message = CoreBase.CoreCacheMesssage };
+            if (Equals(iresult, null)) iresult = new ResultInfo<TS> { Succeed = false, Message = CoreBase.CoreCacheMesssage };
             var result = new ApiResult<T>
             {
                 Success = iresult.Succeed,

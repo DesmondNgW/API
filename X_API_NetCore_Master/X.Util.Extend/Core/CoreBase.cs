@@ -16,5 +16,10 @@ namespace X.Util.Extend.Core
         {
             return iresult != null && iresult.Result != null && iresult.Succeed;
         }
+
+        public static bool CallSuccess<TResult>(ResultInfo<TResult> iresult)
+        {
+            return iresult != null && iresult.Result != null && iresult.Succeed;
+        }
     }
 }

@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <PackageReference Include="MySql.Data" Version="8.0.29" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="Oracle.ManagedDataAccess.Core" Version="2.19.140" />
     <PackageReference Include="System.Data.OleDb" Version="6.0.0" />
     <PackageReference Include="System.Data.SqlClient" Version="4.8.3" />

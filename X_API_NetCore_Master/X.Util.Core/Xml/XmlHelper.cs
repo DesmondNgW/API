@@ -131,7 +131,7 @@ namespace X.Util.Core.Xml
         {
             var ret = defaultValue;
             if (Equals(node, null)) return ret;
-            var attribute = node.Attributes != null ? node.Attributes[attributeName] : null;
+            var attribute = node.Attributes?[attributeName];
             if (attribute != null && !string.IsNullOrWhiteSpace(attribute.Value.Trim())) ret = attribute.Value.Trim();
             return ret;
         }

@@ -9,13 +9,12 @@ namespace X.Util.Extend.Core
 {
     public class CacheContextAttribute : ContextResultAttribute
     {
-        public CacheContextAttribute(EnumCacheExpireType cacheExpireType, EnumCacheType cacheType, EnumCacheTimeLevel cacheTimeLevel, int cacheTimeExpire, string cacheAppVersionKey, bool debugWithoutCache, bool addContext)
+        public CacheContextAttribute(EnumCacheExpireType cacheExpireType, EnumCacheType cacheType, EnumCacheTimeLevel cacheTimeLevel, int cacheTimeExpire, bool debugWithoutCache, bool addContext)
         {
             CacheExpireType = cacheExpireType;
             CacheType = cacheType;
             CacheTimeLevel = cacheTimeLevel;
             CacheTimeExpire = cacheTimeExpire;
-            CacheAppVersionKey = cacheAppVersionKey;
             DebugWithoutCache = debugWithoutCache;
             AddContext = addContext;
         }
@@ -41,19 +40,6 @@ namespace X.Util.Extend.Core
         public int CacheTimeExpire { get; set; }
 
         /// <summary>
-        /// 缓存版本号 配置项名称
-        /// </summary>
-        public string CacheAppVersionKey { get; set; }
-
-        /// <summary>
-        /// 缓存版本号
-        /// </summary>
-        public string CacheAppVersion
-        {
-            get { return ConfigurationHelper.GetAppSettingByName("CacheAppVersionKey", string.Empty); }
-        }
-
-        /// <summary>
         /// debug 模式无缓存
         /// </summary>
         public bool DebugWithoutCache { get; set; }
@@ -72,7 +58,7 @@ namespace X.Util.Extend.Core
                 CacheType = CacheType,
                 CacheTimeLevel = CacheTimeLevel,
                 CacheTimeExpire = CacheTimeExpire,
-                CacheAppVersion = CacheAppVersion,
+                CacheAppVersion = AppConfig.CacheKeyVersion,
                 DebugWithoutCache = DebugWithoutCache,
                 AddContext = AddContext,
             });

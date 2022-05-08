@@ -11,7 +11,7 @@ namespace X.Util.Core.Kernel
 {
     public class CoreUtil
     {
-        private static volatile ConcurrentDictionary<string, object> _locker = new ConcurrentDictionary<string, object>();
+        private static readonly ConcurrentDictionary<string, object> _locker = new ConcurrentDictionary<string, object>();
         private const string CoderLockerPrefix = "X.Util.Core.Kernel.CoderLockerPrefix";
         public delegate bool ParseFunc<T>(string value, out T t);
         public delegate bool ParseFunc2<T>(string value, NumberStyles style, IFormatProvider provider, out T t);
@@ -85,38 +85,32 @@ namespace X.Util.Core.Kernel
 
         public static T Convert2Type<T>(string value, ParseFunc<T> parse, T defaultValue)
         {
-            T result;
-            return parse(value, out result) ? result : defaultValue;
+            return parse(value, out T result) ? result : defaultValue;
         }
 
         public static T? Convert2Type<T>(string value, ParseFunc<T> parse, T? defaultValue) where T : struct
         {
-            T result;
-            return parse(value, out result) ? result : defaultValue;
+            return parse(value, out T result) ? result : defaultValue;
         }
 
         public static T Convert2Type<T>(string value, ParseFunc2<T> parse, NumberStyles style, IFormatProvider provider, T defaultValue)
         {
-            T result;
-            return parse(value, style, provider, out result) ? result : defaultValue;
+            return parse(value, style, provider, out T result) ? result : defaultValue;
         }
 
         public static T? Convert2Type<T>(string value, ParseFunc2<T> parse, NumberStyles style, IFormatProvider provider, T? defaultValue) where T : struct
         {
-            T result;
-            return parse(value, style, provider, out result) ? result : defaultValue;
+            return parse(value, style, provider, out T result) ? result : defaultValue;
         }
 
         public static T Convert2Type<T>(string value, ParseFunc3<T> parse, string format, DateTimeStyles style, IFormatProvider provider, T defaultValue)
         {
-            T result;
-            return parse(value, format, provider, style, out result) ? result : defaultValue;
+            return parse(value, format, provider, style, out T result) ? result : defaultValue;
         }
 
         public static T? Convert2Type<T>(string value, ParseFunc3<T> parse, string format, DateTimeStyles style, IFormatProvider provider, T? defaultValue) where T : struct
         {
-            T result;
-            return parse(value, format, provider, style, out result) ? result : defaultValue;
+            return parse(value, format, provider, style, out T result) ? result : defaultValue;
         }
     }
 }

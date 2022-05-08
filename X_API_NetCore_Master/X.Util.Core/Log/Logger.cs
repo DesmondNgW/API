@@ -27,9 +27,9 @@ namespace X.Util.Core.Log
             for (var i = 0; i < arguments.Count; i++)
             {
                 //fix RedisKey ToJson is nullObj
-                if (values[i] is RedisKey)
+                if (values[i] is RedisKey key)
                 {
-                    result[arguments[i].Name] = ((RedisKey)values[i]).ToString();
+                    result[arguments[i].Name] = key.ToString();
                 }
                 else
                 {
@@ -61,8 +61,8 @@ namespace X.Util.Core.Log
         /// </summary>
         public RequestMethodInfo GetMethodInfo(MethodBase declaringType, object[] values)
         {
-            var id = ExecutionContext<RequestContext>.Current.ApiRequestContext != null ? ExecutionContext<RequestContext>.Current.ApiRequestContext.RequestId : Guid.NewGuid().ToString("N");
-            var token = ExecutionContext<RequestContext>.Current.Token ?? id;
+            var id = !string.IsNullOrEmpty(ExecutionContext<BusinessRequestContext>.Current.RequestId) ? ExecutionContext<BusinessRequestContext>.Current.RequestId : Guid.NewGuid().ToString("N");
+            var token = ExecutionContext<BusinessRequestContext>.Current.Token ?? id;
             return new RequestMethodInfo { Id = id, ClientId = token, ClassName = declaringType.DeclaringType, MethodName = declaringType.Name, Method = declaringType, ParamList = GetParamList(declaringType, values), ClientIp = IpBase.GetIp(), ServerIp = IpBase.GetLocalIp() };
         }
 
@@ -75,10 +75,8 @@ namespace X.Util.Core.Log
         /// <returns></returns>
         public RequestMethodInfo GetMethodInfo(MethodBase declaringType, object[] values, Dictionary<string, object> extendInfo)
         {
-            var id = ExecutionContext<RequestContext>.Current.ApiRequestContext != null
-                ? ExecutionContext<RequestContext>.Current.ApiRequestContext.RequestId
-                : Guid.NewGuid().ToString();
-            var token = ExecutionContext<RequestContext>.Current.Token ?? id;
+            var id = !string.IsNullOrEmpty(ExecutionContext<BusinessRequestContext>.Current.RequestId) ? ExecutionContext<BusinessRequestContext>.Current.RequestId : Guid.NewGuid().ToString("N");
+            var token = ExecutionContext<BusinessRequestContext>.Current.Token ?? id;
             return new RequestMethodInfo { Id = id, ClientId = token, ClassName = declaringType.DeclaringType, MethodName = declaringType.Name, Method = declaringType, ParamList = GetParamList(declaringType, values), ExtendInfo = extendInfo, ClientIp = IpBase.GetIp(), ServerIp = IpBase.GetLocalIp() };
         }
 
@@ -87,10 +85,8 @@ namespace X.Util.Core.Log
         /// </summary>
         public RequestMethodInfo GetMethodInfo(MethodBase declaringType, object[] values, string address)
         {
-            var id = ExecutionContext<RequestContext>.Current.ApiRequestContext != null
-                ? ExecutionContext<RequestContext>.Current.ApiRequestContext.RequestId
-                : Guid.NewGuid().ToString();
-            var token = ExecutionContext<RequestContext>.Current.Token ?? id;
+            var id = !string.IsNullOrEmpty(ExecutionContext<BusinessRequestContext>.Current.RequestId) ? ExecutionContext<BusinessRequestContext>.Current.RequestId : Guid.NewGuid().ToString("N");
+            var token = ExecutionContext<BusinessRequestContext>.Current.Token ?? id;
             return new RequestMethodInfo { Id = id, ClientId = token, ClassName = declaringType.DeclaringType, MethodName = declaringType.Name, Method = declaringType, ParamList = GetParamList(declaringType, values), Address = address, ClientIp = IpBase.GetIp(), ServerIp = IpBase.GetLocalIp() };
         }
 
@@ -99,10 +95,8 @@ namespace X.Util.Core.Log
         /// </summary>
         public RequestMethodInfo GetMethodInfo(MethodBase declaringType, object[] values, string address, Dictionary<string, object> extendInfo)
         {
-            var id = ExecutionContext<RequestContext>.Current.ApiRequestContext != null
-                ? ExecutionContext<RequestContext>.Current.ApiRequestContext.RequestId
-                : Guid.NewGuid().ToString();
-            var token = ExecutionContext<RequestContext>.Current.Token ?? id;
+            var id = !string.IsNullOrEmpty(ExecutionContext<BusinessRequestContext>.Current.RequestId) ? ExecutionContext<BusinessRequestContext>.Current.RequestId : Guid.NewGuid().ToString("N");
+            var token = ExecutionContext<BusinessRequestContext>.Current.Token ?? id;
             return new RequestMethodInfo { Id = id, ClientId = token, ClassName = declaringType.DeclaringType, MethodName = declaringType.Name, Method = declaringType, ParamList = GetParamList(declaringType, values), Address = address, ExtendInfo = extendInfo, ClientIp = IpBase.GetIp(), ServerIp = IpBase.GetLocalIp() };
         }
 

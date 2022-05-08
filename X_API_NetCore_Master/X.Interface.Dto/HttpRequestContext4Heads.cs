@@ -1,20 +1,13 @@
-﻿namespace X.Util.Entities
+﻿using X.Util.Entities;
+
+namespace X.Interface.Dto
 {
     /// <summary>
     /// 请求上下文（把相应参数通过请求头部传递）
     /// </summary>
-    public class HttpRequestContext : MongoBaseModel
+    public class HttpRequestContext4Heads : MongoBaseModel
     {
-        /// <summary>
-        /// token(必须传递)
-        /// </summary>
-        public string Token { get; set; }
-
-        /// <summary>
-        /// API版本号（类似0.0.0）
-        /// </summary>
-        public string Version { get; set; }
-
+        #region 客户端信息
         /// <summary>
         /// 分辨率(Web情况是用户设备分辨率，其余是设备分辨率)
         /// </summary>
@@ -50,15 +43,35 @@
         /// Web = 0, Tablet = 1, Mobile = 2, ThirdParty = 3
         /// </summary>
         public int ClientType { get; set; }
+        #endregion
+
+        #region 业务信息
+        /// <summary>
+        /// token(必须传递)-每次请求必须传递
+        /// </summary>
+        public string Token { get; set; }
 
         /// <summary>
-        /// Last Request Thread id
+        /// UToken（登录状态下必须传递）
         /// </summary>
-        public string Tid { get; set; }
+        public string UToken { get; set; }
+
+        /// <summary>
+        /// API版本号（类似0.0.0）
+        /// </summary>
+        public string Version { get; set; }
 
         /// <summary>
         /// Timestamp(必须传递)
         /// </summary>
         public long Timestamp { get; set; }
+        #endregion
+
+        #region 服务器信息
+        /// <summary>
+        /// Last Request Thread id
+        /// </summary>
+        public string Tid { get; set; }
+        #endregion
     }
 }

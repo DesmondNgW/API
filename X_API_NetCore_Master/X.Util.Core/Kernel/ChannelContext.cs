@@ -25,14 +25,12 @@ namespace X.Util.Core.Kernel
 
         public void Called(ActionContext<TResult> context)
         {
-            var channel = Channel as IClientProvider<TChannel>;
-            if (channel != null) channel.ReleaseClient();
+            if (Channel is IClientProvider<TChannel> channel) channel.ReleaseClient();
         }
 
         public void OnException(ActionContext<TResult> context)
         {
-            var channel = Channel as IClientProvider<TChannel>;
-            if (channel == null) return;
+            if (!(Channel is IClientProvider<TChannel> channel)) return;
             channel.Dispose(channel.Domain);
         }
 
@@ -60,14 +58,12 @@ namespace X.Util.Core.Kernel
 
         public void Called(ActionContext context)
         {
-            var channel = Channel as IClientProvider<TChannel>;
-            if (channel != null) channel.ReleaseClient();
+            if (Channel is IClientProvider<TChannel> channel) channel.ReleaseClient();
         }
 
         public void OnException(ActionContext context)
         {
-            var channel = Channel as IClientProvider<TChannel>;
-            if (channel == null) return;
+            if (!(Channel is IClientProvider<TChannel> channel)) return;
             channel.Dispose(channel.Domain);
         }
 

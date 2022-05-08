@@ -47,8 +47,7 @@ namespace X.DB.Util
         /// </summary>
         public static short? GetInt16(object obj)
         {
-            short result;
-            return (obj != null && obj != DBNull.Value && short.TryParse(obj.ToString(), out result)) ? (short?)result : null;
+            return (obj != null && obj != DBNull.Value && short.TryParse(obj.ToString(), out short result)) ? (short?)result : null;
         }
 
         /// <summary>
@@ -56,8 +55,7 @@ namespace X.DB.Util
         /// </summary>
         public static ushort? GetUInt16(object obj)
         {
-            ushort result;
-            return (obj != null && obj != DBNull.Value && ushort.TryParse(obj.ToString(), out result)) ? (ushort?)result : null;
+            return (obj != null && obj != DBNull.Value && ushort.TryParse(obj.ToString(), out ushort result)) ? (ushort?)result : null;
         }
 
         /// <summary>
@@ -65,8 +63,7 @@ namespace X.DB.Util
         /// </summary>
         public static int? GetInt(object obj)
         {
-            int result;
-            return (obj != null && obj != DBNull.Value && int.TryParse(obj.ToString(), out result)) ? (int?)result : null;
+            return (obj != null && obj != DBNull.Value && int.TryParse(obj.ToString(), out int result)) ? (int?)result : null;
         }
 
         /// <summary>
@@ -74,8 +71,7 @@ namespace X.DB.Util
         /// </summary>
         public static uint? GetUInt(object obj)
         {
-            uint result;
-            return (obj != null && obj != DBNull.Value && uint.TryParse(obj.ToString(), out result)) ? (uint?)result : null;
+            return (obj != null && obj != DBNull.Value && uint.TryParse(obj.ToString(), out uint result)) ? (uint?)result : null;
         }
 
         /// <summary>
@@ -83,8 +79,7 @@ namespace X.DB.Util
         /// </summary>
         public static long? GetLong(object obj)
         {
-            long result;
-            return (obj != null && obj != DBNull.Value && long.TryParse(obj.ToString(), out result)) ? (long?)result : null;
+            return (obj != null && obj != DBNull.Value && long.TryParse(obj.ToString(), out long result)) ? (long?)result : null;
         }
 
         /// <summary>
@@ -92,8 +87,7 @@ namespace X.DB.Util
         /// </summary>
         public static ulong? GetULong(object obj)
         {
-            ulong result;
-            return (obj != null && obj != DBNull.Value && ulong.TryParse(obj.ToString(), out result)) ? (ulong?)result : null;
+            return (obj != null && obj != DBNull.Value && ulong.TryParse(obj.ToString(), out ulong result)) ? (ulong?)result : null;
         }
 
         /// <summary>
@@ -101,8 +95,7 @@ namespace X.DB.Util
         /// </summary>
         public static byte? GetByte(object obj)
         {
-            byte result;
-            return (obj != null && obj != DBNull.Value && byte.TryParse(obj.ToString(), out result)) ? (byte?)result : null;
+            return (obj != null && obj != DBNull.Value && byte.TryParse(obj.ToString(), out byte result)) ? (byte?)result : null;
         }
 
         /// <summary>
@@ -110,8 +103,7 @@ namespace X.DB.Util
         /// </summary>
         public static sbyte? GetSByte(object obj)
         {
-            sbyte result;
-            return (obj != null && obj != DBNull.Value && sbyte.TryParse(obj.ToString(), out result)) ? (sbyte?)result : null;
+            return (obj != null && obj != DBNull.Value && sbyte.TryParse(obj.ToString(), out sbyte result)) ? (sbyte?)result : null;
         }
 
         /// <summary>
@@ -119,8 +111,7 @@ namespace X.DB.Util
         /// </summary>
         public static decimal? GetDecimal(object obj)
         {
-            decimal result;
-            return (obj != null && obj != DBNull.Value && decimal.TryParse(obj.ToString(), out result)) ? (decimal?)result : null;
+            return (obj != null && obj != DBNull.Value && decimal.TryParse(obj.ToString(), out decimal result)) ? (decimal?)result : null;
         }
 
         /// <summary>
@@ -128,8 +119,7 @@ namespace X.DB.Util
         /// </summary>
         public static float? GetFloat(object obj)
         {
-            float result;
-            return (obj != null && obj != DBNull.Value && float.TryParse(obj.ToString(), out result)) ? (float?)result : null;
+            return (obj != null && obj != DBNull.Value && float.TryParse(obj.ToString(), out float result)) ? (float?)result : null;
         }
 
         /// <summary>
@@ -137,14 +127,12 @@ namespace X.DB.Util
         /// </summary>
         public static double? GetDouble(object obj)
         {
-            double result;
-            return (obj != null && obj != DBNull.Value && double.TryParse(obj.ToString(), out result)) ? (double?)result : null;
+            return (obj != null && obj != DBNull.Value && double.TryParse(obj.ToString(), out double result)) ? (double?)result : null;
         }
 
         public static double GetDouble(object obj, double defaultDouble)
         {
-            double result;
-            return (obj != null && obj != DBNull.Value && double.TryParse(obj.ToString(), out result)) ? result : defaultDouble;
+            return (obj != null && obj != DBNull.Value && double.TryParse(obj.ToString(), out double result)) ? result : defaultDouble;
         }
 
         /// <summary>
@@ -152,8 +140,7 @@ namespace X.DB.Util
         /// </summary>
         public static Guid? GetGuid(object obj)
         {
-            Guid result;
-            return (obj != null && obj != DBNull.Value && Guid.TryParse(obj.ToString(), out result)) ? (Guid?)result : null;
+            return (obj != null && obj != DBNull.Value && Guid.TryParse(obj.ToString(), out Guid result)) ? (Guid?)result : null;
         }
 
         /// <summary>
@@ -161,8 +148,7 @@ namespace X.DB.Util
         /// </summary>
         public static DateTime? GetDateTime(object obj)
         {
-            DateTime result;
-            return (obj != null && obj != DBNull.Value && DateTime.TryParse(obj.ToString(), out result)) ? (DateTime?)result : null;
+            return (obj != null && obj != DBNull.Value && DateTime.TryParse(obj.ToString(), out DateTime result)) ? (DateTime?)result : null;
         }
 
         /// <summary>
@@ -170,8 +156,7 @@ namespace X.DB.Util
         /// </summary>
         public static bool? GetBool(object obj)
         {
-            bool result;
-            return (obj != null && obj != DBNull.Value && bool.TryParse(obj.ToString(), out result)) ? (bool?)result : null;
+            return (obj != null && obj != DBNull.Value && bool.TryParse(obj.ToString(), out bool result)) ? (bool?)result : null;
         }
 
         /// <summary>

@@ -38,8 +38,7 @@ namespace X.Util.Core.Kernel
                 {
                     while (true)
                     {
-                        RequestItem<T> item;
-                        if (Queue[queueId].RequestQueue.TryDequeue(out item) && item != null)
+                        if (Queue[queueId].RequestQueue.TryDequeue(out RequestItem<T> item) && item != null)
                         {
                             if (item.Mode == ProcessingMode.Common)
                             {

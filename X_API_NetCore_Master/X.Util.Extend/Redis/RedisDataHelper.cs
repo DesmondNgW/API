@@ -22,7 +22,7 @@ namespace X.Util.Extend.Redis
             {
                 return keys.Select(p => (RedisKey)p).ToArray();
             }
-            return default(RedisKey[]);
+            return default;
         }
 
         public static RedisValue Type2Value<T>(T obj)
@@ -41,7 +41,7 @@ namespace X.Util.Extend.Redis
             {
                 return values.Select(p => (RedisValue)p).ToArray();
             }
-            return default(RedisValue[]);
+            return default;
         }
 
         public static T Value2Type<T>(RedisValue value)
@@ -55,7 +55,7 @@ namespace X.Util.Extend.Redis
             {
                 return values.Select(p => (string)p).ToList();
             }
-            return default(List<string>);
+            return default;
         }
     }
 }

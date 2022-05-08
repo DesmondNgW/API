@@ -94,7 +94,7 @@ namespace X.Util.Core.Kernel
             }
             catch (Exception ex)
             {
-                ContextHelper.AddResponse(context, default(TResult), ex, null);
+                ContextHelper.AddResponse(context, default, ex, null);
                 foreach (var item in list) item.OnException(context);
                 if (maxRetryCounts > 0) return await TryCallAsync((Func<TResult>)Delegate.CreateDelegate(typeof(Func<TResult>), channel.Client, func.Method), channel, callBack, options, maxRetryCounts - 1);
             }
@@ -185,7 +185,7 @@ namespace X.Util.Core.Kernel
             }
             catch (Exception ex)
             {
-                ContextHelper.AddResponse(context, default(TResult), ex, null);
+                ContextHelper.AddResponse(context, default, ex, null);
                 foreach (var item in list) item.OnException(context);
                 if (maxRetryCounts > 0) return await TryCallAsync((Func<T1, TResult>)Delegate.CreateDelegate(typeof(Func<T1, TResult>), channel.Client, func.Method), t1, channel, callBack, options, maxRetryCounts - 1);
             }
@@ -276,7 +276,7 @@ namespace X.Util.Core.Kernel
             }
             catch (Exception ex)
             {
-                ContextHelper.AddResponse(context, default(TResult), ex, null);
+                ContextHelper.AddResponse(context, default, ex, null);
                 foreach (var item in list) item.OnException(context);
                 if (maxRetryCounts > 0) return await TryCallAsync((Func<T1, T2, TResult>)Delegate.CreateDelegate(typeof(Func<T1, T2, TResult>), channel.Client, func.Method), t1, t2, channel, callBack, options, maxRetryCounts - 1);
             }
@@ -367,7 +367,7 @@ namespace X.Util.Core.Kernel
             }
             catch (Exception ex)
             {
-                ContextHelper.AddResponse(context, default(TResult), ex, null);
+                ContextHelper.AddResponse(context, default, ex, null);
                 foreach (var item in list) item.OnException(context);
                 if (maxRetryCounts > 0) return await TryCallAsync((Func<T1, T2, T3, TResult>)Delegate.CreateDelegate(typeof(Func<T1, T2, T3, TResult>), channel.Client, func.Method), t1, t2, t3, channel, callBack, options, maxRetryCounts - 1);
             }
@@ -458,7 +458,7 @@ namespace X.Util.Core.Kernel
             }
             catch (Exception ex)
             {
-                ContextHelper.AddResponse(context, default(TResult), ex, null);
+                ContextHelper.AddResponse(context, default, ex, null);
                 foreach (var item in list) item.OnException(context);
                 if (maxRetryCounts > 0) return await TryCallAsync((Func<T1, T2, T3, T4, TResult>)Delegate.CreateDelegate(typeof(Func<T1, T2, T3, T4, TResult>), channel.Client, func.Method), t1, t2, t3, t4, channel, callBack, options, maxRetryCounts - 1);
             }
@@ -549,7 +549,7 @@ namespace X.Util.Core.Kernel
             }
             catch (Exception ex)
             {
-                ContextHelper.AddResponse(context, default(TResult), ex, null);
+                ContextHelper.AddResponse(context, default, ex, null);
                 foreach (var item in list) item.OnException(context);
                 if (maxRetryCounts > 0) return await TryCallAsync((Func<T1, T2, T3, T4, T5, TResult>)Delegate.CreateDelegate(typeof(Func<T1, T2, T3, T4, T5, TResult>), channel.Client, func.Method), t1, t2, t3, t4, t5, channel, callBack, options, maxRetryCounts - 1);
             }
@@ -640,7 +640,7 @@ namespace X.Util.Core.Kernel
             }
             catch (Exception ex)
             {
-                ContextHelper.AddResponse(context, default(TResult), ex, null);
+                ContextHelper.AddResponse(context, default, ex, null);
                 foreach (var item in list) item.OnException(context);
                 if (maxRetryCounts > 0) return await TryCallAsync((Func<T1, T2, T3, T4, T5, T6, TResult>)Delegate.CreateDelegate(typeof(Func<T1, T2, T3, T4, T5, T6, TResult>), channel.Client, func.Method), t1, t2, t3, t4, t5, t6, channel, callBack, options, maxRetryCounts - 1);
             }
@@ -731,7 +731,7 @@ namespace X.Util.Core.Kernel
             }
             catch (Exception ex)
             {
-                ContextHelper.AddResponse(context, default(TResult), ex, null);
+                ContextHelper.AddResponse(context, default, ex, null);
                 foreach (var item in list) item.OnException(context);
                 if (maxRetryCounts > 0) return await TryCallAsync((Func<T1, T2, T3, T4, T5, T6, T7, TResult>)Delegate.CreateDelegate(typeof(Func<T1, T2, T3, T4, T5, T6, T7, TResult>), channel.Client, func.Method), t1, t2, t3, t4, t5, t6, t7, channel, callBack, options, maxRetryCounts - 1);
             }
@@ -822,7 +822,7 @@ namespace X.Util.Core.Kernel
             }
             catch (Exception ex)
             {
-                ContextHelper.AddResponse(context, default(TResult), ex, null);
+                ContextHelper.AddResponse(context, default, ex, null);
                 foreach (var item in list) item.OnException(context);
                 if (maxRetryCounts > 0) return await TryCallAsync((Func<T1, T2, T3, T4, T5, T6, T7, T8, TResult>)Delegate.CreateDelegate(typeof(Func<T1, T2, T3, T4, T5, T6, T7, T8, TResult>), channel.Client, func.Method), t1, t2, t3, t4, t5, t6, t7, t8, channel, callBack, options, maxRetryCounts - 1);
             }
@@ -913,7 +913,7 @@ namespace X.Util.Core.Kernel
             }
             catch (Exception ex)
             {
-                ContextHelper.AddResponse(context, default(TResult), ex, null);
+                ContextHelper.AddResponse(context, default, ex, null);
                 foreach (var item in list) item.OnException(context);
                 if (maxRetryCounts > 0) return await TryCallAsync((Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>)Delegate.CreateDelegate(typeof(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>), channel.Client, func.Method), t1, t2, t3, t4, t5, t6, t7, t8, t9, channel, callBack, options, maxRetryCounts - 1);
             }
@@ -1004,7 +1004,7 @@ namespace X.Util.Core.Kernel
             }
             catch (Exception ex)
             {
-                ContextHelper.AddResponse(context, default(TResult), ex, null);
+                ContextHelper.AddResponse(context, default, ex, null);
                 foreach (var item in list) item.OnException(context);
                 if (maxRetryCounts > 0) return await TryCallAsync((Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult>)Delegate.CreateDelegate(typeof(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult>), channel.Client, func.Method), t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, channel, callBack, options, maxRetryCounts - 1);
             }
@@ -1095,7 +1095,7 @@ namespace X.Util.Core.Kernel
             }
             catch (Exception ex)
             {
-                ContextHelper.AddResponse(context, default(TResult), ex, null);
+                ContextHelper.AddResponse(context, default, ex, null);
                 foreach (var item in list) item.OnException(context);
                 if (maxRetryCounts > 0) return await TryCallAsync((Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult>)Delegate.CreateDelegate(typeof(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult>), channel.Client, func.Method), t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, channel, callBack, options, maxRetryCounts - 1);
             }
@@ -1186,7 +1186,7 @@ namespace X.Util.Core.Kernel
             }
             catch (Exception ex)
             {
-                ContextHelper.AddResponse(context, default(TResult), ex, null);
+                ContextHelper.AddResponse(context, default, ex, null);
                 foreach (var item in list) item.OnException(context);
                 if (maxRetryCounts > 0) return await TryCallAsync((Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult>)Delegate.CreateDelegate(typeof(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult>), channel.Client, func.Method), t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, channel, callBack, options, maxRetryCounts - 1);
             }
@@ -1277,7 +1277,7 @@ namespace X.Util.Core.Kernel
             }
             catch (Exception ex)
             {
-                ContextHelper.AddResponse(context, default(TResult), ex, null);
+                ContextHelper.AddResponse(context, default, ex, null);
                 foreach (var item in list) item.OnException(context);
                 if (maxRetryCounts > 0) return await TryCallAsync((Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult>)Delegate.CreateDelegate(typeof(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult>), channel.Client, func.Method), t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, channel, callBack, options, maxRetryCounts - 1);
             }
@@ -1368,7 +1368,7 @@ namespace X.Util.Core.Kernel
             }
             catch (Exception ex)
             {
-                ContextHelper.AddResponse(context, default(TResult), ex, null);
+                ContextHelper.AddResponse(context, default, ex, null);
                 foreach (var item in list) item.OnException(context);
                 if (maxRetryCounts > 0) return await TryCallAsync((Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult>)Delegate.CreateDelegate(typeof(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult>), channel.Client, func.Method), t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, channel, callBack, options, maxRetryCounts - 1);
             }
@@ -1459,7 +1459,7 @@ namespace X.Util.Core.Kernel
             }
             catch (Exception ex)
             {
-                ContextHelper.AddResponse(context, default(TResult), ex, null);
+                ContextHelper.AddResponse(context, default, ex, null);
                 foreach (var item in list) item.OnException(context);
                 if (maxRetryCounts > 0) return await TryCallAsync((Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult>)Delegate.CreateDelegate(typeof(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult>), channel.Client, func.Method), t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, channel, callBack, options, maxRetryCounts - 1);
             }
@@ -1550,7 +1550,7 @@ namespace X.Util.Core.Kernel
             }
             catch (Exception ex)
             {
-                ContextHelper.AddResponse(context, default(TResult), ex, null);
+                ContextHelper.AddResponse(context, default, ex, null);
                 foreach (var item in list) item.OnException(context);
                 if (maxRetryCounts > 0) return await TryCallAsync((Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult>)Delegate.CreateDelegate(typeof(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult>), channel.Client, func.Method), t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16, channel, callBack, options, maxRetryCounts - 1);
             }

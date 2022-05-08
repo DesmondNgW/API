@@ -1,15 +1,16 @@
 ﻿using System;
 using System.Threading;
+using X.Business.Core;
 using X.Business.Model;
-using X.Util.Core;
-using X.Util.Core.Kernel;
+using X.Business.Util;
+using X.Interface.Dto;
 using X.Util.Core.Log;
 using X.Util.Entities;
 using X.Util.Entities.Enum;
 using X.Util.Extend.Cache;
 using X.Util.Extend.Cryption;
 
-namespace X.Business.Util
+namespace X.Interface.Core
 {
     public class TokenHelper
     {
@@ -30,7 +31,6 @@ namespace X.Business.Util
             };
             token.TokenId = BaseCryption.SignData(token.ClientId + token.ClientIp + token.UserAgent, Guid.NewGuid().ToString("N"), HmacType.Md5);
             var key = ConstHelper.LoginKeyPrefix + token.TokenId;
-            ExecutionContext<RequestContext>.Current.Update("Zone", EnumZoneHelper.GetTokenZone(token.TokenId));
             CacheData.Default.SetCacheDbData(key, token, TimeSpan.FromMinutes(ConstHelper.LoginExpireMinutes), CacheType);
             return token.TokenId;
         }
@@ -44,11 +44,10 @@ namespace X.Business.Util
         /// <param name="userAgent"></param>
         /// <param name="uri"></param>
         /// <returns></returns>
-        public static void VerifyToken(string token, string clientId, string clientIp, string userAgent, Uri uri)
+        public static void VerifyToken(string token, string clientId, string clientIp, string userAgent, string uri)
         {
             if (!BaseCryption.VerifyData(ConstHelper.GenerateHmacKey, token, HmacType.Md5)) throw new InvalidOperationException("token错误或过期");
             var key = ConstHelper.LoginKeyPrefix + token;
-            ExecutionContext<RequestContext>.Current.Update("Zone", EnumZoneHelper.GetTokenZone(token));
             var obj = CacheData.Default.GetCacheDbData<Token>(key, CacheType);
             if (obj == null) throw new InvalidOperationException("token错误或过期");
             if (obj.ClientId != clientId)
@@ -75,7 +74,7 @@ namespace X.Business.Util
             {
                 requestStatus = new RequestStatus
                 {
-                    Uri = uri.ToString(),
+                    Uri = uri,
                     TokenId = token,
                     RequesTime = DateTime.Now
                 };
@@ -91,6 +90,11 @@ namespace X.Business.Util
                 requestStatus.RequesTime = DateTime.Now;
                 CacheData.Default.SetCacheDbData(requestKey, requestStatus, DateTime.Now.AddMinutes(ConstHelper.RequestExpireMinutes), CacheType);
             }
+        }
+
+        public static void VerifyUToken(string utoken, string uri)
+        {
+            UserService.VerifyToken(utoken, uri);
         }
     }
 }

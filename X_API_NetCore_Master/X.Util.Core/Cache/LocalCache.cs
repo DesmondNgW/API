@@ -6,7 +6,7 @@ namespace X.Util.Core.Cache
     public class LocalCache
     {
         public static LocalCache Default = new LocalCache();
-        private static IMemoryCache MemoryCacheClient = new MemoryCache(new MemoryCacheOptions());
+        private static readonly IMemoryCache MemoryCacheClient = new MemoryCache(new MemoryCacheOptions());
         public LocalCache() { }
 
         public T Get<T>(object key)

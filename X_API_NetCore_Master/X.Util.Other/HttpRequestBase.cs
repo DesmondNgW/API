@@ -108,12 +108,12 @@ namespace X.Util.Other
             {
                 var response = ex.Response as HttpWebResponse;
                 if (Equals(response, null) || (HttpStatusCode.NotModified.Equals(response.StatusCode) || response.StatusCode.GetHashCode() < 300)) return cache;
-                cache = new HttpCacheResult<T> { Result = default(T) };
+                cache = new HttpCacheResult<T> { Result = default };
                 Logger.Client.Error(Logger.Client.GetMethodInfo(MethodBase.GetCurrentMethod(), new object[] { uri }), ex, LogDomain.Util);
             }
             catch (Exception ex)
             {
-                cache = new HttpCacheResult<T> { Result = default(T) };
+                cache = new HttpCacheResult<T> { Result = default };
                 Logger.Client.Error(Logger.Client.GetMethodInfo(MethodBase.GetCurrentMethod(), new object[] { uri }), ex, LogDomain.Util);
             }
             return cache;

@@ -13,8 +13,7 @@ namespace X.Util.Core.Kernel
         public static List<IContext<TResult, TChannel>> GetContext<TResult, TChannel>(IProvider<TChannel> channel, MethodBase method, LogOptions<TResult> options)
         {
             var attr = new List<IContext<TResult, TChannel>>();
-            var cas = method.GetCustomAttributes(typeof(ContextResultAttribute), true) as ContextResultAttribute[];
-            if (cas != null && cas.Any()) attr.AddRange(cas.Select(ca => ca.GetContext(channel, options.CallSuccess)));
+            if (method.GetCustomAttributes(typeof(ContextResultAttribute), true) is ContextResultAttribute[] cas && cas.Any()) attr.AddRange(cas.Select(ca => ca.GetContext(channel, options.CallSuccess)));
             if (method.DeclaringType == null)
                 return new List<IContext<TResult, TChannel>>
                 {
@@ -43,8 +42,7 @@ namespace X.Util.Core.Kernel
         public static List<IContext<TChannel>> GetContext<TChannel>(IProvider<TChannel> channel, MethodBase method, LogOptions options)
         {
             var attr = new List<IContext<TChannel>>();
-            var cas = method.GetCustomAttributes(typeof(ContextAttribute), true) as ContextAttribute[];
-            if (cas != null && cas.Any()) attr.AddRange(cas.Select(ca => ca.GetContext(channel)));
+            if (method.GetCustomAttributes(typeof(ContextAttribute), true) is ContextAttribute[] cas && cas.Any()) attr.AddRange(cas.Select(ca => ca.GetContext(channel)));
             if (method.DeclaringType == null)
                 return new List<IContext<TChannel>>
                 {

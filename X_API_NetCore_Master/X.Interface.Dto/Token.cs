@@ -1,4 +1,4 @@
-﻿namespace X.Business.Model
+﻿namespace X.Interface.Dto
 {
     /// <summary>
     /// Token

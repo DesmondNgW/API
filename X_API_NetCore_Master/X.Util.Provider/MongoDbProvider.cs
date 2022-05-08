@@ -76,7 +76,7 @@ namespace X.Util.Provider
             var client = default(MongoClient);
             try
             {
-                client = Core<MongoClient>.Instance(GetMongoClient, serverName, database, Math.Max(ExecutionContext<RequestContext>.Current.Zone, 1) + serverName + database + ConfigurationHelper.EndpointFileModified);
+                client = Core<MongoClient>.Instance(GetMongoClient, serverName, database, serverName + database + ConfigurationHelper.EndpointFileModified);
             }
             catch (Exception ex)
             {

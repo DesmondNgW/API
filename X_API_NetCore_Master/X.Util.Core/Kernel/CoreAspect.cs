@@ -23,7 +23,7 @@ namespace X.Util.Core.Kernel
             else
             {
                 var existingChain = _chain;
-                Func<Func<T>, T> callAnother = work => existingChain(() => newAspectDelegate(work));
+                T callAnother(Func<T> work) => existingChain(() => newAspectDelegate(work));
                 _chain = callAnother;
             }
             return this;
@@ -35,7 +35,7 @@ namespace X.Util.Core.Kernel
             else
             {
                 var existingChain = _chain;
-                Func<Func<T>, T> callAnother = work => existingChain(() => newAspectDelegate(work, t1));
+                T callAnother(Func<T> work) => existingChain(() => newAspectDelegate(work, t1));
                 _chain = callAnother;
             }
             return this;
@@ -47,7 +47,7 @@ namespace X.Util.Core.Kernel
             else
             {
                 var existingChain = _chain;
-                Func<Func<T>, T> callAnother = work => existingChain(() => newAspectDelegate(work, t1, t2));
+                T callAnother(Func<T> work) => existingChain(() => newAspectDelegate(work, t1, t2));
                 _chain = callAnother;
             }
             return this;
@@ -59,7 +59,7 @@ namespace X.Util.Core.Kernel
             else
             {
                 var existingChain = _chain;
-                Func<Func<T>, T> callAnother = work => existingChain(() => newAspectDelegate(work, t1, t2, t3));
+                T callAnother(Func<T> work) => existingChain(() => newAspectDelegate(work, t1, t2, t3));
                 _chain = callAnother;
             }
             return this;
@@ -71,7 +71,7 @@ namespace X.Util.Core.Kernel
             else
             {
                 var existingChain = _chain;
-                Func<Func<T>, T> callAnother = work => existingChain(() => newAspectDelegate(work, t1, t2, t3, t4));
+                T callAnother(Func<T> work) => existingChain(() => newAspectDelegate(work, t1, t2, t3, t4));
                 _chain = callAnother;
             }
             return this;
@@ -83,7 +83,7 @@ namespace X.Util.Core.Kernel
             else
             {
                 var existingChain = _chain;
-                Func<Func<T>, T> callAnother = work => existingChain(() => newAspectDelegate(work, t1, t2, t3, t4, t5));
+                T callAnother(Func<T> work) => existingChain(() => newAspectDelegate(work, t1, t2, t3, t4, t5));
                 _chain = callAnother;
             }
             return this;
@@ -95,7 +95,7 @@ namespace X.Util.Core.Kernel
             else
             {
                 var existingChain = _chain;
-                Func<Func<T>, T> callAnother = work => existingChain(() => newAspectDelegate(work, t1, t2, t3, t4, t5, t6));
+                T callAnother(Func<T> work) => existingChain(() => newAspectDelegate(work, t1, t2, t3, t4, t5, t6));
                 _chain = callAnother;
             }
             return this;
@@ -107,7 +107,7 @@ namespace X.Util.Core.Kernel
             else
             {
                 var existingChain = _chain;
-                Func<Func<T>, T> callAnother = work => existingChain(() => newAspectDelegate(work, t1, t2, t3, t4, t5, t6, t7));
+                T callAnother(Func<T> work) => existingChain(() => newAspectDelegate(work, t1, t2, t3, t4, t5, t6, t7));
                 _chain = callAnother;
             }
             return this;
@@ -119,7 +119,7 @@ namespace X.Util.Core.Kernel
             else
             {
                 var existingChain = _chain;
-                Func<Func<T>, T> callAnother = work => existingChain(() => newAspectDelegate(work, t1, t2, t3, t4, t5, t6, t7, t8));
+                T callAnother(Func<T> work) => existingChain(() => newAspectDelegate(work, t1, t2, t3, t4, t5, t6, t7, t8));
                 _chain = callAnother;
             }
             return this;
@@ -131,7 +131,7 @@ namespace X.Util.Core.Kernel
             else
             {
                 var existingChain = _chain;
-                Func<Func<T>, T> callAnother = work => existingChain(() => newAspectDelegate(work, t1, t2, t3, t4, t5, t6, t7, t8, t9));
+                T callAnother(Func<T> work) => existingChain(() => newAspectDelegate(work, t1, t2, t3, t4, t5, t6, t7, t8, t9));
                 _chain = callAnother;
             }
             return this;
@@ -143,7 +143,7 @@ namespace X.Util.Core.Kernel
             else
             {
                 var existingChain = _chain;
-                Func<Func<T>, T> callAnother = work => existingChain(() => newAspectDelegate(work, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10));
+                T callAnother(Func<T> work) => existingChain(() => newAspectDelegate(work, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10));
                 _chain = callAnother;
             }
             return this;
@@ -155,7 +155,7 @@ namespace X.Util.Core.Kernel
             else
             {
                 var existingChain = _chain;
-                Func<Func<T>, T> callAnother = work => existingChain(() => newAspectDelegate(work, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11));
+                T callAnother(Func<T> work) => existingChain(() => newAspectDelegate(work, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11));
                 _chain = callAnother;
             }
             return this;
@@ -167,7 +167,7 @@ namespace X.Util.Core.Kernel
             else
             {
                 var existingChain = _chain;
-                Func<Func<T>, T> callAnother = work => existingChain(() => newAspectDelegate(work, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12));
+                T callAnother(Func<T> work) => existingChain(() => newAspectDelegate(work, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12));
                 _chain = callAnother;
             }
             return this;
@@ -179,7 +179,7 @@ namespace X.Util.Core.Kernel
             else
             {
                 var existingChain = _chain;
-                Func<Func<T>, T> callAnother = work => existingChain(() => newAspectDelegate(work, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13));
+                T callAnother(Func<T> work) => existingChain(() => newAspectDelegate(work, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13));
                 _chain = callAnother;
             }
             return this;
@@ -191,7 +191,7 @@ namespace X.Util.Core.Kernel
             else
             {
                 var existingChain = _chain;
-                Func<Func<T>, T> callAnother = work => existingChain(() => newAspectDelegate(work, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14));
+                T callAnother(Func<T> work) => existingChain(() => newAspectDelegate(work, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14));
                 _chain = callAnother;
             }
             return this;
@@ -203,7 +203,7 @@ namespace X.Util.Core.Kernel
             else
             {
                 var existingChain = _chain;
-                Func<Func<T>, T> callAnother = work => existingChain(() => newAspectDelegate(work, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15));
+                T callAnother(Func<T> work) => existingChain(() => newAspectDelegate(work, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15));
                 _chain = callAnother;
             }
             return this;

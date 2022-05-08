@@ -131,12 +131,11 @@ namespace X.Util.Core.Configuration
         #region Get WCF EndpointAddress Configuration
         public static XmlServiceModel GetEndpointAddressesByName(string name)
         {
-            var zone = Math.Max(ExecutionContext<RequestContext>.Current.Zone, 1);
-            var key = CacheConfigurationPrefix + zone + name + "GetEndpointAddressesByName";
+            var key = CacheConfigurationPrefix + name + "GetEndpointAddressesByName";
             var result = LocalCache.Default.Get<XmlServiceModel>(key);
             if (result != null) return result;
             var doc = XmlHelper.GetXmlDocCache(EndpointFile);
-            var node = doc != null ? doc.SelectSingleNode("/configuration/client/endpoint[@name='" + name + "' and @zone='" + zone + "']") : null;
+            var node = doc?.SelectSingleNode("/configuration/client/endpoint[@name='" + name + "']");
             if (Equals(node, null) || node.ChildNodes.Count <= 0) return null;
             result = new XmlServiceModel
             {
@@ -226,11 +225,10 @@ namespace X.Util.Core.Configuration
         /// </summary>
         public static MongoClientSettings MongoClientConfiguration(string serverName, string credentialDataBase = null)
         {
-            var zone = Math.Max(ExecutionContext<RequestContext>.Current.Zone, 1);
             var configuration = new MongoClientSettings();
             var doc = XmlHelper.GetXmlDocCache(EndpointFile);
             if (Equals(doc, null)) return configuration;
-            var node = doc.SelectSingleNode("/configuration/mongodb[@zone='" + zone + "']/server[@name='" + serverName + "']");
+            var node = doc.SelectSingleNode("/configuration/mongodb/server[@name='" + serverName + "']");
             if (Equals(node, null)) return configuration;
             var servers = new List<MongoServerAddress>();
             var userName = XmlHelper.GetXmlAttributeValue(node, "username", string.Empty);

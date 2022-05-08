@@ -40,10 +40,10 @@ namespace X.Util.Extend.Mongo
         /// <returns></returns>
         public Task<string> CreateIndex(string database, string collection, CreateIndexModel<T> index)
         {
-            if (!AppConfig.MongoDbEnable) return default(Task<string>);
+            if (!AppConfig.MongoDbEnable) return default;
             var mc = new MongoDbProvider<T>(database, collection);
             return CoreAccess<IMongoCollection<T>>.TryCallAsync<string, CreateIndexModel<T>, CreateOneIndexOptions, CancellationToken>(mc.Client.Indexes.CreateOne,
-                index, null, default(CancellationToken), mc, null, new LogOptions<string>(CallSuccess, true));
+                index, null, default, mc, null, new LogOptions<string>(CallSuccess, true));
         }
 
         /// <summary>
@@ -55,7 +55,7 @@ namespace X.Util.Extend.Mongo
         /// <returns></returns>
         public Task DropIndex(string database, string collection, string name)
         {
-            if (!AppConfig.MongoDbEnable) return default(Task);
+            if (!AppConfig.MongoDbEnable) return default;
             var mc = new MongoDbProvider<T>(database, collection);
             return CoreAccess<IMongoCollection<T>>.TryCallAsync(mc.Client.Indexes.DropOne, name, default(CancellationToken), mc, null, new LogOptions(true));
         }
@@ -68,7 +68,7 @@ namespace X.Util.Extend.Mongo
         /// <returns></returns>
         public IAsyncCursor<BsonDocument> IndexList(string database, string collection)
         {
-            if (!AppConfig.MongoDbEnable) return default(IAsyncCursor<BsonDocument>);
+            if (!AppConfig.MongoDbEnable) return default;
             var mc = new MongoDbProvider<T>(database, collection);
             return CoreAccess<IMongoCollection<T>>.TryCall(mc.Client.Indexes.List, default(CancellationToken), mc, new LogOptions<IAsyncCursor<BsonDocument>>(CallSuccess, true));
         }
@@ -84,14 +84,14 @@ namespace X.Util.Extend.Mongo
         /// <returns></returns>
         public Task InsertMongo(T t, string database, string collection)
         {
-            if (!AppConfig.MongoDbEnable) return default(Task);
+            if (!AppConfig.MongoDbEnable) return default;
             var property = typeof(T).GetProperty("Id");
             if (property != null && Equals(property.GetValue(t, null), null))
             {
                 property.SetValue(t, Guid.NewGuid().ToString("N"), null);
             }
             var mc = new MongoDbProvider<T>(database, collection);
-            return CoreAccess<IMongoCollection<T>>.TryCallAsync<T, InsertOneOptions, CancellationToken>(mc.Client.InsertOne, t, null, default(CancellationToken), mc, null, new LogOptions(true));
+            return CoreAccess<IMongoCollection<T>>.TryCallAsync<T, InsertOneOptions, CancellationToken>(mc.Client.InsertOne, t, null, default, mc, null, new LogOptions(true));
         }
 
         /// <summary>
@@ -103,7 +103,7 @@ namespace X.Util.Extend.Mongo
         /// <param name="collection"></param>
         public Task InsertBatchMongo(IEnumerable<T> list, string database, string collection)
         {
-            if (!AppConfig.MongoDbEnable) return default(Task);
+            if (!AppConfig.MongoDbEnable) return default;
             var property = typeof(T).GetProperty("Id");
             var enumerable = list as T[] ?? list.ToArray();
             foreach (var t in enumerable.Where(t => property != null && Equals(property.GetValue(t, null), null)))
@@ -111,7 +111,7 @@ namespace X.Util.Extend.Mongo
                 property.SetValue(t, Guid.NewGuid().ToString("N"), null);
             }
             var mc = new MongoDbProvider<T>(database, collection);
-            return CoreAccess<IMongoCollection<T>>.TryCallAsync<IEnumerable<T>, InsertManyOptions, CancellationToken>(mc.Client.InsertMany, enumerable, null, default(CancellationToken), mc, null, new LogOptions(true));
+            return CoreAccess<IMongoCollection<T>>.TryCallAsync<IEnumerable<T>, InsertManyOptions, CancellationToken>(mc.Client.InsertMany, enumerable, null, default, mc, null, new LogOptions(true));
         }
 
         /// <summary>
@@ -136,10 +136,10 @@ namespace X.Util.Extend.Mongo
         /// <returns></returns>
         public Task<UpdateResult> UpdateMongo(string database, string collection, FilterDefinition<T> filter, UpdateDefinition<T> update)
         {
-            if (!AppConfig.MongoDbEnable) return default(Task<UpdateResult>);
+            if (!AppConfig.MongoDbEnable) return default;
             var mc = new MongoDbProvider<T>(database, collection);
             return CoreAccess<IMongoCollection<T>>.TryCallAsync<UpdateResult, FilterDefinition<T>, UpdateDefinition<T>, UpdateOptions, CancellationToken>(mc.Client.UpdateOne,
-                filter, update, null, default(CancellationToken), mc, null, new LogOptions<UpdateResult>(CallSuccess, true));
+                filter, update, null, default, mc, null, new LogOptions<UpdateResult>(CallSuccess, true));
         }
 
         /// <summary>
@@ -152,10 +152,10 @@ namespace X.Util.Extend.Mongo
         /// <returns></returns>
         public Task<UpdateResult> UpdateBatchMongo(string database, string collection, FilterDefinition<T> filter, UpdateDefinition<T> update)
         {
-            if (!AppConfig.MongoDbEnable) return default(Task<UpdateResult>);
+            if (!AppConfig.MongoDbEnable) return default;
             var mc = new MongoDbProvider<T>(database, collection);
             return CoreAccess<IMongoCollection<T>>.TryCallAsync<UpdateResult, FilterDefinition<T>, UpdateDefinition<T>, UpdateOptions, CancellationToken>(mc.Client.UpdateMany,
-                filter, update, null, default(CancellationToken), mc, null, new LogOptions<UpdateResult>(CallSuccess, true));
+                filter, update, null, default, mc, null, new LogOptions<UpdateResult>(CallSuccess, true));
         }
 
         /// <summary>
@@ -168,10 +168,10 @@ namespace X.Util.Extend.Mongo
         /// <returns></returns>
         public Task<ReplaceOneResult> ReplaceMongo(string database, string collection, FilterDefinition<T> filter, T replace)
         {
-            if (!AppConfig.MongoDbEnable) return default(Task<ReplaceOneResult>);
+            if (!AppConfig.MongoDbEnable) return default;
             var mc = new MongoDbProvider<T>(database, collection);
             return CoreAccess<IMongoCollection<T>>.TryCallAsync<ReplaceOneResult, FilterDefinition<T>, T, ReplaceOptions, CancellationToken>(mc.Client.ReplaceOne,
-                filter, replace, null, default(CancellationToken), mc, null, new LogOptions<ReplaceOneResult>(CallSuccess, true));
+                filter, replace, null, default, mc, null, new LogOptions<ReplaceOneResult>(CallSuccess, true));
         }
 
         /// <summary>
@@ -184,7 +184,7 @@ namespace X.Util.Extend.Mongo
         /// <returns></returns>
         public Task<DeleteResult> RemoveMongo(string database, string collection, FilterDefinition<T> filter)
         {
-            if (!AppConfig.MongoDbEnable) return default(Task<DeleteResult>);
+            if (!AppConfig.MongoDbEnable) return default;
             var mc = new MongoDbProvider<T>(database, collection);
             return CoreAccess<IMongoCollection<T>>.TryCallAsync(mc.Client.DeleteOne, filter, default(CancellationToken), mc, null, new LogOptions<DeleteResult>(CallSuccess, true));
         }
@@ -197,7 +197,7 @@ namespace X.Util.Extend.Mongo
         /// <returns></returns>
         public Task<DeleteResult> RemoveBatchMongo(string database, string collection, FilterDefinition<T> filter)
         {
-            if (!AppConfig.MongoDbEnable) return default(Task<DeleteResult>);
+            if (!AppConfig.MongoDbEnable) return default;
             var mc = new MongoDbProvider<T>(database, collection);
             return CoreAccess<IMongoCollection<T>>.TryCallAsync(mc.Client.DeleteMany, filter, default(CancellationToken), mc, null, new LogOptions<DeleteResult>(CallSuccess, true));
         }
@@ -216,7 +216,7 @@ namespace X.Util.Extend.Mongo
         /// <returns></returns>
         public IFindFluent<T, T> Find(string database, string collection, FilterDefinition<T> filter, SortDefinition<T> sortBy = null, int limit = 0, int skip = 0)
         {
-            if (!AppConfig.MongoDbEnable) return default(IFindFluent<T, T>);
+            if (!AppConfig.MongoDbEnable) return default;
             var mc = new MongoDbProvider<T>(database, collection);
             var result = CoreAccess<IMongoCollection<T>>.TryCall((ifilter, isortBy, ilimit, iskip) =>
             {
@@ -241,7 +241,7 @@ namespace X.Util.Extend.Mongo
         {
             if (!AppConfig.MongoDbEnable) return 0;
             var mc = new MongoDbProvider<T>(database, collection);
-            return CoreAccess<IMongoCollection<T>>.TryCall<long, FilterDefinition<T>, CountOptions, CancellationToken>(mc.Client.CountDocuments, filter, null, default(CancellationToken),
+            return CoreAccess<IMongoCollection<T>>.TryCall<long, FilterDefinition<T>, CountOptions, CancellationToken>(mc.Client.CountDocuments, filter, null, default,
                 mc, new LogOptions<long>(CoreBase.CallSuccess, true));
         }
 
@@ -255,10 +255,10 @@ namespace X.Util.Extend.Mongo
         /// <returns></returns>
         public IAsyncCursor<TField> Distinct<TField>(string database, string collection, FieldDefinition<T, TField> field, FilterDefinition<T> filter)
         {
-            if (!AppConfig.MongoDbEnable) return default(IAsyncCursor<TField>);
+            if (!AppConfig.MongoDbEnable) return default;
             var mc = new MongoDbProvider<T>(database, collection);
             return CoreAccess<IMongoCollection<T>>.TryCall<IAsyncCursor<TField>, FieldDefinition<T, TField>, FilterDefinition<T>, DistinctOptions, CancellationToken>
-                (mc.Client.Distinct, field, filter, null, default(CancellationToken), mc, new LogOptions<IAsyncCursor<TField>>(CallSuccess, true));
+                (mc.Client.Distinct, field, filter, null, default, mc, new LogOptions<IAsyncCursor<TField>>(CallSuccess, true));
         }
         #endregion
 
@@ -273,10 +273,10 @@ namespace X.Util.Extend.Mongo
         /// <returns></returns>
         public IAsyncCursor<TResult> Aggregate<TResult>(string database, string collection, PipelineDefinition<T, TResult> pipeline)
         {
-            if (!AppConfig.MongoDbEnable) return default(IAsyncCursor<TResult>);
+            if (!AppConfig.MongoDbEnable) return default;
             var mc = new MongoDbProvider<T>(database, collection);
             return CoreAccess<IMongoCollection<T>>.TryCall<IAsyncCursor<TResult>, PipelineDefinition<T, TResult>, AggregateOptions, CancellationToken>
-                (mc.Client.Aggregate, pipeline, null, default(CancellationToken), mc, new LogOptions<IAsyncCursor<TResult>>(CallSuccess, true));
+                (mc.Client.Aggregate, pipeline, null, default, mc, new LogOptions<IAsyncCursor<TResult>>(CallSuccess, true));
         }
 
         /// <summary>
@@ -289,10 +289,10 @@ namespace X.Util.Extend.Mongo
         /// <returns></returns>
         public Task AggregateToCollection<TResult>(string database, string collection, PipelineDefinition<T, TResult> pipeline)
         {
-            if (!AppConfig.MongoDbEnable) return default(Task);
+            if (!AppConfig.MongoDbEnable) return default;
             var mc = new MongoDbProvider<T>(database, collection);
             return CoreAccess<IMongoCollection<T>>.TryCallAsync<PipelineDefinition<T, TResult>, AggregateOptions, CancellationToken>
-                (mc.Client.AggregateToCollection, pipeline, null, default(CancellationToken), mc, null, new LogOptions(true));
+                (mc.Client.AggregateToCollection, pipeline, null, default, mc, null, new LogOptions(true));
         }
 
         /// <summary>
@@ -304,10 +304,10 @@ namespace X.Util.Extend.Mongo
         /// <returns></returns>
         public Task<BulkWriteResult<T>> BulkWrite(string database, string collection, IEnumerable<WriteModel<T>> requests)
         {
-            if (!AppConfig.MongoDbEnable) return default(Task<BulkWriteResult<T>>);
+            if (!AppConfig.MongoDbEnable) return default;
             var mc = new MongoDbProvider<T>(database, collection);
             return CoreAccess<IMongoCollection<T>>.TryCallAsync<BulkWriteResult<T>, IEnumerable<WriteModel<T>>, BulkWriteOptions, CancellationToken>
-                (mc.Client.BulkWrite, requests, null, default(CancellationToken), mc, null, new LogOptions<BulkWriteResult<T>>(CallSuccess, true));
+                (mc.Client.BulkWrite, requests, null, default, mc, null, new LogOptions<BulkWriteResult<T>>(CallSuccess, true));
         }
 
         /// <summary>
@@ -320,10 +320,10 @@ namespace X.Util.Extend.Mongo
         /// <returns></returns>
         public Task<IChangeStreamCursor<TResult>> Watch<TResult>(string database, string collection, PipelineDefinition<ChangeStreamDocument<T>, TResult> pipeline)
         {
-            if (!AppConfig.MongoDbEnable) return default(Task<IChangeStreamCursor<TResult>>);
+            if (!AppConfig.MongoDbEnable) return default;
             var mc = new MongoDbProvider<T>(database, collection);
             return CoreAccess<IMongoCollection<T>>.TryCallAsync<IChangeStreamCursor<TResult>, PipelineDefinition<ChangeStreamDocument<T>, TResult>, ChangeStreamOptions, CancellationToken>
-                (mc.Client.Watch, pipeline, null, default(CancellationToken), mc, null, new LogOptions<IChangeStreamCursor<TResult>>(CallSuccess, true));
+                (mc.Client.Watch, pipeline, null, default, mc, null, new LogOptions<IChangeStreamCursor<TResult>>(CallSuccess, true));
         }
         #endregion
 

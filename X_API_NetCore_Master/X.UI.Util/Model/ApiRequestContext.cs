@@ -1,8 +1,9 @@
 ﻿using System;
+using X.Interface.Dto;
 
-namespace X.Util.Entities
+namespace X.UI.Util.Model
 {
-    public class ApiRequestContext : HttpRequestContext
+    public class ApiRequestContext
     {
         /// <summary>
         /// RequestId
@@ -27,7 +28,7 @@ namespace X.Util.Entities
         /// <summary>
         /// 时间戳
         /// </summary>
-        public DateTime Now { get; set; }
+        public DateTime ServerTime { get; set; }
 
         /// <summary>
         /// ActionArgument 参数
@@ -40,8 +41,8 @@ namespace X.Util.Entities
         public string Cid { get; set; }
 
         /// <summary>
-        /// 用户信息
+        /// HttpRequestContext4Heads 客户端传递
         /// </summary>
-        public string UserInfo { get; set; }
+        public HttpRequestContext4Heads Heads { get; set; }
     }
 }

@@ -18,7 +18,7 @@ namespace X.Util.Extend.Cache
 
         private CacheData() { }
         public static readonly ICacheData Default = new CacheData();
-        public CacheData(string couchName, string redisName)
+        public CacheData(string redisName)
         {
             _redis = new RedisCache(redisName);
         }
@@ -215,7 +215,7 @@ namespace X.Util.Extend.Cache
                     }
                     return redis;
             }
-            return default(T);
+            return default;
         }
 
         public void SetCacheDbData<T>(string key, T obj, DateTime expire, EnumCacheType cacheType)

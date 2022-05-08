@@ -23,7 +23,7 @@ namespace X.Util.Provider
             if (request.CreateChannel == null) throw new Exception("CreateChannel is method.");
             if (request.CloseChannel == null) request.CloseChannel = chnanel => { };
             if (request.ChannelIsVail == null) request.ChannelIsVail = channel => true;
-            if (request.ChannelRecycle == default(TimeSpan)) request.ChannelRecycle = new TimeSpan(0, 1, 0);
+            if (request.ChannelRecycle == default) request.ChannelRecycle = new TimeSpan(0, 1, 0);
             Request = request;
             CacheKey = string.Format("{0}_{1}", Request.EndpointAddress, Request.PoolSize);
             var th = new Thread(() =>
@@ -57,7 +57,7 @@ namespace X.Util.Provider
                 for (var i = 0; i < Request.PoolSize; i++)
                 {
                     var channel = Request.CreateChannel();
-                    if (Request.InitChannel != null) Request.InitChannel(channel, ReleaseClient);
+                    Request.InitChannel?.Invoke(channel, ReleaseClient);
                     result.ContextQueue.Enqueue(new ContextChannel<TChannel> { ChannelClosedTime = DateTime.Now.Add(Request.ChannelLifeCycle), Channel = channel });
                 }
             }
@@ -84,13 +84,12 @@ namespace X.Util.Provider
                 var channel = default(TChannel);
                 try
                 {
-                    ContextChannel<TChannel> contextChannel;
-                    if (CoreFactoryPool.ContextQueue.TryDequeue(out contextChannel) && contextChannel != null)
+                    if (CoreFactoryPool.ContextQueue.TryDequeue(out ContextChannel<TChannel> contextChannel) && contextChannel != null)
                     {
                         var channelIsVail = contextChannel.ChannelClosedTime > DateTime.Now && Request.ChannelIsVail(contextChannel.Channel);
                         if (channelIsVail) return contextChannel.Channel;
                         channel = Request.CreateChannel();
-                        if (Request.InitChannel != null) Request.InitChannel(channel, ReleaseClient);
+                        Request.InitChannel?.Invoke(channel, ReleaseClient);
                         return channel;
                     }
                     CoreFactoryPool.EventWait.Reset();

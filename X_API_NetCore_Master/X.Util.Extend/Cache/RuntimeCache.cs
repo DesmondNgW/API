@@ -6,7 +6,7 @@ namespace X.Util.Extend.Cache
 {
     public class RuntimeCache
     {
-        private static LocalCache LocalCache = new LocalCache();
+        private static readonly LocalCache LocalCache = new LocalCache();
 
         public static T Get<T>(object key)
         {

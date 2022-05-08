@@ -87,7 +87,7 @@ namespace X.Util.Core.Log
                         }
                         catch
                         {
-                            return default(ILog);
+                            return default;
                         }
                     }
                 }

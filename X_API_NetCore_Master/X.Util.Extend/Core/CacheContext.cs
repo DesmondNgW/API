@@ -41,7 +41,7 @@ namespace X.Util.Extend.Core
             return () =>
             {
                 var iresult = caller();
-                return iresult != null ? iresult.Result : default(TResult);
+                return iresult != null ? iresult.Result : default;
             };
         }
 

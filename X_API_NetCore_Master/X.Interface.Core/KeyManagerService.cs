@@ -10,6 +10,11 @@ namespace X.Interface.Core
 {
     public class KeyManagerService : IKeyManager
     {
+        /// <summary>
+        /// GetPublicKey
+        /// </summary>
+        /// <param name="size"></param>
+        /// <returns></returns>
         public ApiResult<PublicKeyDto> GetPublicKey(int size)
         {
             size = Math.Max(1024, size);

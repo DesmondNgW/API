@@ -240,14 +240,12 @@ namespace X.Util.Extend.Mongo
         #region EnumValue
         public static T GetEnum<T>(BsonValue value, T defaultValue) where T : struct
         {
-            T result;
-            return Enum.TryParse(GetString(value), out result) ? result : defaultValue;
+            return Enum.TryParse(GetString(value), out T result) ? result : defaultValue;
         }
 
         public static T GetEnum<T>(BsonDocument document, string name, T defaultValue) where T : struct
         {
-            T result;
-            return Enum.TryParse(GetString(document, name, string.Empty), out result) ? result : defaultValue;
+            return Enum.TryParse(GetString(document, name, string.Empty), out T result) ? result : defaultValue;
         }
         #endregion
     }

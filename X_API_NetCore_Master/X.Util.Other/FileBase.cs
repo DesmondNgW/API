@@ -25,7 +25,7 @@ namespace X.Util.Other
                 Logger.Client.Error(Logger.Client.GetMethodInfo(MethodBase.GetCurrentMethod(), new object[] { filePath, fileName, content, encode, mode }), ex, LogDomain.Util);
             }
             var fm = FileBaseMode.Append.Equals(mode) ? FileMode.OpenOrCreate : FileMode.Create;
-            FileStream fs = default(FileStream);
+            FileStream fs = default;
             var realFilePath = Path.Combine(filePath, fileName);
             var ed = encode.Contains("utf8") || encode.Contains("utf-8") ? Encoding.UTF8 : encode.Contains("unicode") ? Encoding.Unicode : Encoding.GetEncoding(encode);
             CoreUtil.CoderLocker(realFilePath, () =>

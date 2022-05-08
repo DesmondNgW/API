@@ -9,7 +9,7 @@ namespace X.Util.Core.Kernel
     public static class CallContext
     {
         public static string Prefix = "X.Util.Core.Kernel.CallContext.State.";
-        static ConcurrentDictionary<string, AsyncLocal<object>> state = new ConcurrentDictionary<string, AsyncLocal<object>>();
+        static readonly ConcurrentDictionary<string, AsyncLocal<object>> state = new ConcurrentDictionary<string, AsyncLocal<object>>();
 
         /// <summary>
         /// Stores a given object and associates it with the specified name.

@@ -28,7 +28,7 @@ namespace X.Util.Core
 
         public static T FromJson<T>(this string json)
         {
-            if (json.IsNullOrEmpty()) return default(T);
+            if (json.IsNullOrEmpty()) return default;
             try
             {
                 return JsonConvert.DeserializeObject<T>(json, new JsonSerializerSettings { MaxDepth = int.MaxValue, DateTimeZoneHandling = DateTimeZoneHandling.Local });
@@ -37,7 +37,7 @@ namespace X.Util.Core
             {
                 Logger.Client.Error(Logger.Client.GetMethodInfo(MethodBase.GetCurrentMethod(), new object[] { json }), e, LogDomain.Util);
             }
-            return default(T);
+            return default;
         }
 
         public static object FromJson(this string json, Type T)

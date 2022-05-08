@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
 using X.Util.Core;
@@ -40,7 +41,7 @@ namespace X.Util.Other
         public static T Get<T>(string uri, Dictionary<string, string> arguments, Dictionary<string, string> extendHeaders)
         {
             var iresult = HttpRequestBase.GetHttpInfo(GetUri(uri, arguments), "utf-8", "application/json", extendHeaders, string.Empty);
-            return iresult.Success && !string.IsNullOrEmpty(iresult.Content) ? iresult.Content.FromJson<T>() : default(T);
+            return iresult.Success && !string.IsNullOrEmpty(iresult.Content) ? iresult.Content.FromJson<T>() : default;
         }
 
         public static string GetContent(string uri, Dictionary<string, string> arguments, string contentType, Dictionary<string, string> extendHeaders)
@@ -60,11 +61,16 @@ namespace X.Util.Other
         public static T Post<T>(string uri, object postdata, Dictionary<string, string> extendHeaders)
         {
             var iresult = HttpRequestBase.PostHttpInfo(uri, "utf-8", postdata.ToJson(), "application/json", extendHeaders, string.Empty);
-            return iresult.Success && !string.IsNullOrEmpty(iresult.Content) ? iresult.Content.FromJson<T>() : default(T);
+            return iresult.Success && !string.IsNullOrEmpty(iresult.Content) ? iresult.Content.FromJson<T>() : default;
         }
 
         public static string PostContent(string uri, object postdata, Dictionary<string, string> arguments, string contentType, Dictionary<string, string> extendHeaders)
         {
+            if (arguments is null)
+            {
+                throw new ArgumentNullException(nameof(arguments));
+            }
+
             var iresult = HttpRequestBase.PostHttpInfo(uri, "utf-8", postdata.ToJson(), contentType, extendHeaders, string.Empty);
             return iresult.Success && !string.IsNullOrEmpty(iresult.Content) ? iresult.Content : string.Empty;
         }
@@ -76,7 +82,7 @@ namespace X.Util.Other
         /// <returns></returns>
         public static string GetRealPath(string path)
         {
-            MatchEvaluator matchEvaluator = m => "/";
+            string matchEvaluator(Match m) => "/";
             path = DotRe.Replace(path, matchEvaluator);
             path = MultiSlashRe.Replace(path, m => m.Groups[1].ToString() + "/");
             while (DoubleDotRe.IsMatch(path)) path = DoubleDotRe.Replace(path, matchEvaluator);

@@ -20,16 +20,16 @@ namespace X.Util.Extend.Core
         public static ICoreCache Default = new CoreCache();
         private readonly ICacheData _cacheData = CacheData.Default;
         private CoreCache() { }
-        public CoreCache(string couchName, string redisName)
+        public CoreCache(string redisName)
         {
-            _cacheData = new CacheData(couchName, redisName);
+            _cacheData = new CacheData(redisName);
         }
         #endregion
 
         #region 内部实现
         private static void AddContextCacheKeys(string key)
         {
-            var token = ExecutionContext<RequestContext>.Current.Ctoken;
+            var token = ExecutionContext<BusinessRequestContext>.Current.Ctoken;
             if (string.IsNullOrEmpty(token)) return;
             var list = LocalCache.Default.Get<IList<string>>(token) ?? new List<string>();
             if (list.Contains(key)) return;

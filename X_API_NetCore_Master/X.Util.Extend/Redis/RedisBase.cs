@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using X.Util.Core;
 using X.Util.Core.Configuration;
 using X.Util.Core.Kernel;
@@ -72,7 +73,7 @@ namespace X.Util.Extend.Redis
 
         public long KeyDelete(List<string> keys, CommandFlags flags = CommandFlags.None)
         {
-            if (!AppConfig.RedisCacheEnable) return default(long);
+            if (!AppConfig.RedisCacheEnable) return default;
             var redisProvider = new RedisProvider(DbNum, ServerName);
             return CoreAccess<IDatabase>.TryCall(redisProvider.Client.KeyDelete, RedisDataHelper.String2Key(keys),
                 flags, redisProvider, new LogOptions<long>(CoreBase.CallSuccess, true));
@@ -80,7 +81,7 @@ namespace X.Util.Extend.Redis
 
         public bool KeyMove(string key, int database, CommandFlags flags = CommandFlags.None)
         {
-            if (!AppConfig.RedisCacheEnable) return default(bool);
+            if (!AppConfig.RedisCacheEnable) return default;
             var redisProvider = new RedisProvider(DbNum, ServerName);
             return CoreAccess<IDatabase>.TryCall(redisProvider.Client.KeyMove, RedisDataHelper.String2Key(key), database,
                 flags, redisProvider, new LogOptions<bool>(CoreBase.CallSuccess, true));
@@ -88,7 +89,7 @@ namespace X.Util.Extend.Redis
 
         public bool KeyPersist(string key, CommandFlags flags = CommandFlags.None)
         {
-            if (!AppConfig.RedisCacheEnable) return default(bool);
+            if (!AppConfig.RedisCacheEnable) return default;
             var redisProvider = new RedisProvider(DbNum, ServerName);
             return CoreAccess<IDatabase>.TryCall(redisProvider.Client.KeyPersist, RedisDataHelper.String2Key(key),
                 flags, redisProvider, new LogOptions<bool>(CoreBase.CallSuccess, true));
@@ -104,7 +105,7 @@ namespace X.Util.Extend.Redis
 
         public bool KeyRename(string key, string newKey, When when = When.Always, CommandFlags flags = CommandFlags.None)
         {
-            if (!AppConfig.RedisCacheEnable) return default(bool);
+            if (!AppConfig.RedisCacheEnable) return default;
             var redisProvider = new RedisProvider(DbNum, ServerName);
             return CoreAccess<IDatabase>.TryCall(redisProvider.Client.KeyRename, RedisDataHelper.String2Key(key),
                 RedisDataHelper.String2Key(newKey),
@@ -113,14 +114,14 @@ namespace X.Util.Extend.Redis
 
         public RedisType KeyType(string key, CommandFlags flags = CommandFlags.None)
         {
-            if (!AppConfig.RedisCacheEnable) return default(RedisType);
+            if (!AppConfig.RedisCacheEnable) return default;
             var redisProvider = new RedisProvider(DbNum, ServerName);
             return CoreAccess<IDatabase>.TryCall(redisProvider.Client.KeyType, RedisDataHelper.String2Key(key), flags, redisProvider, new LogOptions<RedisType>(CoreBase.CallSuccess, true));
         }
 
         public TimeSpan? KeyTimeToLive(string key, CommandFlags flags = CommandFlags.None)
         {
-            if (!AppConfig.RedisCacheEnable) return default(TimeSpan?);
+            if (!AppConfig.RedisCacheEnable) return default;
             var redisProvider = new RedisProvider(DbNum, ServerName);
             return CoreAccess<IDatabase>.TryCall(redisProvider.Client.KeyTimeToLive, RedisDataHelper.String2Key(key),
                 flags, redisProvider, new LogOptions<TimeSpan?>(CoreBase.CallSuccess, true));
@@ -131,7 +132,7 @@ namespace X.Util.Extend.Redis
         #region String
         public T StringGet<T>(string key, CommandFlags flags = CommandFlags.None)
         {
-            if (!AppConfig.RedisCacheEnable) return default(T);
+            if (!AppConfig.RedisCacheEnable) return default;
             var redisProvider = new RedisProvider(DbNum, ServerName);
             string ret = CoreAccess<IDatabase>.TryCall(redisProvider.Client.StringGet, RedisDataHelper.String2Key(key),
                 flags, redisProvider, new LogOptions<RedisValue>(CallSuccess));
@@ -166,7 +167,7 @@ namespace X.Util.Extend.Redis
 
         public double StringIncrement(string key, double value, CommandFlags flags = CommandFlags.None)
         {
-            if (!AppConfig.RedisCacheEnable) return default(double);
+            if (!AppConfig.RedisCacheEnable) return default;
             var redisProvider = new RedisProvider(DbNum, ServerName);
             return CoreAccess<IDatabase>.TryCall(
                 redisProvider.Client.StringIncrement, RedisDataHelper.String2Key(key), value, flags,
@@ -175,7 +176,7 @@ namespace X.Util.Extend.Redis
 
         public double StringDecrement(string key, double value, CommandFlags flags = CommandFlags.None)
         {
-            if (!AppConfig.RedisCacheEnable) return default(double);
+            if (!AppConfig.RedisCacheEnable) return default;
             var redisProvider = new RedisProvider(DbNum, ServerName);
             return CoreAccess<IDatabase>.TryCall(
                 redisProvider.Client.StringDecrement, RedisDataHelper.String2Key(key), value, flags,
@@ -197,7 +198,7 @@ namespace X.Util.Extend.Redis
 
         public long HashDecrement(string key, string hashField, long value = 1, CommandFlags flags = CommandFlags.None)
         {
-            if (!AppConfig.RedisCacheEnable) return default(long);
+            if (!AppConfig.RedisCacheEnable) return default;
             var redisProvider = new RedisProvider(DbNum, ServerName);
             return CoreAccess<IDatabase>.TryCall(redisProvider.Client.HashDecrement, RedisDataHelper.String2Key(key),
                 RedisDataHelper.String2Value(hashField), value, flags, redisProvider,
@@ -206,7 +207,7 @@ namespace X.Util.Extend.Redis
 
         public double HashDecrement(string key, string hashField, double value, CommandFlags flags = CommandFlags.None)
         {
-            if (!AppConfig.RedisCacheEnable) return default(double);
+            if (!AppConfig.RedisCacheEnable) return default;
             var redisProvider = new RedisProvider(DbNum, ServerName);
             return CoreAccess<IDatabase>.TryCall(redisProvider.Client.HashDecrement, RedisDataHelper.String2Key(key),
                 RedisDataHelper.String2Value(hashField), value, flags, redisProvider,
@@ -224,7 +225,7 @@ namespace X.Util.Extend.Redis
 
         public long HashDelete(string key, List<string> hashFields, CommandFlags flags = CommandFlags.None)
         {
-            if (!AppConfig.RedisCacheEnable) return default(long);
+            if (!AppConfig.RedisCacheEnable) return default;
             var redisProvider = new RedisProvider(DbNum, ServerName);
             return CoreAccess<IDatabase>.TryCall(redisProvider.Client.HashDelete, RedisDataHelper.String2Key(key),
                 RedisDataHelper.String2Value(hashFields), flags, redisProvider,
@@ -233,7 +234,7 @@ namespace X.Util.Extend.Redis
 
         public T HashGet<T>(string key, string hashField, CommandFlags flags = CommandFlags.None)
         {
-            if (!AppConfig.RedisCacheEnable) return default(T);
+            if (!AppConfig.RedisCacheEnable) return default;
             var redisProvider = new RedisProvider(DbNum, ServerName);
             string ret = CoreAccess<IDatabase>.TryCall(redisProvider.Client.HashGet, RedisDataHelper.String2Key(key),
                 RedisDataHelper.String2Value(hashField), flags, redisProvider,
@@ -243,7 +244,7 @@ namespace X.Util.Extend.Redis
 
         public RedisValue[] HashGet(string key, List<string> hashFields, CommandFlags flags = CommandFlags.None)
         {
-            if (!AppConfig.RedisCacheEnable) return default(RedisValue[]);
+            if (!AppConfig.RedisCacheEnable) return default;
             var redisProvider = new RedisProvider(DbNum, ServerName);
             return CoreAccess<IDatabase>.TryCall(redisProvider.Client.HashGet, RedisDataHelper.String2Key(key),
                 RedisDataHelper.String2Value(hashFields), flags, redisProvider,
@@ -252,7 +253,7 @@ namespace X.Util.Extend.Redis
 
         public HashEntry[] HashGetAll(RedisKey key, CommandFlags flags = CommandFlags.None)
         {
-            if (!AppConfig.RedisCacheEnable) return default(HashEntry[]);
+            if (!AppConfig.RedisCacheEnable) return default;
             var redisProvider = new RedisProvider(DbNum, ServerName);
             return CoreAccess<IDatabase>.TryCall(redisProvider.Client.HashGetAll, RedisDataHelper.String2Key(key), flags,
                 redisProvider, new LogOptions<HashEntry[]>(CallSuccess));
@@ -260,7 +261,7 @@ namespace X.Util.Extend.Redis
 
         public long HashIncrement(string key, string hashField, long value = 1, CommandFlags flags = CommandFlags.None)
         {
-            if (!AppConfig.RedisCacheEnable) return default(long);
+            if (!AppConfig.RedisCacheEnable) return default;
             var redisProvider = new RedisProvider(DbNum, ServerName);
             return CoreAccess<IDatabase>.TryCall(redisProvider.Client.HashIncrement, RedisDataHelper.String2Key(key),
                 RedisDataHelper.String2Value(hashField), value, flags, redisProvider,
@@ -269,7 +270,7 @@ namespace X.Util.Extend.Redis
 
         public double HashIncrement(string key, string hashField, double value, CommandFlags flags = CommandFlags.None)
         {
-            if (!AppConfig.RedisCacheEnable) return default(double);
+            if (!AppConfig.RedisCacheEnable) return default;
             var redisProvider = new RedisProvider(DbNum, ServerName);
             return CoreAccess<IDatabase>.TryCall(redisProvider.Client.HashIncrement, RedisDataHelper.String2Key(key),
                 RedisDataHelper.String2Value(hashField), value, flags, redisProvider,
@@ -278,7 +279,7 @@ namespace X.Util.Extend.Redis
 
         public List<string> HashKeys(string key, CommandFlags flags = CommandFlags.None)
         {
-            if (!AppConfig.RedisCacheEnable) return default(List<string>);
+            if (!AppConfig.RedisCacheEnable) return default;
             var redisProvider = new RedisProvider(DbNum, ServerName);
             return
                 RedisDataHelper.Value2String(CoreAccess<IDatabase>.TryCall(redisProvider.Client.HashKeys,
@@ -287,7 +288,7 @@ namespace X.Util.Extend.Redis
 
         public long HashLength(RedisKey key, CommandFlags flags = CommandFlags.None)
         {
-            if (!AppConfig.RedisCacheEnable) return default(long);
+            if (!AppConfig.RedisCacheEnable) return default;
             var redisProvider = new RedisProvider(DbNum, ServerName);
             return CoreAccess<IDatabase>.TryCall(redisProvider.Client.HashLength, RedisDataHelper.String2Key(key),
                 flags, redisProvider, new LogOptions<long>(CoreBase.CallSuccess));
@@ -295,23 +296,23 @@ namespace X.Util.Extend.Redis
 
         public bool HashSet<T>(string key, string hashField, T value, When when = When.Always, CommandFlags flags = CommandFlags.None)
         {
-            if (!AppConfig.RedisCacheEnable) return default(bool);
+            if (!AppConfig.RedisCacheEnable) return default;
             var redisProvider = new RedisProvider(DbNum, ServerName);
             return CoreAccess<IDatabase>.TryCall(redisProvider.Client.HashSet, RedisDataHelper.String2Key(key),
                 RedisDataHelper.String2Value(hashField), RedisDataHelper.Type2Value(value), when, flags, redisProvider, new LogOptions<bool>(CoreBase.CallSuccess));
         }
 
-        public void HashSet(string key, Dictionary<RedisValue, RedisValue> hashFields, CommandFlags flags = CommandFlags.None)
+        public Task HashSet(string key, Dictionary<RedisValue, RedisValue> hashFields, CommandFlags flags = CommandFlags.None)
         {
-            if (!AppConfig.RedisCacheEnable) return;
+            if (!AppConfig.RedisCacheEnable) return default;
             var redisProvider = new RedisProvider(DbNum, ServerName);
-            CoreAccess<IDatabase>.TryCallAsync(redisProvider.Client.HashSet, RedisDataHelper.String2Key(key),
+            return CoreAccess<IDatabase>.TryCallAsync(redisProvider.Client.HashSet, RedisDataHelper.String2Key(key),
                 hashFields.Select(p => new HashEntry(p.Key, p.Value)).ToArray(), flags, redisProvider, null, new LogOptions());
         }
 
         public RedisValue[] HashValues(RedisKey key, CommandFlags flags = CommandFlags.None)
         {
-            if (!AppConfig.RedisCacheEnable) return default(RedisValue[]);
+            if (!AppConfig.RedisCacheEnable) return default;
             var redisProvider = new RedisProvider(DbNum, ServerName);
             return CoreAccess<IDatabase>.TryCall(redisProvider.Client.HashValues, RedisDataHelper.String2Key(key), flags,
                 redisProvider, new LogOptions<RedisValue[]>(CallSuccess));
@@ -322,7 +323,7 @@ namespace X.Util.Extend.Redis
         #region List
         public T ListGetByIndex<T>(string key, long index, CommandFlags flags = CommandFlags.None)
         {
-            if (!AppConfig.RedisCacheEnable) return default(T);
+            if (!AppConfig.RedisCacheEnable) return default;
             var redisProvider = new RedisProvider(DbNum, ServerName);
             string ret = CoreAccess<IDatabase>.TryCall(redisProvider.Client.ListGetByIndex, RedisDataHelper.String2Key(key),
                 index, flags, redisProvider,
@@ -332,7 +333,7 @@ namespace X.Util.Extend.Redis
 
         public long ListInsertAfter<T>(string key, RedisValue pivot, T value, CommandFlags flags = CommandFlags.None)
         {
-            if (!AppConfig.RedisCacheEnable) return default(long);
+            if (!AppConfig.RedisCacheEnable) return default;
             var redisProvider = new RedisProvider(DbNum, ServerName);
             return CoreAccess<IDatabase>.TryCall(redisProvider.Client.ListInsertAfter, RedisDataHelper.String2Key(key),
                 pivot, RedisDataHelper.Type2Value(value), flags, redisProvider,
@@ -341,7 +342,7 @@ namespace X.Util.Extend.Redis
 
         public long ListInsertBefore<T>(string key, RedisValue pivot, T value, CommandFlags flags = CommandFlags.None)
         {
-            if (!AppConfig.RedisCacheEnable) return default(long);
+            if (!AppConfig.RedisCacheEnable) return default;
             var redisProvider = new RedisProvider(DbNum, ServerName);
             return CoreAccess<IDatabase>.TryCall(redisProvider.Client.ListInsertBefore, RedisDataHelper.String2Key(key),
                 pivot, RedisDataHelper.Type2Value(value), flags, redisProvider,
@@ -350,7 +351,7 @@ namespace X.Util.Extend.Redis
 
         public T ListLeftPop<T>(string key, CommandFlags flags = CommandFlags.None)
         {
-            if (!AppConfig.RedisCacheEnable) return default(T);
+            if (!AppConfig.RedisCacheEnable) return default;
             var redisProvider = new RedisProvider(DbNum, ServerName);
             string ret = CoreAccess<IDatabase>.TryCall(redisProvider.Client.ListLeftPop, RedisDataHelper.String2Key(key),
                 flags, redisProvider, new LogOptions<RedisValue>(CallSuccess));
@@ -359,7 +360,7 @@ namespace X.Util.Extend.Redis
 
         public long ListLeftPush(string key, RedisValue[] values, CommandFlags flags = CommandFlags.None)
         {
-            if (!AppConfig.RedisCacheEnable) return default(long);
+            if (!AppConfig.RedisCacheEnable) return default;
             var redisProvider = new RedisProvider(DbNum, ServerName);
             return CoreAccess<IDatabase>.TryCall(redisProvider.Client.ListLeftPush, RedisDataHelper.String2Key(key),
                 values, flags, redisProvider, new LogOptions<long>(CoreBase.CallSuccess));
@@ -367,7 +368,7 @@ namespace X.Util.Extend.Redis
 
         public long ListLeftPush<T>(string key, T value, When when = When.Always, CommandFlags flags = CommandFlags.None)
         {
-            if (!AppConfig.RedisCacheEnable) return default(long);
+            if (!AppConfig.RedisCacheEnable) return default;
             var redisProvider = new RedisProvider(DbNum, ServerName);
             return CoreAccess<IDatabase>.TryCall(redisProvider.Client.ListLeftPush, RedisDataHelper.String2Key(key),
                 RedisDataHelper.Type2Value(value), when, flags, redisProvider,
@@ -376,7 +377,7 @@ namespace X.Util.Extend.Redis
 
         public long ListLength(string key, CommandFlags flags = CommandFlags.None)
         {
-            if (!AppConfig.RedisCacheEnable) return default(long);
+            if (!AppConfig.RedisCacheEnable) return default;
             var redisProvider = new RedisProvider(DbNum, ServerName);
             return CoreAccess<IDatabase>.TryCall(redisProvider.Client.ListLength, RedisDataHelper.String2Key(key),
                 flags, redisProvider, new LogOptions<long>(CoreBase.CallSuccess));
@@ -384,7 +385,7 @@ namespace X.Util.Extend.Redis
 
         public RedisValue[] ListRange(string key, long start = 0, long stop = -1, CommandFlags flags = CommandFlags.None)
         {
-            if (!AppConfig.RedisCacheEnable) return default(RedisValue[]);
+            if (!AppConfig.RedisCacheEnable) return default;
             var redisProvider = new RedisProvider(DbNum, ServerName);
             return CoreAccess<IDatabase>.TryCall(redisProvider.Client.ListRange, RedisDataHelper.String2Key(key),
                 start, stop, flags, redisProvider, new LogOptions<RedisValue[]>(CoreBase.CallSuccess));
@@ -392,7 +393,7 @@ namespace X.Util.Extend.Redis
 
         public long ListRemove<T>(string key, T value, long count = 0, CommandFlags flags = CommandFlags.None)
         {
-            if (!AppConfig.RedisCacheEnable) return default(long);
+            if (!AppConfig.RedisCacheEnable) return default;
             var redisProvider = new RedisProvider(DbNum, ServerName);
             return CoreAccess<IDatabase>.TryCall(redisProvider.Client.ListRemove, RedisDataHelper.String2Key(key),
                 RedisDataHelper.Type2Value(value), count, flags, redisProvider,
@@ -401,7 +402,7 @@ namespace X.Util.Extend.Redis
 
         public T ListRightPop<T>(string key, CommandFlags flags = CommandFlags.None)
         {
-            if (!AppConfig.RedisCacheEnable) return default(T);
+            if (!AppConfig.RedisCacheEnable) return default;
             var redisProvider = new RedisProvider(DbNum, ServerName);
             string ret = CoreAccess<IDatabase>.TryCall(redisProvider.Client.ListRightPop, RedisDataHelper.String2Key(key),
                 flags, redisProvider, new LogOptions<RedisValue>(CallSuccess));
@@ -410,7 +411,7 @@ namespace X.Util.Extend.Redis
 
         public long ListRightPush(string key, RedisValue[] values, CommandFlags flags = CommandFlags.None)
         {
-            if (!AppConfig.RedisCacheEnable) return default(long);
+            if (!AppConfig.RedisCacheEnable) return default;
             var redisProvider = new RedisProvider(DbNum, ServerName);
             return CoreAccess<IDatabase>.TryCall(redisProvider.Client.ListRightPush, RedisDataHelper.String2Key(key),
                 values, flags, redisProvider, new LogOptions<long>(CoreBase.CallSuccess));
@@ -418,18 +419,18 @@ namespace X.Util.Extend.Redis
 
         public long ListRightPush<T>(string key, T value, When when = When.Always, CommandFlags flags = CommandFlags.None)
         {
-            if (!AppConfig.RedisCacheEnable) return default(long);
+            if (!AppConfig.RedisCacheEnable) return default;
             var redisProvider = new RedisProvider(DbNum, ServerName);
             return CoreAccess<IDatabase>.TryCall(redisProvider.Client.ListRightPush, RedisDataHelper.String2Key(key),
                 RedisDataHelper.Type2Value(value), when, flags, redisProvider,
                 new LogOptions<long>(CoreBase.CallSuccess));
         }
 
-        public void ListSetByIndex<T>(string key, long index, T value, CommandFlags flags = CommandFlags.None)
+        public Task ListSetByIndex<T>(string key, long index, T value, CommandFlags flags = CommandFlags.None)
         {
-            if (!AppConfig.RedisCacheEnable) return;
+            if (!AppConfig.RedisCacheEnable) return default;
             var redisProvider = new RedisProvider(DbNum, ServerName);
-            CoreAccess<IDatabase>.TryCallAsync(redisProvider.Client.ListSetByIndex, RedisDataHelper.String2Key(key),
+            return CoreAccess<IDatabase>.TryCallAsync(redisProvider.Client.ListSetByIndex, RedisDataHelper.String2Key(key),
                 index, RedisDataHelper.Type2Value(value), flags, redisProvider, null, new LogOptions());
         }
 
@@ -447,7 +448,7 @@ namespace X.Util.Extend.Redis
 
         public long SetAdd(string key, RedisValue[] values, CommandFlags flags = CommandFlags.None)
         {
-            if (!AppConfig.RedisCacheEnable) return default(long);
+            if (!AppConfig.RedisCacheEnable) return default;
             var redisProvider = new RedisProvider(DbNum, ServerName);
             return CoreAccess<IDatabase>.TryCall(redisProvider.Client.SetAdd, RedisDataHelper.String2Key(key),
                 values, flags, redisProvider, new LogOptions<long>(CoreBase.CallSuccess));
@@ -455,7 +456,7 @@ namespace X.Util.Extend.Redis
 
         public long SetLength(string key, CommandFlags flags = CommandFlags.None)
         {
-            if (!AppConfig.RedisCacheEnable) return default(long);
+            if (!AppConfig.RedisCacheEnable) return default;
             var redisProvider = new RedisProvider(DbNum, ServerName);
             return CoreAccess<IDatabase>.TryCall(redisProvider.Client.SetLength, RedisDataHelper.String2Key(key),
                 flags, redisProvider, new LogOptions<long>(CoreBase.CallSuccess));
@@ -463,7 +464,7 @@ namespace X.Util.Extend.Redis
 
         public RedisValue[] SetMembers(RedisKey key, CommandFlags flags = CommandFlags.None)
         {
-            if (!AppConfig.RedisCacheEnable) return default(RedisValue[]);
+            if (!AppConfig.RedisCacheEnable) return default;
             var redisProvider = new RedisProvider(DbNum, ServerName);
             return CoreAccess<IDatabase>.TryCall(redisProvider.Client.SetMembers, RedisDataHelper.String2Key(key),
                 flags, redisProvider, new LogOptions<RedisValue[]>(CoreBase.CallSuccess));
@@ -479,7 +480,7 @@ namespace X.Util.Extend.Redis
 
         public long SetRemove(string key, RedisValue[] values, CommandFlags flags = CommandFlags.None)
         {
-            if (!AppConfig.RedisCacheEnable) return default(long);
+            if (!AppConfig.RedisCacheEnable) return default;
             var redisProvider = new RedisProvider(DbNum, ServerName);
             return CoreAccess<IDatabase>.TryCall(redisProvider.Client.SetRemove, RedisDataHelper.String2Key(key),
                 values, flags, redisProvider, new LogOptions<long>(CoreBase.CallSuccess));
@@ -491,7 +492,7 @@ namespace X.Util.Extend.Redis
 
         public long SortedSetAdd(string key, SortedSetEntry[] values, CommandFlags flags)
         {
-            if (!AppConfig.RedisCacheEnable) return default(long);
+            if (!AppConfig.RedisCacheEnable) return default;
             var redisProvider = new RedisProvider(DbNum, ServerName);
             return CoreAccess<IDatabase>.TryCall(redisProvider.Client.SortedSetAdd, RedisDataHelper.String2Key(key),
                 values, flags, redisProvider, new LogOptions<long>(CoreBase.CallSuccess));
@@ -499,7 +500,7 @@ namespace X.Util.Extend.Redis
 
         public bool SortedSetAdd<T>(RedisKey key, T member, double score, CommandFlags flags)
         {
-            if (!AppConfig.RedisCacheEnable) return default(bool);
+            if (!AppConfig.RedisCacheEnable) return default;
             var redisProvider = new RedisProvider(DbNum, ServerName);
             return CoreAccess<IDatabase>.TryCall(redisProvider.Client.SortedSetAdd, RedisDataHelper.String2Key(key),
                 RedisDataHelper.Type2Value(member), score, flags, redisProvider,
@@ -508,7 +509,7 @@ namespace X.Util.Extend.Redis
 
         public long SortedSetAdd(string key, SortedSetEntry[] values, When when = When.Always, CommandFlags flags = CommandFlags.None)
         {
-            if (!AppConfig.RedisCacheEnable) return default(long);
+            if (!AppConfig.RedisCacheEnable) return default;
             var redisProvider = new RedisProvider(DbNum, ServerName);
             return CoreAccess<IDatabase>.TryCall(redisProvider.Client.SortedSetAdd, RedisDataHelper.String2Key(key),
                 values, when, flags, redisProvider, new LogOptions<long>(CoreBase.CallSuccess));
@@ -516,7 +517,7 @@ namespace X.Util.Extend.Redis
 
         public bool SortedSetAdd<T>(string key, T member, double score, When when = When.Always, CommandFlags flags = CommandFlags.None)
         {
-            if (!AppConfig.RedisCacheEnable) return default(bool);
+            if (!AppConfig.RedisCacheEnable) return default;
             var redisProvider = new RedisProvider(DbNum, ServerName);
             return CoreAccess<IDatabase>.TryCall(redisProvider.Client.SortedSetAdd, RedisDataHelper.String2Key(key),
                 RedisDataHelper.Type2Value(member), score, when, flags, redisProvider,
@@ -525,7 +526,7 @@ namespace X.Util.Extend.Redis
 
         public double SortedSetDecrement<T>(string key, T member, double value, CommandFlags flags = CommandFlags.None)
         {
-            if (!AppConfig.RedisCacheEnable) return default(double);
+            if (!AppConfig.RedisCacheEnable) return default;
             var redisProvider = new RedisProvider(DbNum, ServerName);
             return CoreAccess<IDatabase>.TryCall(redisProvider.Client.SortedSetDecrement,
                 RedisDataHelper.String2Key(key), RedisDataHelper.Type2Value(member), value, flags, redisProvider,
@@ -534,7 +535,7 @@ namespace X.Util.Extend.Redis
 
         public double SortedSetIncrement<T>(string key, T member, double value, CommandFlags flags = CommandFlags.None)
         {
-            if (!AppConfig.RedisCacheEnable) return default(double);
+            if (!AppConfig.RedisCacheEnable) return default;
             var redisProvider = new RedisProvider(DbNum, ServerName);
             return CoreAccess<IDatabase>.TryCall(redisProvider.Client.SortedSetIncrement,
                 RedisDataHelper.String2Key(key), RedisDataHelper.Type2Value(member), value, flags, redisProvider,
@@ -543,7 +544,7 @@ namespace X.Util.Extend.Redis
 
         public long SortedSetLength(string key, double min = -1.0 / 0.0, double max = 1.0 / 0.0, Exclude exclude = Exclude.None, CommandFlags flags = CommandFlags.None)
         {
-            if (!AppConfig.RedisCacheEnable) return default(long);
+            if (!AppConfig.RedisCacheEnable) return default;
             var redisProvider = new RedisProvider(DbNum, ServerName);
             return CoreAccess<IDatabase>.TryCall(redisProvider.Client.SortedSetLength,
                 RedisDataHelper.String2Key(key), min, max, exclude, flags, redisProvider,
@@ -552,7 +553,7 @@ namespace X.Util.Extend.Redis
 
         public long SortedSetLengthByValue(string key, RedisValue min, RedisValue max, Exclude exclude = Exclude.None, CommandFlags flags = CommandFlags.None)
         {
-            if (!AppConfig.RedisCacheEnable) return default(long);
+            if (!AppConfig.RedisCacheEnable) return default;
             var redisProvider = new RedisProvider(DbNum, ServerName);
             return CoreAccess<IDatabase>.TryCall(redisProvider.Client.SortedSetLengthByValue,
                 RedisDataHelper.String2Key(key), min, max, exclude, flags, redisProvider,
@@ -561,7 +562,7 @@ namespace X.Util.Extend.Redis
 
         public RedisValue[] SortedSetRangeByRank(string key, long start = 0, long stop = -1, Order order = Order.Ascending, CommandFlags flags = CommandFlags.None)
         {
-            if (!AppConfig.RedisCacheEnable) return default(RedisValue[]);
+            if (!AppConfig.RedisCacheEnable) return default;
             var redisProvider = new RedisProvider(DbNum, ServerName);
             return CoreAccess<IDatabase>.TryCall(redisProvider.Client.SortedSetRangeByRank,
                 RedisDataHelper.String2Key(key), start, stop, order, flags, redisProvider,
@@ -570,7 +571,7 @@ namespace X.Util.Extend.Redis
 
         public SortedSetEntry[] SortedSetRangeByRankWithScores(RedisKey key, long start = 0, long stop = -1, Order order = Order.Ascending, CommandFlags flags = CommandFlags.None)
         {
-            if (!AppConfig.RedisCacheEnable) return default(SortedSetEntry[]);
+            if (!AppConfig.RedisCacheEnable) return default;
             var redisProvider = new RedisProvider(DbNum, ServerName);
             return CoreAccess<IDatabase>.TryCall(redisProvider.Client.SortedSetRangeByRankWithScores,
                 RedisDataHelper.String2Key(key), start, stop, order, flags, redisProvider,
@@ -579,7 +580,7 @@ namespace X.Util.Extend.Redis
 
         public bool SortedSetRemove<T>(string key, T member, CommandFlags flags = CommandFlags.None)
         {
-            if (!AppConfig.RedisCacheEnable) return default(bool);
+            if (!AppConfig.RedisCacheEnable) return default;
             var redisProvider = new RedisProvider(DbNum, ServerName);
             return CoreAccess<IDatabase>.TryCall(redisProvider.Client.SortedSetRemove, RedisDataHelper.String2Key(key),
                 RedisDataHelper.Type2Value(member), flags, redisProvider,
@@ -588,7 +589,7 @@ namespace X.Util.Extend.Redis
 
         public double? SortedSetScore<T>(string key, T member, CommandFlags flags = CommandFlags.None)
         {
-            if (!AppConfig.RedisCacheEnable) return default(double?);
+            if (!AppConfig.RedisCacheEnable) return default;
             var redisProvider = new RedisProvider(DbNum, ServerName);
             return CoreAccess<IDatabase>.TryCall(redisProvider.Client.SortedSetScore, RedisDataHelper.String2Key(key),
                 RedisDataHelper.Type2Value(member), flags, redisProvider,
@@ -605,10 +606,7 @@ namespace X.Util.Extend.Redis
             var sub = redisProvider.ConnectionMultiplexer.GetSubscriber();
             sub.Subscribe(subChannel, (channel, message) =>
             {
-                if (handler != null)
-                {
-                    handler(channel, message);
-                }
+                handler?.Invoke(channel, message);
             });
             var handlerName = handler != null ? handler.Method.GetType().FullName : string.Empty;
             Logger.Client.Warn(string.Format("Redis Subscribe Channel {0} with Handler {1}", subChannel, handlerName), LogDomain.Util);
@@ -616,7 +614,7 @@ namespace X.Util.Extend.Redis
 
         public long Publish<T>(string channel, T msg)
         {
-            if (!AppConfig.RedisCacheEnable) return default(long);
+            if (!AppConfig.RedisCacheEnable) return default;
             var redisProvider = new RedisProvider(DbNum, ServerName);
             var sub = redisProvider.ConnectionMultiplexer.GetSubscriber();
             var ret = sub.Publish(channel, RedisDataHelper.Type2Value(msg));
@@ -644,7 +642,7 @@ namespace X.Util.Extend.Redis
 
         public ITransaction CreateTransaction()
         {
-            if (!AppConfig.RedisCacheEnable) return default(ITransaction);
+            if (!AppConfig.RedisCacheEnable) return default;
             var redisProvider = new RedisProvider(DbNum, ServerName);
             var ret = redisProvider.Client.CreateTransaction();
             Logger.Client.Warn("Redis CreateTransaction", LogDomain.Util);
@@ -653,7 +651,7 @@ namespace X.Util.Extend.Redis
 
         public IServer GetServer(string hostAndPort)
         {
-            if (!AppConfig.RedisCacheEnable) return default(IServer);
+            if (!AppConfig.RedisCacheEnable) return default;
             var redisProvider = new RedisProvider(DbNum, ServerName);
             var ret = redisProvider.ConnectionMultiplexer.GetServer(hostAndPort);
             Logger.Client.Warn(string.Format("Redis GetServer: {0}", hostAndPort), LogDomain.Util);

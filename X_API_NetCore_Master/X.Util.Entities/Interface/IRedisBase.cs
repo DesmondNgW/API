@@ -1,6 +1,7 @@
 ﻿using StackExchange.Redis;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace X.Util.Entities.Interface
 {
@@ -72,7 +73,7 @@ namespace X.Util.Entities.Interface
         bool HashSet<T>(string key, string hashField, T value, When when = When.Always,
             CommandFlags flags = CommandFlags.None);
 
-        void HashSet(string key, Dictionary<RedisValue, RedisValue> hashFields, CommandFlags flags = CommandFlags.None);
+        Task HashSet(string key, Dictionary<RedisValue, RedisValue> hashFields, CommandFlags flags = CommandFlags.None);
 
         RedisValue[] HashValues(RedisKey key, CommandFlags flags = CommandFlags.None);
 
@@ -100,7 +101,7 @@ namespace X.Util.Entities.Interface
 
         long ListRightPush<T>(string key, T value, When when = When.Always, CommandFlags flags = CommandFlags.None);
 
-        void ListSetByIndex<T>(string key, long index, T value, CommandFlags flags = CommandFlags.None);
+        Task ListSetByIndex<T>(string key, long index, T value, CommandFlags flags = CommandFlags.None);
 
         bool SetAdd<T>(string key, T value, CommandFlags flags = CommandFlags.None);
 
