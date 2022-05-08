@@ -1,13 +1,17 @@
-﻿using Microsoft.AspNetCore.Http.Extensions;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.Extensions;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using System;
 using System.Linq;
+using System.Reflection;
 using System.Threading;
 using X.Interface.Core;
 using X.Interface.Dto;
 using X.UI.Util.Model;
 using X.Util.Core;
 using X.Util.Core.Kernel;
+using X.Util.Core.Log;
 using X.Util.Entities;
 
 namespace X.UI.Util.Helper
@@ -71,7 +75,12 @@ namespace X.UI.Util.Helper
             return BusinessRequestContext;
         }
 
-        public static void FilterActionExecutingContext(ActionExecutingContext context, bool isLogin)
+        /// <summary>
+        /// override:ActionFilterAttribute.OnActionExecuting
+        /// </summary>
+        /// <param name="context"></param>
+        /// <param name="isLogin"></param>
+        public static void FilterActionExecuting(ActionExecutingContext context, bool isLogin)
         {
             var apiContext = GetApiRequestContext(context);
             var businessRequestContext = GetBusinessRequestContext(apiContext, isLogin);
@@ -79,13 +88,59 @@ namespace X.UI.Util.Helper
         }
 
         /// <summary>
-        /// AddResponseHeaders
+        /// override:ActionFilterAttribute.OnActionExecuted
         /// </summary>
         /// <param name="context"></param>
-        public static void AddResponseHeaders(ResultExecutedContext context)
+        public static void FilterActionExecuted(ActionExecutedContext context)
         {
-            context.HttpContext.Response.Headers.Add("PCToken", ExecutionContext<BusinessRequestContext>.Current.Ctoken);
-            context.HttpContext.Response.Headers.Add("Cid", ExecutionContext<BusinessRequestContext>.Current.Cid);
+            AddResponseHeaders(context.HttpContext);
+        }
+
+        /// <summary>
+        /// override:ActionFilterAttribute.OnResultExecuting
+        /// </summary>
+        /// <param name="context"></param>
+        public static void FilterResultExecuting(ResultExecutingContext context)
+        {
+
+        }
+
+        private static void AddResponseHeaders(HttpContext context)
+        {
+            context.Response.Headers.Add("PCToken", ExecutionContext<BusinessRequestContext>.Current.Ctoken);
+            context.Response.Headers.Add("Cid", ExecutionContext<BusinessRequestContext>.Current.Cid);
+        }
+
+        /// <summary>
+        /// override:ActionFilterAttribute.OnResultExecuted
+        /// </summary>
+        /// <param name="context"></param>
+        public static void FilterResultExecuted(ResultExecutedContext context)
+        {
+        }
+
+        /// <summary>
+        /// override:ExceptionFilterAttribute.OnException
+        /// </summary>
+        /// <param name="context"></param>
+        public static void GlobalException(ExceptionContext context)
+        {
+            if (context.Exception != default)
+            {
+                var ApiRequestContext = ExecutionContext<BusinessRequestContext>.Current.ApiRequestContext;
+                Logger.Client.Error(Logger.Client.GetMethodInfo(MethodBase.GetCurrentMethod(), new object[] { ApiRequestContext }), context.Exception, LogDomain.Ui);
+                var iresult = new ApiResult<bool>()
+                {
+                    Success = false,
+                    Data = false,
+                    Error = context.Exception.Message
+                };
+                context.ExceptionHandled = true;
+                context.Result = new ContentResult()
+                {
+                    Content = iresult.ToJson()
+                };
+            }
         }
     }
 }

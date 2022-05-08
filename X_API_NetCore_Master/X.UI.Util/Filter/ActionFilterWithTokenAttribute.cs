@@ -7,22 +7,22 @@ namespace X.UI.Util.Filter
     {
         public override void OnActionExecuting(ActionExecutingContext context)
         {
-            RequestContextHelper.FilterActionExecutingContext(context, true);
+            RequestContextHelper.FilterActionExecuting(context, true);
         }
 
         public override void OnActionExecuted(ActionExecutedContext context)
         {
-            
+            RequestContextHelper.FilterActionExecuted(context);
         }
 
         public override void OnResultExecuting(ResultExecutingContext context)
         {
-            
+            RequestContextHelper.FilterResultExecuting(context);
         }
 
         public override void OnResultExecuted(ResultExecutedContext context)
         {
-            RequestContextHelper.AddResponseHeaders(context);
+            RequestContextHelper.FilterResultExecuted(context);
         }
     }
 }

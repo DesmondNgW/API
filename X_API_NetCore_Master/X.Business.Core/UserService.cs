@@ -63,6 +63,7 @@ namespace X.Business.Core
         /// <exception cref="InvalidOperationException"></exception>
         public static User VerifyToken(string utoken, string uri)
         {
+            if (string.IsNullOrEmpty(utoken)) throw new InvalidOperationException("utoken不能为空");
             if (!BaseCryption.VerifyData(ConstHelper.GenerateHmacKey, utoken, HmacType.Md5)) throw new InvalidOperationException("utoken错误或过期");
             var key = ConstHelper.LoginKeyPrefix + utoken;
             var obj = CacheData.Default.GetCacheDbData<User>(key, CacheType);

@@ -46,6 +46,7 @@ namespace X.Interface.Core
         /// <returns></returns>
         public static void VerifyToken(string token, string clientId, string clientIp, string userAgent, string uri)
         {
+            if(string.IsNullOrEmpty(token)) throw new InvalidOperationException("token不能为空");
             if (!BaseCryption.VerifyData(ConstHelper.GenerateHmacKey, token, HmacType.Md5)) throw new InvalidOperationException("token错误或过期");
             var key = ConstHelper.LoginKeyPrefix + token;
             var obj = CacheData.Default.GetCacheDbData<Token>(key, CacheType);
