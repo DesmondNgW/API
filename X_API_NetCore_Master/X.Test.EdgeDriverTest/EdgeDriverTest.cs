@@ -25,11 +25,10 @@ namespace X.Test.EdgeDriverTest
         }
 
         [TestMethod]
-        public void VerifyPageTitle()
+        public void VerifyPageTitleEmpty()
         {
-            // Replace with your own test logic
-            _driver.Url = "https://www.bing.com";
-            Assert.AreEqual("Bing", _driver.Title);
+            _driver.Url = "https://www.baidu.com";
+            Assert.AreEqual("百度一下，你就知道", _driver.Title);
         }
 
         [TestCleanup]
