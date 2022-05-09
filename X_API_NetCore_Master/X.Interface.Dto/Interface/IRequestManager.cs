@@ -1,4 +1,6 @@
-﻿namespace X.Interface.Dto.Interface
+﻿using X.Interface.Dto.HttpResponse;
+
+namespace X.Interface.Dto.Interface
 {
     /// <summary>
     /// 秘钥接口
@@ -18,5 +20,13 @@
         /// </summary>
         /// <returns></returns>
         ApiResult<string> GetTimestamp();
+
+        /// <summary>
+        /// GetRequestPre
+        /// </summary>
+        /// <param name="clientId"></param>
+        /// <param name="ip"></param>
+        /// <returns></returns>
+        ApiResult<RequestPreDto> GetRequestPre(string clientId, string ip);
     }
 }

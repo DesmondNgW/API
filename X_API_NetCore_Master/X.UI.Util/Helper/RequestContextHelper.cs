@@ -44,7 +44,7 @@ namespace X.UI.Util.Helper
             return ApiRequestContext;
         }
 
-        private static BusinessRequestContext GetBusinessRequestContext(ApiRequestContext context, bool verifyClient, bool isLogin)
+        public static BusinessRequestContext GetBusinessRequestContext(ApiRequestContext context, bool verifyClient, bool isLogin)
         {
             if (verifyClient)
             {
@@ -107,7 +107,10 @@ namespace X.UI.Util.Helper
         /// <param name="context"></param>
         public static void FilterActionExecuted(ActionExecutedContext context)
         {
-            
+            if (context is null)
+            {
+                throw new ArgumentNullException(nameof(context));
+            }
         }
 
         /// <summary>
@@ -116,7 +119,10 @@ namespace X.UI.Util.Helper
         /// <param name="context"></param>
         public static void FilterResultExecuting(ResultExecutingContext context)
         {
-
+            if (context is null)
+            {
+                throw new ArgumentNullException(nameof(context));
+            }
         }
 
         /// <summary>
@@ -125,7 +131,10 @@ namespace X.UI.Util.Helper
         /// <param name="context"></param>
         public static void FilterResultExecuted(ResultExecutedContext context)
         {
-
+            if (context is null)
+            {
+                throw new ArgumentNullException(nameof(context));
+            }
         }
 
         /// <summary>
@@ -151,6 +160,6 @@ namespace X.UI.Util.Helper
                 };
             }
         }
-        #endregion    
+        #endregion
     }
 }
