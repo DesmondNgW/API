@@ -110,3 +110,7 @@
 /X_API_NetCore_Master/X.Util.Provider/bin
 /X_API_NetCore_Master/.vs/X_API_NetCore_Master
 /X_API_Master/X.UI.Web/X.UI.Web.csproj.user
+/X_API_NetCore_Master/X.Test.UITest/obj
+/X_API_NetCore_Master/X.Test.UITest/bin
+/X_API_NetCore_Master/X.Test.EdgeDriverTest/obj
+/X_API_NetCore_Master/X.Test.EdgeDriverTest/bin
