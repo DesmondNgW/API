@@ -114,3 +114,5 @@
 /X_API_NetCore_Master/X.Test.UITest/bin
 /X_API_NetCore_Master/X.Test.EdgeDriverTest/obj
 /X_API_NetCore_Master/X.Test.EdgeDriverTest/bin
+/X_API_NetCore_Master/X.UI.BlazorWebAssembly/obj
+/X_API_NetCore_Master/X.UI.BlazorWebAssembly/bin
