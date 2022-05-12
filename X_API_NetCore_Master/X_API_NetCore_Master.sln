@@ -63,6 +63,8 @@ Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "x.front.typevue", "X.Front.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "X.UI.BlazorWebAssembly", "X.UI.BlazorWebAssembly\X.UI.BlazorWebAssembly.csproj", "{ED696CD4-8547-4ECA-ABFD-5C1758C11BA8}"
 EndProject
+Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "x.front.components", "X.Front.Components\x.front.components.esproj", "{128B68B3-CFA7-4A09-8BBB-2E947C6F521D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -165,6 +167,12 @@ Global
 		{ED696CD4-8547-4ECA-ABFD-5C1758C11BA8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ED696CD4-8547-4ECA-ABFD-5C1758C11BA8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ED696CD4-8547-4ECA-ABFD-5C1758C11BA8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{128B68B3-CFA7-4A09-8BBB-2E947C6F521D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{128B68B3-CFA7-4A09-8BBB-2E947C6F521D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{128B68B3-CFA7-4A09-8BBB-2E947C6F521D}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{128B68B3-CFA7-4A09-8BBB-2E947C6F521D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{128B68B3-CFA7-4A09-8BBB-2E947C6F521D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{128B68B3-CFA7-4A09-8BBB-2E947C6F521D}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -193,6 +201,7 @@ Global
 		{A80B81D8-A9FE-49F9-9460-24A90C78F856} = {AF37DA6C-B355-42DE-B00E-A1761DEA00D9}
 		{627CE51C-1F26-4D72-9B93-6ACF81E97232} = {AF37DA6C-B355-42DE-B00E-A1761DEA00D9}
 		{ED696CD4-8547-4ECA-ABFD-5C1758C11BA8} = {9AA6821F-4823-4495-A80E-C5914303B5EA}
+		{128B68B3-CFA7-4A09-8BBB-2E947C6F521D} = {AF37DA6C-B355-42DE-B00E-A1761DEA00D9}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {980A3338-C8BD-4269-A61B-BCF57B14D411}
