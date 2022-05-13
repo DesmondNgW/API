@@ -116,3 +116,14 @@
 /X_API_NetCore_Master/X.Test.EdgeDriverTest/bin
 /X_API_NetCore_Master/X.UI.BlazorWebAssembly/obj
 /X_API_NetCore_Master/X.UI.BlazorWebAssembly/bin
+/X_Front_Master/x.front.nodeconsole/obj
+/X_Front_Master/x.front.nodeconsole/bin
+/X_Front_Master/x.front.NodeExpress/obj
+/X_Front_Master/x.front.NodeExpress/bin
+/X_Front_Master/x.front.NodeExpress/node_modules
+/X_Front_Master/x.front.typeconsole/obj
+/X_Front_Master/x.front.typeconsole/bin
+/X_Front_Master/x.front.typeconsole/node_modules
+/X_Front_Master/x.front.type-express/obj
+/X_Front_Master/x.front.type-express/bin
+/X_Front_Master/x.front.type-express/node_modules

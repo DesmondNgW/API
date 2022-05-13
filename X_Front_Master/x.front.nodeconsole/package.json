@@ -1,0 +1,9 @@
+{
+  "name": "x.front.nodeconsole",
+  "version": "0.0.0",
+  "description": "x.front.nodeconsole",
+  "main": "app.js",
+  "author": {
+    "name": ""
+  }
+}
