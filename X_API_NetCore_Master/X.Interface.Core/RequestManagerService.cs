@@ -11,7 +11,7 @@ namespace X.Interface.Core
     {
         public ApiResult<string> GetToken(string clientId, string ip)
         {
-            var userAgent = HttpContextHelper.Current.Request.Headers["User-Agent"];
+            var userAgent = ServiceCollectionHelper.Current.Request.Headers["User-Agent"];
             return new ApiResult<string> { Success = true, Data = TokenHelper.GenerateToken(clientId, ip, userAgent) };
         }
 
@@ -22,7 +22,7 @@ namespace X.Interface.Core
 
         public ApiResult<RequestPreDto> GetRequestPre(string clientId, string ip)
         {
-            var userAgent = HttpContextHelper.Current.Request.Headers["User-Agent"];
+            var userAgent = ServiceCollectionHelper.Current.Request.Headers["User-Agent"];
             return new ApiResult<RequestPreDto>()
             {
                 Success = true,

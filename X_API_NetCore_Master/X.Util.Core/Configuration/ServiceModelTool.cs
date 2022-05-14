@@ -1,4 +1,7 @@
 ﻿using Microsoft.Extensions.Caching.Memory;
+using SD.Toolkits.CoreWCF.Client.Configurations.Behaviors;
+using SD.Toolkits.CoreWCF.Client.Configurations.Bindings;
+using SD.Toolkits.CoreWCF.Client.Configurations.Clients;
 using System;
 using System.Configuration;
 using System.IO;
@@ -9,9 +12,6 @@ using System.ServiceModel.Description;
 using X.Util.Core.Cache;
 using X.Util.Core.Kernel;
 using X.Util.Entities;
-using SD.Toolkits.CoreWCF.Client.Configurations.Behaviors;
-using SD.Toolkits.CoreWCF.Client.Configurations.Clients;
-using SD.Toolkits.CoreWCF.Client.Configurations.Bindings;
 
 namespace X.Util.Core.Configuration
 {
@@ -29,7 +29,7 @@ namespace X.Util.Core.Configuration
             var config = ConfigurationManager.OpenMappedExeConfiguration(map, ConfigurationUserLevel.None);
             ServiceModelSectionGroup.Initialize(config);
             cache = ServiceModelSectionGroup.Setting;
-            LocalCache.Default.SlidingExpirationSet(key, cache, new TimeSpan(0, 1, 0), CacheItemPriority.Normal);
+            LocalCache.Default.SlidingExpirationSet(key, cache, new TimeSpan(1, 0, 0), CacheItemPriority.Normal, AppConfigFile);
             return cache;
         }
 

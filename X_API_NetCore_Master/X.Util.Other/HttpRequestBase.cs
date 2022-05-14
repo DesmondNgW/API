@@ -100,7 +100,7 @@ namespace X.Util.Other
                 request.IfModifiedSince = cache != null ? cache.LastModified : DateTime.MinValue;
                 var response = (HttpWebResponse)request.GetResponse();
                 cache = new HttpCacheResult<T> { CacheKey = uri, Result = loader(response), LastModified = response.LastModified };
-                RuntimeCache.Set(uri, cache, new TimeSpan(1, 0, 0));
+                RuntimeCache.Set(uri, cache, new TimeSpan(1, 0, 0), string.Empty);
                 request.Abort();
                 response.Close();
             }

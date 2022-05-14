@@ -34,7 +34,7 @@ namespace X.Util.Extend.Core
             var list = LocalCache.Default.Get<IList<string>>(token) ?? new List<string>();
             if (list.Contains(key)) return;
             list.Add(key);
-            LocalCache.Default.Set(token, list, DateTime.Now.AddMinutes(5));
+            LocalCache.Default.Set(token, list, DateTime.Now.AddMinutes(5), string.Empty);
         }
 
         private static string GetCacheKeyPrefix(MethodBase method)

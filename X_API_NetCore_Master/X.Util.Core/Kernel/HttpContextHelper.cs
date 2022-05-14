@@ -3,17 +3,18 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace X.Util.Core.Kernel
 {
-    public class HttpContextHelper
+    public class ServiceCollectionHelper
     {
         private static IServiceCollection iServiceCollection;
 
         /// <summary>
-        /// HttpContextAccessor 注入
+        /// 注入Service【HttpContextAccessor-MemoryCache】
         /// </summary>
         /// <param name="serviceCollection"></param>
         public static void SetServiceCollection(IServiceCollection serviceCollection)
         {
             serviceCollection.AddHttpContextAccessor();
+            serviceCollection.AddMemoryCache();
             iServiceCollection = serviceCollection;
         }
 

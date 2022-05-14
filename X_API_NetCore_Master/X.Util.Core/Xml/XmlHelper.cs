@@ -42,7 +42,7 @@ namespace X.Util.Core.Xml
                 cache = LocalCache.Default.Get<XmlDocument>(key);
                 if (cache != null) return cache;
                 cache = GetXmlDoc(filePath);
-                LocalCache.Default.SlidingExpirationSet(key, cache, new TimeSpan(0, 1, 0), CacheItemPriority.Normal);
+                LocalCache.Default.SlidingExpirationSet(key, cache, new TimeSpan(0, 1, 0), CacheItemPriority.Normal, filePath);
             }
             return cache;
         }
@@ -106,7 +106,7 @@ namespace X.Util.Core.Xml
                 var serializer = new XmlSerializer(typeof(T));
                 var xr = XmlReader.Create(path, null);
                 cache = (T)serializer.Deserialize(xr);
-                LocalCache.Default.SlidingExpirationSet(key, cache, new TimeSpan(0, 1, 0), CacheItemPriority.Normal);
+                LocalCache.Default.SlidingExpirationSet(key, cache, new TimeSpan(0, 1, 0), CacheItemPriority.Normal, path);
             }
             return cache;
         }

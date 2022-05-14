@@ -13,14 +13,14 @@ namespace X.Util.Extend.Cache
             return LocalCache.Get<T>(key);
         }
 
-        public static void AbsoluteExpirationSet(object key, object value, DateTime absoluteExpiration, CacheItemPriority priority)
+        public static void AbsoluteExpirationSet(object key, object value, DateTime absoluteExpiration, CacheItemPriority priority, string filePath)
         {
-            LocalCache.AbsoluteExpirationSet(key, value, absoluteExpiration, priority);
+            LocalCache.AbsoluteExpirationSet(key, value, absoluteExpiration, priority, filePath);
         }
 
-        public static void SlidingExpirationSet(object key, object value, TimeSpan slidingExpiration, CacheItemPriority priority)
+        public static void SlidingExpirationSet(object key, object value, TimeSpan slidingExpiration, CacheItemPriority priority, string filePath)
         {
-            LocalCache.SlidingExpirationSet(key, value, slidingExpiration, priority);
+            LocalCache.SlidingExpirationSet(key, value, slidingExpiration, priority, filePath);
         }
 
         public static void Remove(object key)
@@ -28,14 +28,14 @@ namespace X.Util.Extend.Cache
             LocalCache.Remove(key);
         }
 
-        public static void Set(string key, object value, DateTime dt)
+        public static void Set(string key, object value, DateTime dt, string filePath)
         {
-            LocalCache.Set(key, value, dt);
+            LocalCache.Set(key, value, dt, filePath);
         }
 
-        public static void Set(string key, object value, TimeSpan ts)
+        public static void Set(string key, object value, TimeSpan ts, string filePath)
         {
-            LocalCache.Set(key, value, ts);
+            LocalCache.Set(key, value, ts, filePath);
         }
     }
 }

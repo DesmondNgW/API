@@ -64,7 +64,7 @@ namespace X.Util.Extend.Cache
                 setting.AppVersion = version;
                 setting.CacheTime = DateTime.Now;
                 setting.Succeed = iresult != null && iresult.Result != null && iresult.Succeed;
-                if (setting.Succeed) RuntimeCache.Set(key, setting, dt);
+                if (setting.Succeed) RuntimeCache.Set(key, setting, dt, string.Empty);
             }
             return setting;
         }
@@ -84,7 +84,7 @@ namespace X.Util.Extend.Cache
                 setting.AppVersion = version;
                 setting.CacheTime = DateTime.Now;
                 setting.Succeed = iresult != null && iresult.Result != null && iresult.Succeed;
-                if (setting.Succeed) RuntimeCache.SlidingExpirationSet(key, setting, ts, CacheItemPriority.Normal);
+                if (setting.Succeed) RuntimeCache.SlidingExpirationSet(key, setting, ts, CacheItemPriority.Normal, string.Empty);
             }
             return setting;
         }
@@ -106,7 +106,7 @@ namespace X.Util.Extend.Cache
                 setting.CacheTime = DateTime.Now;
                 setting.Succeed = iresult != null && iresult.Result != null && iresult.Succeed;
                 if (!setting.Succeed) return setting;
-                RuntimeCache.Set(lockKey, setting, DateTime.Now.AddSeconds(15));
+                RuntimeCache.Set(lockKey, setting, DateTime.Now.AddSeconds(15), string.Empty);
                 _redis.Set(key, setting, dt);
             }
             return setting;
@@ -129,7 +129,7 @@ namespace X.Util.Extend.Cache
                 setting.CacheTime = DateTime.Now;
                 setting.Succeed = iresult != null && iresult.Result != null && iresult.Succeed;
                 if (!setting.Succeed) return setting;
-                RuntimeCache.Set(lockKey, setting, DateTime.Now.AddSeconds(15));
+                RuntimeCache.Set(lockKey, setting, DateTime.Now.AddSeconds(15), string.Empty);
                 _redis.Set(key, setting, ts);
             }
             return setting;
@@ -158,7 +158,7 @@ namespace X.Util.Extend.Cache
                     setting = GetTmpCacheData(loader, obj, version);
                     if (setting != null)
                     {
-                        RuntimeCache.Set(key, setting, DateTime.Now.Add(delay));
+                        RuntimeCache.Set(key, setting, DateTime.Now.Add(delay), string.Empty);
                     }
                     else
                     {
@@ -182,7 +182,7 @@ namespace X.Util.Extend.Cache
                     setting = GetTmpCacheData(loader, obj, version);
                     if (setting != null)
                     {
-                        RuntimeCache.Set(key, setting, delay);
+                        RuntimeCache.Set(key, setting, delay, string.Empty);
                         _redis.Set(key, setting, DateTime.Now.Add(delay));
                     }
                     else
@@ -211,7 +211,7 @@ namespace X.Util.Extend.Cache
                     if (redis.Equals(default(T)))
                     {
                         redis = _redis.Get<T>(key);
-                        if (redis != null && expire != null) RuntimeCache.Set(key, redis, expire.Value);
+                        if (redis != null && expire != null) RuntimeCache.Set(key, redis, expire.Value, string.Empty);
                     }
                     return redis;
             }
@@ -223,13 +223,13 @@ namespace X.Util.Extend.Cache
             switch (cacheType)
             {
                 case EnumCacheType.Runtime:
-                    RuntimeCache.Set(key, obj, expire);
+                    RuntimeCache.Set(key, obj, expire, string.Empty);
                     return;
                 case EnumCacheType.Redis:
                     _redis.Set(key, obj, expire);
                     return;
                 case EnumCacheType.RedisBoth:
-                    RuntimeCache.Set(key, obj, expire);
+                    RuntimeCache.Set(key, obj, expire, string.Empty);
                     _redis.Set(key, obj, expire);
                     return;
             }
@@ -240,13 +240,13 @@ namespace X.Util.Extend.Cache
             switch (cacheType)
             {
                 case EnumCacheType.Runtime:
-                    RuntimeCache.Set(key, obj, ts);
+                    RuntimeCache.Set(key, obj, ts, string.Empty);
                     return;
                 case EnumCacheType.Redis:
                     _redis.Set(key, obj, ts);
                     return;
                 case EnumCacheType.RedisBoth:
-                    RuntimeCache.Set(key, obj, ts);
+                    RuntimeCache.Set(key, obj, ts, string.Empty);
                     _redis.Set(key, obj, ts);
                     return;
             }

@@ -14,7 +14,7 @@ namespace X.Util.Core.Kernel
         /// <returns></returns>
         public static string GetIp()
         {
-            return Equals(HttpContextHelper.Current, null) ? LocalIp : GetIp(HttpContextHelper.Current);
+            return Equals(ServiceCollectionHelper.Current, null) ? LocalIp : GetIp(ServiceCollectionHelper.Current);
         }
 
         public static string GetIp(HttpContext context)

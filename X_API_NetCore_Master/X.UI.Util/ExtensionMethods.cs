@@ -1,7 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using X.Util.Core.Kernel;
-using Microsoft.AspNetCore.Http;
-using X.Util.Core;
 
 namespace X.UI.Util
 {
@@ -11,12 +9,12 @@ namespace X.UI.Util
     public static class ExtensionMethods
     {
         /// <summary>
-        /// 注入HttpContext
+        /// 注入ServiceCollection
         /// </summary>
         /// <param name="serviceCollection"></param>
-        public static void SetHttpContex(this IServiceCollection serviceCollection)
+        public static void SetServiceCollection(this IServiceCollection serviceCollection)
         {
-            HttpContextHelper.SetServiceCollection(serviceCollection);
+            ServiceCollectionHelper.SetServiceCollection(serviceCollection);
         }
     }
 }

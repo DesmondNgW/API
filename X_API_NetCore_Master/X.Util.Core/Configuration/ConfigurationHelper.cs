@@ -7,7 +7,6 @@ using System.IO;
 using System.Linq;
 using System.Xml;
 using X.Util.Core.Cache;
-using X.Util.Core.Kernel;
 using X.Util.Core.Xml;
 using X.Util.Entities;
 using X.Util.Entities.Enum;
@@ -64,7 +63,7 @@ namespace X.Util.Core.Configuration
             if (Equals(doc, null)) return result;
             var node = doc.SelectSingleNode("/configuration/AppSettings/add[@key='" + name + "']");
             result = XmlHelper.GetXmlAttributeValue(node, "value", defaultValue);
-            LocalCache.Default.SlidingExpirationSet(key, result, new TimeSpan(0, 1, 0), CacheItemPriority.Normal);
+            LocalCache.Default.SlidingExpirationSet(key, result, new TimeSpan(1, 0, 0), CacheItemPriority.Normal, ConfigFile);
             return result;
         }
 
@@ -148,7 +147,7 @@ namespace X.Util.Core.Configuration
             {
                 result.Endpoints.Add(uri);
             }
-            LocalCache.Default.SlidingExpirationSet(key, result, new TimeSpan(0, 1, 0), CacheItemPriority.Normal);
+            LocalCache.Default.SlidingExpirationSet(key, result, new TimeSpan(1, 0, 0), CacheItemPriority.Normal, EndpointFile);
             return result;
         }
 

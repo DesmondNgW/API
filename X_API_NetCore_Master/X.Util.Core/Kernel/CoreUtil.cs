@@ -72,7 +72,7 @@ namespace X.Util.Core.Kernel
                         circle[Sha1(t + "_clone_" + j)] = t;
                     }
                 }
-                LocalCache.Default.Set(cacheKey, circle, DateTime.Now.AddDays(1));
+                LocalCache.Default.Set(cacheKey, circle, DateTime.Now.AddDays(1), string.Empty);
             }
             var order = circle.OrderBy(p => p.Key);
             var sha1 = Sha1(key);
