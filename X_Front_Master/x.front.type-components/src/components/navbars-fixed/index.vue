@@ -50,25 +50,12 @@ export default Vue.extend({
     @import '../core/css/grid.css';
     @import '../core/css/helpers/position.css';
     @import '../core/css/api.css';
-    
+    @import '../css/base.css';
     body {
         min-height: 75rem;
         padding-top: 4.5rem;
     }
     nav.fixed-top{
         top:2.8rem;
-    }
-    .bd-placeholder-img {
-        font-size: 1.125rem;
-        text-anchor: middle;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        user-select: none;
-    }
-
-    @media (min-width: 768px) {
-        .bd-placeholder-img-lg {
-            font-size: 3.5rem;
-        }
     }
 </style>

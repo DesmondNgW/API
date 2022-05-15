@@ -19,6 +19,12 @@
                     <li class="nav-item">
                         <router-link :to="{name:'navbars-bottom'}" class="nav-link">navbars-bottom</router-link>
                     </li>
+                    <li class="nav-item">
+                        <router-link :to="{name:'blog'}" class="nav-link">blog</router-link>
+                    </li>
+                    <li class="nav-item">
+                        <router-link :to="{name:'carousel'}" class="nav-link">carousel</router-link>
+                    </li>
                 </ul>
             </div>
         </div>

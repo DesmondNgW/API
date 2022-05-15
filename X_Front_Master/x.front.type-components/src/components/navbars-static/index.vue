@@ -45,26 +45,12 @@ export default Vue.extend({
 </script>
 
 <style scoped>
-    /*@import '../core/css/dropdown.css';*/
     @import '../core/css/button.css';
     @import '../core/css/forms/control.css';
     @import '../core/css/grid.css';
     @import '../core/css/api.css';
+    @import '../css/base.css';
     body {
         min-height: 75rem;
-    }
-
-    .bd-placeholder-img {
-        font-size: 1.125rem;
-        text-anchor: middle;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        user-select: none;
-    }
-
-    @media (min-width: 768px) {
-        .bd-placeholder-img-lg {
-            font-size: 3.5rem;
-        }
     }
 </style>

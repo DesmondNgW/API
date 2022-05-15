@@ -27,6 +27,13 @@ export default new Router({
         path: "/navbars-bottom/index",
         name: "navbars-bottom",
         component: () => import("../components/navbars-bottom/index.vue")
-    },
-    ]
+    }, {
+        path: "/blog/index",
+        name: "blog",
+        component: () => import("../components/blog/index.vue")
+    }, {
+        path: "/carousel/index",
+        name: "carousel",
+        component: () => import("../components/carousel/index.vue")
+    },]
 });
