@@ -1,5 +1,5 @@
 <template>
-    <main>
+    <main class="main-app">
         <main class="container">
             <div class="bg-light p-5 rounded mt-3">
                 <h1>Bottom Navbar example</h1>
@@ -53,7 +53,7 @@ export default Vue.extend({
     @import '../core/css/grid.css';
     @import '../core/css/api.css';
     @import '../css/base.css';
-    body {
+    .main-app {
         min-height: 75rem;
     }
 </style>

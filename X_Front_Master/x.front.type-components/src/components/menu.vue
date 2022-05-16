@@ -4,26 +4,8 @@
             <router-link :to="{name:'index'}" class="navbar-brand">Index</router-link>
             <div class="collapse navbar-collapse" id="navbarsExample02">
                 <ul class="navbar-nav me-auto">
-                    <li class="nav-item">
-                        <router-link :to="{name:'album'}" class="nav-link active">album</router-link>
-                    </li>
-                    <li class="nav-item">
-                        <router-link :to="{name:'navbars'}" class="nav-link">navbars</router-link>
-                    </li>
-                    <li class="nav-item">
-                        <router-link :to="{name:'navbars-static'}" class="nav-link">navbars-static</router-link>
-                    </li>
-                    <li class="nav-item">
-                        <router-link :to="{name:'navbars-fixed'}" class="nav-link">navbars-fixed</router-link>
-                    </li>
-                    <li class="nav-item">
-                        <router-link :to="{name:'navbars-bottom'}" class="nav-link">navbars-bottom</router-link>
-                    </li>
-                    <li class="nav-item">
-                        <router-link :to="{name:'blog'}" class="nav-link">blog</router-link>
-                    </li>
-                    <li class="nav-item">
-                        <router-link :to="{name:'carousel'}" class="nav-link">carousel</router-link>
+                    <li class="nav-item" v-for="(item, i) in config" :key="i">
+                        <router-link :to="{name: item.name}" class="nav-link active">{{item.name}}</router-link>
                     </li>
                 </ul>
             </div>
@@ -32,11 +14,25 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
-
-export default Vue.extend({
-  name: 'Menu',
-});
+    import Vue from 'vue';
+    import router from '../router';
+    console.log("menu", router);
+    export default Vue.extend({
+        name: 'Menu',
+        data() {
+            let config = [];
+            let data = router.options.routes;
+            if (data) {
+                for (let i = 0, len = data.length; i < len; i++) {
+                    if (data[i].name == "index")  continue;
+                    config.push(data[i]);
+                }
+            }
+            return {
+                config: config
+            }
+        }
+    });
 </script>
 
 <style>

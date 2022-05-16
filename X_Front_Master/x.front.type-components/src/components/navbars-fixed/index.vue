@@ -1,5 +1,5 @@
 <template>
-    <main>
+    <main class="main-app">
         <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
             <div class="container-fluid">
                 <a class="navbar-brand" href="#">Fixed navbar</a>
@@ -51,7 +51,7 @@ export default Vue.extend({
     @import '../core/css/helpers/position.css';
     @import '../core/css/api.css';
     @import '../css/base.css';
-    body {
+    .main-app {
         min-height: 75rem;
         padding-top: 4.5rem;
     }

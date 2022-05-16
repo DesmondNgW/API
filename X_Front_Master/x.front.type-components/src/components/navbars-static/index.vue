@@ -1,5 +1,5 @@
 <template>
-    <main>
+    <main class="main-app">
         <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
             <div class="container-fluid">
                 <a class="navbar-brand" href="#">Top navbar</a>
@@ -50,7 +50,7 @@ export default Vue.extend({
     @import '../core/css/grid.css';
     @import '../core/css/api.css';
     @import '../css/base.css';
-    body {
+    .main-app {
         min-height: 75rem;
     }
 </style>

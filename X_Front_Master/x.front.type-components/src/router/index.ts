@@ -35,5 +35,13 @@ export default new Router({
         path: "/carousel/index",
         name: "carousel",
         component: () => import("../components/carousel/index.vue")
+    }, {
+        path: "/cheatsheet/index",
+        name: "cheatsheet",
+        component: () => import("../components/cheatsheet/index.vue")
+    }, {
+        path: "/checkout/index",
+        name: "checkout",
+        component: () => import("../components/checkout/index.vue")
     },]
 });
