@@ -56,6 +56,6 @@ export default Vue.extend({
         padding-top: 4.5rem;
     }
     nav.fixed-top {
-        top: 2.8rem;
+        top: 5.8rem;
     }
 </style>

@@ -1,5 +1,5 @@
 ﻿<template>
-    <main class="d-flex h-100 text-center text-white bg-dark">
+    <main class="d-flex h-100 text-center text-white bg-dark main-app">
         <div class="cover-container d-flex p-3 mx-auto flex-column w-100 h-100">
             <header class="mb-auto">
                 <div>
@@ -36,6 +36,7 @@ export default Vue.extend({
 </script>
 
 <style scoped>
+    @import '../core/css/helpers/colored-link.css';
     @import '../core/css/button.css';
     @import '../core/css/type.css';
     @import '../core/css/api.css';

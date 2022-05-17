@@ -3,7 +3,7 @@
         <div class="container-fluid">
             <router-link :to="{name:'index'}" class="navbar-brand">Index</router-link>
             <div class="collapse navbar-collapse" id="navbarsExample02">
-                <ul class="navbar-nav me-auto">
+                <ul class="navbar-nav me-auto" style="flex-wrap:wrap">
                     <li class="nav-item" v-for="(item, i) in config" :key="i">
                         <router-link :to="{name: item.name}" class="nav-link active">{{item.name}}</router-link>
                     </li>
