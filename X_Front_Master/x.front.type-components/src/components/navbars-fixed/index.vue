@@ -55,7 +55,7 @@ export default Vue.extend({
         min-height: 75rem;
         padding-top: 4.5rem;
     }
-    nav.fixed-top{
-        top:2.8rem;
+    nav.fixed-top {
+        top: 2.8rem;
     }
 </style>
