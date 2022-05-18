@@ -13,12 +13,62 @@ using X.Util.Core;
 using X.Util.Core.Kernel;
 using X.Util.Core.Log;
 using X.Util.Entities;
+using X.Util.Other;
 
 namespace X.UI.Util.Helper
 {
     public class RequestContextHelper
     {
         #region 内部实现
+
+        /// <summary>
+        /// 对ActionArgument 做安全漏洞过滤【Xss & Sql注入】
+        /// </summary>
+        /// <param name="context"></param>
+        public static void ProcessActionArguments(ActionExecutingContext context)
+        {
+            var actionArguments = context.ActionArguments;
+            foreach (var item in actionArguments)
+            {
+                var value = item.Value;
+                var pType = value.GetType();
+                if (value == null) continue;
+                //如果不是值类型或接口，不需要过滤
+                if (!pType.IsClass) continue;
+                if (value is string)
+                {
+                    var sValue = value.ToString();
+                    context.ActionArguments[item.Key] = QueryInfo.ProcessSqlStr(sValue) ? (object)QueryInfo.FilterXss(sValue) : throw new InvalidOperationException(item.Key + ":输入参数不合法");
+                }
+                else
+                {
+                    var properties = pType.GetProperties();
+                    foreach (var (pp, temp) in from pp in properties
+                                               let temp = pp.GetValue(value)
+                                               select (pp, temp))
+                    {
+                        if (temp == null) continue;
+                        if (temp is string)
+                        {
+                            var sTemp = temp.ToString();
+                            if (QueryInfo.ProcessSqlStr(sTemp))
+                            {
+                                pp.SetValue(value, QueryInfo.FilterXss(sTemp));
+                            }
+                            else
+                            {
+                                throw new InvalidOperationException(item.Key + "输入参数不合法");
+                            }
+                        }
+                        else
+                        {
+                            pp.SetValue(value, temp);
+                        }
+                    }
+                }
+            }
+        }
+
         private static ApiRequestContext GetApiRequestContext(ActionExecutingContext context)
         {
             var request = context.HttpContext.Request;
@@ -33,6 +83,8 @@ namespace X.UI.Util.Helper
                 Cid = Thread.CurrentThread.ManagedThreadId.ToString(),
                 ActionArgument = context.ActionArguments.ToJson()
             };
+
+            ProcessActionArguments(context);
 
             var headersContext = new HttpRequestContext4Heads();
             var props = typeof(HttpRequestContext4Heads).GetProperties();
