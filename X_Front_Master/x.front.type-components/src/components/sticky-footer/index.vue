@@ -29,5 +29,5 @@
     @import '../core/css/type.css';
     @import '../core/css/api.css';
     @import '../css/base.css';
-    @import './sticky-footer.css';
 </style>
+<style src="./sticky-footer.css" scoped></style>

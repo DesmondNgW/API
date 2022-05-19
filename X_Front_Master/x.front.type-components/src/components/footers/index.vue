@@ -199,5 +199,5 @@ export default Vue.extend({
     @import '../core/css/button.css';
     @import '../core/css/api.css';
     @import '../css/base.css';
-    @import './footers.css';
 </style>
+<style src="./footers.css" scoped></style>

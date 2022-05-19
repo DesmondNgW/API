@@ -161,5 +161,5 @@ export default Vue.extend({
     @import '../core/css/helpers/position.css';
     @import '../core/css/api.css';
     @import '../css/base.css';
-    @import './product.css';
 </style>
+<style src="./product.css" scoped></style>

@@ -135,5 +135,5 @@ export default Vue.extend({
     @import '../core/css/forms/check.css';
     @import '../core/css/api.css';
     @import '../css/base.css';
-    @import './heroes.css';
 </style>
+<style src="./heroes.css" scoped></style>

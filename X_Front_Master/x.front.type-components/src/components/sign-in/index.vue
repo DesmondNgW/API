@@ -40,5 +40,5 @@
     @import '../core/css/button.css';
     @import '../core/css/api.css';
     @import '../css/base.css';
-    @import './signin.css';
 </style>
+<style src="./signin.css" scoped></style>

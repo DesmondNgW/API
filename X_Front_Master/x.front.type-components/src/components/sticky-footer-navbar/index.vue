@@ -60,5 +60,8 @@
     @import '../core/css/type.css';
     @import '../core/css/api.css';
     @import '../css/base.css';
-    @import './sticky-footer-navbar.css';
+    nav.fixed-top {
+        top: 5.8rem;
+    }
 </style>
+<style src="./sticky-footer-navbar.css" scoped></style>

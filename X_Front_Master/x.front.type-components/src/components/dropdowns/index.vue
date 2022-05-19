@@ -365,5 +365,5 @@ export default Vue.extend({
     @import '../core/css/forms/control.css';
     @import '../core/css/api.css';
     @import '../css/base.css';
-    @import './dropdowns.css';
 </style>
+<style src="./dropdowns.css" scoped></style>

@@ -194,5 +194,5 @@ export default Vue.extend({
     @import '../core/css/list-group.css';
     @import '../core/css/api.css';
     @import '../css/base.css';
-    @import './list-groups.css';
 </style>
+<style src="./list-groups.css" scoped></style>

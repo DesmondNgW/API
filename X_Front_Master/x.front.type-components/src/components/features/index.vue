@@ -297,5 +297,5 @@ export default Vue.extend({
     @import '../core/css/grid.css';
     @import '../core/css/api.css';
     @import '../css/base.css';
-    @import './features.css';
 </style>
+<style src="./features.css" scoped></style>

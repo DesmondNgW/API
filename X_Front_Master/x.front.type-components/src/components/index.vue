@@ -6679,16 +6679,15 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
+    import Vue from 'vue';
 
-export default Vue.extend({
-  name: 'Index',
-});
+    export default Vue.extend({
+        name: 'Index',
+    });
 </script>
 
+<style src="../assets/bootstrap-icons-1.8.2/bootstrap-icons.css" scoped></style>
 <style scoped>
-    @import './core/css/api.css';
-    @import '../assets/bootstrap-icons-1.8.2/bootstrap-icons.css';
     .icons {
         display: grid;
         max-width: 100%;

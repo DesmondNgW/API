@@ -1728,5 +1728,5 @@ export default Vue.extend({
     @import '../core/css/modal.css';
     @import '../core/css/api.css';
     @import '../css/base.css';
-    @import './cheatsheet.css';
 </style>
+<style src="./cheatsheet.css" scoped></style>

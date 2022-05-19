@@ -185,5 +185,5 @@ export default Vue.extend({
     @import '../core/css/button.css';
     @import '../core/css/api.css';
     @import '../css/base.css';
-    @import './modals.css';
 </style>
+<style src="./modals.css" scoped></style>

@@ -264,5 +264,5 @@ export default Vue.extend({
     @import '../core/css/helpers/stretched-link.css';
     @import '../core/css/api.css';
     @import '../css/base.css';
-    @import './blog.css';
 </style>
+<style src="./blog.css" scoped></style>

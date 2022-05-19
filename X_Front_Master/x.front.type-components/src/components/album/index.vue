@@ -180,6 +180,5 @@ export default Vue.extend({
     @import '../core/css/grid.css';
     @import '../core/css/button.css';
     @import '../core/css/button-group.css';
-    @import '../core/css/api.css';
     @import '../css/base.css';
 </style>

@@ -41,5 +41,5 @@ export default Vue.extend({
     @import '../core/css/type.css';
     @import '../core/css/api.css';
     @import '../css/base.css';
-    @import './cover.css';
 </style>
+<style src="./cover.css" scoped></style>

@@ -58,5 +58,5 @@
     @import '../core/css/button.css';
     @import '../core/css/api.css';
     @import '../css/base.css';
-    @import './starter-template.css';
 </style>
+<style src="./starter-template.css" scoped></style>

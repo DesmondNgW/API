@@ -398,5 +398,5 @@
     @import '../core/css/button.css';
     @import '../core/css/api.css';
     @import '../css/base.css';
-    @import './sidebars.css';
 </style>
+<style src="./sidebars.css" scoped></style>
