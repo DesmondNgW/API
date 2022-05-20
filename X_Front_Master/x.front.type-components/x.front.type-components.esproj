@@ -11,6 +11,9 @@
     <Script Include="**" Exclude="*.esproj;**\node_modules\**" />
   </ItemGroup>
   <ItemGroup>
+    <Script Remove="src\components\core\js\**" />
+  </ItemGroup>
+  <ItemGroup>
     <Folder Include="src\assets\" />
     <Folder Include="src\router\" />
     <Folder Include="src\config\" />

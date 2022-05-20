@@ -2,6 +2,6 @@
 {
     internal class MethodHelper
     {
-        public static void Test() { }
+
     }
 }
