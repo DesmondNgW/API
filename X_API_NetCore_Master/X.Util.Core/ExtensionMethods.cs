@@ -218,6 +218,10 @@ namespace X.Util.Core
             return ret;
         }
 
+        public static int GetLengthMixZh(this string s)
+        {
+            return Regex.Replace(s, @"[^\x00-\xff]", "OK").Length;
+        }
         #endregion
 
         #region DateTime

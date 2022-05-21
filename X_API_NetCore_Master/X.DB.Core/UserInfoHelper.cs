@@ -59,7 +59,7 @@ namespace X.DB.Core
                 result.Message = ConstHelper.UserManagerCode2;
                 return result;
             }
-            if (!ValidateHelper.IsPhone(Telephone))
+            if (!ValidateHelper.IsMobile(Telephone))
             {
                 result.Message = ConstHelper.UserManagerCode3;
                 return result;
