@@ -24,12 +24,11 @@ namespace X.Business.Core
         /// <param name="accountNo"></param>
         /// <param name="password"></param>
         /// <returns></returns>
-        //[CacheContext(EnumCacheExpireType.Absolute, EnumCacheType.Runtime, EnumCacheTimeLevel.Minute, 30, false, true)]//设置缓存
         public static ResultInfo<User> Login(string accountNo, string password)
         {
             var result = new ResultInfo<User>();
             var provider = new InstanceProvider<UserInfoManager>(LogDomain.Db);
-            var iresult = CoreAccess<IUserInfoManager>.TryCall(provider.Client.Login, accountNo, password, provider, 
+            var iresult = CoreAccess<IUserInfoManager>.TryCall(provider.Client.Login, accountNo, password, provider,
                 new LogOptions<ResultInfo<UserInfo>>(CoreBase.CallSuccess));
             if (CoreBase.CallSuccess(iresult))
             {

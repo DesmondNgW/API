@@ -1,10 +1,13 @@
 ﻿using MongoDB.Driver;
 using X.DB.Entitis;
 using X.DB.Util;
+using X.Util.Core.Kernel;
 using X.Util.Entities;
+using X.Util.Entities.Enum;
 using X.Util.Extend.Core;
 using X.Util.Extend.Cryption;
 using X.Util.Extend.Mongo;
+using X.Util.Provider;
 
 namespace X.DB.Core
 {
@@ -19,6 +22,7 @@ namespace X.DB.Core
         /// </summary>
         /// <param name="CustomerNo"></param>
         /// <returns></returns>
+        [CacheContext(EnumCacheExpireType.Absolute, EnumCacheType.RedisBoth, EnumCacheTimeLevel.Minute, 30, false, true)]
         public ResultInfo<UserInfo> GetUserInfo(string CustomerNo)
         {
             var result = new ResultInfo<UserInfo>() { };
@@ -42,6 +46,7 @@ namespace X.DB.Core
         /// </summary>
         /// <param name="AccountNo"></param>
         /// <returns></returns>
+        [CacheContext(EnumCacheExpireType.Absolute, EnumCacheType.RedisBoth, EnumCacheTimeLevel.Minute, 30, false, true)]
         public ResultInfo<UserInfo> GetUserInfoByAccountNo(string AccountNo)
         {
             var result = new ResultInfo<UserInfo>() { };
@@ -98,7 +103,8 @@ namespace X.DB.Core
         public ResultInfo<bool> Register(UserInfo user)
         {
             var result = new ResultInfo<bool>() { };
-            var iresult = GetUserInfoByAccountNo(user.AccountNo);
+            var provider = new InstanceProvider<UserInfoManager>(LogDomain.Db);
+            var iresult = CoreAccess<IUserInfoManager>.TryCall(provider.Client.GetUserInfoByAccountNo, user.AccountNo, provider, new LogOptions<ResultInfo<UserInfo>>(CoreBase.CallSuccess));
             if (CoreBase.CallSuccess(iresult))
             {
                 result.Message = ConstHelper.UserManagerCode1;
@@ -129,7 +135,8 @@ namespace X.DB.Core
             var iresult = UserInfoHelper.GetUserInfo(AccountNo, Password, Telephone, Email, CustomerName);
             if (!CoreBase.CallSuccess(iresult))
             {
-                return Register(iresult.Result);
+                var provider = new InstanceProvider<UserInfoManager>(LogDomain.Db);
+                return CoreAccess<IUserInfoManager>.TryCall(provider.Client.Register, iresult.Result, provider, new LogOptions<ResultInfo<bool>>(CoreBase.CallSuccess));
             }
             else
             {
@@ -150,7 +157,8 @@ namespace X.DB.Core
             var result = new ResultInfo<bool>() { };
             var Filter = Builders<UserInfo>.Filter;
             var filter = Filter.Eq("_id", CustomerNo) & Filter.Eq("IsEnable", true) & Filter.Eq("BindEmail", false);
-            var iresult = GetUserInfo(CustomerNo);
+            var provider = new InstanceProvider<UserInfoManager>(LogDomain.Db);
+            var iresult = CoreAccess<IUserInfoManager>.TryCall(provider.Client.GetUserInfo, CustomerNo, provider, new LogOptions<ResultInfo<UserInfo>>(CoreBase.CallSuccess));
             if (!CoreBase.CallSuccess(iresult))
             {
                 result.Message = ConstHelper.UserManagerCode0;
@@ -182,7 +190,8 @@ namespace X.DB.Core
             var result = new ResultInfo<bool>() { };
             var Filter = Builders<UserInfo>.Filter;
             var filter = Filter.Eq("_id", CustomerNo) & Filter.Eq("IsEnable", true) & Filter.Eq("BindTelephone", false);
-            var iresult = GetUserInfo(CustomerNo);
+            var provider = new InstanceProvider<UserInfoManager>(LogDomain.Db);
+            var iresult = CoreAccess<IUserInfoManager>.TryCall(provider.Client.GetUserInfo, CustomerNo, provider, new LogOptions<ResultInfo<UserInfo>>(CoreBase.CallSuccess));
             if (!CoreBase.CallSuccess(iresult))
             {
                 result.Message = ConstHelper.UserManagerCode0;
@@ -219,7 +228,8 @@ namespace X.DB.Core
             var Filter = Builders<UserInfo>.Filter;
             var pwd = BaseCryption.Sha1(oldPassword);
             var filter = Filter.Eq("_id", CustomerNo) & Filter.Eq("IsEnable", true) & Filter.Eq("Password", pwd);
-            var iresult = GetUserInfo(CustomerNo);
+            var provider = new InstanceProvider<UserInfoManager>(LogDomain.Db);
+            var iresult = CoreAccess<IUserInfoManager>.TryCall(provider.Client.GetUserInfo, CustomerNo, provider, new LogOptions<ResultInfo<UserInfo>>(CoreBase.CallSuccess));
             if (!CoreBase.CallSuccess(iresult))
             {
                 result.Message = ConstHelper.UserManagerCode0;
@@ -248,7 +258,8 @@ namespace X.DB.Core
             var Filter = Builders<UserInfo>.Filter;
             var pwd = BaseCryption.Sha1(newPassword);
             var filter = Filter.Eq("AccountNo", AccountNo) & Filter.Eq("Telephone", Telephone) & Filter.Eq("Email", Email) & Filter.Eq("IsEnable", true);
-            var iresult = GetUserInfoByAccountNo(AccountNo);
+            var provider = new InstanceProvider<UserInfoManager>(LogDomain.Db);
+            var iresult = CoreAccess<IUserInfoManager>.TryCall(provider.Client.GetUserInfoByAccountNo, AccountNo, provider, new LogOptions<ResultInfo<UserInfo>>(CoreBase.CallSuccess));
             if (!CoreBase.CallSuccess(iresult))
             {
                 result.Message = ConstHelper.UserManagerCode0;
@@ -275,7 +286,8 @@ namespace X.DB.Core
             var result = new ResultInfo<bool>() { };
             var Filter = Builders<UserInfo>.Filter;
             var filter = Filter.Eq("_id", CustomerNo) & Filter.Eq("IsEnable", true);
-            var iresult = GetUserInfo(CustomerNo);
+            var provider = new InstanceProvider<UserInfoManager>(LogDomain.Db);
+            var iresult = CoreAccess<IUserInfoManager>.TryCall(provider.Client.GetUserInfo, CustomerNo, provider, new LogOptions<ResultInfo<UserInfo>>(CoreBase.CallSuccess));
             if (!CoreBase.CallSuccess(iresult))
             {
                 result.Message = ConstHelper.UserManagerCode0;
