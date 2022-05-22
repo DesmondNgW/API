@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System.Net.NetworkInformation;
 using X.Interface.Dto;
 using X.UI.Util.Controller;
+using X.UI.Util.Helper;
+using X.UI.Util.Model;
 using X.Util.Core;
-using X.Util.Core.Kernel;
 using X.Util.Extend.Cryption;
 using X.Util.Other;
 
@@ -103,23 +103,13 @@ namespace X.UI.WebAPI.Controllers
         /// <param name="port"></param>
         /// <returns></returns>
         [HttpGet(Name = "GetTcpConnectionTest")]
-        public ApiResult<List<Tuple<string, string, string>>> GetTcpConnectionTest(string ip, int port)
+        public ApiResult<List<TcpConnectionInfo>> GetTcpConnectionTest(string ip, int port)
         {
-            var ret = new ApiResult<List<Tuple<string, string, string>>>()
+            return new ApiResult<List<TcpConnectionInfo>>()
             {
                 Success = true,
-                Data = new List<Tuple<string, string, string>>()
+                Data = MonitorHelper.GetTcpConnection(ip, port)
             };
-            var properties = IPGlobalProperties.GetIPGlobalProperties();
-            var connections = properties.GetActiveTcpConnections();
-            foreach (var t in connections)
-            {
-                if (IpBase.IpValid(ip) && !t.RemoteEndPoint.Address.ToString().Contains(ip)) continue;
-                if (port > 0 && t.RemoteEndPoint.Port != port) continue;
-                ret.Data.Add(new Tuple<string, string, string>(t.LocalEndPoint.ToString(), t.RemoteEndPoint.ToString(),
-                    t.State.ToString()));
-            }
-            return ret;
         }
     }
 }
