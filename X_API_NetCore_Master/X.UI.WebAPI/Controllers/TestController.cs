@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.Net.NetworkInformation;
 using X.Interface.Dto;
 using X.UI.Util.Controller;
 using X.Util.Core;
+using X.Util.Core.Kernel;
 using X.Util.Extend.Cryption;
 using X.Util.Other;
 
@@ -92,6 +94,32 @@ namespace X.UI.WebAPI.Controllers
                 Data = calendar.ToJson(),
                 Success = true
             };
+        }
+
+        /// <summary>
+        /// GetTcpConnectionTest
+        /// </summary>
+        /// <param name="ip"></param>
+        /// <param name="port"></param>
+        /// <returns></returns>
+        [HttpGet(Name = "GetTcpConnectionTest")]
+        public ApiResult<List<Tuple<string, string, string>>> GetTcpConnectionTest(string ip, int port)
+        {
+            var ret = new ApiResult<List<Tuple<string, string, string>>>()
+            {
+                Success = true,
+                Data = new List<Tuple<string, string, string>>()
+            };
+            var properties = IPGlobalProperties.GetIPGlobalProperties();
+            var connections = properties.GetActiveTcpConnections();
+            foreach (var t in connections)
+            {
+                if (IpBase.IpValid(ip) && !t.RemoteEndPoint.Address.ToString().Contains(ip)) continue;
+                if (port > 0 && t.RemoteEndPoint.Port != port) continue;
+                ret.Data.Add(new Tuple<string, string, string>(t.LocalEndPoint.ToString(), t.RemoteEndPoint.ToString(),
+                    t.State.ToString()));
+            }
+            return ret;
         }
     }
 }
