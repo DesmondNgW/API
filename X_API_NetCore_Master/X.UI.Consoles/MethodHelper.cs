@@ -1,4 +1,4 @@
-﻿using System.Net.NetworkInformation;
+﻿using X.UI.Util.Helper;
 
 namespace X.UI.Consoles
 {
@@ -6,15 +6,10 @@ namespace X.UI.Consoles
     {
         public static void GetTcpConnections(string ip, int port)
         {
-            var properties = IPGlobalProperties.GetIPGlobalProperties();
-            var connections = properties.GetActiveTcpConnections();
-            foreach (var t in connections)
+            var list = MonitorHelper.GetTcpConnection(ip, port);
+            foreach (var t in list)
             {
-                if (!string.IsNullOrEmpty(ip) && !t.RemoteEndPoint.Address.ToString().Contains(ip)) continue;
-                if (port > 0 && t.RemoteEndPoint.Port != port) continue;
-                Console.Write("Local endpoint: {0} ", t.LocalEndPoint.ToString());
-                Console.Write("Remote endpoint: {0} ", t.RemoteEndPoint.ToString());
-                Console.WriteLine("{0}", t.State);
+                Console.WriteLine("Local endpoint: {0},Remote endpoint: {1}, {2}", t.Local, t.Remote, t.TcpState);
             }
         }
 
