@@ -2,6 +2,7 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Threading;
+using System.Threading.Tasks;
 using X.Util.Entities;
 using X.Util.Entities.Enum;
 
@@ -42,7 +43,7 @@ namespace X.Util.Core.Kernel
                         {
                             if (item.Mode == ProcessingMode.Common)
                             {
-                                item.Method.BeginInvoke(item.Context, null, null);
+                                Task.Run(() => { item.Method(item.Context); });
                             }
                             else
                             {
