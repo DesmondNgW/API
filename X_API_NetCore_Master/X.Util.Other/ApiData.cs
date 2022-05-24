@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
 using X.Util.Core;
@@ -44,6 +43,14 @@ namespace X.Util.Other
             return iresult.Success && !string.IsNullOrEmpty(iresult.Content) ? iresult.Content.FromJson<T>() : default;
         }
 
+        /// <summary>
+        /// GetContent
+        /// </summary>
+        /// <param name="uri"></param>
+        /// <param name="arguments"></param>
+        /// <param name="contentType"></param>
+        /// <param name="extendHeaders"></param>
+        /// <returns></returns>
         public static string GetContent(string uri, Dictionary<string, string> arguments, string contentType, Dictionary<string, string> extendHeaders)
         {
             var iresult = HttpRequestBase.GetHttpInfo(GetUri(uri, arguments), "utf-8", contentType, extendHeaders, string.Empty);
@@ -64,13 +71,16 @@ namespace X.Util.Other
             return iresult.Success && !string.IsNullOrEmpty(iresult.Content) ? iresult.Content.FromJson<T>() : default;
         }
 
-        public static string PostContent(string uri, object postdata, Dictionary<string, string> arguments, string contentType, Dictionary<string, string> extendHeaders)
+        /// <summary>
+        /// PostContent
+        /// </summary>
+        /// <param name="uri"></param>
+        /// <param name="postdata"></param>
+        /// <param name="contentType"></param>
+        /// <param name="extendHeaders"></param>
+        /// <returns></returns>
+        public static string PostContent(string uri, object postdata, string contentType, Dictionary<string, string> extendHeaders)
         {
-            if (arguments is null)
-            {
-                throw new ArgumentNullException(nameof(arguments));
-            }
-
             var iresult = HttpRequestBase.PostHttpInfo(uri, "utf-8", postdata.ToJson(), contentType, extendHeaders, string.Empty);
             return iresult.Success && !string.IsNullOrEmpty(iresult.Content) ? iresult.Content : string.Empty;
         }

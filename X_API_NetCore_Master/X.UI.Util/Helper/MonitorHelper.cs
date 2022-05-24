@@ -10,18 +10,20 @@ namespace X.UI.Util.Helper
         public static List<TcpConnectionInfo> GetTcpConnection(string ip, int port)
         {
             var ret = new List<TcpConnectionInfo>();
-            var properties = IPGlobalProperties.GetIPGlobalProperties();
-            var connections = properties.GetActiveTcpConnections();
-            foreach (var t in connections)
+            var connections = IPGlobalProperties.GetIPGlobalProperties()?.GetActiveTcpConnections();
+            if (connections != null)
             {
-                if (IpBase.IpValid(ip) && !t.RemoteEndPoint.Address.ToString().Contains(ip)) continue;
-                if (port > 0 && t.RemoteEndPoint.Port != port) continue;
-                ret.Add(new TcpConnectionInfo
+                foreach (var t in connections)
                 {
-                    Local = t.LocalEndPoint.ToString(),
-                    Remote = t.RemoteEndPoint.ToString(),
-                    TcpState = t.State.ToString()
-                });
+                    if (IpBase.IpValid(ip) && !t.RemoteEndPoint.Address.ToString().Contains(ip)) continue;
+                    if (port > 0 && t.RemoteEndPoint.Port != port) continue;
+                    ret.Add(new TcpConnectionInfo
+                    {
+                        Local = t.LocalEndPoint.ToString(),
+                        Remote = t.RemoteEndPoint.ToString(),
+                        TcpState = t.State.ToString()
+                    });
+                }
             }
             return ret;
         }

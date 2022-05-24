@@ -10,27 +10,27 @@ namespace X.UI.WebAPI.Controllers
     public class ImageManagerController : ControllerBaseWithOutToken
     {
         [HttpGet(Name = "VerifyCode")]
-        public void VerifyCode()
+        public async void VerifyCode()
         {
             var vc = CaptchaHelper.CaptchaOptions();
             var result = CaptchaHelper.GetCaptchaByte(vc);
-            ResponseHelper.ResponseWrite(Response, "image/png", result, "vc", CaptchaHelper.GetCaptchaCode("VerifyCode", vc.Value));
+            await ResponseHelper.ResponseWrite(Response, "image/png", result, "vc", CaptchaHelper.GetCaptchaCode("VerifyCode", vc.Value));
         }
 
         [HttpGet(Name = "BitMap")]
-        public void BitMap()
+        public async void BitMap()
         {
             var result = CaptchaHelper.GetBitMapByte();
-            ResponseHelper.ResponseWrite(Response, "image/png", result);
+            await ResponseHelper.ResponseWrite(Response, "image/png", result);
         }
 
         [HttpGet(Name = "TextImage")]
-        public void TextImage(string value)
+        public async void TextImage(string value)
         {
             var opt = CaptchaHelper.TextImageOptions();
             opt.Value = value;
             var result = CaptchaHelper.GetTextImageByte(opt);
-            ResponseHelper.ResponseWrite(Response, "image/png", result, "opt", CaptchaHelper.GetCaptchaCode("TextImage", opt.Value));
+            await ResponseHelper.ResponseWrite(Response, "image/png", result, "opt", CaptchaHelper.GetCaptchaCode("TextImage", opt.Value));
         }
     }
 }

@@ -1,7 +1,5 @@
-﻿using System;
-using System.IO;
+﻿using NUnit.Framework;
 using System.Linq;
-using NUnit.Framework;
 using Xamarin.UITest;
 using Xamarin.UITest.Queries;
 
@@ -12,7 +10,7 @@ namespace X.Test.UITest
     public class Tests
     {
         IApp app;
-        Platform platform;
+        readonly Platform platform;
 
         public Tests(Platform platform)
         {

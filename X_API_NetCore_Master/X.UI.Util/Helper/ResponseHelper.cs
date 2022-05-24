@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
+using System.Threading.Tasks;
 
 namespace X.UI.Util.Helper
 {
@@ -10,11 +11,11 @@ namespace X.UI.Util.Helper
         /// <param name="Response"></param>
         /// <param name="ContentType"></param>
         /// <param name="result"></param>
-        public static void ResponseWrite(HttpResponse Response, string ContentType, byte[] result)
+        public static Task ResponseWrite(HttpResponse Response, string ContentType, byte[] result)
         {
             Response.ContentType = ContentType;
             Response.StatusCode = 200;
-            Response.Body.WriteAsync(result, 0, result.Length);
+            return Response.Body.WriteAsync(result, 0, result.Length);
         }
 
         /// <summary>
@@ -25,12 +26,12 @@ namespace X.UI.Util.Helper
         /// <param name="result"></param>
         /// <param name="name"></param>
         /// <param name="value"></param>
-        public static void ResponseWrite(HttpResponse Response, string ContentType, byte[] result, string name, string value)
+        public static Task ResponseWrite(HttpResponse Response, string ContentType, byte[] result, string name, string value)
         {
             Response.ContentType = ContentType;
             Response.StatusCode = 200;
             Response.Headers.Add(name, value);
-            Response.Body.WriteAsync(result, 0, result.Length);
+            return Response.Body.WriteAsync(result, 0, result.Length);
         }
     }
 }
