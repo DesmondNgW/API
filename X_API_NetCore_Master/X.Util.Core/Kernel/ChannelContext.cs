@@ -67,6 +67,6 @@ namespace X.Util.Core.Kernel
             channel.Dispose(channel.Domain);
         }
 
-        public int Priority { get { return int.MaxValue; } }
+        public int Priority => int.MaxValue;
     }
 }

@@ -79,9 +79,23 @@ namespace X.Util.Other
         /// <param name="contentType"></param>
         /// <param name="extendHeaders"></param>
         /// <returns></returns>
-        public static string PostContent(string uri, object postdata, string contentType, Dictionary<string, string> extendHeaders)
+        public static string PostContentByObject(string uri, object postdata, string contentType, Dictionary<string, string> extendHeaders)
         {
             var iresult = HttpRequestBase.PostHttpInfo(uri, "utf-8", postdata.ToJson(), contentType, extendHeaders, string.Empty);
+            return iresult.Success && !string.IsNullOrEmpty(iresult.Content) ? iresult.Content : string.Empty;
+        }
+
+        /// <summary>
+        /// PostContent
+        /// </summary>
+        /// <param name="uri"></param>
+        /// <param name="postJsonData"></param>
+        /// <param name="contentType"></param>
+        /// <param name="extendHeaders"></param>
+        /// <returns></returns>
+        public static string PostContentByJson(string uri, string postJsonData, string contentType, Dictionary<string, string> extendHeaders)
+        {
+            var iresult = HttpRequestBase.PostHttpInfo(uri, "utf-8", postJsonData, contentType, extendHeaders, string.Empty);
             return iresult.Success && !string.IsNullOrEmpty(iresult.Content) ? iresult.Content : string.Empty;
         }
 

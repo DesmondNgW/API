@@ -69,15 +69,9 @@ namespace X.Util.Provider
         #endregion
 
         #region 对外公开方法和属性
-        public string EndpointAddress
-        {
-            get { return ServiceModel.EndpointAddress; }
-        }
+        public string EndpointAddress => ServiceModel.EndpointAddress;
 
-        public LogDomain Domain
-        {
-            get { return EDomain; }
-        }
+        public LogDomain Domain => EDomain;
 
         public TChannel Client
         {

@@ -88,23 +88,11 @@ namespace X.Util.Provider
             }
         }
 
-        public LogDomain Domain
-        {
-            get { return LogDomain.ThirdParty; }
-        }
+        public LogDomain Domain => LogDomain.ThirdParty;
 
-        public IDatabase Client
-        {
-            get
-            {
-                return PooledClientManager(ServerName).GetDatabase(DbNum);
-            }
-        }
+        public IDatabase Client => PooledClientManager(ServerName).GetDatabase(DbNum);
 
-        public ConnectionMultiplexer ConnectionMultiplexer
-        {
-            get { return PooledClientManager(ServerName); }
-        }
+        public ConnectionMultiplexer ConnectionMultiplexer => PooledClientManager(ServerName);
         #endregion
     }
 }

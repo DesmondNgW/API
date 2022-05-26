@@ -23,10 +23,7 @@ namespace X.Util.Core.Log
         private static readonly LevelRangeFilter DebugFilter = new LevelRangeFilter { LevelMax = Level.Debug, LevelMin = Level.Debug };
         private static readonly LevelRangeFilter WarnFilter = new LevelRangeFilter { LevelMax = Level.Warn, LevelMin = Level.Warn };
         private static LoggerConfig _instance;
-        public static LoggerConfig Instance
-        {
-            get { return _instance ?? (_instance = new LoggerConfig()); }
-        }
+        public static LoggerConfig Instance => _instance ?? (_instance = new LoggerConfig());
         private LoggerConfig()
         {
             FatalFilter.ActivateOptions();

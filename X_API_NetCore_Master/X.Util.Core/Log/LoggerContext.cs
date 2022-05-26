@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Text;
 using X.Util.Entities;
 using X.Util.Entities.Interface;
 
@@ -18,10 +17,7 @@ namespace X.Util.Core.Log
             Options = options ?? new LogOptions<TResult>(null);
         }
 
-        public IProvider<TChannel> Channel
-        {
-            get { return _channel; }
-        }
+        public IProvider<TChannel> Channel => _channel;
 
         public Func<TResult> Calling(ActionContext<TResult> context, Func<TResult> caller)
         {
@@ -66,7 +62,7 @@ namespace X.Util.Core.Log
             Logger.Client.Error(method, context.Response.Exception, Channel.Domain);
         }
 
-        public int Priority { get { return int.MaxValue; } }
+        public int Priority => int.MaxValue;
     }
 
     public class LoggerContext<TChannel> : IContext<TChannel>
@@ -85,10 +81,7 @@ namespace X.Util.Core.Log
             Options = options ?? new LogOptions();
         }
 
-        public IProvider<TChannel> Channel
-        {
-            get { return _channel; }
-        }
+        public IProvider<TChannel> Channel => _channel;
 
         public Action Calling(ActionContext context, Action caller)
         {
@@ -126,6 +119,6 @@ namespace X.Util.Core.Log
             Logger.Client.Error(method, context.Response.Exception, Channel.Domain);
         }
 
-        public int Priority { get { return int.MaxValue; } }
+        public int Priority => int.MaxValue;
     }
 }

@@ -29,30 +29,15 @@ namespace X.Util.Provider
         }
         #endregion
 
-        #region 内部实现
-        #endregion
-
         #region 对外公开属性和方法
-        public string EndpointAddress
-        {
-            get { return Type.FullName; }
-        }
+        public string EndpointAddress => Type.FullName;
 
-        public LogDomain Domain
-        {
-            get { return EDomain; }
-        }
+        public LogDomain Domain => EDomain;
 
         /// <summary>
         /// Provider提供的实例
         /// </summary>
-        public T Client
-        {
-            get
-            {
-                return Core<T>.Instance(() => (T)Activator.CreateInstance(Type));
-            }
-        }
+        public T Client => Core<T>.Instance(() => (T)Activator.CreateInstance(Type));
         #endregion
     }
 }

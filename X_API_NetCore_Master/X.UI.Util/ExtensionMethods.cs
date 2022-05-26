@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using System.Text.Json;
 using X.Util.Core.Kernel;
 
 namespace X.UI.Util
@@ -15,6 +16,16 @@ namespace X.UI.Util
         public static void SetServiceCollection(this IServiceCollection serviceCollection)
         {
             ServiceCollectionHelper.SetServiceCollection(serviceCollection);
+        }
+
+        /// <summary>
+        /// JsonDocument object to JsonString
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        public static string GetJsonByJsonDocument(this object obj)
+        {
+            return ((JsonElement)obj).GetRawText();
         }
     }
 }

@@ -87,20 +87,11 @@ namespace X.Util.Provider
         #endregion
 
         #region 对外公开属性和方法
-        public string EndpointAddress
-        {
-            get { return _servername; }
-        }
+        public string EndpointAddress => _servername;
 
-        public LogDomain Domain
-        {
-            get { return LogDomain.ThirdParty; }
-        }
+        public LogDomain Domain => LogDomain.ThirdParty;
 
-        public IMongoCollection<TDocument> Client
-        {
-            get { return Collection; }
-        }
+        public IMongoCollection<TDocument> Client => Collection;
         #endregion
     }
 }

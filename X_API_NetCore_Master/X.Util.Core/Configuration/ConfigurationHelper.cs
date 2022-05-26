@@ -19,25 +19,12 @@ namespace X.Util.Core.Configuration
         public const int MaxPoolSize = 1;
         public const string MongoDefaultServername = "XMongo";
         public const string RedisDefaultServername = "XRedis";
-        public const string CouchDefaultServername = "XCouch";
-        public static string EndpointFile
-        {
-            get { return Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "App_Data\\endpoint.xml"); }
-        }
-        public static string ConfigFile
-        {
-            get { return Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "App_Data\\Config.xml"); }
-        }
+        public static string EndpointFile => Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "App_Data\\endpoint.xml");
+        public static string ConfigFile => Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "App_Data\\Config.xml");
 
-        public static string EndpointFileModified
-        {
-            get { return new FileInfo(EndpointFile).LastWriteTime.Ticks.ToString(); }
-        }
+        public static string EndpointFileModified => new FileInfo(EndpointFile).LastWriteTime.Ticks.ToString();
 
-        public static string ConfigFileModified
-        {
-            get { return new FileInfo(EndpointFile).LastWriteTime.Ticks.ToString(); }
-        }
+        public static string ConfigFileModified => new FileInfo(EndpointFile).LastWriteTime.Ticks.ToString();
 
         #region GetAppSetting From web.config
         public static string GetAppSetting(string name)

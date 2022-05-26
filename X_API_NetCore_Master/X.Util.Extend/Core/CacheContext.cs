@@ -18,10 +18,7 @@ namespace X.Util.Extend.Core
             CallSuccess = callSuccess ?? (t => true);
         }
 
-        public IProvider<TChannel> Channel
-        {
-            get { return _channel; }
-        }
+        public IProvider<TChannel> Channel => _channel;
 
         private Func<CacheResult<TResult>> Convert(Func<TResult> caller)
         {
@@ -78,6 +75,6 @@ namespace X.Util.Extend.Core
 
         public void OnException(ActionContext<TResult> context) { }
 
-        public int Priority { get { return 0; } }
+        public int Priority => 0;
     }
 }
