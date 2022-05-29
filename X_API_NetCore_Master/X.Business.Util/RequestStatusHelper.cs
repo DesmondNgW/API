@@ -17,12 +17,12 @@ namespace X.Business.Util
         /// <param name="key"></param>
         /// <param name="uri"></param>
         /// <param name="cacheType"></param>
-        /// <param name="fail"></param>
-        /// <param name="success"></param>
-        public static void VerifyRequestStatus(string key, string uri, EnumCacheType cacheType, Action<RequestStatus> fail, Action<RequestStatus> success = default)
+        /// <param name="OnFail"></param>
+        /// <param name="OnSuccess"></param>
+        public static void VerifyRequestStatus(string key, string uri, EnumCacheType cacheType, Action<RequestStatus> OnFail, Action<RequestStatus> OnSuccess = default)
         {
-            if (fail == default) fail = (request) => { Thread.Sleep(ConstHelper.RequestInterval); };
-            if (success == default) fail = (request) => { };
+            if (OnFail == default) OnFail = (request) => { Thread.Sleep(ConstHelper.RequestInterval); };
+            if (OnSuccess == default) OnSuccess = (request) => { };
             var requestKey = ConstHelper.RequestStatusPrefix + key + uri;
             var requestStatus = CacheData.Default.GetCacheDbData<RequestStatus>(requestKey, cacheType);
             if (requestStatus == null)
@@ -34,19 +34,19 @@ namespace X.Business.Util
                     RequesTime = DateTime.Now
                 };
                 CacheData.Default.SetCacheDbData(requestKey, requestStatus, DateTime.Now.AddMinutes(ConstHelper.RequestExpireMinutes), cacheType);
-                success(requestStatus);
+                OnSuccess(requestStatus);
             }
             else
             {
                 var ts = (DateTime.Now - requestStatus.RequesTime).TotalMilliseconds;
                 if (ts < ConstHelper.RequestInterval)
                 {
-                    fail(requestStatus);
+                    OnFail(requestStatus);
                     Logger.Client.Warn(Logger.Client.GetMethodInfo(MethodBase.GetCurrentMethod(), new object[] { key, uri, cacheType }), new Exception("请求调用过于频繁"), LogDomain.Business);
                 }
                 else
                 {
-                    success(requestStatus);
+                    OnSuccess(requestStatus);
                 }
                 requestStatus.RequesTime = DateTime.Now;
                 CacheData.Default.SetCacheDbData(requestKey, requestStatus, DateTime.Now.AddMinutes(ConstHelper.RequestExpireMinutes), cacheType);
