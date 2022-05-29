@@ -193,28 +193,7 @@ namespace X.Business.Core
             var key = ConstHelper.LoginKeyPrefix + utoken;
             var obj = CacheData.Default.GetCacheDbData<User>(key, CacheType);
             if (obj == null) throw new InvalidOperationException("utoken错误或过期");
-            var requestKey = ConstHelper.LoginKeyPrefix + utoken + uri;
-            var requestStatus = CacheData.Default.GetCacheDbData<RequestStatus>(requestKey, CacheType);
-            if (requestStatus == null)
-            {
-                requestStatus = new RequestStatus
-                {
-                    Uri = uri,
-                    TokenId = utoken,
-                    RequesTime = DateTime.Now
-                };
-                CacheData.Default.SetCacheDbData(requestKey, requestStatus, DateTime.Now.AddMinutes(ConstHelper.RequestExpireMinutes), CacheType);
-            }
-            else
-            {
-                var ts = (DateTime.Now - requestStatus.RequesTime).TotalMilliseconds;
-                if (ts < ConstHelper.RequestInterval)
-                {
-                    Thread.Sleep(ConstHelper.RequestInterval);
-                }
-                requestStatus.RequesTime = DateTime.Now;
-                CacheData.Default.SetCacheDbData(requestKey, requestStatus, DateTime.Now.AddMinutes(ConstHelper.RequestExpireMinutes), CacheType);
-            }
+            RequestStatusHelper.VerifyRequestStatus(utoken, uri, CacheType, (request) => { Thread.Sleep(ConstHelper.RequestInterval); });
             return obj;
         }
     }

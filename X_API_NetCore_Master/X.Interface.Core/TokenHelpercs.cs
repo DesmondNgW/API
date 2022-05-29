@@ -46,7 +46,7 @@ namespace X.Interface.Core
         /// <returns></returns>
         public static void VerifyToken(string token, string clientId, string clientIp, string userAgent, string uri)
         {
-            if(string.IsNullOrEmpty(token)) throw new InvalidOperationException("token不能为空");
+            if (string.IsNullOrEmpty(token)) throw new InvalidOperationException("token不能为空");
             if (!BaseCryption.VerifyData(ConstHelper.GenerateHmacKey, token, HmacType.Md5)) throw new InvalidOperationException("token错误或过期");
             var key = ConstHelper.LoginKeyPrefix + token;
             var obj = CacheData.Default.GetCacheDbData<Token>(key, CacheType);
@@ -69,28 +69,7 @@ namespace X.Interface.Core
                 Logger.Client.Warn(string.Format("token: {0}, clientIp: {1}|{2}不一致", token, obj.ClientIp, clientIp), LogDomain.Ui);
                 throw new InvalidOperationException("token错误或过期");
             }
-            var requestKey = ConstHelper.LoginKeyPrefix + token + uri;
-            var requestStatus = CacheData.Default.GetCacheDbData<RequestStatus>(requestKey, CacheType);
-            if (requestStatus == null)
-            {
-                requestStatus = new RequestStatus
-                {
-                    Uri = uri,
-                    TokenId = token,
-                    RequesTime = DateTime.Now
-                };
-                CacheData.Default.SetCacheDbData(requestKey, requestStatus, DateTime.Now.AddMinutes(ConstHelper.RequestExpireMinutes), CacheType);
-            }
-            else
-            {
-                var ts = (DateTime.Now - requestStatus.RequesTime).TotalMilliseconds;
-                if (ts < ConstHelper.RequestInterval)
-                {
-                    Thread.Sleep(ConstHelper.RequestInterval);
-                }
-                requestStatus.RequesTime = DateTime.Now;
-                CacheData.Default.SetCacheDbData(requestKey, requestStatus, DateTime.Now.AddMinutes(ConstHelper.RequestExpireMinutes), CacheType);
-            }
+            RequestStatusHelper.VerifyRequestStatus(token, uri, CacheType, (request) => { Thread.Sleep(ConstHelper.RequestInterval); });
         }
 
         /// <summary>

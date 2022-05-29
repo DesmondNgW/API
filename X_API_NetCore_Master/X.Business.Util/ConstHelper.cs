@@ -16,6 +16,11 @@
         public const string LoginKeyPrefix = "X.Business.Helper.ConstHelper.LoginKeyPrefix";
 
         /// <summary>
+        /// RequestStatusPrefix
+        /// </summary>
+        public const string RequestStatusPrefix = "X.Business.Helper.ConstHelper.RequestStatusPrefix";
+
+        /// <summary>
         /// LoginExpireMinutes
         /// </summary>
         public const int LoginExpireMinutes = 30;
@@ -33,6 +38,6 @@
         /// <summary>
         /// RequestInterval
         /// </summary>
-        public const int RequestInterval = 100;
+        public const int RequestInterval = 300;
     }
 }
