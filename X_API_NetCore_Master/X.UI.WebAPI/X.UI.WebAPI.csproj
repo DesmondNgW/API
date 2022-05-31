@@ -5,6 +5,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UserSecretsId>90954cce-afe8-4d88-8b9e-c94582dd0fb0</UserSecretsId>
+    <ApplicationIcon>favicon.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
@@ -13,8 +14,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="uninstall.bat" />
-    <Content Include="install.bat" />
+    <Content Include="favicon.ico" />
+    <Content Include="uninstall.bat">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="install.bat">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>
