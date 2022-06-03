@@ -15,8 +15,17 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="src\assets\" />
+    <Folder Include="src\db\core\" />
+    <Folder Include="src\db\util\" />
+    <Folder Include="src\interface\core\" />
     <Folder Include="src\router\" />
     <Folder Include="src\config\" />
+    <Folder Include="src\services\core\" />
+    <Folder Include="src\services\util\" />
+    <Folder Include="src\test\" />
+    <Folder Include="src\util\provider\" />
+    <Folder Include="src\util\common\" />
+    <Folder Include="src\util\extend\" />
   </ItemGroup>
   <!-- This target is copied from the ASP.NET SPA template in order to ensure node_modules are in place. -->
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

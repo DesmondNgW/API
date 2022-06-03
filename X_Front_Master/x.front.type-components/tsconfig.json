@@ -32,7 +32,7 @@
     "src/**/*.vue",
     "tests/**/*.ts",
     "tests/**/*.tsx"
-  ],
+, "src/util/core/cache.js"  ],
   "exclude": [
     "node_modules"
   ]
