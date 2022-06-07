@@ -1,18 +1,11 @@
 'use strict';
+import "./extend/date.js";
+import { cache } from "./cache.js";
+import { store } from "./store.js";
 
-/**function getExceptionStack() {
-    try {
-        throw new Error("getExceptionStack")
-    } catch (error) {
-        console.error(error)
-        console.trace();
-        return error;
-    }
+function Logger() {
+    this.name = name;
 }
-getExceptionStack();
- * */
-
-function Logger() { }
 
 /**
  * getClientOptions
@@ -90,9 +83,74 @@ Logger.prototype.logRequest = function (paramList) {
         client.url.hash);
     if (request.caller) {
         console.trace("method info: %s, paramList: %s,", request.caller, request.paramList)
+    } else {
+        console.info("paramList: %s.", request.paramList);
     }
 }
 
+/**
+ * logResponse
+ * @param {any} paramList
+ * @param {any} error
+ * @param {any} result
+ * @param {any} elapsed
+ */
+Logger.prototype.logResponse = function (paramList, error, result, elapsed) {
+    let client = this.getClientOptions();
+    let response = this.getRequestOptions(paramList, error, result, elapsed);
+    console.info("%s request userAgent: %s, url: %s, search: %s, hash: %s.",
+        response.now.format("yyyy-MM-dd HH:mm:ss.f"),
+        client.userAgent,
+        client.url.href,
+        client.url.search,
+        client.url.hash);
+    if (response.caller) {
+        console.trace("method info: %s, paramList: %s,", response.caller, response.paramList)
+    } else {
+        console.info("paramList: %s.", response.paramList);
+    }
+    if (response.error) {
+        console.error("error: %s.", response.error);
+    } else {
+        if (response.result) {
+            console.info("result: %s.", response.result);
+        }
+        console.info("response elapsed: %s ms.", response.elapsed);
+    }
+}
 
+/**
+ * logClient
+ * */
+Logger.prototype.logClient = function () {
+    let client = this.getClientOptions();
+    const key = "util.core.logger.logClient";
+    store.set(key, client, "local");
+    cache.set(key, client);
+    this.debug(this.getClientOptions());
+}
 
-export default {};
+/**
+ * logError
+ * @param {any} log
+ */
+Logger.prototype.logError = function (log) {
+    console.error("error: %s.", log);
+}
+
+/**
+ * logWarn
+ * @param {any} log
+ */
+Logger.prototype.logWarn = function (log) {
+    console.warn("warn: %s.", log);
+}
+
+/**
+ * logDebug
+ * @param {any} log
+ */
+Logger.prototype.logDebug = function (log) {
+    console.debug("debug: %s.", log);
+}
+export const logger = new Logger("util.core.logger");
