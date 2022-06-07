@@ -12,7 +12,12 @@
 getExceptionStack();
  * */
 
-function getMainOptions() {
+function Logger() { }
+
+/**
+ * getClientOptions
+ * */
+Logger.prototype.getClientOptions = function () {
     let nav = navigator || {};
     let doc = document || {};
     let screen = (window || {}).screen || {};
@@ -21,7 +26,6 @@ function getMainOptions() {
         navigationStart: 0
     };
     return {
-        now: new Date(),
         userAgent: nav.userAgent,
         lang: nav.language,
         platform: nav.platform,
@@ -41,8 +45,28 @@ function getMainOptions() {
     };
 }
 
-function getSubOptions(paramList, error, result, elapsed) {
+/**
+ * getRequestOptions
+ * @param {any} paramList
+ */
+Logger.prototype.getRequestOptions = function (paramList) {
     return {
+        now: new Date(),
+        caller: arguments.callee.caller,
+        paramList: paramList
+    }
+}
+
+/**
+ * getResponseOptions
+ * @param {any} paramList
+ * @param {any} error
+ * @param {any} result
+ * @param {any} elapsed
+ */
+Logger.prototype.getResponseOptions = function (paramList, error, result, elapsed) {
+    return {
+        now: new Date(),
         caller: arguments.callee.caller,
         paramList: paramList,
         error: error,
@@ -51,16 +75,22 @@ function getSubOptions(paramList, error, result, elapsed) {
     }
 }
 
-function logRequest(paramList, error, result, elapsed) {
-    let main = getMainOptions();
-    let sub = getSubOptions(paramList, error, result, elapsed);
-    console.info("%s url:%s,search:%s,hash:%s.", main.now.format("yyyy-MM-dd HH:mm:ss.f"), main.url.href, main.url.search, main.url.hash);
-    if (sub.caller) {
-        console.info("%s ")
+/**
+ * logRequest
+ * @param {any} paramList
+ */
+Logger.prototype.logRequest = function (paramList) {
+    let client = this.getClientOptions();
+    let request = this.getRequestOptions(paramList);
+    console.info("%s request userAgent: %s, url: %s, search: %s, hash: %s.",
+        request.now.format("yyyy-MM-dd HH:mm:ss.f"),
+        client.userAgent,
+        client.url.href,
+        client.url.search,
+        client.url.hash);
+    if (request.caller) {
+        console.trace("method info: %s, paramList: %s,", request.caller, request.paramList)
     }
-
-
-
 }
 
 

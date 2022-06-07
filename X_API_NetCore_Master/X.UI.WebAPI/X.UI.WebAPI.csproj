@@ -15,12 +15,6 @@
 
   <ItemGroup>
     <Content Include="favicon.ico" />
-    <Content Include="uninstall.bat">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="install.bat">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
 
   <ItemGroup>
