@@ -18,7 +18,7 @@ Logger.prototype.getClientOptions = function () {
         domContentLoadedEventEnd: 0,
         navigationStart: 0
     };
-    return {
+    let result = {
         userAgent: nav.userAgent,
         lang: nav.language,
         platform: nav.platform,
@@ -36,6 +36,14 @@ Logger.prototype.getClientOptions = function () {
             hash: location.hash
         }
     };
+    const key = "util.core.logger.logClient";
+    if (!store.get(key, "local")) {
+        store.set(key, result, "local");
+    }
+    if (cache.get(key)) {
+        cache.set(key, result);
+    }
+    return result;
 }
 
 /**
@@ -123,10 +131,6 @@ Logger.prototype.logResponse = function (paramList, error, result, elapsed) {
  * logClient
  * */
 Logger.prototype.logClient = function () {
-    let client = this.getClientOptions();
-    const key = "util.core.logger.logClient";
-    store.set(key, client, "local");
-    cache.set(key, client);
     this.debug(this.getClientOptions());
 }
 
