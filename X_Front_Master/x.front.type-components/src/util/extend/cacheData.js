@@ -35,5 +35,4 @@ CacheData.prototype.remove = function (key) {
     cache.remove(key);
 }
 
-
 export const cacheData = new CacheData("util.extend.cacheData");

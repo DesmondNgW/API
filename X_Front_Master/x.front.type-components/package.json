@@ -12,7 +12,9 @@
     "jest": "^28.1.0",
     "jest-editor-support": "^30.0.2",
     "vue": "^2.6.11",
-    "vue-router": "3.5.3"
+    "vue-router": "3.5.3",
+    "crypto-js": "4.1.1",
+    "jsencrypt": "3.2.1"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^4.18.0",
