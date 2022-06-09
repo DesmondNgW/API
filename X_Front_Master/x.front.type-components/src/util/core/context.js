@@ -20,7 +20,7 @@ Context.prototype.getCaller = function (list, context, caller) {
 /**
  * getContext
  * @param {any} Provider
- * @param {any} contextList
+ * @param {any} contextList:{Array[]{Type:Attribute}}
  */
 Context.prototype.getContext = function (Provider, contextList) {
     var attr = [];
@@ -29,7 +29,7 @@ Context.prototype.getContext = function (Provider, contextList) {
     if (contextList && contextList.length) {
         for (let i = 0, len = contextList.length, item = contextList[i]; i < len; i++) {
             if (item) {
-                attr.push(item);
+                attr.push(item(Provider));
             }
         }
     }

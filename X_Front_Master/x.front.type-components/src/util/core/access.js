@@ -1,11 +1,19 @@
 'use strict';
 import { context } from "./context.js";
 
-
 function Access(name) {
     this.name = name;
 }
 
+/**
+ * 
+ * @param {any} func
+ * @param {any} args
+ * @param {any} bindThis
+ * @param {any} channel:Provider
+ * @param {any} contextList:Attribute
+ * @param {any} maxRetryCounts
+ */
 Access.prototype.tryCall = function (func, args, bindThis, channel, contextList, maxRetryCounts = 0) {
     let contextAction = context.GetActionContext(args);
     let list = context.getContext(channel, contextList);
