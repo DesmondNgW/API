@@ -1,4 +1,3 @@
-'use strict';
 import { cache } from "../core/cache.js";
 
 function CacheData(name) {
@@ -14,7 +13,7 @@ function CacheData(name) {
  * @param {any} loadArgs
  * @param {any} bindThis
  */
-CacheData.prototype.getCacheData = function (key, version, dt, loader, loadArgs, bindThis) {
+CacheData.prototype.getCacheData = function(key, version, dt, loader, loadArgs, bindThis) {
     let setting = cache.get(key);
     if (setting && setting.Result && setting.Succeed && setting.AppVersion == version && (+new Date() - setting.CacheTime) < 0) return setting;
     let iresult = loader.apply(bindThis, loadArgs);
@@ -31,7 +30,7 @@ CacheData.prototype.getCacheData = function (key, version, dt, loader, loadArgs,
  * remove
  * @param {any} key
  */
-CacheData.prototype.remove = function (key) {
+CacheData.prototype.remove = function(key) {
     cache.remove(key);
 }
 

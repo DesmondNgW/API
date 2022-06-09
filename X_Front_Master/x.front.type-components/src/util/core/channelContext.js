@@ -1,4 +1,3 @@
-'use strict';
 import { IProvider } from "./provider.js";
 
 function ChannelContext(Provider) {
@@ -10,7 +9,7 @@ function ChannelContext(Provider) {
  * @param {any} context:Context.getActionContext
  * @param {any} caller
  */
-ChannelContext.prototype.Calling = function (context, caller) {
+ChannelContext.prototype.Calling = function(context, caller) {
     return caller;
 }
 
@@ -18,7 +17,7 @@ ChannelContext.prototype.Calling = function (context, caller) {
  * Called
  * @param {any} context:Context.getActionContext
  */
-ChannelContext.prototype.Called = function (context) {
+ChannelContext.prototype.Called = function() {
     if (this.Provider instanceof IProvider.ClientProvider) {
         this.Provider.ReleaseClient();
     }
@@ -28,10 +27,10 @@ ChannelContext.prototype.Called = function (context) {
  * OnException
  * @param {any} context:Context.getActionContext
  */
-ChannelContext.prototype.OnException = function (context) {
+ChannelContext.prototype.OnException = function() {
     if (this.Provider instanceof IProvider.ClientProvider) {
         this.Provider.Dispose();
     }
 }
 
-export const ChannelContext;
+export default ChannelContext;

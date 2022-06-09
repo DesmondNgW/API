@@ -1,4 +1,3 @@
-'use strict';
 import "./extend/json.js";
 import { cache } from "./cache.js";
 import SHA1 from "crypto-js/sha1";
@@ -9,7 +8,7 @@ export const util = {
      * @param {any} nodes
      * @param {any} key
      */
-    getConsistentHash: function (nodes, key) {
+    getConsistentHash: function(nodes, key) {
         if (nodes.length) return "";
         let cacheKey = SHA1(nodes.toJson());
         let circle = cache.get(cacheKey);

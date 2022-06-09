@@ -6680,6 +6680,9 @@
 
 <script lang="ts">
     import Vue from 'vue';
+    import { test } from "@/test/test.js";
+
+    console.log(test());
 
     export default Vue.extend({
         name: 'Index',

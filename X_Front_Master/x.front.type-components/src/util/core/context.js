@@ -1,7 +1,5 @@
-'use strict';
-
-import { ChannelContext } from "./channelContext.js";
-import { LoggerContext } from "./loggerContext.js";
+import ChannelContext from "./channelContext.js";
+import LoggerContext from "./loggerContext.js";
 
 function Context(name) {
     this.name = name;
@@ -13,7 +11,7 @@ function Context(name) {
  * @param {any} context:Context.getActionContext
  * @param {any} caller
  */
-Context.prototype.getCaller = function (list, context, caller) {
+Context.prototype.getCaller = function(list, context, caller) {
     return list.reduce((current, item) => { return item.Calling(context, current); }, caller);
 }
 
@@ -22,7 +20,7 @@ Context.prototype.getCaller = function (list, context, caller) {
  * @param {any} Provider
  * @param {any} contextList:{Array[]{Type:Attribute}}
  */
-Context.prototype.getContext = function (Provider, contextList) {
+Context.prototype.getContext = function(Provider, contextList) {
     var attr = [];
     attr.push(new ChannelContext(Provider));
     attr.push(new LoggerContext(Provider));
@@ -40,7 +38,7 @@ Context.prototype.getContext = function (Provider, contextList) {
  * getActionContext
  * @param {any} values:paramsList
  */
-Context.prototype.getActionContext = function (values) {
+Context.prototype.getActionContext = function(values) {
     return {
         ActionArguments: values
     };
@@ -52,7 +50,7 @@ Context.prototype.getActionContext = function (values) {
  * @param {any} result
  * @param {any} error
  */
-Context.prototype.addResultToActionContext = function (context, result, error) {
+Context.prototype.addResultToActionContext = function(context, result, error) {
     context.Result = result;
     context.Error = error;
     return context;

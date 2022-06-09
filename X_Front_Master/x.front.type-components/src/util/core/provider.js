@@ -1,10 +1,9 @@
-'use strict';
 function Provider(Client) {
     this.Client = Client;
 }
 
 function ClientProvider(Client, ReleaseClient, Dispose) {
-    Provider.call(this, Client)
+    Provider.call(this, Client);
     this.ReleaseClient = ReleaseClient;
     this.Dispose = Dispose;
 }

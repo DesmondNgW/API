@@ -1,22 +1,21 @@
-'use strict';
 /**
  * JSON.toJson
  * */
-Object.prototype.toJson = function () {
+Object.prototype.toJson = function() {
     return JSON.stringify(this);
 }
 
 /**
  * JSON.fromJson
  * */
-String.prototype.fromJson = function () {
+String.prototype.fromJson = function() {
     return JSON.parse(this);
 }
 
 /**
  * JSON.isJson
  * */
-String.prototype.isJson = function () {
+String.prototype.isJson = function() {
     let json = this;
     json = json.replace(new RegExp("\\\\(?:[\"'\\/bfnrt]|u[0-9a-fA-F]{4})", "ig"), () => "@");
     json = json.replace(new RegExp("\"[^\"\\\\n\\r]*\"|'[^\"\\\n\\r]*'|true|false|null|-?\\d+(?:\\.\\d*)?(?:[eE][+\\-]?\\d+)?", "ig"), () => "]");
@@ -27,13 +26,13 @@ String.prototype.isJson = function () {
 /**
  * Base64.encode
  * */
-String.prototype.toBase64 = function () {
+String.prototype.toBase64 = function() {
     return btoa(encodeURIComponent(this));
 }
 
 /**
  * Base64.decode
  * */
-String.prototype.fromBase64 = function () {
+String.prototype.fromBase64 = function() {
     return decodeURIComponent(atob(this));
 }

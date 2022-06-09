@@ -1,4 +1,3 @@
-'use strict';
 import { context } from "./context.js";
 
 function Access(name) {
@@ -14,8 +13,8 @@ function Access(name) {
  * @param {any} contextList:Attribute
  * @param {any} maxRetryCounts
  */
-Access.prototype.tryCall = function (func, args, bindThis, channel, contextList, maxRetryCounts = 0) {
-    let contextAction = context.GetActionContext(args);
+Access.prototype.tryCall = function(func, args, bindThis, channel, contextList, maxRetryCounts = 0) {
+    let contextAction = context.getActionContext(args);
     let list = context.getContext(channel, contextList);
     let result;
     try {

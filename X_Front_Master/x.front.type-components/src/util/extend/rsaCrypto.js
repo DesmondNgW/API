@@ -1,4 +1,3 @@
-'use strict';
 import { JSEncrypt } from "jsencrypt";
 
 function RSACrypto(name) {
@@ -10,7 +9,7 @@ function RSACrypto(name) {
  * @param {any} publicKey
  * @param {any} text
  */
-RSACrypto.prototype.encrypt = function (publicKey, text) {
+RSACrypto.prototype.encrypt = function(publicKey, text) {
     let obj = new JSEncrypt();
     obj.setPublicKey(publicKey);
     return obj.encrypt(text);
@@ -21,11 +20,10 @@ RSACrypto.prototype.encrypt = function (publicKey, text) {
  * @param {any} privateKey
  * @param {any} encrypted
  */
-RSACrypto.prototype.decrypt = function (privateKey, encrypted) {
+RSACrypto.prototype.decrypt = function(privateKey, encrypted) {
     let obj = new JSEncrypt();
     obj.setPrivateKey(privateKey);
     return obj.decrypt(encrypted);
 }
 
 export const RSACrypto = new RSACrypto("util.extend.RSACrypto")
-

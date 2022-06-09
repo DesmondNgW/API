@@ -1,4 +1,3 @@
-'use strict';
 import { cacheData } from "./cacheData.js";
 
 /**
@@ -16,11 +15,11 @@ function CacheContext(Provider, Options) {
  * @param {any} context
  * @param {any} caller
  */
-CacheContext.prototype.Calling = function (context, caller) {
+CacheContext.prototype.Calling = function(context, caller) {
     let self = this;
     let options = this.Options;
     let CallSuccess = options.CallSuccess;
-    let box = function (caller) {
+    let box = function(caller) {
         return () => {
             let iresult = caller();
             return {
@@ -29,7 +28,7 @@ CacheContext.prototype.Calling = function (context, caller) {
             };
         };
     };
-    let unbox = function (caller) {
+    let unbox = function(caller) {
         return () => {
             var iresult = caller();
             return iresult ? iresult.Result : null;
@@ -44,7 +43,7 @@ CacheContext.prototype.Calling = function (context, caller) {
  * Called
  * @param {any} context
  */
-CacheContext.prototype.Called = function (context) {
+CacheContext.prototype.Called = function() {
 
 }
 
@@ -52,8 +51,8 @@ CacheContext.prototype.Called = function (context) {
  * OnException
  * @param {any} context
  */
-CacheContext.prototype.OnException = function (context) {
-    
+CacheContext.prototype.OnException = function() {
+
 }
 
-export const CacheContext;
+export default CacheContext;

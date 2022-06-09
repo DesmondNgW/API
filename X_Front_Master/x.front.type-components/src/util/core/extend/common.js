@@ -1,9 +1,8 @@
-'use strict';
 /**
  * Number.floor
  * @param {any} length
  */
-Number.prototype.floor = function (length) {
+Number.prototype.floor = function(length) {
     return Math.floor(this * Math.pow(10, length)) / Math.pow(10, length);
 }
 
@@ -11,27 +10,27 @@ Number.prototype.floor = function (length) {
  * Number.ceil
  * @param {any} length
  */
-Number.prototype.ceil = function (length){
+Number.prototype.ceil = function(length) {
     return Math.ceil(this * Math.pow(10, length)) / Math.pow(10, length);
 }
 
 /**
  * String.isNullOrEmpty
  * */
-String.prototype.isNullOrEmpty = function () {
+String.prototype.isNullOrEmpty = function() {
     return !this;
 }
 
 /**
  * String.isNullOrWhiteSpace
  * */
-String.prototype.isNullOrWhiteSpace = function () {
+String.prototype.isNullOrWhiteSpace = function() {
     return !(this && this.replace(/\s/ig, ""));
 }
 
 /**
- * String.getLengthMixZh{ÖÐÎÄ×Ö·û´®³¤¶È}
+ * String.getLengthMixZh{ï¿½ï¿½ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½}
  * */
-String.prototype.getLengthMixZh = function () {
+String.prototype.getLengthMixZh = function() {
     return this.replace(new RegExp("[^\x00-\xff]", "ig"), "OK").length;
 }

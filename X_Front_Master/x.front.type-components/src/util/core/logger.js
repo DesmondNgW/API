@@ -1,4 +1,3 @@
-'use strict';
 import "./extend/date.js";
 import { cache } from "./cache.js";
 import { store } from "./store.js";
@@ -10,7 +9,7 @@ function Logger() {
 /**
  * getClientOptions
  * */
-Logger.prototype.getClientOptions = function () {
+Logger.prototype.getClientOptions = function() {
     let nav = navigator || {};
     let doc = document || {};
     let screen = (window || {}).screen || {};
@@ -50,7 +49,7 @@ Logger.prototype.getClientOptions = function () {
  * getRequestOptions
  * @param {any} paramList
  */
-Logger.prototype.getRequestOptions = function (paramList) {
+Logger.prototype.getRequestOptions = function(paramList) {
     return {
         now: new Date(),
         caller: arguments.callee.caller,
@@ -65,7 +64,7 @@ Logger.prototype.getRequestOptions = function (paramList) {
  * @param {any} result
  * @param {any} elapsed
  */
-Logger.prototype.getResponseOptions = function (paramList, error, result, elapsed) {
+Logger.prototype.getResponseOptions = function(paramList, error, result, elapsed) {
     return {
         now: new Date(),
         caller: arguments.callee.caller,
@@ -80,7 +79,7 @@ Logger.prototype.getResponseOptions = function (paramList, error, result, elapse
  * logRequest
  * @param {any} paramList
  */
-Logger.prototype.logRequest = function (paramList) {
+Logger.prototype.logRequest = function(paramList) {
     let client = this.getClientOptions();
     let request = this.getRequestOptions(paramList);
     console.info("%s request userAgent: %s, url: %s, search: %s, hash: %s.",
@@ -103,7 +102,7 @@ Logger.prototype.logRequest = function (paramList) {
  * @param {any} result
  * @param {any} elapsed
  */
-Logger.prototype.logResponse = function (paramList, error, result, elapsed) {
+Logger.prototype.logResponse = function(paramList, error, result, elapsed) {
     let client = this.getClientOptions();
     let response = this.getRequestOptions(paramList, error, result, elapsed);
     console.info("%s request userAgent: %s, url: %s, search: %s, hash: %s.",
@@ -130,7 +129,7 @@ Logger.prototype.logResponse = function (paramList, error, result, elapsed) {
 /**
  * logClient
  * */
-Logger.prototype.logClient = function () {
+Logger.prototype.logClient = function() {
     this.debug(this.getClientOptions());
 }
 
@@ -138,7 +137,7 @@ Logger.prototype.logClient = function () {
  * logError
  * @param {any} log
  */
-Logger.prototype.logError = function (log) {
+Logger.prototype.logError = function(log) {
     console.error("error: %s.", log);
 }
 
@@ -146,7 +145,7 @@ Logger.prototype.logError = function (log) {
  * logWarn
  * @param {any} log
  */
-Logger.prototype.logWarn = function (log) {
+Logger.prototype.logWarn = function(log) {
     console.warn("warn: %s.", log);
 }
 
@@ -154,7 +153,7 @@ Logger.prototype.logWarn = function (log) {
  * logDebug
  * @param {any} log
  */
-Logger.prototype.logDebug = function (log) {
+Logger.prototype.logDebug = function(log) {
     console.debug("debug: %s.", log);
 }
 export const logger = new Logger("util.core.logger");

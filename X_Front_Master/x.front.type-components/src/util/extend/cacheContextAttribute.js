@@ -1,5 +1,4 @@
-'use strict';
-import { CacheContext } from "./cacheContext";
+import CacheContext from "./cacheContext";
 
 /**
  * CacheContextAttribute
@@ -8,7 +7,7 @@ import { CacheContext } from "./cacheContext";
  * @param {any} date
  * @param {any} callSuccess
  */
-export const CacheContextAttribute = function (key, version, date, callSuccess) {
+export const CacheContextAttribute = function(key, version, date, callSuccess) {
     return (Provider) => {
         return new CacheContext(Provider, {
             Key: key,

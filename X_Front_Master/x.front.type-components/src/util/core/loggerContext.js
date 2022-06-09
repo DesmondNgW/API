@@ -1,4 +1,3 @@
-'use strict';
 import { logger } from "./logger.js";
 
 function LoggerContext(Provider) {
@@ -10,10 +9,10 @@ function LoggerContext(Provider) {
  * @param {any} context:Context.getActionContext
  * @param {any} caller
  */
-LoggerContext.prototype.Calling = function (context, caller) {
+LoggerContext.prototype.Calling = function(context, caller) {
     logger.logRequest(context.ActionArguments);
     let now = +new Date();
-    context.stopElapsed = function () {
+    context.stopElapsed = function() {
         return +new Date() - now;
     }
     return caller;
@@ -23,8 +22,8 @@ LoggerContext.prototype.Calling = function (context, caller) {
  * Called
  * @param {any} context:Context.getActionContext
  */
-LoggerContext.prototype.Called = function (context) {
-    elapsed = -1;
+LoggerContext.prototype.Called = function(context) {
+    let elapsed = -1;
     if (context && context.stopElapsed) {
         elapsed = context.stopElapsed();
     }
@@ -35,8 +34,8 @@ LoggerContext.prototype.Called = function (context) {
  * OnException
  * @param {any} context:Context.getActionContext
  */
-LoggerContext.prototype.OnException = function (context) {
+LoggerContext.prototype.OnException = function(context) {
     logger.logError(context.Error);
 }
 
-export const LoggerContext;
+export default LoggerContext;

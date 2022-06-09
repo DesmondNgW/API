@@ -1,4 +1,3 @@
-'use strict';
 import AES from "crypto-js/aes";
 import TripleDES from "crypto-js/tripledes";
 
@@ -12,4 +11,3 @@ ExtendCrypto.prototype.TripleDESEncrypt = TripleDES.encrypt;
 ExtendCrypto.prototype.TripleDESDecrypt = TripleDES.decrypt;
 
 export const extendCrypto = new ExtendCrypto("util.extend.extendCrypto")
-

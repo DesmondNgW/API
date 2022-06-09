@@ -1,4 +1,3 @@
-'use strict';
 import MD5 from "crypto-js/md5";
 import SHA1 from "crypto-js/sha1";
 import SHA256 from "crypto-js/sha256";
@@ -28,4 +27,3 @@ BaseCrypto.prototype.HmacSHA384 = HmacSHA384;
 BaseCrypto.prototype.HmacSHA512 = HmacSHA512;
 
 export const baseCrypto = new BaseCrypto("util.extend.baseCrypto")
-

@@ -1,10 +1,8 @@
-'use strict';
-
 /**
  * Date.addDays
  * @param {any} days
  */
-Date.prototype.addDays = function (days) {
+Date.prototype.addDays = function(days) {
     this.setDate(this.getDate() + days);
     return this;
 };
@@ -13,7 +11,7 @@ Date.prototype.addDays = function (days) {
  * Date.addMonths
  * @param {any} months
  */
-Date.prototype.addMonths = function (months) {
+Date.prototype.addMonths = function(months) {
     this.setMonth(this.getMonth() + months);
     return this;
 };
@@ -22,7 +20,7 @@ Date.prototype.addMonths = function (months) {
  * Date.addFullYears
  * @param {any} years
  */
-Date.prototype.addFullYears = function (years) {
+Date.prototype.addFullYears = function(years) {
     this.setFullYear(this.getFullYear() + years);
     return this;
 };
@@ -32,8 +30,9 @@ Date.prototype.addFullYears = function (years) {
  * @param {any} interval
  * @param {any} number
  */
-Date.prototype.add = function (interval, number) {
-    let dt = this, addMilliseconds = 0;
+Date.prototype.add = function(interval, number) {
+    let dt = this,
+        addMilliseconds = 0;
     switch (interval) {
         case 's':
             addMilliseconds = 1000 * number;
@@ -63,7 +62,7 @@ Date.prototype.add = function (interval, number) {
 /**
  * Date.isLeapYear
  * */
-Date.prototype.isLeapYear = function () {
+Date.prototype.isLeapYear = function() {
     return (0 == this.getYear() % 4 && ((this.getYear() % 100 != 0) || (this.getYear() % 400 == 0)));
 }
 
@@ -71,7 +70,7 @@ Date.prototype.isLeapYear = function () {
  * Date.format
  * @param {any} fmt
  */
-Date.prototype.format = function (fmt) {
+Date.prototype.format = function(fmt) {
     var o = {
         "M+": this.getMonth() + 1,
         "d+": this.getDate(),
@@ -92,6 +91,6 @@ Date.prototype.format = function (fmt) {
 /**
  * Date.getTimestamp
  * */
-Date.prototype.getTimestamp = function () {
+Date.prototype.getTimestamp = function() {
     return +this;
 }
