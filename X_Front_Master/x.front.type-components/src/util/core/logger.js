@@ -49,11 +49,14 @@ Logger.prototype.getClientOptions = function() {
 /**
  * getRequestOptions
  * @param {any} paramList
+ * @param {any} channel
+ * @param {any} func
  */
-Logger.prototype.getRequestOptions = function(paramList) {
+Logger.prototype.getRequestOptions = function(paramList, channel, func) {
     return {
         now: new Date(),
-        caller: null, //arguments.callee.caller,
+        channel: channel,
+        func: func,
         paramList: paramList
     }
 }
@@ -64,11 +67,14 @@ Logger.prototype.getRequestOptions = function(paramList) {
  * @param {any} error
  * @param {any} result
  * @param {any} elapsed
+ * @param {any} channel
+ * @param {any} func
  */
-Logger.prototype.getResponseOptions = function(paramList, error, result, elapsed) {
+Logger.prototype.getResponseOptions = function(paramList, error, result, elapsed, channel, func) {
     return {
         now: new Date(),
-        caller: null, //arguments.callee.caller,
+        channel: channel,
+        func: func,
         paramList: paramList,
         error: error,
         result: result,
@@ -79,18 +85,19 @@ Logger.prototype.getResponseOptions = function(paramList, error, result, elapsed
 /**
  * logRequest
  * @param {any} paramList
+ * @param {any} caller
  */
-Logger.prototype.logRequest = function(paramList) {
+Logger.prototype.logRequest = function(paramList, channel, func) {
     let client = this.getClientOptions();
-    let request = this.getRequestOptions(paramList);
+    let request = this.getRequestOptions(paramList, channel, func);
     console.info("%s LOGREQUEST: request userAgent: %s, url: %s, search: %s, hash: %s.",
         request.now.format("yyyy-MM-dd HH:mm:ss.f"),
         client.userAgent,
         client.url.href,
         client.url.search,
         client.url.hash);
-    if (request.caller) {
-        console.trace("method info: %s, paramList: %s,", request.caller, request.paramList)
+    if (request.channel) {
+        console.trace("method info: %s.%s, paramList: %s,", request.channel.Client.constructor, request.func, request.paramList)
     } else {
         console.info("paramList: %s.", request.paramList);
     }
@@ -102,18 +109,19 @@ Logger.prototype.logRequest = function(paramList) {
  * @param {any} error
  * @param {any} result
  * @param {any} elapsed
+ * @param {any} caller
  */
-Logger.prototype.logResponse = function(paramList, error, result, elapsed) {
+Logger.prototype.logResponse = function(paramList, error, result, elapsed, channel, func) {
     let client = this.getClientOptions();
-    let response = this.getResponseOptions(paramList, error, result, elapsed);
+    let response = this.getResponseOptions(paramList, error, result, elapsed, channel, func);
     console.info("%s LOGRESPONSE: request userAgent: %s, url: %s, search: %s, hash: %s.",
         response.now.format("yyyy-MM-dd HH:mm:ss.f"),
         client.userAgent,
         client.url.href,
         client.url.search,
         client.url.hash);
-    if (response.caller) {
-        console.trace("method info: %s, paramList: %s,", response.caller, response.paramList)
+    if (response.channel) {
+        console.trace("method info: %s.%s, paramList: %s,", response.channel.Client.constructor, response.func, response.paramList)
     } else {
         console.info("paramList: %s.", response.paramList);
     }

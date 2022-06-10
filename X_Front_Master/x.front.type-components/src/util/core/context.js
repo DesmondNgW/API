@@ -38,11 +38,15 @@ Context.prototype.getContext = function(Provider, contextList) {
  * getActionContext
  * @param {any} values:paramsList
  * @param {any} bindThis:bindContext
+ * @param {any} channel:channel
+ * @param {any} func:func
  */
-Context.prototype.getActionContext = function(values, bindThis) {
+Context.prototype.getActionContext = function(values, bindThis, channel, func) {
     return {
         ActionArguments: values,
-        ActionBindThis: bindThis
+        ActionBindThis: bindThis,
+        ActionChannel: channel,
+        ActionFunc: func
     };
 }
 

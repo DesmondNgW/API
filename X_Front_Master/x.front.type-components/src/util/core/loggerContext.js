@@ -11,7 +11,7 @@ function LoggerContext(Provider) {
  * @param {any} caller
  */
 LoggerContext.prototype.Calling = function(context, caller) {
-    logger.logRequest(context.ActionArguments);
+    logger.logRequest(context.ActionArguments, context.ActionChannel, context.ActionFunc);
     let now = +new Date();
     context.stopElapsed = function() {
         return +new Date() - now;
@@ -28,7 +28,7 @@ LoggerContext.prototype.Called = function(context) {
     if (context && context.stopElapsed) {
         elapsed = context.stopElapsed();
     }
-    logger.logResponse(context.ActionArguments, null, context.Result, elapsed)
+    logger.logResponse(context.ActionArguments, null, context.Result, elapsed, context.ActionChannel, context.ActionFunc)
 }
 
 /**

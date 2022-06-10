@@ -16,7 +16,7 @@ function Access(name) {
  */
 Access.prototype.tryCall = function(func, args, bindThis, channel, contextList, maxRetryCounts = 0) {
     if (!bindThis) bindThis = channel.Client;
-    let contextAction = context.getActionContext(args, bindThis);
+    let contextAction = context.getActionContext(args, bindThis, channel, func);
     let list = context.getContext(channel, contextList);
     let result;
     try {
