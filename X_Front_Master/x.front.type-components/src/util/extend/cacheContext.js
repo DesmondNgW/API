@@ -1,6 +1,6 @@
 "use strict";
 import { cacheData } from "./cacheData.js";
-
+import MD5 from "crypto-js/md5";
 /**
  * CacheContext
  * @param {any} Provider
@@ -36,8 +36,9 @@ CacheContext.prototype.Calling = function(context, caller) {
             return iresult ? iresult.Result : null;
         };
     }
+    let cacheKey = MD5(options.Key + args.toString());
     return unbox(() => {
-        return cacheData.getCacheData(options.Key, options.Version, options.Date, box(caller), args, bindThis);
+        return cacheData.getCacheData(cacheKey, options.Version, options.Date, box(caller), args, bindThis);
     });
 }
 

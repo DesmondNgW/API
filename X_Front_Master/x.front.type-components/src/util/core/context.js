@@ -1,3 +1,4 @@
+"use strict";
 import ChannelContext from "./channelContext.js";
 import LoggerContext from "./loggerContext.js";
 
@@ -50,7 +51,6 @@ Context.prototype.getActionContext = function(values, bindThis, channel, func) {
     };
 }
 
-"use strict";
 /**
  * addResultToActionContext
  * @param {any} context
