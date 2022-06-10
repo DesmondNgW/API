@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using System.Net.NetworkInformation;
 using X.UI.Util.Model;
 using X.Util.Core.Kernel;

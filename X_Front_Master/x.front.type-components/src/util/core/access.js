@@ -15,6 +15,7 @@ function Access(name) {
  * @param {any} maxRetryCounts
  */
 Access.prototype.tryCall = function(func, args, bindThis, channel, contextList, maxRetryCounts = 0) {
+    if (!bindThis) bindThis = channel.Client;
     let contextAction = context.getActionContext(args, bindThis);
     let list = context.getContext(channel, contextList);
     let result;
