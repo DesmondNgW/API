@@ -16,7 +16,6 @@
 <script lang="ts">
     import Vue from 'vue';
     import router from '../router';
-    console.log("menu", router);
     export default Vue.extend({
         name: 'Menu',
         data() {

@@ -1,3 +1,4 @@
+"use strict";
 import { logger } from "./logger.js";
 
 function LoggerContext(Provider) {

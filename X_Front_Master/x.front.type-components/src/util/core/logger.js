@@ -1,3 +1,4 @@
+"use strict";
 import "./extend/date.js";
 import { cache } from "./cache.js";
 import { store } from "./store.js";
@@ -52,7 +53,7 @@ Logger.prototype.getClientOptions = function() {
 Logger.prototype.getRequestOptions = function(paramList) {
     return {
         now: new Date(),
-        caller: arguments.callee.caller,
+        caller: null, //arguments.callee.caller,
         paramList: paramList
     }
 }
@@ -67,7 +68,7 @@ Logger.prototype.getRequestOptions = function(paramList) {
 Logger.prototype.getResponseOptions = function(paramList, error, result, elapsed) {
     return {
         now: new Date(),
-        caller: arguments.callee.caller,
+        caller: null, //arguments.callee.caller,
         paramList: paramList,
         error: error,
         result: result,
@@ -82,7 +83,7 @@ Logger.prototype.getResponseOptions = function(paramList, error, result, elapsed
 Logger.prototype.logRequest = function(paramList) {
     let client = this.getClientOptions();
     let request = this.getRequestOptions(paramList);
-    console.info("%s request userAgent: %s, url: %s, search: %s, hash: %s.",
+    console.info("%s LOGREQUEST: request userAgent: %s, url: %s, search: %s, hash: %s.",
         request.now.format("yyyy-MM-dd HH:mm:ss.f"),
         client.userAgent,
         client.url.href,
@@ -104,8 +105,8 @@ Logger.prototype.logRequest = function(paramList) {
  */
 Logger.prototype.logResponse = function(paramList, error, result, elapsed) {
     let client = this.getClientOptions();
-    let response = this.getRequestOptions(paramList, error, result, elapsed);
-    console.info("%s request userAgent: %s, url: %s, search: %s, hash: %s.",
+    let response = this.getResponseOptions(paramList, error, result, elapsed);
+    console.info("%s LOGRESPONSE: request userAgent: %s, url: %s, search: %s, hash: %s.",
         response.now.format("yyyy-MM-dd HH:mm:ss.f"),
         client.userAgent,
         client.url.href,
@@ -130,7 +131,7 @@ Logger.prototype.logResponse = function(paramList, error, result, elapsed) {
  * logClient
  * */
 Logger.prototype.logClient = function() {
-    this.debug(this.getClientOptions());
+    console.debug(this.getClientOptions());
 }
 
 /**

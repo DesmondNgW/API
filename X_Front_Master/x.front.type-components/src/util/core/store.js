@@ -1,3 +1,5 @@
+"use strict";
+
 function Store(name) {
     this.name = name;
     this.prefixKey = "util.core.cache.store";

@@ -1,3 +1,4 @@
+"use strict";
 import { cacheData } from "./cacheData.js";
 
 /**
@@ -12,16 +13,17 @@ function CacheContext(Provider, Options) {
 
 /**
  * Calling
- * @param {any} context
+ * @param {any} context:Context.getActionContext
  * @param {any} caller
  */
 CacheContext.prototype.Calling = function(context, caller) {
-    let self = this;
     let options = this.Options;
     let CallSuccess = options.CallSuccess;
+    let args = context.ActionArguments;
+    let bindThis = context.ActionBindThis;
     let box = function(caller) {
         return () => {
-            let iresult = caller();
+            let iresult = caller.apply(bindThis, args);
             return {
                 Succeed: CallSuccess(iresult),
                 Result: iresult
@@ -35,24 +37,24 @@ CacheContext.prototype.Calling = function(context, caller) {
         };
     }
     return unbox(() => {
-        return cacheData.getCacheData(options.Key, options.Version, options.Date, box(caller), null, self);
+        return cacheData.getCacheData(options.Key, options.Version, options.Date, box(caller), args, bindThis);
     });
 }
 
 /**
  * Called
- * @param {any} context
+ * @param {any} context:Context.getActionContext
  */
-CacheContext.prototype.Called = function() {
-
+CacheContext.prototype.Called = function(context) {
+    console.debug("debug:CacheContext-Called;ignore", context);
 }
 
 /**
  * OnException
- * @param {any} context
+ * @param {any} context:Context.getActionContext
  */
-CacheContext.prototype.OnException = function() {
-
+CacheContext.prototype.OnException = function(context) {
+    console.debug("debug:CacheContext-OnException;ignore", context);
 }
 
 export default CacheContext;

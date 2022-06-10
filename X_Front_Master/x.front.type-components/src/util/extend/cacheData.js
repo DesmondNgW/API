@@ -1,3 +1,4 @@
+"use strict";
 import { cache } from "../core/cache.js";
 
 function CacheData(name) {

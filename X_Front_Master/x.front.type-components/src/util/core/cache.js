@@ -1,3 +1,5 @@
+"use strict";
+
 function Cache(name) {
     this.name = name;
     this.CacheStore = {};

@@ -1,3 +1,4 @@
+"use strict";
 import "./extend/json.js";
 import { cache } from "./cache.js";
 import SHA1 from "crypto-js/sha1";

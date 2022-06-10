@@ -37,13 +37,16 @@ Context.prototype.getContext = function(Provider, contextList) {
 /**
  * getActionContext
  * @param {any} values:paramsList
+ * @param {any} bindThis:bindContext
  */
-Context.prototype.getActionContext = function(values) {
+Context.prototype.getActionContext = function(values, bindThis) {
     return {
-        ActionArguments: values
+        ActionArguments: values,
+        ActionBindThis: bindThis
     };
 }
 
+"use strict";
 /**
  * addResultToActionContext
  * @param {any} context

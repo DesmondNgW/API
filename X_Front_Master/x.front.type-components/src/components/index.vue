@@ -6678,7 +6678,7 @@
     </main>
 </template>
 
-<script lang="ts">
+<script>
     import Vue from 'vue';
     import { test } from "@/test/test.js";
 

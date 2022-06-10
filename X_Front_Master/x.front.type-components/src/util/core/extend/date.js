@@ -1,3 +1,4 @@
+"use strict";
 /**
  * Date.addDays
  * @param {any} days

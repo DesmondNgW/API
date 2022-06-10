@@ -1,3 +1,4 @@
+"use strict";
 import AES from "crypto-js/aes";
 import TripleDES from "crypto-js/tripledes";
 

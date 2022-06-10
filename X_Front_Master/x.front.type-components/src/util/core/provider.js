@@ -1,3 +1,5 @@
+"use strict";
+
 function Provider(Client) {
     this.Client = Client;
 }

@@ -4,6 +4,7 @@ function Access(name) {
     this.name = name;
 }
 
+"use strict";
 /**
  * 
  * @param {any} func
@@ -14,11 +15,11 @@ function Access(name) {
  * @param {any} maxRetryCounts
  */
 Access.prototype.tryCall = function(func, args, bindThis, channel, contextList, maxRetryCounts = 0) {
-    let contextAction = context.getActionContext(args);
+    let contextAction = context.getActionContext(args, bindThis);
     let list = context.getContext(channel, contextList);
     let result;
     try {
-        var iresult = context.getCaller(list, contextAction, func).apply(bindThis, args);
+        let iresult = context.getCaller(list, contextAction, func).apply(bindThis, args);
         result = iresult;
         context.addResultToActionContext(contextAction, iresult, null);
         for (let i = 0, len = list.length; i < len; i++) {
@@ -29,7 +30,7 @@ Access.prototype.tryCall = function(func, args, bindThis, channel, contextList, 
         for (let i = 0, len = list.length; i < len; i++) {
             list[i].OnException(contextAction);
         }
-        if (maxRetryCounts > 0) return tryCall(func, args, bindThis, channel, contextList, maxRetryCounts - 1);
+        if (maxRetryCounts > 0) return this.tryCall(func, args, bindThis, channel, contextList, maxRetryCounts - 1);
     }
     return result;
 }
