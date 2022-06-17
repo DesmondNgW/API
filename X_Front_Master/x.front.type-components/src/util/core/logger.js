@@ -3,7 +3,7 @@ import "./extend/date.js";
 import { cache } from "./cache.js";
 import { store } from "./store.js";
 
-function Logger() {
+function Logger(name) {
     this.name = name;
 }
 
