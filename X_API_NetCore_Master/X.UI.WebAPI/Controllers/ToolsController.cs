@@ -155,5 +155,20 @@ namespace X.UI.WebAPI.Controllers
                 Data = ApiData.GetContent(requestDto.Uri, requestDto.Arguments, "application/json", requestDto.ExtendHeaders)
             });
         }
+
+        /// <summary>
+        /// GetChinese
+        /// </summary>
+        /// <param name="chinese"></param>
+        /// <returns></returns>
+        [HttpGet(Name = "GetChinese")]
+        public async Task<ApiResult<List<string>>> GetChinese(string chinese)
+        {
+            return await Task.Run(() => new ApiResult<List<string>>()
+            {
+                Success = true,
+                Data = ChineseConvert.Get(chinese)
+            });
+        }
     }
 }
