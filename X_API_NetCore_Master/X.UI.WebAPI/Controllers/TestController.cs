@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using X.Interface.Dto;
 using X.UI.Util.Controller;
+using X.UI.WebAPI.Test;
+using System.Linq;
 
 namespace X.UI.WebAPI.Controllers
 {
@@ -9,9 +11,21 @@ namespace X.UI.WebAPI.Controllers
     [Route("api/[controller]/[action]")]
     public class TestController : ControllerBaseWithOutToken
     {
-        public async Task Test(string text)
+        [HttpGet(Name = "Test")]
+        public async Task<object> Test(EnumTestMethodItem methodItem)
         {
-            await Task.Run(() => { });
+            return await Task.Run(() =>
+            {
+                object? ret = default;
+                foreach (var methodInfo in from item in ((EnumTestMethodItem[])Enum.GetValues(typeof(EnumTestMethodItem))).Where(item => item == methodItem)
+                                           let methodInfo = typeof(TestMethodHelper).GetMethod(item.ToString())
+                                           select methodInfo)
+                {
+                    ret = methodInfo?.Invoke(null, null);
+                    break;
+                }
+                return (ret != default) ? ret : throw new ArgumentOutOfRangeException(nameof(methodItem));
+            });
         }
     }
 }
