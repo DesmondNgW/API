@@ -17,5 +17,10 @@ let contextList = [CacheContextAttribute("test.test.key", "0.0.0.1", new Date().
 logger.logClient();
 
 export const test = function() {
-    return access.tryCall(target.add, [1, 2], this, channel, contextList);
+    var arr = [];
+    arr.push(access.tryCall(target.add, [1, 2], this, channel, contextList));
+    arr.push(access.tryCall(target.pow, [3, 2], this, channel, contextList));
+    arr.push(access.tryCall(target.pow, [2, 3], this, channel, contextList));
+    arr.push(access.tryCall(target.sqrt, [2], this, channel, contextList));
+    arr.push(access.tryCall(target.sqrt, [3], this, channel, contextList));
 }
