@@ -1,21 +1,25 @@
-﻿namespace X.UI.WebAPI.Test
+﻿using System.ComponentModel;
+
+namespace X.UI.WebAPI.Test
 {
     public enum EnumTestMethodItem
     {
-        Test0 = 0,
-        Test1 = 1,
+        GetGUID,
+        GetDateTime,
     }
 
     public class TestMethodHelper
     {
-        public static string Test0()
+        public static string GetGUID()
         {
             return Guid.NewGuid().ToString("N");
         }
 
-        public static string Test1()
+        public static string GetDateTime()
         {
             return DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff");
         }
+
+        
     }
 }

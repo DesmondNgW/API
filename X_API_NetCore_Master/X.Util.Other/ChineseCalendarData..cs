@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using X.Util.Entities;
 
 namespace X.Util.Other
@@ -11,7 +12,10 @@ namespace X.Util.Other
         public const int MaxYear = 2050;
         public const int GanZhiStartYear = 1864; //干支计算起始年
         public static readonly DateTime GanZhiStartDay = new DateTime(1899, 12, 22);//起始日
-        public const string HZNum = "零一二三四五六七八九";
+        public static readonly Dictionary<char, string> HZNum = new Dictionary<char, string>()
+        {
+            { '0',"零" },{ '1',"一" },{ '2',"二" },{ '3',"三" },{ '4',"四" },{ '5',"五" },{ '6',"六" },{ '7',"七" },{ '8',"八" },{ '9',"九" }
+        };
         public const int AnimalStartYear = 1900; //1900年为鼠年
         public static readonly DateTime ChineseConstellationReferDay = new DateTime(2007, 9, 13);//28星宿参考值,本日为角
         #region 阴历数据
@@ -103,5 +107,10 @@ namespace X.Util.Other
             new WeekHolidayStruct(9, 4, 1, "国际聋人节"), new WeekHolidayStruct(10, 1, 2, "国际住房日"), new WeekHolidayStruct(10, 1, 4, "国际减轻自然灾害日"),
             new WeekHolidayStruct(11, 4, 5, "感恩节") };
         #endregion
+
+        public static readonly Dictionary<DayOfWeek, string> DayOfWeekDictionary = new Dictionary<DayOfWeek, string>() {
+            { DayOfWeek.Sunday, "星期日" },{ DayOfWeek.Monday, "星期一" },{ DayOfWeek.Tuesday, "星期二" },{ DayOfWeek.Wednesday, "星期三" },
+            { DayOfWeek.Thursday, "星期四" },{ DayOfWeek.Friday, "星期五" },{ DayOfWeek.Saturday, "星期六" }
+        };
     }
 }

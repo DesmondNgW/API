@@ -11,8 +11,8 @@ namespace X.UI.WebAPI.Controllers
     [Route("api/[controller]/[action]")]
     public class TestController : ControllerBaseWithOutToken
     {
-        [HttpGet(Name = "Test")]
-        public async Task<object> Test(EnumTestMethodItem methodItem)
+        [HttpPost(Name = "TestMethod")]
+        public async Task<object> TestMethod(EnumTestMethodItem methodItem)
         {
             return await Task.Run(() =>
             {

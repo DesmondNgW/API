@@ -36,8 +36,7 @@ namespace X.Util.Other
             //计算12个月中有多少天为30天
             for (int m = 0; m < 12; m++)
             {
-                var f = info & i;
-                if (f != 0)
+                if ((info & i) != 0)
                 {
                     sumDay++;
                 }
@@ -69,15 +68,7 @@ namespace X.Util.Other
         /// </summary>
         private void CheckChineseDateLimit(int year, int month, int day, bool leapMonth)
         {
-            if ((year < ChineseCalendarData.MinYear) || (year > ChineseCalendarData.MaxYear))
-            {
-                throw new Exception("非法农历日期");
-            }
-            if ((month < 1) || (month > 12))
-            {
-                throw new Exception("非法农历日期");
-            }
-            if ((day < 1) || (day > 30)) //中国的月最多30天
+            if ((year < ChineseCalendarData.MinYear) || (year > ChineseCalendarData.MaxYear) || (month < 1) || (month > 12) || (day < 1) || (day > 30))
             {
                 throw new Exception("非法农历日期");
             }
@@ -128,31 +119,7 @@ namespace X.Util.Other
         /// </summary>
         private string ConvertNumToChineseNum(char n)
         {
-            switch (n)
-            {
-                case '0':
-                    return ChineseCalendarData.HZNum[0].ToString();
-                case '1':
-                    return ChineseCalendarData.HZNum[1].ToString();
-                case '2':
-                    return ChineseCalendarData.HZNum[2].ToString();
-                case '3':
-                    return ChineseCalendarData.HZNum[3].ToString();
-                case '4':
-                    return ChineseCalendarData.HZNum[4].ToString();
-                case '5':
-                    return ChineseCalendarData.HZNum[5].ToString();
-                case '6':
-                    return ChineseCalendarData.HZNum[6].ToString();
-                case '7':
-                    return ChineseCalendarData.HZNum[7].ToString();
-                case '8':
-                    return ChineseCalendarData.HZNum[8].ToString();
-                case '9':
-                    return ChineseCalendarData.HZNum[9].ToString();
-                default:
-                    return string.Empty;
-            }
+            return ChineseCalendarData.HZNum.ContainsKey(n) ? ChineseCalendarData.HZNum[n] : string.Empty;
         }
 
         /// <summary>
@@ -392,29 +359,7 @@ namespace X.Util.Other
         /// <summary>
         /// 周几的字符
         /// </summary>
-        public string WeekDayStr
-        {
-            get
-            {
-                switch (Date.DayOfWeek)
-                {
-                    case DayOfWeek.Sunday:
-                        return "星期日";
-                    case DayOfWeek.Monday:
-                        return "星期一";
-                    case DayOfWeek.Tuesday:
-                        return "星期二";
-                    case DayOfWeek.Wednesday:
-                        return "星期三";
-                    case DayOfWeek.Thursday:
-                        return "星期四";
-                    case DayOfWeek.Friday:
-                        return "星期五";
-                    default:
-                        return "星期六";
-                }
-            }
-        }
+        public string WeekDayStr => ChineseCalendarData.DayOfWeekDictionary[Date.DayOfWeek];
 
         /// <summary>
         /// 公历日期中文表示法 如一九九七年七月一日
