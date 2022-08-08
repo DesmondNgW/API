@@ -55,5 +55,10 @@
                 return RewardInnerCount + RewardOuterCount + (IsRed ? 1 : 0);
             }
         }
+
+        /// <summary>
+        /// 是否生效
+        /// </summary>
+        public bool Active { get; set; }
     }
 }

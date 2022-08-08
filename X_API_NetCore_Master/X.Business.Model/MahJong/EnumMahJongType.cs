@@ -5,7 +5,7 @@
     /// </summary>
     public enum EnumMahJongType
     {
-        //索子
+        //索
         S,
         //万
         M,
