@@ -2,6 +2,9 @@
 
 namespace X.Business.Model.MahJong
 {
+    /// <summary>
+    /// 牌山
+    /// </summary>
     public class MahJongModel : MahJongOption
     {
         /// <summary>
