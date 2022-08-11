@@ -29,7 +29,6 @@ namespace X.Business.Core
                         {
                             Name = number,
                             Code = Guid.NewGuid().ToString("N2"),
-                            IsRed = i <= RedCount - 1 && number == "5",
                             Type = item,
                         };
                         ret.Add(mahJongItem);

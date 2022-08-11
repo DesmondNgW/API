@@ -14,6 +14,21 @@
         //字
         Z,
     }
+
+    /// <summary>
+    /// 类型
+    /// </summary>
+    public enum EnumOrderType
+    {
+        //东
+        East = 1,
+        //南
+        South = 2,
+        //西
+        West = 3,
+        //北
+        North = 4,
+    }
 }
 
 

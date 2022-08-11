@@ -33,30 +33,11 @@ namespace X.Business.Core
             var model = new MahJongModel
             {
                 MahJongList = list,
-                MahJongGangList = new List<MahJongItem>(),
-                MahJongRewardList = new List<MahJongItem>(),
                 DymicMahJongList = new List<MahJongItem>()
             };
-            for (var i = 0; i < list.Count - 14; i++)
+            for (var i = 0; i < list.Count - MahJongOption.UnGetItemCount; i++)
             {
                 model.DymicMahJongList.Add(list[i]);
-            }
-            var count = 14;
-            while (count > 0)
-            {
-                if (model.MahJongRewardList.Count < 10)
-                {
-                    if (count == 6 || count == 5)
-                    {
-                        list[list.Count - count].Active = true;
-                    }
-                    model.MahJongRewardList.Add(list[list.Count - count]);
-                }
-                else
-                {
-                    model.MahJongGangList.Add(list[list.Count - count]);
-                }
-                count--;
             }
             return model;
         }
