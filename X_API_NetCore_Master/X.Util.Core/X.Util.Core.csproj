@@ -15,7 +15,7 @@
     <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="6.0.1" />
     <PackageReference Include="Microsoft.Extensions.FileProviders.Physical" Version="6.0.0" />
     <PackageReference Include="MongoDB.Bson" Version="2.15.0" />
-    <PackageReference Include="MongoDB.Driver" Version="2.15.0" />
+    <PackageReference Include="MongoDB.Driver" Version="2.19.0" />
     <PackageReference Include="NetworkCommsDotNetStandard" Version="3.0.4.1" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="SD.Toolkits.CoreWCF.Client" Version="1.1.0" />
