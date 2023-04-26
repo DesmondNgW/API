@@ -1,5 +1,5 @@
 ﻿// See https://aka.ms/new-console-template for more information
+using X.UI.Consoles;
 
-
-//MethodHelper.MonitorTcpConnection();
-Console.ReadLine();
+ConsoleUIHelper.Index();
+//Console.ReadLine();
