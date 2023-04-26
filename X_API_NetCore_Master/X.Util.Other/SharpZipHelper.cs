@@ -121,10 +121,7 @@ namespace X.Util.Other
             }
             finally
             {
-                if (fs != null)
-                {
-                    fs.Close();
-                }
+                fs?.Close();
                 GC.Collect();
                 GC.Collect(1);
             }
@@ -190,10 +187,7 @@ namespace X.Util.Other
                     ZipStream.Finish();
                     ZipStream.Close();
                 }
-                if (ZipFile != null)
-                {
-                    ZipFile.Close();
-                }
+                ZipFile?.Close();
                 GC.Collect();
                 GC.Collect(1);
             }

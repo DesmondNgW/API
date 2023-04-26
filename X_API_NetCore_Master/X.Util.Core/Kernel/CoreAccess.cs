@@ -47,7 +47,7 @@ namespace X.Util.Core.Kernel
             var list = ContextHelper.GetContext(channel, func.Method, options);
             await Task.Run(ContextHelper.GetCaller(list, context, func));
             foreach (var item in list) item.Called(context);
-            if (callBack != null) callBack.Invoke();
+            callBack?.Invoke();
         }
 
         public static async Task TryCallAsync(Action func, IProvider<TChannel> channel, Action callBack, LogOptions options, int maxRetryCounts = 0)
@@ -58,7 +58,7 @@ namespace X.Util.Core.Kernel
             {
                 await Task.Run(ContextHelper.GetCaller(list, context, func));
                 foreach (var item in list) item.Called(context);
-                if (callBack != null) callBack.Invoke();
+                callBack?.Invoke();
             }
             catch (Exception ex)
             {
@@ -75,7 +75,7 @@ namespace X.Util.Core.Kernel
             var iresult = await Task.Run(ContextHelper.GetCaller(list, context, func));
             ContextHelper.AddResponse(context, iresult, null, null);
             foreach (var item in list) item.Called(context);
-            if (callBack != null) callBack.Invoke(iresult);
+            callBack?.Invoke(iresult);
             return iresult;
         }
 
@@ -90,7 +90,7 @@ namespace X.Util.Core.Kernel
                 result = iresult;
                 ContextHelper.AddResponse(context, iresult, null, null);
                 foreach (var item in list) item.Called(context);
-                if (callBack != null) callBack.Invoke(iresult);
+                callBack?.Invoke(iresult);
             }
             catch (Exception ex)
             {
@@ -138,7 +138,7 @@ namespace X.Util.Core.Kernel
             var list = ContextHelper.GetContext(channel, func.Method, options);
             await Task.Run(ContextHelper.GetCaller(list, context, () => func(t1)));
             foreach (var item in list) item.Called(context);
-            if (callBack != null) callBack.Invoke();
+            callBack?.Invoke();
         }
 
         public static async Task TryCallAsync<T1>(Action<T1> func, T1 t1, IProvider<TChannel> channel, Action callBack, LogOptions options, int maxRetryCounts = 0)
@@ -149,7 +149,7 @@ namespace X.Util.Core.Kernel
             {
                 await Task.Run(ContextHelper.GetCaller(list, context, () => func(t1)));
                 foreach (var item in list) item.Called(context);
-                if (callBack != null) callBack.Invoke();
+                callBack?.Invoke();
             }
             catch (Exception ex)
             {
@@ -166,7 +166,7 @@ namespace X.Util.Core.Kernel
             var iresult = await Task.Run(ContextHelper.GetCaller(list, context, () => func(t1)));
             ContextHelper.AddResponse(context, iresult, null, null);
             foreach (var item in list) item.Called(context);
-            if (callBack != null) callBack.Invoke(iresult);
+            callBack?.Invoke(iresult);
             return iresult;
         }
 
@@ -181,7 +181,7 @@ namespace X.Util.Core.Kernel
                 result = iresult;
                 ContextHelper.AddResponse(context, iresult, null, null);
                 foreach (var item in list) item.Called(context);
-                if (callBack != null) callBack.Invoke(iresult);
+                callBack?.Invoke(iresult);
             }
             catch (Exception ex)
             {
@@ -229,7 +229,7 @@ namespace X.Util.Core.Kernel
             var list = ContextHelper.GetContext(channel, func.Method, options);
             await Task.Run(ContextHelper.GetCaller(list, context, () => func(t1, t2)));
             foreach (var item in list) item.Called(context);
-            if (callBack != null) callBack.Invoke();
+            callBack?.Invoke();
         }
 
         public static async Task TryCallAsync<T1, T2>(Action<T1, T2> func, T1 t1, T2 t2, IProvider<TChannel> channel, Action callBack, LogOptions options, int maxRetryCounts = 0)
@@ -240,7 +240,7 @@ namespace X.Util.Core.Kernel
             {
                 await Task.Run(ContextHelper.GetCaller(list, context, () => func(t1, t2)));
                 foreach (var item in list) item.Called(context);
-                if (callBack != null) callBack.Invoke();
+                callBack?.Invoke();
             }
             catch (Exception ex)
             {
@@ -257,7 +257,7 @@ namespace X.Util.Core.Kernel
             var iresult = await Task.Run(ContextHelper.GetCaller(list, context, () => func(t1, t2)));
             ContextHelper.AddResponse(context, iresult, null, null);
             foreach (var item in list) item.Called(context);
-            if (callBack != null) callBack.Invoke(iresult);
+            callBack?.Invoke(iresult);
             return iresult;
         }
 
@@ -272,7 +272,7 @@ namespace X.Util.Core.Kernel
                 result = iresult;
                 ContextHelper.AddResponse(context, iresult, null, null);
                 foreach (var item in list) item.Called(context);
-                if (callBack != null) callBack.Invoke(iresult);
+                callBack?.Invoke(iresult);
             }
             catch (Exception ex)
             {
@@ -320,7 +320,7 @@ namespace X.Util.Core.Kernel
             var list = ContextHelper.GetContext(channel, func.Method, options);
             await Task.Run(ContextHelper.GetCaller(list, context, () => func(t1, t2, t3)));
             foreach (var item in list) item.Called(context);
-            if (callBack != null) callBack.Invoke();
+            callBack?.Invoke();
         }
 
         public static async Task TryCallAsync<T1, T2, T3>(Action<T1, T2, T3> func, T1 t1, T2 t2, T3 t3, IProvider<TChannel> channel, Action callBack, LogOptions options, int maxRetryCounts = 0)
@@ -331,7 +331,7 @@ namespace X.Util.Core.Kernel
             {
                 await Task.Run(ContextHelper.GetCaller(list, context, () => func(t1, t2, t3)));
                 foreach (var item in list) item.Called(context);
-                if (callBack != null) callBack.Invoke();
+                callBack?.Invoke();
             }
             catch (Exception ex)
             {
@@ -348,7 +348,7 @@ namespace X.Util.Core.Kernel
             var iresult = await Task.Run(ContextHelper.GetCaller(list, context, () => func(t1, t2, t3)));
             ContextHelper.AddResponse(context, iresult, null, null);
             foreach (var item in list) item.Called(context);
-            if (callBack != null) callBack.Invoke(iresult);
+            callBack?.Invoke(iresult);
             return iresult;
         }
 
@@ -363,7 +363,7 @@ namespace X.Util.Core.Kernel
                 result = iresult;
                 ContextHelper.AddResponse(context, iresult, null, null);
                 foreach (var item in list) item.Called(context);
-                if (callBack != null) callBack.Invoke(iresult);
+                callBack?.Invoke(iresult);
             }
             catch (Exception ex)
             {
@@ -411,7 +411,7 @@ namespace X.Util.Core.Kernel
             var list = ContextHelper.GetContext(channel, func.Method, options);
             await Task.Run(ContextHelper.GetCaller(list, context, () => func(t1, t2, t3, t4)));
             foreach (var item in list) item.Called(context);
-            if (callBack != null) callBack.Invoke();
+            callBack?.Invoke();
         }
 
         public static async Task TryCallAsync<T1, T2, T3, T4>(Action<T1, T2, T3, T4> func, T1 t1, T2 t2, T3 t3, T4 t4, IProvider<TChannel> channel, Action callBack, LogOptions options, int maxRetryCounts = 0)
@@ -422,7 +422,7 @@ namespace X.Util.Core.Kernel
             {
                 await Task.Run(ContextHelper.GetCaller(list, context, () => func(t1, t2, t3, t4)));
                 foreach (var item in list) item.Called(context);
-                if (callBack != null) callBack.Invoke();
+                callBack?.Invoke();
             }
             catch (Exception ex)
             {
@@ -439,7 +439,7 @@ namespace X.Util.Core.Kernel
             var iresult = await Task.Run(ContextHelper.GetCaller(list, context, () => func(t1, t2, t3, t4)));
             ContextHelper.AddResponse(context, iresult, null, null);
             foreach (var item in list) item.Called(context);
-            if (callBack != null) callBack.Invoke(iresult);
+            callBack?.Invoke(iresult);
             return iresult;
         }
 
@@ -454,7 +454,7 @@ namespace X.Util.Core.Kernel
                 result = iresult;
                 ContextHelper.AddResponse(context, iresult, null, null);
                 foreach (var item in list) item.Called(context);
-                if (callBack != null) callBack.Invoke(iresult);
+                callBack?.Invoke(iresult);
             }
             catch (Exception ex)
             {
@@ -502,7 +502,7 @@ namespace X.Util.Core.Kernel
             var list = ContextHelper.GetContext(channel, func.Method, options);
             await Task.Run(ContextHelper.GetCaller(list, context, () => func(t1, t2, t3, t4, t5)));
             foreach (var item in list) item.Called(context);
-            if (callBack != null) callBack.Invoke();
+            callBack?.Invoke();
         }
 
         public static async Task TryCallAsync<T1, T2, T3, T4, T5>(Action<T1, T2, T3, T4, T5> func, T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, IProvider<TChannel> channel, Action callBack, LogOptions options, int maxRetryCounts = 0)
@@ -513,7 +513,7 @@ namespace X.Util.Core.Kernel
             {
                 await Task.Run(ContextHelper.GetCaller(list, context, () => func(t1, t2, t3, t4, t5)));
                 foreach (var item in list) item.Called(context);
-                if (callBack != null) callBack.Invoke();
+                callBack?.Invoke();
             }
             catch (Exception ex)
             {
@@ -530,7 +530,7 @@ namespace X.Util.Core.Kernel
             var iresult = await Task.Run(ContextHelper.GetCaller(list, context, () => func(t1, t2, t3, t4, t5)));
             ContextHelper.AddResponse(context, iresult, null, null);
             foreach (var item in list) item.Called(context);
-            if (callBack != null) callBack.Invoke(iresult);
+            callBack?.Invoke(iresult);
             return iresult;
         }
 
@@ -545,7 +545,7 @@ namespace X.Util.Core.Kernel
                 result = iresult;
                 ContextHelper.AddResponse(context, iresult, null, null);
                 foreach (var item in list) item.Called(context);
-                if (callBack != null) callBack.Invoke(iresult);
+                callBack?.Invoke(iresult);
             }
             catch (Exception ex)
             {
@@ -593,7 +593,7 @@ namespace X.Util.Core.Kernel
             var list = ContextHelper.GetContext(channel, func.Method, options);
             await Task.Run(ContextHelper.GetCaller(list, context, () => func(t1, t2, t3, t4, t5, t6)));
             foreach (var item in list) item.Called(context);
-            if (callBack != null) callBack.Invoke();
+            callBack?.Invoke();
         }
 
         public static async Task TryCallAsync<T1, T2, T3, T4, T5, T6>(Action<T1, T2, T3, T4, T5, T6> func, T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6, IProvider<TChannel> channel, Action callBack, LogOptions options, int maxRetryCounts = 0)
@@ -604,7 +604,7 @@ namespace X.Util.Core.Kernel
             {
                 await Task.Run(ContextHelper.GetCaller(list, context, () => func(t1, t2, t3, t4, t5, t6)));
                 foreach (var item in list) item.Called(context);
-                if (callBack != null) callBack.Invoke();
+                callBack?.Invoke();
             }
             catch (Exception ex)
             {
@@ -621,7 +621,7 @@ namespace X.Util.Core.Kernel
             var iresult = await Task.Run(ContextHelper.GetCaller(list, context, () => func(t1, t2, t3, t4, t5, t6)));
             ContextHelper.AddResponse(context, iresult, null, null);
             foreach (var item in list) item.Called(context);
-            if (callBack != null) callBack.Invoke(iresult);
+            callBack?.Invoke(iresult);
             return iresult;
         }
 
@@ -636,7 +636,7 @@ namespace X.Util.Core.Kernel
                 result = iresult;
                 ContextHelper.AddResponse(context, iresult, null, null);
                 foreach (var item in list) item.Called(context);
-                if (callBack != null) callBack.Invoke(iresult);
+                callBack?.Invoke(iresult);
             }
             catch (Exception ex)
             {
@@ -684,7 +684,7 @@ namespace X.Util.Core.Kernel
             var list = ContextHelper.GetContext(channel, func.Method, options);
             await Task.Run(ContextHelper.GetCaller(list, context, () => func(t1, t2, t3, t4, t5, t6, t7)));
             foreach (var item in list) item.Called(context);
-            if (callBack != null) callBack.Invoke();
+            callBack?.Invoke();
         }
 
         public static async Task TryCallAsync<T1, T2, T3, T4, T5, T6, T7>(Action<T1, T2, T3, T4, T5, T6, T7> func, T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6, T7 t7, IProvider<TChannel> channel, Action callBack, LogOptions options, int maxRetryCounts = 0)
@@ -695,7 +695,7 @@ namespace X.Util.Core.Kernel
             {
                 await Task.Run(ContextHelper.GetCaller(list, context, () => func(t1, t2, t3, t4, t5, t6, t7)));
                 foreach (var item in list) item.Called(context);
-                if (callBack != null) callBack.Invoke();
+                callBack?.Invoke();
             }
             catch (Exception ex)
             {
@@ -712,7 +712,7 @@ namespace X.Util.Core.Kernel
             var iresult = await Task.Run(ContextHelper.GetCaller(list, context, () => func(t1, t2, t3, t4, t5, t6, t7)));
             ContextHelper.AddResponse(context, iresult, null, null);
             foreach (var item in list) item.Called(context);
-            if (callBack != null) callBack.Invoke(iresult);
+            callBack?.Invoke(iresult);
             return iresult;
         }
 
@@ -727,7 +727,7 @@ namespace X.Util.Core.Kernel
                 result = iresult;
                 ContextHelper.AddResponse(context, iresult, null, null);
                 foreach (var item in list) item.Called(context);
-                if (callBack != null) callBack.Invoke(iresult);
+                callBack?.Invoke(iresult);
             }
             catch (Exception ex)
             {
@@ -775,7 +775,7 @@ namespace X.Util.Core.Kernel
             var list = ContextHelper.GetContext(channel, func.Method, options);
             await Task.Run(ContextHelper.GetCaller(list, context, () => func(t1, t2, t3, t4, t5, t6, t7, t8)));
             foreach (var item in list) item.Called(context);
-            if (callBack != null) callBack.Invoke();
+            callBack?.Invoke();
         }
 
         public static async Task TryCallAsync<T1, T2, T3, T4, T5, T6, T7, T8>(Action<T1, T2, T3, T4, T5, T6, T7, T8> func, T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6, T7 t7, T8 t8, IProvider<TChannel> channel, Action callBack, LogOptions options, int maxRetryCounts = 0)
@@ -786,7 +786,7 @@ namespace X.Util.Core.Kernel
             {
                 await Task.Run(ContextHelper.GetCaller(list, context, () => func(t1, t2, t3, t4, t5, t6, t7, t8)));
                 foreach (var item in list) item.Called(context);
-                if (callBack != null) callBack.Invoke();
+                callBack?.Invoke();
             }
             catch (Exception ex)
             {
@@ -803,7 +803,7 @@ namespace X.Util.Core.Kernel
             var iresult = await Task.Run(ContextHelper.GetCaller(list, context, () => func(t1, t2, t3, t4, t5, t6, t7, t8)));
             ContextHelper.AddResponse(context, iresult, null, null);
             foreach (var item in list) item.Called(context);
-            if (callBack != null) callBack.Invoke(iresult);
+            callBack?.Invoke(iresult);
             return iresult;
         }
 
@@ -818,7 +818,7 @@ namespace X.Util.Core.Kernel
                 result = iresult;
                 ContextHelper.AddResponse(context, iresult, null, null);
                 foreach (var item in list) item.Called(context);
-                if (callBack != null) callBack.Invoke(iresult);
+                callBack?.Invoke(iresult);
             }
             catch (Exception ex)
             {
@@ -866,7 +866,7 @@ namespace X.Util.Core.Kernel
             var list = ContextHelper.GetContext(channel, func.Method, options);
             await Task.Run(ContextHelper.GetCaller(list, context, () => func(t1, t2, t3, t4, t5, t6, t7, t8, t9)));
             foreach (var item in list) item.Called(context);
-            if (callBack != null) callBack.Invoke();
+            callBack?.Invoke();
         }
 
         public static async Task TryCallAsync<T1, T2, T3, T4, T5, T6, T7, T8, T9>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9> func, T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6, T7 t7, T8 t8, T9 t9, IProvider<TChannel> channel, Action callBack, LogOptions options, int maxRetryCounts = 0)
@@ -877,7 +877,7 @@ namespace X.Util.Core.Kernel
             {
                 await Task.Run(ContextHelper.GetCaller(list, context, () => func(t1, t2, t3, t4, t5, t6, t7, t8, t9)));
                 foreach (var item in list) item.Called(context);
-                if (callBack != null) callBack.Invoke();
+                callBack?.Invoke();
             }
             catch (Exception ex)
             {
@@ -894,7 +894,7 @@ namespace X.Util.Core.Kernel
             var iresult = await Task.Run(ContextHelper.GetCaller(list, context, () => func(t1, t2, t3, t4, t5, t6, t7, t8, t9)));
             ContextHelper.AddResponse(context, iresult, null, null);
             foreach (var item in list) item.Called(context);
-            if (callBack != null) callBack.Invoke(iresult);
+            callBack?.Invoke(iresult);
             return iresult;
         }
 
@@ -909,7 +909,7 @@ namespace X.Util.Core.Kernel
                 result = iresult;
                 ContextHelper.AddResponse(context, iresult, null, null);
                 foreach (var item in list) item.Called(context);
-                if (callBack != null) callBack.Invoke(iresult);
+                callBack?.Invoke(iresult);
             }
             catch (Exception ex)
             {
@@ -957,7 +957,7 @@ namespace X.Util.Core.Kernel
             var list = ContextHelper.GetContext(channel, func.Method, options);
             await Task.Run(ContextHelper.GetCaller(list, context, () => func(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10)));
             foreach (var item in list) item.Called(context);
-            if (callBack != null) callBack.Invoke();
+            callBack?.Invoke();
         }
 
         public static async Task TryCallAsync<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> func, T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6, T7 t7, T8 t8, T9 t9, T10 t10, IProvider<TChannel> channel, Action callBack, LogOptions options, int maxRetryCounts = 0)
@@ -968,7 +968,7 @@ namespace X.Util.Core.Kernel
             {
                 await Task.Run(ContextHelper.GetCaller(list, context, () => func(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10)));
                 foreach (var item in list) item.Called(context);
-                if (callBack != null) callBack.Invoke();
+                callBack?.Invoke();
             }
             catch (Exception ex)
             {
@@ -985,7 +985,7 @@ namespace X.Util.Core.Kernel
             var iresult = await Task.Run(ContextHelper.GetCaller(list, context, () => func(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10)));
             ContextHelper.AddResponse(context, iresult, null, null);
             foreach (var item in list) item.Called(context);
-            if (callBack != null) callBack.Invoke(iresult);
+            callBack?.Invoke(iresult);
             return iresult;
         }
 
@@ -1000,7 +1000,7 @@ namespace X.Util.Core.Kernel
                 result = iresult;
                 ContextHelper.AddResponse(context, iresult, null, null);
                 foreach (var item in list) item.Called(context);
-                if (callBack != null) callBack.Invoke(iresult);
+                callBack?.Invoke(iresult);
             }
             catch (Exception ex)
             {
@@ -1048,7 +1048,7 @@ namespace X.Util.Core.Kernel
             var list = ContextHelper.GetContext(channel, func.Method, options);
             await Task.Run(ContextHelper.GetCaller(list, context, () => func(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11)));
             foreach (var item in list) item.Called(context);
-            if (callBack != null) callBack.Invoke();
+            callBack?.Invoke();
         }
 
         public static async Task TryCallAsync<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> func, T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6, T7 t7, T8 t8, T9 t9, T10 t10, T11 t11, IProvider<TChannel> channel, Action callBack, LogOptions options, int maxRetryCounts = 0)
@@ -1059,7 +1059,7 @@ namespace X.Util.Core.Kernel
             {
                 await Task.Run(ContextHelper.GetCaller(list, context, () => func(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11)));
                 foreach (var item in list) item.Called(context);
-                if (callBack != null) callBack.Invoke();
+                callBack?.Invoke();
             }
             catch (Exception ex)
             {
@@ -1076,7 +1076,7 @@ namespace X.Util.Core.Kernel
             var iresult = await Task.Run(ContextHelper.GetCaller(list, context, () => func(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11)));
             ContextHelper.AddResponse(context, iresult, null, null);
             foreach (var item in list) item.Called(context);
-            if (callBack != null) callBack.Invoke(iresult);
+            callBack?.Invoke(iresult);
             return iresult;
         }
 
@@ -1091,7 +1091,7 @@ namespace X.Util.Core.Kernel
                 result = iresult;
                 ContextHelper.AddResponse(context, iresult, null, null);
                 foreach (var item in list) item.Called(context);
-                if (callBack != null) callBack.Invoke(iresult);
+                callBack?.Invoke(iresult);
             }
             catch (Exception ex)
             {
@@ -1139,7 +1139,7 @@ namespace X.Util.Core.Kernel
             var list = ContextHelper.GetContext(channel, func.Method, options);
             await Task.Run(ContextHelper.GetCaller(list, context, () => func(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12)));
             foreach (var item in list) item.Called(context);
-            if (callBack != null) callBack.Invoke();
+            callBack?.Invoke();
         }
 
         public static async Task TryCallAsync<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> func, T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6, T7 t7, T8 t8, T9 t9, T10 t10, T11 t11, T12 t12, IProvider<TChannel> channel, Action callBack, LogOptions options, int maxRetryCounts = 0)
@@ -1150,7 +1150,7 @@ namespace X.Util.Core.Kernel
             {
                 await Task.Run(ContextHelper.GetCaller(list, context, () => func(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12)));
                 foreach (var item in list) item.Called(context);
-                if (callBack != null) callBack.Invoke();
+                callBack?.Invoke();
             }
             catch (Exception ex)
             {
@@ -1167,7 +1167,7 @@ namespace X.Util.Core.Kernel
             var iresult = await Task.Run(ContextHelper.GetCaller(list, context, () => func(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12)));
             ContextHelper.AddResponse(context, iresult, null, null);
             foreach (var item in list) item.Called(context);
-            if (callBack != null) callBack.Invoke(iresult);
+            callBack?.Invoke(iresult);
             return iresult;
         }
 
@@ -1182,7 +1182,7 @@ namespace X.Util.Core.Kernel
                 result = iresult;
                 ContextHelper.AddResponse(context, iresult, null, null);
                 foreach (var item in list) item.Called(context);
-                if (callBack != null) callBack.Invoke(iresult);
+                callBack?.Invoke(iresult);
             }
             catch (Exception ex)
             {
@@ -1230,7 +1230,7 @@ namespace X.Util.Core.Kernel
             var list = ContextHelper.GetContext(channel, func.Method, options);
             await Task.Run(ContextHelper.GetCaller(list, context, () => func(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13)));
             foreach (var item in list) item.Called(context);
-            if (callBack != null) callBack.Invoke();
+            callBack?.Invoke();
         }
 
         public static async Task TryCallAsync<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> func, T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6, T7 t7, T8 t8, T9 t9, T10 t10, T11 t11, T12 t12, T13 t13, IProvider<TChannel> channel, Action callBack, LogOptions options, int maxRetryCounts = 0)
@@ -1241,7 +1241,7 @@ namespace X.Util.Core.Kernel
             {
                 await Task.Run(ContextHelper.GetCaller(list, context, () => func(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13)));
                 foreach (var item in list) item.Called(context);
-                if (callBack != null) callBack.Invoke();
+                callBack?.Invoke();
             }
             catch (Exception ex)
             {
@@ -1258,7 +1258,7 @@ namespace X.Util.Core.Kernel
             var iresult = await Task.Run(ContextHelper.GetCaller(list, context, () => func(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13)));
             ContextHelper.AddResponse(context, iresult, null, null);
             foreach (var item in list) item.Called(context);
-            if (callBack != null) callBack.Invoke(iresult);
+            callBack?.Invoke(iresult);
             return iresult;
         }
 
@@ -1273,7 +1273,7 @@ namespace X.Util.Core.Kernel
                 result = iresult;
                 ContextHelper.AddResponse(context, iresult, null, null);
                 foreach (var item in list) item.Called(context);
-                if (callBack != null) callBack.Invoke(iresult);
+                callBack?.Invoke(iresult);
             }
             catch (Exception ex)
             {
@@ -1321,7 +1321,7 @@ namespace X.Util.Core.Kernel
             var list = ContextHelper.GetContext(channel, func.Method, options);
             await Task.Run(ContextHelper.GetCaller(list, context, () => func(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14)));
             foreach (var item in list) item.Called(context);
-            if (callBack != null) callBack.Invoke();
+            callBack?.Invoke();
         }
 
         public static async Task TryCallAsync<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> func, T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6, T7 t7, T8 t8, T9 t9, T10 t10, T11 t11, T12 t12, T13 t13, T14 t14, IProvider<TChannel> channel, Action callBack, LogOptions options, int maxRetryCounts = 0)
@@ -1332,7 +1332,7 @@ namespace X.Util.Core.Kernel
             {
                 await Task.Run(ContextHelper.GetCaller(list, context, () => func(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14)));
                 foreach (var item in list) item.Called(context);
-                if (callBack != null) callBack.Invoke();
+                callBack?.Invoke();
             }
             catch (Exception ex)
             {
@@ -1349,7 +1349,7 @@ namespace X.Util.Core.Kernel
             var iresult = await Task.Run(ContextHelper.GetCaller(list, context, () => func(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14)));
             ContextHelper.AddResponse(context, iresult, null, null);
             foreach (var item in list) item.Called(context);
-            if (callBack != null) callBack.Invoke(iresult);
+            callBack?.Invoke(iresult);
             return iresult;
         }
 
@@ -1364,7 +1364,7 @@ namespace X.Util.Core.Kernel
                 result = iresult;
                 ContextHelper.AddResponse(context, iresult, null, null);
                 foreach (var item in list) item.Called(context);
-                if (callBack != null) callBack.Invoke(iresult);
+                callBack?.Invoke(iresult);
             }
             catch (Exception ex)
             {
@@ -1412,7 +1412,7 @@ namespace X.Util.Core.Kernel
             var list = ContextHelper.GetContext(channel, func.Method, options);
             await Task.Run(ContextHelper.GetCaller(list, context, () => func(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15)));
             foreach (var item in list) item.Called(context);
-            if (callBack != null) callBack.Invoke();
+            callBack?.Invoke();
         }
 
         public static async Task TryCallAsync<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> func, T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6, T7 t7, T8 t8, T9 t9, T10 t10, T11 t11, T12 t12, T13 t13, T14 t14, T15 t15, IProvider<TChannel> channel, Action callBack, LogOptions options, int maxRetryCounts = 0)
@@ -1423,7 +1423,7 @@ namespace X.Util.Core.Kernel
             {
                 await Task.Run(ContextHelper.GetCaller(list, context, () => func(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15)));
                 foreach (var item in list) item.Called(context);
-                if (callBack != null) callBack.Invoke();
+                callBack?.Invoke();
             }
             catch (Exception ex)
             {
@@ -1440,7 +1440,7 @@ namespace X.Util.Core.Kernel
             var iresult = await Task.Run(ContextHelper.GetCaller(list, context, () => func(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15)));
             ContextHelper.AddResponse(context, iresult, null, null);
             foreach (var item in list) item.Called(context);
-            if (callBack != null) callBack.Invoke(iresult);
+            callBack?.Invoke(iresult);
             return iresult;
         }
 
@@ -1455,7 +1455,7 @@ namespace X.Util.Core.Kernel
                 result = iresult;
                 ContextHelper.AddResponse(context, iresult, null, null);
                 foreach (var item in list) item.Called(context);
-                if (callBack != null) callBack.Invoke(iresult);
+                callBack?.Invoke(iresult);
             }
             catch (Exception ex)
             {
@@ -1503,7 +1503,7 @@ namespace X.Util.Core.Kernel
             var list = ContextHelper.GetContext(channel, func.Method, options);
             await Task.Run(ContextHelper.GetCaller(list, context, () => func(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16)));
             foreach (var item in list) item.Called(context);
-            if (callBack != null) callBack.Invoke();
+            callBack?.Invoke();
         }
 
         public static async Task TryCallAsync<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> func, T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6, T7 t7, T8 t8, T9 t9, T10 t10, T11 t11, T12 t12, T13 t13, T14 t14, T15 t15, T16 t16, IProvider<TChannel> channel, Action callBack, LogOptions options, int maxRetryCounts = 0)
@@ -1514,7 +1514,7 @@ namespace X.Util.Core.Kernel
             {
                 await Task.Run(ContextHelper.GetCaller(list, context, () => func(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16)));
                 foreach (var item in list) item.Called(context);
-                if (callBack != null) callBack.Invoke();
+                callBack?.Invoke();
             }
             catch (Exception ex)
             {
@@ -1531,7 +1531,7 @@ namespace X.Util.Core.Kernel
             var iresult = await Task.Run(ContextHelper.GetCaller(list, context, () => func(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16)));
             ContextHelper.AddResponse(context, iresult, null, null);
             foreach (var item in list) item.Called(context);
-            if (callBack != null) callBack.Invoke(iresult);
+            callBack?.Invoke(iresult);
             return iresult;
         }
 
@@ -1546,7 +1546,7 @@ namespace X.Util.Core.Kernel
                 result = iresult;
                 ContextHelper.AddResponse(context, iresult, null, null);
                 foreach (var item in list) item.Called(context);
-                if (callBack != null) callBack.Invoke(iresult);
+                callBack?.Invoke(iresult);
             }
             catch (Exception ex)
             {

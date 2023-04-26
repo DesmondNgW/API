@@ -43,7 +43,7 @@ namespace X.UI.Consoles
         public static void Md5()
         {
             Console.WriteLine(@"请输入需要计算MD5值的字符串:");
-            string md5;
+            string? md5;
             while (!string.IsNullOrEmpty(md5 = Console.ReadLine()))
             {
                 Console.WriteLine(BaseCryption.Md5Bit32(md5));
@@ -53,7 +53,7 @@ namespace X.UI.Consoles
         public static void WebHtml()
         {
             Console.WriteLine(@"请输入需要访问的url:");
-            string url;
+            string? url;
             var cookie = string.Empty;
             while (!string.IsNullOrEmpty(url = Console.ReadLine()))
             {
@@ -81,12 +81,12 @@ namespace X.UI.Consoles
 
         public static void RsaEncrypt()
         {
-            const string id = "RSATest";
-            const string nonce = "RSATestNonce";
             Console.WriteLine(@"请输入需要加密的字符串:");
-            string rsa;
+            string? rsa;
             while (!string.IsNullOrEmpty(rsa = Console.ReadLine()))
             {
+                const string id = "RSATest";
+                const string nonce = "RSATestNonce";
                 var en = RsaCryption.Encrypt(id, rsa, nonce);
                 Console.WriteLine(@"密文：" + en);
             }
@@ -97,7 +97,7 @@ namespace X.UI.Consoles
             const string id = "RSATest";
             const string nonce = "RSATestNonce";
             Console.WriteLine(@"请输入需要解密的字符串:");
-            string rsa;
+            string? rsa;
             while (!string.IsNullOrEmpty(rsa = Console.ReadLine()))
             {
                 var de = RsaCryption.Decrypt(id, rsa, nonce);

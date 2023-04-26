@@ -60,13 +60,13 @@ namespace X.Business.Core
                 var token = ExecutionContext<BusinessRequestContext>.Current.Token;
                 var customerNo = Guid.NewGuid().ToString("N");
                 var data = iresult.Result;
-                var user = new User()
+                var user = new User
                 {
                     UserInfo = data,
                     CustomerNo = data.CustomerNo,
-                    Token = token
+                    Token = token,
+                    UToken = BaseCryption.SignData(token, Guid.NewGuid().ToString("N"), HmacType.Md5)
                 };
-                user.UToken = BaseCryption.SignData(token, Guid.NewGuid().ToString("N"), HmacType.Md5);
                 result.Result = user;
                 result.Succeed = true;
                 var key = ConstHelper.LoginKeyPrefix + user.UToken;
@@ -191,8 +191,7 @@ namespace X.Business.Core
             if (string.IsNullOrEmpty(utoken)) throw new InvalidOperationException("utoken不能为空");
             if (!BaseCryption.VerifyData(ConstHelper.GenerateHmacKey, utoken, HmacType.Md5)) throw new InvalidOperationException("utoken错误或过期");
             var key = ConstHelper.LoginKeyPrefix + utoken;
-            var obj = CacheData.Default.GetCacheDbData<User>(key, CacheType);
-            if (obj == null) throw new InvalidOperationException("utoken错误或过期");
+            var obj = CacheData.Default.GetCacheDbData<User>(key, CacheType) ?? throw new InvalidOperationException("utoken错误或过期");
             RequestStatusHelper.VerifyRequestStatus(utoken, uri, CacheType, (request) => { Thread.Sleep(ConstHelper.RequestInterval); });
             return obj;
         }

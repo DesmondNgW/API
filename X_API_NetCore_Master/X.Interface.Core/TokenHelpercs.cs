@@ -49,8 +49,7 @@ namespace X.Interface.Core
             if (string.IsNullOrEmpty(token)) throw new InvalidOperationException("token不能为空");
             if (!BaseCryption.VerifyData(ConstHelper.GenerateHmacKey, token, HmacType.Md5)) throw new InvalidOperationException("token错误或过期");
             var key = ConstHelper.LoginKeyPrefix + token;
-            var obj = CacheData.Default.GetCacheDbData<Token>(key, CacheType);
-            if (obj == null) throw new InvalidOperationException("token错误或过期");
+            var obj = CacheData.Default.GetCacheDbData<Token>(key, CacheType) ?? throw new InvalidOperationException("token错误或过期");
             if (obj.ClientId != clientId)
             {
                 CacheData.Default.Remove(key, CacheType);

@@ -87,13 +87,13 @@ namespace X.Util.Provider
 
         public void ReleaseClient()
         {
-            if (_scope != null) _scope.Dispose();
+            _scope?.Dispose();
             ProxyPooledManager.ReleaseClient(_instance);
         }
 
         public void Dispose(LogDomain eDomain)
         {
-            if (_scope != null) _scope.Dispose();
+            _scope?.Dispose();
             Core<TChannel>.Dispose(_instance, eDomain, true);
             ProxyPooledManager.ReleaseClient(_instance);
         }
