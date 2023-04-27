@@ -14,6 +14,9 @@ namespace X.UI.Consoles
         ConsistentHash = 4,
         RsaEncrypt = 5,
         RsaDecrypt = 6,
+        ChineseCalendar = 7,
+        GetChinese = 8,
+        GetRealPath = 9,
     }
 
     /// <summary>
@@ -21,6 +24,11 @@ namespace X.UI.Consoles
     /// </summary>
     internal class MethodHelper
     {
+        /// <summary>
+        /// tcp连接信息
+        /// </summary>
+        /// <param name="ip"></param>
+        /// <param name="port"></param>
         public static void GetTcpConnections(string ip, int port)
         {
             var list = MonitorHelper.GetTcpConnection(ip, port);
@@ -39,7 +47,9 @@ namespace X.UI.Consoles
             while (!string.IsNullOrEmpty(Console.ReadLine()));
         }
 
-
+        /// <summary>
+        /// md5
+        /// </summary>
         public static void Md5()
         {
             Console.WriteLine(@"请输入需要计算MD5值的字符串:");
@@ -50,6 +60,9 @@ namespace X.UI.Consoles
             }
         }
 
+        /// <summary>
+        /// WebHtml
+        /// </summary>
         public static void WebHtml()
         {
             Console.WriteLine(@"请输入需要访问的url:");
@@ -61,6 +74,9 @@ namespace X.UI.Consoles
             }
         }
 
+        /// <summary>
+        /// 一致性Hash
+        /// </summary>
         public static void ConsistentHash()
         {
             var nodes = new List<string> { "1", "2", "3" };
@@ -79,6 +95,9 @@ namespace X.UI.Consoles
             while (!string.IsNullOrEmpty(Console.ReadLine()));
         }
 
+        /// <summary>
+        /// rsa加密
+        /// </summary>
         public static void RsaEncrypt()
         {
             Console.WriteLine(@"请输入需要加密的字符串:");
@@ -92,6 +111,9 @@ namespace X.UI.Consoles
             }
         }
 
+        /// <summary>
+        /// rsa解密
+        /// </summary>
         public static void RsaDecrypt()
         {
             const string id = "RSATest";
@@ -102,6 +124,46 @@ namespace X.UI.Consoles
             {
                 var de = RsaCryption.Decrypt(id, rsa, nonce);
                 Console.WriteLine(@"明文：" + de);
+            }
+        }
+
+
+        /// <summary>
+        /// 农历
+        /// </summary>
+        public static void ChineseCalendar()
+        {
+            Console.WriteLine(@"请输入需要计算农历的时间字符串:");
+            string? dt;
+            while (!string.IsNullOrEmpty(dt = Console.ReadLine()))
+            {
+                Console.WriteLine(new ChineseCalendar(dt.Convert2DateTime(default)).ToJson());
+            }
+        }
+
+        /// <summary>
+        /// 汉字转拼音
+        /// </summary>
+        public static void GetChinese()
+        {
+            Console.WriteLine(@"请输入需要获取拼音的汉字字符串:");
+            string? chinese;
+            while (!string.IsNullOrEmpty(chinese = Console.ReadLine()))
+            {
+                Console.WriteLine(ChineseConvert.Get(chinese).ToJson());
+            }
+        }
+
+        /// <summary>
+        /// GetRealPath
+        /// </summary>
+        public static void GetRealPath()
+        {
+            Console.WriteLine(@"请输入需要计算绝对路径的相对路径字符串:");
+            string? path;
+            while (!string.IsNullOrEmpty(path = Console.ReadLine()))
+            {
+                Console.WriteLine(ApiData.GetRealPath(path));
             }
         }
     }
