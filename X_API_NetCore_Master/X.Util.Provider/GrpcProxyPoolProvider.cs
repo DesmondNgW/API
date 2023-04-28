@@ -1,6 +1,8 @@
-﻿using Grpc.Net.Client;
+﻿using Grpc.Core;
+using Grpc.Net.Client;
 using System;
 using X.Util.Core.Configuration;
+using X.Util.Core.Kernel;
 using X.Util.Entities;
 using X.Util.Entities.Interface;
 
@@ -10,7 +12,7 @@ namespace X.Util.Provider
     /// GrpcProxyPoolProvider
     /// </summary>
     /// <typeparam name="TChannel"></typeparam>
-    public sealed class GrpcProxyPoolProvider<TChannel> : IClientProvider<TChannel>, IDisposable
+    public sealed class GrpcProxyPoolProvider<TChannel> : IClientProvider<TChannel>, IDisposable where TChannel : ClientBase<TChannel>, new()
     {
         #region 构造函数
         public readonly LogDomain EDomain = LogDomain.Core;
@@ -47,10 +49,22 @@ namespace X.Util.Provider
         {
         }
 
+        /// <summary>
+        /// CreateChannel
+        /// </summary>
+        /// <returns></returns>
         private TChannel CreateChannel()
         {
-            var channel = GrpcChannel.ForAddress(GrpcModel.GrpcAddress, GrpcModel.GrpcChannelOptions);
+            var channel = GrpcChannel;
             return (TChannel)Activator.CreateInstance(typeof(TChannel), new object[] { channel });
+        }
+
+        /// <summary>
+        /// 初始化GrpcChannel
+        /// </summary>
+        private GrpcChannel GrpcChannel
+        {
+            get { return Core<GrpcChannel>.Instance(() => GrpcChannel.ForAddress(GrpcModel.GrpcAddress, GrpcModel.GrpcChannelOptions), EndpointAddress); }
         }
         #endregion
 
