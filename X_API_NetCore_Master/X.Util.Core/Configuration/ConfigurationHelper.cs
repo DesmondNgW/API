@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Caching.Memory;
+﻿using Grpc.Net.Client;
+using Microsoft.Extensions.Caching.Memory;
 using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
@@ -276,6 +277,44 @@ namespace X.Util.Core.Configuration
             return Equals(node, null) ? string.Empty : XmlHelper.GetXmlNodeValue(node, string.Empty);
         }
 
+        #endregion
+
+        #region Get Grpc EndpointAddress Configuration
+        /// <summary>
+        /// GetGrpcChannelByName
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        public static GrpcChannelOptionsModel GetGrpcChannelByName(string name)
+        {
+            var key = CacheConfigurationPrefix + name + "GetGrpcChannelByName";
+            var result = LocalCache.Default.Get<GrpcChannelOptionsModel>(key);
+            if (result != null) return result;
+            var doc = XmlHelper.GetXmlDocCache(EndpointFile);
+            var node = doc?.SelectSingleNode("/configuration/grpc/endpoint[@name='" + name + "']");
+            if (Equals(node, null) || node.ChildNodes.Count <= 0) return null;
+            result = new GrpcChannelOptionsModel
+            {
+                GrpcChannelOptions = new GrpcChannelOptions()
+                {
+                    ThrowOperationCanceledOnCancellation = true,
+                    UnsafeUseInsecureChannelCallCredentials = false,
+                    MaxSendMessageSize = 1000000 * XmlHelper.GetXmlAttributeValue(node, "maxSendMessageSize", 1000),
+                    MaxReceiveMessageSize = 1000000 * XmlHelper.GetXmlAttributeValue(node, "maxReceiveMessageSize", 4),
+                    MaxRetryAttempts = XmlHelper.GetXmlAttributeValue(node, "maxRetryAttempts", 5),
+                    MaxRetryBufferSize = 1000000 * XmlHelper.GetXmlAttributeValue(node, "maxRetryBufferSize", 16),
+                    MaxRetryBufferPerCallSize = 1000000 * XmlHelper.GetXmlAttributeValue(node, "MaxRetryBufferPerCallSize", 1),
+                },
+                GrpcName = name
+            };
+            foreach (var uri in node.ChildNodes.Cast<XmlNode>().Select(child => XmlHelper.GetXmlNodeValue(child, string.Empty)).Where(uri => !string.IsNullOrEmpty(uri)))
+            {
+                result.GrpcAddress = uri;
+                break;
+            }
+            LocalCache.Default.SlidingExpirationSet(key, result, new TimeSpan(1, 0, 0), CacheItemPriority.Normal, EndpointFile);
+            return result;
+        }
         #endregion
     }
 }

@@ -71,4 +71,10 @@
       <address>http://172.16.86.57:8001/AngieOneServices/</address>
     </endpoint>
   </client>
+  <!--自定义gRPC客户端配置节点-->
+  <grpc>
+    <endpoint name="X.UI.GrpcService.Greeter+GreeterClient" maxSendMessageSize="null" maxReceiveMessageSize="4" maxRetryAttempts="5" maxRetryBufferSize="16" maxRetryBufferPerCallSize="1">
+      <address>http://222.73.55.27:8002/DateService/</address>
+    </endpoint>
+  </grpc>
 </configuration>
