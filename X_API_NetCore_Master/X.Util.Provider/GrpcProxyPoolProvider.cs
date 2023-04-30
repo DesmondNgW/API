@@ -25,7 +25,6 @@ namespace X.Util.Provider
                 PoolSize = 20,
                 EndpointAddress = EndpointAddress,
                 CreateChannel = CreateChannel,
-                InitChannel = InitChannel,
                 ChannelLifeCycle = new TimeSpan(0, 0, 0),
                 ChannelRecycle = new TimeSpan(0, 1, 0),
             });
@@ -45,10 +44,6 @@ namespace X.Util.Provider
 
         #region 内部实现
         private static TChannel _instance;
-        private void InitChannel(TChannel channel, Action<TChannel> releaseClient)
-        {
-        }
-
         /// <summary>
         /// CreateChannel
         /// </summary>
