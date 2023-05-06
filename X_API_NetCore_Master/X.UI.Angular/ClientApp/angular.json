@@ -132,5 +132,8 @@
       }
     }
   },
-  "defaultProject": "X.UI.Angular"
+  "defaultProject": "X.UI.Angular",
+  "cli": {
+    "analytics": "268de3aa-31d1-414c-ba8d-da7061c9b32d"
+  }
 }
