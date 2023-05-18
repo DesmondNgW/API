@@ -1,4 +1,5 @@
 ﻿using X.UI.Util.Helper;
+using X.UI.Util.Stock;
 using X.Util.Core;
 using X.Util.Core.Kernel;
 using X.Util.Extend.Cryption;
@@ -17,6 +18,7 @@ namespace X.UI.Consoles
         ChineseCalendar = 7,
         GetChinese = 8,
         GetRealPath = 9,
+        GetRandomStock = 10,
     }
 
     /// <summary>
@@ -165,6 +167,15 @@ namespace X.UI.Consoles
             {
                 Console.WriteLine(ApiData.GetRealPath(path));
             }
+        }
+
+        public static void GetRandomStock()
+        {
+            do
+            {
+                Console.WriteLine(StockHelper.GetRandomStock());
+            }
+            while (!string.IsNullOrEmpty(Console.ReadLine()));
         }
     }
 
