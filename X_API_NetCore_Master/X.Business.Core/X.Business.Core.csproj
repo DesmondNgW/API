@@ -17,4 +17,8 @@
     <ProjectReference Include="..\X.Util.Extend\X.Util.Extend.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Stock\" />
+  </ItemGroup>
+
 </Project>

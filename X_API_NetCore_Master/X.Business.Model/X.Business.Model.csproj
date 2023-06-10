@@ -12,4 +12,8 @@
     <ProjectReference Include="..\X.DB.Entitis\X.DB.Entitis.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Stock\" />
+  </ItemGroup>
+
 </Project>
