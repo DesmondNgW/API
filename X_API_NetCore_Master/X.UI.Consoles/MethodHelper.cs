@@ -19,6 +19,7 @@ namespace X.UI.Consoles
         GetChinese = 8,
         GetRealPath = 9,
         GetRandomStock = 10,
+        TestRandomStock = 11,
     }
 
     /// <summary>
@@ -176,6 +177,28 @@ namespace X.UI.Consoles
                 Console.WriteLine(StockHelper.GetRandomStock());
             }
             while (!string.IsNullOrEmpty(Console.ReadLine()));
+        }
+
+        public static void TestRandomStock()
+        {
+            var dic = new Dictionary<string, int>();
+            for (var i = 0; i < 10000; i++)
+            {
+                var ret = StockHelper.GetRandomStock();
+                if (dic.ContainsKey(ret))
+                {
+                    dic[ret]++;
+                }
+                else
+                {
+                    dic[ret] = 1;
+                }
+            }
+            foreach (var item in dic.OrderByDescending(p => p.Value).Take(10))
+            {
+                Console.WriteLine("{0}:{1}", item.Key, item.Value);
+            }
+            Console.ReadLine();
         }
     }
 
