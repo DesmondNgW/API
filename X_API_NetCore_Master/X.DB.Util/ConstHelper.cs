@@ -2,6 +2,7 @@
 {
     public class ConstHelper
     {
+        #region UserManagerCode
         public const string UserManagerCode0 = "未找到用户数据,请检查输入数据";
 
         public const string UserManagerCode1 = "用户账号已存在，请重新输入";
@@ -15,5 +16,6 @@
         public const string UserManagerCode5 = "邮箱已经绑定";
 
         public const string UserManagerCode6 = "手机号已经绑定";
+        #endregion
     }
 }
