@@ -20,6 +20,7 @@ namespace X.UI.Consoles
         GetRealPath = 9,
         GetRandomStock = 10,
         TestRandomStock = 11,
+        TestRandomStock2 = 12,
     }
 
     /// <summary>
@@ -195,6 +196,29 @@ namespace X.UI.Consoles
                 }
             }
             foreach (var item in dic.OrderByDescending(p => p.Value).Take(10))
+            {
+                Console.WriteLine("{0}:{1}", item.Key, item.Value);
+            }
+            Console.ReadLine();
+        }
+
+
+        public static void TestRandomStock2()
+        {
+            var dic = new Dictionary<string, int>();
+            for (var i = 0; i < 10000; i++)
+            {
+                var ret = StockHelper.GetRandomStock2();
+                if (dic.ContainsKey(ret))
+                {
+                    dic[ret]++;
+                }
+                else
+                {
+                    dic[ret] = 1;
+                }
+            }
+            foreach (var item in dic.OrderByDescending(p => p.Value).Take(3))
             {
                 Console.WriteLine("{0}:{1}", item.Key, item.Value);
             }

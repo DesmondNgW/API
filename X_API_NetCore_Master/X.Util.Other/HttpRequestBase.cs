@@ -17,6 +17,7 @@ namespace X.Util.Other
         {
             var result = new HttpRequestResult() { Success = false };
             var request = (HttpWebRequest)WebRequest.Create(uri);
+            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
             var encode = charset.Contains("utf8") || charset.Contains("utf-8") ? Encoding.UTF8 : charset.Contains("unicode") ? Encoding.Unicode : Encoding.GetEncoding(charset);
             if (uri.StartsWith("https", StringComparison.OrdinalIgnoreCase))
                 ServicePointManager.ServerCertificateValidationCallback = (sender, certificate, chain, errors) => SslPolicyErrors.None.Equals(errors);
