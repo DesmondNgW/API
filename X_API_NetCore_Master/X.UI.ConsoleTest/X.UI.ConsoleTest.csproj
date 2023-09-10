@@ -8,11 +8,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-    <PackageReference Include="System.Text.Encoding.CodePages" Version="7.0.0" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\X.UI.Util\X.UI.Util.csproj" />
     <ProjectReference Include="..\X.Util.Core\X.Util.Core.csproj" />
     <ProjectReference Include="..\X.Util.Entities\X.Util.Entities.csproj" />

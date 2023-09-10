@@ -5,7 +5,7 @@ using X.Util.Core.Kernel;
 using X.Util.Extend.Cryption;
 using X.Util.Other;
 
-namespace X.UI.Consoles
+namespace X.UI.ConsoleTest
 {
     public enum EnumMethodItem
     {
@@ -218,7 +218,7 @@ namespace X.UI.Consoles
                     dic[ret] = 1;
                 }
             }
-            foreach (var item in dic.OrderByDescending(p => p.Value).Take(3))
+            foreach (var item in dic.OrderByDescending(p => p.Value).Take(13))
             {
                 Console.WriteLine("{0}:{1}", item.Key, item.Value);
             }

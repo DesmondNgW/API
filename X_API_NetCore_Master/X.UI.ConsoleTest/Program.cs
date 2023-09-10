@@ -1,6 +1,6 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
-using X.UI.Consoles;
+using X.UI.ConsoleTest;
 
 ConsoleUIHelper.Index();
 
